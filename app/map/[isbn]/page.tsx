@@ -227,7 +227,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
         {/* 좌상단: 대출가능 카운트 */}
         {!loading && mapReady && (
           <div className="absolute top-3 left-3 z-10 bg-white rounded-2xl px-4 py-2 shadow text-xs font-medium text-gray-800">
-            지금 내 근처에서 바로 대출 가능한 도서 <span className="text-blue-600 font-bold">{visibleAvailableCount}</span>권
+            지금 여기에서 바로 대출 가능한 도서 <span className="text-blue-600 font-bold">{visibleAvailableCount}</span>권
           </div>
         )}
 

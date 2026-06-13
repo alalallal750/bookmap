@@ -154,8 +154,7 @@ const res = await fetch(SMART_BASE_URL, {
     }
 
     const $ = cheerio.load(html);
-    console.log("HTML 전체길이:", html.length);
-console.log("HTML 뒷부분:", html.slice(-3000));
+  
 
     // 검색결과 테이블 행 파싱
     let found = false;
@@ -172,9 +171,8 @@ console.log("HTML 뒷부분:", html.slice(-3000));
       if (!titleCell.includes(searchTitle)) return;
 
       found = true;
-      console.log("found:", found, "available:", available, "title매칭:", titleCell);
+      
       const statusText = $(row).find("td").eq(4).text().trim();
-      console.log("statusText:", JSON.stringify(statusText));
       available = statusText.includes("대출가능");
       if (!available) {
         returnDueDate = $(row).find("td").eq(5).text().trim() || undefined;
