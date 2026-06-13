@@ -1,3 +1,5 @@
+import { PhysicalLibrary } from "@/types";
+
 export const DONGJAK_LIBRARIES: Omit
   PhysicalLibrary,
   "available" | "callNumber" | "returnDueDate" | "distance" | "searchResultUrl"
