@@ -12,8 +12,8 @@ export function PhysicalSection({ isbn, physical, smartLibrary, title }: Physica
   const all = [...physical, ...smartLibrary];
 
   // 권수 기준 집계
-  const totalBooks = all.reduce((sum, l) => sum + (l.totalCount ?? 1), 0);
-  const availableBooks = all.reduce((sum, l) => sum + (l.availableCount ?? (l.available ? 1 : 0)), 0);
+  const totalBooks = all.reduce((sum, l) => sum + ((l as any).totalCount ?? 1), 0);
+const availableBooks = all.reduce((sum, l) => sum + ((l as any).availableCount ?? (l.available ? 1 : 0)), 0);
   const facilityCount = all.length;
 
   const mapHref = `/map/${isbn}${title ? `?title=${encodeURIComponent(title)}` : ""}`;
