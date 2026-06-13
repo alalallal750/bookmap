@@ -269,27 +269,27 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
 
         {/* 우상단 범례 */}
         {!loading && mapReady && (
-          <div className="absolute bottom-6 right-3 z-10 flex flex-col gap-1.5">
-            {[
-              { label: "구립", color: "#2563eb" },
-              { label: "작은", color: "#16a34a" },
-              { label: "스마트", color: "#7c3aed" },
-            ].map(({ label, color }) => (
-              <div key={label} style={{
-                background: color,
-                color: "white",
-                borderRadius: "10px",
-                padding: "4px 10px",
-                fontSize: "12px",
-                fontWeight: 500,
-                textAlign: "center",
-                boxShadow: "0 1px 4px rgba(0,0,0,0.2)",
-              }}>
-                {label}
-              </div>
-            ))}
-          </div>
-        )}
+  <div className="absolute top-3 right-3 z-10 flex flex-row gap-1.5">
+    {[
+      { label: "구립", color: "#2563eb" },
+      { label: "작은", color: "#16a34a" },
+      { label: "스마트", color: "#7c3aed" },
+    ].map(({ label, color }) => (
+      <div key={label} style={{
+        background: color,
+        color: "white",
+        borderRadius: "10px",
+        padding: "4px 10px",
+        fontSize: "12px",
+        fontWeight: 500,
+        textAlign: "center",
+        boxShadow: "0 1px 4px rgba(0,0,0,0.2)",
+      }}>
+        {label}
+      </div>
+    ))}
+  </div>
+)}
 
         {(loading || !mapReady) && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-20">
@@ -306,14 +306,14 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
         )}
 
         {userLocation && (
-          <button onClick={moveToUser} className="absolute top-3 right-3 z-10 bg-white shadow rounded-xl p-2.5" aria-label="현재 위치로 이동">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <circle cx="10" cy="10" r="3" fill="#2563eb" />
-              <circle cx="10" cy="10" r="7" stroke="#2563eb" strokeWidth="1.5" />
-              <path d="M10 1v3M10 16v3M1 10h3M16 10h3" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-          </button>
-        )}
+  <button onClick={moveToUser} className="absolute bottom-6 right-3 z-10 bg-white shadow rounded-xl p-2.5" aria-label="현재 위치로 이동">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <circle cx="10" cy="10" r="3" fill="#2563eb" />
+      <circle cx="10" cy="10" r="7" stroke="#2563eb" strokeWidth="1.5" />
+      <path d="M10 1v3M10 16v3M1 10h3M16 10h3" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  </button>
+)}
 
         {showGuide && !loading && (
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 bg-gray-800 bg-opacity-85 text-white text-xs px-5 py-2.5 rounded-full whitespace-nowrap">
