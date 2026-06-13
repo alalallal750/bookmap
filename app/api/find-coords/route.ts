@@ -69,6 +69,7 @@ async function searchPlace(name: string) {
 }
 
 export async function GET() {
+    console.log("KAKAO_REST_KEY:", process.env.KAKAO_REST_KEY ? "있음" : "없음");
   const results = [];
   for (const lib of libraries) {
     const result = await searchPlace(lib.name);
