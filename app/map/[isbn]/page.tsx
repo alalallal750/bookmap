@@ -9,11 +9,52 @@ import { getCurrentPosition, sortByDistance } from "@/lib/distance";
 function getMarkerColor(lib: PhysicalLibrary): string {
   if (!lib.available) return "#888780";
   if (lib.libraryType === "smart_library") return "#7c3aed";
+  if (lib.libraryType === "small_library") return "#16a34a";
   return "#2563eb";
 }
 
+const SHORT_NAMES: Record<string, string> = {
+  "김영삼도서관": "김영삼",
+  "까망돌도서관": "까망돌",
+  "사당솔밭도서관": "사당솔밭",
+  "신대방누리도서관": "신대방누리",
+  "동작영어마루도서관": "동작영어마루",
+  "약수도서관": "약수",
+  "동작샘터도서관": "동작샘터",
+  "대방어린이도서관": "대방어린이",
+  "다울작은도서관": "다울",
+  "국사봉숲속작은도서관": "국사봉",
+  "노량진1동 작은도서관": "노량진1동",
+  "노량진2동 작은도서관": "노량진2동",
+  "대방동 작은도서관": "대방동",
+  "사당1동 작은도서관": "사당1동",
+  "사당2동 작은도서관": "사당2동",
+  "사당3동 작은도서관": "사당3동",
+  "사당5동 작은도서관": "사당5동",
+  "상도1동 작은도서관": "상도1동",
+  "상도2동 작은도서관": "상도2동",
+  "상도3동 작은도서관": "상도3동",
+  "상도4동 작은도서관": "상도4동",
+  "신대방2동 작은도서관": "신대방2동",
+  "흑석동 작은도서관": "흑석동",
+  "담소작은도서관": "담소",
+  "상도중앙작은도서관": "상도중앙",
+  "성대골 어린이도서관": "성대골어린이",
+  "아트&힐링작은도서관": "아트&힐링",
+  "지혜샘터작은도서관": "지혜샘터",
+  "행복한래미안작은도서관": "행복한래미안",
+  "양문작은도서관": "양문",
+  "만나작은도서관": "만나",
+  "장승배기역 스마트도서관": "장승배기역",
+  "신대방삼거리역 스마트도서관": "신대방삼거리역",
+  "총신대입구(이수역) 스마트도서관": "총신대입구(이수역)",
+  "노들역 스마트도서관": "노들역",
+  "까망돌 스마트도서관": "까망돌S",
+  "동작구민체육센터 스마트도서관": "동작구민체육센터",
+};
+
 function getLibraryShortName(name: string): string {
-  return name.replace(/도서관$/, "").replace(/스마트$/, "").trim();
+  return SHORT_NAMES[name] ?? name;
 }
 
 function createCustomOverlay(lib: PhysicalLibrary, onClick: () => void) {
@@ -65,8 +106,8 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
     if (!loading) return;
     const messages = [
       { text: "구립도서관 찾는 중...", delay: 0 },
-      { text: "작은도서관 찾는 중...", delay: 2000 },
-      { text: "스마트도서관 찾는 중...", delay: 4000 },
+      { text: "작은도서관 찾는 중...", delay: 3000 },
+      { text: "스마트도서관 찾는 중...", delay: 6000 },
     ];
     const timers = messages.map(({ text, delay }) =>
       setTimeout(() => setLoadingMessage(text), delay)
@@ -218,7 +259,10 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
         {(loading || !mapReady) && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-20">
             <div className="bg-white rounded-2xl px-6 py-5 shadow-lg text-center">
-              <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+              <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin mx-auto mb-3" style={{
+  borderColor: loadingMessage.includes("구립") ? "#2563eb" : loadingMessage.includes("작은") ? "#16a34a" : "#7c3aed",
+  borderTopColor: "transparent"
+}} />
               <p className="text-sm text-gray-700 font-medium">{mapReady ? loadingMessage : "지도를 불러오는 중..."}</p>
             </div>
           </div>
