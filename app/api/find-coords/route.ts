@@ -4,12 +4,12 @@ import { NextResponse } from "next/server";
 const KAKAO_REST_KEY = process.env.KAKAO_REST_KEY!;
 
 const libraries = [
-  { id: "smart_sindaebang", name: "신대방삼거리역", address: "서울 동작구 신대방삼거리역" },
-  { id: "smart_jangseungbaegi", name: "장승배기역", address: "서울 동작구 장승배기역" },
-  { id: "smart_isu", name: "총신대입구역", address: "서울 동작구 총신대입구역" },
-  { id: "smart_nodeul", name: "노들역", address: "서울 동작구 노들역" },
-  { id: "smart_kkamangdol", name: "까망돌도서관", address: "서울특별시 동작구 서달로 129" },
-  { id: "smart_gymnasium", name: "동작구민체육센터", address: "서울 동작구 동작대로 지하" },
+  { id: "smart_jangseungbaegi", name: "장승배기역", address: "서울 동작구 상도로 188" },
+  { id: "smart_sindaebang", name: "신대방삼거리역", address: "서울 동작구 상도로 76" },
+  { id: "smart_isu", name: "총신대입구이수역", address: "서울 동작구 동작대로 117" },
+  { id: "smart_nodeul", name: "노들역", address: "서울 동작구 노량진로 238" },
+  { id: "smart_kkamangdol", name: "까망돌도서관", address: "서울 동작구 서달로 129" },
+  { id: "smart_gymnasium", name: "동작구민체육센터", address: "서울특별시 동작구 여의대방로16길 53" },
 ];
 
 async function geocode(address: string) {
