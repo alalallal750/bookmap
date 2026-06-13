@@ -7,38 +7,36 @@ import { LibraryDetail } from "@/components/map/LibraryDetail";
 import { getCurrentPosition, sortByDistance } from "@/lib/distance";
 
 function LoadingDots({ message }: { message: string }) {
-  const [dots, setDots] = useState("");
+  const [dotCount, setDotCount] = useState(0);
   const color = message.includes("구립") ? "#2563eb" : message.includes("작은") ? "#16a34a" : message.includes("스마트") ? "#7c3aed" : "#2563eb";
 
   useEffect(() => {
-    let count = 0;
     const timer = setInterval(() => {
-      count = (count + 1) % 4;
-      setDots(".".repeat(count));
+      setDotCount((c) => (c + 1) % 4);
     }, 400);
     return () => clearInterval(timer);
-  }, [message]);
+  }, []);
+
+  const baseMsg = message.replace(/\.+$/, "");
 
   return (
-    <div className="text-center" style={{ width: "180px", minHeight: "80px" }}>
-      <style>{`
-        @keyframes spinner { to { transform: rotate(360deg); } }
-        .spin-ring { animation: spinner 0.8s linear infinite; }
-      `}</style>
-      <div
-        className="spin-ring"
-        style={{
-          width: "32px",
-          height: "32px",
-          borderRadius: "50%",
-          border: `2.5px solid ${color}`,
-          borderTopColor: "transparent",
-          margin: "0 auto 12px",
-        }}
-      />
-      <p className="text-sm font-medium text-gray-700">
-        {message.replace(/\.+$/, "")}{dots}
-      </p>
+    <div style={{ width: "200px", textAlign: "center", minHeight: "80px" }}>
+      <div style={{
+        width: "32px",
+        height: "32px",
+        borderRadius: "50%",
+        border: `2.5px solid ${color}`,
+        borderTopColor: "transparent",
+        margin: "0 auto 12px",
+        animationName: "spin",
+        animationDuration: "0.8s",
+        animationTimingFunction: "linear",
+        animationIterationCount: "infinite",
+      }} />
+      <div style={{ display: "flex", justifyContent: "center", fontSize: "14px", fontWeight: 500, color: "#374151" }}>
+        <span>{baseMsg}</span>
+        <span style={{ width: "20px", textAlign: "left" }}>{"...".slice(0, dotCount)}</span>
+      </div>
     </div>
   );
 }
@@ -296,10 +294,37 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
         {(loading || !mapReady) && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-20">
             <div className="bg-white rounded-2xl px-6 py-5 shadow-lg text-center">
-              <LoadingDots message={mapReady ? loadingMessage : "지도를 불러오는 중..."} />
-            </div>
-          </div>
-        )}
+              function LoadingDots({ message }: { message: string }) {
+  const [dotCount, setDotCount] = useState(0);
+  const color = message.includes("구립") ? "#2563eb" : message.includes("작은") ? "#16a34a" : message.includes("스마트") ? "#7c3aed" : "#2563eb";
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDotCount((c) => (c + 1) % 4);
+    }, 400);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="text-center" style={{ width: "180px", minHeight: "80px" }}>
+      <div
+        style={{
+          width: "32px",
+          height: "32px",
+          borderRadius: "50%",
+          border: `2.5px solid ${color}`,
+          borderTopColor: "transparent",
+          margin: "0 auto 12px",
+          animation: "spin 0.8s linear infinite",
+        }}
+      />
+      <p className="text-sm font-medium text-gray-700" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <span>{message.replace(/\.+$/, "")}</span>
+        <span style={{ display: "inline-block", width: "24px", textAlign: "left" }}>{"...".slice(0, dotCount)}</span>
+      </p>
+    </div>
+  );
+}
 
         {/* 좌상단: 대출가능 카운트 */}
         {!loading && mapReady && (
