@@ -1,6 +1,6 @@
 import { PhysicalLibrary } from "@/types";
 
-export const DONGJAK_LIBRARIES: Omit
+export const DONGJAK_LIBRARIES: Omit <
   PhysicalLibrary,
   "available" | "callNumber" | "returnDueDate" | "distance" | "searchResultUrl"
 >[] = [  // ─── 구립도서관 ────────────────────────────────────────────
