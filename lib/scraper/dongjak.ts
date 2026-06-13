@@ -182,7 +182,7 @@ function parsePhysicalRows(html: string, isbn: string): PhysicalLibrary[] {
 
 function findFieldText(
   $: ReturnType<typeof cheerio.load>,
-  row: cheerio.AnyNode,
+  row: any,
   label: string
 ): string {
   let result = "";
