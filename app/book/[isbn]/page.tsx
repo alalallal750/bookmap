@@ -35,7 +35,7 @@ export default async function BookPage({ params, searchParams }: Props) {
     ...(availability?.smartLibrary ?? []),
   ];
   const totalBooks = allLibraries.reduce((sum, l) => sum + ((l as any).totalCount ?? 1), 0);
-  const availableBooks = allLibraries.reduce((sum, l) => sum + (l.availableCount ?? (l.available ? 1 : 0)), 0);
+  const availableBooks = allLibraries.reduce((sum, l) => sum + ((l as any).availableCount ?? (l.available ? 1 : 0)), 0);
   const availableCount = allLibraries.filter((l) => l.available).length;
 
   return (
