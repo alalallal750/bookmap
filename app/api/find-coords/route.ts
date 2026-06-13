@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const KAKAO_REST_KEY = "a85e74481662abf212ff7a17a40b12e4";
+const KAKAO_REST_KEY = process.env.KAKAO_REST_KEY!;
 
 const libraries = [
   { id: "lib_NA", name: "노량진1동 작은도서관" },
