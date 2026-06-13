@@ -20,16 +20,25 @@ function LoadingDots({ message }: { message: string }) {
   }, [message]);
 
   return (
-    <div className="text-center">
-      <div className="w-8 h-8 rounded-full mx-auto mb-3" style={{
-        border: `2.5px solid ${color}`,
-        borderTopColor: "transparent",
-        animation: "spin 0.8s linear infinite"
-      }} />
-      <p className="text-sm font-medium" style={{ color }}>
+    <div className="text-center" style={{ width: "180px", minHeight: "80px" }}>
+      <style>{`
+        @keyframes spinner { to { transform: rotate(360deg); } }
+        .spin-ring { animation: spinner 0.8s linear infinite; }
+      `}</style>
+      <div
+        className="spin-ring"
+        style={{
+          width: "32px",
+          height: "32px",
+          borderRadius: "50%",
+          border: `2.5px solid ${color}`,
+          borderTopColor: "transparent",
+          margin: "0 auto 12px",
+        }}
+      />
+      <p className="text-sm font-medium text-gray-700">
         {message.replace(/\.+$/, "")}{dots}
       </p>
-      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </div>
   );
 }
