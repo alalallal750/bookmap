@@ -19,7 +19,7 @@ const SMART_BASE_URL =
   "http://smartlib.dongjak.go.kr:8088/EZ-950SL_Web/mainPage/SI_searchbookindex_Service.jsp";
 
 // 스마트도서관 마스터 데이터
-export const SMART_LIBRARIES: Omit
+export const SMART_LIBRARIES: Omit<
   PhysicalLibrary,
   "available" | "callNumber" | "returnDueDate" | "distance" | "searchResultUrl" | "copyInfo" | "totalCount" | "availableCount"
 >[] = [
