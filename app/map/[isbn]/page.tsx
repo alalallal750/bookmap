@@ -6,8 +6,6 @@ import { PhysicalLibrary, Availability, ApiResponse } from "@/types";
 import { LibraryDetail } from "@/components/map/LibraryDetail";
 import { getCurrentPosition, sortByDistance } from "@/lib/distance";
 
-git commit -m "fix spinner with inline style tag"
-
 function getMarkerColor(lib: PhysicalLibrary): string {
   if (!lib.available) return "#888780";
   if (lib.libraryType === "smart_library") return "#7c3aed";
