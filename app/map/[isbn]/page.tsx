@@ -127,7 +127,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
   const updateVisibleCount = useCallback(() => {
     const map = mapRef.current;
     if (!map || !window.kakao?.maps) return;
-    const bounds = map.getBounds();
+    const bounds = (map as any).getBounds();
     const count = libraries.filter((lib) => {
       if (!lib.available) return false;
       const pos = new window.kakao.maps.LatLng(lib.latitude, lib.longitude);
