@@ -1,4 +1,4 @@
 {
   "/page": "app/page.js",
-  "/map/[isbn]/page": "app/map/[isbn]/page.js"
+  "/api/find-coords/route": "app/api/find-coords/route.js"
 }
