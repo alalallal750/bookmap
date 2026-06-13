@@ -28,6 +28,9 @@ export type PhysicalLibrary = {
   callNumber?: string; // 자료실명
   returnDueDate?: string; // 반납예정일 (대출불가 시)
   distance?: number; // km, 현재 위치 기준
+  totalCount?: number;
+  availableCount?: number;
+  copyInfo?: string;
 };
 
 // ─── 전자책 제공처 (향후 확장) ────────────────────────────────
