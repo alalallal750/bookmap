@@ -274,7 +274,7 @@ useEffect(() => {
                     )}
                     <p className={`text-xs font-medium ${lib.available ? "text-green-600" : "text-red-500"}`}>
                       {lib.available ? "대출가능" : "대출중"}
-                      {lib.copyInfo && <span className="ml-0.5 opacity-75">({lib.copyInfo})</span>}
+                      {(lib as any).copyInfo && <span className="ml-0.5 opacity-75">({(lib as any).copyInfo})</span>}
                     </p>
                   </div>
                 </button>
