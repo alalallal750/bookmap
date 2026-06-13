@@ -41,7 +41,6 @@ function LoadingDots({ message }: { message: string }) {
   );
 }
 
-
 function getMarkerColor(lib: PhysicalLibrary): string {
   if (!lib.available) return "#888780";
   if (lib.libraryType === "smart_library") return "#7c3aed";
@@ -151,7 +150,6 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
     return () => timers.forEach(clearTimeout);
   }, [loading]);
 
-  // 가용성 데이터 로드
   useEffect(() => {
     async function load() {
       try {
@@ -170,7 +168,6 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
     load();
   }, [isbn, title]);
 
-  // 현재 위치 요청
   useEffect(() => {
     getCurrentPosition()
       .then((coords) => {
@@ -179,7 +176,6 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
       .catch(() => {});
   }, []);
 
-  // 카카오맵 SDK 로드
   useEffect(() => {
     const appKey = process.env.NEXT_PUBLIC_KAKAO_MAP_KEY;
     if (!appKey) return;
@@ -191,7 +187,6 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
     document.head.appendChild(script);
   }, []);
 
-  // 지도 초기화
   useEffect(() => {
     if (!mapReady || !mapContainerRef.current || mapRef.current) return;
     const center = userLocation
@@ -200,7 +195,6 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
     mapRef.current = new window.kakao.maps.Map(mapContainerRef.current, { center, level: 5 });
   }, [mapReady, userLocation]);
 
-  // 지도 범위 내 대출가능 카운트
   const updateVisibleCount = useCallback(() => {
     const map = mapRef.current;
     if (!map || !window.kakao?.maps) return;
@@ -211,12 +205,10 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
       return bounds.contain(pos);
     }).length;
     setVisibleAvailableCount(count);
-
     const totalAvailable = libraries.filter((l) => l.available).length;
     setShowGuide(totalAvailable > 0 && count === 0);
   }, [libraries]);
 
-  // 마커(커스텀 오버레이) 렌더링
   const drawMarkers = useCallback(() => {
     const map = mapRef.current;
     if (!map || !window.kakao?.maps) return;
@@ -235,7 +227,6 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
       overlaysRef.current.push(overlay);
     });
 
-    // 내 위치 마커
     if (userLocation) {
       if (userMarkerRef.current) userMarkerRef.current.setMap(null);
       const dot = document.createElement("div");
@@ -256,7 +247,6 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
       overlaysRef.current.push(userOverlay);
     }
 
-    // 지도 이동 시 카운트 업데이트
     window.kakao.maps.event.addListener(map, "idle", updateVisibleCount);
     updateVisibleCount();
   }, [libraries, userLocation, updateVisibleCount]);
@@ -288,56 +278,22 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
       </header>
 
       <div className="flex-1 relative">
-        {/* 지도 */}
         <div ref={mapContainerRef} className="absolute inset-0" />
 
-        {/* 로딩 오버레이 */}
         {(loading || !mapReady) && (
-  <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-20">
-    <div className="bg-white rounded-2xl px-6 py-5 shadow-lg">
-      <LoadingDots message={mapReady ? loadingMessage : "지도를 불러오는 중..."} />
-    </div>
-  </div>
-)}
-  const [dotCount, setDotCount] = useState(0);
-  const color = message.includes("구립") ? "#2563eb" : message.includes("작은") ? "#16a34a" : message.includes("스마트") ? "#7c3aed" : "#2563eb";
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-20">
+            <div className="bg-white rounded-2xl px-6 py-5 shadow-lg">
+              <LoadingDots message={mapReady ? loadingMessage : "지도를 불러오는 중..."} />
+            </div>
+          </div>
+        )}
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setDotCount((c) => (c + 1) % 4);
-    }, 400);
-    return () => clearInterval(timer);
-  }, []);
-
-  return (
-    <div className="text-center" style={{ width: "180px", minHeight: "80px" }}>
-      <div
-        style={{
-          width: "32px",
-          height: "32px",
-          borderRadius: "50%",
-          border: `2.5px solid ${color}`,
-          borderTopColor: "transparent",
-          margin: "0 auto 12px",
-          animation: "spin 0.8s linear infinite",
-        }}
-      />
-      <p className="text-sm font-medium text-gray-700" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <span>{message.replace(/\.+$/, "")}</span>
-        <span style={{ display: "inline-block", width: "24px", textAlign: "left" }}>{"...".slice(0, dotCount)}</span>
-      </p>
-    </div>
-  );
-}
-
-        {/* 좌상단: 대출가능 카운트 */}
         {!loading && mapReady && (
           <div className="absolute top-3 left-3 z-10 bg-white rounded-2xl px-4 py-2 shadow text-xs font-medium text-gray-800">
             지금 여기에서 바로 대출 가능한 도서 <span className="text-blue-600 font-bold">{visibleAvailableCount}</span>권
           </div>
         )}
 
-        {/* 현재 위치 버튼 */}
         {userLocation && (
           <button onClick={moveToUser} className="absolute top-3 right-3 z-10 bg-white shadow rounded-xl p-2.5" aria-label="현재 위치로 이동">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -348,14 +304,12 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
           </button>
         )}
 
-        {/* 안내 문구 */}
         {showGuide && !loading && (
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 bg-gray-800 bg-opacity-85 text-white text-xs px-5 py-2.5 rounded-full whitespace-nowrap">
             지도를 움직여 대출 가능한 도서를 찾아보세요!
           </div>
         )}
 
-        {/* 시설 상세 패널 */}
         {selectedLibrary && (
           <div className="absolute inset-0 z-20">
             <LibraryDetail library={selectedLibrary} bookTitle={title} onClose={() => setSelectedLibrary(null)} />
