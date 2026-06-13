@@ -268,37 +268,6 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
   function moveToUser() {
     if (!userLocation || !mapRef.current) return;
     mapRef.current.setCenter(new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng));
-    function LoadingDots({ message }: { message: string }) {
-  const [dotCount, setDotCount] = useState(0);
-  const color = message.includes("구립") ? "#2563eb" : message.includes("작은") ? "#16a34a" : message.includes("스마트") ? "#7c3aed" : "#2563eb";
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setDotCount((c) => (c + 1) % 4);
-    }, 400);
-    return () => clearInterval(timer);
-  }, []);
-
-  const baseMsg = message.replace(/\.+$/, "");
-
-  return (
-    <div style={{ width: "200px", textAlign: "center", minHeight: "80px" }}>
-      <div style={{
-        width: "32px",
-        height: "32px",
-        borderRadius: "50%",
-        border: `2.5px solid ${color}`,
-        borderTopColor: "transparent",
-        margin: "0 auto 12px",
-        animation: "spin 0.8s linear infinite",
-      }} />
-      <div style={{ display: "flex", justifyContent: "center", fontSize: "14px", fontWeight: 500, color: "#374151" }}>
-        <span>{baseMsg}</span>
-        <span style={{ width: "20px", textAlign: "left" }}>{"...".slice(0, dotCount)}</span>
-      </div>
-    </div>
-  );
-}
     mapRef.current.setLevel(4);
   }
 
