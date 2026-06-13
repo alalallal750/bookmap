@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 
 const KAKAO_REST_KEY = process.env.KAKAO_REST_KEY!;
