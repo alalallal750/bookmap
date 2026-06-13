@@ -149,7 +149,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
 
     libraries.forEach((lib) => {
       const content = createCustomOverlay(lib, () => setSelectedLibrary({ ...lib }));
-      const overlay = new window.kakao.maps.CustomOverlay({
+      const overlay = new (window.kakao.maps as any).CustomOverlay({
         position: new window.kakao.maps.LatLng(lib.latitude, lib.longitude),
         content,
         yAnchor: 1.3,
@@ -169,7 +169,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
         border: 2.5px solid white;
         box-shadow: 0 0 0 3px rgba(37,99,235,0.25);
       `;
-      const userOverlay = new window.kakao.maps.CustomOverlay({
+      const userOverlay = new (window.kakao.maps as any).CustomOverlay
         position: new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng),
         content: dot,
         yAnchor: 0.5,
