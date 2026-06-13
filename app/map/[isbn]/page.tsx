@@ -18,20 +18,25 @@ function LoadingDots({ message }: { message: string }) {
   }, []);
 
   const baseMsg = message.replace(/\.+$/, "");
+  const id = `spinner-${color.replace("#", "")}`;
 
   return (
     <div style={{ width: "200px", textAlign: "center", minHeight: "80px" }}>
+      <style>{`
+        @keyframes bmspin { to { transform: rotate(360deg); } }
+        #${id} { animation: bmspin 0.8s linear infinite; }
+      `}</style>
       <div
-  className="bookmap-spin"
-  style={{
-    width: "32px",
-    height: "32px",
-    borderRadius: "50%",
-    border: `2.5px solid ${color}`,
-    borderTopColor: "transparent",
-    margin: "0 auto 12px",
-  }}
-/>
+        id={id}
+        style={{
+          width: "32px",
+          height: "32px",
+          borderRadius: "50%",
+          border: `2.5px solid ${color}`,
+          borderTopColor: "transparent",
+          margin: "0 auto 12px",
+        }}
+      />
       <div style={{ display: "flex", justifyContent: "center", fontSize: "14px", fontWeight: 500, color: "#374151" }}>
         <span>{baseMsg}</span>
         <span style={{ width: "20px", textAlign: "left" }}>{"...".slice(0, dotCount)}</span>
@@ -39,7 +44,6 @@ function LoadingDots({ message }: { message: string }) {
     </div>
   );
 }
-
 function getMarkerColor(lib: PhysicalLibrary): string {
   if (!lib.available) return "#888780";
   if (lib.libraryType === "smart_library") return "#7c3aed";
