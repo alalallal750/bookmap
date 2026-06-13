@@ -21,18 +21,17 @@ function LoadingDots({ message }: { message: string }) {
 
   return (
     <div style={{ width: "200px", textAlign: "center", minHeight: "80px" }}>
-      <div style={{
-        width: "32px",
-        height: "32px",
-        borderRadius: "50%",
-        border: `2.5px solid ${color}`,
-        borderTopColor: "transparent",
-        margin: "0 auto 12px",
-        animationName: "spin",
-        animationDuration: "0.8s",
-        animationTimingFunction: "linear",
-        animationIterationCount: "infinite",
-      }} />
+      <div
+  className="bookmap-spin"
+  style={{
+    width: "32px",
+    height: "32px",
+    borderRadius: "50%",
+    border: `2.5px solid ${color}`,
+    borderTopColor: "transparent",
+    margin: "0 auto 12px",
+  }}
+/>
       <div style={{ display: "flex", justifyContent: "center", fontSize: "14px", fontWeight: 500, color: "#374151" }}>
         <span>{baseMsg}</span>
         <span style={{ width: "20px", textAlign: "left" }}>{"...".slice(0, dotCount)}</span>

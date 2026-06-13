@@ -47,6 +47,9 @@
     @apply bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden;
   }
 }
-@keyframes spin {
+@keyframes bookmap-spin {
   to { transform: rotate(360deg); }
+}
+.bookmap-spin {
+  animation: bookmap-spin 0.8s linear infinite !important;
 }
