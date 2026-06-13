@@ -1,10 +1,7 @@
-import { PhysicalLibrary } from "@/types";
-
 export const DONGJAK_LIBRARIES: Omit
   PhysicalLibrary,
   "available" | "callNumber" | "returnDueDate" | "distance" | "searchResultUrl"
->[] = [
-  // ─── 구립도서관 ────────────────────────────────────────────
+>[] = [  // ─── 구립도서관 ────────────────────────────────────────────
   {
     id: "lib_MK",
     libraryName: "김영삼도서관",
