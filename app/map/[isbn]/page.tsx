@@ -5,6 +5,48 @@ import Link from "next/link";
 import { PhysicalLibrary, Availability, ApiResponse } from "@/types";
 import { LibraryDetail } from "@/components/map/LibraryDetail";
 import { getCurrentPosition, sortByDistance } from "@/lib/distance";
+function LoadingDots({ message }: { message: string }) {
+  const [dotCount, setDotCount] = useState(0);
+  const spinnerRef = useRef<HTMLDivElement>(null);
+  const color = message.includes("구립") ? "#2563eb" : message.includes("작은") ? "#16a34a" : message.includes("스마트") ? "#7c3aed" : "#2563eb";
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDotCount((c) => (c + 1) % 4);
+    }, 400);
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!spinnerRef.current) return;
+    spinnerRef.current.style.animation = "none";
+    spinnerRef.current.getBoundingClientRect();
+    spinnerRef.current.style.animation = "bmspin 0.8s linear infinite";
+  }, [color]);
+
+  const baseMsg = message.replace(/\.+$/, "");
+
+  return (
+    <div style={{ width: "200px", textAlign: "center", minHeight: "80px" }}>
+      <style>{`@keyframes bmspin { to { transform: rotate(360deg); } }`}</style>
+      <div
+        ref={spinnerRef}
+        style={{
+          width: "32px",
+          height: "32px",
+          borderRadius: "50%",
+          border: `2.5px solid ${color}`,
+          borderTopColor: "transparent",
+          margin: "0 auto 12px",
+        }}
+      />
+      <div style={{ display: "flex", justifyContent: "center", fontSize: "14px", fontWeight: 500, color: "#374151" }}>
+        <span>{baseMsg}</span>
+        <span style={{ width: "20px", textAlign: "left" }}>{"...".slice(0, dotCount)}</span>
+      </div>
+    </div>
+  );
+}
 
 function getMarkerColor(lib: PhysicalLibrary): string {
   if (!lib.available) return "#888780";
