@@ -6,6 +6,34 @@ import { PhysicalLibrary, Availability, ApiResponse } from "@/types";
 import { LibraryDetail } from "@/components/map/LibraryDetail";
 import { getCurrentPosition, sortByDistance } from "@/lib/distance";
 
+function LoadingDots({ message }: { message: string }) {
+  const [dots, setDots] = useState("");
+  const color = message.includes("구립") ? "#2563eb" : message.includes("작은") ? "#16a34a" : message.includes("스마트") ? "#7c3aed" : "#2563eb";
+
+  useEffect(() => {
+    let count = 0;
+    const timer = setInterval(() => {
+      count = (count + 1) % 4;
+      setDots(".".repeat(count));
+    }, 400);
+    return () => clearInterval(timer);
+  }, [message]);
+
+  return (
+    <div className="text-center">
+      <div className="w-8 h-8 rounded-full mx-auto mb-3" style={{
+        border: `2.5px solid ${color}`,
+        borderTopColor: "transparent",
+        animation: "spin 0.8s linear infinite"
+      }} />
+      <p className="text-sm font-medium" style={{ color }}>
+        {message.replace(/\.+$/, "")}{dots}
+      </p>
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+    </div>
+  );
+}
+
 function getMarkerColor(lib: PhysicalLibrary): string {
   if (!lib.available) return "#888780";
   if (lib.libraryType === "smart_library") return "#7c3aed";
@@ -259,11 +287,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
         {(loading || !mapReady) && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-20">
             <div className="bg-white rounded-2xl px-6 py-5 shadow-lg text-center">
-              <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin mx-auto mb-3" style={{
-  borderColor: loadingMessage.includes("구립") ? "#2563eb" : loadingMessage.includes("작은") ? "#16a34a" : "#7c3aed",
-  borderTopColor: "transparent"
-}} />
-              <p className="text-sm text-gray-700 font-medium">{mapReady ? loadingMessage : "지도를 불러오는 중..."}</p>
+              <LoadingDots message={mapReady ? loadingMessage : "지도를 불러오는 중..."} />
             </div>
           </div>
         )}
