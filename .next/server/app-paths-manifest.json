@@ -1,0 +1,4 @@
+{
+  "/page": "app/page.js",
+  "/map/[isbn]/page": "app/map/[isbn]/page.js"
+}
