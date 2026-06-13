@@ -267,6 +267,30 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
       <div className="flex-1 relative">
         <div ref={mapContainerRef} className="absolute inset-0" />
 
+        {/* 우상단 범례 */}
+        {!loading && mapReady && (
+          <div className="absolute bottom-6 right-3 z-10 flex flex-col gap-1.5">
+            {[
+              { label: "구립", color: "#2563eb" },
+              { label: "작은", color: "#16a34a" },
+              { label: "스마트", color: "#7c3aed" },
+            ].map(({ label, color }) => (
+              <div key={label} style={{
+                background: color,
+                color: "white",
+                borderRadius: "10px",
+                padding: "4px 10px",
+                fontSize: "12px",
+                fontWeight: 500,
+                textAlign: "center",
+                boxShadow: "0 1px 4px rgba(0,0,0,0.2)",
+              }}>
+                {label}
+              </div>
+            ))}
+          </div>
+        )}
+
         {(loading || !mapReady) && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-20">
             <div className="bg-white rounded-2xl px-6 py-5 shadow-lg">
