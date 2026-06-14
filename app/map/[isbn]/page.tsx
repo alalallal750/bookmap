@@ -65,7 +65,8 @@ const LEGEND = [
   { label: "스마트", color: "#7c3aed" },
 ];
 
-const BOTTOM_STYLE = { bottom: "7rem" };
+const BOTTOM_STYLE = { bottom: "7rem" } as React.CSSProperties;
+const BOTTOM_STYLE_WEB = { bottom: "1.5rem" } as React.CSSProperties;
 
 type MapPageProps = { params: { isbn: string }; searchParams: { title?: string } };
 
@@ -228,11 +229,6 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
           </div>
         )}
 
-        {/* 디버그 — 확인 후 삭제 */}
-        <div className="absolute top-16 left-3 z-30 bg-yellow-300 text-black text-xs px-2 py-1 rounded">
-          loc: {userLocation ? "있음" : "없음"} / load: {String(loading)} / ready: {String(mapReady)}
-        </div>
-
         {/* 좌상단: 대출 가능 권수 */}
         {!loading && mapReady && (
           <div className="absolute top-3 left-3 z-10 bg-white rounded-2xl px-4 py-2 shadow text-xs font-medium text-gray-800">
@@ -242,7 +238,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
 
         {/* 우하단: 현재위치 버튼 */}
         {!selectedLibrary && (
-          <div className="absolute right-3 z-10" style={BOTTOM_STYLE}>
+          <div className="absolute right-3 z-10" style={typeof window !== "undefined" && window.innerWidth >= 768 ? BOTTOM_STYLE_WEB : BOTTOM_STYLE}>
             <button
               onClick={userLocation ? moveToUser : undefined}
               className={`bg-white shadow rounded-xl p-2.5 ${!userLocation ? "opacity-50 cursor-default" : "cursor-pointer"}`}
