@@ -237,8 +237,8 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
         )}
 
         {/* 우하단: 현재위치 버튼 */}
-        {!selectedLibrary && (
-          {userLocation && !selectedLibrary && (
+        {/* 우하단: 현재위치 버튼 */}
+        {userLocation && !selectedLibrary && (
           <button onClick={moveToUser} className="absolute right-3 z-10 bg-white shadow rounded-xl p-2.5" aria-label="현재 위치로 이동" style={{ bottom: "calc(1.5rem + env(safe-area-inset-bottom))" }}>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <circle cx="10" cy="10" r="3" fill="#2563eb" />
