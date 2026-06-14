@@ -114,7 +114,9 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
   }, [isbn, title]);
 
   useEffect(() => {
-    getCurrentPosition().then((coords) => setUserLocation({ lat: coords.latitude, lng: coords.longitude })).catch(() => {});
+    getCurrentPosition()
+      .then((coords) => setUserLocation({ lat: coords.latitude, lng: coords.longitude }))
+      .catch((err) => console.warn("위치 오류:", err.message));
   }, []);
 
   useEffect(() => {
@@ -235,7 +237,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
         )}
 
         {/* 우하단: 현재위치 버튼 */}
-        {userLocation && !selectedLibrary && (
+        {!selectedLibrary && (
           <button onClick={moveToUser} className="absolute bottom-6 right-3 z-10 bg-white shadow rounded-xl p-2.5" aria-label="현재 위치로 이동">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <circle cx="10" cy="10" r="3" fill="#2563eb" />
@@ -245,13 +247,12 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
           </button>
         )}
 
-        {/* 하단 중앙: 말풍선 안내 (showGuide일 때만) */}
-        {showGuide && !loading && !selectedLibrary && (
+        {/* 하단 중앙: 말풍선 안내 */}
+        {!loading && mapReady && !selectedLibrary && (
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 bg-gray-800 bg-opacity-85 text-white text-xs px-5 py-2.5 rounded-full whitespace-nowrap">
-            지도를 움직여 대출 가능한 도서를 찾아보세요!
+            {showGuide ? "지도를 움직여 대출 가능한 도서를 찾아보세요!" : "마커를 눌러 도서관 정보를 확인하세요"}
           </div>
         )}
-
         {/* 시설 상세 패널 */}
         {selectedLibrary && (
           <div className="absolute inset-0 z-20">
