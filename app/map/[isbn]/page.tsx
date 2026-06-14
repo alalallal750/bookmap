@@ -59,6 +59,12 @@ function createCustomOverlay(lib: PhysicalLibrary, onClick: () => void) {
   return div;
 }
 
+const LEGEND = [
+  { label: "구립", color: "#2563eb" },
+  { label: "작은", color: "#16a34a" },
+  { label: "스마트", color: "#7c3aed" },
+];
+
 type MapPageProps = { params: { isbn: string }; searchParams: { title?: string } };
 
 export default function MapPage({ params, searchParams }: MapPageProps) {
@@ -150,14 +156,20 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
     overlaysRef.current = [];
     libraries.forEach((lib) => {
       const content = createCustomOverlay(lib, () => setSelectedLibrary({ ...lib }));
-      const overlay = new (window.kakao.maps as any).CustomOverlay({ position: new window.kakao.maps.LatLng(lib.latitude, lib.longitude), content, yAnchor: 1.3, map });
+      const overlay = new (window.kakao.maps as any).CustomOverlay({
+        position: new window.kakao.maps.LatLng(lib.latitude, lib.longitude),
+        content, yAnchor: 1.3, map,
+      });
       overlaysRef.current.push(overlay);
     });
     if (userLocation) {
       if (userMarkerRef.current) userMarkerRef.current.setMap(null);
       const dot = document.createElement("div");
       dot.style.cssText = `width:12px;height:12px;background:#2563eb;border-radius:50%;border:2.5px solid white;box-shadow:0 0 0 3px rgba(37,99,235,0.25);`;
-      const userOverlay = new (window.kakao.maps as any).CustomOverlay({ position: new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng), content: dot, yAnchor: 0.5, map });
+      const userOverlay = new (window.kakao.maps as any).CustomOverlay({
+        position: new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng),
+        content: dot, yAnchor: 0.5, map,
+      });
       userMarkerRef.current = userOverlay;
       overlaysRef.current.push(userOverlay);
     }
@@ -173,35 +185,30 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
     mapRef.current.setLevel(4);
   }
 
-  const LEGEND = [
-    { label: "구립", color: "#2563eb" },
-    { label: "작은", color: "#16a34a" },
-    { label: "스마트", color: "#7c3aed" },
-  ];
-
   return (
     <main className="h-screen flex flex-col overflow-hidden">
-      {/* ── 헤더 (제목 + 범례 한 몸) ── */}
+
+      {/* ── 헤더 ── */}
       <header className="bg-white border-b border-gray-100 px-4 pt-12 pb-3 flex-shrink-0 z-20">
-        <div className="flex items-center gap-3">
+        {/* 윗 행: 뒤로가기 + 범례 */}
+        <div className="flex items-center justify-between mb-1.5">
           <Link href="/" className="p-2 -ml-2 text-gray-500" aria-label="뒤로가기">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M13 4l-6 6 6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
-          <div className="flex-1 min-w-0">
-            <h1 className="font-bold text-gray-900 text-sm line-clamp-1">{title ?? "도서관 찾기"}</h1>
-            <p className="text-xs text-gray-400">동작구 · ISBN {isbn}</p>
+          <div className="flex gap-1.5">
+            {LEGEND.map(({ label, color }) => (
+              <div key={label} style={{ background: color, color: "white", borderRadius: "10px", padding: "3px 10px", fontSize: "12px", fontWeight: 500, boxShadow: "0 1px 3px rgba(0,0,0,0.15)" }}>
+                {label}
+              </div>
+            ))}
           </div>
         </div>
-
-        {/* 범례 — 헤더 하단에 고정 */}
-        <div className="flex gap-1.5 mt-2.5">
-          {LEGEND.map(({ label, color }) => (
-            <div key={label} style={{ background: color, color: "white", borderRadius: "10px", padding: "3px 10px", fontSize: "12px", fontWeight: 500, boxShadow: "0 1px 3px rgba(0,0,0,0.15)" }}>
-              {label}
-            </div>
-          ))}
+        {/* 아랫 행: 제목 + ISBN */}
+        <div className="pl-2">
+          <h1 className="font-bold text-gray-900 text-sm line-clamp-1">{title ?? "도서관 찾기"}</h1>
+          <p className="text-xs text-gray-400">동작구 · ISBN {isbn}</p>
         </div>
       </header>
 
@@ -225,6 +232,24 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
           </div>
         )}
 
+        {/* 우하단: 현재위치 버튼 */}
+        {userLocation && (
+          <button onClick={moveToUser} className="absolute bottom-6 right-3 z-10 bg-white shadow rounded-xl p-2.5" aria-label="현재 위치로 이동">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="3" fill="#2563eb" />
+              <circle cx="10" cy="10" r="7" stroke="#2563eb" strokeWidth="1.5" />
+              <path d="M10 1v3M10 16v3M1 10h3M16 10h3" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </button>
+        )}
+
+        {/* 하단 중앙: 말풍선 안내 (showGuide일 때만) */}
+        {showGuide && !loading && (
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 bg-gray-800 bg-opacity-85 text-white text-xs px-5 py-2.5 rounded-full whitespace-nowrap">
+            지도를 움직여 대출 가능한 도서를 찾아보세요!
+          </div>
+        )}
+
         {/* 시설 상세 패널 */}
         {selectedLibrary && (
           <div className="absolute inset-0 z-20">
@@ -233,23 +258,6 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
         )}
       </div>
 
-      {/* ── 하단 고정 바 (지도 밖) ── */}
-      {!loading && mapReady && (
-        <div className="bg-white border-t border-gray-100 px-4 py-3 flex-shrink-0 flex items-center justify-between z-20">
-          <p className="text-xs text-gray-500">
-            {showGuide ? "지도를 움직여 대출 가능한 도서를 찾아보세요!" : "마커를 눌러 도서관 정보를 확인하세요"}
-          </p>
-          {userLocation && (
-            <button onClick={moveToUser} className="bg-gray-100 hover:bg-gray-200 rounded-xl p-2.5 flex-shrink-0" aria-label="현재 위치로 이동">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <circle cx="10" cy="10" r="3" fill="#2563eb" />
-                <circle cx="10" cy="10" r="7" stroke="#2563eb" strokeWidth="1.5" />
-                <path d="M10 1v3M10 16v3M1 10h3M16 10h3" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
-            </button>
-          )}
-        </div>
-      )}
     </main>
   );
 }
