@@ -458,7 +458,6 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
                 <p className="text-xs text-gray-300 leading-relaxed">
                   지금빌려는 개인 프로젝트로, 현재 동작구 도서관만 지원해요.<br />
                   실제 대출가능 여부는 도서관 홈페이지에서 확인해 주세요.<br />
-                  문의: your@email.com
                 </p>
               </div>
             </div>
