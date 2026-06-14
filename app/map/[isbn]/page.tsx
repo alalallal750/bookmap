@@ -139,14 +139,17 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
   }, []);
 
   useEffect(() => {
+    const intervalRef = { current: null as ReturnType<typeof setInterval> | null };
     const initial = setTimeout(() => {
       setShowFeedback(true);
-      const interval = setInterval(() => {
+      intervalRef.current = setInterval(() => {
         setShowFeedback(prev => !prev);
       }, 30000);
-      return () => clearInterval(interval);
     }, 30000);
-    return () => clearTimeout(initial);
+    return () => {
+      clearTimeout(initial);
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
   }, []);
 
   useEffect(() => {
