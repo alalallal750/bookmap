@@ -65,8 +65,6 @@ const LEGEND = [
   { label: "스마트", color: "#7c3aed" },
 ];
 
-const BOTTOM_STYLE = { bottom: "7rem" } as React.CSSProperties;
-const BOTTOM_STYLE_WEB = { bottom: "1.5rem" } as React.CSSProperties;
 
 type MapPageProps = { params: { isbn: string }; searchParams: { title?: string } };
 
@@ -85,6 +83,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
   const [loading, setLoading] = useState(true);
   const [loadingMessage, setLoadingMessage] = useState("구립도서관 찾는 중...");
   const [visibleAvailableCount, setVisibleAvailableCount] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
     if (!loading) return;
@@ -139,7 +138,12 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
       : new window.kakao.maps.LatLng(37.4967, 126.9508);
     mapRef.current = new window.kakao.maps.Map(mapContainerRef.current, { center, level: 5 });
   }, [mapReady, userLocation]);
-
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
   const updateVisibleCount = useCallback(() => {
     const map = mapRef.current;
     if (!map || !window.kakao?.maps) return;
@@ -238,7 +242,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
 
         {/* 우하단: 현재위치 버튼 */}
         {!selectedLibrary && (
-          <div className="absolute right-3 z-10" style={typeof window !== "undefined" && window.innerWidth >= 768 ? BOTTOM_STYLE_WEB : BOTTOM_STYLE}>
+          <div className="absolute right-3 z-10" style={{ bottom: isDesktop ? "1.5rem" : "7rem" }}>
             <button
               onClick={userLocation ? moveToUser : undefined}
               className={`bg-white shadow rounded-xl p-2.5 ${!userLocation ? "opacity-50 cursor-default" : "cursor-pointer"}`}
@@ -263,7 +267,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
 
         {/* 하단 중앙: 말풍선 안내 */}
         {!loading && mapReady && !selectedLibrary && (
-          <div className="absolute left-1/2 -translate-x-1/2 z-10 bg-gray-800 bg-opacity-85 text-white text-xs px-5 py-2.5 rounded-full whitespace-nowrap" style={BOTTOM_STYLE}>
+          <div className="absolute left-1/2 -translate-x-1/2 z-10 bg-gray-800 bg-opacity-85 text-white text-xs px-5 py-2.5 rounded-full whitespace-nowrap" style={{ bottom: isDesktop ? "1.5rem" : "7rem" }}>
             지도를 움직여 대출 가능한 도서를 찾아보세요!
           </div>
         )}
