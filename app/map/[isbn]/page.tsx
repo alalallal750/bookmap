@@ -68,6 +68,81 @@ const LEGEND = [
 
 type MapPageProps = { params: { isbn: string }; searchParams: { title?: string } };
 
+const FEATURES = [
+  "서초구/강남구 도서관 추가",
+  "더 많은 검색결과 보기",
+  "같은 책 여러 판본 동시 검색",
+  "전자책/오디오북 연동",
+];
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwckk8L6aKOx4Cs9hj0i5P1tPpW_K298AIq6GXBMrX2jUnm9LrL9AX9bQ3tFveqbDv5/exec";
+
+function FeedbackOptions({ onClose }: { onClose: () => void }) {
+  const [selected, setSelected] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+
+  async function handleSubmit() {
+    if (!selected) return;
+    setSending(true);
+    try {
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ feature: selected }),
+      });
+    } finally {
+      setSubmitted(true);
+      setSending(false);
+      setTimeout(onClose, 1500);
+    }
+  }
+
+  if (submitted) {
+    return (
+      <div className="px-5 py-8 text-center">
+        <p className="text-2xl mb-2">🎉</p>
+        <p className="font-medium text-gray-800">감사해요!</p>
+        <p className="text-xs text-gray-400 mt-1">소중한 의견을 반영할게요.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="px-5 pb-4">
+      <p className="text-xs text-gray-400 mb-3">하나만 골라주세요!</p>
+      <div className="space-y-2 mb-4">
+        {FEATURES.map((f) => (
+          <button
+            key={f}
+            onClick={() => setSelected(f)}
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-left text-sm"
+            style={{
+              borderColor: selected === f ? "#2563eb" : "#e5e7eb",
+              background: selected === f ? "#eff6ff" : "white",
+              color: selected === f ? "#1d4ed8" : "#374151",
+            }}
+          >
+            <div style={{
+              width: "18px", height: "18px", borderRadius: "50%", flexShrink: 0,
+              border: selected === f ? "5px solid #2563eb" : "1.5px solid #d1d5db",
+            }} />
+            {f}
+          </button>
+        ))}
+      </div>
+      <button
+        onClick={handleSubmit}
+        disabled={!selected || sending}
+        className="w-full py-3.5 rounded-xl text-white text-sm font-medium"
+        style={{ background: selected ? "#2563eb" : "#d1d5db" }}
+      >
+        {sending ? "전송 중..." : "보내기"}
+      </button>
+    </div>
+  );
+}
 export default function MapPage({ params, searchParams }: MapPageProps) {
   const { isbn } = params;
   const title = searchParams?.title;
@@ -318,21 +393,16 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
               <div className="flex justify-center pt-3 pb-2">
                 <div className="w-10 h-1 bg-gray-200 rounded-full" />
               </div>
-              <div className="px-5 pt-2 pb-4">
-                <p className="font-bold text-gray-900 text-base mb-1">다음에 어떤 기능이 생기면 좋을까요?</p>
-                <p className="text-xs text-gray-400 mb-5">하나만 골라주세요!</p>
-                
-                  <a
-                  href="https://forms.google.com/PLACEHOLDER"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full py-3.5 rounded-xl text-center text-white text-sm font-medium"
-                  style={{ background: "#2563eb" }}
-                >
-                  구글폼에서 투표하기 →
-                </a>
+              <div className="flex items-center justify-between px-5 pt-2 pb-4">
+                <p className="font-bold text-gray-900 text-base">다음에 어떤 기능이 생기면 좋을까요?</p>
+                <button onClick={() => setShowFeedbackSheet(false)} className="text-gray-400 p-1">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+                  </svg>
+                </button>
               </div>
-              <div className="px-5 pt-2 border-t border-gray-100">
+              <FeedbackOptions onClose={() => setShowFeedbackSheet(false)} />
+              <div className="px-5 pt-3 border-t border-gray-100">
                 <p className="text-xs text-gray-300 leading-relaxed">
                   지금빌려는 개인 프로젝트로, 현재 동작구 도서관만 지원해요.<br />
                   실제 대출가능 여부는 도서관 홈페이지에서 확인해 주세요.<br />
@@ -341,6 +411,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
               </div>
             </div>
           </div>
+        )}
         )}
         {/* 지역 안내 말풍선 */}
         {showRegionNotice && (
