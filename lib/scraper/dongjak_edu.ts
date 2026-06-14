@@ -41,12 +41,12 @@ export async function fetchDongjakEduAvailability(
   let callNumber = "";
 
   $("dl.bookDataWrap").each((_, el) => {
-    const rowIsbn = $(el).find("dt.tit2 a").attr("isbn") ?? "";
+    const rowIsbn = $(el).find("dt a[isbn]").attr("isbn") ?? "";
     if (rowIsbn !== isbn) return;
 
     totalCount++;
 
-    const site = $(el).find("dd.site").text().trim();
+    const site = $(el).find("dd.site span").last().text().replace("자료실 :", "").trim();
     if (site && !callNumber) callNumber = site;
 
     const stateBar = $(el).find("div.bookStateBar");
