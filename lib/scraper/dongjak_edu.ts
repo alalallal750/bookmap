@@ -22,7 +22,7 @@ export async function fetchDongjakEduAvailability(
     `${BASE_URL}/djlib/intro/search/index.do` +
     `?menu_idx=4&locExquery=111013&editMode=normal` +
     `&officeNm=%EB%8F%99%EC%9E%91%EB%8F%84%EC%84%9C%EA%B4%80` +
-    `&mainSearchType=on&search_text=${encodeURIComponent(isbn)}`;
+    `&mainSearchType=on&rowCount=100&search_text=${encodeURIComponent(isbn)}`;
 
   let html: string;
   try {
@@ -49,7 +49,7 @@ export async function fetchDongjakEduAvailability(
     const site = $(el).find("dd.site span").last().text().replace("자료실 :", "").trim();
     if (site && !callNumber) callNumber = site;
 
-    const stateText = $(el).find("div.bookStateBar p.txt").first().text();
+    const stateText = $(el).find("div.bookStateBar p.txt").first().text().replace(/\s+/g, "");
     if (stateText.includes("대출가능")) {
       availableCount++;
     }
@@ -104,7 +104,7 @@ export async function fetchDongjakEduSmartAvailability(
 
     totalCount++;
 
-    const stateText = $(el).find("div.bookStateBar p.txt").first().text();
+    const stateText = $(el).find("div.bookStateBar p.txt").first().text().replace(/\s+/g, "");
     if (stateText.includes("대출가능")) {
       availableCount++;
     }
