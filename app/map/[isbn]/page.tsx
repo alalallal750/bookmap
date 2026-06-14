@@ -267,7 +267,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
 
         {/* 하단 중앙: 말풍선 안내 */}
         {!loading && mapReady && !selectedLibrary && (
-          <div className="absolute left-1/2 -translate-x-1/2 z-10 bg-gray-800 bg-opacity-85 text-white text-xs px-5 py-2.5 rounded-full whitespace-nowrap" style={{ bottom: isDesktop ? "1.5rem" : "7rem" }}>
+          <div className="absolute left-1/2 -translate-x-1/2 z-10 bg-gray-800 bg-opacity-85 text-white text-xs px-5 py-2.5 rounded-full whitespace-nowrap" style={{ bottom: isDesktop ? "0.75rem" : "7rem" }}>
             지도를 움직여 대출 가능한 도서를 찾아보세요!
           </div>
         )}
