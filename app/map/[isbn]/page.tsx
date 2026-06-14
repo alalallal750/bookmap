@@ -69,10 +69,10 @@ const LEGEND = [
 type MapPageProps = { params: { isbn: string }; searchParams: { title?: string } };
 
 const FEATURES = [
-  "서초구/강남구 도서관 추가",
-  "더 많은 검색결과 보기",
-  "같은 책 여러 판본 동시 검색",
-  "전자책/오디오북 연동",
+  "다른 구 도서관에서도 찾고 싶어요",
+  "저자 이름으로도 검색하고 싶어요",
+  "여러 책을 한꺼번에 검색하고 싶어요",
+  "전자책으로 먼저 읽을 수 있는지 확인하고 싶어요",
 ];
 
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwckk8L6aKOx4Cs9hj0i5P1tPpW_K298AIq6GXBMrX2jUnm9LrL9AX9bQ3tFveqbDv5/exec";
@@ -94,7 +94,7 @@ function FeedbackOptions({ onClose }: { onClose: () => void }) {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ feature: selected.join(", ") }),
+        body: JSON.stringify({ feature: [...selected, ...(etcSelected && etcText.trim() ? [`기타: ${etcText.trim()}`] : [])].join(", ") }),
       });
     } finally {
       setSubmitted(true);
@@ -112,6 +112,9 @@ function FeedbackOptions({ onClose }: { onClose: () => void }) {
       </div>
     );
   }
+
+  const [etcText, setEtcText] = useState("");
+  const [etcSelected, setEtcSelected] = useState(false);
 
   return (
     <div className="px-5 pb-4">
@@ -146,12 +149,47 @@ function FeedbackOptions({ onClose }: { onClose: () => void }) {
             </button>
           );
         })}
+
+        {/* 기타 선택지 */}
+        <button
+          onClick={() => setEtcSelected(prev => !prev)}
+          className="w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-left text-sm"
+          style={{
+            borderColor: etcSelected ? "#2563eb" : "#e5e7eb",
+            background: etcSelected ? "#eff6ff" : "white",
+            color: etcSelected ? "#1d4ed8" : "#374151",
+          }}
+        >
+          <div style={{
+            width: "18px", height: "18px", borderRadius: "4px", flexShrink: 0,
+            border: etcSelected ? "none" : "1.5px solid #d1d5db",
+            background: etcSelected ? "#2563eb" : "white",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}>
+            {etcSelected && (
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+                <path d="M1.5 5.5L4.5 8.5L9.5 2.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            )}
+          </div>
+          기타 (직접 알려주세요)
+        </button>
+
+        {etcSelected && (
+          <textarea
+            value={etcText}
+            onChange={e => setEtcText(e.target.value)}
+            placeholder="자유롭게 적어주세요!"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-700 resize-none focus:outline-none focus:border-blue-400"
+            rows={3}
+          />
+        )}
       </div>
       <button
         onClick={handleSubmit}
-        disabled={selected.length === 0 || sending}
+        disabled={(selected.length === 0 && !etcSelected) || (etcSelected && etcText.trim() === "" && selected.length === 0) || sending}
         className="w-full py-3.5 rounded-xl text-white text-sm font-medium"
-        style={{ background: selected.length > 0 ? "#2563eb" : "#d1d5db" }}
+        style={{ background: (selected.length > 0 || (etcSelected && etcText.trim())) ? "#2563eb" : "#d1d5db" }}
       >
         {sending ? "전송 중..." : "보내기"}
       </button>
