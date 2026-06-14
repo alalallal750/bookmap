@@ -49,8 +49,9 @@ export async function fetchDongjakEduAvailability(
     const site = $(el).find("dd.site span").last().text().replace("자료실 :", "").trim();
     if (site && !callNumber) callNumber = site;
 
-    const stateText = $(el).find("div.bookStateBar p.txt").first().text().replace(/\s+/g, "");
-    if (stateText.includes("대출가능")) {
+    const stateArea = $(el).find("div.bookStateBar div.stateArea");
+    const isAvailable = stateArea.find("a.reserve-btn").text().replace(/\s+/g, "").includes("도서대출가능");
+    if (isAvailable) {
       availableCount++;
     }
   });
