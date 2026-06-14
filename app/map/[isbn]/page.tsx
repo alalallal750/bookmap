@@ -139,8 +139,10 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
     mapRef.current = new window.kakao.maps.Map(mapContainerRef.current, { center, level: 5 });
   }, [mapReady, userLocation]);
   useEffect(() => {
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     setIsDesktop(!isMobile);
+  }, []);
+
   const updateVisibleCount = useCallback(() => {
     const map = mapRef.current;
     if (!map || !window.kakao?.maps) return;
