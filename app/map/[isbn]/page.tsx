@@ -78,19 +78,23 @@ const FEATURES = [
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwckk8L6aKOx4Cs9hj0i5P1tPpW_K298AIq6GXBMrX2jUnm9LrL9AX9bQ3tFveqbDv5/exec";
 
 function FeedbackOptions({ onClose }: { onClose: () => void }) {
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, setSelected] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
 
+  function toggle(f: string) {
+    setSelected(prev => prev.includes(f) ? prev.filter(x => x !== f) : [...prev, f]);
+  }
+
   async function handleSubmit() {
-    if (!selected) return;
+    if (selected.length === 0) return;
     setSending(true);
     try {
       await fetch(SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ feature: selected }),
+        body: JSON.stringify({ feature: selected.join(", ") }),
       });
     } finally {
       setSubmitted(true);
@@ -111,32 +115,43 @@ function FeedbackOptions({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="px-5 pb-4">
-      <p className="text-xs text-gray-400 mb-3">하나만 골라주세요!</p>
+      <p className="text-xs text-gray-400 mb-3">여러 개 골라도 돼요!</p>
       <div className="space-y-2 mb-4">
-        {FEATURES.map((f) => (
-          <button
-            key={f}
-            onClick={() => setSelected(f)}
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-left text-sm"
-            style={{
-              borderColor: selected === f ? "#2563eb" : "#e5e7eb",
-              background: selected === f ? "#eff6ff" : "white",
-              color: selected === f ? "#1d4ed8" : "#374151",
-            }}
-          >
-            <div style={{
-              width: "18px", height: "18px", borderRadius: "50%", flexShrink: 0,
-              border: selected === f ? "5px solid #2563eb" : "1.5px solid #d1d5db",
-            }} />
-            {f}
-          </button>
-        ))}
+        {FEATURES.map((f) => {
+          const isSelected = selected.includes(f);
+          return (
+            <button
+              key={f}
+              onClick={() => toggle(f)}
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-left text-sm"
+              style={{
+                borderColor: isSelected ? "#2563eb" : "#e5e7eb",
+                background: isSelected ? "#eff6ff" : "white",
+                color: isSelected ? "#1d4ed8" : "#374151",
+              }}
+            >
+              <div style={{
+                width: "18px", height: "18px", borderRadius: "4px", flexShrink: 0,
+                border: isSelected ? "none" : "1.5px solid #d1d5db",
+                background: isSelected ? "#2563eb" : "white",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                {isSelected && (
+                  <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+                    <path d="M1.5 5.5L4.5 8.5L9.5 2.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                )}
+              </div>
+              {f}
+            </button>
+          );
+        })}
       </div>
       <button
         onClick={handleSubmit}
-        disabled={!selected || sending}
+        disabled={selected.length === 0 || sending}
         className="w-full py-3.5 rounded-xl text-white text-sm font-medium"
-        style={{ background: selected ? "#2563eb" : "#d1d5db" }}
+        style={{ background: selected.length > 0 ? "#2563eb" : "#d1d5db" }}
       >
         {sending ? "전송 중..." : "보내기"}
       </button>
