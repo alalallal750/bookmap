@@ -14,7 +14,6 @@ import * as cheerio from "cheerio";
 import { PhysicalLibrary } from "@/types";
 
 const BASE_URL = "https://djlib.sen.go.kr";
-const LIBRARY_ID = "lib_EDU";
 
 export async function fetchDongjakEduAvailability(
   isbn: string
@@ -39,20 +38,17 @@ export async function fetchDongjakEduAvailability(
   const $ = cheerio.load(html);
   let availableCount = 0;
   let totalCount = 0;
-  let roomName = "";
+  let callNumber = "";
 
   $("dl.bookDataWrap").each((_, el) => {
-    // ISBN 확인
     const rowIsbn = $(el).find("dt.tit2 a").attr("isbn") ?? "";
     if (rowIsbn !== isbn) return;
 
     totalCount++;
 
-    // 자료실명
     const site = $(el).find("dd.site").text().trim();
-    if (site && !roomName) roomName = site;
+    if (site && !callNumber) callNumber = site;
 
-    // 대출상태: strong=대출가능, em=예약가능, span=대출불가
     const stateBar = $(el).find("div.bookStateBar");
     if (stateBar.find("strong").length > 0) {
       availableCount++;
@@ -61,18 +57,19 @@ export async function fetchDongjakEduAvailability(
 
   if (totalCount === 0) return [];
 
-  const result: PhysicalLibrary = {
-    libraryId: LIBRARY_ID,
+  return [{
+    id: "lib_EDU",
     libraryName: "동작도서관",
-    libraryType: "main_library",
+    libraryType: "library",
     address: "서울시 동작구 장승배기로 94",
     latitude: 37.5109,
     longitude: 126.9326,
-    homepage: BASE_URL,
+    homepageUrl: BASE_URL,
+    searchResultUrl: url,
     available: availableCount > 0,
-    roomName: roomName || "동작종합자료실",
+    callNumber: callNumber || "동작종합자료실",
+    availableCount,
+    totalCount,
     copyInfo: totalCount > 1 ? `${availableCount}/${totalCount}` : undefined,
-  };
-
-  return [result];
+  }];
 }
