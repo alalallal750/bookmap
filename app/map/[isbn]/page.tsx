@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { PhysicalLibrary, Availability, ApiResponse } from "@/types";
 import { LibraryDetail } from "@/components/map/LibraryDetail";
-import { getCurrentPosition, sortByDistance } from "@/lib/distance";
+import { getCurrentPosition } from "@/lib/distance";
 
 function LoadingDots({ message }: { message: string }) {
   const [dotCount, setDotCount] = useState(0);
@@ -65,13 +65,15 @@ const LEGEND = [
   { label: "스마트", color: "#7c3aed" },
 ];
 
+const BOTTOM_STYLE = { bottom: "max(1.5rem, calc(0.75rem + env(safe-area-inset-bottom)))" };
+
 type MapPageProps = { params: { isbn: string }; searchParams: { title?: string } };
 
 export default function MapPage({ params, searchParams }: MapPageProps) {
   const { isbn } = params;
   const title = searchParams?.title;
   const mapContainerRef = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<KakaoMap | null>(null);
+  const mapRef = useRef<any>(null);
   const overlaysRef = useRef<any[]>([]);
   const userMarkerRef = useRef<any>(null);
 
@@ -82,7 +84,6 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
   const [loading, setLoading] = useState(true);
   const [loadingMessage, setLoadingMessage] = useState("구립도서관 찾는 중...");
   const [visibleAvailableCount, setVisibleAvailableCount] = useState(0);
-  const [showGuide, setShowGuide] = useState(false);
 
   useEffect(() => {
     if (!loading) return;
@@ -141,14 +142,12 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
   const updateVisibleCount = useCallback(() => {
     const map = mapRef.current;
     if (!map || !window.kakao?.maps) return;
-    const bounds = (map as any).getBounds();
+    const bounds = map.getBounds();
     const count = libraries.filter((lib) => {
       if (!lib.available) return false;
-      const pos = new window.kakao.maps.LatLng(lib.latitude, lib.longitude);
-      return bounds.contain(pos);
+      return bounds.contain(new window.kakao.maps.LatLng(lib.latitude, lib.longitude));
     }).length;
     setVisibleAvailableCount(count);
-    setShowGuide(libraries.filter((l) => l.available).length > 0 && count === 0);
   }, [libraries]);
 
   const drawMarkers = useCallback(() => {
@@ -158,7 +157,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
     overlaysRef.current = [];
     libraries.forEach((lib) => {
       const content = createCustomOverlay(lib, () => setSelectedLibrary({ ...lib }));
-      const overlay = new (window.kakao.maps as any).CustomOverlay({
+      const overlay = new window.kakao.maps.CustomOverlay({
         position: new window.kakao.maps.LatLng(lib.latitude, lib.longitude),
         content, yAnchor: 1.3, map,
       });
@@ -168,7 +167,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
       if (userMarkerRef.current) userMarkerRef.current.setMap(null);
       const dot = document.createElement("div");
       dot.style.cssText = `width:12px;height:12px;background:#2563eb;border-radius:50%;border:2.5px solid white;box-shadow:0 0 0 3px rgba(37,99,235,0.25);`;
-      const userOverlay = new (window.kakao.maps as any).CustomOverlay({
+      const userOverlay = new window.kakao.maps.CustomOverlay({
         position: new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng),
         content: dot, yAnchor: 0.5, map,
       });
@@ -179,7 +178,9 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
     updateVisibleCount();
   }, [libraries, userLocation, updateVisibleCount]);
 
-  useEffect(() => { if (mapRef.current) drawMarkers(); }, [drawMarkers, mapReady]);
+  useEffect(() => {
+    if (mapRef.current) drawMarkers();
+  }, [drawMarkers, mapReady]);
 
   function moveToUser() {
     if (!userLocation || !mapRef.current) return;
@@ -190,9 +191,8 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
   return (
     <main className="h-screen h-dvh flex flex-col overflow-hidden">
 
-      {/* ── 헤더 ── */}
+      {/* 헤더 */}
       <header className="bg-white border-b border-gray-100 px-4 pt-4 pb-3 flex-shrink-0 z-20">
-        {/* 최상단 행: 범례만 우측정렬 */}
         <div className="flex justify-end mb-1.5">
           <div className="flex gap-1.5">
             {LEGEND.map(({ label, color }) => (
@@ -202,7 +202,6 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
             ))}
           </div>
         </div>
-        {/* 아랫 행: 뒤로가기 + 제목 */}
         <div className="flex items-center gap-3">
           <Link href="/" className="p-2 -ml-2 text-gray-500" aria-label="뒤로가기">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -216,7 +215,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
         </div>
       </header>
 
-      {/* ── 지도 영역 ── */}
+      {/* 지도 영역 */}
       <div className="flex-1 relative min-h-0">
         <div ref={mapContainerRef} className="absolute inset-0" />
 
@@ -236,17 +235,9 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
           </div>
         )}
 
-{/* 디버그: 모바일 확인용 — 나중에 삭제 */}
-        <div className="absolute top-16 left-3 z-30 bg-yellow-300 text-black text-xs px-2 py-1 rounded">
-          loc: {userLocation ? `${userLocation.lat.toFixed(3)},${userLocation.lng.toFixed(3)}` : "없음"} / loading: {String(loading)} / ready: {String(mapReady)}
-        </div>
-
         {/* 우하단: 현재위치 버튼 */}
         {!selectedLibrary && (
-
-        {/* 우하단: 현재위치 버튼 */}
-        {!selectedLibrary && (
-          <div className="absolute right-3 z-10" style={{ bottom: "max(1.5rem, calc(0.75rem + env(safe-area-inset-bottom)))" }}>
+          <div className="absolute right-3 z-10" style={BOTTOM_STYLE}>
             <button
               onClick={userLocation ? moveToUser : undefined}
               className={`bg-white shadow rounded-xl p-2.5 ${!userLocation ? "opacity-50 cursor-default" : "cursor-pointer"}`}
@@ -261,8 +252,8 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
             {!userLocation && (
               <div style={{ position: "absolute", top: "-4px", right: "-4px", width: "16px", height: "16px", background: "#ef4444", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
-                  <line x1="1.5" y1="1.5" x2="6.5" y2="6.5" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
-                  <line x1="6.5" y1="1.5" x2="1.5" y2="6.5" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
+                  <line x1="1.5" y1="1.5" x2="6.5" y2="6.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" />
+                  <line x1="6.5" y1="1.5" x2="1.5" y2="6.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" />
                 </svg>
               </div>
             )}
@@ -271,10 +262,11 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
 
         {/* 하단 중앙: 말풍선 안내 */}
         {!loading && mapReady && !selectedLibrary && (
-          <div className="absolute left-1/2 -translate-x-1/2 z-10 bg-gray-800 bg-opacity-85 text-white text-xs px-5 py-2.5 rounded-full whitespace-nowrap" style={{ bottom: "max(1.5rem, calc(0.75rem + env(safe-area-inset-bottom)))" }}>
+          <div className="absolute left-1/2 -translate-x-1/2 z-10 bg-gray-800 bg-opacity-85 text-white text-xs px-5 py-2.5 rounded-full whitespace-nowrap" style={BOTTOM_STYLE}>
             지도를 움직여 대출 가능한 도서를 찾아보세요!
           </div>
         )}
+
         {/* 시설 상세 패널 */}
         {selectedLibrary && (
           <div className="absolute inset-0 z-20">
