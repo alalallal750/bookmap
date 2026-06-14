@@ -238,7 +238,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
 
         {/* 우하단: 현재위치 버튼 */}
         {!selectedLibrary && (
-          <div className="absolute right-3 bottom-24 z-10" style={{ position: "absolute" }}>
+          <div className="absolute right-3 z-10" style={{ bottom: "calc(1.5rem + env(safe-area-inset-bottom))" }}>
             <button
               onClick={userLocation ? moveToUser : undefined}
               className={`bg-white shadow rounded-xl p-2.5 ${!userLocation ? "opacity-50 cursor-default" : "cursor-pointer"}`}
