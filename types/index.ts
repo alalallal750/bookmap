@@ -9,7 +9,7 @@ export type Book = {
 };
 
 // ─── 도서관 유형 ──────────────────────────────────────────────
-export type LibraryType = "library" | "small_library" | "smart_library";
+export type LibraryType = "library" | "small_library" | "smart_library" | "edu_library";
 
 // ─── 물리 도서관 ──────────────────────────────────────────────
 export type PhysicalLibrary = {
