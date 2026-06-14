@@ -85,7 +85,11 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
   const [visibleAvailableCount, setVisibleAvailableCount] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
   const [showRegionNotice, setShowRegionNotice] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [showFeedbackSheet, setShowFeedbackSheet] = useState(false);
 
+
+  
   useEffect(() => {
     if (!loading) return;
     const messages = [
@@ -132,6 +136,17 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
         }
       })
       .catch((err) => console.warn("위치 오류:", err.message));
+  }, []);
+
+  useEffect(() => {
+    const initial = setTimeout(() => {
+      setShowFeedback(true);
+      const interval = setInterval(() => {
+        setShowFeedback(prev => !prev);
+      }, 30000);
+      return () => clearInterval(interval);
+    }, 30000);
+    return () => clearTimeout(initial);
   }, []);
 
   useEffect(() => {
@@ -282,10 +297,45 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
           </div>
         )}
 
-        {/* 하단 중앙: 말풍선 안내 */}
+        {/* 하단 중앙: 말풍선 안내 / 피드백 버튼 교차 */}
         {!loading && mapReady && !selectedLibrary && (
-          <div className="absolute left-1/2 -translate-x-1/2 z-10 bg-gray-800 bg-opacity-85 text-white text-xs px-5 py-2.5 rounded-full whitespace-nowrap" style={{ bottom: isDesktop ? "0.75rem" : "7rem" }}>
-            지도를 움직여 대출 가능한 도서를 찾아보세요!
+          <div
+            className="absolute left-1/2 -translate-x-1/2 z-10 text-white text-xs px-5 py-2.5 rounded-full whitespace-nowrap cursor-pointer"
+            style={{ bottom: isDesktop ? "0.75rem" : "7rem", background: showFeedback ? "#2563eb" : "rgba(31,41,55,0.85)" }}
+            onClick={() => { if (showFeedback) setShowFeedbackSheet(true); }}
+          >
+            {showFeedback ? "다음 기능은? →" : "지도를 움직여 대출 가능한 도서를 찾아보세요!"}
+          </div>
+        )}
+
+        {/* 피드백 바텀시트 */}
+        {showFeedbackSheet && (
+          <div className="absolute inset-0 z-30" onClick={() => setShowFeedbackSheet(false)}>
+            <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl pb-8" onClick={e => e.stopPropagation()}>
+              <div className="flex justify-center pt-3 pb-2">
+                <div className="w-10 h-1 bg-gray-200 rounded-full" />
+              </div>
+              <div className="px-5 pt-2 pb-4">
+                <p className="font-bold text-gray-900 text-base mb-1">다음에 어떤 기능이 생기면 좋을까요?</p>
+                <p className="text-xs text-gray-400 mb-5">하나만 골라주세요!</p>
+                
+                  href="https://forms.google.com/PLACEHOLDER"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full py-3.5 rounded-xl text-center text-white text-sm font-medium"
+                  style={{ background: "#2563eb" }}
+                >
+                  구글폼에서 투표하기 →
+                </a>
+              </div>
+              <div className="px-5 pt-2 border-t border-gray-100">
+                <p className="text-xs text-gray-300 leading-relaxed">
+                  지금빌려는 개인 프로젝트로, 현재 동작구 도서관만 지원해요.<br />
+                  실제 대출가능 여부는 도서관 홈페이지에서 확인해 주세요.<br />
+                  문의: your@email.com
+                </p>
+              </div>
+            </div>
           </div>
         )}
         {/* 지역 안내 말풍선 */}
