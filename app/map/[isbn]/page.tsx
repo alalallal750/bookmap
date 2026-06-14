@@ -84,6 +84,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
   const [loadingMessage, setLoadingMessage] = useState("구립도서관 찾는 중...");
   const [visibleAvailableCount, setVisibleAvailableCount] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [showRegionNotice, setShowRegionNotice] = useState(false);
 
   useEffect(() => {
     if (!loading) return;
@@ -116,7 +117,20 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
 
   useEffect(() => {
     getCurrentPosition()
-      .then((coords) => setUserLocation({ lat: coords.latitude, lng: coords.longitude }))
+      .then((coords) => {
+        const lat = coords.latitude;
+        const lng = coords.longitude;
+        setUserLocation({ lat, lng });
+
+        // 동작구 중심과의 거리 계산 (단순 위경도 차이)
+        const dlat = lat - 37.4967;
+        const dlng = lng - 126.9508;
+        const distKm = Math.sqrt(dlat * dlat + dlng * dlng) * 111;
+        if (distKm > 5) {
+          setShowRegionNotice(true);
+          setTimeout(() => setShowRegionNotice(false), 3000);
+        }
+      })
       .catch((err) => console.warn("위치 오류:", err.message));
   }, []);
 
@@ -133,7 +147,11 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
 
   useEffect(() => {
     if (!mapReady || !mapContainerRef.current || mapRef.current) return;
-    const center = userLocation
+    const dlat = userLocation ? userLocation.lat - 37.4967 : 0;
+    const dlng = userLocation ? userLocation.lng - 126.9508 : 0;
+    const distKm = Math.sqrt(dlat * dlat + dlng * dlng) * 111;
+    const isFar = distKm > 5;
+    const center = userLocation && !isFar
       ? new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng)
       : new window.kakao.maps.LatLng(37.4967, 126.9508);
     mapRef.current = new window.kakao.maps.Map(mapContainerRef.current, { center, level: 5 });
@@ -270,7 +288,14 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
             지도를 움직여 대출 가능한 도서를 찾아보세요!
           </div>
         )}
+        {/* 지역 안내 말풍선 */}
+        {showRegionNotice && (
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-gray-800 bg-opacity-90 text-white text-sm px-6 py-3 rounded-full whitespace-nowrap animate-pulse">
+            현재는 동작구에서만 이용 가능합니다.
+          </div>
+        )}
 
+        {/* 시설 상세 패널 */}
         {/* 시설 상세 패널 */}
         {selectedLibrary && (
           <div className="absolute inset-0 z-20">

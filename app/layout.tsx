@@ -13,6 +13,7 @@ export const viewport: Viewport = {
   maximumScale: 1, // 핀치줌 방지 (지도 UX)
   userScalable: false,
   themeColor: "#16a34a",
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

@@ -76,9 +76,9 @@ export function getCurrentPosition(): Promise<GeolocationCoordinates> {
         }
       },
       {
-        enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 60000, // 1분 캐시
+        enableHighAccuracy: false,
+        timeout: 5000,
+        maximumAge: 300000, // 5분 캐시
       }
     );
   });
