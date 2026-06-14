@@ -8,6 +8,7 @@ import {
   fetchSmartLibraryAvailability,
   extractSmartLibraries,
 } from "@/lib/scraper/smartLibrary";
+import { fetchDongjakEduAvailability } from "@/lib/scraper/dongjak_edu";
 import { Availability, ApiResponse } from "@/types";
 
 export async function GET(request: NextRequest) {
@@ -49,11 +50,14 @@ export async function GET(request: NextRequest) {
       smartLibrary = [...smartFromPhysical, ...newSmart];
     }
 
+    // 4. 동작도서관(교육청) 별도 검색
+    const eduLibrary = await fetchDongjakEduAvailability(isbn);
+
     const availability: Availability = {
       isbn,
       ebook: [],
       audiobook: [],
-      physical,
+      physical: [...physical, ...eduLibrary],
       smartLibrary,
     };
 
