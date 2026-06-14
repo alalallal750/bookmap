@@ -42,7 +42,7 @@ export async function fetchDongjakEduAvailability(
 
   
 
-  $("dl.bookDataWrap").each((_, el) => {
+  $("div.cont[data-tab='tab1'] dl.bookDataWrap").each((_, el) => {
     const rowIsbn = $(el).find("dt a[isbn]").attr("isbn") ?? "";
     if (rowIsbn !== isbn) return;
 
