@@ -141,6 +141,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
   useEffect(() => {
     const check = () => setIsDesktop(window.innerWidth >= 768);
     check();
+    console.log("isDesktop:", window.innerWidth >= 768, window.innerWidth);
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
