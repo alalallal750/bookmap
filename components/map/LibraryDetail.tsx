@@ -41,7 +41,8 @@ export function LibraryDetail({ library, bookTitle, onClose }: LibraryDetailProp
     library: "구립도서관",
     small_library: "작은도서관",
     smart_library: "스마트도서관",
-  }[library.libraryType];
+    edu_library: "교육청도서관",
+  }
 
   return (
     <>
