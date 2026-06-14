@@ -227,7 +227,13 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
             </div>
           </div>
         )}
+{/* 디버그 — 확인 후 삭제 */}
+        <div className="absolute top-16 left-3 z-30 bg-yellow-300 text-black text-xs px-2 py-1 rounded">
+          loc: {userLocation ? "있음" : "없음"} / load: {String(loading)} / ready: {String(mapReady)}
+        </div>
 
+        {/* 좌상단: 대출 가능 권수 */}
+        {!loading && mapReady && (
         {/* 좌상단: 대출 가능 권수 */}
         {!loading && mapReady && (
           <div className="absolute top-3 left-3 z-10 bg-white rounded-2xl px-4 py-2 shadow text-xs font-medium text-gray-800">
