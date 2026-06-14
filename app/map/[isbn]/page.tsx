@@ -69,10 +69,10 @@ const LEGEND = [
 type MapPageProps = { params: { isbn: string }; searchParams: { title?: string } };
 
 const FEATURES = [
-  "다른 구 도서관에서도 찾고 싶어요",
-  "저자 이름으로도 검색하고 싶어요",
-  "여러 책을 한꺼번에 검색하고 싶어요",
-  "전자책으로 먼저 읽을 수 있는지 확인하고 싶어요",
+  "다른 구 도서관에서도 찾고 싶어요.(기타 의견으로 어딘지 알려주세요!)",
+  "저자 이름으로도 검색하고 싶어요.",
+  "여러 책을 한꺼번에 검색하고 싶어요.",
+  "전자책으로 먼저 읽을 수 있는지 확인하고 싶어요.",
 ];
 
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwckk8L6aKOx4Cs9hj0i5P1tPpW_K298AIq6GXBMrX2jUnm9LrL9AX9bQ3tFveqbDv5/exec";
@@ -81,13 +81,15 @@ function FeedbackOptions({ onClose }: { onClose: () => void }) {
   const [selected, setSelected] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
+  const [etcText, setEtcText] = useState("");
+  const [etcSelected, setEtcSelected] = useState(false);
 
   function toggle(f: string) {
     setSelected(prev => prev.includes(f) ? prev.filter(x => x !== f) : [...prev, f]);
   }
 
   async function handleSubmit() {
-    if (selected.length === 0) return;
+    if (selected.length === 0 && !etcSelected) return;
     setSending(true);
     try {
       await fetch(SCRIPT_URL, {
@@ -112,9 +114,6 @@ function FeedbackOptions({ onClose }: { onClose: () => void }) {
       </div>
     );
   }
-
-  const [etcText, setEtcText] = useState("");
-  const [etcSelected, setEtcSelected] = useState(false);
 
   return (
     <div className="px-5 pb-4">
