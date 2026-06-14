@@ -41,7 +41,7 @@ export default function HomePage() {
     <main className="min-h-screen flex flex-col">
       <header className="bg-white border-b border-gray-100 px-4 pt-14 pb-4 sticky top-0 z-10">
         <div className="mb-3">
-          <img src="/지금빌려_1번.png" alt="지금빌려" className="h-8 mb-1" />
+          <img src="/logo-header.png" alt="지금빌려" className="h-8 mb-1" />
           <p className="text-xs text-gray-400">그 책, 지금 어디서 빌릴 수 있지?</p>
         </div>
         <SearchBar
@@ -53,7 +53,7 @@ export default function HomePage() {
       <div className="flex-1 py-4">
         {state.status === "idle" && (
           <div className="flex flex-col items-center justify-center pt-24 px-8 text-center">
-            <img src="/지금빌려_2번.png" alt="지금빌려 로고" className="w-48 mb-6" />
+            <img src="/logo-main.png" alt="지금빌려 로고" className="w-48 mb-6" />
             <p className="text-gray-500 text-base font-medium mb-1">
               읽고 싶은 책을 검색하세요
             </p>
