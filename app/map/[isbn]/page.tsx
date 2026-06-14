@@ -237,15 +237,28 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
         )}
 
         {/* 우하단: 현재위치 버튼 */}
-        {/* 우하단: 현재위치 버튼 */}
-        {userLocation && !selectedLibrary && (
-          <button onClick={moveToUser} className="absolute right-3 z-10 bg-white shadow rounded-xl p-2.5" aria-label="현재 위치로 이동" style={{ bottom: "calc(1.5rem + env(safe-area-inset-bottom))" }}>
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <circle cx="10" cy="10" r="3" fill="#2563eb" />
-              <circle cx="10" cy="10" r="7" stroke="#2563eb" strokeWidth="1.5" />
-              <path d="M10 1v3M10 16v3M1 10h3M16 10h3" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-          </button>
+        {!selectedLibrary && (
+          <div className="absolute right-3 bottom-24 z-10" style={{ position: "absolute" }}>
+            <button
+              onClick={userLocation ? moveToUser : undefined}
+              className={`bg-white shadow rounded-xl p-2.5 ${!userLocation ? "opacity-50 cursor-default" : "cursor-pointer"}`}
+              aria-label={userLocation ? "현재 위치로 이동" : "위치 정보 없음"}
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="3" fill={userLocation ? "#2563eb" : "#9ca3af"} />
+                <circle cx="10" cy="10" r="7" stroke={userLocation ? "#2563eb" : "#9ca3af"} strokeWidth="1.5" />
+                <path d="M10 1v3M10 16v3M1 10h3M16 10h3" stroke={userLocation ? "#2563eb" : "#9ca3af"} strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            </button>
+            {!userLocation && (
+              <div style={{ position: "absolute", top: "-4px", right: "-4px", width: "16px", height: "16px", background: "#ef4444", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+                  <line x1="1.5" y1="1.5" x2="6.5" y2="6.5" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
+                  <line x1="6.5" y1="1.5" x2="1.5" y2="6.5" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
+                </svg>
+              </div>
+            )}
+          </div>
         )}
 
         {/* 하단 중앙: 말풍선 안내 */}
