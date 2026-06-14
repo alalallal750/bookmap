@@ -291,7 +291,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
   }, []);
 
   useEffect(() => {
-    if (!mapReady || !mapContainerRef.current || mapRef.current) return;
+    if (!mapReady || loading || !mapContainerRef.current || mapRef.current) return;
     const dlat = userLocation ? userLocation.lat - 37.4967 : 0;
     const dlng = userLocation ? userLocation.lng - 126.9508 : 0;
     const distKm = Math.sqrt(dlat * dlat + dlng * dlng) * 111;
@@ -300,7 +300,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
       ? new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng)
       : new window.kakao.maps.LatLng(37.4967, 126.9508);
     mapRef.current = new window.kakao.maps.Map(mapContainerRef.current, { center, level: 5 });
-  }, [mapReady, userLocation]);
+  }, [mapReady, userLocation, loading]);
   useEffect(() => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     setIsDesktop(!isMobile);
