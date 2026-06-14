@@ -40,8 +40,8 @@ export default function HomePage() {
   return (
     <main className="min-h-screen flex flex-col">
       <header className="bg-white border-b border-gray-100 px-4 pt-14 pb-4 sticky top-0 z-10">
-        <div className="mb-3">
-          <img src="/logo-header.png" alt="지금빌려" className="h-8 mb-1" />
+        <div className="flex items-center gap-3 mb-3">
+          <img src="/logo-header.png" alt="지금빌려" className="h-10" />
           <p className="text-xs text-gray-400">그 책, 지금 어디서 빌릴 수 있지?</p>
         </div>
         <SearchBar
@@ -60,6 +60,7 @@ export default function HomePage() {
             <p className="text-gray-400 text-sm mb-4">
               나랑 가까운 도서관에서 지금 빌릴 수 있는지 바로 확인해 드려요.
             </p>
+            <div className="mt-10" />
             <p className="text-gray-300 text-xs leading-relaxed">
               현재는 동작구 도서관만 지원해요.<br />
               실제 대출가능 여부는 도서관 홈페이지에서 다시 한번 확인해 주세요.
