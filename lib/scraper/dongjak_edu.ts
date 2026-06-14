@@ -60,7 +60,7 @@ export async function fetchDongjakEduAvailability(
   return [{
     id: "lib_EDU",
     libraryName: "동작도서관",
-    libraryType: "library",
+    libraryType: "edu_library",
     address: "서울시 동작구 장승배기로 94",
     latitude: 37.5034,
     longitude: 126.9393,
@@ -68,6 +68,61 @@ export async function fetchDongjakEduAvailability(
     searchResultUrl: url,
     available: availableCount > 0,
     callNumber: callNumber || "동작종합자료실",
+    availableCount,
+    totalCount,
+    copyInfo: totalCount > 1 ? `${availableCount}/${totalCount}` : undefined,
+ }];
+}
+
+export async function fetchDongjakEduSmartAvailability(
+  isbn: string
+): Promise<PhysicalLibrary[]> {
+  const url =
+    `${BASE_URL}/djlib/module/unmannedReservation/search.do` +
+    `?menu_idx=130&locExquery=111013&editMode=normal` +
+    `&officeNm=%EB%8F%99%EC%9E%91%EB%8F%84%EC%84%9C%EA%B4%80` +
+    `&mainSearchType=on&search_text=${encodeURIComponent(isbn)}`;
+
+  let html: string;
+  try {
+    const res = await fetch(url, {
+      signal: AbortSignal.timeout(8000),
+      headers: { "User-Agent": "Mozilla/5.0" },
+    });
+    html = await res.text();
+  } catch {
+    return [];
+  }
+
+  const $ = cheerio.load(html);
+  let availableCount = 0;
+  let totalCount = 0;
+
+  $("dl.bookDataWrap").each((_, el) => {
+    const rowIsbn = $(el).find("dt a[isbn]").attr("isbn") ?? "";
+    if (rowIsbn !== isbn) return;
+
+    totalCount++;
+
+    const stateBar = $(el).find("div.bookStateBar");
+    if (stateBar.find("strong").length > 0) {
+      availableCount++;
+    }
+  });
+
+  if (totalCount === 0) return [];
+
+  return [{
+    id: "smart_EDU",
+    libraryName: "동작도서관 스마트도서관",
+    libraryType: "smart_library",
+    address: "서울시 동작구 장승배기로 94 (동작도서관 정문 왼쪽)",
+    latitude: 37.5034,
+    longitude: 126.9396,
+    homepageUrl: BASE_URL,
+    searchResultUrl: url,
+    available: availableCount > 0,
+    callNumber: "스마트도서관",
     availableCount,
     totalCount,
     copyInfo: totalCount > 1 ? `${availableCount}/${totalCount}` : undefined,
