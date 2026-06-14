@@ -40,12 +40,7 @@ export async function fetchDongjakEduAvailability(
   let totalCount = 0;
   let callNumber = "";
 
-  // 임시 디버그 로그
-  console.log("[EDU] HTML 길이:", html.length);
-  console.log("[EDU] bookDataWrap 개수:", $("dl.bookDataWrap").length);
-  const firstWrap = $("dl.bookDataWrap").first();
-  console.log("[EDU] 첫 번째 ISBN:", firstWrap.find("dt a[isbn]").attr("isbn"));
-  console.log("[EDU] 첫 번째 stateBar HTML:", firstWrap.find("div.bookStateBar").html()?.slice(0, 200));
+  
 
   $("dl.bookDataWrap").each((_, el) => {
     const rowIsbn = $(el).find("dt a[isbn]").attr("isbn") ?? "";
@@ -53,11 +48,11 @@ export async function fetchDongjakEduAvailability(
 
     totalCount++;
 
-    const site = $(el).find("dd.site span").last().text().replace("자료실 :", "").trim();
+    const site = $(el).find("dd.site span").last().text().replace("자료실 :", "").replace(/\s+/g, " ").trim();
     if (site && !callNumber) callNumber = site;
 
-    const stateArea = $(el).find("div.bookStateBar div.stateArea");
-    const isAvailable = stateArea.find("a.reserve-btn").text().replace(/\s+/g, "").includes("도서대출가능");
+    const stateBar = $(el).next("div.bookStateBar");
+    const isAvailable = stateBar.find("a.reserve-btn").text().replace(/\s+/g, "").includes("도서대출가능");
     if (isAvailable) {
       availableCount++;
     }
@@ -112,8 +107,9 @@ export async function fetchDongjakEduSmartAvailability(
 
     totalCount++;
 
-    const stateText = $(el).find("div.bookStateBar p.txt").first().text().replace(/\s+/g, "");
-    if (stateText.includes("대출가능")) {
+    const stateBar = $(el).next("div.bookStateBar");
+    const isAvailable = stateBar.find("a.reserve-btn").text().replace(/\s+/g, "").includes("도서대출가능");
+    if (isAvailable) {
       availableCount++;
     }
   });
