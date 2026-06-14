@@ -191,7 +191,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
     <main className="h-screen flex flex-col overflow-hidden">
 
       {/* ── 헤더 ── */}
-      <header className="bg-white border-b border-gray-100 px-4 pt-12 pb-3 flex-shrink-0 z-20">
+      <header className="bg-white border-b border-gray-100 px-4 pt-4 pb-3 flex-shrink-0 z-20">
         {/* 최상단 행: 범례만 우측정렬 */}
         <div className="flex justify-end mb-1.5">
           <div className="flex gap-1.5">
