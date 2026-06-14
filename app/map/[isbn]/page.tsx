@@ -322,6 +322,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
                 <p className="font-bold text-gray-900 text-base mb-1">다음에 어떤 기능이 생기면 좋을까요?</p>
                 <p className="text-xs text-gray-400 mb-5">하나만 골라주세요!</p>
                 
+                  <a
                   href="https://forms.google.com/PLACEHOLDER"
                   target="_blank"
                   rel="noopener noreferrer"
