@@ -238,7 +238,8 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
 
         {/* 우하단: 현재위치 버튼 */}
         {!selectedLibrary && (
-          <button onClick={moveToUser} className="absolute bottom-20 right-3 z-10 bg-white shadow rounded-xl p-2.5" aria-label="현재 위치로 이동">
+          {userLocation && !selectedLibrary && (
+          <button onClick={moveToUser} className="absolute right-3 z-10 bg-white shadow rounded-xl p-2.5" aria-label="현재 위치로 이동" style={{ bottom: "calc(1.5rem + env(safe-area-inset-bottom))" }}>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <circle cx="10" cy="10" r="3" fill="#2563eb" />
               <circle cx="10" cy="10" r="7" stroke="#2563eb" strokeWidth="1.5" />
@@ -249,7 +250,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
 
         {/* 하단 중앙: 말풍선 안내 */}
         {!loading && mapReady && !selectedLibrary && (
-          <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10 bg-gray-800 bg-opacity-85 text-white text-xs px-5 py-2.5 rounded-full whitespace-nowrap">
+          <div className="absolute left-1/2 -translate-x-1/2 z-10 bg-gray-800 bg-opacity-85 text-white text-xs px-5 py-2.5 rounded-full whitespace-nowrap" style={{ bottom: "calc(1.5rem + env(safe-area-inset-bottom))" }}>
             지도를 움직여 대출 가능한 도서를 찾아보세요!
           </div>
         )}
