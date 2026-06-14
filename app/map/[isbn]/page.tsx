@@ -65,7 +65,7 @@ const LEGEND = [
   { label: "스마트", color: "#7c3aed" },
 ];
 
-const BOTTOM_STYLE = { bottom: "max(1.5rem, calc(0.75rem + env(safe-area-inset-bottom)))" };
+const BOTTOM_STYLE = { bottom: "5rem" };
 
 type MapPageProps = { params: { isbn: string }; searchParams: { title?: string } };
 
