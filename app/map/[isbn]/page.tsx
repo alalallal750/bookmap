@@ -457,6 +457,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
               <div className="px-5 pt-3 border-t border-gray-100">
                 <p className="text-xs text-gray-300 leading-relaxed">
                   지금빌려는 개인 프로젝트로, 현재 동작구 도서관만 지원해요.<br />
+                  서울시교육청 동작도서관(djlib.sen.go.kr)은 현재 미지원이에요.<br />
                   실제 대출가능 여부는 도서관 홈페이지에서 확인해 주세요.<br />
                 </p>
               </div>
