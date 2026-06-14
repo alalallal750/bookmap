@@ -67,7 +67,7 @@ export function LibraryDetail({ library, bookTitle, onClose }: LibraryDetailProp
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
-                  {typeLabel}
+                  {typeLabel[library.libraryType]}
                 </span>
                 {library.available !== undefined && (
                   <AvailableBadge available={library.available} />
