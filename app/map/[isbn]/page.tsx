@@ -190,13 +190,8 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
 
       {/* ── 헤더 ── */}
       <header className="bg-white border-b border-gray-100 px-4 pt-12 pb-3 flex-shrink-0 z-20">
-        {/* 윗 행: 뒤로가기 + 범례 */}
-        <div className="flex items-center justify-between mb-1.5">
-          <Link href="/" className="p-2 -ml-2 text-gray-500" aria-label="뒤로가기">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M13 4l-6 6 6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </Link>
+        {/* 최상단 행: 범례만 우측정렬 */}
+        <div className="flex justify-end mb-1.5">
           <div className="flex gap-1.5">
             {LEGEND.map(({ label, color }) => (
               <div key={label} style={{ background: color, color: "white", borderRadius: "10px", padding: "3px 10px", fontSize: "12px", fontWeight: 500, boxShadow: "0 1px 3px rgba(0,0,0,0.15)" }}>
@@ -205,10 +200,17 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
             ))}
           </div>
         </div>
-        {/* 아랫 행: 제목 + ISBN */}
-        <div className="pl-2">
-          <h1 className="font-bold text-gray-900 text-sm line-clamp-1">{title ?? "도서관 찾기"}</h1>
-          <p className="text-xs text-gray-400">동작구 · ISBN {isbn}</p>
+        {/* 아랫 행: 뒤로가기 + 제목 */}
+        <div className="flex items-center gap-3">
+          <Link href="/" className="p-2 -ml-2 text-gray-500" aria-label="뒤로가기">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M13 4l-6 6 6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
+          <div>
+            <h1 className="font-bold text-gray-900 text-sm line-clamp-1">{title ?? "도서관 찾기"}</h1>
+            <p className="text-xs text-gray-400">동작구 · ISBN {isbn}</p>
+          </div>
         </div>
       </header>
 
@@ -233,7 +235,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
         )}
 
         {/* 우하단: 현재위치 버튼 */}
-        {userLocation && (
+        {userLocation && !selectedLibrary && (
           <button onClick={moveToUser} className="absolute bottom-6 right-3 z-10 bg-white shadow rounded-xl p-2.5" aria-label="현재 위치로 이동">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <circle cx="10" cy="10" r="3" fill="#2563eb" />
@@ -244,7 +246,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
         )}
 
         {/* 하단 중앙: 말풍선 안내 (showGuide일 때만) */}
-        {showGuide && !loading && (
+        {showGuide && !loading && !selectedLibrary && (
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 bg-gray-800 bg-opacity-85 text-white text-xs px-5 py-2.5 rounded-full whitespace-nowrap">
             지도를 움직여 대출 가능한 도서를 찾아보세요!
           </div>
