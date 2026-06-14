@@ -14,15 +14,19 @@ export function LibraryDetail({ library, bookTitle, onClose }: LibraryDetailProp
   if (!library) return null;
 
   function openKakaoNavi() {
-    const url = `kakaomap://route?ep=${library!.latitude},${library!.longitude}&by=FOOT`;
-    window.location.href = url;
-    // fallback: 앱 미설치 시 카카오맵 웹
-    setTimeout(() => {
-      window.open(
-        `https://map.kakao.com/link/to/${encodeURIComponent(library!.libraryName)},${library!.latitude},${library!.longitude}`,
-        "_blank"
-      );
-    }, 1500);
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const webUrl = `https://map.kakao.com/link/to/${encodeURIComponent(library!.libraryName)},${library!.latitude},${library!.longitude}`;
+
+    if (isMobile) {
+      // 모바일: 앱 시도 후 1.5초 뒤 웹 fallback
+      window.location.href = `kakaomap://route?ep=${library!.latitude},${library!.longitude}&by=FOOT`;
+      setTimeout(() => {
+        window.open(webUrl, "_blank");
+      }, 1500);
+    } else {
+      // PC: 바로 카카오맵 웹으로
+      window.open(webUrl, "_blank");
+    }
   }
 
   function openHomepage() {
