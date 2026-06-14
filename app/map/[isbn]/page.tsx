@@ -188,7 +188,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
   }
 
   return (
-    <main className="h-screen flex flex-col overflow-hidden">
+    <main className="h-screen h-dvh flex flex-col overflow-hidden">
 
       {/* ── 헤더 ── */}
       <header className="bg-white border-b border-gray-100 px-4 pt-4 pb-3 flex-shrink-0 z-20">
@@ -248,9 +248,9 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
         )}
 
         {/* 하단 중앙: 말풍선 안내 */}
-        {!loading && mapReady && !selectedLibrary && (
+        {showGuide && !loading && !selectedLibrary && (
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 bg-gray-800 bg-opacity-85 text-white text-xs px-5 py-2.5 rounded-full whitespace-nowrap">
-            {showGuide ? "지도를 움직여 대출 가능한 도서를 찾아보세요!" : "마커를 눌러 도서관 정보를 확인하세요"}
+            지도를 움직여 대출 가능한 도서를 찾아보세요!
           </div>
         )}
         {/* 시설 상세 패널 */}
