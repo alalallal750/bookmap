@@ -324,6 +324,28 @@ export const DONGJAK_LIBRARIES: Omit <
     openingHours: "평일 10:00~18:00 / 주말·공휴일 휴관",
     homepageUrl: "https://lib.dongjak.go.kr",
   },
+  {
+    id: "lib_NR",
+    libraryName: "만나작은도서관",
+    libraryType: "small_library",
+    address: "서울특별시 동작구 사당로2다길 85",
+    latitude: 37.4896554316338,
+    longitude: 126.963130745075,
+    openingHours: "평일 10:00~18:00 / 주말·공휴일 휴관",
+    homepageUrl: "https://lib.dongjak.go.kr",
+  },
+  {
+    id: "lib_EDU",
+    libraryName: "동작도서관",
+    libraryType: "library",
+    address: "서울특별시 동작구 장승배기로 94",
+    latitude: 37.5109,
+    longitude: 126.9326,
+    tel: "02-823-6417",
+    openingHours: "평일 09:00~18:00 / 토요일 09:00~17:00 / 일요일·공휴일 휴관",
+    homepageUrl: "https://djlib.sen.go.kr",
+  },
+
 ];
 
 export function getLibraryById(id: string) {
