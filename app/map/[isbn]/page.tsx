@@ -28,6 +28,7 @@ function getMarkerColor(lib: PhysicalLibrary): string {
   if (!lib.available) return "#888780";
   if (lib.libraryType === "smart_library") return "#7c3aed";
   if (lib.libraryType === "small_library") return "#16a34a";
+  if (lib.libraryType === "edu_library") return "#ea580c";
   return "#2563eb";
 }
 
@@ -42,7 +43,7 @@ const SHORT_NAMES: Record<string, string> = {
   "신대방2동 작은도서관": "신대방2동", "흑석동 작은도서관": "흑석동", "담소작은도서관": "담소",
   "상도중앙작은도서관": "상도중앙", "성대골 어린이도서관": "성대골어린이", "아트&힐링작은도서관": "아트&힐링",
   "지혜샘터작은도서관": "지혜샘터", "행복한래미안작은도서관": "행복한래미안", "양문작은도서관": "양문",
-  "만나작은도서관": "만나", "장승배기역 스마트도서관": "장승배기역",
+  "만나작은도서관": "만나", "동작도서관": "동작", "장승배기역 스마트도서관": "장승배기역",
   "신대방삼거리역 스마트도서관": "신대방삼거리역", "총신대입구(이수역) 스마트도서관": "총신대입구(이수역)",
   "노들역 스마트도서관": "노들역", "까망돌 스마트도서관": "까망돌S", "동작구민체육센터 스마트도서관": "동작구민체육센터",
 };
@@ -63,6 +64,7 @@ const LEGEND = [
   { label: "구립", color: "#2563eb" },
   { label: "작은", color: "#16a34a" },
   { label: "스마트", color: "#7c3aed" },
+  { label: "교육청", color: "#ea580c" },
 ];
 
 
