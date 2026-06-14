@@ -53,7 +53,7 @@ export default function HomePage() {
       <div className="flex-1 py-4">
         {state.status === "idle" && (
           <div className="flex flex-col items-center justify-center pt-24 px-8 text-center">
-            <img src="/logo-main.png" alt="지금빌려 로고" className="w-48 mb-6" />
+            <img src="/logo-main.png" alt="지금빌려 로고" className="w-64 mb-6" style={{filter: "brightness(0.9)"}} />
             <p className="text-gray-500 text-base font-medium mb-1">
               읽고 싶은 책을 검색하세요
             </p>
