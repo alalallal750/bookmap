@@ -412,7 +412,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
             </div>
           </div>
         )}
-        )}
+        
         {/* 지역 안내 말풍선 */}
         {showRegionNotice && (
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-gray-800 bg-opacity-90 text-white text-sm px-6 py-3 rounded-full whitespace-nowrap animate-pulse">
