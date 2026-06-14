@@ -41,8 +41,8 @@ export default function HomePage() {
     <main className="min-h-screen flex flex-col">
       <header className="bg-white border-b border-gray-100 px-4 pt-14 pb-4 sticky top-0 z-10">
         <div className="mb-3">
-          <h1 className="text-xl font-bold text-gray-900">BookMap</h1>
-          <p className="text-xs text-gray-400">동작구 도서관에서 책 빠르게 찾기</p>
+          <img src="/지금빌려_1번.png" alt="지금빌려" className="h-8 mb-1" />
+          <p className="text-xs text-gray-400">그 책, 지금 어디서 빌릴 수 있지?</p>
         </div>
         <SearchBar
           onSearch={handleSearch}
@@ -53,12 +53,16 @@ export default function HomePage() {
       <div className="flex-1 py-4">
         {state.status === "idle" && (
           <div className="flex flex-col items-center justify-center pt-24 px-8 text-center">
-            <span className="text-6xl mb-4">📖</span>
+            <img src="/지금빌려_2번.png" alt="지금빌려 로고" className="w-48 mb-6" />
             <p className="text-gray-500 text-base font-medium mb-1">
               읽고 싶은 책을 검색하세요
             </p>
-            <p className="text-gray-400 text-sm">
-              동작구 도서관에서 지금 빌릴 수 있는지 바로 확인해 드려요
+            <p className="text-gray-400 text-sm mb-4">
+              나랑 가까운 도서관에서 지금 빌릴 수 있는지 바로 확인해 드려요.
+            </p>
+            <p className="text-gray-300 text-xs leading-relaxed">
+              현재는 동작구 도서관만 지원해요.<br />
+              실제 대출가능 여부는 도서관 홈페이지에서 다시 한번 확인해 주세요.
             </p>
           </div>
         )}
