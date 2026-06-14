@@ -234,6 +234,7 @@ async function fetchPostHtml(
   try {
     const res = await fetch(url, {
       method: "POST",
+      signal: AbortSignal.timeout(8000),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         "User-Agent":
