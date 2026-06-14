@@ -40,6 +40,13 @@ export async function fetchDongjakEduAvailability(
   let totalCount = 0;
   let callNumber = "";
 
+  // 임시 디버그 로그
+  console.log("[EDU] HTML 길이:", html.length);
+  console.log("[EDU] bookDataWrap 개수:", $("dl.bookDataWrap").length);
+  const firstWrap = $("dl.bookDataWrap").first();
+  console.log("[EDU] 첫 번째 ISBN:", firstWrap.find("dt a[isbn]").attr("isbn"));
+  console.log("[EDU] 첫 번째 stateBar HTML:", firstWrap.find("div.bookStateBar").html()?.slice(0, 200));
+
   $("dl.bookDataWrap").each((_, el) => {
     const rowIsbn = $(el).find("dt a[isbn]").attr("isbn") ?? "";
     if (rowIsbn !== isbn) return;
