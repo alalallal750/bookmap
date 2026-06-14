@@ -236,6 +236,14 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
           </div>
         )}
 
+{/* 디버그: 모바일 확인용 — 나중에 삭제 */}
+        <div className="absolute top-16 left-3 z-30 bg-yellow-300 text-black text-xs px-2 py-1 rounded">
+          loc: {userLocation ? `${userLocation.lat.toFixed(3)},${userLocation.lng.toFixed(3)}` : "없음"} / loading: {String(loading)} / ready: {String(mapReady)}
+        </div>
+
+        {/* 우하단: 현재위치 버튼 */}
+        {!selectedLibrary && (
+
         {/* 우하단: 현재위치 버튼 */}
         {!selectedLibrary && (
           <div className="absolute right-3 z-10" style={{ bottom: "max(1.5rem, calc(0.75rem + env(safe-area-inset-bottom)))" }}>
