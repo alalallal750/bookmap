@@ -130,7 +130,7 @@ export async function fetchDongjakEduSmartAvailability(
     libraryType: "smart_library",
     address: "서울시 동작구 장승배기로 94 (동작도서관 정문 왼쪽)",
     latitude: 37.5057,
-    longitude: 126.9400583,
+    longitude: 126.9385,
     homepageUrl: BASE_URL,
     searchResultUrl: url,
     available: availableCount > 0,
