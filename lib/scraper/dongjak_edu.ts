@@ -65,8 +65,8 @@ export async function fetchDongjakEduAvailability(
     libraryName: "동작도서관",
     libraryType: "edu_library",
     address: "서울시 동작구 장승배기로 94",
-    latitude: 37.5034,
-    longitude: 126.9393,
+    latitude: 37.5048,
+    longitude: 126.9399,
     homepageUrl: BASE_URL,
     searchResultUrl: url,
     available: availableCount > 0,
@@ -101,14 +101,14 @@ export async function fetchDongjakEduSmartAvailability(
   let availableCount = 0;
   let totalCount = 0;
 
-  $("dl.bookDataWrap").each((_, el) => {
-    const rowIsbn = $(el).find("dt a[isbn]").attr("isbn") ?? "";
+  $("li").each((_, el) => {
+    const rowIsbn = $(el).find("div.thumb a[isbn]").attr("isbn") ?? "";
     if (rowIsbn !== isbn) return;
 
     totalCount++;
 
-    const stateBar = $(el).next("div.bookStateBar");
-    const isAvailable = stateBar.find("a.reserve-btn").text().replace(/\s+/g, "").includes("도서대출가능");
+    const stateBar = $(el).find("div.bookStateBar");
+    const isAvailable = stateBar.find("p.txt").text().replace(/\s+/g, "").includes("대출가능");
     if (isAvailable) {
       availableCount++;
     }
