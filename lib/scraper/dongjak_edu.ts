@@ -80,17 +80,25 @@ export async function fetchDongjakEduAvailability(
 export async function fetchDongjakEduSmartAvailability(
   isbn: string
 ): Promise<PhysicalLibrary[]> {
-  const url =
-    `${BASE_URL}/djlib/module/unmannedReservation/search.do` +
-    `?menu_idx=130&locExquery=111013&editMode=normal` +
-    `&officeNm=%EB%8F%99%EC%9E%91%EB%8F%84%EC%84%9C%EA%B4%80` +
-    `&mainSearchType=on&search_text=${encodeURIComponent(isbn)}`;
+  const url = `${BASE_URL}/djlib/module/unmannedReservation/search.do`;
+  const body = new URLSearchParams({
+    current_count: "1",
+    menu_idx: "130",
+    menu: "all",
+    keyword: isbn,
+    page_count: "10",
+  });
 
   let html: string;
   try {
     const res = await fetch(url, {
+      method: "POST",
       signal: AbortSignal.timeout(8000),
-      headers: { "User-Agent": "Mozilla/5.0" },
+      headers: {
+        "User-Agent": "Mozilla/5.0",
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: body.toString(),
     });
     html = await res.text();
   } catch {
