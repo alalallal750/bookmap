@@ -24,37 +24,33 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // 1. 통합도서관 소장현황 (ISBN → 제목 fallback)
-    let allPhysical = await fetchPhysicalAvailability(isbn);
-    if (allPhysical.length === 0) {
-      let bookTitle = title;
-      if (!bookTitle) {
-        const books = await searchBooks(isbn);
-        bookTitle = books[0]?.title;
-      }
-      if (bookTitle) {
-        allPhysical = await fetchPhysicalAvailabilityByTitle(bookTitle, isbn);
-      }
-    }
+    // 1. 통합도서관 + 교육청 동시 검색
+    const [allPhysical, eduLibrary, eduSmartLibrary] = await Promise.all([
+      fetchPhysicalAvailability(isbn),
+      fetchDongjakEduAvailability(isbn),
+      fetchDongjakEduSmartAvailability(isbn),
+    ]);
 
     // 2. 통합도서관 결과에서 스마트도서관 분리
-    const { physical, smartLibrary: smartFromPhysical } = extractSmartLibraries(allPhysical);
+    let { physical, smartLibrary: smartFromPhysical } = extractSmartLibraries(
+      allPhysical.length > 0 ? allPhysical : await (async () => {
+        let bookTitle = title;
+        if (!bookTitle) {
+          const books = await searchBooks(isbn);
+          bookTitle = books[0]?.title;
+        }
+        return bookTitle ? fetchPhysicalAvailabilityByTitle(bookTitle, isbn) : [];
+      })()
+    );
 
-    // 3. 스마트도서관 별도 검색 (title 기반)
+    // 3. 스마트도서관 별도 검색 (title 기반) — 통합도서관과 동시 실행 불가 (title 의존)
     let smartLibrary = smartFromPhysical;
     if (title) {
       const smartResults = await fetchSmartLibraryAvailability(title.slice(0, 10));
-      // 통합도서관에서 이미 나온 것과 합치되 중복 제거
       const existingIds = new Set(smartFromPhysical.map((l) => l.id));
       const newSmart = smartResults.filter((l) => !existingIds.has(l.id));
       smartLibrary = [...smartFromPhysical, ...newSmart];
     }
-
-    // 4. 동작도서관(교육청) 별도 검색
-    const eduLibrary = await fetchDongjakEduAvailability(isbn);
-
-    // 5. 동작도서관 스마트도서관(교육청) 별도 검색
-    const eduSmartLibrary = await fetchDongjakEduSmartAvailability(isbn);
 
     const availability: Availability = {
       isbn,
