@@ -48,7 +48,7 @@ const SHORT_NAMES: Record<string, string> = {
   "노들역 스마트도서관": "노들역S", "까망돌 스마트도서관": "까망돌S", "동작구민체육센터 스마트도서관": "동작구민체육센터S",
 };
 function getLibraryShortName(name: string): string { return SHORT_NAMES[name] ?? name; }
-}
+
 
 function createCustomOverlay(lib: PhysicalLibrary, onClick: () => void) {
   const color = getMarkerColor(lib);
