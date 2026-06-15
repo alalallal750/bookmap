@@ -150,7 +150,9 @@ export function LibraryDetail({ library, bookTitle, onClose }: LibraryDetailProp
     }}
     className="btn-secondary"
   >
-    {bookTitle ? `'${bookTitle.slice(0, 10)}' 스마트도서관에서 검색하기` : "스마트도서관에서 검색하기"}
+    {bookTitle
+  ? `「${bookTitle.slice(0, 10)}${bookTitle.length > 10 ? "..." : ""}」 스마트도서관에서 검색하기`
+  : "스마트도서관에서 검색하기"}
   </button>
 ) : (
   <button onClick={openHomepage} className="btn-secondary">
