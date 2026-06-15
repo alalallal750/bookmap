@@ -129,9 +129,34 @@ export function LibraryDetail({ library, bookTitle, onClose }: LibraryDetailProp
             <button onClick={openKakaoNavi} className="btn-primary">
               길찾기
             </button>
-            {!library?.id?.startsWith("smart_") && (
+            {library?.id?.startsWith("smart_") ? (
+  <button
+    onClick={() => {
+      const SMART_NO: Record<string, string> = {
+        smart_jangseungbaegi: "3",
+        smart_sindaebang: "1",
+        smart_isu: "2",
+        smart_nodeul: "4",
+        smart_kkamangdol: "5",
+        smart_gymnasium: "6",
+      };
+      const titlePreview = bookTitle ? bookTitle.slice(0, 10) : "";
+      if (library.id === "smart_EDU") {
+        window.open("https://djlib.sen.go.kr/djlib/module/unmannedReservation/search.do?menu_idx=130&locExquery=111013", "_blank");
+      } else {
+        const no = SMART_NO[library.id];
+        if (no) window.open(`http://smartlib.dongjak.go.kr:8088/EZ-950SL_Web/mainPage/SI_searchbookindex_Service.jsp?no=${no}`, "_blank");
+      }
+    }}
+    className="btn-secondary"
+  >
+    {bookTitle ? `'${bookTitle.slice(0, 10)}' 스마트도서관에서 검색하기` : "스마트도서관에서 검색하기"}
+  </button>
+) : (
   <button onClick={openHomepage} className="btn-secondary">
-    도서관 홈페이지에서 보기</button>)}
+    도서관 홈페이지에서 보기
+  </button>
+)}
           </div>
         </div>
       </div>
