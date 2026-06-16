@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "지금 어디서 빌릴 수 있지?",
   description: "나랑 가까운 동작구 도서관에서 지금 빌릴 수 있는지 바로 확인해 드려요.",
   applicationName: "지금빌려",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export const viewport: Viewport = {
