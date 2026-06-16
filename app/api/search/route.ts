@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
     const merged = [
       ...dongjak_books,
       ...edu_books.filter((b) => !seen.has(b.isbn)),
-    ];
+    ].sort((a, b) => (b.publishYear ?? 0) - (a.publishYear ?? 0));
 
     return NextResponse.json<ApiResponse<SearchResult>>({
       success: true,
