@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { searchBooks } from "@/lib/scraper/dongjak";
+import { searchDongjakEduBooks } from "@/lib/scraper/dongjak_edu";
 import { ApiResponse, SearchResult } from "@/types";
 
 export async function GET(request: NextRequest) {
@@ -21,10 +22,25 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const books = await searchBooks(query);
+    // 두 서버에 동시에 검색 요청
+    const [dongjak, edu] = await Promise.allSettled([
+      searchBooks(query),
+      searchDongjakEduBooks(query),
+    ]);
+
+    const dongjak_books = dongjak.status === "fulfilled" ? dongjak.value : [];
+    const edu_books = edu.status === "fulfilled" ? edu.value : [];
+
+    // ISBN 기준 중복 제거 (동작구 통합도서관 우선)
+    const seen = new Set<string>(dongjak_books.map((b) => b.isbn));
+    const merged = [
+      ...dongjak_books,
+      ...edu_books.filter((b) => !seen.has(b.isbn)),
+    ];
+
     return NextResponse.json<ApiResponse<SearchResult>>({
       success: true,
-      data: { books, total: books.length },
+      data: { books: merged, total: merged.length },
     });
   } catch (e) {
     console.error("[/api/search] error:", e);

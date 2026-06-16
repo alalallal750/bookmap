@@ -11,7 +11,7 @@
  */
 
 import * as cheerio from "cheerio";
-import { PhysicalLibrary } from "@/types";
+import { Book, PhysicalLibrary } from "@/types";
 
 const BASE_URL = "https://djlib.sen.go.kr";
 
@@ -139,4 +139,56 @@ export async function fetchDongjakEduSmartAvailability(
     totalCount,
     copyInfo: totalCount > 1 ? `${availableCount}/${totalCount}` : undefined,
   }];
+}
+export async function searchDongjakEduBooks(query: string): Promise<Book[]> {
+  const url =
+    `${BASE_URL}/djlib/intro/search/index.do` +
+    `?menu_idx=4&locExquery=111013&editMode=normal` +
+    `&officeNm=%EB%8F%99%EC%9E%91%EB%8F%84%EC%84%9C%EA%B4%80` +
+    `&mainSearchType=on&rowCount=100&search_text=${encodeURIComponent(query)}`;
+
+  let html: string;
+  try {
+    const res = await fetch(url, {
+      signal: AbortSignal.timeout(8000),
+      headers: { "User-Agent": "Mozilla/5.0" },
+    });
+    html = await res.text();
+  } catch {
+    return [];
+  }
+
+  const $ = cheerio.load(html);
+  const seen = new Set<string>();
+  const books: Book[] = [];
+
+  $("div.cont[data-tab='tab1'] li").each((_, el) => {
+    try {
+      const isbn = $(el).find("a.goDetail[isbn]").first().attr("isbn")?.trim();
+      if (!isbn) return;
+      if (seen.has(isbn)) return;
+      seen.add(isbn);
+
+      const title = $(el).find("dt.tit2 a.goDetail").text().replace(/\s+/g, " ").trim();
+      if (!title) return;
+
+      const authorRaw = $(el).find("dd.author span").eq(0).text().replace("저자:", "").replace("지은이:", "").trim();
+      const publisher = $(el).find("dd.author span").eq(1).text().replace("발행처:", "").trim();
+      const publishYearRaw = $(el).find("dd.author span").eq(2).text().replace("발행연도:", "").trim();
+      const coverImage = $(el).find("div.thumb img").attr("src");
+
+      books.push({
+        isbn,
+        title,
+        author: authorRaw,
+        publisher,
+        publishYear: parseInt(publishYearRaw) || 0,
+        coverImage: coverImage || undefined,
+      });
+    } catch {
+      // 개별 항목 파싱 실패 스킵
+    }
+  });
+
+  return books;
 }
