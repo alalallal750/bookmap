@@ -453,7 +453,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
                 <div className="w-10 h-1 bg-gray-200 rounded-full" />
               </div>
               <div className="flex items-center justify-between px-5 pt-2 pb-4">
-                <p className="font-bold text-gray-900 text-base">🚀 이 기능 생기면 친구들한테 추천할래!</p>
+                <p className="font-bold text-gray-900 text-base">🚀 이 기능 생기면 친구들한테 추천할래요!</p>
                 <button onClick={() => setShowFeedbackSheet(false)} className="text-gray-400 p-1">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
