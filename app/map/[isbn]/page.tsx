@@ -440,7 +440,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
             style={{ bottom: isDesktop ? "0.75rem" : "7rem", background: showFeedback ? "#2563eb" : "rgba(31,41,55,0.85)" }}
             onClick={() => { if (showFeedback) setShowFeedbackSheet(true); }}
           >
-            {showFeedback ? "좋아요!👍" : "지도를 움직여 대출 가능한 도서를 찾아보세요!"}
+            {showFeedback ? "✨ 다음 버전 미리보기 👍" : "지도를 움직여 대출 가능한 도서를 찾아보세요!"}
 
           </div>
         )}
@@ -453,7 +453,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
                 <div className="w-10 h-1 bg-gray-200 rounded-full" />
               </div>
               <div className="flex items-center justify-between px-5 pt-2 pb-4">
-                <p className="font-bold text-gray-900 text-base">다음에 어떤 기능이 생기면 좋을까요?</p>
+                <p className="font-bold text-gray-900 text-base">🚀 이 기능 생기면 친구들한테 추천할래!</p>
                 <button onClick={() => setShowFeedbackSheet(false)} className="text-gray-400 p-1">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
@@ -461,7 +461,21 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
                 </button>
               </div>
               <FeedbackOptions onClose={() => setShowFeedbackSheet(false)} />
-              <div className="px-5 pt-3 border-t border-gray-100">
+              <div className="px-5 pb-3 text-center">
+  <style>{`
+    @keyframes dotFade {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+  `}</style>
+  <p className="text-sm text-gray-400">
+    📚 다음 장을 쓰는 중
+    <span style={{ animation: 'dotFade 1.2s ease-in-out 0s infinite' }}>.</span>
+    <span style={{ animation: 'dotFade 1.2s ease-in-out 0.4s infinite' }}>.</span>
+    <span style={{ animation: 'dotFade 1.2s ease-in-out 0.8s infinite' }}>.</span>
+  </p>
+</div>
+<div className="px-5 pt-3 border-t border-gray-100">
                 <p className="text-xs text-gray-300 leading-relaxed">
                   지금빌려는 개인 프로젝트로, 현재 동작구 도서관만 지원해요.<br />
                   실제 대출가능 여부는 도서관 홈페이지에서 확인해 주세요.<br />
