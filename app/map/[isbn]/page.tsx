@@ -440,7 +440,8 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
             style={{ bottom: isDesktop ? "0.75rem" : "7rem", background: showFeedback ? "#2563eb" : "rgba(31,41,55,0.85)" }}
             onClick={() => { if (showFeedback) setShowFeedbackSheet(true); }}
           >
-            {showFeedback ? "다음 기능은? →" : "지도를 움직여 대출 가능한 도서를 찾아보세요!"}
+            {showFeedback ? "좋아요!👍" : "지도를 움직여 대출 가능한 도서를 찾아보세요!"}
+
           </div>
         )}
 
