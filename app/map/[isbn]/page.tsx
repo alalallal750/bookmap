@@ -470,9 +470,9 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
   `}</style>
   <p className="text-sm text-gray-400">
     📚 다음 장을 쓰는 중
-    <span style={{ animation: 'dotFade 1.2s ease-in-out 0s infinite' }}>.</span>
-    <span style={{ animation: 'dotFade 1.2s ease-in-out 0.8s infinite' }}>.</span>
-    <span style={{ animation: 'dotFade 1.2s ease-in-out 1.6s infinite' }}>.</span>
+    <span style={{ animation: 'dotFade 1.8s ease-in-out 0s infinite' }}>.</span>
+    <span style={{ animation: 'dotFade 1.8s ease-in-out 0.4s infinite' }}>.</span>
+    <span style={{ animation: 'dotFade 1.8s ease-in-out 0.8s infinite' }}>.</span>
   </p>
 </div>
 <div className="px-5 pt-3 border-t border-gray-100">
