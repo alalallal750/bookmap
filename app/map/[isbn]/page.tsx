@@ -313,10 +313,13 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
     const map = mapRef.current;
     if (!map || !window.kakao?.maps) return;
     const bounds = map.getBounds();
-    const count = libraries.filter((lib) => {
-      if (!lib.available) return false;
-      return bounds.contain(new window.kakao.maps.LatLng(lib.latitude, lib.longitude));
-    }).length;
+    const count = libraries
+      .filter((lib) => {
+        if (!lib.available) return false;
+        return bounds.contain(new window.kakao.maps.LatLng(lib.latitude, lib.longitude));
+      })
+      .reduce((sum, lib) => sum + (lib.availableCount ?? 1), 0);
+    setVisibleAvailableCount(count);
     setVisibleAvailableCount(count);
   }, [libraries]);
 
