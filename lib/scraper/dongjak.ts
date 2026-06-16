@@ -51,7 +51,9 @@ export async function searchBooks(query: string): Promise<Book[]> {
       seen.add(isbn);
 
       const coverSrc = $(row).find("div.thumb img").first().attr("src");
-      const authorText = findFieldText($, row, "저자");
+      const authorText = findFieldText($, row, "저자")
+  .replace(/[;,\s]+$/g, "")
+  .trim();
       const pubRaw = findFieldText($, row, "출판정보");
       const { publisher, publishYear } = parsePublisherYear(pubRaw);
 
