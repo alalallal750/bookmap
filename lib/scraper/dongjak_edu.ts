@@ -175,9 +175,7 @@ export async function searchDongjakEduBooks(query: string): Promise<Book[]> {
       const authorRaw = $(el).find("dd.author span").eq(0).text()
   .replace(/저자\s*:\s*/g, "")
   .replace(/지은이\s*:\s*/g, "")
-  .replace(/\s*지음\s*$/g, "")
-  .replace(/\s*엮음\s*$/g, "")
-  .replace(/\s*글\s*$/g, "")
+  .replace(/[;,\s]+$/g, "")
   .trim();
       const publisher = $(el).find("dd.author span").eq(1).text().replace("발행처:", "").trim();
       const publishYearRaw = $(el).find("dd.author span").eq(2).text().replace("발행연도:", "").trim();
