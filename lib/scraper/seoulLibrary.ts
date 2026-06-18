@@ -177,13 +177,10 @@ export async function searchEbooks(
     return [];
   }
 
-  // 서버 자체 설정값(ajax/config/all 응답의 config_id 128,129) 확인 결과:
-  //   able_all_result_first = "1" (켜짐), all_result_first_delay = "3" (3초)
-  // → 검색 시작 후 결과를 모으는 데 최소 3초가 걸리도록 서버가 설계되어 있음.
-  // 이 지연을 기다리지 않고 곧바로 check/all_result를 보내면 "File Load Failed" 응답을 받음
-  // (실측 확인됨, 2026-06-18). 그래서 1단계 직후 3초 대기를 추가함.
-  console.log("[seoulLibrary] waiting 3s (server config: all_result_first_delay)");
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  // [임시 검증 코드 2026-06-18] 시크릿 모드 캡처에서는 check/3초 대기 없이
+  // result 직후 즉시 all_result를 호출해도 성공했음. 이 가설을 검증하기 위해
+  // 일시적으로 check와 대기 로직을 건너뛰고 곧바로 all_result를 호출함.
+  console.log("[seoulLibrary] TEMP: skipping check/delay, calling all_result immediately");
 
   const commonHeaders = {
     "User-Agent": "Mozilla/5.0",
@@ -191,39 +188,6 @@ export async function searchEbooks(
     "X-Requested-With": "XMLHttpRequest",
     Referer: stage1Url,
   };
-
-  // 2단계: check로 각 도서관(dbnum) 검색이 완료됐는지 확인. 25개 구를 동시에 조회하는 구조라
-  // 즉시 다 끝나지 않을 수 있어, 짧게 대기하며 최대 8회까지 재확인(실측 기반 추정치, 필요시 조정).
-  const checkUrl = `${BASE_URL}/index.php/ajax/engine/check?id=${id}`;
-  const MAX_CHECK_ATTEMPTS = 8;
-  const CHECK_INTERVAL_MS = 600;
-
-  for (let attempt = 1; attempt <= MAX_CHECK_ATTEMPTS; attempt++) {
-    try {
-      const checkRes = await fetch(checkUrl, {
-        signal: AbortSignal.timeout(8000),
-        headers: commonHeaders,
-      });
-      const checkXml = await checkRes.text();
-      console.log(`[seoulLibrary] check attempt ${attempt} status:`, checkRes.status);
-      console.log(`[seoulLibrary] check attempt ${attempt} raw:`, checkXml.slice(0, 500));
-
-      const pending = (checkXml.match(/status="0"/g) ?? []).length;
-      const done = (checkXml.match(/status="1"/g) ?? []).length;
-      console.log(`[seoulLibrary] check attempt ${attempt} done=${done} pending=${pending}`);
-
-      // done과 pending이 둘 다 0이면 "이미 다 끝남"이 아니라 "아직 응답이 비정상/시작 전"인
-      // 경우일 수 있으므로(실측으로 확인됨, 2026-06-18), 그런 경우는 완료로 간주하지 않고 재시도함.
-      // 실제로 완료로 봐야 하는 조건은 done이 1개 이상 있으면서 pending이 0인 경우로 한정.
-      if (done > 0 && pending === 0) break;
-    } catch (e) {
-      console.log(`[seoulLibrary] check attempt ${attempt} failed:`, e);
-    }
-
-    if (attempt < MAX_CHECK_ATTEMPTS) {
-      await new Promise((resolve) => setTimeout(resolve, CHECK_INTERVAL_MS));
-    }
-  }
 
   // 3단계: 실제 XML 데이터 요청 (같은 쿠키 사용)
   const stage2Url =
