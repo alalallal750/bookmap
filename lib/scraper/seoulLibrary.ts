@@ -149,6 +149,14 @@ export async function searchEbooks(
     return [];
   }
 
+  // 서버 자체 설정값(ajax/config/all 응답의 config_id 128,129) 확인 결과:
+  //   able_all_result_first = "1" (켜짐), all_result_first_delay = "3" (3초)
+  // → 검색 시작 후 결과를 모으는 데 최소 3초가 걸리도록 서버가 설계되어 있음.
+  // 이 지연을 기다리지 않고 곧바로 check/all_result를 보내면 "File Load Failed" 응답을 받음
+  // (실측 확인됨, 2026-06-18). 그래서 1단계 직후 3초 대기를 추가함.
+  console.log("[seoulLibrary] waiting 3s (server config: all_result_first_delay)");
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
   const commonHeaders = {
     "User-Agent": "Mozilla/5.0",
     Cookie: cookie,
