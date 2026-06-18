@@ -35,16 +35,21 @@ const CATEGORY: Record<SearchCategory, string> = {
 };
 
 /**
- * id 생성 — handoff 5-1장: 정확한 생성규칙 미확정, 현재시각 기반 17자리 숫자로 추정.
- * 서버 사전승인 절차가 없는 것으로 보여 큰 문제 없을 것으로 예상(추정 단계, 실측 필요).
+ * id 생성 — handoff 5-1장에는 "17자리, 현재시각 기반"으로 추정 기록되어 있었으나,
+ * 실측 결과(2026-06-18) 틀린 추정으로 확인됨.
+ *
+ * 실제 샘플 2건 비교로 확인된 패턴:
+ *   178178598137071  (15자리)
+ *   178178604389597  (15자리)
+ * 앞 10자리가 초 단위 유닉스 타임스탬프와 일치(두 샘플의 차이가 실제 요청 시간차와 일치).
+ * 뒤 5자리는 정확한 의미 불명(밀리초였다면 3자리여야 하나 5자리로 확인됨) — 무작위값으로 채움.
+ * = 10자리(초 단위 타임스탬프) + 5자리(임의 숫자) = 15자리
  */
 function generateRequestId(): string {
-  // 밀리초(13자리) + 임의 4자리를 덧붙여 17자리를 맞춤
-  const millis = Date.now().toString();
-  const rand = Math.floor(1000 + Math.random() * 9000).toString();
-  return millis + rand;
+  const seconds = Math.floor(Date.now() / 1000).toString(); // 10자리
+  const rand = Math.floor(10000 + Math.random() * 90000).toString(); // 5자리
+  return seconds + rand;
 }
-
 type RawRecord = {
   dbnum: string;
   dbname: string;
