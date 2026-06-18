@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Book, ApiResponse, SearchResult } from "@/types";
 import { SearchBar } from "@/components/search/SearchBar";
@@ -14,6 +14,16 @@ type SearchState =
   | { status: "error"; message: string };
 
 export default function HomePage() {
+  return (
+    // useSearchParams()는 빌드 시점에 미리 알 수 없는 값이라 Suspense로 감싸야 함
+    // (안 감싸면 "useSearchParams() should be wrapped in a suspense boundary" 빌드 오류)
+    <Suspense fallback={<LoadingSpinner />}>
+      <HomeContent />
+    </Suspense>
+  );
+}
+
+function HomeContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [state, setState] = useState<SearchState>({ status: "idle" });
@@ -33,9 +43,6 @@ export default function HomePage() {
     }
   }
 
-  // 이 페이지는 더 이상 사이트의 기본 진입점이 아님(②전자책 검색이 첫 화면).
-  // ?q= 파라미터 없이 직접 / 로 들어온 경우는 /ebook으로 보내고,
-  // ?q=가 있으면(②에서 "종이책으로 찾아보시겠어요?" 버튼으로 넘어온 경우) 그 검색어로 바로 검색 실행.
   useEffect(() => {
     const q = searchParams.get("q");
     if (!q) {
@@ -47,7 +54,6 @@ export default function HomePage() {
   }, []);
 
   function handleSelectBook(book: Book) {
-    // 책 선택 시 바로 지도 페이지로 이동
     router.push(`/map/${book.isbn}?title=${encodeURIComponent(book.title)}`);
   }
 
