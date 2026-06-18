@@ -140,7 +140,7 @@ export async function searchEbooks(
     });
     console.log("[seoulLibrary] stage0 (advanced_search) status:", advRes.status);
     cookie = extractCookies(advRes);
-    console.log("[seoulLibrary] stage0 cookie acquired:", cookie ? "yes" : "no");
+    console.log("[seoulLibrary] stage0 cookie value:", cookie || "(empty)");
   } catch (e) {
     console.log("[seoulLibrary] stage0 fetch failed:", e);
     // 0단계 실패해도 1단계는 시도해볼 가치가 있음 (혹시 advanced_search 없이도 동작하는 경우 대비)
@@ -166,7 +166,7 @@ export async function searchEbooks(
     console.log("[seoulLibrary] stage1 status:", stage1Res.status);
     const stage1Cookie = extractCookies(stage1Res);
     if (stage1Cookie) cookie = stage1Cookie; // 갱신된 쿠키가 있으면 덮어씀
-    console.log("[seoulLibrary] cookie after stage1:", cookie ? "yes" : "no");
+    console.log("[seoulLibrary] cookie value after stage1:", cookie || "(empty)");
   } catch (e) {
     console.log("[seoulLibrary] stage1 fetch failed:", e);
     return [];
