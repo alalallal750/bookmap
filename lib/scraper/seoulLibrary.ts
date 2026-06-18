@@ -72,6 +72,8 @@ export async function searchEbooks(
   const id = generateRequestId();
   const dbnumParam = EBOOK_DBNUMS.join("%20");
 
+  console.log("[seoulLibrary] generated id:", id);
+
   // 1단계: 검색결과 페이지 요청 (서버에 검색 세션을 만드는 단계로 추정)
   const stage1Url =
     `${BASE_URL}/index.php/result` +
@@ -84,11 +86,13 @@ export async function searchEbooks(
     `&display=30&recstart=1&sort=rel`;
 
   try {
-    await fetch(stage1Url, {
+    const stage1Res = await fetch(stage1Url, {
       signal: AbortSignal.timeout(8000),
       headers: { "User-Agent": "Mozilla/5.0" },
     });
-  } catch {
+    console.log("[seoulLibrary] stage1 status:", stage1Res.status);
+  } catch (e) {
+    console.log("[seoulLibrary] stage1 fetch failed:", e);
     // 1단계가 실패해도 2단계를 시도해볼 가치는 있음 (세션이 이미 있을 수도 있어서가 아니라,
     // 일부 실패가 일시적 네트워크 문제일 수 있어 바로 빈 배열로 단정하지 않음)
   }
@@ -104,13 +108,18 @@ export async function searchEbooks(
       signal: AbortSignal.timeout(8000),
       headers: { "User-Agent": "Mozilla/5.0", Accept: "text/xml, application/xml" },
     });
+    console.log("[seoulLibrary] stage2 status:", res.status);
     if (!res.ok) return [];
     xml = await res.text();
-  } catch {
+    console.log("[seoulLibrary] stage2 xml length:", xml.length);
+    console.log("[seoulLibrary] stage2 xml preview:", xml.slice(0, 1500));
+  } catch (e) {
+    console.log("[seoulLibrary] stage2 fetch failed:", e);
     return [];
   }
 
   const rawRecords = parseXml(xml);
+  console.log("[seoulLibrary] parsed records count:", rawRecords.length);
   if (rawRecords.length === 0) return [];
 
   // 도서관별 해석 규칙 적용 (강남구는 비동기 상세조회 필요)
