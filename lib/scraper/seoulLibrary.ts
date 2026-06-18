@@ -157,9 +157,9 @@ export async function searchEbooks(
   };
 
   // 2단계: check로 각 도서관(dbnum) 검색이 완료됐는지 확인. 25개 구를 동시에 조회하는 구조라
-  // 즉시 다 끝나지 않을 수 있어, 짧게 대기하며 최대 5회까지 재확인(실측 기반 추정치, 필요시 조정).
+  // 즉시 다 끝나지 않을 수 있어, 짧게 대기하며 최대 8회까지 재확인(실측 기반 추정치, 필요시 조정).
   const checkUrl = `${BASE_URL}/index.php/ajax/engine/check?id=${id}`;
-  const MAX_CHECK_ATTEMPTS = 5;
+  const MAX_CHECK_ATTEMPTS = 8;
   const CHECK_INTERVAL_MS = 600;
 
   for (let attempt = 1; attempt <= MAX_CHECK_ATTEMPTS; attempt++) {
@@ -170,12 +170,16 @@ export async function searchEbooks(
       });
       const checkXml = await checkRes.text();
       console.log(`[seoulLibrary] check attempt ${attempt} status:`, checkRes.status);
+      console.log(`[seoulLibrary] check attempt ${attempt} raw:`, checkXml.slice(0, 500));
 
       const pending = (checkXml.match(/status="0"/g) ?? []).length;
       const done = (checkXml.match(/status="1"/g) ?? []).length;
       console.log(`[seoulLibrary] check attempt ${attempt} done=${done} pending=${pending}`);
 
-      if (pending === 0) break; // 전부 완료됨
+      // done과 pending이 둘 다 0이면 "이미 다 끝남"이 아니라 "아직 응답이 비정상/시작 전"인
+      // 경우일 수 있으므로(실측으로 확인됨, 2026-06-18), 그런 경우는 완료로 간주하지 않고 재시도함.
+      // 실제로 완료로 봐야 하는 조건은 done이 1개 이상 있으면서 pending이 0인 경우로 한정.
+      if (done > 0 && pending === 0) break;
     } catch (e) {
       console.log(`[seoulLibrary] check attempt ${attempt} failed:`, e);
     }
