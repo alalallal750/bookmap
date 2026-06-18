@@ -110,6 +110,8 @@ export async function searchEbooks(
   query: string,
   category: SearchCategory
 ): Promise<EbookBook[]> {
+  console.log("[seoulLibrary] CODE VERSION MARKER: v3-cookie-check-20260618");
+
   const id = generateRequestId();
   const dbnumParam = EBOOK_DBNUMS.join("%20");
 
