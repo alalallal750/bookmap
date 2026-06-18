@@ -3,12 +3,16 @@
  *
  * handoff v3 5장(API 구조), 6장(대출가능 해석 규칙), 7장(판본 묶기 기준) 참조
  *
- * 흐름:
- *   1. id 발급 + 검색결과 페이지 요청 (GET .../index.php/result)
- *   2. 실제 XML 데이터 요청 (GET .../index.php/ajax/engine/all_result)
- *   3. 도서관별(dbnum) 해석 규칙 적용해 대출가능 여부 판단
- *   4. 강남구는 상세페이지 추가조회 필요 (XML만으로 판단 불가)
- *   5. 제목+저자 완전일치 기준으로 같은 책 묶기 (+ 출판일 보조기준)
+ * 흐름 (2026-06-18 실측으로 확정 — handoff 문서의 "1·2단계" 추정과 다름, 중간에 check 단계가 더 있었음):
+ *   1. id 발급 + 검색결과 페이지 요청 (GET .../index.php/result) → 응답 쿠키 확보
+ *   2. check로 각 도서관(dbnum) 검색 완료 여부 확인, 미완료 시 잠시 대기 후 재확인 (GET .../index.php/ajax/engine/check)
+ *   3. 실제 XML 데이터 요청 (GET .../index.php/ajax/engine/all_result)
+ *   4. 도서관별(dbnum) 해석 규칙 적용해 대출가능 여부 판단
+ *   5. 강남구는 상세페이지 추가조회 필요 (XML만으로 판단 불가)
+ *   6. 제목+저자 완전일치 기준으로 같은 책 묶기 (+ 출판일 보조기준)
+ *
+ * 중요: 1~3단계는 모두 같은 쿠키(WL_PCID, JSESSIONID, ls_session)를 들고 가야 함.
+ * 쿠키 없이 보내면 "No search has been found in that ID" 오류 응답을 받음(실측 확인됨).
  */
 
 import * as cheerio from "cheerio";
@@ -50,6 +54,38 @@ function generateRequestId(): string {
   const rand = Math.floor(10000 + Math.random() * 90000).toString(); // 5자리
   return seconds + rand;
 }
+
+/**
+ * fetch 응답의 Set-Cookie 헤더들을 모아서, 다음 요청에 그대로 보낼 수 있는
+ * "Cookie: a=1; b=2" 형식의 문자열로 변환.
+ *
+ * 주의: 표준 fetch의 Headers.get("set-cookie")는 여러 개의 Set-Cookie를
+ * 하나로 합쳐서 줄 수도, 못 가져올 수도 있어 런타임에 따라 동작이 다를 수 있음.
+ * Node.js(Vercel 서버리스 함수) 환경에서는 getSetCookie()를 우선 사용하고,
+ * 없으면 set-cookie 헤더를 그대로 사용하는 방식으로 안전하게 처리.
+ */
+function extractCookies(res: Response): string {
+  // 최신 Node.js의 fetch는 Headers.getSetCookie()로 여러 쿠키를 배열로 줌
+  const headersAny = res.headers as Headers & { getSetCookie?: () => string[] };
+  let rawCookies: string[] = [];
+
+  if (typeof headersAny.getSetCookie === "function") {
+    rawCookies = headersAny.getSetCookie();
+  } else {
+    const single = res.headers.get("set-cookie");
+    if (single) rawCookies = [single];
+  }
+
+  if (rawCookies.length === 0) return "";
+
+  // 각 Set-Cookie 값에서 "이름=값" 부분만 추출 (Path, Expires 등 속성은 제외)
+  const pairs = rawCookies
+    .map((c) => c.split(";")[0].trim())
+    .filter((c) => c.length > 0);
+
+  return pairs.join("; ");
+}
+
 type RawRecord = {
   dbnum: string;
   dbname: string;
@@ -79,7 +115,9 @@ export async function searchEbooks(
 
   console.log("[seoulLibrary] generated id:", id);
 
-  // 1단계: 검색결과 페이지 요청 (서버에 검색 세션을 만드는 단계로 추정)
+  // 1단계: 검색결과 페이지 요청. 응답에 담긴 쿠키(WL_PCID, JSESSIONID, ls_session)를
+  // 이후 check/all_result 요청에도 그대로 들고 가야 서버가 "같은 검색"으로 인식함
+  // (실측으로 확인됨, 2026-06-18).
   const stage1Url =
     `${BASE_URL}/index.php/result` +
     `?id=${id}` +
@@ -90,19 +128,62 @@ export async function searchEbooks(
     `&dbnum=${dbnumParam}` +
     `&display=30&recstart=1&sort=rel`;
 
+  let cookie = "";
   try {
     const stage1Res = await fetch(stage1Url, {
       signal: AbortSignal.timeout(8000),
       headers: { "User-Agent": "Mozilla/5.0" },
     });
     console.log("[seoulLibrary] stage1 status:", stage1Res.status);
+    cookie = extractCookies(stage1Res);
+    console.log("[seoulLibrary] cookie acquired:", cookie ? "yes" : "no");
   } catch (e) {
     console.log("[seoulLibrary] stage1 fetch failed:", e);
-    // 1단계가 실패해도 2단계를 시도해볼 가치는 있음 (세션이 이미 있을 수도 있어서가 아니라,
-    // 일부 실패가 일시적 네트워크 문제일 수 있어 바로 빈 배열로 단정하지 않음)
+    return [];
   }
 
-  // 2단계: 실제 XML 데이터 요청
+  if (!cookie) {
+    console.log("[seoulLibrary] no cookie - aborting (서버가 쿠키 없이는 후속 요청을 거부함)");
+    return [];
+  }
+
+  const commonHeaders = {
+    "User-Agent": "Mozilla/5.0",
+    Cookie: cookie,
+    "X-Requested-With": "XMLHttpRequest",
+    Referer: stage1Url,
+  };
+
+  // 2단계: check로 각 도서관(dbnum) 검색이 완료됐는지 확인. 25개 구를 동시에 조회하는 구조라
+  // 즉시 다 끝나지 않을 수 있어, 짧게 대기하며 최대 5회까지 재확인(실측 기반 추정치, 필요시 조정).
+  const checkUrl = `${BASE_URL}/index.php/ajax/engine/check?id=${id}`;
+  const MAX_CHECK_ATTEMPTS = 5;
+  const CHECK_INTERVAL_MS = 600;
+
+  for (let attempt = 1; attempt <= MAX_CHECK_ATTEMPTS; attempt++) {
+    try {
+      const checkRes = await fetch(checkUrl, {
+        signal: AbortSignal.timeout(8000),
+        headers: commonHeaders,
+      });
+      const checkXml = await checkRes.text();
+      console.log(`[seoulLibrary] check attempt ${attempt} status:`, checkRes.status);
+
+      const pending = (checkXml.match(/status="0"/g) ?? []).length;
+      const done = (checkXml.match(/status="1"/g) ?? []).length;
+      console.log(`[seoulLibrary] check attempt ${attempt} done=${done} pending=${pending}`);
+
+      if (pending === 0) break; // 전부 완료됨
+    } catch (e) {
+      console.log(`[seoulLibrary] check attempt ${attempt} failed:`, e);
+    }
+
+    if (attempt < MAX_CHECK_ATTEMPTS) {
+      await new Promise((resolve) => setTimeout(resolve, CHECK_INTERVAL_MS));
+    }
+  }
+
+  // 3단계: 실제 XML 데이터 요청 (같은 쿠키 사용)
   const stage2Url =
     `${BASE_URL}/index.php/ajax/engine/all_result` +
     `?id=${id}&display=20&recstart=1&reload=on&_=${Date.now()}`;
@@ -111,7 +192,7 @@ export async function searchEbooks(
   try {
     const res = await fetch(stage2Url, {
       signal: AbortSignal.timeout(8000),
-      headers: { "User-Agent": "Mozilla/5.0", Accept: "text/xml, application/xml" },
+      headers: { ...commonHeaders, Accept: "text/xml, application/xml" },
     });
     console.log("[seoulLibrary] stage2 status:", res.status);
     if (!res.ok) return [];
