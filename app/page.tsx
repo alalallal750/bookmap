@@ -63,7 +63,7 @@ export default function HomePage() {
             <div className="mt-10" />
             <p className="text-gray-300 text-xs leading-relaxed">
               현재는 동작구 도서관만 지원해요.<br />
-              실제 대출가능 여부는 도서관 홈페이지에서 다시 한번 확인해 주세요.
+              실제 대출 가능 여부는 도서관 홈페이지에서 다시 한번 확인해 주세요.
             </p>
           </div>
         )}
