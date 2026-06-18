@@ -117,28 +117,56 @@ export async function searchEbooks(
 
   console.log("[seoulLibrary] generated id:", id);
 
-  // 1단계: 검색결과 페이지 요청. 응답에 담긴 쿠키(WL_PCID, JSESSIONID, ls_session)를
-  // 이후 check/all_result 요청에도 그대로 들고 가야 서버가 "같은 검색"으로 인식함
-  // (실측으로 확인됨, 2026-06-18).
-  const stage1Url =
-    `${BASE_URL}/index.php/result` +
-    `?id=${id}` +
-    `&category1=${CATEGORY[category]}` +
+  // 검색 파라미터는 0단계(advanced_search)와 1단계(result)가 동일하게 사용함
+  const searchQueryParams =
+    `category1=${CATEGORY[category]}` +
     `&category2=0&category3=0` +
     `&text1=${encodeURIComponent(query)}&text2=&text3=` +
     `&op=0&op2=0&year1=&year2=` +
     `&dbnum=${dbnumParam}` +
-    `&display=30&recstart=1&sort=rel`;
+    `&sort=rel`;
+
+  // 0단계(신규, 실측으로 확인됨 2026-06-18): 실제 브라우저는 result 페이지로 곧장 가지 않고
+  // advanced_search 페이지를 먼저 방문함(result 요청의 Referer가 advanced_search였음).
+  // 이 단계를 건너뛰면 검색 자체가 서버에서 시작되지 않아 이후 check/all_result가
+  // "File Load Failed"를 반환하는 것으로 추정됨.
+  const advancedSearchUrl = `${BASE_URL}/index.php/advanced_search?${searchQueryParams}`;
 
   let cookie = "";
   try {
-    const stage1Res = await fetch(stage1Url, {
+    const advRes = await fetch(advancedSearchUrl, {
       signal: AbortSignal.timeout(8000),
       headers: { "User-Agent": "Mozilla/5.0" },
     });
+    console.log("[seoulLibrary] stage0 (advanced_search) status:", advRes.status);
+    cookie = extractCookies(advRes);
+    console.log("[seoulLibrary] stage0 cookie acquired:", cookie ? "yes" : "no");
+  } catch (e) {
+    console.log("[seoulLibrary] stage0 fetch failed:", e);
+    // 0단계 실패해도 1단계는 시도해볼 가치가 있음 (혹시 advanced_search 없이도 동작하는 경우 대비)
+  }
+
+  // 1단계: 검색결과 페이지 요청. id를 포함해서 보내고, 0단계에서 받은 쿠키를 이어서 사용.
+  // Referer를 advanced_search로 지정해 실제 브라우저 흐름을 모방함.
+  const stage1Url =
+    `${BASE_URL}/index.php/result` +
+    `?id=${id}` +
+    `&${searchQueryParams}` +
+    `&display=30&recstart=1`;
+
+  try {
+    const stage1Res = await fetch(stage1Url, {
+      signal: AbortSignal.timeout(8000),
+      headers: {
+        "User-Agent": "Mozilla/5.0",
+        ...(cookie ? { Cookie: cookie } : {}),
+        Referer: advancedSearchUrl,
+      },
+    });
     console.log("[seoulLibrary] stage1 status:", stage1Res.status);
-    cookie = extractCookies(stage1Res);
-    console.log("[seoulLibrary] cookie acquired:", cookie ? "yes" : "no");
+    const stage1Cookie = extractCookies(stage1Res);
+    if (stage1Cookie) cookie = stage1Cookie; // 갱신된 쿠키가 있으면 덮어씀
+    console.log("[seoulLibrary] cookie after stage1:", cookie ? "yes" : "no");
   } catch (e) {
     console.log("[seoulLibrary] stage1 fetch failed:", e);
     return [];
