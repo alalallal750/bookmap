@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Book, ApiResponse, SearchResult } from "@/types";
 import { SearchBar } from "@/components/search/SearchBar";
 import { BookList } from "@/components/search/BookList";
@@ -15,6 +15,7 @@ type SearchState =
 
 export default function HomePage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [state, setState] = useState<SearchState>({ status: "idle" });
 
   async function handleSearch(query: string) {
@@ -31,6 +32,19 @@ export default function HomePage() {
       });
     }
   }
+
+  // 이 페이지는 더 이상 사이트의 기본 진입점이 아님(②전자책 검색이 첫 화면).
+  // ?q= 파라미터 없이 직접 / 로 들어온 경우는 /ebook으로 보내고,
+  // ?q=가 있으면(②에서 "종이책으로 찾아보시겠어요?" 버튼으로 넘어온 경우) 그 검색어로 바로 검색 실행.
+  useEffect(() => {
+    const q = searchParams.get("q");
+    if (!q) {
+      router.replace("/ebook");
+      return;
+    }
+    handleSearch(q);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handleSelectBook(book: Book) {
     // 책 선택 시 바로 지도 페이지로 이동
@@ -63,7 +77,7 @@ export default function HomePage() {
             <div className="mt-10" />
             <p className="text-gray-300 text-xs leading-relaxed">
               현재는 동작구 도서관만 지원해요.<br />
-              실제 대출 가능 여부는 도서관 홈페이지에서 다시 한번 확인해 주세요.
+              실제 대출가능 여부는 도서관 홈페이지에서 다시 한번 확인해 주세요.
             </p>
           </div>
         )}
