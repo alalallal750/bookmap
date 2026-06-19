@@ -279,13 +279,22 @@ async function resolveAvailability(r: RawRecord): Promise<EbookLibraryEntry | nu
 
   switch (r.dbnum) {
     case "45011": {
-      const available = (r.state ?? "").includes("대출가능");
-      return { dbnum: r.dbnum, libraryName, available, url: r.url, loanInfo: r.state };
+      // [2026-06-19 변경] 기존엔 r.state(텍스트, "대출가능"/"대출")만으로 판단했으나,
+      // 상세페이지 실측 결과 금천구도 103301(서울시육아종합지원센터)과 똑같은
+      // FxLibrary 시스템(<ul class="state"><li><p>대출</p>1/1</li>...)을 쓰고 있어
+      // 정확한 권수(N/M)를 알 수 있음이 확인됨. 같은 함수 재사용.
+      return resolveChildrenLibraryAvailability(r, libraryName);
     }
 
     case "45111": {
-      const available = (r.loan ?? "").includes("대출가능");
-      return { dbnum: r.dbnum, libraryName, available, url: r.url, loanInfo: r.loan };
+      // [2026-06-19 해결] 서초구 정적 HTML에는 권수가 없었지만, 페이지가 로드된 후
+      // 자바스크립트가 추가로 호출하는 JSON API를 실측으로 찾아냄:
+      //   https://e-book.seocholib.or.kr/api/service/content/detail
+      //     ?contentType=EB&id={contentId}&libCode=MA
+      // 응답 JSON의 loanable 필드가 "지금 빌릴 수 있는 권수"를 이미 계산해서
+      // 줌(0이면 대출불가). 책 2건으로 실측 확인됨. libCode=MA는 두 건 모두
+      // 동일해서 고정값으로 사용.
+      return resolveSeochoAvailability(r, libraryName);
     }
 
     case "45351":
@@ -400,8 +409,12 @@ async function resolveGangnamAvailability(
 }
 
 /**
- * 서울시육아종합지원센터 상세페이지 추가조회 — handoff 6장 "표시 형식 미확인" 항목
- * 해결, 2026-06-19 실측으로 패턴 확인
+ * FxLibrary 계열 도서관 상세페이지 추가조회 (서울시육아종합지원센터·금천구 공용)
+ * — handoff 6장 "표시 형식 미확인" 항목 해결, 2026-06-19 실측으로 패턴 확인
+ *
+ * 함수명은 "ChildrenLibrary"이지만 실제로는 같은 FxLibrary 시스템을 쓰는 도서관
+ * 전체(현재 103301, 45011)에 공용으로 사용됨. 이름은 처음 발견한 도서관(육아종합
+ * 지원센터) 기준으로 남아있음 — 추후 정리 시 더 일반적인 이름으로 변경 고려.
  *
  * deploy 응답 XML에는 대출가능 관련 필드가 없어, 강남구처럼 상세페이지 추가조회가
  * 필요함. 다만 강남구와 달리 한글이 깨지지 않고(EUC-KR 인코딩 문제 없음), 페이지에
@@ -481,6 +494,87 @@ async function resolveChildrenLibraryAvailability(
       "error:",
       e
     );
+    return null;
+  }
+}
+
+/**
+ * 서초구 대출가능 조회 — 2026-06-19 실측으로 발견한 JSON API 사용
+ *
+ * 서초구 상세페이지(e-book.seocholib.or.kr/content/detail?...)의 정적 HTML에는
+ * 권수 정보가 없음 — 페이지가 로드된 뒤 자바스크립트가 아래 API를 추가로 호출해서
+ * 화면에 숫자를 채워 넣는 구조였음:
+ *   https://e-book.seocholib.or.kr/api/service/content/detail
+ *     ?contentType=EB&id={contentId}&libCode=MA
+ * 응답은 JSON이라 HTML 파싱(cheerio)이 필요 없음. 핵심 필드:
+ *   - copys: 보유 권수, loanCnt: 현재 대출중인 권수
+ *   - loanable: "지금 빌릴 수 있는 권수"를 서초구 쪽에서 이미 계산해서 줌
+ *     (0이면 대출불가, 그 외 가능 — 강남구처럼 우리가 직접 빼기 계산할 필요 없음)
+ * libCode=MA는 책 2건(실측)에서 동일했음 — 서초구 전체 대표 코드로 추정, 고정값
+ * 사용. (만약 분관마다 다른 libCode가 있다면 추후 재검토 필요)
+ */
+async function resolveSeochoAvailability(
+  r: RawRecord,
+  libraryName: string
+): Promise<EbookLibraryEntry | null> {
+  if (!r.url) {
+    console.log("[seoulLibrary] seocho: record has no detail url, title:", r.title);
+    return null;
+  }
+
+  // r.url 예시: https://e-book.seocholib.or.kr/content/detail?contentType=EB&id=4801191998376
+  // 위 URL에서 id 값만 뽑아서 API 주소를 직접 만듦
+  const idMatch = r.url.match(/[?&]id=([^&]+)/);
+  const contentId = idMatch?.[1];
+
+  if (!contentId) {
+    console.log("[seoulLibrary] seocho: could not extract id from url:", r.url);
+    return null;
+  }
+
+  const apiUrl = `https://e-book.seocholib.or.kr/api/service/content/detail?contentType=EB&id=${contentId}&libCode=MA`;
+
+  try {
+    const res = await fetch(apiUrl, {
+      signal: AbortSignal.timeout(8000),
+      headers: { "User-Agent": "Mozilla/5.0", Accept: "application/json" },
+    });
+    console.log("[seoulLibrary] seocho api status:", res.status, "url:", apiUrl);
+    if (!res.ok) {
+      console.log("[seoulLibrary] seocho: api fetch not ok, title:", r.title);
+      return null;
+    }
+
+    const json = await res.json();
+    const data = json?.data;
+
+    if (!data || typeof data.copys !== "number" || typeof data.loanCnt !== "number") {
+      console.log("[seoulLibrary] seocho: unexpected json shape, title:", r.title, "json:", json);
+      return null;
+    }
+
+    const owned = data.copys;
+    const loaned = data.loanCnt;
+    const loanable = typeof data.loanable === "number" ? data.loanable : owned - loaned;
+
+    console.log(
+      "[seoulLibrary] seocho parsed - owned:",
+      owned,
+      "loaned:",
+      loaned,
+      "loanable:",
+      loanable
+    );
+
+    return {
+      dbnum: r.dbnum,
+      libraryName,
+      available: loanable > 0,
+      url: r.url,
+      loanInfo: `보유 ${owned} / 대출 ${loaned}`,
+    };
+  } catch (e) {
+    console.log("[seoulLibrary] seocho api fetch threw error, title:", r.title, "error:", e);
     return null;
   }
 }
