@@ -7,22 +7,36 @@
  * 호출하면 그 응답 자체에 검색 결과 XML이 들어있음을 확인함 (result/all_result/
  * JSESSIONID·WL_PCID 위조는 전부 불필요했음).
  *
- * [2026-06-19 v6 변경 — 이번 버전] dbnum을 7개 한꺼번에 넣어 deploy를 "1번" 호출하면,
- * 7개 도서관 중 그때그때 무작위로 "딱 1곳"의 결과만 돌아온다는 것을 실측으로 확인함
- * (같은 id로 9번 연속 호출 → 4개 도서관만 등장, 일부는 3~4회 중복, 3개 도서관은 한
- * 번도 안 나옴). 즉 "여러 도서관을 한 요청에 합쳐 보내기"는 신뢰할 수 없는 방식임.
+ * [2026-06-19 v6 변경] dbnum을 7개 한꺼번에 넣어 deploy를 "1번" 호출하면, 7개 도서관
+ * 중 그때그때 무작위로 "딱 1곳"의 결과만 돌아온다는 것을 실측으로 확인함. 해결:
+ * dbnum 1개씩, 도서관 수만큼(7번) deploy를 "동시에" 호출(Promise.all)하고 결과를
+ * 모아서 합치는 방식으로 변경.
  *
- * → 해결: dbnum 1개씩, 도서관 수만큼(7번) deploy를 "동시에" 호출(Promise.all)하고
- *   결과를 모아서 합치는 방식으로 변경. 실측으로 dbnum을 1개만 넣었을 때는 그 도서관의
- *   결과가 정확하고 안정적으로 돌아오는 것을 확인함(금천구 단독 테스트 사례).
+ * [2026-06-19 v7 변경 — 이번 버전] 서명/저자 탭 구분을 제거함.
  *
- *   동시에 보내므로, 전체 소요 시간은 "가장 느린 도서관 1곳"의 응답 시간과 비슷한
- *   수준일 것으로 예상됨(순차 호출 시 7배 느려지는 것을 피함). 다만 실제 배포
- *   환경(Vercel)에서의 체감 속도는 재측정 필요.
+ * 배경: "저자" 탭(category1=4)으로 검색해도 도서관마다 실제 동작이 다름을 실측으로
+ * 확인함 — 어떤 도서관(동대문구)은 저자 탭인데도 제목에만 매칭되는 책까지 같이
+ * 보여주고, 어떤 도서관(강남구)은 반대로 전체검색(category1=0)일 때 저자 필드를
+ * 통째로 무시함(저자검색 12건 vs 전체검색 0건, handoff 5-3장). 즉 "서명/저자"라는
+ * 탭 구분이 도서관마다 다르게 해석되어, 사용자에게 일관된 약속을 줄 수 없는
+ * 상태였음.
+ *
+ * 해결: 상세검색 화면에서 "제목 OR 저자"를 동시에 거는 방식을 발견함 (op=1이 OR
+ * 연산자). 이제 모든 검색을 아래처럼 고정해서 보냄:
+ *   category1=1(제목) + text1=검색어
+ *   category2=4(저자) + text2=검색어 (동일한 검색어)
+ *   op=1 (OR)
+ * 강남구에서 실측으로 이 방식이 정상 작동함을 확인함(이전엔 저자 필드를 못 찾던
+ * 강남구가, 이 방식으로는 제목 매칭으로도 결과를 찾아줌).
+ *
+ * SearchCategory(서명/저자 구분) 파라미터는 호출하는 쪽(route.ts, page.tsx 등)과의
+ * 호환성을 위해 일단 받아두지만, 이 함수 내부에서는 더 이상 사용하지 않음. 화면의
+ * 탭 UI를 제거하는 작업은 별도로 필요함(이 파일 수정만으로는 화면이 바뀌지 않음).
  *
  * 흐름:
  *   1. default_search 페이지 방문 → ls_session 쿠키 확보
- *   2. EBOOK_DBNUMS 각각에 대해 deploy를 동시에 호출 (dbnum 파라미터에 1개씩만)
+ *   2. EBOOK_DBNUMS 각각에 대해 deploy를 동시에 호출 (dbnum 파라미터에 1개씩만,
+ *      검색조건은 항상 "제목 OR 저자"로 고정)
  *   3. 7개 응답을 모두 모아서 합친 뒤, 도서관별(dbnum) 해석 규칙 적용해 대출가능
  *      여부 판단
  *   4. 강남구는 상세페이지 추가조회 필요 (XML만으로 판단 불가)
@@ -46,19 +60,11 @@ const EBOOK_LIBRARIES: Record<string, string> = {
 };
 const EBOOK_DBNUMS = Object.keys(EBOOK_LIBRARIES);
 
-// handoff 5-1장: category1 값
-const CATEGORY: Record<SearchCategory, string> = {
-  title: "1", // 서명 검색
-  author: "4", // 저자 검색
-};
-
 /**
  * id 생성 — handoff v4 실측 확정: 13자리 밀리초 타임스탬프 + 5자리 임의숫자
  *
- * [주의] 이번 버전에서는 도서관별로 deploy를 따로 호출하지만, 같은 검색 1건으로
- * 취급되어야 하므로 7개 요청 모두 "같은 id"를 사용함 (도서관마다 다른 id를 쓰면
- * 서버가 서로 다른 검색으로 인식할 가능성을 배제하기 위함 — 실측 검증 전 안전한
- * 선택).
+ * [주의] 도서관별로 deploy를 따로 호출하지만, 같은 검색 1건으로 취급되어야 하므로
+ * 7개 요청 모두 "같은 id"를 사용함.
  */
 function generateRequestId(): string {
   const millis = Date.now().toString(); // 13자리
@@ -106,13 +112,22 @@ type RawRecord = {
 };
 
 /**
- * 전자책 검색 메인 함수 (v6 — dbnum별 병렬 deploy 호출 방식)
+ * 전자책 검색 메인 함수 (v7 — 제목 OR 저자 고정 검색)
+ *
+ * @param category 더 이상 검색 조건에 사용하지 않음 (호환성을 위해 유지).
+ *   호출하는 쪽 코드를 정리할 때 이 파라미터 자체를 제거하는 것을 권장함.
  */
 export async function searchEbooks(
   query: string,
-  category: SearchCategory
+  category?: SearchCategory
 ): Promise<EbookBook[]> {
-  console.log("[seoulLibrary] CODE VERSION MARKER: v6-parallel-deploy-20260619");
+  console.log("[seoulLibrary] CODE VERSION MARKER: v7-title-or-author-20260619");
+  if (category) {
+    console.log(
+      "[seoulLibrary] note: category param is no longer used for search conditions:",
+      category
+    );
+  }
 
   const id = generateRequestId();
   console.log("[seoulLibrary] generated id (shared across all dbnum calls):", id);
@@ -134,12 +149,18 @@ export async function searchEbooks(
   }
 
   // 2단계: 도서관별로 deploy를 동시에 호출 (dbnum 1개씩만 넣어서)
+  //
+  // [2026-06-19 v7] 검색조건을 "제목(category1=1) OR 저자(category2=4)"로 고정.
+  // 같은 검색어를 text1, text2에 동일하게 넣고, op=1(OR)로 연결함. 실측으로 강남구
+  // 사이트에서 이 조합이 정상 작동함을 확인함 (브라우저 상세검색에서 캡처한 실제
+  // 요청 형태를 그대로 따름).
   const buildDeployUrl = (dbnum: string) => {
+    const encodedQuery = encodeURIComponent(query);
     const searchQueryParams =
-      `category1=${CATEGORY[category]}` +
-      `&category2=0&category3=0` +
-      `&text1=${encodeURIComponent(query)}&text2=&text3=` +
-      `&op=0&op2=0&year1=&year2=` +
+      `category1=1` +
+      `&category2=4&category3=0` +
+      `&text1=${encodedQuery}&text2=${encodedQuery}&text3=` +
+      `&op=1&op2=0&year1=&year2=` +
       `&dbnum=${dbnum}` +
       `&display=30&recstart=1&sort=rel`;
 
