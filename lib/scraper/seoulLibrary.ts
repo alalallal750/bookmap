@@ -315,23 +315,42 @@ async function resolveGangnamAvailability(
   r: RawRecord,
   libraryName: string
 ): Promise<EbookLibraryEntry | null> {
-  if (!r.url) return null;
+  if (!r.url) {
+    console.log("[seoulLibrary] gangnam: record has no detail url, title:", r.title);
+    return null;
+  }
 
   try {
     const res = await fetch(r.url, {
       signal: AbortSignal.timeout(8000),
       headers: { "User-Agent": "Mozilla/5.0" },
     });
-    if (!res.ok) return null;
+    console.log("[seoulLibrary] gangnam detail page status:", res.status, "url:", r.url);
+    if (!res.ok) {
+      console.log("[seoulLibrary] gangnam: detail page fetch not ok, title:", r.title);
+      return null;
+    }
     const html = await res.text();
+    console.log("[seoulLibrary] gangnam detail html length:", html.length);
+
     const $ = cheerio.load(html);
 
     const ownedText = $("div.current span:contains('보유') strong").first().text().trim();
     const loanText = $("div.current span:contains('대출') strong").first().text().trim();
 
+    console.log("[seoulLibrary] gangnam parsed ownedText:", JSON.stringify(ownedText), "loanText:", JSON.stringify(loanText));
+
     const owned = parseInt(ownedText, 10);
     const loaned = parseInt(loanText, 10);
-    if (Number.isNaN(owned) || Number.isNaN(loaned)) return null;
+    if (Number.isNaN(owned) || Number.isNaN(loaned)) {
+      console.log(
+        "[seoulLibrary] gangnam: could not parse owned/loaned numbers, title:",
+        r.title,
+        "- html snippet around 'div.current':",
+        html.includes("div") ? $("div.current").first().html()?.slice(0, 500) : "(no div found)"
+      );
+      return null;
+    }
 
     const remaining = owned - loaned;
     return {
@@ -341,7 +360,8 @@ async function resolveGangnamAvailability(
       url: r.url,
       loanInfo: `보유 ${owned} / 대출 ${loaned}`,
     };
-  } catch {
+  } catch (e) {
+    console.log("[seoulLibrary] gangnam detail fetch threw error, title:", r.title, "error:", e);
     return null;
   }
 }
