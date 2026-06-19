@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { searchEbooks } from "@/lib/scraper/seoulLibrary";
-import { ApiResponse, EbookSearchResult, SearchCategory } from "@/types";
+import { ApiResponse, EbookSearchResult } from "@/types";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const query = searchParams.get("q")?.trim();
-  const categoryParam = searchParams.get("category");
 
   if (!query || query.length < 1) {
     return NextResponse.json<ApiResponse<never>>(
@@ -21,10 +20,8 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const category: SearchCategory = categoryParam === "author" ? "author" : "title";
-
   try {
-    const books = await searchEbooks(query, category);
+    const books = await searchEbooks(query);
 
     return NextResponse.json<ApiResponse<EbookSearchResult>>({
       success: true,
