@@ -108,18 +108,14 @@ export default function EbookSearchPage() {
 }
 
 function EbookCard({ book }: { book: EbookBook }) {
-  const hasAvailable = book.libraries.some((l) => l.available);
-
   return (
     <div className="bg-white rounded-2xl border border-gray-100 p-4 shadow-sm">
       <div className="flex gap-3">
-        {book.coverImage && (
-          <img
-            src={book.coverImage}
-            alt={book.title}
-            className="w-14 h-20 object-cover rounded-lg flex-shrink-0 bg-gray-100"
-          />
-        )}
+        <img
+          src={book.coverImage || "/favicon.png"}
+          alt={book.title}
+          className="w-14 h-20 object-cover rounded-lg flex-shrink-0 bg-gray-100"
+        />
         <div className="flex-1 min-w-0">
           <h3 className="font-semibold text-gray-900 text-sm leading-snug line-clamp-2">
             {book.title}
@@ -128,11 +124,6 @@ function EbookCard({ book }: { book: EbookBook }) {
             {[book.author, book.publisher].filter(Boolean).join(" · ")}
           </p>
         </div>
-        {hasAvailable && (
-          <span className="flex-shrink-0 px-2 py-1 rounded-lg bg-green-50 text-green-700 text-xs font-medium h-fit">
-            대출가능
-          </span>
-        )}
       </div>
 
       <div className="mt-3 space-y-1.5">
@@ -165,7 +156,7 @@ function EbookCard({ book }: { book: EbookBook }) {
  * 규칙:
  *   1. 권수를 알고(loanableCount 존재) 1권 이상 빌릴 수 있으면 → "N권 대출가능"
  *   2. 권수를 알지만 0권이면 → "모두 대출중"
- *   3. 권수를 모르고("직접 확인" 안내가 있는 도서관, 예: 서울시 전자도서관) →
+ *   3. 권수를 모르고("사이트 확인" 안내가 있는 도서관, 예: 서울시 전자도서관) →
  *      안내문구 그대로
  *   4. (예외 대비) 권수도 모르고 안내문구도 없는 경우 → available만 보고
  *      "대출가능"/"대출중"으로 폴백
@@ -178,6 +169,6 @@ function getDisplayStatus(lib: EbookLibraryEntry): string {
   if (typeof lib.loanableCount === "number") {
     return lib.loanableCount > 0 ? `${lib.loanableCount}권 대출가능` : "모두 대출중";
   }
-  if (lib.loanInfo?.includes("직접 확인")) return lib.loanInfo;
+  if (lib.loanInfo?.includes("사이트 확인")) return lib.loanInfo;
   return lib.available ? "대출가능" : "대출중";
 }

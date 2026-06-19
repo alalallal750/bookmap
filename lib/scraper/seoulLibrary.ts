@@ -328,7 +328,7 @@ async function resolveAvailability(r: RawRecord): Promise<EbookLibraryEntry | nu
         libraryName,
         available: false,
         url: r.url,
-        loanInfo: "대출가능 여부는 사이트에서 직접 확인해 주세요",
+        loanInfo: "대출가능여부 사이트 확인",
       };
     }
 
@@ -490,7 +490,7 @@ async function resolveChildrenLibraryAvailability(
         libraryName,
         available: false,
         url: r.url,
-        loanInfo: "대출가능 여부 확인 필요(사이트에서 직접 확인해 주세요)",
+        loanInfo: "대출가능여부 사이트 확인",
       };
     }
 
