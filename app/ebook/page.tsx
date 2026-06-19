@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ApiResponse, EbookBook, EbookSearchResult, SearchCategory } from "@/types";
+import { ApiResponse, EbookBook, EbookSearchResult } from "@/types";
 import { SearchBar } from "@/components/search/SearchBar";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
@@ -14,13 +14,12 @@ type SearchState =
 
 export default function EbookSearchPage() {
   const router = useRouter();
-  const [category, setCategory] = useState<SearchCategory>("title");
   const [state, setState] = useState<SearchState>({ status: "idle" });
 
   async function handleSearch(query: string) {
     setState({ status: "loading" });
     try {
-      const url = `/api/ebook-search?q=${encodeURIComponent(query)}&category=${category}`;
+      const url = `/api/ebook-search?q=${encodeURIComponent(query)}`;
       const res = await fetch(url);
       const json: ApiResponse<EbookSearchResult> = await res.json();
       if (!json.success) throw new Error(json.error);
@@ -46,27 +45,10 @@ export default function EbookSearchPage() {
           <p className="text-xs text-gray-400">전자책으로 먼저 읽을 수 있는지 확인해보세요</p>
         </div>
 
-        {/* 서명/저자 탭 */}
-        <div className="flex gap-2 mb-3">
-          {(["title", "author"] as const).map((c) => (
-            <button
-              key={c}
-              onClick={() => setCategory(c)}
-              className="px-4 py-1.5 rounded-full text-sm font-medium transition-colors"
-              style={{
-                background: category === c ? "#16a34a" : "#f3f4f6",
-                color: category === c ? "white" : "#6b7280",
-              }}
-            >
-              {c === "title" ? "서명" : "저자"}
-            </button>
-          ))}
-        </div>
-
         <SearchBar
           onSearch={handleSearch}
           loading={state.status === "loading"}
-          placeholder={category === "title" ? "책 제목을 입력하세요" : "저자명을 입력하세요"}
+          placeholder="책 제목을 입력하세요"
         />
       </header>
 
