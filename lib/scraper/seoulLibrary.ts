@@ -3,35 +3,33 @@
  *
  * handoff v3 5장(API 구조), 6장(대출가능 해석 규칙), 7장(판본 묶기 기준) 참조
  *
- * [2026-06-19 대폭 수정] 흐름을 완전히 재발견함.
+ * [2026-06-19 v5 변경] deploy 엔드포인트 발견 — default_search 방문 후 deploy 한 번
+ * 호출하면 그 응답 자체에 검색 결과 XML이 들어있음을 확인함 (result/all_result/
+ * JSESSIONID·WL_PCID 위조는 전부 불필요했음).
  *
- * 기존(실패) 가설: default_search/advanced_search → result → all_result 순으로
- * 호출해야 하고, 그 과정에 JSESSIONID/WL_PCID라는 쿠키가 반드시 필요하다고 추정했음.
- * 실제 브라우저 Network 탭을 한 단계씩 다시 캡처해본 결과, 이 가설 자체가 틀렸음이
- * 밝혀짐:
+ * [2026-06-19 v6 변경 — 이번 버전] dbnum을 7개 한꺼번에 넣어 deploy를 "1번" 호출하면,
+ * 7개 도서관 중 그때그때 무작위로 "딱 1곳"의 결과만 돌아온다는 것을 실측으로 확인함
+ * (같은 id로 9번 연속 호출 → 4개 도서관만 등장, 일부는 3~4회 중복, 3개 도서관은 한
+ * 번도 안 나옴). 즉 "여러 도서관을 한 요청에 합쳐 보내기"는 신뢰할 수 없는 방식임.
  *
- *   1. default_search 페이지 방문 (검색대상 도서관 설정 화면) — ls_session 쿠키만 받음
- *   2. 검색어 입력 후 검색 버튼 클릭 시, 브라우저가 동시에 여러 요청을 보냄:
- *      - ajax/stat/search   : 통계 기록용 (검색 자체와 무관, 호출 안 해도 됨)
- *      - ajax/search_history/add : "최근 검색기록" 보관용 (무관, 호출 안 해도 됨)
- *      - ajax/engine/deploy : ★ 진짜 핵심. 이 요청의 응답 자체에 검색 결과 XML이
- *                              전부 포함되어 있음 (<resultinfo>Success</resultinfo>
- *                              + <record> 목록). 실측으로 JSESSIONID, WL_PCID
- *                              쿠키 없이 ls_session만으로도 200 + Success 응답을
- *                              받는 것을 확인함(2026-06-19).
- *      - result (HTML 페이지) : 사용자에게 보여줄 화면일 뿐, 데이터는 deploy가
- *                              이미 갖고 있으므로 우리 코드 입장에서는 불필요.
- *      - all_result : result 화면이 새로고침/재조회할 때 쓰는 후속 요청으로 추정.
- *                     최초 검색에는 불필요.
+ * → 해결: dbnum 1개씩, 도서관 수만큼(7번) deploy를 "동시에" 호출(Promise.all)하고
+ *   결과를 모아서 합치는 방식으로 변경. 실측으로 dbnum을 1개만 넣었을 때는 그 도서관의
+ *   결과가 정확하고 안정적으로 돌아오는 것을 확인함(금천구 단독 테스트 사례).
  *
- * → 결론: default_search 한 번 방문해서 쿠키를 받고, 곧바로 deploy를 호출하면
- *         검색 결과를 받을 수 있음. JSESSIONID/WL_PCID 위조 시도는 더 이상 불필요.
+ *   동시에 보내므로, 전체 소요 시간은 "가장 느린 도서관 1곳"의 응답 시간과 비슷한
+ *   수준일 것으로 예상됨(순차 호출 시 7배 느려지는 것을 피함). 다만 실제 배포
+ *   환경(Vercel)에서의 체감 속도는 재측정 필요.
  *
- * [실험적 요소 표시] default_search 방문이 실제로 꼭 필요한지(혹은 ls_session 없이
- * deploy만 단독 호출해도 되는지)는 아직 실측 검증 전. 일단 안전하게 default_search
- * 방문을 유지하고, 콘솔 로그로 결과를 보면서 다음에 더 단순화할 수 있는지 판단할 것.
+ * 흐름:
+ *   1. default_search 페이지 방문 → ls_session 쿠키 확보
+ *   2. EBOOK_DBNUMS 각각에 대해 deploy를 동시에 호출 (dbnum 파라미터에 1개씩만)
+ *   3. 7개 응답을 모두 모아서 합친 뒤, 도서관별(dbnum) 해석 규칙 적용해 대출가능
+ *      여부 판단
+ *   4. 강남구는 상세페이지 추가조회 필요 (XML만으로 판단 불가)
+ *   5. 제목+저자 완전일치 기준으로 같은 책 묶기 (+ 출판일 보조기준)
  */
 
+import * as cheerio from "cheerio";
 import { EbookBook, EbookLibraryEntry, SearchCategory } from "@/types";
 
 const BASE_URL = "https://meta.seoul.go.kr/libseoul";
@@ -56,8 +54,11 @@ const CATEGORY: Record<SearchCategory, string> = {
 
 /**
  * id 생성 — handoff v4 실측 확정: 13자리 밀리초 타임스탬프 + 5자리 임의숫자
- * (이번 deploy 캡처에서도 178183510349793 형태로 동일 패턴 재확인됨 — 15자리,
- *  앞부분이 밀리초 단위 시각과 일치)
+ *
+ * [주의] 이번 버전에서는 도서관별로 deploy를 따로 호출하지만, 같은 검색 1건으로
+ * 취급되어야 하므로 7개 요청 모두 "같은 id"를 사용함 (도서관마다 다른 id를 쓰면
+ * 서버가 서로 다른 검색으로 인식할 가능성을 배제하기 위함 — 실측 검증 전 안전한
+ * 선택).
  */
 function generateRequestId(): string {
   const millis = Date.now().toString(); // 13자리
@@ -105,29 +106,18 @@ type RawRecord = {
 };
 
 /**
- * 전자책 검색 메인 함수 (v2 — deploy 단일 호출 방식)
+ * 전자책 검색 메인 함수 (v6 — dbnum별 병렬 deploy 호출 방식)
  */
 export async function searchEbooks(
   query: string,
   category: SearchCategory
 ): Promise<EbookBook[]> {
-  console.log("[seoulLibrary] CODE VERSION MARKER: v5-deploy-20260619");
+  console.log("[seoulLibrary] CODE VERSION MARKER: v6-parallel-deploy-20260619");
 
   const id = generateRequestId();
-  const dbnumParam = EBOOK_DBNUMS.join("%20");
+  console.log("[seoulLibrary] generated id (shared across all dbnum calls):", id);
 
-  console.log("[seoulLibrary] generated id:", id);
-
-  const searchQueryParams =
-    `category1=${CATEGORY[category]}` +
-    `&category2=0&category3=0` +
-    `&text1=${encodeURIComponent(query)}&text2=&text3=` +
-    `&op=0&op2=0&year1=&year2=` +
-    `&dbnum=${dbnumParam}` +
-    `&display=30&recstart=1&sort=rel`;
-
-  // 1단계: default_search 방문 — ls_session 쿠키 확보
-  // [실험적 요소] 이 단계가 실제로 필요한지는 아직 검증 전. 일단 안전하게 유지.
+  // 1단계: default_search 방문 — ls_session 쿠키 확보 (도서관별 호출 전 1회만)
   const defaultSearchUrl = `${BASE_URL}/index.php/default_search`;
 
   let cookie = "";
@@ -141,43 +131,60 @@ export async function searchEbooks(
     console.log("[seoulLibrary] stage1 cookie value:", cookie || "(empty)");
   } catch (e) {
     console.log("[seoulLibrary] stage1 fetch failed:", e);
-    // 실패해도 deploy를 시도해볼 가치는 있음 (쿠키 없이도 될 가능성 확인 차원)
   }
 
-  // 2단계: deploy 호출 — 이 응답 자체에 검색 결과 XML이 들어있음
-  const deployUrl =
-    `${BASE_URL}/index.php/ajax/engine/deploy` +
-    `?id=${id}&${searchQueryParams}&_=${Date.now()}`;
+  // 2단계: 도서관별로 deploy를 동시에 호출 (dbnum 1개씩만 넣어서)
+  const buildDeployUrl = (dbnum: string) => {
+    const searchQueryParams =
+      `category1=${CATEGORY[category]}` +
+      `&category2=0&category3=0` +
+      `&text1=${encodeURIComponent(query)}&text2=&text3=` +
+      `&op=0&op2=0&year1=&year2=` +
+      `&dbnum=${dbnum}` +
+      `&display=30&recstart=1&sort=rel`;
 
-  let xml: string;
-  try {
-    const res = await fetch(deployUrl, {
-      signal: AbortSignal.timeout(8000),
-      headers: {
-        "User-Agent": "Mozilla/5.0",
-        ...(cookie ? { Cookie: cookie } : {}),
-        "X-Requested-With": "XMLHttpRequest",
-        Referer: defaultSearchUrl,
-        Accept: "text/xml, application/xml, */*",
-      },
-    });
-    console.log("[seoulLibrary] stage2 (deploy) status:", res.status);
-    if (!res.ok) return [];
-    xml = await res.text();
-    console.log("[seoulLibrary] stage2 xml length:", xml.length);
-    console.log("[seoulLibrary] stage2 xml preview:", xml.slice(0, 1500));
-  } catch (e) {
-    console.log("[seoulLibrary] stage2 fetch failed:", e);
-    return [];
-  }
+    return `${BASE_URL}/index.php/ajax/engine/deploy?id=${id}&${searchQueryParams}&_=${Date.now()}`;
+  };
 
-  // resultinfo의 성공 여부 확인 (간단 텍스트 체크 — 정식 파싱은 parseXml에서)
-  if (!xml.includes("Success")) {
-    console.log("[seoulLibrary] resultinfo did not report Success - check response");
-  }
+  const fetchOneLibrary = async (dbnum: string): Promise<RawRecord[]> => {
+    const url = buildDeployUrl(dbnum);
+    try {
+      const res = await fetch(url, {
+        signal: AbortSignal.timeout(8000),
+        headers: {
+          "User-Agent": "Mozilla/5.0",
+          ...(cookie ? { Cookie: cookie } : {}),
+          "X-Requested-With": "XMLHttpRequest",
+          Referer: defaultSearchUrl,
+          Accept: "text/xml, application/xml, */*",
+        },
+      });
+      console.log(`[seoulLibrary] deploy(${dbnum}) status:`, res.status);
+      if (!res.ok) return [];
 
-  const rawRecords = parseXml(xml);
-  console.log("[seoulLibrary] parsed records count:", rawRecords.length);
+      const xml = await res.text();
+      console.log(`[seoulLibrary] deploy(${dbnum}) xml length:`, xml.length);
+
+      if (!xml.includes("Success")) {
+        console.log(`[seoulLibrary] deploy(${dbnum}) resultinfo did not report Success`);
+      }
+
+      return parseXml(xml, dbnum);
+    } catch (e) {
+      console.log(`[seoulLibrary] deploy(${dbnum}) fetch failed:`, e);
+      return [];
+    }
+  };
+
+  // 7개 도서관에 동시에 요청 — 가장 느린 응답 시간만큼만 기다리면 됨
+  const resultsByLibrary = await Promise.all(EBOOK_DBNUMS.map(fetchOneLibrary));
+  const rawRecords = resultsByLibrary.flat();
+
+  console.log("[seoulLibrary] total parsed records across all libraries:", rawRecords.length);
+  console.log(
+    "[seoulLibrary] dbnums that returned results:",
+    [...new Set(rawRecords.map((r) => r.dbnum))]
+  );
   if (rawRecords.length === 0) return [];
 
   const entries = await Promise.all(
@@ -193,47 +200,36 @@ export async function searchEbooks(
 }
 
 /**
- * XML 파싱 — deploy 응답 구조 기준
+ * XML 파싱 — deploy 응답 구조 기준 (cheerio 복원)
  *
- * [2026-06-19 변경] deploy 응답은 <resultdata><record>...</record></resultdata>
- * 구조로, 기존 all_result가 주던 구조(<record>가 최상위 바로 아래)와 동일한 형태의
- * record/field 패턴을 그대로 사용함. 따라서 파싱 로직 자체는 거의 그대로 재사용 가능.
- * 다만 cheerio의 xmlMode가 CDATA를 다루는 방식이 동작 환경에 따라 다를 수 있어
- * 정규식 기반 경량 파서로 교체함 (의존성도 줄어듦).
+ * [2026-06-19 v6 변경] 정규식 방식에서 cheerio로 되돌림 (기존 코드와의 일관성
+ * 유지가 더 안전하다는 판단, 2026-06-19 논의 기록 참조). 이제 dbnum을 1개씩만
+ * 보내므로 응답 안에 <record>가 항상 그 도서관 것만 들어있어, expectedDbnum과
+ * 다른 record가 섞여 있으면 무시하는 안전장치를 추가함.
  */
-function parseXml(xml: string): RawRecord[] {
+function parseXml(xml: string, expectedDbnum: string): RawRecord[] {
+  const $ = cheerio.load(xml, { xmlMode: true });
   const records: RawRecord[] = [];
 
-  // <record ...> ... </record> 블록 단위로 분리
-  const recordBlocks = xml.match(/<record\b[^>]*>[\s\S]*?<\/record>/g) ?? [];
+  $("record").each((_: number, el: any) => {
+    const dbnum = $(el).attr("dbnum") ?? "";
+    const dbname = $(el).attr("dbname") ?? "";
 
-  for (const block of recordBlocks) {
-    const dbnumMatch = block.match(/dbnum="([^"]*)"/);
-    const dbnameMatch = block.match(/dbname="([^"]*)"/);
-    const dbnum = dbnumMatch?.[1] ?? "";
-    const dbname = dbnameMatch?.[1] ?? "";
-
-    // 우리가 요청한 7개 전자도서관 외의 결과는 무시
-    if (!EBOOK_DBNUMS.includes(dbnum)) continue;
-
-    const field = (name: string): string => {
-      const re = new RegExp(
-        `<field name="${name}"[^>]*>[\\s\\S]*?<content><!\\[CDATA\\[([\\s\\S]*?)\\]\\]><\\/content>`,
+    // 우리가 요청한 도서관과 다른 dbnum이 섞여 들어오면 무시 (안전장치)
+    if (dbnum !== expectedDbnum) {
+      console.log(
+        `[seoulLibrary] unexpected dbnum in response: expected ${expectedDbnum}, got ${dbnum} - skipping`
       );
-      const m = block.match(re);
-      return m?.[1]?.trim() ?? "";
-    };
+      return;
+    }
 
-    const fieldUrl = (name: string): string => {
-      const re = new RegExp(
-        `<field name="${name}"[^>]*>[\\s\\S]*?<url><!\\[CDATA\\[([\\s\\S]*?)\\]\\]><\\/url>`,
-      );
-      const m = block.match(re);
-      return m?.[1]?.trim() ?? "";
-    };
+    const field = (name: string) =>
+      $(el).find(`field[name="${name}"] content`).first().text().trim();
+    const fieldUrl = (name: string) =>
+      $(el).find(`field[name="${name}"] url`).first().text().trim();
 
     const title = field("TITLE");
-    if (!title) continue;
+    if (!title) return;
 
     records.push({
       dbnum,
@@ -250,7 +246,7 @@ function parseXml(xml: string): RawRecord[] {
       loanKorean: field("대출") || undefined,
       reserveKorean: field("예약") || undefined,
     });
-  }
+  });
 
   return records;
 }
@@ -328,12 +324,13 @@ async function resolveGangnamAvailability(
     });
     if (!res.ok) return null;
     const html = await res.text();
+    const $ = cheerio.load(html);
 
-    const ownedMatch = html.match(/보유\s*<strong>(\d+)<\/strong>/);
-    const loanMatch = html.match(/대출\s*<strong>(\d+)<\/strong>/);
+    const ownedText = $("div.current span:contains('보유') strong").first().text().trim();
+    const loanText = $("div.current span:contains('대출') strong").first().text().trim();
 
-    const owned = ownedMatch ? parseInt(ownedMatch[1], 10) : NaN;
-    const loaned = loanMatch ? parseInt(loanMatch[1], 10) : NaN;
+    const owned = parseInt(ownedText, 10);
+    const loaned = parseInt(loanText, 10);
     if (Number.isNaN(owned) || Number.isNaN(loaned)) return null;
 
     const remaining = owned - loaned;
