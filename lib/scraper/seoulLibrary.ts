@@ -13,6 +13,11 @@
  *
  * 중요: 1~3단계는 모두 같은 쿠키(WL_PCID, JSESSIONID, ls_session)를 들고 가야 함.
  * 쿠키 없이 보내면 "No search has been found in that ID" 오류 응답을 받음(실측 확인됨).
+ *
+ * [2026-06-19 추가] 방향 A 실험: 서버 응답 헤더에서 JSESSIONID/WL_PCID를 못 받는 문제(handoff v4 5-3장)에
+ * 대해, 브라우저가 자바스크립트로 직접 만들어 쓰는 값일 가능성이 높다는 가설 하에, 우리가 비슷한 형식으로
+ * 직접 만들어서 쿠키에 끼워 넣어보는 실험. 형식만 맞으면 서버가 받아주는지(=새 세션을 발급해주는지)를
+ * 확인하는 단계이며, 실패하면 방향 B(wl6.js 분석)로 넘어갈 예정.
  */
 
 import * as cheerio from "cheerio";
@@ -53,6 +58,41 @@ function generateRequestId(): string {
   const seconds = Math.floor(Date.now() / 1000).toString(); // 10자리
   const rand = Math.floor(10000 + Math.random() * 90000).toString(); // 5자리
   return seconds + rand;
+}
+
+/**
+ * [2026-06-19 추가] 방향 A 실험용 — 무작위 영문자+숫자 문자열 생성 (JSESSIONID용)
+ */
+function randomAlphaNum(length: number): string {
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+}
+
+/**
+ * [2026-06-19 추가] 방향 A 실험용 — 가짜 WL_PCID 생성
+ * 실측 패턴: 17817908762201261577718 (10자리 초단위 타임스탬프 + 13자리 임의숫자 = 23자리)
+ */
+function generateFakeWlPcid(): string {
+  const seconds = Math.floor(Date.now() / 1000).toString(); // 10자리
+  let rand = "";
+  for (let i = 0; i < 13; i++) {
+    rand += Math.floor(Math.random() * 10).toString();
+  }
+  return seconds + rand;
+}
+
+/**
+ * [2026-06-19 추가] 방향 A 실험용 — 가짜 JSESSIONID 생성
+ * 실측 패턴: gosZtIIFDoxcIGCYkkvUxLTRm5ytjWsYIlBivHVwDGWQ0NLLT2Kp7cOLlg4QG8g2.replibwas2_servlet_engine6
+ * (64자 영문/숫자 + .replibwas2_servlet_engine6 접미사)
+ */
+function generateFakeJsessionId(): string {
+  return `${randomAlphaNum(64)}.replibwas2_servlet_engine6`;
 }
 
 /**
@@ -110,7 +150,7 @@ export async function searchEbooks(
   query: string,
   category: SearchCategory
 ): Promise<EbookBook[]> {
-  console.log("[seoulLibrary] CODE VERSION MARKER: v3-cookie-check-20260618");
+  console.log("[seoulLibrary] CODE VERSION MARKER: v4-fake-cookie-20260619");
 
   const id = generateRequestId();
   const dbnumParam = EBOOK_DBNUMS.join("%20");
@@ -146,7 +186,30 @@ export async function searchEbooks(
     // 0단계 실패해도 1단계는 시도해볼 가치가 있음 (혹시 advanced_search 없이도 동작하는 경우 대비)
   }
 
-  // 1단계: 검색결과 페이지 요청. id를 포함해서 보내고, 0단계에서 받은 쿠키를 이어서 사용.
+  // [2026-06-19 추가] 방향 A 실험: 서버가 JSESSIONID/WL_PCID를 발급해주지 않으므로
+  // (handoff v4 5-3장), 우리가 직접 비슷한 형식으로 만들어 끼워 넣어본다.
+  // 이미 서버가 준 쿠키(ls_session 등)가 있다면 그건 유지하고, 없는 두 개만 추가.
+  const hasJsessionId = cookie.includes("JSESSIONID=");
+  const hasWlPcid = cookie.includes("WL_PCID=");
+
+  const fakeParts: string[] = [];
+  if (!hasJsessionId) {
+    const fakeJsessionId = generateFakeJsessionId();
+    console.log("[seoulLibrary] FAKE COOKIE injected - JSESSIONID:", fakeJsessionId);
+    fakeParts.push(`JSESSIONID=${fakeJsessionId}`);
+  }
+  if (!hasWlPcid) {
+    const fakeWlPcid = generateFakeWlPcid();
+    console.log("[seoulLibrary] FAKE COOKIE injected - WL_PCID:", fakeWlPcid);
+    fakeParts.push(`WL_PCID=${fakeWlPcid}`);
+  }
+
+  if (fakeParts.length > 0) {
+    cookie = cookie ? `${fakeParts.join("; ")}; ${cookie}` : fakeParts.join("; ");
+  }
+  console.log("[seoulLibrary] cookie value after fake-injection:", cookie || "(empty)");
+
+  // 1단계: 검색결과 페이지 요청. id를 포함해서 보내고, 0단계 쿠키(+가짜 쿠키)를 이어서 사용.
   // Referer를 advanced_search로 지정해 실제 브라우저 흐름을 모방함.
   const stage1Url =
     `${BASE_URL}/index.php/result` +
@@ -165,7 +228,12 @@ export async function searchEbooks(
     });
     console.log("[seoulLibrary] stage1 status:", stage1Res.status);
     const stage1Cookie = extractCookies(stage1Res);
-    if (stage1Cookie) cookie = stage1Cookie; // 갱신된 쿠키가 있으면 덮어씀
+    if (stage1Cookie) {
+      // 서버가 진짜 쿠키를 새로 내려줬다면, 그 쪽이 우선이므로 합쳐줌
+      // (단, 우리가 만든 가짜 값 중 서버가 안 건드린 것은 유지)
+      console.log("[seoulLibrary] stage1 returned NEW cookie from server:", stage1Cookie);
+      cookie = mergeCookies(cookie, stage1Cookie);
+    }
     console.log("[seoulLibrary] cookie value after stage1:", cookie || "(empty)");
   } catch (e) {
     console.log("[seoulLibrary] stage1 fetch failed:", e);
@@ -226,6 +294,35 @@ export async function searchEbooks(
       entry: EbookLibraryEntry;
     }[]
   );
+}
+
+/**
+ * [2026-06-19 추가] 방향 A 실험용 — 기존 쿠키 문자열과 서버가 새로 내려준 쿠키 문자열을 합침.
+ * 같은 이름의 쿠키가 있으면 서버가 새로 내려준 값(나중 것)이 우선됨.
+ */
+function mergeCookies(oldCookie: string, newCookie: string): string {
+  const map = new Map<string, string>();
+
+  const parse = (str: string) => {
+    str
+      .split(";")
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0)
+      .forEach((pair) => {
+        const idx = pair.indexOf("=");
+        if (idx === -1) return;
+        const name = pair.slice(0, idx);
+        const value = pair.slice(idx + 1);
+        map.set(name, value);
+      });
+  };
+
+  parse(oldCookie);
+  parse(newCookie); // 나중에 덮어써서 새 값이 우선되게 함
+
+  return Array.from(map.entries())
+    .map(([name, value]) => `${name}=${value}`)
+    .join("; ");
 }
 
 /** XML 파싱 — handoff 5-2장 구조 참조 */
