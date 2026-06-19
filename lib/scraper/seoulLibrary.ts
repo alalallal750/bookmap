@@ -193,6 +193,7 @@ export async function searchEbooks(
 
       if (!xml.includes("Success")) {
         console.log(`[seoulLibrary] deploy(${dbnum}) resultinfo did not report Success`);
+        console.log(`[seoulLibrary] deploy(${dbnum}) FULL RESPONSE (no Success):`, xml);
       }
 
       return parseXml(xml, dbnum);
