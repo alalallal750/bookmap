@@ -45,7 +45,15 @@ import { EbookBook, EbookLibraryEntry } from "@/types";
 
 const BASE_URL = "https://meta.seoul.go.kr/libseoul";
 
-// handoff 3-1장: 전자책도서관 7곳 (서울시전자도서관 103291은 통합검색 미지원으로 제외)
+// handoff 3-1장: 전자책도서관 8곳
+// [2026-06-19 추가] 서울시 전자도서관(103291) — 통합검색에 실제로는 포함되어 있었고
+// (서울도서관 사이트 "지역별 > 중구" 폴더 안에 있었음), 제목 검색 응답도 정상적으로
+// 옴. 다만 대출가능 여부(대출횟수/예약횟수)는 로그인해야만 서버가 값을 채워서
+// 보내주는 구조로 확인됨(비로그인 상태 HTML에 숫자 자리가 비어있음, 강남구처럼
+// "라벨만 깨진 것"과는 다른 경우 — 값 자체가 없음). 로그인 기능이 없는 우리
+// 서비스로는 이 값을 알아낼 수 없으므로, 책 정보(제목·저자·표지 등)는 보여주되
+// 대출가능 여부는 "사이트에서 직접 확인" 안내로 고정함(103301과 동일 패턴).
+// 이 방식은 강남구 같은 상세페이지 추가조회가 필요 없어 오히려 가벼운 처리임.
 const EBOOK_LIBRARIES: Record<string, string> = {
   "44911": "강남구립전자도서관",
   "44891": "구로구립전자도서관",
@@ -54,6 +62,7 @@ const EBOOK_LIBRARIES: Record<string, string> = {
   "45051": "마포구립전자도서관",
   "45111": "서초구립전자도서관",
   "103301": "서울시육아종합지원센터",
+  "103291": "서울시 전자도서관",
 };
 const EBOOK_DBNUMS = Object.keys(EBOOK_LIBRARIES);
 
@@ -295,13 +304,20 @@ async function resolveAvailability(r: RawRecord): Promise<EbookLibraryEntry | nu
     }
 
     case "103301": {
-      const fallbackText = r.state ?? r.loan ?? r.loanKorean ?? "";
+      return resolveChildrenLibraryAvailability(r, libraryName);
+    }
+
+    case "103291": {
+      // [2026-06-19] 서울시 전자도서관 — 대출가능 여부는 로그인해야만 서버가 값을
+      // 채워 보내주는 구조로 확인됨(deploy 응답 XML에도 관련 필드 자체가 없음).
+      // 로그인 기능이 없는 우리 서비스는 이 값을 알아낼 방법이 없으므로, 책이
+      // 여기 있다는 사실만 알려주고 대출가능 여부는 항상 "직접 확인" 안내로 고정함.
       return {
         dbnum: r.dbnum,
         libraryName,
-        available: fallbackText.includes("대출가능"),
+        available: false,
         url: r.url,
-        loanInfo: fallbackText || "대출가능 여부 확인 필요(사이트에서 직접 확인해 주세요)",
+        loanInfo: "대출가능 여부는 사이트에서 직접 확인해 주세요",
       };
     }
 
@@ -379,6 +395,92 @@ async function resolveGangnamAvailability(
     };
   } catch (e) {
     console.log("[seoulLibrary] gangnam detail fetch threw error, title:", r.title, "error:", e);
+    return null;
+  }
+}
+
+/**
+ * 서울시육아종합지원센터 상세페이지 추가조회 — handoff 6장 "표시 형식 미확인" 항목
+ * 해결, 2026-06-19 실측으로 패턴 확인
+ *
+ * deploy 응답 XML에는 대출가능 관련 필드가 없어, 강남구처럼 상세페이지 추가조회가
+ * 필요함. 다만 강남구와 달리 한글이 깨지지 않고(EUC-KR 인코딩 문제 없음), 페이지에
+ * 이렇게 표시됨:
+ *   <ul class="state">
+ *     <li><p>대출</p>0/1</li>
+ *     <li><p>예약</p>0</li>
+ *     ...
+ *   </ul>
+ * "대출" 글자가 있는 <li>의 전체 텍스트에서 "분자/분모" 형식을 그대로 추출하면 됨
+ * (다른 도서관(동대문구·구로구)에서 이미 쓰던 isRatioAvailable과 동일한 판단 방식
+ * 재사용 가능).
+ */
+async function resolveChildrenLibraryAvailability(
+  r: RawRecord,
+  libraryName: string
+): Promise<EbookLibraryEntry | null> {
+  if (!r.url) {
+    console.log("[seoulLibrary] childrenLibrary: record has no detail url, title:", r.title);
+    return null;
+  }
+
+  try {
+    const res = await fetch(r.url, {
+      signal: AbortSignal.timeout(8000),
+      headers: { "User-Agent": "Mozilla/5.0" },
+    });
+    console.log("[seoulLibrary] childrenLibrary detail page status:", res.status, "url:", r.url);
+    if (!res.ok) {
+      console.log("[seoulLibrary] childrenLibrary: detail page fetch not ok, title:", r.title);
+      return null;
+    }
+    const html = await res.text();
+    console.log("[seoulLibrary] childrenLibrary detail html length:", html.length);
+
+    const $ = cheerio.load(html);
+
+    // "대출"이라는 글자를 담은 <p> 태그의 부모 <li> 전체 텍스트를 가져옴
+    // (예: "대출0/1" — <p>대출</p> 다음에 바로 "0/1"이 붙어있는 구조)
+    const loanLiText = $("ul.state li")
+      .filter((_: number, el: any) => $(el).find("p").text().trim() === "대출")
+      .first()
+      .text()
+      .trim();
+
+    console.log("[seoulLibrary] childrenLibrary loan li text:", JSON.stringify(loanLiText));
+
+    // "대출" 글자를 떼어내고 남은 "0/1" 부분만 추출
+    const loanText = loanLiText.replace("대출", "").trim();
+    const available = isRatioAvailable(loanText);
+
+    if (!loanText) {
+      console.log(
+        "[seoulLibrary] childrenLibrary: could not find loan text, title:",
+        r.title
+      );
+      return {
+        dbnum: r.dbnum,
+        libraryName,
+        available: false,
+        url: r.url,
+        loanInfo: "대출가능 여부 확인 필요(사이트에서 직접 확인해 주세요)",
+      };
+    }
+
+    return {
+      dbnum: r.dbnum,
+      libraryName,
+      available,
+      url: r.url,
+      loanInfo: loanText,
+    };
+  } catch (e) {
+    console.log(
+      "[seoulLibrary] childrenLibrary detail fetch threw error, title:",
+      r.title,
+      "error:",
+      e
+    );
     return null;
   }
 }
