@@ -300,12 +300,14 @@ async function resolveAvailability(r: RawRecord): Promise<EbookLibraryEntry | nu
     case "45351":
     case "44891": {
       const available = isRatioAvailable(r.loan);
-      return { dbnum: r.dbnum, libraryName, available, url: r.url, loanInfo: r.loan };
+      const loanableCount = extractRatioNumerator(r.loan);
+      return { dbnum: r.dbnum, libraryName, available, url: r.url, loanInfo: r.loan, loanableCount };
     }
 
     case "45051": {
       const available = isRatioAvailable(r.loanKorean);
-      return { dbnum: r.dbnum, libraryName, available, url: r.url, loanInfo: r.loanKorean };
+      const loanableCount = extractRatioNumerator(r.loanKorean);
+      return { dbnum: r.dbnum, libraryName, available, url: r.url, loanInfo: r.loanKorean, loanableCount };
     }
 
     case "44911": {
@@ -341,6 +343,17 @@ function isRatioAvailable(text?: string): boolean {
   const match = text.match(/^(\d+)\s*\/\s*(\d+)/);
   if (!match) return false;
   return parseInt(match[1], 10) > 0;
+}
+
+/**
+ * [2026-06-19 추가] "0/2" 같은 분자/분모 텍스트에서 분자(대출가능 권수)만
+ * 숫자로 추출. 형식이 안 맞으면 undefined.
+ */
+function extractRatioNumerator(text?: string): number | undefined {
+  if (!text) return undefined;
+  const match = text.match(/^(\d+)\s*\/\s*(\d+)/);
+  if (!match) return undefined;
+  return parseInt(match[1], 10);
 }
 
 /**
@@ -401,6 +414,7 @@ async function resolveGangnamAvailability(
       available: remaining > 0,
       url: r.url,
       loanInfo: `보유 ${owned} / 대출 ${loaned}`,
+      loanableCount: remaining > 0 ? remaining : 0,
     };
   } catch (e) {
     console.log("[seoulLibrary] gangnam detail fetch threw error, title:", r.title, "error:", e);
@@ -486,6 +500,7 @@ async function resolveChildrenLibraryAvailability(
       available,
       url: r.url,
       loanInfo: loanText,
+      loanableCount: extractRatioNumerator(loanText),
     };
   } catch (e) {
     console.log(
@@ -572,6 +587,7 @@ async function resolveSeochoAvailability(
       available: loanable > 0,
       url: r.url,
       loanInfo: `보유 ${owned} / 대출 ${loaned}`,
+      loanableCount: loanable,
     };
   } catch (e) {
     console.log("[seoulLibrary] seocho api fetch threw error, title:", r.title, "error:", e);

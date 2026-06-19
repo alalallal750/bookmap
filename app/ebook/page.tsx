@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ApiResponse, EbookBook, EbookSearchResult } from "@/types";
+import { ApiResponse, EbookBook, EbookLibraryEntry, EbookSearchResult } from "@/types";
 import { SearchBar } from "@/components/search/SearchBar";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
@@ -149,11 +149,35 @@ function EbookCard({ book }: { book: EbookBook }) {
               className="font-medium"
               style={{ color: lib.available ? "#16a34a" : "#9ca3af" }}
             >
-              {lib.available ? "대출가능" : lib.loanInfo || "대출중"}
+              {getDisplayStatus(lib)}
             </span>
           </a>
         ))}
       </div>
     </div>
   );
+}
+
+/**
+ * [2026-06-19 v2] 도서관별 대출가능 표시 형식 통일 — loanableCount(정확한 권수)
+ * 기반으로 재정리.
+ *
+ * 규칙:
+ *   1. 권수를 알고(loanableCount 존재) 1권 이상 빌릴 수 있으면 → "N권 대출가능"
+ *   2. 권수를 알지만 0권이면 → "모두 대출중"
+ *   3. 권수를 모르고("직접 확인" 안내가 있는 도서관, 예: 서울시 전자도서관) →
+ *      안내문구 그대로
+ *   4. (예외 대비) 권수도 모르고 안내문구도 없는 경우 → available만 보고
+ *      "대출가능"/"대출중"으로 폴백
+ *
+ * 소장 전체 권수("N권 대출가능 / M권 소장")는 일부러 보여주지 않음 — 사용자가
+ * 실제로 필요한 정보는 "지금 빌릴 수 있는가"이고, 전체 권수는 핵심 의사결정에
+ * 불필요한 정보라 화면을 더 간결하게 유지하기로 함(2026-06-19 논의).
+ */
+function getDisplayStatus(lib: EbookLibraryEntry): string {
+  if (typeof lib.loanableCount === "number") {
+    return lib.loanableCount > 0 ? `${lib.loanableCount}권 대출가능` : "모두 대출중";
+  }
+  if (lib.loanInfo?.includes("직접 확인")) return lib.loanInfo;
+  return lib.available ? "대출가능" : "대출중";
 }
