@@ -12,31 +12,24 @@
  * dbnum 1개씩, 도서관 수만큼(7번) deploy를 "동시에" 호출(Promise.all)하고 결과를
  * 모아서 합치는 방식으로 변경.
  *
- * [2026-06-19 v7 변경 — 이번 버전] 서명/저자 탭 구분을 제거함.
+ * [2026-06-19 v7 변경, 이후 되돌림] 모든 도서관에 "제목 OR 저자"(category1=1,
+ * category2=4, op=1)를 동일하게 적용해봤으나, 실측 결과 금천구(45011)·서초구
+ * (45111)·서울시육아종합지원센터(103301) 3곳이 빈 응답(500자 안팎, Success 표시
+ * 없음)을 반환하는 부작용이 발생함. 추정 원인: 이 도서관들의 시스템이 category2/op
+ * 같은 복합 검색 파라미터 자체를 이해하지 못해 요청을 거부하는 것으로 보임(원인의
+ * 정확한 내부 동작까지는 미확인이나, 동일 조건에서 일관되게 실패하므로 호환성
+ * 문제로 추정).
  *
- * 배경: "저자" 탭(category1=4)으로 검색해도 도서관마다 실제 동작이 다름을 실측으로
- * 확인함 — 어떤 도서관(동대문구)은 저자 탭인데도 제목에만 매칭되는 책까지 같이
- * 보여주고, 어떤 도서관(강남구)은 반대로 전체검색(category1=0)일 때 저자 필드를
- * 통째로 무시함(저자검색 12건 vs 전체검색 0건, handoff 5-3장). 즉 "서명/저자"라는
- * 탭 구분이 도서관마다 다르게 해석되어, 사용자에게 일관된 약속을 줄 수 없는
- * 상태였음.
- *
- * 해결: 상세검색 화면에서 "제목 OR 저자"를 동시에 거는 방식을 발견함 (op=1이 OR
- * 연산자). 이제 모든 검색을 아래처럼 고정해서 보냄:
- *   category1=1(제목) + text1=검색어
- *   category2=4(저자) + text2=검색어 (동일한 검색어)
- *   op=1 (OR)
- * 강남구에서 실측으로 이 방식이 정상 작동함을 확인함(이전엔 저자 필드를 못 찾던
- * 강남구가, 이 방식으로는 제목 매칭으로도 결과를 찾아줌).
- *
- * SearchCategory(서명/저자 구분) 파라미터는 호출하는 쪽(route.ts, page.tsx 등)과의
- * 호환성을 위해 일단 받아두지만, 이 함수 내부에서는 더 이상 사용하지 않음. 화면의
- * 탭 UI를 제거하는 작업은 별도로 필요함(이 파일 수정만으로는 화면이 바뀌지 않음).
+ * [2026-06-19 v8 변경 — 이번 버전] "모든 도서관 동일 처리" 원칙을 포기하고, 강남구
+ * (44911)만 예외로 "제목 OR 저자" 방식을 쓰고, 나머지 6개 도서관은 기존에 안정적으로
+ * 작동하던 전체검색(category1=0)으로 되돌림. 강남구가 유독 전체검색 시 저자 필드를
+ * 무시하는 특이 케이스(handoff 5-3장)이므로, 그 도서관에만 맞춤 처리하는 것이 다른
+ * 도서관의 정상 동작을 깨뜨리지 않는 더 안전한 선택임.
  *
  * 흐름:
  *   1. default_search 페이지 방문 → ls_session 쿠키 확보
- *   2. EBOOK_DBNUMS 각각에 대해 deploy를 동시에 호출 (dbnum 파라미터에 1개씩만,
- *      검색조건은 항상 "제목 OR 저자"로 고정)
+ *   2. EBOOK_DBNUMS 각각에 대해 deploy를 동시에 호출 (dbnum 파라미터에 1개씩만).
+ *      강남구(44911)는 "제목 OR 저자" 조건, 나머지는 전체검색(category1=0) 조건.
  *   3. 7개 응답을 모두 모아서 합친 뒤, 도서관별(dbnum) 해석 규칙 적용해 대출가능
  *      여부 판단
  *   4. 강남구는 상세페이지 추가조회 필요 (XML만으로 판단 불가)
@@ -59,6 +52,12 @@ const EBOOK_LIBRARIES: Record<string, string> = {
   "103301": "서울시육아종합지원센터",
 };
 const EBOOK_DBNUMS = Object.keys(EBOOK_LIBRARIES);
+
+// [2026-06-19 v8] 전체검색(category1=0) 시 저자 필드를 무시하는 도서관 목록.
+// 이 도서관들만 "제목 OR 저자" 방식(category1=1&category2=4&op=1)을 적용함.
+// handoff 5-3장: 강남구 실측 사례(전체검색 0건 vs 저자검색 12건)로 확인됨.
+// 다른 도서관에서 같은 증상이 추가로 발견되면 이 목록에 추가하면 됨.
+const NEEDS_TITLE_OR_AUTHOR_WORKAROUND = new Set(["44911"]);
 
 /**
  * id 생성 — handoff v4 실측 확정: 13자리 밀리초 타임스탬프 + 5자리 임의숫자
@@ -112,7 +111,7 @@ type RawRecord = {
 };
 
 /**
- * 전자책 검색 메인 함수 (v7 — 제목 OR 저자 고정 검색)
+ * 전자책 검색 메인 함수 (v8 — 강남구만 제목 OR 저자 예외 처리)
  *
  * @param category 더 이상 검색 조건에 사용하지 않음 (호환성을 위해 유지).
  *   호출하는 쪽 코드를 정리할 때 이 파라미터 자체를 제거하는 것을 권장함.
@@ -121,7 +120,7 @@ export async function searchEbooks(
   query: string,
   category?: SearchCategory
 ): Promise<EbookBook[]> {
-  console.log("[seoulLibrary] CODE VERSION MARKER: v7-title-or-author-20260619");
+  console.log("[seoulLibrary] CODE VERSION MARKER: v8-gangnam-exception-20260619");
   if (category) {
     console.log(
       "[seoulLibrary] note: category param is no longer used for search conditions:",
@@ -150,19 +149,25 @@ export async function searchEbooks(
 
   // 2단계: 도서관별로 deploy를 동시에 호출 (dbnum 1개씩만 넣어서)
   //
-  // [2026-06-19 v7] 검색조건을 "제목(category1=1) OR 저자(category2=4)"로 고정.
-  // 같은 검색어를 text1, text2에 동일하게 넣고, op=1(OR)로 연결함. 실측으로 강남구
-  // 사이트에서 이 조합이 정상 작동함을 확인함 (브라우저 상세검색에서 캡처한 실제
-  // 요청 형태를 그대로 따름).
+  // [2026-06-19 v8] 강남구만 "제목 OR 저자" 방식, 나머지는 기존 전체검색 방식.
   const buildDeployUrl = (dbnum: string) => {
     const encodedQuery = encodeURIComponent(query);
-    const searchQueryParams =
-      `category1=1` +
-      `&category2=4&category3=0` +
-      `&text1=${encodedQuery}&text2=${encodedQuery}&text3=` +
-      `&op=1&op2=0&year1=&year2=` +
-      `&dbnum=${dbnum}` +
-      `&display=30&recstart=1&sort=rel`;
+
+    const searchQueryParams = NEEDS_TITLE_OR_AUTHOR_WORKAROUND.has(dbnum)
+      ? // 강남구: 제목 OR 저자 (실측으로 검증된 조합, op=1이 OR 연산자)
+        `category1=1` +
+        `&category2=4&category3=0` +
+        `&text1=${encodedQuery}&text2=${encodedQuery}&text3=` +
+        `&op=1&op2=0&year1=&year2=` +
+        `&dbnum=${dbnum}` +
+        `&display=30&recstart=1&sort=rel`
+      : // 그 외 도서관: 기존에 안정적으로 작동하던 전체검색
+        `category1=0` +
+        `&category2=0&category3=0` +
+        `&text1=${encodedQuery}&text2=&text3=` +
+        `&op=0&op2=0&year1=&year2=` +
+        `&dbnum=${dbnum}` +
+        `&display=30&recstart=1&sort=rel`;
 
     return `${BASE_URL}/index.php/ajax/engine/deploy?id=${id}&${searchQueryParams}&_=${Date.now()}`;
   };
