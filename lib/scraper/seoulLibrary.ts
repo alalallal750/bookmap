@@ -335,19 +335,25 @@ async function resolveGangnamAvailability(
 
     const $ = cheerio.load(html);
 
-    const ownedText = $("div.current span:contains('보유') strong").first().text().trim();
-    const loanText = $("div.current span:contains('대출') strong").first().text().trim();
+    // [2026-06-19 수정] 강남구 사이트가 EUC-KR로 한글을 보내는 것으로 추정됨
+    // (실측: "보유"/"대출"/"예약" 한글이 ???? 형태로 깨져서 들어옴, 숫자는 정상).
+    // 한글 라벨로 찾는 대신, "div.current 안의 <strong> 태그들"을 순서대로 가져옴.
+    // 실측으로 확인된 순서: 1번째 = 보유, 2번째 = 대출, 3번째 = 예약.
+    const strongTexts = $("div.current strong")
+      .map((_: number, el: any) => $(el).text().trim())
+      .get();
 
-    console.log("[seoulLibrary] gangnam parsed ownedText:", JSON.stringify(ownedText), "loanText:", JSON.stringify(loanText));
+    console.log("[seoulLibrary] gangnam strong tag values (순서: 보유, 대출, 예약):", strongTexts);
 
-    const owned = parseInt(ownedText, 10);
-    const loaned = parseInt(loanText, 10);
+    const owned = strongTexts[0] !== undefined ? parseInt(strongTexts[0], 10) : NaN;
+    const loaned = strongTexts[1] !== undefined ? parseInt(strongTexts[1], 10) : NaN;
+
     if (Number.isNaN(owned) || Number.isNaN(loaned)) {
       console.log(
         "[seoulLibrary] gangnam: could not parse owned/loaned numbers, title:",
         r.title,
-        "- html snippet around 'div.current':",
-        html.includes("div") ? $("div.current").first().html()?.slice(0, 500) : "(no div found)"
+        "- strongTexts:",
+        strongTexts
       );
       return null;
     }
