@@ -183,7 +183,7 @@ export async function searchEbooks(
   console.log("[seoulLibrary] total parsed records across all libraries:", rawRecords.length);
   console.log(
     "[seoulLibrary] dbnums that returned results:",
-    [...new Set(rawRecords.map((r) => r.dbnum))]
+    Array.from(new Set(rawRecords.map((r) => r.dbnum)))
   );
   if (rawRecords.length === 0) return [];
 
