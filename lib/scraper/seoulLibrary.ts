@@ -446,20 +446,19 @@ async function resolveGangnamAvailability(
     // "이 책"의 current는 book_info 안에 있음 (추천 목록 쪽 current와 구분)
     const currentDiv = $(".book_info > div.current").first();
 
-    // [2026-06-20 v15 — 진단] "절창"은 정상 해결됐으나 "혼모노"는 다시 빈 값이
-    // 나오는 사례 발견. 이번엔 인코딩 문제가 아니라(이미 해결됨) 구조 자체가
-    // 다를 가능성을 의심 중 — currentDiv 자체가 비어있는지(선택자가 못 찾는지)
-    // 먼저 확인.
-    console.log(
-      "[seoulLibrary] gangnam DEBUG2 - currentDiv exists:",
-      currentDiv.length > 0,
-      "- currentDiv outer html:",
-      $.html(currentDiv)
-    );
-
+    // [2026-06-20 v16 변경 — 진짜 원인 확인됨] "혼모노" DEBUG2 로그로 확인된
+    // 사실: 강남구 HTML이 책마다 태그가 제대로 안 닫히는 경우가 있음. 구체적으로
+    // "대출예정일" span의 닫는 태그가 맨 끝에 한 번만 나와서, "보유"/"대출"/
+    // "예약" span들이 "대출예정일" span의 자식(직속 자식이 아님)으로 끼어들어가
+    // 버림:
+    //   <span>대출예정일<span>...</span> <span>보유...</span> <span>대출...</span>
+    //   <span>예약...</span></span>  ← 마지막에 한 번만 닫힘
+    // "> span"(바로 아래 자식만)으로 찾으면 이 경우 못 찾음. "find("span")"
+    // (몇 단계 안에 있든 전부 찾음)으로 넓혀서, 태그가 안 닫힌 경우와 정상적으로
+    // 닫힌 경우(절창처럼 각자 따로 닫힌 경우) 둘 다 대응되도록 함.
     const findStrongByLabel = (label: string): string | undefined => {
       const span = currentDiv
-        .find("> span")
+        .find("span")
         .filter((_: number, el: any) => {
           const ownText = $(el).clone().children().remove().end().text().trim();
           if (!ownText.startsWith(label)) return false;
