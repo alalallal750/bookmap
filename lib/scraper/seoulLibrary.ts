@@ -421,42 +421,34 @@ async function resolveGangnamAvailability(
       console.log("[seoulLibrary] gangnam: detail page fetch not ok, title:", r.title);
       return null;
     }
-    const html = await res.text();
-    console.log("[seoulLibrary] gangnam detail html length:", html.length);
+
+    // [2026-06-20 v14] 강남구 페이지가 EUC-KR로 인코딩되어 있어, res.text()
+    // (항상 UTF-8로 해석) 대신 원본 바이트를 받아서 직접 EUC-KR로 디코딩함.
+    const rawBuffer = await res.arrayBuffer();
+    // [2026-06-20 v14 변경 — 진짜 원인 확인됨] DEBUG 로그로 두 가지 사실이
+    // 동시에 확인됨:
+    //   1) 강남구 페이지는 실제로 EUC-KR로 인코딩되어 있음(HTML <meta>에 명시된
+    //      그대로). res.text()는 UTF-8로 가정하고 읽어버려서 한글이 깨짐(????).
+    //      이전 세션엔 "한글이 안 깨진다"고 판단했었는데, 그건 다른 페이지였거나
+    //      우연히 깨지지 않는 조합이었을 뿐 — 이 페이지(보유/대출/예약 부분)는
+    //      명확히 깨짐이 실측으로 재확인됨.
+    //   2) 페이지 안에 class="current"인 div가 2개 있음 — 하나는 "이 책"의 진짜
+    //      정보, 다른 하나는 페이지 하단 "작가의 다른 책" 추천 목록 안에 있는
+    //      것. .first()가 어느 쪽을 집을지는 보장되지 않아 잘못된 div를 읽을
+    //      위험이 있었음. "book_info 클래스 안에 있는 current"로 좁혀서 정확히
+    //      이 책의 정보만 가리키도록 수정함.
+    const decoder = new TextDecoder("euc-kr");
+    const html = decoder.decode(rawBuffer);
+    console.log("[seoulLibrary] gangnam detail html length (EUC-KR decoded):", html.length);
 
     const $ = cheerio.load(html);
 
-    // [2026-06-20 v13 — 진단 모드] 두 차례(순서 기반, 시작문자열 기반) 추측이
-    // 모두 빗나갔으므로, 추측 대신 cheerio가 "div.current" 안에서 실제로 무엇을
-    // 보고 있는지를 그대로 로그에 찍어 직접 눈으로 확인하기로 함. 아래 로그를
-    // 보고 나서 정확한 매칭 방식을 정함 — 이 단계에서는 추측에 의한 코드 수정을
-    //하지 않음.
-    const currentDivCount = $("div.current").length;
-    const currentDivHtml = $("div.current").first().html();
-    const spanDetails = $("div.current > span")
-      .map((_: number, el: any) => ({
-        fullText: JSON.stringify($(el).text()),
-        ownTextTrimmed: JSON.stringify(
-          $(el).clone().children().remove().end().text().trim()
-        ),
-      }))
-      .get();
+    // "이 책"의 current는 book_info 안에 있음 (추천 목록 쪽 current와 구분)
+    const currentDiv = $(".book_info > div.current").first();
 
-    console.log("[seoulLibrary] gangnam DEBUG - div.current count:", currentDivCount);
-    console.log("[seoulLibrary] gangnam DEBUG - div.current inner html:", currentDivHtml);
-    console.log("[seoulLibrary] gangnam DEBUG - span-by-span breakdown:", JSON.stringify(spanDetails));
-
-    // "보유"/"대출"로 시작하는 <span>을 글자로 찾아 그 안의 <strong> 값을 가져옴.
-    // [2026-06-20 v12 수정] 처음엔 "완전히 똑같은 글자(===)"로 찾았으나, 실제
-    // HTML(`<span>보유 <strong>5</strong></span>`)은 "보유" 뒤에 공백이 있어서
-    // 매칭이 전혀 안 되는 문제가 실측으로 확인됨(빈 값만 나옴). "완전 일치" 대신
-    // "그 글자로 시작하는지"로 조건을 느슨하게 바꿈. 다만 "대출"과 "대출예정일"을
-    // 구분해야 하므로(둘 다 "대출"로 시작함), "대출예정일"인 경우는 제외함.
-    // [2026-06-20 v13] 이 방식도 다시 실패함(빈 값) — 위 DEBUG 로그로 정확한
-    // 원인을 확인하는 중. 아래 로직은 다음 검색 시도 후 DEBUG 로그를 보고 교체될
-    // 예정.
     const findStrongByLabel = (label: string): string | undefined => {
-      const span = $("div.current > span")
+      const span = currentDiv
+        .find("> span")
         .filter((_: number, el: any) => {
           const ownText = $(el).clone().children().remove().end().text().trim();
           if (!ownText.startsWith(label)) return false;
