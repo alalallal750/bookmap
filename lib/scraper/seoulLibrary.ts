@@ -202,7 +202,14 @@ export async function searchEbooks(query: string): Promise<EbookBook[]> {
       const xml = await res.text();
       console.log(`[seoulLibrary] deploy(${dbnum}) xml length:`, xml.length);
 
-      if (!xml.includes("Success")) {
+      // [2026-06-20 v20 수정] "Success"가 없으면 무조건 경고성 로그를 찍었으나,
+      // 실측 확인 결과 도서관(예: 103301)이 검색 결과가 0건일 때 정상적으로
+      // "Failed"를 응답하는 경우가 있었음(count="0"). 이건 에러가 아니라 "이
+      // 책을 소장하지 않음"이라는 정상 응답이므로, count="0"인 경우는 로그를
+      // 찍지 않음. count가 0이 아닌데도 Success가 없는 경우만 — 진짜로 이상한
+      // 응답일 가능성이 있으므로 — 그대로 로그를 남김.
+      const isEmptyResult = /count="0"/.test(xml);
+      if (!xml.includes("Success") && !isEmptyResult) {
         console.log(`[seoulLibrary] deploy(${dbnum}) resultinfo did not report Success`);
         console.log(`[seoulLibrary] deploy(${dbnum}) FULL RESPONSE (no Success):`, xml);
       }

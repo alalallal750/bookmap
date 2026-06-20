@@ -108,14 +108,27 @@ export default function EbookSearchPage() {
 }
 
 function EbookCard({ book }: { book: EbookBook }) {
+  const hasCover = Boolean(book.coverImage);
+
   return (
     <div className="bg-white rounded-2xl border border-gray-100 p-4 shadow-sm">
       <div className="flex gap-3">
-        <img
-          src={book.coverImage || "/favicon.png"}
-          alt={book.title}
-          className="w-14 h-20 object-cover rounded-lg flex-shrink-0 bg-gray-100"
-        />
+        {/* [2026-06-20 v20 수정] 표지 이미지가 없을 때 대체로 보여주는 favicon은
+            책 표지처럼 꽉 채워서 늘리면 어색해 보여서(원래 정사각형 아이콘이라),
+            75% 크기로 줄이고 칸 가운데에 배치하기로 함(지난 세션 논의, 지금까지
+            반영이 안 되어 있었음). 표지 이미지가 있을 때는 기존처럼 칸을 꽉
+            채워서 보여줌 — 이 경우엔 줄일 필요가 없음. */}
+        <div className="w-14 h-20 flex-shrink-0 rounded-lg bg-gray-100 flex items-center justify-center overflow-hidden">
+          <img
+            src={book.coverImage || "/favicon.png"}
+            alt={book.title}
+            className={
+              hasCover
+                ? "w-full h-full object-cover"
+                : "w-[75%] h-[75%] object-contain"
+            }
+          />
+        </div>
         <div className="flex-1 min-w-0">
           <h3 className="font-semibold text-gray-900 text-sm leading-snug line-clamp-2">
             {book.title}
