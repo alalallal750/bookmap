@@ -705,6 +705,24 @@ async function resolveSeochoAvailability(
 function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): EbookBook[] {
   const normalize = (s: string) => s.replace(/\s+/g, "");
 
+  // [2026-06-20 v17 — 진단] "달러구트 꿈 백화점"(금천구) 등 제목이 눈으로는
+  // 완전히 같아 보이는데도 분리되는 사례, "데미안의 Wi-Fi ON"처럼 출판일까지
+  // 같을 것으로 추정되는데도 안 합쳐지는 사례가 발견됨. 추측 대신, 각 record가
+  // 실제로 어떤 title/author/date 값을 가지고 들어오는지 — 눈에 안 보이는
+  // 공백·특수문자까지 — 그대로 확인하기 위한 진단 로그. JSON.stringify로
+  // 찍어서 공백, 줄바꿈, 유사문자 등을 숨김 없이 드러냄.
+  console.log(
+    "[seoulLibrary] groupBooks DEBUG - raw items (dbnum, title, author, date):",
+    JSON.stringify(
+      items.map(({ raw }) => ({
+        dbnum: raw.dbnum,
+        title: raw.title,
+        author: raw.author,
+        date: raw.date,
+      }))
+    )
+  );
+
   // 1차 기준: 제목+저자 완전일치로 먼저 묶음 (기존 로직, 변경 없음)
   const groups = new Map<string, EbookBook & { rawDate: string; rawDbnums: string[] }>();
 
