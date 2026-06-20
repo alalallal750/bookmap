@@ -426,12 +426,35 @@ async function resolveGangnamAvailability(
 
     const $ = cheerio.load(html);
 
+    // [2026-06-20 v13 — 진단 모드] 두 차례(순서 기반, 시작문자열 기반) 추측이
+    // 모두 빗나갔으므로, 추측 대신 cheerio가 "div.current" 안에서 실제로 무엇을
+    // 보고 있는지를 그대로 로그에 찍어 직접 눈으로 확인하기로 함. 아래 로그를
+    // 보고 나서 정확한 매칭 방식을 정함 — 이 단계에서는 추측에 의한 코드 수정을
+    //하지 않음.
+    const currentDivCount = $("div.current").length;
+    const currentDivHtml = $("div.current").first().html();
+    const spanDetails = $("div.current > span")
+      .map((_: number, el: any) => ({
+        fullText: JSON.stringify($(el).text()),
+        ownTextTrimmed: JSON.stringify(
+          $(el).clone().children().remove().end().text().trim()
+        ),
+      }))
+      .get();
+
+    console.log("[seoulLibrary] gangnam DEBUG - div.current count:", currentDivCount);
+    console.log("[seoulLibrary] gangnam DEBUG - div.current inner html:", currentDivHtml);
+    console.log("[seoulLibrary] gangnam DEBUG - span-by-span breakdown:", JSON.stringify(spanDetails));
+
     // "보유"/"대출"로 시작하는 <span>을 글자로 찾아 그 안의 <strong> 값을 가져옴.
     // [2026-06-20 v12 수정] 처음엔 "완전히 똑같은 글자(===)"로 찾았으나, 실제
     // HTML(`<span>보유 <strong>5</strong></span>`)은 "보유" 뒤에 공백이 있어서
     // 매칭이 전혀 안 되는 문제가 실측으로 확인됨(빈 값만 나옴). "완전 일치" 대신
     // "그 글자로 시작하는지"로 조건을 느슨하게 바꿈. 다만 "대출"과 "대출예정일"을
     // 구분해야 하므로(둘 다 "대출"로 시작함), "대출예정일"인 경우는 제외함.
+    // [2026-06-20 v13] 이 방식도 다시 실패함(빈 값) — 위 DEBUG 로그로 정확한
+    // 원인을 확인하는 중. 아래 로직은 다음 검색 시도 후 DEBUG 로그를 보고 교체될
+    // 예정.
     const findStrongByLabel = (label: string): string | undefined => {
       const span = $("div.current > span")
         .filter((_: number, el: any) => {
