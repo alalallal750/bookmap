@@ -446,6 +446,17 @@ async function resolveGangnamAvailability(
     // "이 책"의 current는 book_info 안에 있음 (추천 목록 쪽 current와 구분)
     const currentDiv = $(".book_info > div.current").first();
 
+    // [2026-06-20 v15 — 진단] "절창"은 정상 해결됐으나 "혼모노"는 다시 빈 값이
+    // 나오는 사례 발견. 이번엔 인코딩 문제가 아니라(이미 해결됨) 구조 자체가
+    // 다를 가능성을 의심 중 — currentDiv 자체가 비어있는지(선택자가 못 찾는지)
+    // 먼저 확인.
+    console.log(
+      "[seoulLibrary] gangnam DEBUG2 - currentDiv exists:",
+      currentDiv.length > 0,
+      "- currentDiv outer html:",
+      $.html(currentDiv)
+    );
+
     const findStrongByLabel = (label: string): string | undefined => {
       const span = currentDiv
         .find("> span")
