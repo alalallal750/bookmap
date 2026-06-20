@@ -381,6 +381,26 @@ function extractRatioNumerator(text?: string): number | undefined {
  * [2026-06-20 v10 변경] 다른 도서관 상세조회보다 강남구가 반복적으로 느려
  * 8초 제한에 걸려 실패하는 경우가 로그로 확인됨(TimeoutError). 강남구 요청에만
  * GANGNAM_TIMEOUT_MS(15초)를 적용. 다른 동작은 변경 없음.
+ *
+ * [2026-06-20 v11 변경 — 중요] "한글이 깨져서 순서로만 찾을 수 있다"는 기존
+ * 가정이 틀렸음이 실제 HTML 원본 확인으로 밝혀짐. "보유"/"대출"/"예약" 한글이
+ * 전혀 깨지지 않고 정상적으로 들어있었음. 문제의 진짜 원인은 순서였음 — 일부
+ * 책은 맨 앞에 "대출예정일"이라는 항목이 하나 더 붙어서(`대출예정일<strong>
+ * 2026-07-06</strong>`), "1번째=보유, 2번째=대출"이라는 고정 순서 가정이
+ * 깨지고 한 칸씩 밀려버림. 그 결과 날짜 문자열("2026-07-06")의 일부 숫자가
+ * "보유 권수"로 잘못 읽혀 "2021권 대출가능" 같은 비정상 값이 표시됨(실측,
+ * 2026-06-20).
+ *
+ * 해결: 순서 대신 "보유"/"대출" 글자 자체를 찾는 방식으로 변경. HTML 구조:
+ *   <div class="current">
+ *     <span>대출예정일<span><strong>2026-07-06</strong></span></span>  (있을 때도, 없을 때도 있음)
+ *     <span>보유 <strong>5</strong></span>
+ *     <span>대출 <strong>2</strong></span>
+ *     <span>예약 <strong>10</strong></span>
+ *   </div>
+ * "보유"/"대출" 글자로 시작하는 <span>을 찾아 그 안의 <strong> 숫자를 가져오면,
+ * "대출예정일" 항목이 있어도 없어도 항상 정확하게 찾을 수 있음(순서에 의존하지
+ * 않으므로).
  */
 async function resolveGangnamAvailability(
   r: RawRecord,
@@ -406,25 +426,40 @@ async function resolveGangnamAvailability(
 
     const $ = cheerio.load(html);
 
-    // [2026-06-19 수정] 강남구 사이트가 EUC-KR로 한글을 보내는 것으로 추정됨
-    // (실측: "보유"/"대출"/"예약" 한글이 ???? 형태로 깨져서 들어옴, 숫자는 정상).
-    // 한글 라벨로 찾는 대신, "div.current 안의 <strong> 태그들"을 순서대로 가져옴.
-    // 실측으로 확인된 순서: 1번째 = 보유, 2번째 = 대출, 3번째 = 예약.
-    const strongTexts = $("div.current strong")
-      .map((_: number, el: any) => $(el).text().trim())
-      .get();
+    // "보유"/"대출"로 시작하는 <span>을 글자로 찾아 그 안의 <strong> 값을 가져옴.
+    // ("대출예정일"도 "대출"로 시작하지만 뒤에 "예정일"이 바로 붙어있어 구분됨 —
+    // 정확히 "대출" 또는 "대출 "로 시작하고 "대출예정일"이 아닌 경우만 매칭.)
+    const findStrongByLabel = (label: string): string | undefined => {
+      const span = $("div.current > span")
+        .filter((_: number, el: any) => {
+          const ownText = $(el).clone().children().remove().end().text().trim();
+          return ownText === label;
+        })
+        .first();
+      return span.find("strong").first().text().trim();
+    };
 
-    console.log("[seoulLibrary] gangnam strong tag values (순서: 보유, 대출, 예약):", strongTexts);
+    const ownedText = findStrongByLabel("보유");
+    const loanedText = findStrongByLabel("대출");
 
-    const owned = strongTexts[0] !== undefined ? parseInt(strongTexts[0], 10) : NaN;
-    const loaned = strongTexts[1] !== undefined ? parseInt(strongTexts[1], 10) : NaN;
+    console.log(
+      "[seoulLibrary] gangnam label-based values - 보유:",
+      ownedText,
+      "대출:",
+      loanedText
+    );
+
+    const owned = ownedText !== undefined ? parseInt(ownedText, 10) : NaN;
+    const loaned = loanedText !== undefined ? parseInt(loanedText, 10) : NaN;
 
     if (Number.isNaN(owned) || Number.isNaN(loaned)) {
       console.log(
         "[seoulLibrary] gangnam: could not parse owned/loaned numbers, title:",
         r.title,
-        "- strongTexts:",
-        strongTexts
+        "- ownedText:",
+        ownedText,
+        "loanedText:",
+        loanedText
       );
       return null;
     }
