@@ -325,13 +325,13 @@ async function resolveAvailability(r: RawRecord): Promise<EbookLibraryEntry | nu
     case "45351":
     case "44891": {
       const available = isRatioAvailable(r.loan);
-      const loanableCount = extractRatioNumerator(r.loan);
+      const loanableCount = calculateLoanableCount(r.loan);
       return { dbnum: r.dbnum, libraryName, available, url: r.url, loanInfo: r.loan, loanableCount };
     }
 
     case "45051": {
       const available = isRatioAvailable(r.loanKorean);
-      const loanableCount = extractRatioNumerator(r.loanKorean);
+      const loanableCount = calculateLoanableCount(r.loanKorean);
       return { dbnum: r.dbnum, libraryName, available, url: r.url, loanInfo: r.loanKorean, loanableCount };
     }
 
@@ -362,23 +362,42 @@ async function resolveAvailability(r: RawRecord): Promise<EbookLibraryEntry | nu
   }
 }
 
-/** "0/2" 같은 분자/분모 텍스트 — 분자가 0이면 대출중(false), 그 외 가능(true) */
+/**
+ * [2026-06-20 v21 변경 — 실측으로 확인된 의미 정정] "N/M" 형식에서 N은
+ * "대출가능 권수"가 아니라 "현재 대출중인 권수"였음이 5개 도서관(구로구,
+ * 동대문구, 마포구, 금천구, 서울시육아종합지원센터) 실측 대조로 확인됨.
+ * 화면 표시와 실제 사이트가 정반대로 나오는 문제의 원인이었음 — 화면 vs
+ * 실제 사이트의 숫자 자체는 정확히 일치했고(파싱은 맞았음), 그 숫자의
+ * 의미("가능 권수"로 해석)만 틀렸던 것.
+ *
+ * "0/2" 같은 분자/분모 텍스트 — 분자(대출중)가 분모(전체)보다 적으면
+ * 대출가능(true), 같으면(전부 대출중) 대출불가(false).
+ */
 function isRatioAvailable(text?: string): boolean {
   if (!text) return false;
   const match = text.match(/^(\d+)\s*\/\s*(\d+)/);
   if (!match) return false;
-  return parseInt(match[1], 10) > 0;
+  const loaned = parseInt(match[1], 10);
+  const total = parseInt(match[2], 10);
+  return loaned < total;
 }
 
 /**
- * [2026-06-19 추가] "0/2" 같은 분자/분모 텍스트에서 분자(대출가능 권수)만
- * 숫자로 추출. 형식이 안 맞으면 undefined.
+ * [2026-06-20 v21 변경 — 실측으로 확인된 의미 정정] 함수 이름과 반환값을
+ * 모두 정정함. "N/M"의 N은 대출중 권수이므로, 실제 빌릴 수 있는 권수는
+ * "M(전체) - N(대출중)"으로 계산해야 함(isRatioAvailable과 같은 근거,
+ * 위 주석 참조). 기존 함수명(extractRatioNumerator)은 "분자를 그대로
+ * 꺼내온다"는 잘못된 전제를 담고 있어, 계산까지 포함하는 새 이름으로
+ * 변경함. 형식이 안 맞으면 undefined.
  */
-function extractRatioNumerator(text?: string): number | undefined {
+function calculateLoanableCount(text?: string): number | undefined {
   if (!text) return undefined;
   const match = text.match(/^(\d+)\s*\/\s*(\d+)/);
   if (!match) return undefined;
-  return parseInt(match[1], 10);
+  const loaned = parseInt(match[1], 10);
+  const total = parseInt(match[2], 10);
+  const loanable = total - loaned;
+  return loanable > 0 ? loanable : 0;
 }
 
 /**
@@ -594,7 +613,7 @@ async function resolveChildrenLibraryAvailability(
       available,
       url: r.url,
       loanInfo: loanText,
-      loanableCount: extractRatioNumerator(loanText),
+      loanableCount: calculateLoanableCount(loanText),
     };
   } catch (e) {
     console.log(
