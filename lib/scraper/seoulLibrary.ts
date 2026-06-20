@@ -682,7 +682,93 @@ async function resolveSeochoAvailability(
     }
 
     const owned = data.copys;
+    const loaned = data.loanCnt;/**
+ * 서초구 대출가능 조회 — 2026-06-19 실측으로 발견한 JSON API 사용
+ *
+ * 서초구 상세페이지(e-book.seocholib.or.kr/content/detail?...)의 정적 HTML에는
+ * 권수 정보가 없음 — 페이지가 로드된 뒤 자바스크립트가 아래 API를 추가로 호출해서
+ * 화면에 숫자를 채워 넣는 구조였음:
+ *   https://e-book.seocholib.or.kr/api/service/content/detail
+ *     ?contentType=EB&id={contentId}&libCode=MA
+ * 응답은 JSON이라 HTML 파싱(cheerio)이 필요 없음. 핵심 필드:
+ *   - copys: 보유 권수, loanCnt: 현재 대출중인 권수
+ *
+ * [2026-06-20 v22 변경 — loanable 필드 신뢰 철회] "달러구트 꿈 백화점 2"
+ * 실측 결과 owned=3, loaned=1(실제 사이트 "대출 1/3"과 일치)인데도
+ * loanable=1로 응답함(직접 계산하면 3-1=2여야 함). 처음 실측한 책 2건에서는
+ * 우연히 owned-loaned와 일치했을 뿐, 서초구의 loanable이 우리가 모르는
+ * 다른 기준(예약 우선순위 등)으로 계산되고 있을 가능성이 있어 더 이상
+ * 신뢰하지 않음. 전자책은 보유 권수가 전부 대출중일 때만 예약이 가능한
+ * 구조라(2026-06-20 확인), "예약자에게 우선권이 있어 실제로는 못 받는"
+ * 케이스 자체가 존재하지 않음 — 따라서 강남구와 동일하게 "보유-대출"을
+ * 직접 계산하는 방식이 더 안전함. loanable 필드는 더 이상 사용하지 않음.
+ */
+async function resolveSeochoAvailability(
+  r: RawRecord,
+  libraryName: string
+): Promise<EbookLibraryEntry | null> {
+  if (!r.url) {
+    console.log("[seoulLibrary] seocho: record has no detail url, title:", r.title);
+    return null;
+  }
+
+  // r.url 예시: https://e-book.seocholib.or.kr/content/detail?contentType=EB&id=4801191998376
+  // 위 URL에서 id 값만 뽑아서 API 주소를 직접 만듦
+  const idMatch = r.url.match(/[?&]id=([^&]+)/);
+  const contentId = idMatch?.[1];
+
+  if (!contentId) {
+    console.log("[seoulLibrary] seocho: could not extract id from url:", r.url);
+    return null;
+  }
+
+  const apiUrl = `https://e-book.seocholib.or.kr/api/service/content/detail?contentType=EB&id=${contentId}&libCode=MA`;
+
+  try {
+    const res = await fetch(apiUrl, {
+      signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
+      headers: { "User-Agent": "Mozilla/5.0", Accept: "application/json" },
+    });
+    console.log("[seoulLibrary] seocho api status:", res.status, "url:", apiUrl);
+    if (!res.ok) {
+      console.log("[seoulLibrary] seocho: api fetch not ok, title:", r.title);
+      return null;
+    }
+
+    const json = await res.json();
+    const data = json?.data;
+
+    if (!data || typeof data.copys !== "number" || typeof data.loanCnt !== "number") {
+      console.log("[seoulLibrary] seocho: unexpected json shape, title:", r.title, "json:", json);
+      return null;
+    }
+
+    const owned = data.copys;
     const loaned = data.loanCnt;
+    const loanable = owned - loaned;
+
+    console.log(
+      "[seoulLibrary] seocho parsed - owned:",
+      owned,
+      "loaned:",
+      loaned,
+      "loanable (직접계산):",
+      loanable
+    );
+
+    return {
+      dbnum: r.dbnum,
+      libraryName,
+      available: loanable > 0,
+      url: r.url,
+      loanInfo: `보유 ${owned} / 대출 ${loaned}`,
+      loanableCount: loanable > 0 ? loanable : 0,
+    };
+  } catch (e) {
+    console.log("[seoulLibrary] seocho api fetch threw error, title:", r.title, "error:", e);
+    return null;
+  }
+}
     const loanable = typeof data.loanable === "number" ? data.loanable : owned - loaned;
 
     console.log(
