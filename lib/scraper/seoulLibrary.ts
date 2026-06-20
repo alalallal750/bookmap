@@ -672,7 +672,7 @@ function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): Eboo
   // 이 단계에서 다른 그룹과 합쳐지지 않도록 건너뜀.
   const mergedByDate = new Map<string, EbookBook & { rawDate: string; rawDbnums: string[] }>();
 
-  for (const group of groups.values()) {
+  for (const group of Array.from(groups.values())) {
     const hasOnlyExcludedDbnums = group.rawDbnums.every((d) => d === "45011");
     const dateKey = group.rawDate.trim();
 
