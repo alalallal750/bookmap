@@ -763,19 +763,14 @@ function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): Eboo
     sortDate: g.rawDate.trim(),
   }));
 
-  // [2026-06-20 v26 추가] 화면 노출 순서 — 출판일 오래된 순으로 정렬.
+  // [2026-06-20 v26 변경] 화면 노출 순서 — 출판일 신간(최신) 순으로 정렬.
   // 날짜가 없는 카드(예: 금천구 단독, Date 필드 미제공)는 항상 맨 뒤로 보냄.
-  // 이렇게 하면 "1권 먼저, 2권 다음" 순서가 자연스럽게 만들어지고, 같은
-  // 책(같은 날짜)끼리도 서로 떨어지지 않고 인접하게 보임.
+  // 이 정렬은 "1권이 항상 위로 간다"를 보장하지 않음 — 권수와 출판 순서가
+  // 일치하는 시리즈에서만 우연히 그렇게 보일 뿐. 사용자가 큰 피해를 보는
+  // 문제(잘못된 정보)는 아니라 우선순위는 낮게 둠(2026-06-20 논의 기록).
   result.sort((a, b) => {
     if (!a.sortDate && !b.sortDate) return 0;
     if (!a.sortDate) return 1;
     if (!b.sortDate) return -1;
-    return a.sortDate.localeCompare(b.sortDate);
+    return b.sortDate.localeCompare(a.sortDate);
   });
-
-  return result.map(({ book }) => {
-    const { rawDate, ...rest } = book;
-    return rest;
-  });
-}
