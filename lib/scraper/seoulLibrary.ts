@@ -30,6 +30,13 @@
  *   - SearchCategory 파라미터 자체를 함수에서 제거함 (호출하는 쪽 route.ts 등도
  *     함께 정리 필요)
  *
+ * [2026-06-20 v10 변경] 강남구 상세페이지 조회가 8초 제한 시간에 걸려 자주
+ * 실패하는 문제를 로그로 확인함(TimeoutError 실측). 다른 도서관들은 응답이
+ * 1초 안팎인데 강남구만 반복적으로 느린 패턴이 v5 문서에도 이미 기록되어
+ * 있었음. 1차 대응으로 강남구 상세페이지 요청에만 더 긴 제한 시간(15초)을
+ * 적용함. 이 값으로도 자주 실패하면, 시간을 더 늘릴지 다른 방식(재시도 등)을
+ * 검토할 다음 단계로 넘어갈 예정.
+ *
  * 흐름:
  *   1. default_search 페이지 방문 → ls_session 쿠키 확보
  *   2. EBOOK_DBNUMS 각각에 대해 deploy를 동시에 호출 (dbnum 파라미터에 1개씩만,
@@ -44,6 +51,17 @@ import * as cheerio from "cheerio";
 import { EbookBook, EbookLibraryEntry } from "@/types";
 
 const BASE_URL = "https://meta.seoul.go.kr/libseoul";
+
+// [2026-06-20 v10] 대부분의 도서관 요청에 쓰는 기본 제한 시간(밀리초).
+// 강남구는 따로 더 긴 값을 쓰므로 이 상수와는 별개로 관리함 (아래
+// GANGNAM_TIMEOUT_MS 참조).
+const DEFAULT_TIMEOUT_MS = 8000;
+
+// [2026-06-20 v10 추가] 강남구 상세페이지 전용 제한 시간. 다른 도서관(보통 1초
+// 안팎 응답)과 달리 강남구는 반복적으로 느려서(실측 TimeoutError 확인,
+// 2026-06-20) 8초보다 넉넉하게 잡음. 이 값으로도 실패가 잦으면 더 늘리거나
+// 재시도 로직을 추가하는 다음 단계로 넘어갈 것 — handoff 문서 참조.
+const GANGNAM_TIMEOUT_MS = 15000;
 
 // handoff 3-1장: 전자책도서관 8곳
 // [2026-06-19 추가] 서울시 전자도서관(103291) — 통합검색에 실제로는 포함되어 있었고
@@ -125,7 +143,7 @@ type RawRecord = {
  * 검색 카테고리를 항상 서명(제목)으로 고정함.
  */
 export async function searchEbooks(query: string): Promise<EbookBook[]> {
-  console.log("[seoulLibrary] CODE VERSION MARKER: v9-title-only-20260619");
+  console.log("[seoulLibrary] CODE VERSION MARKER: v10-gangnam-timeout-15s-20260620");
 
   const id = generateRequestId();
   console.log("[seoulLibrary] generated id (shared across all dbnum calls):", id);
@@ -136,7 +154,7 @@ export async function searchEbooks(query: string): Promise<EbookBook[]> {
   let cookie = "";
   try {
     const res = await fetch(defaultSearchUrl, {
-      signal: AbortSignal.timeout(8000),
+      signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
       headers: { "User-Agent": "Mozilla/5.0" },
     });
     console.log("[seoulLibrary] stage1 (default_search) status:", res.status);
@@ -169,7 +187,7 @@ export async function searchEbooks(query: string): Promise<EbookBook[]> {
     const url = buildDeployUrl(dbnum);
     try {
       const res = await fetch(url, {
-        signal: AbortSignal.timeout(8000),
+        signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
         headers: {
           "User-Agent": "Mozilla/5.0",
           ...(cookie ? { Cookie: cookie } : {}),
@@ -357,8 +375,12 @@ function extractRatioNumerator(text?: string): number | undefined {
 }
 
 /**
- * 강남구 상세페이지 추가조회 — handoff 6-1장 (변경 없음)
+ * 강남구 상세페이지 추가조회 — handoff 6-1장
  * 보유 - 대출 = 빌릴 수 있는 권수 (0보다 크면 대출가능)
+ *
+ * [2026-06-20 v10 변경] 다른 도서관 상세조회보다 강남구가 반복적으로 느려
+ * 8초 제한에 걸려 실패하는 경우가 로그로 확인됨(TimeoutError). 강남구 요청에만
+ * GANGNAM_TIMEOUT_MS(15초)를 적용. 다른 동작은 변경 없음.
  */
 async function resolveGangnamAvailability(
   r: RawRecord,
@@ -371,7 +393,7 @@ async function resolveGangnamAvailability(
 
   try {
     const res = await fetch(r.url, {
-      signal: AbortSignal.timeout(8000),
+      signal: AbortSignal.timeout(GANGNAM_TIMEOUT_MS),
       headers: { "User-Agent": "Mozilla/5.0" },
     });
     console.log("[seoulLibrary] gangnam detail page status:", res.status, "url:", r.url);
@@ -453,7 +475,7 @@ async function resolveChildrenLibraryAvailability(
 
   try {
     const res = await fetch(r.url, {
-      signal: AbortSignal.timeout(8000),
+      signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
       headers: { "User-Agent": "Mozilla/5.0" },
     });
     console.log("[seoulLibrary] childrenLibrary detail page status:", res.status, "url:", r.url);
@@ -551,7 +573,7 @@ async function resolveSeochoAvailability(
 
   try {
     const res = await fetch(apiUrl, {
-      signal: AbortSignal.timeout(8000),
+      signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
       headers: { "User-Agent": "Mozilla/5.0", Accept: "application/json" },
     });
     console.log("[seoulLibrary] seocho api status:", res.status, "url:", apiUrl);
