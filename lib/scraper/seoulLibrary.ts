@@ -758,5 +758,24 @@ function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): Eboo
     }
   }
 
-  return Array.from(mergedByDate.values()).map(({ rawDate, ...book }) => book);
+  const result = Array.from(mergedByDate.values()).map((g) => ({
+    book: g,
+    sortDate: g.rawDate.trim(),
+  }));
+
+  // [2026-06-20 v26 추가] 화면 노출 순서 — 출판일 오래된 순으로 정렬.
+  // 날짜가 없는 카드(예: 금천구 단독, Date 필드 미제공)는 항상 맨 뒤로 보냄.
+  // 이렇게 하면 "1권 먼저, 2권 다음" 순서가 자연스럽게 만들어지고, 같은
+  // 책(같은 날짜)끼리도 서로 떨어지지 않고 인접하게 보임.
+  result.sort((a, b) => {
+    if (!a.sortDate && !b.sortDate) return 0;
+    if (!a.sortDate) return 1;
+    if (!b.sortDate) return -1;
+    return a.sortDate.localeCompare(b.sortDate);
+  });
+
+  return result.map(({ book }) => {
+    const { rawDate, ...rest } = book;
+    return rest;
+  });
 }
