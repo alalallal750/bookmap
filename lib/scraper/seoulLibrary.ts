@@ -618,12 +618,30 @@ async function resolveSeochoAvailability(
 }
 
 /**
- * 판본 묶기 — handoff 7장 (변경 없음)
+ * 판본 묶기 — handoff 7장 1차 기준(제목+저자 완전일치) + 2026-06-20 추가된
+ * 2차 보조기준(출판일 일치)
+ *
+ * [2026-06-20 v10 추가] 1차 기준(제목+저자 완전일치)만으로는 아래 두 케이스가
+ * 묶이지 않는 문제가 실측으로 확인됨(v5 문서 5장 참조):
+ *   - 저자 표기 차이: "이미예"(금천구) vs "저"(동대문구)
+ *   - 제목 자체의 표기 오류: "달러구트 꿈 백화점 | 잠들어야만 입장 가능합니다"
+ *     (강남구, 광고 카피가 제목에 잘못 합쳐짐) — 정상판과 분리되어 보임
+ *
+ * 해결: 1차 기준으로 먼저 묶은 뒤, 아직 분리되어 있는 그룹들 중 "출판일(Date)이
+ * 서로 같은 그룹"이 있으면 합침. 단, 금천구(45011)는 통합검색 XML에 Date 필드
+ * 자체가 없는 것으로 확인되어(v3 문서 7-2장) 이 보조기준 비교에서 제외함 —
+ * 금천구 항목은 1차 기준(제목 완전일치)에서만 묶이고, 2차 기준으로는 다른
+ * 그룹과 합쳐지지 않음.
+ *
+ * 위험성 평가(v3 문서 7-3장과 동일한 기조): 같은 저자가 같은 날 전혀 다른 책을
+ * 내는 경우는 드물고, 그런 경우는 1차 기준(제목)에서 애초에 분리되어 있으므로
+ * 2차 기준이 잘못 합칠 위험은 낮음으로 판단함.
  */
 function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): EbookBook[] {
   const normalize = (s: string) => s.replace(/\s+/g, "");
 
-  const groups = new Map<string, EbookBook>();
+  // 1차 기준: 제목+저자 완전일치로 먼저 묶음 (기존 로직, 변경 없음)
+  const groups = new Map<string, EbookBook & { rawDate: string; rawDbnums: string[] }>();
 
   for (const { raw, entry } of items) {
     const key = `${normalize(raw.title)}__${normalize(raw.author)}`;
@@ -634,6 +652,7 @@ function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): Eboo
         existing.libraries.push(entry);
       }
       if (!existing.coverImage && raw.image) existing.coverImage = raw.image;
+      if (!existing.rawDbnums.includes(raw.dbnum)) existing.rawDbnums.push(raw.dbnum);
     } else {
       groups.set(key, {
         title: raw.title,
@@ -642,9 +661,46 @@ function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): Eboo
         publishDate: raw.date || undefined,
         coverImage: raw.image,
         libraries: [entry],
+        rawDate: raw.date || "",
+        rawDbnums: [raw.dbnum],
       });
     }
   }
 
-  return Array.from(groups.values());
+  // 2차 보조기준: 출판일(Date)이 같은 그룹들을 추가로 합침.
+  // 금천구(45011)는 Date 필드가 없어 비교 대상에서 제외 — rawDate가 빈 값이면
+  // 이 단계에서 다른 그룹과 합쳐지지 않도록 건너뜀.
+  const mergedByDate = new Map<string, EbookBook & { rawDate: string; rawDbnums: string[] }>();
+
+  for (const group of groups.values()) {
+    const hasOnlyExcludedDbnums = group.rawDbnums.every((d) => d === "45011");
+    const dateKey = group.rawDate.trim();
+
+    // 출판일 정보가 없거나, 금천구 단독 그룹이면 보조기준 비교 자체를 스킵
+    // (자기 자신 그대로 결과에 포함됨, 다른 그룹과 합쳐지지 않음)
+    if (!dateKey || hasOnlyExcludedDbnums) {
+      mergedByDate.set(`__nodate__${group.title}__${group.author}__${group.rawDbnums.join(",")}`, group);
+      continue;
+    }
+
+    const existing = mergedByDate.get(dateKey);
+    if (existing) {
+      // 같은 출판일을 가진 다른 제목/저자 표기의 그룹을 발견 — 합침
+      console.log(
+        "[seoulLibrary] groupBooks: merging by publishDate -",
+        `"${existing.title}"(${existing.author}) + "${group.title}"(${group.author})`,
+        `date=${dateKey}`
+      );
+      for (const entry of group.libraries) {
+        if (!existing.libraries.some((l: EbookLibraryEntry) => l.dbnum === entry.dbnum)) {
+          existing.libraries.push(entry);
+        }
+      }
+      if (!existing.coverImage && group.coverImage) existing.coverImage = group.coverImage;
+    } else {
+      mergedByDate.set(dateKey, group);
+    }
+  }
+
+  return Array.from(mergedByDate.values()).map(({ rawDate, rawDbnums, ...book }) => book);
 }
