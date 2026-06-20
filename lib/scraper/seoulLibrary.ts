@@ -756,17 +756,33 @@ function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): Eboo
   }
 
   // 2차 보조기준: 출판일(Date)이 같은 그룹들을 추가로 합침.
-  // 금천구(45011)는 Date 필드가 없어 비교 대상에서 제외 — rawDate가 빈 값이면
-  // 이 단계에서 다른 그룹과 합쳐지지 않도록 건너뜀.
+  //
+  // [2026-06-20 v19 변경 — 안전장치 수정] 기존엔 "그룹에 들어있는 도서관이
+  // 전부 금천구(45011)뿐인지"를 봐서 금천구를 비교 대상에서 뺐음. 그런데 금천구
+  // 항목이 1차 기준(제목+저자 완전일치)으로 이미 다른 도서관과 합쳐진 경우엔
+  // 이 조건이 작동하지 않아, 금천구의 빈 날짜("")가 그룹의 대표 출판일로 그대로
+  // 쓰이는 문제가 있었음. 빈 값끼리 우연히 일치해 버리면(예: 다른 도서관도
+  // 어쩌다 날짜를 못 줘서 둘 다 ""인 경우), 서로 다른 책이 잘못 합쳐질 위험이
+  // 있었음.
+  //
+  // 수정: 도서관이 누구인지와 상관없이, "비교할 날짜 값 자체가 비어있으면" 항상
+  // 보조기준 비교에서 제외함. 이렇게 하면 금천구뿐 아니라 어떤 도서관이든 날짜를
+  // 못 준 경우 안전하게 처리됨.
+  //
+  // [트레이드오프] 이 수정 때문에, 금천구 항목이 1차 기준(제목+저자 완전일치)
+  // 만으로 다른 도서관과 못 묶이는 경우엔 — 날짜가 없으니 2차 기준의 도움도
+  // 받을 수 없어 — 영구히 분리된 카드로 남게 됨. 이는 "위험한 추측으로 합치는
+  // 것"보다 "안전하게 분리해서 보여주는 것"을 우선한 의도적 선택. 만약 금천구가
+  // 실제로 1차 기준만으론 자주 분리되는 사례가 발견되면, 금천구 전용의 별도
+  // 보조기준(예: 제목 일부만 비교)을 추가하는 걸 별도로 검토할 것.
   const mergedByDate = new Map<string, EbookBook & { rawDate: string; rawDbnums: string[] }>();
 
   for (const group of Array.from(groups.values())) {
-    const hasOnlyExcludedDbnums = group.rawDbnums.every((d) => d === "45011");
     const dateKey = group.rawDate.trim();
 
-    // 출판일 정보가 없거나, 금천구 단독 그룹이면 보조기준 비교 자체를 스킵
+    // 출판일 정보가 없으면(빈 값) 보조기준 비교 자체를 스킵
     // (자기 자신 그대로 결과에 포함됨, 다른 그룹과 합쳐지지 않음)
-    if (!dateKey || hasOnlyExcludedDbnums) {
+    if (!dateKey) {
       mergedByDate.set(`__nodate__${group.title}__${group.author}__${group.rawDbnums.join(",")}`, group);
       continue;
     }
