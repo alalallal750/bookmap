@@ -676,19 +676,34 @@ function normalizeTitle(title: string): string {
  * 정규화로 풀리는 문제가 아니라 별도 패턴 감지가 필요한 다른 종류의 문제,
  * 발생 빈도가 낮아(1건) 우선순위 낮춤.
  */
+/**
+ * [2026-06-20 v25 변경 — 출판일 보조기준 부분 복원] v24에서 "출판일/ISBN
+ * 둘 다 신뢰 불가 데이터"라는 이유로 완전 폐기했으나, 그 결과 출판일
+ * 보조기준이 가려주고 있던 "제목 구두점 표기 차이" 문제(예: "달러구트 꿈
+ * 백화점. 2" vs "달러구트 꿈 백화점 2")가 그대로 드러나 카드가 늘어나는
+ * 부작용이 실측으로 확인됨(2026-06-20). 제목/저자 정규화 규칙(구두점 목록,
+ * 권수 보존)이 아직 결정 보류 상태인 동안의 임시 안전장치로, 출판일
+ * 완전일치 시 합치는 규칙만 다시 추가함. 나머지 정규화 결정은 보류 유지.
+ *
+ * 금천구(45011)는 Date 필드 자체가 없는 것으로 확인되어(v3 문서 7-2장),
+ * 빈 날짜는 항상 보조기준 비교에서 제외함 — 빈 값끼리 우연히 일치해
+ * 다른 책이 잘못 합쳐지는 사고 방지.
+ */
 function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): EbookBook[] {
   console.log(
-    "[seoulLibrary] groupBooks DEBUG - raw items (dbnum, title, author):",
+    "[seoulLibrary] groupBooks DEBUG - raw items (dbnum, title, author, date):",
     JSON.stringify(
       items.map(({ raw }) => ({
         dbnum: raw.dbnum,
         title: raw.title,
         author: raw.author,
+        date: raw.date,
       }))
     )
   );
 
-  const groups = new Map<string, EbookBook>();
+  // 1차 기준: 제목+저자 일치로 먼저 묶음
+  const groups = new Map<string, EbookBook & { rawDate: string }>();
 
   for (const { raw, entry } of items) {
     const key = `${normalizeTitle(raw.title)}__${normalizeAuthor(raw.author)}`;
@@ -707,9 +722,41 @@ function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): Eboo
         publishDate: raw.date || undefined,
         coverImage: raw.image,
         libraries: [entry],
+        rawDate: raw.date || "",
       });
     }
   }
 
-  return Array.from(groups.values());
+  // 2차 보조기준: 출판일(Date)이 완전히 같은 그룹들을 추가로 합침.
+  // 날짜 값이 비어있으면(금천구 등) 항상 비교 대상에서 제외.
+  const mergedByDate = new Map<string, EbookBook & { rawDate: string }>();
+  let noDateCounter = 0;
+
+  for (const group of Array.from(groups.values())) {
+    const dateKey = group.rawDate.trim();
+
+    if (!dateKey) {
+      mergedByDate.set(`__nodate__${noDateCounter++}`, group);
+      continue;
+    }
+
+    const existing = mergedByDate.get(dateKey);
+    if (existing) {
+      console.log(
+        "[seoulLibrary] groupBooks: merging by publishDate -",
+        `"${existing.title}"(${existing.author}) + "${group.title}"(${group.author})`,
+        `date=${dateKey}`
+      );
+      for (const entry of group.libraries) {
+        if (!existing.libraries.some((l: EbookLibraryEntry) => l.dbnum === entry.dbnum)) {
+          existing.libraries.push(entry);
+        }
+      }
+      if (!existing.coverImage && group.coverImage) existing.coverImage = group.coverImage;
+    } else {
+      mergedByDate.set(dateKey, group);
+    }
+  }
+
+  return Array.from(mergedByDate.values()).map(({ rawDate, ...book }) => book);
 }
