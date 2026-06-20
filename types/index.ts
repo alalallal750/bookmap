@@ -47,12 +47,11 @@ export type EbookLibraryEntry = {
   dbnum: string;
   libraryName: string; // 예: "마포구립전자도서관"
   available: boolean;
-  url: string; // 해당 도서관 상세페이지 링크
+  // [2026-06-20 v27 변경] 상세페이지 링크 → 도서관 검색창 결과 화면 링크로
+  // 의미 변경. 벤더/매체가 갈라지는 경우(동대문구 등) 사용자가 검색결과에서
+  // 직접 선택하도록 하기 위함. 검색어는 우리 화면에 표시된 책 제목.
+  url: string;
   loanInfo?: string; // 원문 그대로 표시할 보조 문구 (예: "0/5", "대출가능")
-  // [2026-06-19 추가] 지금 빌릴 수 있는 정확한 권수(숫자). 화면에서 "N권
-  // 대출가능" 형태로 통일된 표시를 만들기 위해 사용. 권수를 알 수 없는
-  // 도서관(예: 서울시 전자도서관 — 로그인 필요)은 undefined로 둠 — 이 경우
-  // loanInfo의 안내문구를 그대로 보여줘야 함.
   loanableCount?: number;
 };
 

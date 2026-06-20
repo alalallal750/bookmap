@@ -84,6 +84,68 @@ const EBOOK_LIBRARIES: Record<string, string> = {
 const EBOOK_DBNUMS = Object.keys(EBOOK_LIBRARIES);
 
 /**
+ * [2026-06-20 v27 추가] 도서관별 검색창 URL 빌더 — 2026-06-20 실측으로
+ * 확인한 8곳 패턴(논의 기록 참조).
+ *
+ * "지금빌려는 대출 가능 권수만 정확히 알려준다, 어느 벤더/페이지로 보낼지는
+ * 도서관 검색결과 화면에서 사용자가 직접 본다"는 원칙에 따라, 상세페이지
+ * 링크 대신 검색창 결과 화면으로 보냄. 이렇게 하면:
+ *   - 동대문구처럼 벤더(교보/yes24)가 갈라진 경우도 사용자가 검색결과에서
+ *     직접 선택 가능 (우리가 어느 벤더로 보낼지 고민할 필요 없음)
+ *   - 서초구 구독자료/오디오처럼 통합검색이 놓치는 형태도 검색결과 화면에서
+ *     자연스럽게 노출됨 (우리가 몰랐던 책도 사용자가 발견 가능)
+ *   - 상세페이지 링크보다 검색창 URL이 더 단순하고 안 바뀔 가능성이 높음
+ *
+ * 강남구만 EUC-KR 인코딩 사용 — 나머지 7곳은 UTF-8. encodeURIComponent는
+ * 항상 UTF-8 기준이라, 강남구는 별도로 EUC-KR 바이트로 변환 후 퍼센트
+ * 인코딩해야 함(아래 encodeEucKr 함수 참조).
+ */
+function buildSearchPageUrl(dbnum: string, query: string): string | undefined {
+  switch (dbnum) {
+    case "44911": // 강남구 — EUC-KR
+      return `https://ebook.gangnam.go.kr/elibbook/book_info.asp?strSearch=${encodeEucKr(query)}&search=title`;
+
+    case "44891": // 구로구
+      return `https://ebook.guro.go.kr/elibrary-front/search/searchList.ink?schClst=all&schDvsn=000&orderByKey=&schTxt=${encodeURIComponent(query)}`;
+
+    case "45011": // 금천구
+      return `https://elib.geumcheonlib.seoul.kr/FxLibrary/product/list/?page=1&keyoption2=0&category=&searchoption=1&searchType=search&keyword=${encodeURIComponent(query)}`;
+
+    case "45351": // 동대문구
+      return `https://e-book.l4d.or.kr/elibrary-front/search/searchList.ink?schClst=all&schDvsn=000&orderByKey=&schTxt=${encodeURIComponent(query)}`;
+
+    case "45051": // 마포구
+      return `https://ebook.mapo.go.kr/elibrary-front/search/searchList.ink?schClst=all&schDvsn=000&orderByKey=&schTxt=${encodeURIComponent(query)}`;
+
+    case "45111": // 서초구
+      return `https://e-book.seocholib.or.kr/search?keyword=${encodeURIComponent(query)}`;
+
+    case "103301": // 서울시육아종합지원센터
+      return `https://children.bookcube.biz/FxLibrary/product/list/?page=1&keyoption2=0&category=&searchoption=1&searchType=search&keyword=${encodeURIComponent(query)}`;
+
+    case "103291": // 서울시 전자도서관
+      return `https://elib.seoul.go.kr/contents/search/content?t=EB&k=${encodeURIComponent(query)}`;
+
+    default:
+      return undefined;
+  }
+}
+
+/**
+ * [2026-06-20 v27 추가] EUC-KR 퍼센트 인코딩 — 강남구 전용.
+ * Node.js 환경에는 EUC-KR이 기본 내장되어 있지 않아, Buffer로 직접 변환.
+ * iconv-lite 같은 외부 패키지 없이 처리하기 위해, TextEncoder로는 EUC-KR을
+ * 못 만들기 때문에 Node 내장 Buffer의 "ks_c_5601-1987" 인코딩 별칭을 사용함
+ * (EUC-KR과 동일 코드 페이지).
+ */
+function encodeEucKr(text: string): string {
+  const buffer = Buffer.from(text, "ks_c_5601-1987" as BufferEncoding);
+  return Array.from(buffer)
+    .map((byte) => "%" + byte.toString(16).toUpperCase().padStart(2, "0"))
+    .join("");
+}
+
+/**
  * id 생성 — handoff v4 실측 확정: 13자리 밀리초 타임스탬프 + 5자리 임의숫자
  */
 function generateRequestId(): string {
@@ -216,7 +278,23 @@ export async function searchEbooks(query: string): Promise<EbookBook[]> {
     .map((r, i) => ({ raw: r, entry: entries[i] }))
     .filter((x) => x.entry !== null) as { raw: RawRecord; entry: EbookLibraryEntry }[];
 
-  return groupBooks(mergeDongdaemoonVendors(resolvedItems));
+  const books = groupBooks(mergeDongdaemoonVendors(resolvedItems));
+
+  // [2026-06-20 v27 추가] 상세페이지 링크 대신 도서관 검색창 결과 화면으로
+  // 연결. 검색어는 우리 화면에 표시되는 책 제목(book.title)을 사용 — 1차
+  // 시도가 안 맞으면 사용자가 검색창에서 직접 다른 검색어로 재시도 가능
+  // (논의 기록 참조: "지금빌려에서 확인되는 도서명으로 넣어보고, 오류 생기면
+  // 사용자가 원래 검색어로 재시도하는 흐름").
+  for (const book of books) {
+    for (const lib of book.libraries) {
+      const searchPageUrl = buildSearchPageUrl(lib.dbnum, book.title);
+      if (searchPageUrl) {
+        lib.url = searchPageUrl;
+      }
+    }
+  }
+
+  return books;
 }
 
 /**
