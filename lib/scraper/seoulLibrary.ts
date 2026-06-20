@@ -427,13 +427,18 @@ async function resolveGangnamAvailability(
     const $ = cheerio.load(html);
 
     // "보유"/"대출"로 시작하는 <span>을 글자로 찾아 그 안의 <strong> 값을 가져옴.
-    // ("대출예정일"도 "대출"로 시작하지만 뒤에 "예정일"이 바로 붙어있어 구분됨 —
-    // 정확히 "대출" 또는 "대출 "로 시작하고 "대출예정일"이 아닌 경우만 매칭.)
+    // [2026-06-20 v12 수정] 처음엔 "완전히 똑같은 글자(===)"로 찾았으나, 실제
+    // HTML(`<span>보유 <strong>5</strong></span>`)은 "보유" 뒤에 공백이 있어서
+    // 매칭이 전혀 안 되는 문제가 실측으로 확인됨(빈 값만 나옴). "완전 일치" 대신
+    // "그 글자로 시작하는지"로 조건을 느슨하게 바꿈. 다만 "대출"과 "대출예정일"을
+    // 구분해야 하므로(둘 다 "대출"로 시작함), "대출예정일"인 경우는 제외함.
     const findStrongByLabel = (label: string): string | undefined => {
       const span = $("div.current > span")
         .filter((_: number, el: any) => {
           const ownText = $(el).clone().children().remove().end().text().trim();
-          return ownText === label;
+          if (!ownText.startsWith(label)) return false;
+          if (ownText.startsWith("대출예정일")) return false; // "대출"과 구분
+          return true;
         })
         .first();
       return span.find("strong").first().text().trim();
