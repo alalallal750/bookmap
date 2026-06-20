@@ -711,14 +711,19 @@ function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): Eboo
   // 실제로 어떤 title/author/date 값을 가지고 들어오는지 — 눈에 안 보이는
   // 공백·특수문자까지 — 그대로 확인하기 위한 진단 로그. JSON.stringify로
   // 찍어서 공백, 줄바꿈, 유사문자 등을 숨김 없이 드러냄.
+  //
+  // [2026-06-20 v18 추가] ISBN을 1차 묶기 기준으로 쓸 수 있는지 재검토하기 위해
+  // isbn 필드도 같이 확인. v3 문서 1-2장에 "전자책 ISBN은 종종 빈값(-)"이라고
+  // 기록되어 있었으나, 실제로 지금 도서관 8곳 전부에서 그런지 다시 실측 확인.
   console.log(
-    "[seoulLibrary] groupBooks DEBUG - raw items (dbnum, title, author, date):",
+    "[seoulLibrary] groupBooks DEBUG - raw items (dbnum, title, author, date, isbn):",
     JSON.stringify(
       items.map(({ raw }) => ({
         dbnum: raw.dbnum,
         title: raw.title,
         author: raw.author,
         date: raw.date,
+        isbn: raw.isbn,
       }))
     )
   );
