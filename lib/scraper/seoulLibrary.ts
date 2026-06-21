@@ -945,6 +945,66 @@ function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): Eboo
 
   return result.map(({ book }) => {
     const { rawDate, ...rest } = book;
-    return rest;
+    return { ...rest, libraries: sortLibraryEntries(rest.libraries) };
   });
+}
+
+/**
+ * [2026-06-21 추가] 도서관 줄 안에서 보유 권수(전체 권수) 추출.
+ * loanInfo 텍스트 형식이 도서관 종류별로 다름:
+ *   - "N/M" 형식(구로구·동대문구·마포구·금천구·서울시육아종합지원센터): M이 보유 권수
+ *   - "보유 N / 대출 M" 형식(강남구·서초구): 앞의 N이 보유 권수
+ *   - 그 외(서울시 전자도서관 등 정보 없음): 알 수 없음 → undefined
+ */
+function extractOwnedCount(loanInfo?: string): number | undefined {
+  if (!loanInfo) return undefined;
+
+  const ratioMatch = loanInfo.match(/^(\d+)\s*\/\s*(\d+)/);
+  if (ratioMatch) {
+    return parseInt(ratioMatch[2], 10);
+  }
+
+  const ownedMatch = loanInfo.match(/보유\s*(\d+)/);
+  if (ownedMatch) {
+    return parseInt(ownedMatch[1], 10);
+  }
+
+  return undefined;
+}
+
+/**
+ * [2026-06-21 추가] 한 책 카드 안의 도서관 줄 정렬.
+ * 사용자 요청 규칙:
+ *   1순위 - 서울시 전자도서관(103291)은 항상 맨 끝 (대출가능여부 확인 불가하므로)
+ *   2순위 - 대출가능 권수(loanableCount) 많은 순
+ *   3순위 - 같으면 보유 권수(전체 권수) 많은 순
+ *   4순위 - 그래도 같으면 원래 순서 유지(안정 정렬)
+ *
+ * 원래 배열의 인덱스를 같이 들고 있다가 4순위에서 사용 — Array.prototype.sort는
+ * 자바스크립트 표준상 안정 정렬이 보장되지만, 비교 함수가 0을 반환하지 않으면
+ * 의미가 없으므로 인덱스를 명시적으로 비교해 원래 순서를 보존함.
+ */
+const SEOUL_LIBRARY_DBNUM = "103291";
+
+function sortLibraryEntries(libraries: EbookLibraryEntry[]): EbookLibraryEntry[] {
+  return libraries
+    .map((lib, index) => ({ lib, index }))
+    .sort((a, b) => {
+      const aIsSeoul = a.lib.dbnum === SEOUL_LIBRARY_DBNUM;
+      const bIsSeoul = b.lib.dbnum === SEOUL_LIBRARY_DBNUM;
+      if (aIsSeoul && !bIsSeoul) return 1;
+      if (!aIsSeoul && bIsSeoul) return -1;
+      if (aIsSeoul && bIsSeoul) return a.index - b.index;
+
+      const aLoanable = a.lib.loanableCount ?? -1;
+      const bLoanable = b.lib.loanableCount ?? -1;
+      if (aLoanable !== bLoanable) return bLoanable - aLoanable;
+
+      const aOwned = extractOwnedCount(a.lib.loanInfo) ?? -1;
+      const bOwned = extractOwnedCount(b.lib.loanInfo) ?? -1;
+      if (aOwned !== bOwned) return bOwned - aOwned;
+
+      return a.index - b.index;
+    })
+    .map(({ lib }) => lib);
 }
