@@ -43,7 +43,7 @@ export default function EbookSearchPage() {
         <div className="flex items-center gap-3 mb-3">
           <img src="/logo-header.png" alt="지금빌려" className="h-10" />
           <p className="text-xs text-gray-400">
-            지금 읽을 수 있는 전자책이 있는지 먼저 검색할게요.
+            지금 바로 읽을 수 있는 전자책이 있는지 검색할게요.
             <br />
             전자책을 읽으시려면 각 도서관 사이트에 먼저 가입하셔야 해요.
           </p>
