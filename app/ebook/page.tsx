@@ -58,15 +58,31 @@ export default function EbookSearchPage() {
 
       <div className="flex-1 py-4">
         {state.status === "idle" && (
-          <div className="flex flex-col items-center justify-center pt-24 px-8 text-center">
-            <img src="/logo-main.png" alt="지금빌려 로고" className="w-64 mb-6" style={{ filter: "brightness(0.9)" }} />
-            <p className="text-gray-500 text-base font-medium mb-1">
-              읽고 싶은 책을 검색하세요
-            </p>
-            <p className="text-gray-400 text-sm mb-4">
-              전자책으로 바로 읽을 수 있는지 먼저 확인해 드려요.
-            </p>
-          </div>
+          <>
+            <div className="flex flex-col items-center justify-center pt-24 px-8 text-center">
+              <img src="/logo-main.png" alt="지금빌려 로고" className="w-64 mb-6" style={{ filter: "brightness(0.9)" }} />
+              <p className="text-gray-500 text-base font-medium mb-1">
+                읽고 싶은 책을 검색하세요
+              </p>
+              <p className="text-gray-400 text-sm mb-4">
+                전자책으로 바로 읽을 수 있는지 먼저 확인해 드려요.
+              </p>
+            </div>
+
+            {/* 전자책을 원하지 않는 사용자를 검색 전에 바로 종이책으로 안내하는
+                버튼. 화면 스크롤 위치와 무관하게 항상 화면 하단에 고정되도록
+                fixed 사용 (2026-06-21 논의: idle 화면은 콘텐츠가 짧아 거의
+                항상 화면 맨 아래와 같은 자리에 보이지만, 작은 화면이나 향후
+                콘텐츠 추가에도 안전하게 보이도록 고정 방식 선택). */}
+            <div className="fixed bottom-0 left-0 right-0 px-4 py-3 bg-white border-t border-gray-100">
+              <button
+                onClick={goToPhysicalSearch}
+                className="w-full py-3.5 rounded-xl border border-gray-200 bg-white text-gray-700 text-sm font-medium"
+              >
+                종이책으로 찾아보시겠어요?
+              </button>
+            </div>
+          </>
         )}
 
         {state.status === "loading" && (
