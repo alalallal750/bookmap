@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 type SearchBarProps = {
   onSearch: (query: string) => void;
@@ -15,6 +15,15 @@ export function SearchBar({
 }: SearchBarProps) {
   const [value, setValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // [2026-06-21] 자동 포커스(autoFocus)를 모바일에서 끄기 위한 화면 너비 판단.
+  // 모바일에서 자동 포커스 시 키보드가 즉시 올라와 로고/안내문구를 가려버리는
+  // 문제 발견(실기기 확인). 480px 이상(PC/태블릿)에서만 자동 포커스 적용.
+  const [shouldAutoFocus, setShouldAutoFocus] = useState(false);
+
+  useEffect(() => {
+    setShouldAutoFocus(window.innerWidth >= 480);
+  }, []);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -44,7 +53,7 @@ export function SearchBar({
           type="search"
           inputMode="search"
           enterKeyHint="search"
-          autoFocus
+          autoFocus={shouldAutoFocus}
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder={placeholder}
