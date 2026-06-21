@@ -63,6 +63,7 @@
  */
 
 import * as cheerio from "cheerio";
+import * as iconv from "iconv-lite";
 import { EbookBook, EbookLibraryEntry } from "@/types";
 
 const BASE_URL = "https://meta.seoul.go.kr/libseoul";
@@ -132,14 +133,14 @@ function buildSearchPageUrl(dbnum: string, query: string): string | undefined {
 }
 
 /**
- * [2026-06-20 v27 추가] EUC-KR 퍼센트 인코딩 — 강남구 전용.
- * Node.js 환경에는 EUC-KR이 기본 내장되어 있지 않아, Buffer로 직접 변환.
- * iconv-lite 같은 외부 패키지 없이 처리하기 위해, TextEncoder로는 EUC-KR을
- * 못 만들기 때문에 Node 내장 Buffer의 "ks_c_5601-1987" 인코딩 별칭을 사용함
- * (EUC-KR과 동일 코드 페이지).
+ * [2026-06-21 v28 변경] EUC-KR 퍼센트 인코딩 — 강남구 전용.
+ * Node.js 내장 Buffer는 "ks_c_5601-1987"(EUC-KR) 인코딩을 지원하지 않음 —
+ * 로컬 환경에서는 우연히 동작했을 수 있으나, Vercel 서버리스 실행 환경에서
+ * "Unknown encoding" 에러를 던져 검색 기능 전체가 중단됨(v7 문서 0장 참조).
+ * iconv-lite로 교체 — 이 패키지는 EUC-KR 변환을 정식으로 지원함.
  */
 function encodeEucKr(text: string): string {
-  const buffer = Buffer.from(text, "ks_c_5601-1987" as BufferEncoding);
+  const buffer = iconv.encode(text, "euc-kr");
   return Array.from(buffer)
     .map((byte) => "%" + byte.toString(16).toUpperCase().padStart(2, "0"))
     .join("");
@@ -285,11 +286,26 @@ export async function searchEbooks(query: string): Promise<EbookBook[]> {
   // 시도가 안 맞으면 사용자가 검색창에서 직접 다른 검색어로 재시도 가능
   // (논의 기록 참조: "지금빌려에서 확인되는 도서명으로 넣어보고, 오류 생기면
   // 사용자가 원래 검색어로 재시도하는 흐름").
+  // [2026-06-21 v28 변경] 도서관별 검색창 URL 생성 중 하나라도 에러가 나면
+  // (예: 인코딩 문제, 예상 못 한 특수문자 등) 전체 검색 API가 죽는 사고가
+  // 있었음(v7 문서 0장). try/catch로 감싸 "이 도서관 링크만 원래 링크로
+  // 남겨두고 나머지는 정상 진행"하도록 안전장치 추가.
   for (const book of books) {
     for (const lib of book.libraries) {
-      const searchPageUrl = buildSearchPageUrl(lib.dbnum, book.title);
-      if (searchPageUrl) {
-        lib.url = searchPageUrl;
+      try {
+        const searchPageUrl = buildSearchPageUrl(lib.dbnum, book.title);
+        if (searchPageUrl) {
+          lib.url = searchPageUrl;
+        }
+      } catch (e) {
+        console.log(
+          "[seoulLibrary] buildSearchPageUrl threw error, dbnum:",
+          lib.dbnum,
+          "title:",
+          book.title,
+          "error:",
+          e
+        );
       }
     }
   }
