@@ -469,17 +469,51 @@ async function resolveGangnamAvailability(
     const currentDiv = $(".book_info > div.current").first();
 
     const findStrongByLabel = (label: string): string | undefined => {
-      const span = currentDiv
-        .find("span")
-        .filter((_: number, el: any) => {
-          const ownText = $(el).clone().children().remove().end().text().trim();
-          if (!ownText.startsWith(label)) return false;
-          if (ownText.startsWith("대출예정일")) return false;
-          return true;
-        })
-        .first();
-      return span.find("strong").first().text().trim();
+      const candidates = currentDiv.find("span").filter((_: number, el: any) => {
+        const ownText = $(el).clone().children().remove().end().text().trim();
+        if (!ownText.startsWith(label)) return false;
+        if (ownText.startsWith("대출예정일")) return false;
+        return true;
+      });
+
+      // [2026-06-21 임시 디버그] "절창" 사례(보유 35로 잘못 파싱됨, 실제는
+      // 5)의 원인 진단용. 후보로 잡힌 span이 몇 개인지, 각 span의 실제
+      // HTML 구조(자식 태그까지 전부)와 그 안에서 찾은 모든 strong 값을
+      // 그대로 출력. 원인 확정되면 제거할 것.
+      console.log(
+        `[seoulLibrary] gangnam DEBUG findStrongByLabel("${label}") - candidate count:`,
+        candidates.length
+      );
+      candidates.each((i: number, el: any) => {
+        console.log(
+          `[seoulLibrary] gangnam DEBUG candidate[${i}] full html:`,
+          $.html(el)
+        );
+        const allStrongsInside = $(el)
+          .find("strong")
+          .map((_: number, s: any) => $(s).text().trim())
+          .get();
+        console.log(
+          `[seoulLibrary] gangnam DEBUG candidate[${i}] all strong values inside:`,
+          allStrongsInside
+        );
+      });
+
+      const span = candidates.first();
+      const result = span.find("strong").first().text().trim();
+      console.log(
+        `[seoulLibrary] gangnam DEBUG findStrongByLabel("${label}") FINAL chosen value:`,
+        result
+      );
+      return result;
     };
+
+    // [2026-06-21 임시 디버그] div.current 자체의 전체 HTML도 원본 그대로
+    // 출력 — 태그 닫힘 구조를 직접 눈으로 대조하기 위함.
+    console.log(
+      "[seoulLibrary] gangnam DEBUG div.current full html:",
+      currentDiv.html()
+    );
 
     const ownedText = findStrongByLabel("보유");
     const loanedText = findStrongByLabel("대출");
