@@ -48,13 +48,8 @@ export default function EbookSearchPage() {
   return (
     <main className="min-h-screen flex flex-col">
       <header className="bg-white border-b border-gray-100 px-4 pt-14 pb-4 sticky top-0 z-10">
-        {/* [2026-06-21] 모바일 화면에서 안내문구가 줄바꿈되면서 로고 옆 좁은
-            공간에 끼어 침범하는 문제 발견(실기기 캡처로 확인). 480px 미만
-            화면에서는 로고와 문구를 위아래로 쌓고, 480px 이상에서는 기존처럼
-            가로로 나란히 배치(min-[480px]: 임의값 브레이크포인트 사용 —
-            Tailwind 기본 sm:은 640px부터라 480px에 정확히 맞추기 위함). */}
-        <div className="flex flex-col min-[480px]:flex-row min-[480px]:items-center gap-1 min-[480px]:gap-3 mb-3">
-          <img src="/logo-header.png" alt="지금빌려" className="h-10" /><img src="/logo-header.png" alt="지금빌려" className="h-10 w-auto flex-shrink-0" />
+        <div className="flex items-center gap-3 mb-3">
+          <img src="/logo-header.png" alt="지금빌려" className="h-10 w-auto flex-shrink-0" />
           <p className="text-xs text-gray-400">
             지금 바로 읽을 수 있는 전자책이 있는지 검색할게요.
             <br />
