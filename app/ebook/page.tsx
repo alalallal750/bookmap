@@ -42,7 +42,11 @@ export default function EbookSearchPage() {
       <header className="bg-white border-b border-gray-100 px-4 pt-14 pb-4 sticky top-0 z-10">
         <div className="flex items-center gap-3 mb-3">
           <img src="/logo-header.png" alt="지금빌려" className="h-10" />
-          <p className="text-xs text-gray-400">지금 읽을 수 있는 전자책이 있는지 먼저 검색할게요. 전자책을 읽으시려면 각 도서관 사이트에 가입하셔야 해요.</p>
+          <p className="text-xs text-gray-400">
+            지금 읽을 수 있는 전자책이 있는지 먼저 검색할게요.
+            <br />
+            전자책을 읽으시려면 각 도서관 사이트에 가입하셔야 해요.
+          </p>
         </div>
 
         <SearchBar

@@ -44,6 +44,7 @@ export function SearchBar({
           type="search"
           inputMode="search"
           enterKeyHint="search"
+          autoFocus
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder={placeholder}
