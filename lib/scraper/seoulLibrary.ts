@@ -469,64 +469,50 @@ async function resolveGangnamAvailability(
     const currentDiv = $(".book_info > div.current").first();
 
     const findStrongByLabel = (label: string): string | undefined => {
-      const candidates = currentDiv.find("span").filter((_: number, el: any) => {
-        const ownText = $(el).clone().children().remove().end().text().trim();
-        if (!ownText.startsWith(label)) return false;
-        if (ownText.startsWith("대출예정일")) return false;
-        return true;
-      });
-
-      // [2026-06-21 임시 디버그] "절창" 사례(보유 35로 잘못 파싱됨, 실제는
-      // 5)의 원인 진단용. 후보로 잡힌 span이 몇 개인지, 각 span의 실제
-      // HTML 구조(자식 태그까지 전부)와 그 안에서 찾은 모든 strong 값을
-      // 그대로 출력. 원인 확정되면 제거할 것.
-      console.log(
-        `[seoulLibrary] gangnam DEBUG findStrongByLabel("${label}") - candidate count:`,
-        candidates.length
-      );
-      candidates.each((i: number, el: any) => {
-        console.log(
-          `[seoulLibrary] gangnam DEBUG candidate[${i}] full html:`,
-          $.html(el)
-        );
-        const allStrongsInside = $(el)
-          .find("strong")
-          .map((_: number, s: any) => $(s).text().trim())
-          .get();
-        console.log(
-          `[seoulLibrary] gangnam DEBUG candidate[${i}] all strong values inside:`,
-          allStrongsInside
-        );
-      });
-
-      const span = candidates.first();
-      const result = span.find("strong").first().text().trim();
-      console.log(
-        `[seoulLibrary] gangnam DEBUG findStrongByLabel("${label}") FINAL chosen value:`,
-        result
-      );
-      return result;
+      const span = currentDiv
+        .find("span")
+        .filter((_: number, el: any) => {
+          const ownText = $(el).clone().children().remove().end().text().trim();
+          if (!ownText.startsWith(label)) return false;
+          if (ownText.startsWith("대출예정일")) return false;
+          return true;
+        })
+        .first();
+      return span.find("strong").first().text().trim();
     };
-
-    // [2026-06-21 임시 디버그] div.current 자체의 전체 HTML도 원본 그대로
-    // 출력 — 태그 닫힘 구조를 직접 눈으로 대조하기 위함.
-    console.log(
-      "[seoulLibrary] gangnam DEBUG div.current full html:",
-      currentDiv.html()
-    );
 
     const ownedText = findStrongByLabel("보유");
     const loanedText = findStrongByLabel("대출");
+    // [2026-06-21 추가] "예약" 값도 함께 추출 — 예약 건수가 보유-대출
+    // 가능권수를 넘어서면 실제로는 대출 불가능한 문제 발견(절창 사례:
+    // 보유5/대출3이라 겉보기엔 2권 가능해 보이나, 실제 사이트 확인 결과
+    // 예약 10건이 밀려있어 대출 불가능했음). 강남구는 "보유-대출" 계산값을
+    // 예약자가 먼저 가져가는 구조로 추정 — 검증 전까지는 "예약이 1건이라도
+    // 있으면 그 즉시 모두 예약자에게 우선권이 있다"고 보수적으로 가정하지
+    // 않고, 우선 "보유-대출-예약" 합산식을 적용함(아래 주석 참조).
+    const reservedText = findStrongByLabel("예약");
 
     console.log(
       "[seoulLibrary] gangnam label-based values - 보유:",
       ownedText,
       "대출:",
-      loanedText
+      loanedText,
+      "예약:",
+      reservedText
     );
 
     const owned = ownedText !== undefined ? parseInt(ownedText, 10) : NaN;
     const loaned = loanedText !== undefined ? parseInt(loanedText, 10) : NaN;
+    // 예약 값을 못 찾으면 0으로 간주(보수적이지 않은 방향이지만, "예약"
+    // span 자체가 거의 항상 존재하는 것으로 실측 확인됐으므로 — v3/v6
+    // 문서 기준 — 못 찾는 경우는 파싱 실패로 보고 별도 로그만 남김)
+    const reserved = reservedText !== undefined ? parseInt(reservedText, 10) : 0;
+    if (reservedText === undefined) {
+      console.log(
+        "[seoulLibrary] gangnam: could not find 예약 value, defaulting to 0, title:",
+        r.title
+      );
+    }
 
     if (Number.isNaN(owned) || Number.isNaN(loaned)) {
       console.log(
@@ -540,7 +526,19 @@ async function resolveGangnamAvailability(
       return null;
     }
 
-    const remaining = owned - loaned;
+    // [2026-06-21 변경] 예약 건수를 빼는 계산으로 변경.
+    // 기존: remaining = owned - loaned
+    // 변경: remaining = owned - loaned - reserved
+    // 실측 사례("절창", 2025-09-17 문학동네): 보유5/대출3/예약10 →
+    // 5-3-10=-8(음수) → 대출불가로 정정됨(기존 계산은 5-3=2로 "2권
+    // 대출가능"이라는 잘못된 안내를 했었음).
+    //
+    // [검증 필요 — 미확정] 이 공식이 "예약 건수만큼 책이 묶인다"는 가정에
+    // 기반하는데, 강남구가 실제로 이 방식으로 동작하는지, 혹은 "예약이
+    // 1건이라도 있으면 무조건 대출불가"인지는 아직 실측 대조가 안 됨.
+    // 현재는 "절창" 한 건의 사례로만 검증된 상태 — 더 많은 사례(특히
+    // "예약 1건, 보유-대출 차이가 양수인" 경우)로 추가 검증 필요.
+    const remaining = owned - loaned - reserved;
     return {
       dbnum: r.dbnum,
       libraryName,
