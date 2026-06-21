@@ -785,13 +785,14 @@ function normalizeTitle(title: string): string {
  */
 function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): EbookBook[] {
   console.log(
-    "[seoulLibrary] groupBooks DEBUG - raw items (dbnum, title, author, date):",
+    "[seoulLibrary] groupBooks DEBUG - raw items (dbnum, title, author, date, publisher):",
     JSON.stringify(
       items.map(({ raw }) => ({
         dbnum: raw.dbnum,
         title: raw.title,
         author: raw.author,
         date: raw.date,
+        publisher: raw.publisher,
       }))
     )
   );
