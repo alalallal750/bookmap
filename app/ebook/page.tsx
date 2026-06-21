@@ -32,9 +32,17 @@ export default function EbookSearchPage() {
     }
   }
 
+  // [2026-06-21 변경] 종이책 검색은 아직 이 서비스 안에 구현되어 있지 않아,
+  // 이미 동작구 종이책 검색을 지원하는 기존 운영 MVP(caniread.vercel.app)로
+  // 사용자를 보냄. 같은 앱 내부 이동이 아니라 다른 도메인으로 가는 것이라
+  // router.push 대신 window.location.href 사용. 검색어가 있으면(이미 검색을
+  // 마친 done 상태) 그대로 넘겨주고, 없으면(idle 상태) 빈 화면으로 보냄.
   function goToPhysicalSearch() {
     const query = state.status === "done" ? state.query : "";
-    router.push(`/?q=${encodeURIComponent(query)}`);
+    const target = query
+      ? `https://caniread.vercel.app/?q=${encodeURIComponent(query)}`
+      : `https://caniread.vercel.app/`;
+    window.location.href = target;
   }
 
   return (
