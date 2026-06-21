@@ -797,10 +797,39 @@ function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): Eboo
     )
   );
 
-  // 1차 기준: 제목+저자 일치로 먼저 묶음
+  // [2026-06-21 변경] 저자 필드가 공통문구(저/지음 등) 제거 후 빈 문자열이
+  // 되는 항목 전용 처리. 실측 확인된 사례(동대문구+YES24 벤더, "난생처음
+  // 킥복싱"·"달러구트" 등 3건 이상): 저자가 "저" 한 글자만 와서 정규화 후
+  // 빈 문자열이 되고, 제목+저자 1차 기준으로 못 묶임. 출판일 보조기준도
+  // 14일 차이가 나 신뢰 불가(도서관마다 등록일 기준이 다른 v6 문서의 알려진
+  // 문제와 동일 패턴). 대신 "출판사(Publication)"는 3건 모두 정확히
+  // 일치하는 것으로 확인되어, 저자 대신 출판사를 보조 신호로 사용.
+  //
+  // 규칙: 저자가 빈 문자열이 되는 항목은, 1차 기준(제목+저자)으로 그룹화할
+  // 때 건너뛰고 별도로 모아둔 뒤, 이미 만들어진 그룹 중 "제목도 같고
+  // 출판사도 같은" 그룹이 있으면 거기에 합류시킴. 합류 대상이 없으면
+  // 독립된 새 카드로 둠(애매하면 분리해서 보여주는 기존 원칙과 동일 기조).
+  //
+  // 위험 범위: 이 처리는 "저자가 빈 문자열이 되는 항목"에만 적용되고,
+  // 저자가 정상적으로 있는 모든 책은 기존처럼 제목+저자로 엄격하게 비교됨.
+  // 동명이서(제목 같고 저자 다른 책)가 잘못 묶일 위험은, 출판사까지
+  // 우연히 일치해야 하므로 매우 낮음(저자만으로 판단하는 것보다 안전).
+
+  const itemsWithAuthor: typeof items = [];
+  const itemsWithEmptyAuthor: typeof items = [];
+
+  for (const item of items) {
+    if (normalizeAuthor(item.raw.author)) {
+      itemsWithAuthor.push(item);
+    } else {
+      itemsWithEmptyAuthor.push(item);
+    }
+  }
+
+  // 1차 기준: 제목+저자 일치로 먼저 묶음 (저자가 정상적으로 있는 항목만)
   const groups = new Map<string, EbookBook & { rawDate: string }>();
 
-  for (const { raw, entry } of items) {
+  for (const { raw, entry } of itemsWithAuthor) {
     const key = `${normalizeTitle(raw.title)}__${normalizeAuthor(raw.author)}`;
     const existing = groups.get(key);
 
@@ -811,6 +840,45 @@ function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): Eboo
       if (!existing.coverImage && raw.image) existing.coverImage = raw.image;
     } else {
       groups.set(key, {
+        title: raw.title,
+        author: raw.author,
+        publisher: raw.publisher || undefined,
+        publishDate: raw.date || undefined,
+        coverImage: raw.image,
+        libraries: [entry],
+        rawDate: raw.date || "",
+      });
+    }
+  }
+
+  // 저자가 빈 문자열인 항목들 처리: 제목+출판사가 일치하는 기존 그룹을 찾아
+  // 합류시키고, 없으면 독립된 새 그룹으로 추가
+  for (const { raw, entry } of itemsWithEmptyAuthor) {
+    const normalizedTitle = normalizeTitle(raw.title);
+    const matchingGroup = Array.from(groups.values()).find(
+      (g) =>
+        normalizeTitle(g.title) === normalizedTitle &&
+        raw.publisher &&
+        g.publisher === raw.publisher
+    );
+
+    if (matchingGroup) {
+      console.log(
+        "[seoulLibrary] groupBooks: empty-author item merged by title+publisher -",
+        `"${raw.title}"(${raw.dbnum}, publisher=${raw.publisher}) → joined "${matchingGroup.title}"(${matchingGroup.author})`
+      );
+      if (!matchingGroup.libraries.some((l: EbookLibraryEntry) => l.dbnum === entry.dbnum)) {
+        matchingGroup.libraries.push(entry);
+      }
+      if (!matchingGroup.coverImage && raw.image) matchingGroup.coverImage = raw.image;
+    } else {
+      // 합류할 그룹이 없으면, 저자 빈 문자열 그대로 독립 키로 새 그룹 생성
+      const fallbackKey = `${normalizedTitle}__${raw.dbnum}__${raw.date || ""}`;
+      console.log(
+        "[seoulLibrary] groupBooks: empty-author item has no matching group, kept separate -",
+        `"${raw.title}"(${raw.dbnum}, publisher=${raw.publisher})`
+      );
+      groups.set(fallbackKey, {
         title: raw.title,
         author: raw.author,
         publisher: raw.publisher || undefined,
