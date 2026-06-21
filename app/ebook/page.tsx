@@ -59,9 +59,9 @@ export default function EbookSearchPage() {
             style={{ height: "40px", width: "107px" }}
           />
           <p className="text-xs text-gray-400">
-            지금 바로 읽을 수 있는 전자책이 있는지 검색할게요.
+            지금 바로 읽을 수 있는 <span className="text-[#1d2b6b] font-bold" style={{ textShadow: "0 1px 1px rgba(29,43,107,0.18)" }}>전자책</span>이 있는지 검색할게요.
             <br />
-            전자책을 읽으시려면 각 도서관 사이트에 먼저 가입하셔야 해요.
+            <span className="text-[#1d2b6b] font-bold" style={{ textShadow: "0 1px 1px rgba(29,43,107,0.18)" }}>전자책</span>을 읽으시려면 각 도서관 사이트에 먼저 가입하셔야 해요.
           </p>
         </div>
 
@@ -93,7 +93,7 @@ export default function EbookSearchPage() {
             <div className="fixed bottom-0 left-0 right-0 px-4 py-3 bg-white border-t border-gray-100">
               <button
                 onClick={goToPhysicalSearch}
-                className="w-full py-3.5 rounded-xl border border-gray-200 bg-white text-gray-700 text-sm font-medium"
+                className="w-full py-3.5 rounded-xl bg-green-600 text-white text-sm font-semibold active:bg-green-800"
               >
                 종이책으로 찾아보시겠어요?
               </button>
@@ -131,7 +131,7 @@ export default function EbookSearchPage() {
             <div className="px-4 mt-6">
               <button
                 onClick={goToPhysicalSearch}
-                className="w-full py-3.5 rounded-xl border border-gray-200 bg-white text-gray-700 text-sm font-medium"
+                className="w-full py-3.5 rounded-xl bg-green-600 text-white text-sm font-semibold active:bg-green-800"
               >
                 종이책으로 찾아보시겠어요?
               </button>
