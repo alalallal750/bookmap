@@ -56,6 +56,12 @@ function loadRawEntries(): RawSlibEntry[] {
   if (cachedEntries) return cachedEntries;
 
   const filePath = path.join(process.cwd(), "data", "slib-hours.json");
+  if (!fs.existsSync(filePath)) {
+    console.log("[branchHours] slib-hours.json 없음 — 운영시간 정보 없이 진행");
+    cachedEntries = [];
+    return cachedEntries;
+  }
+
   const raw = fs.readFileSync(filePath, "utf-8");
   cachedEntries = JSON.parse(raw);
   console.log(`[branchHours] loaded ${cachedEntries!.length} entries from slib-hours.json`);

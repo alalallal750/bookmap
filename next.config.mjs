@@ -7,7 +7,7 @@ const nextConfig = {
     ],
   },
   outputFileTracingIncludes: {
-    '/api/physical-search/**': ['./data/**'],
+    'app/api/physical-search/route': ['./data/**'],
   },
 };
 
