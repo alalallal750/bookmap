@@ -6,8 +6,10 @@ const nextConfig = {
       { protocol: 'http', hostname: '**' },
     ],
   },
-  outputFileTracingIncludes: {
-    'app/api/physical-search/route': ['./data/**'],
+  experimental: {
+    outputFileTracingIncludes: {
+      'app/api/physical-search/route': ['./data/**'],
+    },
   },
 };
 
