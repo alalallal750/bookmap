@@ -1333,6 +1333,8 @@ function extractReturnDueDate(loan?: string): string | undefined {
  * PhysicalLibrary로 매핑.
  */
 function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] {
+  console.log("[DEBUG] groupPhysicalBooksByIsbn 시작, records:", records.length);
+
   const byIsbn = new Map<string, PhysicalRawRecord[]>();
   for (const r of records) {
     const key = normalizeIsbn(r.isbn);
@@ -1340,19 +1342,26 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
     list.push(r);
     byIsbn.set(key, list);
   }
+  console.log("[DEBUG] byIsbn 그룹 수:", byIsbn.size);
 
   const books: PhysicalBook[] = [];
 
   for (const [isbn, recordsForIsbn] of byIsbn) {
+    console.log("[DEBUG] 처리 중 isbn:", isbn, "records:", recordsForIsbn.length);
     const first = recordsForIsbn[0];
 
-    const libraries: PhysicalLibrary[] = recordsForIsbn.map((r) => {
+    const libraries: PhysicalLibrary[] = recordsForIsbn.map((r, idx) => {
+      console.log("[DEBUG]   record idx:", idx, "dbnum:", r.dbnum, "library:", r.library, "location:", r.location);
+
       const branchName = extractLibraryName(r);
+      console.log("[DEBUG]   branchName:", branchName);
+
       // branchCoords.ts에서 분관 이름으로 좌표 조회. 못 찾으면(아직 좌표
       // 수집이 안 된 구, 또는 위험 항목으로 제외된 경우) 0,0으로 남김 —
       // 화면에서 좌표가 0,0인 마커는 지도에 안 찍히도록 별도 필터링이
       // 필요(app/physical 지도 화면에서 처리).
       const coord = findBranchCoord(branchName);
+      console.log("[DEBUG]   coord:", coord);
 
       // [2026-06-24 추가] branchHours.ts에서 운영시간·전화번호·주소 조회
       // (서울도서관 정식 명단 기준, 1447건). r.dbnum으로 구 이름을 알아내
@@ -1361,7 +1370,10 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
       // 14곳 등)은 그냥 undefined로 남음 — PhysicalLibrary의 tel/
       // openingHours가 원래 선택적 필드라 추가 처리 불필요.
       const guName = getDistrictName(r.dbnum);
+      console.log("[DEBUG]   guName:", guName);
+
       const hoursInfo = guName ? findBranchHours(branchName, guName) : undefined;
+      console.log("[DEBUG]   hoursInfo:", hoursInfo);
 
       return {
         id: `seoul_${r.dbnum}_${branchName}`,
@@ -1383,6 +1395,8 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
       };
     });
 
+    console.log("[DEBUG] isbn:", isbn, "libraries 완성, 개수:", libraries.length);
+
     books.push({
       isbn,
       title: first.title,
@@ -1394,9 +1408,9 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
     });
   }
 
+  console.log("[DEBUG] groupPhysicalBooksByIsbn 끝, books:", books.length);
   return books;
 }
-
 /**
  * [2026-06-23] PhysicalBook 타입은 types/index.ts로 이동함 (위 import 참조).
  * EbookBook과 같은 위치에 두는 게 일관적이고, 화면/API 라우트에서도
