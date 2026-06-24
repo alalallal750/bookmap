@@ -4,7 +4,13 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { PhysicalLibrary, PhysicalBook, ApiResponse } from "@/types";
 import { LibraryDetail } from "@/components/map/LibraryDetail";
-import { DEFAULT_LOCATION } from "@/lib/data/districtCoords";
+import { DEFAULT_LOCATION, getNearbyDbnums, getDistrictName, distanceKm } from "@/lib/data/districtCoords";
+
+// [2026-06-24 추가] 지도 이동 시 "이 지역에서 재검색" UX 관련 상수
+// - 진입 후 이 시간(ms) 동안은 이동 감지를 끔(최초 위치 확인/확대 보호)
+// - 마지막 검색 위치에서 이 거리(km) 이상 벗어나야 "재검색 찾기" 문구로 전환
+const MOVE_DETECTION_DELAY_MS = 15000;
+const MOVE_DETECTION_DISTANCE_KM = 5;
 
 function LoadingDots({ message }: { message: string }) {
   const [dotCount, setDotCount] = useState(0);
@@ -22,6 +28,19 @@ function LoadingDots({ message }: { message: string }) {
       </div>
     </div>
   );
+}
+
+// [2026-06-24 추가] 좌표 기준으로 "구 이름, 구 이름" 형태 라벨 생성.
+// getNearbyDbnums가 반경 5km 안의 구 dbnum들을 반환하므로, 그걸 구
+// 이름으로 변환. 하나도 안 잡히면(이론상 fallback으로 최소 1곳은 항상
+// 반환되므로 거의 발생 안 함) 빈 문자열.
+function computeDistrictLabel(lat: number, lng: number): string {
+  const dbnums = getNearbyDbnums(lat, lng);
+  const names = dbnums
+    .map((dbnum) => getDistrictName(dbnum))
+    .filter((name): name is string => Boolean(name));
+  const uniqueNames = Array.from(new Set(names));
+  return uniqueNames.join(", ");
 }
 
 function getMarkerColor(lib: PhysicalLibrary): string {
@@ -68,6 +87,18 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
   const [visibleAvailableCount, setVisibleAvailableCount] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
 
+  // [2026-06-24 추가] "이 지역에서 재검색" UX 상태
+  // lastSearchedLocation: 마지막으로 실제 검색을 실행한 위치(거리 비교 기준점)
+  // districtLabel: 현재 표시 중인 구 이름들(예: "동작구, 서초구")
+  // showResearchPrompt: true면 "OO에서 도서 찾기" 안내 버튼 상태로 전환
+  // pendingLocation: "찾기" 클릭 시 검색에 사용할 새 위치(지도 idle 시점에 저장)
+  const [lastSearchedLocation, setLastSearchedLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [districtLabel, setDistrictLabel] = useState<string>("");
+  const [showResearchPrompt, setShowResearchPrompt] = useState(false);
+  const [pendingLocation, setPendingLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [researching, setResearching] = useState(false);
+  const moveDetectionEnabledRef = useRef(false);
+
   // 로딩 메시지 순차 변경
   useEffect(() => {
     if (!loading) return;
@@ -92,14 +123,15 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
     );
   }, []);
 
-  // 도서관 가용성 로드 — title로 재검색해서 해당 ISBN의 도서관 목록만 추출
-  useEffect(() => {
-    async function load() {
+  // [2026-06-24 변경] 검색 로직을 함수로 분리 — 최초 진입 시와 "찾기" 버튼
+  // 클릭 시(재검색) 둘 다 같은 책(title/isbn)을 기준으로, 위치만 바꿔서
+  // 호출하는 공용 함수. 호출 성공 시 lastSearchedLocation을 그 위치로
+  // 갱신하고, 15초 보호시간 타이머를 다시 시작함(moveDetectionEnabledRef).
+  const runSearch = useCallback(
+    async (lat: number, lng: number) => {
       try {
         const url = new URL("/api/physical-search", window.location.origin);
         url.searchParams.set("q", title ?? isbn);
-        const lat = userLocation?.lat ?? DEFAULT_LOCATION.lat;
-        const lng = userLocation?.lng ?? DEFAULT_LOCATION.lng;
         url.searchParams.set("lat", String(lat));
         url.searchParams.set("lng", String(lng));
 
@@ -109,13 +141,43 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
 
         const matched = json.data.find((b) => b.isbn === isbn);
         setLibraries(matched?.libraries ?? []);
-      } finally {
-        setLoading(false);
+
+        // 검색 기준점 갱신 + 구 이름 라벨 갱신 + 이동 감지 타이머 재시작
+        setLastSearchedLocation({ lat, lng });
+        setDistrictLabel(computeDistrictLabel(lat, lng));
+        setShowResearchPrompt(false);
+        setPendingLocation(null);
+
+        moveDetectionEnabledRef.current = false;
+        setTimeout(() => {
+          moveDetectionEnabledRef.current = true;
+        }, MOVE_DETECTION_DELAY_MS);
+      } catch (e) {
+        console.log("[physical map] runSearch failed:", e);
       }
+    },
+    [isbn, title]
+  );
+
+  // 최초 진입 시 검색 — userLocation이 null이어도(권한 거부) DEFAULT_LOCATION으로 진행
+  useEffect(() => {
+    async function initialLoad() {
+      const lat = userLocation?.lat ?? DEFAULT_LOCATION.lat;
+      const lng = userLocation?.lng ?? DEFAULT_LOCATION.lng;
+      await runSearch(lat, lng);
+      setLoading(false);
     }
-    // userLocation이 null이어도(권한 거부) DEFAULT_LOCATION으로 진행
-    load();
+    initialLoad();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isbn, title, userLocation]);
+
+  // "찾기" 버튼 클릭 시 재검색
+  async function handleResearchClick() {
+    if (!pendingLocation || researching) return;
+    setResearching(true);
+    await runSearch(pendingLocation.lat, pendingLocation.lng);
+    setResearching(false);
+  }
 
   useEffect(() => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -159,6 +221,34 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
     setVisibleAvailableCount(count);
   }, [libraries]);
 
+  // [2026-06-24 추가] 지도가 멈출 때(idle) 호출 — 15초 보호시간이 지난
+  // 뒤부터, 마지막 검색 위치 대비 5km 이상 벗어났는지 확인. 벗어났으면
+  // "찾기" 안내로 전환하고, 그 시점 좌표를 pendingLocation에 저장.
+  // 아직 보호시간 중이거나 5km 미만이면 아무 동작 안 함(중복 호출돼도
+  // 안전 — 이미 showResearchPrompt가 true면 굳이 다시 안 바꿔도 결과 동일).
+  const checkMapMoved = useCallback(() => {
+    const map = mapRef.current;
+    if (!map || !lastSearchedLocation) return;
+    if (!moveDetectionEnabledRef.current) return;
+
+    const center = map.getCenter();
+    const currentLat = center.getLat();
+    const currentLng = center.getLng();
+
+    const moved = distanceKm(
+      lastSearchedLocation.lat,
+      lastSearchedLocation.lng,
+      currentLat,
+      currentLng
+    );
+
+    if (moved >= MOVE_DETECTION_DISTANCE_KM) {
+      setPendingLocation({ lat: currentLat, lng: currentLng });
+      setDistrictLabel(computeDistrictLabel(currentLat, currentLng));
+      setShowResearchPrompt(true);
+    }
+  }, [lastSearchedLocation]);
+
   const drawMarkers = useCallback(() => {
     const map = mapRef.current;
     if (!map || !window.kakao?.maps) return;
@@ -194,8 +284,9 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
     }
 
     window.kakao.maps.event.addListener(map, "idle", updateVisibleCount);
+    window.kakao.maps.event.addListener(map, "idle", checkMapMoved);
     updateVisibleCount();
-  }, [libraries, userLocation, updateVisibleCount]);
+  }, [libraries, userLocation, updateVisibleCount, checkMapMoved]);
 
   useEffect(() => {
     if (mapRef.current) drawMarkers();
@@ -262,11 +353,21 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
           </div>
         )}
 
-        {!loading && mapReady && (
+        {!loading && mapReady && !showResearchPrompt && (
           <div className="absolute top-3 left-3 z-10 bg-white rounded-2xl px-4 py-2 shadow text-xs font-medium text-gray-800">
-            지금 여기에서 바로 대출 가능한 도서{" "}
+            지금 {districtLabel}에서 바로 대출 가능한 도서{" "}
             <span className="text-blue-600 font-bold">{visibleAvailableCount}</span>권
           </div>
+        )}
+
+        {!loading && mapReady && showResearchPrompt && (
+          <button
+            onClick={handleResearchClick}
+            disabled={researching}
+            className="absolute top-3 left-3 z-10 bg-blue-600 text-white rounded-2xl px-4 py-2 shadow text-xs font-medium disabled:opacity-60"
+          >
+            {researching ? "찾는 중..." : `지금 ${districtLabel}에서 바로 대출 가능한 도서 찾기`}
+          </button>
         )}
 
         {!selectedLibrary && (
