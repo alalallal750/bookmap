@@ -64,7 +64,7 @@
 
 import * as cheerio from "cheerio";
 import * as iconv from "iconv-lite";
-import { EbookBook, EbookLibraryEntry } from "@/types";
+import { EbookBook, EbookLibraryEntry, PhysicalBook, PhysicalLibrary } from "@/types";
 
 const BASE_URL = "https://meta.seoul.go.kr/libseoul";
 

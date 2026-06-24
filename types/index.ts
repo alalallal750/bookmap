@@ -82,7 +82,16 @@ export type Availability = {
   physical: PhysicalLibrary[];
   smartLibrary: PhysicalLibrary[];
 };
-
+// ─── 종이책 (서울시 전체, ③④단계) ──────────────────────────────
+export type PhysicalBook = {
+  isbn: string;
+  title: string;
+  author: string;
+  publisher?: string;
+  publishYear?: number;
+  coverImage?: string;
+  libraries: PhysicalLibrary[];
+};
 // ─── API 응답 래퍼 ────────────────────────────────────────────
 export type ApiResponse<T> =
   | { success: true; data: T }
