@@ -6,6 +6,9 @@ const nextConfig = {
       { protocol: 'http', hostname: '**' },
     ],
   },
+  outputFileTracingIncludes: {
+    '/api/physical-search/**': ['./data/**'],
+  },
 };
 
 export default nextConfig;
