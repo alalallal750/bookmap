@@ -208,16 +208,29 @@ export function loadBranchCoords(): BranchCoord[] {
  * 카카오맵 검색 결과의 표기가 미세하게 다를 수 있음(예: "아트앤힐링작은
  * 도서관" vs "아트&힐링작은도서관").
  */
-export function findBranchCoord(libraryName: string): BranchCoord | undefined {
+/**
+ * [2026-06-24 수정] gu(구) 파라미터 추가 — findBranchHours와 동일한
+ * 안전장치 패턴 적용. gu가 주어지면 같은 구 안에서만 매칭(정확히
+ * 일치 → 정규화 후 포함관계까지 허용). gu가 없으면 전체에서 정확히
+ * 일치하는 것만 허용 — 느슨한 포함관계 매칭은 구 구분과 결합되지
+ * 않으면 동명이인 사고 위험이 커서 시도하지 않음.
+ */
+export function findBranchCoord(
+  libraryName: string,
+  gu?: string
+): BranchCoord | undefined {
   const coords = loadBranchCoords();
+  const pool = gu ? coords.filter((c) => c.gu === gu) : coords;
 
-  const exact = coords.find((c) => c.name === libraryName);
+  const exact = pool.find((c) => c.name === libraryName);
   if (exact) return exact;
+
+  if (!gu) return undefined;
 
   const normalize = (s: string) => s.replace(/[\s&]/g, "");
   const normalizedTarget = normalize(libraryName);
 
-  return coords.find((c) => {
+  return pool.find((c) => {
     const normalizedName = normalize(c.name);
     return (
       normalizedName === normalizedTarget ||

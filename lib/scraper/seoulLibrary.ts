@@ -1399,20 +1399,25 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
       const branchName = extractLibraryName(r);
       console.log("[DEBUG]   branchName:", branchName);
 
-      // branchCoords.ts에서 분관 이름으로 좌표 조회. 못 찾으면(아직 좌표
-      // 수집이 안 된 구, 또는 위험 항목으로 제외된 경우) 0,0으로 남김 —
-      // 화면에서 좌표가 0,0인 마커는 지도에 안 찍히도록 별도 필터링이
-      // 필요(app/physical 지도 화면에서 처리).
-      const coord = findBranchCoord(branchName);
-      console.log("[DEBUG]   coord:", coord);
+      // [2026-06-24 추가] r.dbnum으로 구 이름을 먼저 알아냄 — findBranchCoord,
+      // findBranchHours 둘 다 같은 구 안에서만 찾도록 이 값을 넘겨줄 것.
+      const guName = getDistrictName(r.dbnum);
 
-      // [2026-06-24 추가] branchHours.ts에서 운영시간·전화번호·주소 조회
-      // (서울도서관 정식 명단 기준, 1447건). r.dbnum으로 구 이름을 알아내
-      // 같은 구 안에서만 찾도록 해 동명이인 위험을 줄임. 정식 명단에 없는
-      // 분관(예: 사용자가 직접 주소 확인해서 branchCoords.ts에만 있는
-      // 14곳 등)은 그냥 undefined로 남음 — PhysicalLibrary의 tel/
-      // openingHours가 원래 선택적 필드라 추가 처리 불필요.
-     const guName = getDistrictName(r.dbnum);
+      // branchCoords.ts에서 분관 이름+구로 좌표 조회. 못 찾으면(같은 구
+      // 안에 없거나, 아직 좌표 수집이 안 됐거나, 위험 항목으로 제외된
+      // 경우) 0,0으로 남김 — 화면에서 좌표가 0,0인 마커는 지도에 안
+      // 찍히도록 별도 필터링이 필요(app/physical 지도 화면에서 처리).
+      // [2026-06-24] 이전엔 구 구분 없이 전체에서 찾아 다른 구 좌표가
+      // 잘못 잡히는 사고가 있었음(이슈 E) — guName 추가로 해결.
+      const coord = findBranchCoord(branchName, guName);
+      console.log("[DEBUG]   coord:", coord, "guName:", guName);
+
+      // branchHours.ts에서 운영시간·전화번호·주소 조회 (서울도서관 정식
+      // 명단 기준, 1447건). 같은 구 안에서만 찾도록 해 동명이인 위험을
+      // 줄임. 정식 명단에 없는 분관(예: 사용자가 직접 주소 확인해서
+      // branchCoords.ts에만 있는 14곳 등)은 그냥 undefined로 남음 —
+      // PhysicalLibrary의 tel/openingHours가 원래 선택적 필드라 추가
+      // 처리 불필요.
       const hoursInfo = guName ? findBranchHours(branchName, guName) : undefined;
 
       return {
@@ -1451,9 +1456,3 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
   console.log("[DEBUG] groupPhysicalBooksByIsbn 끝, books:", books.length);
   return books;
 }
-/**
- * [2026-06-23] PhysicalBook 타입은 types/index.ts로 이동함 (위 import 참조).
- * EbookBook과 같은 위치에 두는 게 일관적이고, 화면/API 라우트에서도
- * import해서 써야 하기 때문 — 이 파일에만 export되어 있으면 재사용하기
- * 불편함.
- */
