@@ -138,58 +138,61 @@ let cachedCoords: BranchCoord[] | null = null;
  * mismatched + 위험 항목을 제외한 신뢰 가능한 좌표 목록을 반환. 결과는
  * 모듈 내에서 캐싱(서버 프로세스 생애주기 동안 파일을 한 번만 읽음).
  */
+/**
+ * [2026-06-24 변경] 4개 파일(branch-coords.json, retry-coords.json,
+ * dobong-coords.json, address-coords.json)을 매번 따로 읽던 방식에서,
+ * scripts/merge-branch-coords.js로 미리 병합해둔 단일 파일
+ * (branch-coords-merged.json)을 읽는 방식으로 변경.
+ *
+ * 변경 이유: dobong-coords.json만 "notFound" 대신 "suspicious"라는 다른
+ * 키 이름을 써서, 4개 파일을 함께 읽을 때 형식 불일치로 런타임 에러가
+ * 발생함(TypeError: Cannot read properties of undefined (reading
+ * 'length')). 병합 스크립트가 이런 파일별 형식 차이를 미리 흡수해두므로,
+ * 이 함수는 이제 출처가 다른 파일들의 형식을 신경 쓸 필요가 없어짐.
+ *
+ * 병합된 파일의 각 항목에는 source 태그(initial/retry/dobong/address)가
+ * 있으나, 현재 findBranchCoord의 매칭 로직(이름 기반)에는 source가
+ * 필요하지 않으므로 이 함수에서는 읽기만 하고 별도 분기 없이 그대로 사용.
+ */
 export function loadBranchCoords(): BranchCoord[] {
   if (cachedCoords) return cachedCoords;
 
   const result: BranchCoord[] = [];
   let skippedSuspicious = 0;
-  let totalMismatched = 0;
-  let totalNotFound = 0;
 
-  const dataFiles = [
-    "branch-coords.json",
-    "dobong-coords.json",
-    "retry-coords.json",
-    "address-coords.json",
-  ];
+  const filePath = path.join(process.cwd(), "data", "branch-coords-merged.json");
 
-  for (const fileName of dataFiles) {
-    const filePath = path.join(process.cwd(), "data", fileName);
-    if (!fs.existsSync(filePath)) {
-      console.log(`[branchCoords] ${fileName} 없음 — 건너뜀`);
+  if (!fs.existsSync(filePath)) {
+    console.log("[branchCoords] branch-coords-merged.json 없음 — 좌표 없이 진행");
+    cachedCoords = result;
+    return result;
+  }
+
+  const raw = fs.readFileSync(filePath, "utf-8");
+  const parsed: { matched: (RawMatchedEntry & { source?: string })[] } = JSON.parse(raw);
+
+  for (const entry of parsed.matched) {
+    const key = makeKey(entry.gu, entry.searchKeyword);
+    if (SUSPICIOUS_KEYS.has(key)) {
+      skippedSuspicious++;
       continue;
     }
 
-    const raw = fs.readFileSync(filePath, "utf-8");
-    const parsed: RawBranchCoordsFile = JSON.parse(raw);
-    totalMismatched += parsed.mismatched.length;
-    totalNotFound += parsed.notFound.length;
+    const lat = parseFloat(entry.lat);
+    const lng = parseFloat(entry.lng);
+    if (Number.isNaN(lat) || Number.isNaN(lng)) continue;
 
-    for (const entry of parsed.matched) {
-      const key = makeKey(entry.gu, entry.searchKeyword);
-      if (SUSPICIOUS_KEYS.has(key)) {
-        skippedSuspicious++;
-        continue;
-      }
-
-      const lat = parseFloat(entry.lat);
-      const lng = parseFloat(entry.lng);
-      if (Number.isNaN(lat) || Number.isNaN(lng)) continue;
-
-      result.push({
-        gu: entry.gu,
-        name: entry.matchedName,
-        lat,
-        lng,
-      });
-    }
+    result.push({
+      gu: entry.gu,
+      name: entry.matchedName,
+      lat,
+      lng,
+    });
   }
 
   console.log(
     `[branchCoords] loaded ${result.length} branches` +
-      ` (excluded ${totalMismatched} mismatched,` +
-      ` ${skippedSuspicious} suspicious, ${totalNotFound} notFound,` +
-      ` across ${dataFiles.length} source files)`
+      ` (excluded ${skippedSuspicious} suspicious, from merged file)`
   );
 
   cachedCoords = result;

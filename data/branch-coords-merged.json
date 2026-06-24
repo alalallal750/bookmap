@@ -1,0 +1,5871 @@
+{
+  "matched": [
+    {
+      "gu": "동작구",
+      "searchKeyword": "김영삼도서관",
+      "matchedName": "김영삼도서관",
+      "address": "서울 동작구 상도1동 611",
+      "roadAddress": "서울 동작구 매봉로 1",
+      "lat": "37.5054033017348",
+      "lng": "126.94988637914703",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "까망돌도서관",
+      "matchedName": "까망돌도서관",
+      "address": "서울 동작구 흑석동 340-1",
+      "roadAddress": "서울 동작구 서달로 129",
+      "lat": "37.5051208236701",
+      "lng": "126.960547122878",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "사당솔밭도서관",
+      "matchedName": "사당솔밭도서관",
+      "address": "서울 동작구 사당동 708-1188",
+      "roadAddress": "서울 동작구 솔밭로 86",
+      "lat": "37.48403213246281",
+      "lng": "126.96735910708873",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "신대방누리도서관",
+      "matchedName": "신대방누리도서관",
+      "address": "서울 동작구 신대방동 686-78",
+      "roadAddress": "서울 동작구 신대방1다길 19",
+      "lat": "37.4860678721786",
+      "lng": "126.90588621702",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "동작영어마루도서관",
+      "matchedName": "동작영어마루도서관",
+      "address": "서울 동작구 노량진동 225-161",
+      "roadAddress": "서울 동작구 장승배기로16길 98",
+      "lat": "37.5091900042695",
+      "lng": "126.943412067095",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "약수도서관",
+      "matchedName": "약수도서관",
+      "address": "서울 동작구 상도동 211-77",
+      "roadAddress": "서울 동작구 양녕로22바길 64",
+      "lat": "37.4978860452268",
+      "lng": "126.947432904218",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "동작샘터도서관",
+      "matchedName": "동작샘터도서관",
+      "address": "서울 동작구 사당동 1136-1",
+      "roadAddress": "서울 동작구 동작대로29길 63-26",
+      "lat": "37.4884025975986",
+      "lng": "126.977557442618",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "대방어린이도서관",
+      "matchedName": "대방어린이도서관",
+      "address": "서울 동작구 대방동 379-2",
+      "roadAddress": "서울 동작구 대방동길 55",
+      "lat": "37.5029809896133",
+      "lng": "126.925244793887",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "다울작은도서관",
+      "matchedName": "다울작은도서관",
+      "address": "서울 동작구 사당동 316-40",
+      "roadAddress": "서울 동작구 사당로20길 132",
+      "lat": "37.47890146629",
+      "lng": "126.97325052041",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "국사봉숲속작은도서관",
+      "matchedName": "국사봉숲속작은도서관",
+      "address": "서울 동작구 상도동 산 65-149",
+      "roadAddress": "서울 동작구 양녕로23길 27",
+      "lat": "37.4954320648471",
+      "lng": "126.940590858134",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "노량진1동 작은도서관",
+      "matchedName": "노량진1동자치회관문고",
+      "address": "서울 동작구 노량진동 84-100",
+      "roadAddress": "서울 동작구 장승배기로28길 30",
+      "lat": "37.5122959948158",
+      "lng": "126.942025278374",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "노량진2동 작은도서관",
+      "matchedName": "노량진2동작은도서관",
+      "address": "서울 동작구 노량진동 302-97",
+      "roadAddress": "서울 동작구 장승배기로19길 48",
+      "lat": "37.5084589378489",
+      "lng": "126.937359380372",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "대방동 작은도서관",
+      "matchedName": "나무별작은도서관",
+      "address": "서울 동작구 대방동 399-7",
+      "roadAddress": "서울 동작구 상도로 3",
+      "lat": "37.50013912573928",
+      "lng": "126.92095134543472",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "사당1동 작은도서관",
+      "matchedName": "다울작은도서관",
+      "address": "서울 동작구 사당동 316-40",
+      "roadAddress": "서울 동작구 사당로20길 132",
+      "lat": "37.47890146629",
+      "lng": "126.97325052041",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "사당2동 작은도서관",
+      "matchedName": "동작샘터도서관",
+      "address": "서울 동작구 사당동 1136-1",
+      "roadAddress": "서울 동작구 동작대로29길 63-26",
+      "lat": "37.4884025975986",
+      "lng": "126.977557442618",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "사당3동 작은도서관",
+      "matchedName": "주님의숲작은도서관",
+      "address": "서울 동작구 사당동 256-1",
+      "roadAddress": "서울 동작구 사당로17길 31",
+      "lat": "37.4845093972137",
+      "lng": "126.973479176347",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "사당5동 작은도서관",
+      "matchedName": "만나작은도서관",
+      "address": "서울 동작구 사당동 190-163",
+      "roadAddress": "서울 동작구 사당로2다길 85",
+      "lat": "37.4896279400736",
+      "lng": "126.963096044876",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "상도1동 작은도서관",
+      "matchedName": "라이브러리 두란노",
+      "address": "서울 동작구 상도동 485-12",
+      "roadAddress": "서울 동작구 상도로55길 9",
+      "lat": "37.497273552345",
+      "lng": "126.954399400286",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "상도2동 작은도서관",
+      "matchedName": "상도2동작은도서관",
+      "address": "서울 동작구 상도동 25-48",
+      "roadAddress": "서울 동작구 상도로 211",
+      "lat": "37.5054683165302",
+      "lng": "126.942300862459",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "상도3동 작은도서관",
+      "matchedName": "지혜샘터작은도서관",
+      "address": "서울 동작구 상도동 259-41",
+      "roadAddress": "서울 동작구 성대로10가길 5",
+      "lat": "37.4973425442697",
+      "lng": "126.934430703128",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "상도4동 작은도서관",
+      "matchedName": "국사봉숲속작은도서관",
+      "address": "서울 동작구 상도동 산 65-149",
+      "roadAddress": "서울 동작구 양녕로23길 27",
+      "lat": "37.4954320648471",
+      "lng": "126.940590858134",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "신대방2동 작은도서관",
+      "matchedName": "신대방햇살도서관",
+      "address": "서울 동작구 신대방동 460-1",
+      "roadAddress": "서울 동작구 여의대방로16길 53",
+      "lat": "37.4945707633345",
+      "lng": "126.916805996334",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "흑석동 작은도서관",
+      "matchedName": "서달산 숲속도서관",
+      "address": "서울 동작구 흑석동 산 42-1",
+      "roadAddress": "",
+      "lat": "37.499684900716",
+      "lng": "126.957501099883",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "담소작은도서관",
+      "matchedName": "담소작은도서관",
+      "address": "서울 동작구 상도1동 578",
+      "roadAddress": "서울 동작구 강남초등길 24",
+      "lat": "37.5051392698477",
+      "lng": "126.951965285153",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "상도중앙작은도서관",
+      "matchedName": "상도중앙작은도서관",
+      "address": "서울 동작구 상도동 356-209",
+      "roadAddress": "서울 동작구 상도로15길 47",
+      "lat": "37.50276291181863",
+      "lng": "126.9342789413679",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "성대골 어린이도서관",
+      "matchedName": "성대골어린이도서관",
+      "address": "서울 동작구 상도동 270",
+      "roadAddress": "서울 동작구 성대로10길 23",
+      "lat": "37.49691043481069",
+      "lng": "126.93510732889186",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "아트앤힐링작은도서관",
+      "matchedName": "아트&힐링작은도서관",
+      "address": "서울 동작구 상도동 493-5",
+      "roadAddress": "서울 동작구 상도로62길 13",
+      "lat": "37.494882951613384",
+      "lng": "126.95380717387938",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "지혜샘터작은도서관",
+      "matchedName": "지혜샘터작은도서관",
+      "address": "서울 동작구 상도동 259-41",
+      "roadAddress": "서울 동작구 성대로10가길 5",
+      "lat": "37.4973425442697",
+      "lng": "126.934430703128",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "행복한래미안작은도서관",
+      "matchedName": "행복한래미안작은도서관",
+      "address": "서울 동작구 상도동 431",
+      "roadAddress": "서울 동작구 상도로53길 8",
+      "lat": "37.49848963305969",
+      "lng": "126.95368507973411",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "양문작은도서관",
+      "matchedName": "양문작은도서관",
+      "address": "서울 동작구 신대방동 607-28",
+      "roadAddress": "서울 동작구 시흥대로 646",
+      "lat": "37.4893846289808",
+      "lng": "126.907211801231",
+      "source": "initial"
+    },
+    {
+      "gu": "동작구",
+      "searchKeyword": "만나작은도서관",
+      "matchedName": "만나작은도서관",
+      "address": "서울 동작구 사당동 190-163",
+      "roadAddress": "서울 동작구 사당로2다길 85",
+      "lat": "37.4896279400736",
+      "lng": "126.963096044876",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "도곡정보문화도서관",
+      "matchedName": "도곡정보문화도서관",
+      "address": "서울 강남구 도곡동 892-6",
+      "roadAddress": "서울 강남구 도곡로18길 57",
+      "lat": "37.4881641147195",
+      "lng": "127.038742912705",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "개포하늘꿈도서관",
+      "matchedName": "강남구립 개포하늘꿈도서관",
+      "address": "서울 강남구 일원동 741-3",
+      "roadAddress": "서울 강남구 개포로110길 54",
+      "lat": "37.4906695646022",
+      "lng": "127.080357134863",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "논현도서관",
+      "matchedName": "논현문화마루도서관",
+      "address": "서울 강남구 논현동 40-5",
+      "roadAddress": "서울 강남구 논현로131길 40",
+      "lat": "37.5138469281521",
+      "lng": "127.02710580276",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "논현문화마루도서관",
+      "matchedName": "논현문화마루도서관",
+      "address": "서울 강남구 논현동 40-5",
+      "roadAddress": "서울 강남구 논현로131길 40",
+      "lat": "37.5138469281521",
+      "lng": "127.02710580276",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "대치1작은도서관",
+      "matchedName": "대치1작은도서관",
+      "address": "서울 강남구 대치동 646-2",
+      "roadAddress": "서울 강남구 남부순환로391길 19",
+      "lat": "37.493245715481926",
+      "lng": "127.0567749211372",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "대치도서관",
+      "matchedName": "강남구립대치도서관",
+      "address": "서울 강남구 대치동 316",
+      "roadAddress": "서울 강남구 삼성로 212",
+      "lat": "37.4960532414605",
+      "lng": "127.063856083151",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "못골도서관",
+      "matchedName": "못골도서관",
+      "address": "서울 강남구 자곡동 632",
+      "roadAddress": "서울 강남구 자곡로 116",
+      "lat": "37.4715326281388",
+      "lng": "127.09655319056951",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "못골한옥어린이도서관",
+      "matchedName": "못골한옥어린이도서관",
+      "address": "서울 강남구 자곡동 607",
+      "roadAddress": "서울 강남구 자곡로7길 3",
+      "lat": "37.4730745859462",
+      "lng": "127.099415313691",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "삼성도서관",
+      "matchedName": "삼성도서관",
+      "address": "서울 강남구 삼성동 161-2",
+      "roadAddress": "서울 강남구 봉은사로 616",
+      "lat": "37.5144487368682",
+      "lng": "127.062785883707",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "세곡도서관",
+      "matchedName": "세곡도서관",
+      "address": "서울 강남구 율현동 278-1",
+      "roadAddress": "서울 강남구 밤고개로 286",
+      "lat": "37.469063935829",
+      "lng": "127.106929619383",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "세곡마루도서관",
+      "matchedName": "세곡마루도서관",
+      "address": "서울 강남구 세곡동 521-1",
+      "roadAddress": "서울 강남구 헌릉로590길 68",
+      "lat": "37.46103784538844",
+      "lng": "127.10273604720807",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "역삼2동작은도서관",
+      "matchedName": "역삼2작은도서관",
+      "address": "서울 강남구 역삼동 761-18",
+      "roadAddress": "서울 강남구 언주로 314",
+      "lat": "37.49586666364767",
+      "lng": "127.0466695130328",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "역삼도서관",
+      "matchedName": "역삼도서관",
+      "address": "서울 강남구 역삼동 829-20",
+      "roadAddress": "서울 강남구 역삼로7길 16",
+      "lat": "37.49537383790107",
+      "lng": "127.03328248367103",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "역삼푸른솔도서관",
+      "matchedName": "역삼푸른솔도서관",
+      "address": "서울 강남구 역삼동 827-61",
+      "roadAddress": "서울 강남구 테헤란로8길 36",
+      "lat": "37.4964175578716",
+      "lng": "127.03200057186992",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "열린도서관",
+      "matchedName": "열린도서관",
+      "address": "서울 강남구 일원동 717",
+      "roadAddress": "서울 강남구 일원로 115",
+      "lat": "37.484136161779794",
+      "lng": "127.08451095383202",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "일원라온영어도서관",
+      "matchedName": "일원라온영어도서관",
+      "address": "서울 강남구 일원동 743",
+      "roadAddress": "서울 강남구 영동대로 22",
+      "lat": "37.4915586965873",
+      "lng": "127.076530435479",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "즐거운도서관",
+      "matchedName": "즐거운도서관",
+      "address": "서울 강남구 대치동 928-22",
+      "roadAddress": "서울 강남구 도곡로77길 23",
+      "lat": "37.49969993070047",
+      "lng": "127.05800117033047",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "행복한도서관",
+      "matchedName": "행복한도서관",
+      "address": "서울 강남구 대치동 980-9",
+      "roadAddress": "서울 강남구 영동대로65길 24",
+      "lat": "37.50238708322741",
+      "lng": "127.06428218367142",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "개포4동주민도서관",
+      "matchedName": "개포1동 주민도서관",
+      "address": "서울 강남구 개포동 660-1",
+      "roadAddress": "서울 강남구 선릉로 35",
+      "lat": "37.4823238532559",
+      "lng": "127.060104274586",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "도곡2동주민도서관",
+      "matchedName": "개포1동 주민도서관",
+      "address": "서울 강남구 개포동 660-1",
+      "roadAddress": "서울 강남구 선릉로 35",
+      "lat": "37.4823238532559",
+      "lng": "127.060104274586",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "신사동주민도서관",
+      "matchedName": "압구정동주민센터 U도서관",
+      "address": "서울 강남구 압구정동 458",
+      "roadAddress": "서울 강남구 압구정로33길 48",
+      "lat": "37.5306110191441",
+      "lng": "127.030648493858",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "압구정동주민도서관",
+      "matchedName": "압구정동주민센터 U도서관",
+      "address": "서울 강남구 압구정동 458",
+      "roadAddress": "서울 강남구 압구정로33길 48",
+      "lat": "37.5306110191441",
+      "lng": "127.030648493858",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "일원본동주민도서관",
+      "matchedName": "서울주민생활소형도서관",
+      "address": "서울 강남구 개포동 12",
+      "roadAddress": "서울 강남구 개포로109길 5",
+      "lat": "37.4923221827548",
+      "lng": "127.074600972689",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "개포1동주민도서관",
+      "matchedName": "개포1동 주민도서관",
+      "address": "서울 강남구 개포동 660-1",
+      "roadAddress": "서울 강남구 선릉로 35",
+      "lat": "37.4823238532559",
+      "lng": "127.060104274586",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "청담도서관",
+      "matchedName": "청담도서관",
+      "address": "서울 강남구 청담동 124-1",
+      "roadAddress": "서울 강남구 압구정로79길 26",
+      "lat": "37.52512207053224",
+      "lng": "127.04939487298878",
+      "source": "initial"
+    },
+    {
+      "gu": "광진구",
+      "searchKeyword": "광진정보도서관",
+      "matchedName": "광진정보도서관",
+      "address": "서울 광진구 광장동 112",
+      "roadAddress": "서울 광진구 아차산로78길 90",
+      "lat": "37.55106994644599",
+      "lng": "127.11060915357692",
+      "source": "initial"
+    },
+    {
+      "gu": "광진구",
+      "searchKeyword": "자양한강도서관",
+      "matchedName": "자양한강도서관",
+      "address": "서울 광진구 자양동 594",
+      "roadAddress": "서울 광진구 뚝섬로52길 66",
+      "lat": "37.529219976856744",
+      "lng": "127.07760406988577",
+      "source": "initial"
+    },
+    {
+      "gu": "광진구",
+      "searchKeyword": "구의3동 작은도서관",
+      "matchedName": "구의제3동도서관",
+      "address": "서울 광진구 구의동 587-29",
+      "roadAddress": "서울 광진구 강변역로 17",
+      "lat": "37.5380034331623",
+      "lng": "127.091965863206",
+      "source": "initial"
+    },
+    {
+      "gu": "광진구",
+      "searchKeyword": "군자동 작은도서관",
+      "matchedName": "어린이대공원역 스마트도서관",
+      "address": "서울 광진구 능동 463-1",
+      "roadAddress": "",
+      "lat": "37.5477511749119",
+      "lng": "127.074288402035",
+      "source": "initial"
+    },
+    {
+      "gu": "광진구",
+      "searchKeyword": "아차산숲속도서관",
+      "matchedName": "아차산숲속도서관",
+      "address": "서울 광진구 광장동 5-117",
+      "roadAddress": "서울 광진구 영화사로 139",
+      "lat": "37.552470702214045",
+      "lng": "127.10087870622709",
+      "source": "initial"
+    },
+    {
+      "gu": "광진구",
+      "searchKeyword": "자양제4동 작은도서관",
+      "matchedName": "자양4동새마을작은도서관",
+      "address": "서울 광진구 자양동 13-28",
+      "roadAddress": "서울 광진구 아차산로24길 17",
+      "lat": "37.5402773772383",
+      "lng": "127.065147485683",
+      "source": "initial"
+    },
+    {
+      "gu": "광진구",
+      "searchKeyword": "중곡문화체육센터 작은도서관",
+      "matchedName": "중곡문화체육센터도서관 스마트도서관",
+      "address": "서울 광진구 중곡동 168-8",
+      "roadAddress": "서울 광진구 능동로 433",
+      "lat": "37.5677834333416",
+      "lng": "127.084431052052",
+      "source": "initial"
+    },
+    {
+      "gu": "광진구",
+      "searchKeyword": "광진어린이영어도서관",
+      "matchedName": "광진어린이영어도서관",
+      "address": "서울 광진구 구의동 63-6",
+      "roadAddress": "서울 광진구 천호대로136길 55",
+      "lat": "37.547169962716396",
+      "lng": "127.08993457090602",
+      "source": "initial"
+    },
+    {
+      "gu": "마포구",
+      "searchKeyword": "마포중앙도서관",
+      "matchedName": "마포중앙도서관",
+      "address": "서울 마포구 성산동 275-3",
+      "roadAddress": "서울 마포구 성산로 128",
+      "lat": "37.56373600080743",
+      "lng": "126.90811569951101",
+      "source": "initial"
+    },
+    {
+      "gu": "마포구",
+      "searchKeyword": "마포구립서강도서관",
+      "matchedName": "마포구립서강도서관",
+      "address": "서울 마포구 창전동 242",
+      "roadAddress": "서울 마포구 독막로 165",
+      "lat": "37.5477685977495",
+      "lng": "126.932207063747",
+      "source": "initial"
+    },
+    {
+      "gu": "마포구",
+      "searchKeyword": "소금나루도서관",
+      "matchedName": "소금나루도서관",
+      "address": "서울 마포구 염리동 61-4",
+      "roadAddress": "서울 마포구 숭문길 72",
+      "lat": "37.54958678387692",
+      "lng": "126.94614388613529",
+      "source": "initial"
+    },
+    {
+      "gu": "마포구",
+      "searchKeyword": "마포푸르메어린이도서관",
+      "matchedName": "마포푸르메어린이도서관",
+      "address": "서울 마포구 상암동 1738",
+      "roadAddress": "서울 마포구 월드컵북로 494",
+      "lat": "37.5844738246742",
+      "lng": "126.880533140995",
+      "source": "initial"
+    },
+    {
+      "gu": "마포구",
+      "searchKeyword": "마포어린이영어도서관",
+      "matchedName": "마포어린이영어도서관",
+      "address": "서울 마포구 도화동 357-8",
+      "roadAddress": "서울 마포구 도화4길 53",
+      "lat": "37.539535927961",
+      "lng": "126.951920598499",
+      "source": "initial"
+    },
+    {
+      "gu": "마포구",
+      "searchKeyword": "마포꿈나래어린이영어도서관",
+      "matchedName": "꿈나래어린이영어도서관",
+      "address": "서울 마포구 망원동 403-22",
+      "roadAddress": "서울 마포구 월드컵로13길 80",
+      "lat": "37.5552178604429",
+      "lng": "126.905681622948",
+      "source": "initial"
+    },
+    {
+      "gu": "마포구",
+      "searchKeyword": "성산글마루작은도서관",
+      "matchedName": "성산글마루작은도서관",
+      "address": "서울 마포구 성산동 450",
+      "roadAddress": "서울 마포구 월드컵북로 235",
+      "lat": "37.5713169011058",
+      "lng": "126.901323603151",
+      "source": "initial"
+    },
+    {
+      "gu": "마포구",
+      "searchKeyword": "꿈을이루는작은도서관",
+      "matchedName": "꿈을이루는작은도서관",
+      "address": "서울 마포구 공덕동 458",
+      "roadAddress": "서울 마포구 마포대로7길 18",
+      "lat": "37.5471008237138",
+      "lng": "126.952178273078",
+      "source": "initial"
+    },
+    {
+      "gu": "마포구",
+      "searchKeyword": "늘푸른소나무작은도서관",
+      "matchedName": "늘푸른소나무작은도서관",
+      "address": "서울 마포구 신공덕동 158",
+      "roadAddress": "서울 마포구 백범로 227",
+      "lat": "37.542143030674",
+      "lng": "126.955521723408",
+      "source": "initial"
+    },
+    {
+      "gu": "마포구",
+      "searchKeyword": "복사골작은도서관",
+      "matchedName": "복사골작은도서관",
+      "address": "서울 마포구 도화동 357-8",
+      "roadAddress": "서울 마포구 도화4길 53",
+      "lat": "37.5395287162772",
+      "lng": "126.951911551186",
+      "source": "initial"
+    },
+    {
+      "gu": "마포구",
+      "searchKeyword": "성메작은도서관",
+      "matchedName": "성메작은도서관",
+      "address": "서울 마포구 성산동 603",
+      "roadAddress": "서울 마포구 월드컵북로30길 22",
+      "lat": "37.5686705568763",
+      "lng": "126.909024240284",
+      "source": "initial"
+    },
+    {
+      "gu": "마포구",
+      "searchKeyword": "아름드리작은도서관",
+      "matchedName": "아름드리작은도서관",
+      "address": "서울 마포구 망원동 436-14",
+      "roadAddress": "서울 마포구 방울내로7길 11",
+      "lat": "37.5603165668174",
+      "lng": "126.90231372980263",
+      "source": "initial"
+    },
+    {
+      "gu": "마포구",
+      "searchKeyword": "용강동작은도서관",
+      "matchedName": "용강동작은도서관",
+      "address": "서울 마포구 용강동 505",
+      "roadAddress": "서울 마포구 토정로31길 31",
+      "lat": "37.5423249806495",
+      "lng": "126.942839370043",
+      "source": "initial"
+    },
+    {
+      "gu": "마포구",
+      "searchKeyword": "마포초록숲작은도서관",
+      "matchedName": "초록숲작은도서관",
+      "address": "서울 마포구 아현동 770",
+      "roadAddress": "서울 마포구 마포대로11길 44-81",
+      "lat": "37.5521280348362",
+      "lng": "126.951296874903",
+      "source": "initial"
+    },
+    {
+      "gu": "마포구",
+      "searchKeyword": "해오름작은도서관 마포",
+      "matchedName": "해오름작은도서관",
+      "address": "서울 마포구 노고산동 1-50",
+      "roadAddress": "서울 마포구 신촌로26길 10",
+      "lat": "37.55590378168613",
+      "lng": "126.94253587901284",
+      "source": "initial"
+    },
+    {
+      "gu": "강북구",
+      "searchKeyword": "강북문화정보도서관",
+      "matchedName": "강북문화정보도서관",
+      "address": "서울 강북구 번동 산 27-108",
+      "roadAddress": "서울 강북구 오현로 145",
+      "lat": "37.62489854721974",
+      "lng": "127.03601125702522",
+      "source": "initial"
+    },
+    {
+      "gu": "강북구",
+      "searchKeyword": "강북청소년문화정보도서관",
+      "matchedName": "강북청소년문화정보도서관",
+      "address": "서울 강북구 미아동 754-1",
+      "roadAddress": "서울 강북구 삼양로54길 68",
+      "lat": "37.6230370062297",
+      "lng": "127.021685508671",
+      "source": "initial"
+    },
+    {
+      "gu": "강북구",
+      "searchKeyword": "솔샘문화정보도서관",
+      "matchedName": "솔샘문화정보도서관",
+      "address": "서울 강북구 미아동 1354-4",
+      "roadAddress": "서울 강북구 솔샘로 177",
+      "lat": "37.6204362848309",
+      "lng": "127.012500675816",
+      "source": "initial"
+    },
+    {
+      "gu": "강북구",
+      "searchKeyword": "수유문화정보도서관",
+      "matchedName": "수유문화정보도서관",
+      "address": "서울 강북구 수유동 605-412",
+      "roadAddress": "서울 강북구 삼양로 299",
+      "lat": "37.6300473625678",
+      "lng": "127.017604704177",
+      "source": "initial"
+    },
+    {
+      "gu": "강북구",
+      "searchKeyword": "미아문화정보도서관",
+      "matchedName": "미아문화정보도서관",
+      "address": "서울 강북구 미아동 197-1",
+      "roadAddress": "서울 강북구 솔매로49길 14",
+      "lat": "37.62691014932691",
+      "lng": "127.02701993258331",
+      "source": "initial"
+    },
+    {
+      "gu": "강북구",
+      "searchKeyword": "삼각산어린이도서관",
+      "matchedName": "삼각산어린이도서관",
+      "address": "서울 강북구 미아동 813-3",
+      "roadAddress": "서울 강북구 삼양로19길 34",
+      "lat": "37.6151841719855",
+      "lng": "127.020704628481",
+      "source": "initial"
+    },
+    {
+      "gu": "양천구",
+      "searchKeyword": "양천중앙도서관",
+      "matchedName": "양천중앙도서관",
+      "address": "서울 양천구 신정동 1319-4",
+      "roadAddress": "서울 양천구 신정로7길 81",
+      "lat": "37.51365822603642",
+      "lng": "126.83372802734786",
+      "source": "initial"
+    },
+    {
+      "gu": "양천구",
+      "searchKeyword": "갈산공공도서관",
+      "matchedName": "갈산공공도서관",
+      "address": "서울 양천구 신정동 337-9",
+      "roadAddress": "서울 양천구 목동남로4길 48-6",
+      "lat": "37.508766650295534",
+      "lng": "126.86715169067735",
+      "source": "initial"
+    },
+    {
+      "gu": "양천구",
+      "searchKeyword": "방아다리문학도서관",
+      "matchedName": "방아다리문학도서관",
+      "address": "서울 양천구 신월동 52-2",
+      "roadAddress": "서울 양천구 화곡로4길 10",
+      "lat": "37.5385543353993",
+      "lng": "126.82720523965",
+      "source": "initial"
+    },
+    {
+      "gu": "양천구",
+      "searchKeyword": "신월음악도서관",
+      "matchedName": "신월음악도서관",
+      "address": "서울 양천구 신월동 425-2",
+      "roadAddress": "서울 양천구 오목로5길 34",
+      "lat": "37.524686357953",
+      "lng": "126.840156305129",
+      "source": "initial"
+    },
+    {
+      "gu": "양천구",
+      "searchKeyword": "개울건강도서관",
+      "matchedName": "개울건강도서관",
+      "address": "서울 양천구 신정동 915-2",
+      "roadAddress": "서울 양천구 중앙로52길 56",
+      "lat": "37.5259761251494",
+      "lng": "126.856638670181",
+      "source": "initial"
+    },
+    {
+      "gu": "양천구",
+      "searchKeyword": "해맞이역사도서관",
+      "matchedName": "해맞이역사도서관",
+      "address": "서울 양천구 신월동 987",
+      "roadAddress": "서울 양천구 지양로 37",
+      "lat": "37.519075879374796",
+      "lng": "126.83560508209513",
+      "source": "initial"
+    },
+    {
+      "gu": "양천구",
+      "searchKeyword": "양천구영어특성화도서관",
+      "matchedName": "양천구영어특성화도서관",
+      "address": "서울 양천구 신정동 322-11",
+      "roadAddress": "서울 양천구 목동동로 81",
+      "lat": "37.51605178723754",
+      "lng": "126.86365713610795",
+      "source": "initial"
+    },
+    {
+      "gu": "양천구",
+      "searchKeyword": "모새미작은도서관",
+      "matchedName": "모새미작은도서관",
+      "address": "서울 양천구 목동 775-14",
+      "roadAddress": "서울 양천구 목동중앙서로7길 16-18",
+      "lat": "37.5334685529303",
+      "lng": "126.867173508215",
+      "source": "initial"
+    },
+    {
+      "gu": "양천구",
+      "searchKeyword": "그린나래미술작은도서관",
+      "matchedName": "그린나래미술도서관",
+      "address": "서울 양천구 신정동 1051-11",
+      "roadAddress": "서울 양천구 중앙로32길 1",
+      "lat": "37.518501201008846",
+      "lng": "126.85425714444409",
+      "source": "initial"
+    },
+    {
+      "gu": "양천구",
+      "searchKeyword": "고운맘작은도서관",
+      "matchedName": "고운맘작은도서관",
+      "address": "서울 양천구 신월동 483-11",
+      "roadAddress": "서울 양천구 중앙로53길 47",
+      "lat": "37.5249949942144",
+      "lng": "126.844576658746",
+      "source": "initial"
+    },
+    {
+      "gu": "양천구",
+      "searchKeyword": "고운달작은도서관",
+      "matchedName": "고운달작은도서관",
+      "address": "서울 양천구 신월동 135-18",
+      "roadAddress": "서울 양천구 곰달래로1길 38",
+      "lat": "37.532812227865",
+      "lng": "126.831544924175",
+      "source": "initial"
+    },
+    {
+      "gu": "양천구",
+      "searchKeyword": "미감도서관",
+      "matchedName": "미감도서관",
+      "address": "서울 양천구 목동 723-8",
+      "roadAddress": "서울 양천구 목동중앙남로 57-10",
+      "lat": "37.5389609183545",
+      "lng": "126.865466540815",
+      "source": "initial"
+    },
+    {
+      "gu": "양천구",
+      "searchKeyword": "신월3북카페 작은도서관",
+      "matchedName": "신월3북카페",
+      "address": "서울 양천구 신월동 167-5",
+      "roadAddress": "서울 양천구 남부순환로54길 5",
+      "lat": "37.5336304063521",
+      "lng": "126.829085677603",
+      "source": "initial"
+    },
+    {
+      "gu": "양천구",
+      "searchKeyword": "새아름 작은도서관 양천",
+      "matchedName": "새아름작은도서관",
+      "address": "서울 양천구 신월동 1078-1",
+      "roadAddress": "서울 양천구 남부순환로83길 53",
+      "lat": "37.5179462930667",
+      "lng": "126.845138763588",
+      "source": "initial"
+    },
+    {
+      "gu": "양천구",
+      "searchKeyword": "신정7동 도서방",
+      "matchedName": "신정7동도서방",
+      "address": "서울 양천구 신정동 324-5",
+      "roadAddress": "서울 양천구 목동동로 37",
+      "lat": "37.5144073021044",
+      "lng": "126.859678611053",
+      "source": "initial"
+    },
+    {
+      "gu": "양천구",
+      "searchKeyword": "신정6동 도서방",
+      "matchedName": "신정6동도서방",
+      "address": "서울 양천구 신정동 322-9",
+      "roadAddress": "서울 양천구 목동서로 353",
+      "lat": "37.5170581482405",
+      "lng": "126.864388292169",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "관악중앙도서관",
+      "matchedName": "관악중앙도서관",
+      "address": "서울 관악구 신림동 209-1",
+      "roadAddress": "서울 관악구 신림로3길 35",
+      "lat": "37.46705411409455",
+      "lng": "126.94476867051847",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "글빛정보도서관",
+      "matchedName": "글빛정보도서관",
+      "address": "서울 관악구 봉천동 1717-4",
+      "roadAddress": "서울 관악구 관악로30길 23",
+      "lat": "37.4862606702991",
+      "lng": "126.959715810473",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "은천동작은도서관",
+      "matchedName": "은천동작은도서관",
+      "address": "서울 관악구 봉천동 905-29",
+      "roadAddress": "서울 관악구 봉천로33나길 30",
+      "lat": "37.48535972805741",
+      "lng": "126.94246331846742",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "조원도서관",
+      "matchedName": "조원도서관",
+      "address": "서울 관악구 신림동 568-27",
+      "roadAddress": "서울 관악구 조원로12길 25",
+      "lat": "37.48263112953136",
+      "lng": "126.90779451551435",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "하난곡작은도서관",
+      "matchedName": "고맙습니다하난곡작은도서관",
+      "address": "서울 관악구 신림동 597-96",
+      "roadAddress": "서울 관악구 난우10가길 20-7",
+      "lat": "37.4768266883507",
+      "lng": "126.919961806497",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "낙성대공원 작은도서관",
+      "matchedName": "낙성대공원도서관",
+      "address": "서울 관악구 봉천동 227",
+      "roadAddress": "서울 관악구 낙성대로 77",
+      "lat": "37.4719741555524",
+      "lng": "126.959388858737",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "성현동작은도서관",
+      "matchedName": "성현동작은도서관",
+      "address": "서울 관악구 봉천동 1703-1",
+      "roadAddress": "서울 관악구 관악로37길 56",
+      "lat": "37.4873117903244",
+      "lng": "126.95618292414",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "용꿈꾸는작은도서관",
+      "matchedName": "용꿈꾸는작은도서관",
+      "address": "서울 관악구 봉천동 1570-1",
+      "roadAddress": "서울 관악구 관악로 145",
+      "lat": "37.47820977441988",
+      "lng": "126.95150316671918",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "그림숲그림책작은도서관",
+      "matchedName": "그림숲그림책작은도서관",
+      "address": "서울 관악구 봉천동 1577-15",
+      "roadAddress": "서울 관악구 청룡9길 12-39",
+      "lat": "37.4780526298136",
+      "lng": "126.946474513911",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "삼성작은도서관 관악",
+      "matchedName": "삼성작은도서관",
+      "address": "서울 관악구 신림동 808-268",
+      "roadAddress": "서울 관악구 호암로 520",
+      "lat": "37.4641154654801",
+      "lng": "126.931826002984",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "녹두작은도서관",
+      "matchedName": "대학동녹두작은도서관",
+      "address": "서울 관악구 신림동 1516",
+      "roadAddress": "서울 관악구 신림로 111",
+      "lat": "37.470612803618",
+      "lng": "126.936961403507",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "다사랑작은도서관 관악",
+      "matchedName": "보라매동다사랑작은도서관",
+      "address": "서울 관악구 봉천동 661",
+      "roadAddress": "서울 관악구 봉천로 279-8",
+      "lat": "37.4881765500746",
+      "lng": "126.932740377401",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "새싹작은도서관 관악",
+      "matchedName": "중앙동새싹작은도서관",
+      "address": "서울 관악구 봉천동 1512-7",
+      "roadAddress": "서울 관악구 양녕로6다길 7",
+      "lat": "37.4841881288567",
+      "lng": "126.949730954037",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "숯고을작은도서관",
+      "matchedName": "청룡동숯고을작은도서관",
+      "address": "서울 관악구 봉천동 1539-1",
+      "roadAddress": "서울 관악구 쑥고개로 44",
+      "lat": "37.4791171489369",
+      "lng": "126.941666522979",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "우듬지작은도서관",
+      "matchedName": "낙성대동우듬지작은도서관",
+      "address": "서울 관악구 봉천동 1624-24",
+      "roadAddress": "서울 관악구 낙성대로4가길 5",
+      "lat": "37.476334698674",
+      "lng": "126.958396146736",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "우리작은도서관 관악",
+      "matchedName": "남현동우리작은도서관",
+      "address": "서울 관악구 남현동 1086-1",
+      "roadAddress": "서울 관악구 남현1가길 29",
+      "lat": "37.4745631666922",
+      "lng": "126.977909779402",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "울타리작은도서관",
+      "matchedName": "신원동울타리작은도서관",
+      "address": "서울 관악구 신림동 1601-3",
+      "roadAddress": "서울 관악구 신원로3길 13",
+      "lat": "37.4815707566502",
+      "lng": "126.927328376717",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "책사랑작은도서관 관악",
+      "matchedName": "난곡동책사랑작은도서관",
+      "address": "서울 관악구 신림동 633-56",
+      "roadAddress": "서울 관악구 난곡로30길 40",
+      "lat": "37.4709568454787",
+      "lng": "126.921659231167",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "책의향기작은도서관",
+      "matchedName": "미성동책의향기작은도서관",
+      "address": "서울 관악구 신림동 1565-6",
+      "roadAddress": "서울 관악구 문성로 115",
+      "lat": "37.47810174529158",
+      "lng": "126.91624766843655",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "파랑새작은도서관 관악",
+      "matchedName": "성현동파랑새작은도서관",
+      "address": "서울 관악구 봉천동 1712-9",
+      "roadAddress": "서울 관악구 구암길 38",
+      "lat": "37.4895250127891",
+      "lng": "126.948139821504",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "푸른숲작은도서관 관악",
+      "matchedName": "청림동푸른숲작은도서관",
+      "address": "서울 관악구 봉천동 1000",
+      "roadAddress": "서울 관악구 관악로40길 39",
+      "lat": "37.4918465421065",
+      "lng": "126.958627268425",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "한울작은도서관 관악",
+      "matchedName": "은천동 한울작은도서관",
+      "address": "서울 관악구 봉천동 634-45",
+      "roadAddress": "서울 관악구 은천로9길 20",
+      "lat": "37.487077207946",
+      "lng": "126.940958168656",
+      "source": "initial"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "해오름작은도서관 관악",
+      "matchedName": "신사동해오름작은도서관",
+      "address": "서울 관악구 신림동 492-4",
+      "roadAddress": "서울 관악구 조원로 142",
+      "lat": "37.48537412462556",
+      "lng": "126.9180147112387",
+      "source": "initial"
+    },
+    {
+      "gu": "용산구",
+      "searchKeyword": "용산꿈나무도서관",
+      "matchedName": "용산꿈나무도서관",
+      "address": "서울 용산구 원효로1가 25",
+      "roadAddress": "서울 용산구 백범로 329",
+      "lat": "37.5390036092211",
+      "lng": "126.965258884714",
+      "source": "initial"
+    },
+    {
+      "gu": "용산구",
+      "searchKeyword": "청파도서관",
+      "matchedName": "청파도서관",
+      "address": "서울 용산구 서계동 227-1",
+      "roadAddress": "서울 용산구 청파로93길 27",
+      "lat": "37.553924819516816",
+      "lng": "126.96760591723012",
+      "source": "initial"
+    },
+    {
+      "gu": "용산구",
+      "searchKeyword": "용마루어린이도서관",
+      "matchedName": "용마루어린이도서관",
+      "address": "서울 용산구 용문동 38-191",
+      "roadAddress": "서울 용산구 효창원로37길 1",
+      "lat": "37.5369272372498",
+      "lng": "126.958251624576",
+      "source": "initial"
+    },
+    {
+      "gu": "용산구",
+      "searchKeyword": "청파어린이영어도서관",
+      "matchedName": "청파어린이영어도서관",
+      "address": "서울 용산구 청파동2가 35-20",
+      "roadAddress": "서울 용산구 청파로49길 34",
+      "lat": "37.5454809015107",
+      "lng": "126.968492206016",
+      "source": "initial"
+    },
+    {
+      "gu": "용산구",
+      "searchKeyword": "용암어린이영어도서관",
+      "matchedName": "용암어린이영어도서관",
+      "address": "서울 용산구 용산동2가 5-66",
+      "roadAddress": "서울 용산구 신흥로3가길 21-7",
+      "lat": "37.541022361056",
+      "lng": "126.984674753856",
+      "source": "initial"
+    },
+    {
+      "gu": "용산구",
+      "searchKeyword": "해다올작은도서관 용산",
+      "matchedName": "해다올작은도서관",
+      "address": "서울 용산구 용산동2가 11-13",
+      "roadAddress": "서울 용산구 신흥로 90",
+      "lat": "37.5459401167296",
+      "lng": "126.985470386418",
+      "source": "initial"
+    },
+    {
+      "gu": "용산구",
+      "searchKeyword": "한강로동 작은도서관",
+      "matchedName": "한강로동작은도서관",
+      "address": "서울 용산구 한강로2가 425",
+      "roadAddress": "서울 용산구 한강대로38길 28",
+      "lat": "37.5280340958934",
+      "lng": "126.969126296639",
+      "source": "initial"
+    },
+    {
+      "gu": "용산구",
+      "searchKeyword": "서빙고동 작은도서관",
+      "matchedName": "서빙고동작은도서관",
+      "address": "서울 용산구 서빙고동 134",
+      "roadAddress": "서울 용산구 서빙고로 279",
+      "lat": "37.520463284180146",
+      "lng": "126.9946799429529",
+      "source": "initial"
+    },
+    {
+      "gu": "용산구",
+      "searchKeyword": "별밭작은도서관 한남동",
+      "matchedName": "별밭작은도서관",
+      "address": "서울 용산구 한남동 622-3",
+      "roadAddress": "서울 용산구 대사관로34길 49",
+      "lat": "37.53123652304524",
+      "lng": "127.00622252218261",
+      "source": "initial"
+    },
+    {
+      "gu": "용산구",
+      "searchKeyword": "후암동작은도서관 북앤캠프",
+      "matchedName": "후암동작은도서관북&캠프",
+      "address": "서울 용산구 후암동 244-109",
+      "roadAddress": "서울 용산구 후암로 32-6",
+      "lat": "37.5486870357241",
+      "lng": "126.978150461632",
+      "source": "initial"
+    },
+    {
+      "gu": "용산구",
+      "searchKeyword": "원효로제2동 작은도서관",
+      "matchedName": "원효로제2동작은도서관두드림",
+      "address": "서울 용산구 산천동 81-1",
+      "roadAddress": "서울 용산구 효창원로8길 3",
+      "lat": "37.5343532215395",
+      "lng": "126.951548296211",
+      "source": "initial"
+    },
+    {
+      "gu": "용산구",
+      "searchKeyword": "이촌2동 작은도서관",
+      "matchedName": "이촌2동작은도서관",
+      "address": "서울 용산구 이촌동 206-2",
+      "roadAddress": "서울 용산구 이촌로18길 20",
+      "lat": "37.526281483665",
+      "lng": "126.954657784428",
+      "source": "initial"
+    },
+    {
+      "gu": "용산구",
+      "searchKeyword": "효창동 작은도서관",
+      "matchedName": "고래이야기작은도서관",
+      "address": "서울 용산구 효창동 5-495",
+      "roadAddress": "서울 용산구 효창원로 157",
+      "lat": "37.541907402503064",
+      "lng": "126.96191726426281",
+      "source": "initial"
+    },
+    {
+      "gu": "용산구",
+      "searchKeyword": "회나무작은도서관 이태원",
+      "matchedName": "이태원2동회나무작은도서관",
+      "address": "서울 용산구 이태원동 255-54",
+      "roadAddress": "서울 용산구 회나무로13길 58",
+      "lat": "37.5419023243412",
+      "lng": "126.990196434337",
+      "source": "initial"
+    },
+    {
+      "gu": "용산구",
+      "searchKeyword": "꿈꾸는책마을 작은도서관 보광동",
+      "matchedName": "꿈꾸는 책마을",
+      "address": "서울 용산구 보광동 217-32",
+      "roadAddress": "서울 용산구 장문로 95",
+      "lat": "37.5262649593841",
+      "lng": "127.000108604088",
+      "source": "initial"
+    },
+    {
+      "gu": "용산구",
+      "searchKeyword": "청소년푸르미르도서관",
+      "matchedName": "청소년푸르미르 작은도서관",
+      "address": "서울 용산구 이촌동 301-82",
+      "roadAddress": "서울 용산구 이촌로71길 24",
+      "lat": "37.5213568836937",
+      "lng": "126.973298719328",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "등빛도서관",
+      "matchedName": "강서구립 등빛도서관",
+      "address": "서울 강서구 등촌동 690-1",
+      "roadAddress": "서울 강서구 강서로62길 48",
+      "lat": "37.562405162431354",
+      "lng": "126.842391494442",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "강서구립 가양도서관",
+      "matchedName": "강서구립 가양도서관",
+      "address": "서울 강서구 가양동 1493",
+      "roadAddress": "서울 강서구 양천로61길 101",
+      "lat": "37.5594278014627",
+      "lng": "126.865302989472",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "강서영어도서관",
+      "matchedName": "강서영어도서관",
+      "address": "서울 강서구 화곡동 809-3",
+      "roadAddress": "서울 강서구 곰달래로57가길 26",
+      "lat": "37.53465602320527",
+      "lng": "126.86087166398725",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "곰달래도서관",
+      "matchedName": "곰달래도서관",
+      "address": "서울 강서구 화곡동 890",
+      "roadAddress": "서울 강서구 강서로5길 50",
+      "lat": "37.52911310500611",
+      "lng": "126.84915907010613",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "길꽃어린이도서관",
+      "matchedName": "길꽃어린이도서관",
+      "address": "서울 강서구 방화동 828",
+      "roadAddress": "서울 강서구 금낭화로24길 5",
+      "lat": "37.5786572090441",
+      "lng": "126.813862703073",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "꿈꾸는어린이도서관 강서",
+      "matchedName": "꿈꾸는어린이도서관",
+      "address": "서울 강서구 염창동 281-25",
+      "roadAddress": "서울 강서구 공항대로 615",
+      "lat": "37.5473597241619",
+      "lng": "126.873336510192",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "우장산숲속도서관",
+      "matchedName": "우장산숲속도서관",
+      "address": "서울 강서구 화곡동 1159-4",
+      "roadAddress": "서울 강서구 우현로 34",
+      "lat": "37.5483057178016",
+      "lng": "126.841907428457",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "푸른들청소년도서관",
+      "matchedName": "푸른들청소년도서관",
+      "address": "서울 강서구 화곡동 1019",
+      "roadAddress": "서울 강서구 강서로45다길 71",
+      "lat": "37.54465998988",
+      "lng": "126.835107606436",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "도란도란쉼터 작은도서관",
+      "matchedName": "도란도란쉼터작은도서관",
+      "address": "서울 강서구 가양동 1462-3",
+      "roadAddress": "서울 강서구 허준로 30",
+      "lat": "37.5694216834908",
+      "lng": "126.844787751366",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "초록향기작은도서관",
+      "matchedName": "초록향기작은도서관",
+      "address": "서울 강서구 화곡동 46-148",
+      "roadAddress": "서울 강서구 초록마을로5길 29",
+      "lat": "37.5440353460949",
+      "lng": "126.847664771172",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "생각열매작은도서관",
+      "matchedName": "생각열매작은도서관",
+      "address": "서울 강서구 등촌동 642-1",
+      "roadAddress": "서울 강서구 공항대로53가길 55",
+      "lat": "37.5558271910254",
+      "lng": "126.858935519469",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "글벗누리작은도서관",
+      "matchedName": "글벗누리작은도서관",
+      "address": "서울 강서구 마곡동 731-272",
+      "roadAddress": "서울 강서구 방화대로 330",
+      "lat": "37.57034422385379",
+      "lng": "126.81705287386228",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "볏고을작은도서관",
+      "matchedName": "볏고을작은도서관",
+      "address": "서울 강서구 화곡동 809-3",
+      "roadAddress": "서울 강서구 곰달래로57가길 26",
+      "lat": "37.5347856656049",
+      "lng": "126.860785435195",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "배다리작은도서관",
+      "matchedName": "배다리작은도서관",
+      "address": "서울 강서구 화곡동 341-4",
+      "roadAddress": "서울 강서구 곰달래로25길 45",
+      "lat": "37.5326584867599",
+      "lng": "126.848412002257",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "채움작은도서관 강서",
+      "matchedName": "채움작은도서관",
+      "address": "서울 강서구 방화동 850",
+      "roadAddress": "서울 강서구 개화동로21길 52",
+      "lat": "37.57170119955414",
+      "lng": "126.8058203337807",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "가람작은도서관 강서",
+      "matchedName": "가람작은도서관",
+      "address": "서울 강서구 가양동 1481",
+      "roadAddress": "서울 강서구 양천로57길 36",
+      "lat": "37.56423313850431",
+      "lng": "126.85347200181317",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "역마을작은도서관",
+      "matchedName": "역마을작은도서관",
+      "address": "서울 강서구 화곡동 1176-1",
+      "roadAddress": "서울 강서구 공항대로46길 105",
+      "lat": "37.551541258795595",
+      "lng": "126.85095850890379",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "솔뫼작은도서관",
+      "matchedName": "솔뫼작은도서관",
+      "address": "서울 강서구 화곡동 379-32",
+      "roadAddress": "서울 강서구 가로공원로77길 30",
+      "lat": "37.538026147524",
+      "lng": "126.838521148376",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "아리향기작은도서관",
+      "matchedName": "아리향기작은도서관",
+      "address": "서울 강서구 염창동 53-1",
+      "roadAddress": "서울 강서구 양천로67가길 63",
+      "lat": "37.5537614512323",
+      "lng": "126.870967198188",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "책마루작은도서관 강서",
+      "matchedName": "책마루작은도서관",
+      "address": "서울 강서구 화곡동 1050-3",
+      "roadAddress": "서울 강서구 강서로33가길 17",
+      "lat": "37.54252738921281",
+      "lng": "126.83841186542683",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "수명산작은도서관",
+      "matchedName": "수명산작은도서관",
+      "address": "서울 강서구 내발산동 740",
+      "roadAddress": "서울 강서구 수명로1길 131",
+      "lat": "37.5541248888821",
+      "lng": "126.825643747249",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "초록동작은도서관",
+      "matchedName": "초록동작은도서관",
+      "address": "서울 강서구 화곡동 55-79",
+      "roadAddress": "서울 강서구 초록마을로14길 36",
+      "lat": "37.54115871179057",
+      "lng": "126.84856339058135",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "도리샘작은도서관",
+      "matchedName": "도리샘작은도서관",
+      "address": "서울 강서구 가양동 1488-1",
+      "roadAddress": "서울 강서구 허준로 202",
+      "lat": "37.5610548736154",
+      "lng": "126.860537372041",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "등마루골작은도서관",
+      "matchedName": "등마루골작은도서관",
+      "address": "서울 강서구 등촌동 560-12",
+      "roadAddress": "서울 강서구 등촌로 143",
+      "lat": "37.5426696443034",
+      "lng": "126.86252240015",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "옹기종기작은도서관",
+      "matchedName": "옹기종기작은도서관",
+      "address": "서울 강서구 염창동 270-1",
+      "roadAddress": "서울 강서구 공항대로61길 50",
+      "lat": "37.5530251262736",
+      "lng": "126.866722343568",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "방그리나작은도서관",
+      "matchedName": "방그리나작은도서관",
+      "address": "서울 강서구 방화동 828",
+      "roadAddress": "서울 강서구 금낭화로24길 5",
+      "lat": "37.5787073715484",
+      "lng": "126.813676916422",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "꿈자람책놀이터 작은도서관",
+      "matchedName": "꿈자람책놀이터작은도서관",
+      "address": "서울 강서구 방화동 851",
+      "roadAddress": "서울 강서구 개화동로21길 4",
+      "lat": "37.56942840144537",
+      "lng": "126.80606960212798",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "해뜰작은도서관",
+      "matchedName": "해뜰작은도서관",
+      "address": "서울 강서구 방화동 839",
+      "roadAddress": "서울 강서구 방화대로48길 40",
+      "lat": "37.57486050271956",
+      "lng": "126.81971906699481",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "옹달샘작은도서관 강서",
+      "matchedName": "옹달샘작은도서관",
+      "address": "서울 강서구 화곡동 860-4",
+      "roadAddress": "서울 강서구 곰달래로37길 13",
+      "lat": "37.5317975694207",
+      "lng": "126.854491492002",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "내발산작은도서관",
+      "matchedName": "내발산작은도서관",
+      "address": "서울 강서구 내발산동 648-8",
+      "roadAddress": "서울 강서구 강서로52길 89",
+      "lat": "37.5575264512715",
+      "lng": "126.843205323089",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "꿈터작은도서관 강서",
+      "matchedName": "꿈터작은도서관",
+      "address": "서울 강서구 화곡동 425-4",
+      "roadAddress": "서울 강서구 곰달래로 79",
+      "lat": "37.5304222630153",
+      "lng": "126.841592198914",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "허준마을작은도서관",
+      "matchedName": "허준마을작은도서관",
+      "address": "서울 강서구 가양동 1472-4",
+      "roadAddress": "서울 강서구 허준로 93",
+      "lat": "37.5673973847313",
+      "lng": "126.851271023684",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "책향기작은도서관 강서",
+      "matchedName": "책향기작은도서관",
+      "address": "서울 강서구 내발산동 681-5",
+      "roadAddress": "서울 강서구 강서로47길 54",
+      "lat": "37.55311584656352",
+      "lng": "126.8331786734401",
+      "source": "initial"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "큰마음작은도서관",
+      "matchedName": "큰마음작은도서관",
+      "address": "서울 강서구 등촌동 705-4",
+      "roadAddress": "서울 강서구 화곡로63길 96",
+      "lat": "37.5588588962568",
+      "lng": "126.847928861537",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "서초구립반포도서관",
+      "matchedName": "서초구립반포도서관",
+      "address": "서울 서초구 반포동 32-12",
+      "roadAddress": "서울 서초구 고무래로 34",
+      "lat": "37.5024886017556",
+      "lng": "127.012544317106",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "내곡도서관",
+      "matchedName": "서초구립내곡도서관",
+      "address": "서울 서초구 신원동 294",
+      "roadAddress": "서울 서초구 청계산로7길 9-20",
+      "lat": "37.45211750606295",
+      "lng": "127.05442922269215",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "양재도서관",
+      "matchedName": "윤봉길새책도서관",
+      "address": "서울 서초구 양재동 236",
+      "roadAddress": "서울 서초구 매헌로 99",
+      "lat": "37.4696616740631",
+      "lng": "127.036590049316",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "서초청소년도서관",
+      "matchedName": "서초청소년도서관",
+      "address": "서울 서초구 서초동 1336-1",
+      "roadAddress": "서울 서초구 효령로77길 37",
+      "lat": "37.4923153422999",
+      "lng": "127.028192615151",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "방배숲환경도서관",
+      "matchedName": "서초구립방배숲환경도서관",
+      "address": "서울 서초구 방배동 126-1",
+      "roadAddress": "서울 서초구 서초대로 160-7",
+      "lat": "37.48896245301088",
+      "lng": "127.0000508828409",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "우면도서관",
+      "matchedName": "우면도서관",
+      "address": "서울 서초구 우면동 767",
+      "roadAddress": "서울 서초구 양재대로2길 110",
+      "lat": "37.4562529374893",
+      "lng": "127.015671868425",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "서이도서관",
+      "matchedName": "서이도서관",
+      "address": "서울 서초구 서초동 1332-6",
+      "roadAddress": "서울 서초구 서초대로70길 51",
+      "lat": "37.49199533314262",
+      "lng": "127.02485444564135",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "잠원도서관",
+      "matchedName": "잠원도서관",
+      "address": "서울 서초구 잠원동 58-27",
+      "roadAddress": "서울 서초구 나루터로 38",
+      "lat": "37.5149691587652",
+      "lng": "127.013980668551",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "방배도서관",
+      "matchedName": "방배도서관",
+      "address": "서울 서초구 방배동 1023-3",
+      "roadAddress": "서울 서초구 방배로 40",
+      "lat": "37.478526070273126",
+      "lng": "126.99996834396919",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "서초그림책도서관",
+      "matchedName": "서초그림책도서관",
+      "address": "서울 서초구 서초동 1498-4",
+      "roadAddress": "서울 서초구 명달로 150",
+      "lat": "37.490612988892885",
+      "lng": "127.00510309585752",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "서초1동 작은도서관",
+      "matchedName": "씨넷도서관",
+      "address": "서울 서초구 서초동 1431-1",
+      "roadAddress": "서울 서초구 남부순환로333길 36",
+      "lat": "37.4840599881744",
+      "lng": "127.021084471302",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "서초3동 작은도서관",
+      "matchedName": "서초3동작은도서관",
+      "address": "서울 서초구 서초동 1583-10",
+      "roadAddress": "서울 서초구 반포대로 58",
+      "lat": "37.48525334103598",
+      "lng": "127.01153061235765",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "서초4동 작은도서관",
+      "matchedName": "서초4동 작은도서관",
+      "address": "서울 서초구 서초동 1302-6",
+      "roadAddress": "서울 서초구 서운로26길 3",
+      "lat": "37.5026709890323",
+      "lng": "127.022188973964",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "반포본동 작은도서관",
+      "matchedName": "방배본동작은도서관",
+      "address": "서울 서초구 방배동 774-9",
+      "roadAddress": "서울 서초구 동광로19길 38",
+      "lat": "37.494141816381",
+      "lng": "126.988827618193",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "반포1동 작은도서관",
+      "matchedName": "반포별빛작은도서관",
+      "address": "서울 서초구 반포동 30-15",
+      "roadAddress": "서울 서초구 사평대로 310-4",
+      "lat": "37.5034603746243",
+      "lng": "127.015961074797",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "반포2동 작은도서관",
+      "matchedName": "반포2동작은도서관",
+      "address": "서울 서초구 반포동 1-23",
+      "roadAddress": "서울 서초구 신반포로 127",
+      "lat": "37.50442011025488",
+      "lng": "126.99827867449244",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "반포3동 작은도서관",
+      "matchedName": "반포3동작은도서관",
+      "address": "서울 서초구 잠원동 71-7",
+      "roadAddress": "서울 서초구 신반포로23길 78",
+      "lat": "37.51204609578",
+      "lng": "127.00558865610155",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "반포4동 작은도서관",
+      "matchedName": "반포4동작은도서관",
+      "address": "서울 서초구 반포동 74-7",
+      "roadAddress": "서울 서초구 사평대로28길 70",
+      "lat": "37.4974652572111",
+      "lng": "127.000312116805",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "방배본동 작은도서관",
+      "matchedName": "방배본동작은도서관",
+      "address": "서울 서초구 방배동 774-9",
+      "roadAddress": "서울 서초구 동광로19길 38",
+      "lat": "37.494141816381",
+      "lng": "126.988827618193",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "방배1동 작은도서관",
+      "matchedName": "방배1동 작은도서관",
+      "address": "서울 서초구 방배동 922-18",
+      "roadAddress": "서울 서초구 효령로29길 43",
+      "lat": "37.48340670876173",
+      "lng": "126.99451184399551",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "방배2동 작은도서관",
+      "matchedName": "방배2동작은도서관",
+      "address": "서울 서초구 방배동 462-13",
+      "roadAddress": "서울 서초구 청두곶길 36",
+      "lat": "37.4798010170985",
+      "lng": "126.985560082374",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "방배4동 작은도서관",
+      "matchedName": "방배4동작은도서관",
+      "address": "서울 서초구 방배동 852-14",
+      "roadAddress": "서울 서초구 방배로 173",
+      "lat": "37.48895948622409",
+      "lng": "126.99210524487181",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "양재1동 작은도서관",
+      "matchedName": "양재너구리도서관",
+      "address": "서울 서초구 양재동 82-13",
+      "roadAddress": "서울 서초구 논현로27길 58",
+      "lat": "37.4792046125228",
+      "lng": "127.041035630633",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "양재2동 작은도서관",
+      "matchedName": "양재2동작은도서관",
+      "address": "서울 서초구 양재동 323-1",
+      "roadAddress": "서울 서초구 강남대로12길 44",
+      "lat": "37.47069897870151",
+      "lng": "127.04132376819817",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "양재역 스마트도서관",
+      "matchedName": "양재역스마트도서관",
+      "address": "서울 서초구 서초동 1366-9",
+      "roadAddress": "서울 서초구 남부순환로 지하 2585",
+      "lat": "37.48353678525918",
+      "lng": "127.03506139473161",
+      "source": "initial"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "양재근린공원 스마트도서관",
+      "matchedName": "스마트도서관",
+      "address": "서울 서초구 양재동 311",
+      "roadAddress": "",
+      "lat": "37.4710424967949",
+      "lng": "127.043191476775",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "성동구립도서관",
+      "matchedName": "성동구립도서관",
+      "address": "서울 성동구 행당동 142-4",
+      "roadAddress": "서울 성동구 고산자로10길 9",
+      "lat": "37.55918951636491",
+      "lng": "127.03496099832289",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "금호도서관",
+      "matchedName": "성동구립금호도서관",
+      "address": "서울 성동구 금호동1가 688",
+      "roadAddress": "서울 성동구 난계로 20",
+      "lat": "37.554126658530066",
+      "lng": "127.02490335794663",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "용답도서관",
+      "matchedName": "성동구립용답도서관",
+      "address": "서울 성동구 용답동 95-1",
+      "roadAddress": "서울 성동구 용답중앙3길 10",
+      "lat": "37.5666798308756",
+      "lng": "127.051315975524",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "성수도서관",
+      "matchedName": "성동구립성수도서관",
+      "address": "서울 성동구 성수동1가 656-323",
+      "roadAddress": "서울 성동구 뚝섬로1길 43",
+      "lat": "37.54536400860451",
+      "lng": "127.04704774759006",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "매봉산숲속도서관",
+      "matchedName": "매봉산숲속도서관",
+      "address": "서울 성동구 옥수동 528-6",
+      "roadAddress": "서울 성동구 매봉길 49-29",
+      "lat": "37.5459044761691",
+      "lng": "127.010806677868",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "왕십리제2동 작은도서관",
+      "matchedName": "왕십리제2동작은도서관",
+      "address": "서울 성동구 하왕십리동 973-9",
+      "roadAddress": "서울 성동구 무학봉15길 6",
+      "lat": "37.56181252338817",
+      "lng": "127.03100081960574",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "마장동 작은도서관",
+      "matchedName": "마장동 작은도서관",
+      "address": "서울 성동구 마장동 780-2",
+      "roadAddress": "서울 성동구 마장로42길 11",
+      "lat": "37.5663218546939",
+      "lng": "127.045402694889",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "사근동 작은도서관",
+      "matchedName": "마을작은도서관 누리마루",
+      "address": "서울 성동구 사근동 212-31",
+      "roadAddress": "서울 성동구 사근동9가길 23",
+      "lat": "37.5617542610663",
+      "lng": "127.046541938302",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "행당제2동 작은도서관",
+      "matchedName": "행당2동어린이작은도서관",
+      "address": "서울 성동구 행당동 347-1",
+      "roadAddress": "서울 성동구 행당로9길 9",
+      "lat": "37.5582540009407",
+      "lng": "127.029376378489",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "응봉동 작은도서관",
+      "matchedName": "독서당작은도서관",
+      "address": "서울 성동구 응봉동 279-1",
+      "roadAddress": "서울 성동구 독서당로63길 57-1",
+      "lat": "37.55340567164042",
+      "lng": "127.02962231821805",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "금호1가동 작은도서관",
+      "matchedName": "금호1가동숲속작은도서관",
+      "address": "서울 성동구 금호동1가 127-2",
+      "roadAddress": "서울 성동구 행당로 15",
+      "lat": "37.5548607125147",
+      "lng": "127.02164763027",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "금호2,3가동 작은도서관",
+      "matchedName": "어린이작은도서관 책읽는엄마 책읽는 아이",
+      "address": "서울 성동구 금호동3가 산 2-8",
+      "roadAddress": "서울 성동구 매봉18길 11",
+      "lat": "37.55002895755124",
+      "lng": "127.01362055932738",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "금호4가동 작은도서관",
+      "matchedName": "금호4가동작은도서관",
+      "address": "서울 성동구 금호동4가 803",
+      "roadAddress": "서울 성동구 독서당로46길 26",
+      "lat": "37.547166051545",
+      "lng": "127.022374160693",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "옥수동 작은도서관",
+      "matchedName": "올리브나무작은도서관",
+      "address": "서울 성동구 옥수동 565",
+      "roadAddress": "서울 성동구 독서당로 227",
+      "lat": "37.544936195809534",
+      "lng": "127.01613059688356",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "성수1가제1동 작은도서관",
+      "matchedName": "성수1가제1동작은도서관",
+      "address": "서울 성동구 성수동1가 27-23",
+      "roadAddress": "서울 성동구 뚝섬로3길 18",
+      "lat": "37.5419968088711",
+      "lng": "127.049651545556",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "성수1가제2동 작은도서관",
+      "matchedName": "서울숲옆다루작은도서관",
+      "address": "서울 성동구 성수동1가 668-13",
+      "roadAddress": "서울 성동구 서울숲6길 14",
+      "lat": "37.5475063052177",
+      "lng": "127.043055630198",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "성수2가제1동 작은도서관",
+      "matchedName": "작은도서관 그림",
+      "address": "서울 성동구 성수동2가 425-1",
+      "roadAddress": "서울 성동구 둘레11길 10-24",
+      "lat": "37.5362617554289",
+      "lng": "127.052177650477",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "성수2가제3동 작은도서관",
+      "matchedName": "뚝섬 작은도서관",
+      "address": "서울 성동구 성수동2가 315-63",
+      "roadAddress": "서울 성동구 성수일로6길 56",
+      "lat": "37.5437761352796",
+      "lng": "127.056022259994",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "송정동늘푸른작은도서관",
+      "matchedName": "송정동늘푸른작은도서관",
+      "address": "서울 성동구 송정동 72-117",
+      "roadAddress": "서울 성동구 송정18가길 9",
+      "lat": "37.5532265094248",
+      "lng": "127.068375046728",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "용답동 작은도서관",
+      "matchedName": "용답동어린이작은도서관",
+      "address": "서울 성동구 용답동 5-6",
+      "roadAddress": "서울 성동구 용답중앙23길 20",
+      "lat": "37.5641155001979",
+      "lng": "127.055511170371",
+      "source": "initial"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "왕십리도선동 작은도서관",
+      "matchedName": "와글와글도서관",
+      "address": "서울 성동구 도선동 101",
+      "roadAddress": "서울 성동구 왕십리로22길 22",
+      "lat": "37.5638674228439",
+      "lng": "127.035190688297",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "노원중앙도서관",
+      "matchedName": "노원중앙도서관",
+      "address": "서울 노원구 상계동 686",
+      "roadAddress": "서울 노원구 노원로34길 43",
+      "lat": "37.66106965639641",
+      "lng": "127.06500809784696",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "노원어린이도서관",
+      "matchedName": "노원어린이도서관",
+      "address": "서울 노원구 중계동 356",
+      "roadAddress": "서울 노원구 한글비석로 346",
+      "lat": "37.658211070468916",
+      "lng": "127.07663317532989",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "월계도서관",
+      "matchedName": "월계도서관",
+      "address": "서울 노원구 월계동 598",
+      "roadAddress": "서울 노원구 월계로 319",
+      "lat": "37.628636996613",
+      "lng": "127.056125543739",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "상계도서관",
+      "matchedName": "상계도서관",
+      "address": "서울 노원구 상계동 1118-66",
+      "roadAddress": "서울 노원구 동일로243길 57",
+      "lat": "37.6785425209255",
+      "lng": "127.051968795357",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "불암도서관",
+      "matchedName": "불암도서관",
+      "address": "서울 노원구 중계동 34-5",
+      "roadAddress": "서울 노원구 중계로 106",
+      "lat": "37.64522369443124",
+      "lng": "127.08286884419142",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "화랑도서관",
+      "matchedName": "화랑도서관",
+      "address": "서울 노원구 공릉동 87-6",
+      "roadAddress": "서울 노원구 노원로1나길 10",
+      "lat": "37.621564572065644",
+      "lng": "127.08307478606055",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "노원휴먼라이브러리",
+      "matchedName": "노원휴먼라이브러리",
+      "address": "서울 노원구 상계동 686",
+      "roadAddress": "서울 노원구 노원로34길 43",
+      "lat": "37.6611002897468",
+      "lng": "127.06500812456",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "하계어린이도서관",
+      "matchedName": "하계어린이도서관",
+      "address": "서울 노원구 하계동 170-14",
+      "roadAddress": "서울 노원구 공릉로62길 18",
+      "lat": "37.636104497471",
+      "lng": "127.072424194967",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "월계어린이도서관",
+      "matchedName": "월계어린이도서관",
+      "address": "서울 노원구 월계동 936",
+      "roadAddress": "서울 노원구 월계로42길 9",
+      "lat": "37.6242642209734",
+      "lng": "127.050793677781",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "공릉행복작은도서관",
+      "matchedName": "한내행복 작은도서관",
+      "address": "서울 노원구 월계동 333-1",
+      "roadAddress": "서울 노원구 마들로3길 13",
+      "lat": "37.627487411900326",
+      "lng": "127.06311194290558",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "노원문화원 작은도서관",
+      "matchedName": "노원문화원작은도서관",
+      "address": "서울 노원구 공릉동 710",
+      "roadAddress": "서울 노원구 동일로197길 24",
+      "lat": "37.6288279105593",
+      "lng": "127.069810456897",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "도란도란작은도서관 노원",
+      "matchedName": "도란도란작은도서관",
+      "address": "서울 노원구 공릉동 499-25",
+      "roadAddress": "서울 노원구 동일로186길 3-24",
+      "lat": "37.62477287307252",
+      "lng": "127.07375554798934",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "책이랑친구랑작은도서관",
+      "matchedName": "책이랑친구랑작은도서관",
+      "address": "서울 노원구 공릉동 87-7",
+      "roadAddress": "서울 노원구 노원로1길 68",
+      "lat": "37.6212434977765",
+      "lng": "127.08353205168",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "푸른숲작은도서관 노원",
+      "matchedName": "푸른숲작은도서관",
+      "address": "서울 노원구 상계동 1412",
+      "roadAddress": "서울 노원구 동일로 1633",
+      "lat": "37.67405613119204",
+      "lng": "127.05487431055958",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "파랑새작은도서관 노원",
+      "matchedName": "파랑새작은도서관",
+      "address": "서울 노원구 상계동 385-1",
+      "roadAddress": "서울 노원구 상계로 118",
+      "lat": "37.6574659253358",
+      "lng": "127.067860821558",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "수락작은도서관",
+      "matchedName": "수락작은도서관",
+      "address": "서울 노원구 상계동 37-7",
+      "roadAddress": "서울 노원구 덕릉로 859",
+      "lat": "37.6728268459162",
+      "lng": "127.083181775901",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "해솔작은도서관",
+      "matchedName": "해솔작은도서관",
+      "address": "서울 노원구 상계동 167-2",
+      "roadAddress": "서울 노원구 한글비석로 434",
+      "lat": "37.6629502246344",
+      "lng": "127.069366387061",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "나무작은도서관 노원",
+      "matchedName": "KB국민은행과함께하는나무작은도서관",
+      "address": "서울 노원구 상계동 731-5",
+      "roadAddress": "서울 노원구 동일로 1405",
+      "lat": "37.6538310280137",
+      "lng": "127.060177648416",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "노원구청 작은도서관",
+      "matchedName": "KB국민은행과함께하는나무작은도서관",
+      "address": "서울 노원구 상계동 731-5",
+      "roadAddress": "서울 노원구 동일로 1405",
+      "lat": "37.6538310280137",
+      "lng": "127.060177648416",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "메아리작은도서관",
+      "matchedName": "메아리작은도서관",
+      "address": "서울 노원구 상계동 735-1",
+      "roadAddress": "서울 노원구 동일로217길 48",
+      "lat": "37.6530491548795",
+      "lng": "127.058020513038",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "반디작은도서관 노원",
+      "matchedName": "반디작은도서관",
+      "address": "서울 노원구 상계동 658",
+      "roadAddress": "서울 노원구 동일로227길 97",
+      "lat": "37.6667254450817",
+      "lng": "127.051575191724",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "상계숲속작은도서관",
+      "matchedName": "상계숲속작은도서관",
+      "address": "서울 노원구 상계동 620-1",
+      "roadAddress": "서울 노원구 동일로227길 106",
+      "lat": "37.6694252675951",
+      "lng": "127.050452665687",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "한울작은도서관 노원",
+      "matchedName": "한울작은도서관",
+      "address": "서울 노원구 상계동 682",
+      "roadAddress": "서울 노원구 한글비석로 487",
+      "lat": "37.6645498898099",
+      "lng": "127.06382787601",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "가온작은도서관 노원",
+      "matchedName": "가온작은도서관",
+      "address": "서울 노원구 상계동 671",
+      "roadAddress": "서울 노원구 노원로 530",
+      "lat": "37.6612649889243",
+      "lng": "127.060257315713",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "꿈꾸는작은도서관 노원",
+      "matchedName": "꿈꾸는작은도서관",
+      "address": "서울 노원구 월계동 928",
+      "roadAddress": "서울 노원구 석계로 59",
+      "lat": "37.6199227933312",
+      "lng": "127.06298321519",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "달내작은도서관",
+      "matchedName": "달내작은도서관",
+      "address": "서울 노원구 월계동 777",
+      "roadAddress": "서울 노원구 초안산로5길 28",
+      "lat": "37.6325100538177",
+      "lng": "127.050781163237",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "초안산숲속작은도서관",
+      "matchedName": "초안산숲속작은도서관",
+      "address": "서울 노원구 월계동 905-10",
+      "roadAddress": "서울 노원구 덕릉로60길 199",
+      "lat": "37.6321342151311",
+      "lng": "127.044395908858",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "한내지혜의숲작은도서관",
+      "matchedName": "한내지혜의숲도서관",
+      "address": "서울 노원구 월계동 1-1",
+      "roadAddress": "서울 노원구 마들로 86",
+      "lat": "37.6235631462126",
+      "lng": "127.068786044514",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "한내행복발전소작은도서관",
+      "matchedName": "한내행복 작은도서관",
+      "address": "서울 노원구 월계동 333-1",
+      "roadAddress": "서울 노원구 마들로3길 13",
+      "lat": "37.627487411900326",
+      "lng": "127.06311194290558",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "책누리작은도서관 노원",
+      "matchedName": "책누리작은도서관",
+      "address": "서울 노원구 중계동 363-4",
+      "roadAddress": "서울 노원구 중계로 143",
+      "lat": "37.6478067680623",
+      "lng": "127.080330096181",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "책사랑작은도서관 노원",
+      "matchedName": "책사랑북카페",
+      "address": "서울 노원구 중계동 359-5",
+      "roadAddress": "서울 노원구 한글비석로 279",
+      "lat": "37.6525442230751",
+      "lng": "127.077506718817",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "하늘작은도서관 노원",
+      "matchedName": "하늘작은도서관",
+      "address": "서울 노원구 중계동 511-1",
+      "roadAddress": "서울 노원구 노원로17길 56",
+      "lat": "37.6421162641252",
+      "lng": "127.068748761608",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "중계사랑작은도서관",
+      "matchedName": "중계사랑작은도서관",
+      "address": "서울 노원구 중계동 606-2",
+      "roadAddress": "서울 노원구 한글비석로 371",
+      "lat": "37.6585914080738",
+      "lng": "127.073609929387",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "지혜마루작은도서관 노원",
+      "matchedName": "가재울지혜마루작은도서관",
+      "address": "서울 노원구 하계동 251-9",
+      "roadAddress": "서울 노원구 한글비석로 97",
+      "lat": "37.638229825021206",
+      "lng": "127.07258034428722",
+      "source": "initial"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "열린작은도서관 노원",
+      "matchedName": "열린작은도서관",
+      "address": "서울 노원구 하계동 273-2",
+      "roadAddress": "서울 노원구 공릉로55길 88",
+      "lat": "37.632040094524",
+      "lng": "127.067978173503",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "구로문화누리도서관",
+      "matchedName": "구로문화누리도서관",
+      "address": "서울 구로구 개봉동 195-6",
+      "roadAddress": "서울 구로구 개봉로20길 123",
+      "lat": "37.4927272601702",
+      "lng": "126.861150755037",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "꿈나무어린이도서관 구로",
+      "matchedName": "꿈나무어린이도서관",
+      "address": "서울 구로구 구로동 741-27",
+      "roadAddress": "서울 구로구 구로동로26길 54",
+      "lat": "37.4895646781022",
+      "lng": "126.886405992083",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "꿈마을도서관",
+      "matchedName": "꿈마을도서관",
+      "address": "서울 구로구 구로동 777-1",
+      "roadAddress": "서울 구로구 디지털로27다길 65",
+      "lat": "37.4871319154441",
+      "lng": "126.890172650859",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "온누리도서관 구로",
+      "matchedName": "온누리도서관",
+      "address": "서울 구로구 구로동 443",
+      "roadAddress": "서울 구로구 구로중앙로27나길 9",
+      "lat": "37.49687279652441",
+      "lng": "126.88552756263704",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "하늘도서관 구로",
+      "matchedName": "구립하늘도서관",
+      "address": "서울 구로구 구로동 390-42",
+      "roadAddress": "서울 구로구 구로동로13길 68",
+      "lat": "37.487352234300566",
+      "lng": "126.88134378416073",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "개봉도서관",
+      "matchedName": "개봉도서관",
+      "address": "서울 구로구 개봉동 266",
+      "roadAddress": "서울 구로구 개봉로16길 30-11",
+      "lat": "37.48906560958533",
+      "lng": "126.85890398698226",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "글마루한옥어린이도서관",
+      "matchedName": "글마루 한옥어린이도서관",
+      "address": "서울 구로구 개봉동 105-24",
+      "roadAddress": "서울 구로구 고척로27바길 7",
+      "lat": "37.5069042355873",
+      "lng": "126.845627548004",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "궁동어린이도서관",
+      "matchedName": "궁동어린이도서관",
+      "address": "서울 구로구 궁동 40-1",
+      "roadAddress": "서울 구로구 오리로 1352",
+      "lat": "37.5021640678149",
+      "lng": "126.829270522694",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "구로기적의도서관",
+      "matchedName": "구로기적의도서관",
+      "address": "서울 구로구 신도림동 400-6",
+      "roadAddress": "서울 구로구 구로중앙로40길 24",
+      "lat": "37.506736031998194",
+      "lng": "126.87737724082697",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "항동푸른도서관",
+      "matchedName": "항동푸른도서관",
+      "address": "서울 구로구 항동 18-2",
+      "roadAddress": "서울 구로구 연동로 290-46",
+      "lat": "37.48475176521699",
+      "lng": "126.8247173922574",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "고척열린도서관",
+      "matchedName": "고척열린도서관",
+      "address": "서울 구로구 고척동 100-7",
+      "roadAddress": "서울 구로구 경인로43길 49",
+      "lat": "37.4992240497211",
+      "lng": "126.857813928503",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "구로미래도서관",
+      "matchedName": "구로미래도서관",
+      "address": "서울 구로구 구로동 1-4",
+      "roadAddress": "서울 구로구 새말로 111",
+      "lat": "37.5070606185262",
+      "lng": "126.891416970156",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "신도림어린이영어도서관",
+      "matchedName": "신도림어린이영어작은도서관",
+      "address": "서울 구로구 신도림동 390-44",
+      "roadAddress": "서울 구로구 신도림로 40",
+      "lat": "37.507780891325346",
+      "lng": "126.88059665654018",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "흥부네그림책도서관",
+      "matchedName": "흥부네그림책도서관",
+      "address": "서울 구로구 오류동 81-98",
+      "roadAddress": "서울 구로구 고척로1길 30",
+      "lat": "37.4949842041323",
+      "lng": "126.839075240542",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "시끄러운도서관",
+      "matchedName": "시끄러운도서관",
+      "address": "서울 구로구 구로동 256-7",
+      "roadAddress": "서울 구로구 디지털로31길 93",
+      "lat": "37.4868729957672",
+      "lng": "126.890788129486",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "신도림동 작은도서관",
+      "matchedName": "따뜻한마음도서관",
+      "address": "서울 구로구 신도림동 394-43",
+      "roadAddress": "서울 구로구 신도림로11길 8",
+      "lat": "37.5083714267837",
+      "lng": "126.880079969963",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "구로1동 작은도서관",
+      "matchedName": "스마트도서관 구일역점",
+      "address": "서울 구로구 구로동 642-76",
+      "roadAddress": "",
+      "lat": "37.4961828301875",
+      "lng": "126.870869563035",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "구로2동 작은도서관",
+      "matchedName": "구로구청 스마트미니도서관",
+      "address": "서울 구로구 구로동 435",
+      "roadAddress": "서울 구로구 가마산로 245",
+      "lat": "37.49496251375152",
+      "lng": "126.88724593181584",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "구로4동 작은도서관",
+      "matchedName": "구로4동주민센터작은도서관",
+      "address": "서울 구로구 구로동 317-87",
+      "roadAddress": "서울 구로구 구로동로28길 94",
+      "lat": "37.4915963553728",
+      "lng": "126.889152945411",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "구로5동 작은도서관",
+      "matchedName": "파크사이드도서관",
+      "address": "서울 구로구 구로동 103-4",
+      "roadAddress": "서울 구로구 가마산로25길 9-13",
+      "lat": "37.4963506732678",
+      "lng": "126.889801806279",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "가리봉동 작은도서관",
+      "matchedName": "가리봉동주민센터작은도서관",
+      "address": "서울 구로구 가리봉동 131-49",
+      "roadAddress": "서울 구로구 디지털로19길 22",
+      "lat": "37.48067956286097",
+      "lng": "126.88992205628766",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "고척1동 작은도서관",
+      "matchedName": "고척벽산블루밍경로당 작은도서관",
+      "address": "서울 구로구 고척동 334",
+      "roadAddress": "서울 구로구 경인로 390",
+      "lat": "37.4955767054531",
+      "lng": "126.864655571994",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "고척2동 작은도서관",
+      "matchedName": "고척교회도서관책마을",
+      "address": "서울 구로구 고척동 172-6",
+      "roadAddress": "서울 구로구 중앙로 79",
+      "lat": "37.504514688014964",
+      "lng": "126.8607862460489",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "개봉2동 작은도서관",
+      "matchedName": "개봉2동주민센터작은도서관",
+      "address": "서울 구로구 개봉동 261-6",
+      "roadAddress": "서울 구로구 개봉로16가길 17",
+      "lat": "37.4907134690172",
+      "lng": "126.856590754381",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "개봉3동 작은도서관",
+      "matchedName": "광진교회 도서관",
+      "address": "서울 구로구 개봉동 355-4",
+      "roadAddress": "서울 구로구 개봉로3길 100-10",
+      "lat": "37.48656580617846",
+      "lng": "126.85122563146301",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "오류1동 작은도서관",
+      "matchedName": "오류1동주민센터작은도서관",
+      "address": "서울 구로구 오류동 359",
+      "roadAddress": "서울 구로구 경인로27길 7",
+      "lat": "37.4970285594507",
+      "lng": "126.845122033641",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "오류2동 작은도서관",
+      "matchedName": "오류2동새마을작은도서관",
+      "address": "서울 구로구 오류동 172-2",
+      "roadAddress": "서울 구로구 오리로10길 44-5",
+      "lat": "37.488717184782196",
+      "lng": "126.83935553654273",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "수궁동 작은도서관",
+      "matchedName": "온수역 스마트도서관",
+      "address": "서울 구로구 온수동 24-6",
+      "roadAddress": "",
+      "lat": "37.4922719348519",
+      "lng": "126.822549079676",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "고척교회도서관책마을",
+      "matchedName": "고척교회도서관책마을",
+      "address": "서울 구로구 고척동 172-6",
+      "roadAddress": "서울 구로구 중앙로 79",
+      "lat": "37.504514688014964",
+      "lng": "126.8607862460489",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "광진교회도서관 구로",
+      "matchedName": "광진교회 도서관",
+      "address": "서울 구로구 개봉동 355-4",
+      "roadAddress": "서울 구로구 개봉로3길 100-10",
+      "lat": "37.48656580617846",
+      "lng": "126.85122563146301",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "꿈터작은도서관 천왕6단지",
+      "matchedName": "천왕이펜하우스6단지꿈터작은도서관",
+      "address": "서울 구로구 천왕동 275",
+      "roadAddress": "서울 구로구 천왕로 9",
+      "lat": "37.478509903375176",
+      "lng": "126.84153112745177",
+      "source": "initial"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "별숲작은도서관 구로1동",
+      "matchedName": "별숲작은도서관",
+      "address": "서울 구로구 구로동 700-49",
+      "roadAddress": "서울 구로구 구일로2길 51",
+      "lat": "37.48938617829059",
+      "lng": "126.87729592602017",
+      "source": "initial"
+    },
+    {
+      "gu": "은평구",
+      "searchKeyword": "은평구립도서관",
+      "matchedName": "은평구립도서관",
+      "address": "서울 은평구 불광동 산 59-32",
+      "roadAddress": "서울 은평구 통일로78가길 13-84",
+      "lat": "37.619049316454",
+      "lng": "126.928381841584",
+      "source": "initial"
+    },
+    {
+      "gu": "은평구",
+      "searchKeyword": "구립증산도서관",
+      "matchedName": "구립증산도서관",
+      "address": "서울 은평구 증산동 173-8",
+      "roadAddress": "서울 은평구 증산로5길 6",
+      "lat": "37.5827862593609",
+      "lng": "126.907639432409",
+      "source": "initial"
+    },
+    {
+      "gu": "은평구",
+      "searchKeyword": "구립응암도서관",
+      "matchedName": "구립응암도서관",
+      "address": "서울 은평구 응암동 730-3",
+      "roadAddress": "서울 은평구 가좌로7길 15",
+      "lat": "37.58596566116532",
+      "lng": "126.91968092826839",
+      "source": "initial"
+    },
+    {
+      "gu": "은평구",
+      "searchKeyword": "은평뉴타운도서관",
+      "matchedName": "은평뉴타운도서관",
+      "address": "서울 은평구 진관동 93",
+      "roadAddress": "서울 은평구 진관2로 111-51",
+      "lat": "37.637197052118196",
+      "lng": "126.93310364880051",
+      "source": "initial"
+    },
+    {
+      "gu": "은평구",
+      "searchKeyword": "구산동도서관마을",
+      "matchedName": "구립구산동도서관마을",
+      "address": "서울 은평구 구산동 17-37",
+      "roadAddress": "서울 은평구 연서로13길 29-23",
+      "lat": "37.6094957710892",
+      "lng": "126.9130834335",
+      "source": "initial"
+    },
+    {
+      "gu": "은평구",
+      "searchKeyword": "내를건너서숲으로도서관",
+      "matchedName": "구립 내를건너서숲으로도서관",
+      "address": "서울 은평구 신사동 산 80-66",
+      "roadAddress": "서울 은평구 증산로17길 50",
+      "lat": "37.59164512011434",
+      "lng": "126.90802704867765",
+      "source": "initial"
+    },
+    {
+      "gu": "은평구",
+      "searchKeyword": "은뜨락도서관",
+      "matchedName": "은뜨락도서관",
+      "address": "서울 은평구 진관동 236-8",
+      "roadAddress": "서울 은평구 통일로 972",
+      "lat": "37.630346164989334",
+      "lng": "126.92037635202264",
+      "source": "initial"
+    },
+    {
+      "gu": "은평구",
+      "searchKeyword": "구립상림도서관",
+      "matchedName": "구립상림도서관",
+      "address": "서울 은평구 진관동 12-1",
+      "roadAddress": "서울 은평구 진관4로 48-25",
+      "lat": "37.6442087775624",
+      "lng": "126.928933297134",
+      "source": "initial"
+    },
+    {
+      "gu": "은평구",
+      "searchKeyword": "신사어린이도서관 은평",
+      "matchedName": "신사어린이도서관",
+      "address": "서울 은평구 신사동 26-18",
+      "roadAddress": "서울 은평구 은평로 38",
+      "lat": "37.5980489201733",
+      "lng": "126.912172729948",
+      "source": "initial"
+    },
+    {
+      "gu": "은평구",
+      "searchKeyword": "녹번만화도서관",
+      "matchedName": "녹번만화도서관",
+      "address": "서울 은평구 녹번동 48-5",
+      "roadAddress": "서울 은평구 은평로 245",
+      "lat": "37.601255941657875",
+      "lng": "126.935058704509",
+      "source": "initial"
+    },
+    {
+      "gu": "은평구",
+      "searchKeyword": "은평작은도서관",
+      "matchedName": "은평작은도서관",
+      "address": "서울 은평구 녹번동 84",
+      "roadAddress": "서울 은평구 은평로 195",
+      "lat": "37.60278877077597",
+      "lng": "126.92921619411655",
+      "source": "initial"
+    },
+    {
+      "gu": "은평구",
+      "searchKeyword": "대조꿈나무어린이도서관",
+      "matchedName": "대조꿈나무어린이도서관",
+      "address": "서울 은평구 대조동 214-48",
+      "roadAddress": "서울 은평구 연서로20길 24-6",
+      "lat": "37.6138222885012",
+      "lng": "126.920716769634",
+      "source": "initial"
+    },
+    {
+      "gu": "은평구",
+      "searchKeyword": "은평어린이영어도서관",
+      "matchedName": "은평어린이영어도서관",
+      "address": "서울 은평구 역촌동 14-34",
+      "roadAddress": "서울 은평구 서오릉로 87",
+      "lat": "37.607916624976866",
+      "lng": "126.92119303767126",
+      "source": "initial"
+    },
+    {
+      "gu": "은평구",
+      "searchKeyword": "고리마루작은도서관 갈현1동",
+      "matchedName": "갈현1동고리마루작은도서관",
+      "address": "서울 은평구 갈현동 436-14",
+      "roadAddress": "서울 은평구 갈현로 301",
+      "lat": "37.6236853263675",
+      "lng": "126.916684972855",
+      "source": "initial"
+    },
+    {
+      "gu": "은평구",
+      "searchKeyword": "효경골작은도서관 갈현2동",
+      "matchedName": "효경골작은도서관",
+      "address": "서울 은평구 갈현동 502-3",
+      "roadAddress": "서울 은평구 연서로27길 31-6",
+      "lat": "37.6185148686684",
+      "lng": "126.915850287784",
+      "source": "initial"
+    },
+    {
+      "gu": "은평구",
+      "searchKeyword": "문화의집작은도서관 응암1동",
+      "matchedName": "은평문화의집작은도서관",
+      "address": "서울 은평구 응암동 96-3",
+      "roadAddress": "서울 은평구 백련산로 179",
+      "lat": "37.6007149462493",
+      "lng": "126.926682673442",
+      "source": "initial"
+    },
+    {
+      "gu": "은평구",
+      "searchKeyword": "매바위작은도서관 응암2동",
+      "matchedName": "매바위작은도서관",
+      "address": "서울 은평구 응암동 229-13",
+      "roadAddress": "서울 은평구 백련산로 100",
+      "lat": "37.5945318661934",
+      "lng": "126.92309700525",
+      "source": "initial"
+    },
+    {
+      "gu": "은평구",
+      "searchKeyword": "역촌누리작은도서관",
+      "matchedName": "역촌누리작은도서관",
+      "address": "서울 은평구 역촌동 8-45",
+      "roadAddress": "서울 은평구 연서로14길 8-8",
+      "lat": "37.60847932983948",
+      "lng": "126.91665663587581",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "금천구립독산도서관",
+      "matchedName": "금천구립독산도서관",
+      "address": "서울 금천구 독산동 375-2",
+      "roadAddress": "서울 금천구 독산로54길 114",
+      "lat": "37.4675376244392",
+      "lng": "126.908061745875",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "금천구립가산도서관",
+      "matchedName": "금천구립가산도서관",
+      "address": "서울 금천구 가산동 235-3",
+      "roadAddress": "서울 금천구 가산로5길 43",
+      "lat": "37.47350505908624",
+      "lng": "126.89212800300261",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "금천구립금나래도서관",
+      "matchedName": "금천구립금나래도서관",
+      "address": "서울 금천구 시흥동 1020",
+      "roadAddress": "서울 금천구 시흥대로73길 70",
+      "lat": "37.45646657552785",
+      "lng": "126.89573760091004",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "금천구립시흥도서관",
+      "matchedName": "금천구립시흥도서관",
+      "address": "서울 금천구 시흥동 267-9",
+      "roadAddress": "서울 금천구 금하로 764",
+      "lat": "37.449612166154964",
+      "lng": "126.91429379036343",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "책이든거리작은도서관",
+      "matchedName": "책이든거리 작은도서관",
+      "address": "서울 금천구 가산동 677",
+      "roadAddress": "",
+      "lat": "37.466264687864324",
+      "lng": "126.88840586793665",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "참새작은도서관 금천",
+      "matchedName": "참새작은도서관",
+      "address": "서울 금천구 독산동 1088-1",
+      "roadAddress": "서울 금천구 한내로 69-15",
+      "lat": "37.4571325204185",
+      "lng": "126.887020189459",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "청개구리작은도서관",
+      "matchedName": "청개구리작은도서관",
+      "address": "서울 금천구 독산동 973-17",
+      "roadAddress": "서울 금천구 독산로 317",
+      "lat": "37.475159869863",
+      "lng": "126.90317307924",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "꿈씨어린이작은도서관",
+      "matchedName": "꿈씨어린이 작은도서관",
+      "address": "서울 금천구 독산동 1022",
+      "roadAddress": "서울 금천구 독산로 232",
+      "lat": "37.4675617110121",
+      "lng": "126.902151948663",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "도란도란작은도서관 금천",
+      "matchedName": "도란도란 작은도서관",
+      "address": "서울 금천구 시흥동 812-38",
+      "roadAddress": "서울 금천구 독산로36길 14",
+      "lat": "37.45896394434747",
+      "lng": "126.90620728523899",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "해오름작은도서관 금천",
+      "matchedName": "해오름작은도서관",
+      "address": "서울 금천구 독산동 289-5",
+      "roadAddress": "서울 금천구 시흥대로123길 11",
+      "lat": "37.4702207654066",
+      "lng": "126.897052427783",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "미래향기작은도서관",
+      "matchedName": "미래향기작은도서관",
+      "address": "서울 금천구 독산동 1043-51",
+      "roadAddress": "서울 금천구 독산로 179",
+      "lat": "37.463147850914424",
+      "lng": "126.9034824599208",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "맑은누리작은도서관",
+      "matchedName": "맑은누리작은도서관",
+      "address": "서울 금천구 시흥동 893",
+      "roadAddress": "서울 금천구 금하로 668",
+      "lat": "37.45274275715318",
+      "lng": "126.90433894862005",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "꿈꾸는작은도서관 금천",
+      "matchedName": "꿈꾸는작은도서관",
+      "address": "서울 금천구 시흥동 961-5",
+      "roadAddress": "서울 금천구 시흥대로12길 10-5",
+      "lat": "37.43868522195069",
+      "lng": "126.90444611297222",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "행궁마을작은도서관",
+      "matchedName": "행궁마을 작은도서관",
+      "address": "서울 금천구 시흥동 910-5",
+      "roadAddress": "서울 금천구 금하로24길 6",
+      "lat": "37.4507393645513",
+      "lng": "126.908330942807",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "책달샘숲속작은도서관",
+      "matchedName": "책달샘숲속작은도서관",
+      "address": "서울 금천구 독산동 산 197",
+      "roadAddress": "",
+      "lat": "37.46928511297083",
+      "lng": "126.90861464833975",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "지혜의숲작은도서관 금천",
+      "matchedName": "지혜의숲작은도서관",
+      "address": "서울 금천구 독산동 1060-17",
+      "roadAddress": "서울 금천구 시흥대로90길 29",
+      "lat": "37.46190208214476",
+      "lng": "126.89955393249747",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "책읽는마을작은도서관",
+      "matchedName": "책읽는마을작은도서관",
+      "address": "서울 금천구 독산동 185-5",
+      "roadAddress": "서울 금천구 독산로74길 31",
+      "lat": "37.4686445423429",
+      "lng": "126.904126517196",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "산돌어린이작은도서관",
+      "matchedName": "산돌어린이도서관",
+      "address": "서울 금천구 시흥동 108-23",
+      "roadAddress": "서울 금천구 시흥대로75길 12",
+      "lat": "37.4576294322631",
+      "lng": "126.898439562242",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "은행나무어린이작은도서관",
+      "matchedName": "은행나무어린이도서관",
+      "address": "서울 금천구 시흥동 858-26",
+      "roadAddress": "서울 금천구 독산로35가길 8",
+      "lat": "37.459444434095786",
+      "lng": "126.9031662190641",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "나누리작은도서관 금천",
+      "matchedName": "나누리작은도서관",
+      "address": "서울 금천구 시흥동 825",
+      "roadAddress": "서울 금천구 금하로23길 40",
+      "lat": "37.4530824509848",
+      "lng": "126.90891578169",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "소망의나무작은도서관",
+      "matchedName": "소망의나무어린이작은도서관",
+      "address": "서울 금천구 시흥동 841-40",
+      "roadAddress": "서울 금천구 금하로11길 22",
+      "lat": "37.454927117818",
+      "lng": "126.903606046561",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "길빛작은도서관 금천",
+      "matchedName": "길빛작은도서관",
+      "address": "서울 금천구 시흥동 935-27",
+      "roadAddress": "서울 금천구 독산로 16",
+      "lat": "37.4488336567085",
+      "lng": "126.904829880314",
+      "source": "initial"
+    },
+    {
+      "gu": "금천구",
+      "searchKeyword": "금천가산퍼블릭디자인작은도서관",
+      "matchedName": "금천가산퍼블릭 디자인작은도서관",
+      "address": "서울 금천구 가산동 60-26",
+      "roadAddress": "서울 금천구 디지털로 178",
+      "lat": "37.4764396758109",
+      "lng": "126.887331423733",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "송파글마루도서관",
+      "matchedName": "송파글마루도서관",
+      "address": "서울 송파구 장지동 846",
+      "roadAddress": "서울 송파구 충민로 120",
+      "lat": "37.4808724363953",
+      "lng": "127.13038619364",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "송파어린이도서관",
+      "matchedName": "송파어린이도서관",
+      "address": "서울 송파구 잠실동 19-6",
+      "roadAddress": "서울 송파구 올림픽로 105",
+      "lat": "37.5121120314401",
+      "lng": "127.082487317166",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "거마도서관",
+      "matchedName": "거마도서관",
+      "address": "서울 송파구 거여동 195-1",
+      "roadAddress": "서울 송파구 거마로2길 19",
+      "lat": "37.493600802540946",
+      "lng": "127.14666468180349",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "돌마리도서관",
+      "matchedName": "송파돌마리도서관",
+      "address": "서울 송파구 석촌동 265",
+      "roadAddress": "서울 송파구 백제고분로37길 16",
+      "lat": "37.50355740676333",
+      "lng": "127.10368546923891",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "풍납도서관",
+      "matchedName": "풍납도서관",
+      "address": "서울 송파구 풍납동 222-112",
+      "roadAddress": "서울 송파구 풍성로8길 5",
+      "lat": "37.534141476525605",
+      "lng": "127.11582710569026",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "소나무언덕2호도서관",
+      "matchedName": "소나무언덕2호도서관",
+      "address": "서울 송파구 잠실동 44-4",
+      "roadAddress": "서울 송파구 석촌호수로 155",
+      "lat": "37.5072666662958",
+      "lng": "127.094217298183",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "소나무언덕3호도서관",
+      "matchedName": "소나무언덕3호도서관",
+      "address": "서울 송파구 마천동 325-5",
+      "roadAddress": "서울 송파구 성내천로 319",
+      "lat": "37.492258088121",
+      "lng": "127.156658137699",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "소나무언덕4호도서관",
+      "matchedName": "소나무언덕4호작은도서관",
+      "address": "서울 송파구 송파동 173-21",
+      "roadAddress": "서울 송파구 송이로 34",
+      "lat": "37.5022080334059",
+      "lng": "127.116843092711",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "소나무언덕잠실본동도서관",
+      "matchedName": "소나무언덕잠실본동도서관",
+      "address": "서울 송파구 잠실동 306",
+      "roadAddress": "서울 송파구 탄천동로 205",
+      "lat": "37.5030624909305",
+      "lng": "127.076922172523",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "송파어린이영어도서관",
+      "matchedName": "송파어린이영어도서관",
+      "address": "서울 송파구 신천동 14",
+      "roadAddress": "서울 송파구 오금로 1",
+      "lat": "37.5225557025948",
+      "lng": "127.10192440151",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "가락몰도서관",
+      "matchedName": "가락몰 도서관",
+      "address": "서울 송파구 가락동 600",
+      "roadAddress": "서울 송파구 양재대로 932",
+      "lat": "37.49498961772475",
+      "lng": "127.11547599284663",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "송이골작은도서관",
+      "matchedName": "송이골작은도서관",
+      "address": "서울 송파구 송파동 173",
+      "roadAddress": "서울 송파구 송이로 32",
+      "lat": "37.502373009926465",
+      "lng": "127.11674948249335",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "잠실나루역 스마트도서관",
+      "matchedName": "송파스마트도서관 잠실나루역",
+      "address": "서울 송파구 신천동 15",
+      "roadAddress": "",
+      "lat": "37.5211477193461",
+      "lng": "127.103669081935",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "방이역 스마트도서관",
+      "matchedName": "송파스마트도서관 방이역",
+      "address": "서울 송파구 방이동 217-2",
+      "roadAddress": "서울 송파구 양재대로 지하 1127",
+      "lat": "37.508460796626615",
+      "lng": "127.12581958981757",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "마천역 스마트도서관",
+      "matchedName": "송파스마트도서관 마천역",
+      "address": "서울 송파구 마천동 307-4",
+      "roadAddress": "서울 송파구 마천로57길 지하 7",
+      "lat": "37.49468836045083",
+      "lng": "127.15232653814384",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "거여역 스마트도서관",
+      "matchedName": "송파스마트도서관 거여역",
+      "address": "서울 송파구 거여동 20-14",
+      "roadAddress": "서울 송파구 오금로 지하 499",
+      "lat": "37.493081338860335",
+      "lng": "127.14412956354789",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "장지역 스마트도서관",
+      "matchedName": "송파스마트도서관 장지역",
+      "address": "서울 송파구 장지동 201-5",
+      "roadAddress": "서울 송파구 송파대로 지하 82",
+      "lat": "37.47820980080747",
+      "lng": "127.1263827517905",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "잠실2동주민센터 스마트도서관",
+      "matchedName": "송파스마트도서관",
+      "address": "서울 송파구 잠실동 22-7",
+      "roadAddress": "서울 송파구 올림픽로 159",
+      "lat": "37.5118229759698",
+      "lng": "127.088481692554",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "잠실근린공원 스마트도서관",
+      "matchedName": "송파구 잠실근린공원 스마트도서관",
+      "address": "서울 송파구 잠실동 230",
+      "roadAddress": "",
+      "lat": "37.5057490783696",
+      "lng": "127.083851066652",
+      "source": "initial"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "풍납동 스마트도서관",
+      "matchedName": "송파스마트도서관",
+      "address": "서울 송파구 풍납동 83-29",
+      "roadAddress": "",
+      "lat": "37.537915055396",
+      "lng": "127.119256764317",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "동대문구정보화도서관",
+      "matchedName": "동대문구정보화도서관",
+      "address": "서울 동대문구 청량리동 206-19",
+      "roadAddress": "서울 동대문구 회기로10길 60",
+      "lat": "37.5898911041047",
+      "lng": "127.047328254504",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "답십리도서관",
+      "matchedName": "동대문구답십리도서관",
+      "address": "서울 동대문구 답십리동 474-5",
+      "roadAddress": "서울 동대문구 서울시립대로4길 75",
+      "lat": "37.57319263661209",
+      "lng": "127.05036050634905",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "배봉산숲속도서관",
+      "matchedName": "배봉산숲속도서관",
+      "address": "서울 동대문구 전농동 산 32-20",
+      "roadAddress": "서울 동대문구 전농로16길 97",
+      "lat": "37.578441311875",
+      "lng": "127.062728634017",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "동대문책마당도서관",
+      "matchedName": "동대문책마당도서관",
+      "address": "서울 동대문구 용두동 39-9",
+      "roadAddress": "서울 동대문구 천호대로 145",
+      "lat": "37.5744184358972",
+      "lng": "127.039747507296",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "휘경행복도서관",
+      "matchedName": "휘경행복도서관",
+      "address": "서울 동대문구 휘경동 376",
+      "roadAddress": "서울 동대문구 장안벚꽃로 323",
+      "lat": "37.58718320731344",
+      "lng": "127.06993005526724",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "제기동감초마을현진건기념도서관",
+      "matchedName": "제기동감초마을현진건기념도서관",
+      "address": "서울 동대문구 제기동 133-17",
+      "roadAddress": "서울 동대문구 약령시로9길 45",
+      "lat": "37.5850930766995",
+      "lng": "127.035120292826",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "장안어린이도서관",
+      "matchedName": "장안어린이도서관",
+      "address": "서울 동대문구 장안동 342-23",
+      "roadAddress": "서울 동대문구 장한로26다길 10",
+      "lat": "37.5712489383748",
+      "lng": "127.073220513711",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "용두어린이영어도서관",
+      "matchedName": "용두어린이영어도서관",
+      "address": "서울 동대문구 용두동 234-40",
+      "roadAddress": "서울 동대문구 무학로 133",
+      "lat": "37.5761042890202",
+      "lng": "127.030329779906",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "휘경어린이도서관",
+      "matchedName": "휘경어린이도서관",
+      "address": "서울 동대문구 휘경동 282-4",
+      "roadAddress": "서울 동대문구 망우로18가길 38",
+      "lat": "37.588666903169",
+      "lng": "127.060583701361",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "이문어린이도서관",
+      "matchedName": "이문어린이도서관",
+      "address": "서울 동대문구 이문동 264-181",
+      "roadAddress": "서울 동대문구 천장산로9길 68",
+      "lat": "37.5988946240189",
+      "lng": "127.053842941803",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "이문체육문화센터 작은도서관",
+      "matchedName": "이문체육문화센터 어린이도서관",
+      "address": "서울 동대문구 이문동 189",
+      "roadAddress": "서울 동대문구 한천로58길 81-49",
+      "lat": "37.6023466762135",
+      "lng": "127.06876650522",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "전농2동뜨락작은도서관",
+      "matchedName": "전농2동뜨락작은도서관",
+      "address": "서울 동대문구 전농동 688-2",
+      "roadAddress": "서울 동대문구 사가정로 137",
+      "lat": "37.5781003617446",
+      "lng": "127.059981931143",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "답십리1동아름드리작은도서관",
+      "matchedName": "답십리1동 아름드리 도서관",
+      "address": "서울 동대문구 답십리동 477-9",
+      "roadAddress": "서울 동대문구 사가정로 30",
+      "lat": "37.5718227309865",
+      "lng": "127.051274224735",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "답십리2동민들레작은도서관",
+      "matchedName": "답십리2동민들레작은도서관",
+      "address": "서울 동대문구 답십리동 10-2",
+      "roadAddress": "서울 동대문구 한천로11길 18",
+      "lat": "37.5674210794477",
+      "lng": "127.061327136566",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "장안1동 작은도서관",
+      "matchedName": "모두행복작은도서관",
+      "address": "서울 동대문구 장안동 409-6",
+      "roadAddress": "서울 동대문구 천호대로77길 17",
+      "lat": "37.5629144195418",
+      "lng": "127.061091413696",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "휘경1동새싹마루작은도서관",
+      "matchedName": "휘경1동새싹마루작은도서관",
+      "address": "서울 동대문구 휘경동 373",
+      "roadAddress": "서울 동대문구 외대역동로6길 3",
+      "lat": "37.592916830928104",
+      "lng": "127.06573232030148",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "휘경2동꿈빛누리작은도서관",
+      "matchedName": "휘경2동 꿈빛누리 작은도서관",
+      "address": "서울 동대문구 휘경동 367-1",
+      "roadAddress": "서울 동대문구 한천로 329",
+      "lat": "37.5901329404276",
+      "lng": "127.068592221103",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "이문1동꿈꾸는작은도서관",
+      "matchedName": "이문1동꿈꾸는작은도서관",
+      "address": "서울 동대문구 이문동 120-1",
+      "roadAddress": "서울 동대문구 외대역동로 114-1",
+      "lat": "37.59782736565151",
+      "lng": "127.06549544402047",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "이문2동 작은도서관",
+      "matchedName": "이문체육문화센터 어린이도서관",
+      "address": "서울 동대문구 이문동 189",
+      "roadAddress": "서울 동대문구 한천로58길 81-49",
+      "lat": "37.6023466762135",
+      "lng": "127.06876650522",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "장안마루작은도서관",
+      "matchedName": "장안마루작은도서관",
+      "address": "서울 동대문구 장안동 585",
+      "roadAddress": "서울 동대문구 사가정로23길 64",
+      "lat": "37.5814357006178",
+      "lng": "127.070051477279",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "장안꿈마루어린이작은도서관",
+      "matchedName": "장안꿈마루어린이작은도서관",
+      "address": "서울 동대문구 장안동 138-40",
+      "roadAddress": "서울 동대문구 한천로28길 5",
+      "lat": "37.5737427883866",
+      "lng": "127.067341030421",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "용두어울림작은도서관",
+      "matchedName": "용두어울림작은도서관",
+      "address": "서울 동대문구 용두동 795",
+      "roadAddress": "서울 동대문구 무학로 89",
+      "lat": "37.572248147359",
+      "lng": "127.029875420952",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "답십리역 스마트도서관",
+      "matchedName": "동대문구 스마트도서관",
+      "address": "서울 동대문구 답십리동 524-1",
+      "roadAddress": "",
+      "lat": "37.5674228839087",
+      "lng": "127.051929982995",
+      "source": "initial"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "용두역 스마트도서관",
+      "matchedName": "동대문구 스마트도서관",
+      "address": "서울 동대문구 용두동 47-1",
+      "roadAddress": "서울 동대문구 천호대로 지하 129",
+      "lat": "37.5741054321335",
+      "lng": "127.038102521954",
+      "source": "initial"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "서대문구립이진아기념도서관",
+      "matchedName": "서대문구립이진아기념도서관",
+      "address": "서울 서대문구 현저동 101",
+      "roadAddress": "서울 서대문구 독립문공원길 80",
+      "lat": "37.572954443895654",
+      "lng": "126.95554868549858",
+      "source": "initial"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "새롬어린이도서관",
+      "matchedName": "남가좌새롬어린이도서관",
+      "address": "서울 서대문구 남가좌동 342-34",
+      "roadAddress": "서울 서대문구 증가로10길 16-15",
+      "lat": "37.5783110346573",
+      "lng": "126.924087279318",
+      "source": "initial"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "홍은도담도서관",
+      "matchedName": "홍은도담도서관",
+      "address": "서울 서대문구 홍은동 11-8",
+      "roadAddress": "서울 서대문구 홍은중앙로 129",
+      "lat": "37.6017357837712",
+      "lng": "126.948940799014",
+      "source": "initial"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "해담는도서관",
+      "matchedName": "해담는도서관",
+      "address": "서울 서대문구 북가좌동 334-5",
+      "roadAddress": "서울 서대문구 응암로 131",
+      "lat": "37.5843191986858",
+      "lng": "126.914068265131",
+      "source": "initial"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "알음알음작은도서관",
+      "matchedName": "충현동알음알음작은도서관",
+      "address": "서울 서대문구 충정로3가 185-2",
+      "roadAddress": "서울 서대문구 경기대로 40",
+      "lat": "37.56292783470519",
+      "lng": "126.96237741514905",
+      "source": "initial"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "북아현마을북카페 작은도서관",
+      "matchedName": "북아현마을 북카페",
+      "address": "서울 서대문구 북아현동 129-37",
+      "roadAddress": "서울 서대문구 북아현로 24",
+      "lat": "37.5594787971493",
+      "lng": "126.957032552258",
+      "source": "initial"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "늘푸른열린작은도서관",
+      "matchedName": "북가좌1동늘푸른열린작은도서관",
+      "address": "서울 서대문구 북가좌동 477",
+      "roadAddress": "서울 서대문구 수색로 100-55",
+      "lat": "37.5743044800531",
+      "lng": "126.910203742436",
+      "source": "initial"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "파랑새작은도서관 서대문",
+      "matchedName": "남가좌1동파랑새작은도서관",
+      "address": "서울 서대문구 남가좌동 385-3",
+      "roadAddress": "서울 서대문구 모래내로15길 37",
+      "lat": "37.5732734312041",
+      "lng": "126.919781725535",
+      "source": "initial"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "논골작은도서관",
+      "matchedName": "홍은2동논골작은도서관",
+      "address": "서울 서대문구 홍은동 466",
+      "roadAddress": "서울 서대문구 연희로41가길 33",
+      "lat": "37.5908875786819",
+      "lng": "126.933876566809",
+      "source": "initial"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "새싹작은도서관 서대문",
+      "matchedName": "홍제1동새싹작은도서관",
+      "address": "서울 서대문구 홍제동 85-1",
+      "roadAddress": "서울 서대문구 통일로27길 19",
+      "lat": "37.5832075597702",
+      "lng": "126.948419079468",
+      "source": "initial"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "행복작은도서관 서대문",
+      "matchedName": "홍은2동행복작은도서관",
+      "address": "서울 서대문구 홍은동 273-10",
+      "roadAddress": "서울 서대문구 모래내로 334",
+      "lat": "37.5801371032261",
+      "lng": "126.934183819567",
+      "source": "initial"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "문화촌작은도서관",
+      "matchedName": "홍제3동문화촌작은도서관",
+      "address": "서울 서대문구 홍제동 7-13",
+      "roadAddress": "서울 서대문구 세검정로4길 32",
+      "lat": "37.5936560758365",
+      "lng": "126.94982725845",
+      "source": "initial"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "햇살작은도서관 서대문",
+      "matchedName": "홍은1동 햇살작은도서관",
+      "address": "서울 서대문구 홍은동 71-626",
+      "roadAddress": "서울 서대문구 세검정로1길 45",
+      "lat": "37.5932245337433",
+      "lng": "126.943896533002",
+      "source": "initial"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "폭포책방아름인작은도서관",
+      "matchedName": "폭포책방 아름인도서관",
+      "address": "서울 서대문구 홍은동 433",
+      "roadAddress": "서울 서대문구 연희로 262-32",
+      "lat": "37.58148026665822",
+      "lng": "126.93708880810307",
+      "source": "initial"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "홍제역 스마트도서관",
+      "matchedName": "서대문구 스마트도서관",
+      "address": "서울 서대문구 연희동 168-6",
+      "roadAddress": "서울 서대문구 연희로 248",
+      "lat": "37.5791879618778",
+      "lng": "126.936757901621",
+      "source": "initial"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "독립문역 스마트도서관",
+      "matchedName": "서대문스마트도서관 독립문역",
+      "address": "서울 서대문구 현저동 102-47",
+      "roadAddress": "서울 서대문구 통일로 지하 247",
+      "lat": "37.573918623285735",
+      "lng": "126.95833399634205",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "신길도서관",
+      "matchedName": "신길책마루문화센터 도서관",
+      "address": "서울 영등포구 신길동 4946",
+      "roadAddress": "서울 영등포구 신길로 131",
+      "lat": "37.504133369695055",
+      "lng": "126.90975517166186",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "대림도서관",
+      "matchedName": "대림도서관",
+      "address": "서울 영등포구 대림동 608-2",
+      "roadAddress": "서울 영등포구 도신로 27",
+      "lat": "37.50433205158517",
+      "lng": "126.8960646480413",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "문래도서관",
+      "matchedName": "문래도서관",
+      "address": "서울 영등포구 문래동3가 98",
+      "roadAddress": "서울 영등포구 문래로20길 49",
+      "lat": "37.516806312124174",
+      "lng": "126.89091193215603",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "선유도서관",
+      "matchedName": "선유도서관",
+      "address": "서울 영등포구 양평동3가 88-1",
+      "roadAddress": "서울 영등포구 선유로43가길 10-8",
+      "lat": "37.5333271303629",
+      "lng": "126.892933442399",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "여의샛강도서관",
+      "matchedName": "여의샛강도서관",
+      "address": "서울 영등포구 여의도동 28-1",
+      "roadAddress": "서울 영등포구 여의대로 24",
+      "lat": "37.5216797272756",
+      "lng": "126.920048533997",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "영등포생각공장도서관",
+      "matchedName": "영등포생각공장도서관",
+      "address": "서울 영등포구 당산동1가 460",
+      "roadAddress": "서울 영등포구 문래북로 105",
+      "lat": "37.5201222340382",
+      "lng": "126.897196573173",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "원지공원도서관",
+      "matchedName": "원지공원도서관",
+      "address": "서울 영등포구 대림동 691-8",
+      "roadAddress": "서울 영등포구 도림로47길 23",
+      "lat": "37.4973251337374",
+      "lng": "126.899421691914",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "밤동산작은도서관",
+      "matchedName": "밤동산작은도서관",
+      "address": "서울 영등포구 신길동 1-10",
+      "roadAddress": "서울 영등포구 여의대방로61길 18-2",
+      "lat": "37.5148954131517",
+      "lng": "126.924520305309",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "조롱박작은도서관",
+      "matchedName": "조롱박작은도서관",
+      "address": "서울 영등포구 대림동 973-19",
+      "roadAddress": "서울 영등포구 대림로8길 13-1",
+      "lat": "37.49096619997711",
+      "lng": "126.90532260707796",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "당산1동 작은도서관",
+      "matchedName": "당산1동 작은도서관",
+      "address": "서울 영등포구 당산동3가 250",
+      "roadAddress": "서울 영등포구 양산로23길 11",
+      "lat": "37.52498424319734",
+      "lng": "126.8974274691247",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "당산2동 작은도서관",
+      "matchedName": "당산2동작은도서관",
+      "address": "서울 영등포구 당산동4가 80-5",
+      "roadAddress": "서울 영등포구 당산로41가길 7",
+      "lat": "37.5310316693605",
+      "lng": "126.897317365408",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "대림1동 작은도서관",
+      "matchedName": "조롱박작은도서관",
+      "address": "서울 영등포구 대림동 973-19",
+      "roadAddress": "서울 영등포구 대림로8길 13-1",
+      "lat": "37.49096619997711",
+      "lng": "126.90532260707796",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "대림2동 작은도서관",
+      "matchedName": "대림2동작은도서관",
+      "address": "서울 영등포구 대림동 705",
+      "roadAddress": "서울 영등포구 대림로23길 27",
+      "lat": "37.492609912936324",
+      "lng": "126.89807446623271",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "목화마을작은도서관",
+      "matchedName": "목화마을작은도서관",
+      "address": "서울 영등포구 문래동6가 24-4",
+      "roadAddress": "서울 영등포구 선유로13길 25",
+      "lat": "37.51889406680443",
+      "lng": "126.88627444543683",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "신길1동 작은도서관",
+      "matchedName": "밤동산작은도서관",
+      "address": "서울 영등포구 신길동 1-10",
+      "roadAddress": "서울 영등포구 여의대방로61길 18-2",
+      "lat": "37.5148954131517",
+      "lng": "126.924520305309",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "청소년문화의집 작은도서관 영등포",
+      "matchedName": "청소년문화의집 작은도서관",
+      "address": "서울 영등포구 신길동 107-2",
+      "roadAddress": "서울 영등포구 영등포로64길 15",
+      "lat": "37.51352813773213",
+      "lng": "126.9171242881271",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "신길4동 작은도서관",
+      "matchedName": "신길4동드나드리마을도서관",
+      "address": "서울 영등포구 신길동 209-102",
+      "roadAddress": "서울 영등포구 신길로42길 1",
+      "lat": "37.5084440839539",
+      "lng": "126.911350380301",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "신길5동 작은도서관",
+      "matchedName": "꿈터마을도서관",
+      "address": "서울 영등포구 신길동 422",
+      "roadAddress": "서울 영등포구 도림로 264",
+      "lat": "37.5016097312279",
+      "lng": "126.905251492473",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "신길6동 작은도서관",
+      "matchedName": "신길6동작은도서관",
+      "address": "서울 영등포구 신길동 3741-11",
+      "roadAddress": "서울 영등포구 대방천로 167",
+      "lat": "37.49939498147844",
+      "lng": "126.90975522001112",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "신길7동 작은도서관",
+      "matchedName": "마음서랍 마을도서관",
+      "address": "서울 영등포구 신길동 897-3",
+      "roadAddress": "서울 영등포구 여의대방로43길 10",
+      "lat": "37.5063924781837",
+      "lng": "126.92151364138334",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "양평1동 작은도서관",
+      "matchedName": "양평1동작은도서관",
+      "address": "서울 영등포구 양평동3가 36",
+      "roadAddress": "서울 영등포구 선유서로34길 10",
+      "lat": "37.52686724626466",
+      "lng": "126.88743550168472",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "양평2동 작은도서관",
+      "matchedName": "북마크어린이도서관",
+      "address": "서울 영등포구 양평동4가 275-3",
+      "roadAddress": "서울 영등포구 선유로 277-9",
+      "lat": "37.5373571212522",
+      "lng": "126.897811060583",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "여의동 작은도서관",
+      "matchedName": "여의동작은도서관",
+      "address": "서울 영등포구 여의도동 53-22",
+      "roadAddress": "서울 영등포구 국제금융로 124",
+      "lat": "37.517694539188696",
+      "lng": "126.9346074596981",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "영등포본동 작은도서관",
+      "matchedName": "청소년문화의집 작은도서관",
+      "address": "서울 영등포구 신길동 107-2",
+      "roadAddress": "서울 영등포구 영등포로64길 15",
+      "lat": "37.51352813773213",
+      "lng": "126.9171242881271",
+      "source": "initial"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "늘샘드리작은도서관",
+      "matchedName": "늘샘드리마을도서관",
+      "address": "서울 영등포구 도림동 222-7",
+      "roadAddress": "서울 영등포구 도영로7길 10",
+      "lat": "37.5094217491656",
+      "lng": "126.895976156671",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "강동구립강일도서관",
+      "matchedName": "강동구립강일도서관",
+      "address": "서울 강동구 강일동 678",
+      "roadAddress": "서울 강동구 아리수로93길 9-14",
+      "lat": "37.5650447488513",
+      "lng": "127.17388820169033",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "강동중앙도서관",
+      "matchedName": "강동중앙도서관",
+      "address": "서울 강동구 둔촌동 172-1",
+      "roadAddress": "서울 강동구 양재대로84길 63",
+      "lat": "37.52435019970898",
+      "lng": "127.13696545247977",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "미래교육혁신센터 스마트도서관",
+      "matchedName": "강동구스마트도서관 미래교육혁신센터점",
+      "address": "서울 강동구 명일동 312-250",
+      "roadAddress": "",
+      "lat": "37.55093597973838",
+      "lng": "127.14305943937364",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "상일동역 스마트도서관",
+      "matchedName": "고덕역 스마트도서관",
+      "address": "서울 강동구 고덕동 310",
+      "roadAddress": "서울 강동구 고덕로 지하 253",
+      "lat": "37.5550564993763",
+      "lng": "127.154301966747",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "고덕역 스마트도서관",
+      "matchedName": "고덕역 스마트도서관",
+      "address": "서울 강동구 고덕동 310",
+      "roadAddress": "서울 강동구 고덕로 지하 253",
+      "lat": "37.5550564993763",
+      "lng": "127.154301966747",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "강동구청 스마트도서관",
+      "matchedName": "강동구청 스마트도서관",
+      "address": "서울 강동구 성내동 540",
+      "roadAddress": "서울 강동구 성내로 25",
+      "lat": "37.52990563085858",
+      "lng": "127.12490413977496",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "상일1동주민센터 스마트도서관",
+      "matchedName": "강동구스마트도서관 상일동주민센터점",
+      "address": "서울 강동구 상일동 513-2",
+      "roadAddress": "",
+      "lat": "37.55052091000778",
+      "lng": "127.16813731919807",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "상일2동주민센터 스마트도서관",
+      "matchedName": "강동구스마트도서관 상일동주민센터점",
+      "address": "서울 강동구 상일동 513-2",
+      "roadAddress": "",
+      "lat": "37.55052091000778",
+      "lng": "127.16813731919807",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "글익는작은도서관",
+      "matchedName": "글익는작은도서관",
+      "address": "서울 강동구 암사동 414-19",
+      "roadAddress": "서울 강동구 고덕로 137",
+      "lat": "37.554973339643",
+      "lng": "127.14081841832",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "가람슬기작은도서관",
+      "matchedName": "가람슬기작은도서관",
+      "address": "서울 강동구 성내동 430-29",
+      "roadAddress": "서울 강동구 강동대로53길 76",
+      "lat": "37.5260424874169",
+      "lng": "127.132840474985",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "해오름작은도서관 강동",
+      "matchedName": "해오름작은도서관",
+      "address": "서울 강동구 암사동 503-8",
+      "roadAddress": "서울 강동구 상암로3길 28",
+      "lat": "37.551701888885",
+      "lng": "127.12726383617",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "햇살작은도서관 강동",
+      "matchedName": "햇살작은도서관",
+      "address": "서울 강동구 천호동 302-4",
+      "roadAddress": "서울 강동구 천중로17길 42-16",
+      "lat": "37.54621173251961",
+      "lng": "127.13171411104103",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "늘솔길작은도서관",
+      "matchedName": "늘솔길작은도서관",
+      "address": "서울 강동구 고덕동 691-6",
+      "roadAddress": "서울 강동구 양재대로156길 123",
+      "lat": "37.5572810763149",
+      "lng": "127.151506578837",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "게냇골작은도서관",
+      "matchedName": "게냇골작은도서관",
+      "address": "서울 강동구 상일동 131",
+      "roadAddress": "서울 강동구 구천면로 633",
+      "lat": "37.550583747471",
+      "lng": "127.168300419219",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "솔향기북카페 작은도서관 강동",
+      "matchedName": "솔향기북카페",
+      "address": "서울 강동구 강일동 695",
+      "roadAddress": "서울 강동구 고덕로97길 20",
+      "lat": "37.55950896162257",
+      "lng": "127.18112673761811",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "채우리작은도서관",
+      "matchedName": "채우리작은도서관",
+      "address": "서울 강동구 암사동 474-6",
+      "roadAddress": "서울 강동구 고덕로24길 49",
+      "lat": "37.5523808329578",
+      "lng": "127.135720951743",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "안말작은도서관",
+      "matchedName": "안말작은도서관",
+      "address": "서울 강동구 성내동 611",
+      "roadAddress": "서울 강동구 천호대로 1050",
+      "lat": "37.5360441481566",
+      "lng": "127.12826570138647",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "책꾸러미작은도서관",
+      "matchedName": "책꾸러미작은도서관",
+      "address": "서울 강동구 명일동 223-7",
+      "roadAddress": "서울 강동구 상암로 260",
+      "lat": "37.5463179079136",
+      "lng": "127.151375755031",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "글고운작은도서관",
+      "matchedName": "글고운작은도서관",
+      "address": "서울 강동구 성내동 539-1",
+      "roadAddress": "서울 강동구 성내로 13",
+      "lat": "37.5304794319301",
+      "lng": "127.122453449133",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "글향기작은도서관 강동",
+      "matchedName": "글향기작은도서관",
+      "address": "서울 강동구 천호동 76-2",
+      "roadAddress": "서울 강동구 구천면로42길 59",
+      "lat": "37.545052668415",
+      "lng": "127.136803030504",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "부엉이작은도서관",
+      "matchedName": "부엉이작은도서관",
+      "address": "서울 강동구 천호동 555",
+      "roadAddress": "서울 강동구 진황도로23길 7",
+      "lat": "37.53996816732639",
+      "lng": "127.12976373844282",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "글마루작은도서관 강동",
+      "matchedName": "글마루작은도서관",
+      "address": "서울 강동구 고덕동 226-4",
+      "roadAddress": "서울 강동구 아리수로78길 43-12",
+      "lat": "37.5605506899722",
+      "lng": "127.164379611473",
+      "source": "initial"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "서원마을작은도서관",
+      "matchedName": "서원마을작은도서관",
+      "address": "서울 강동구 암사동 116-51",
+      "roadAddress": "서울 강동구 올림픽로 936",
+      "lat": "37.56400635802303",
+      "lng": "127.13337871108769",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "중랑구립정보도서관",
+      "matchedName": "중랑구립정보도서관",
+      "address": "서울 중랑구 묵동 22",
+      "roadAddress": "서울 중랑구 신내로15길 197",
+      "lat": "37.61524044821545",
+      "lng": "127.0869527012108",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "면목정보도서관",
+      "matchedName": "중랑구립면목정보도서관",
+      "address": "서울 중랑구 면목동 115-18",
+      "roadAddress": "서울 중랑구 면목로 397",
+      "lat": "37.587426363943855",
+      "lng": "127.08764495481473",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "중화어린이도서관",
+      "matchedName": "중화어린이도서관",
+      "address": "서울 중랑구 중화동 321-37",
+      "roadAddress": "서울 중랑구 중랑역로3길 28",
+      "lat": "37.5949764238455",
+      "lng": "127.074928665731",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "중랑숲어린이도서관",
+      "matchedName": "중랑숲어린이도서관",
+      "address": "서울 중랑구 망우동 583-1",
+      "roadAddress": "서울 중랑구 망우로73길 46-1",
+      "lat": "37.6026633682763",
+      "lng": "127.103881748506",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "양원숲속도서관",
+      "matchedName": "양원숲속도서관",
+      "address": "서울 중랑구 망우동 56",
+      "roadAddress": "서울 중랑구 송림길 172",
+      "lat": "37.6068593340187",
+      "lng": "127.110755133814",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "중랑상봉도서관",
+      "matchedName": "중랑상봉도서관",
+      "address": "서울 중랑구 상봉동 126",
+      "roadAddress": "서울 중랑구 동일로114길 10",
+      "lat": "37.59291825816655",
+      "lng": "127.08084626925489",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "중화문학도서관",
+      "matchedName": "중화문학도서관",
+      "address": "서울 중랑구 중화동 311-6",
+      "roadAddress": "서울 중랑구 봉화산로 27",
+      "lat": "37.602073692861445",
+      "lng": "127.07746565261276",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "면목2동 작은도서관",
+      "matchedName": "겸재작은도서관",
+      "address": "서울 중랑구 면목동 1031-22",
+      "roadAddress": "서울 중랑구 사가정로 305-137",
+      "lat": "37.58619657970043",
+      "lng": "127.07441716804328",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "면목3동 작은도서관",
+      "matchedName": "다모아어린이도서관",
+      "address": "서울 중랑구 면목동 57-6",
+      "roadAddress": "서울 중랑구 용마산로 370",
+      "lat": "37.5847810898427",
+      "lng": "127.094595685447",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "면목8동 작은도서관",
+      "matchedName": "다모아어린이도서관",
+      "address": "서울 중랑구 면목동 57-6",
+      "roadAddress": "서울 중랑구 용마산로 370",
+      "lat": "37.5847810898427",
+      "lng": "127.094595685447",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "면목4동 작은도서관",
+      "matchedName": "행복터작은도서관",
+      "address": "서울 중랑구 면목동 656",
+      "roadAddress": "서울 중랑구 답십리로81길 35",
+      "lat": "37.573036076247",
+      "lng": "127.083386486195",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "면목5동 작은도서관",
+      "matchedName": "책소리작은도서관",
+      "address": "서울 중랑구 면목동 149-6",
+      "roadAddress": "서울 중랑구 겸재로 138",
+      "lat": "37.5871107476738",
+      "lng": "127.083031951086",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "면목7동 작은도서관",
+      "matchedName": "새마을문고면목7동분회작은도서관",
+      "address": "서울 중랑구 면목동 354",
+      "roadAddress": "서울 중랑구 면목로36길 4",
+      "lat": "37.577714847865025",
+      "lng": "127.08602603087895",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "상봉1동 작은도서관",
+      "matchedName": "새마을문고상봉1동분회 작은도서관",
+      "address": "서울 중랑구 상봉동 204-1",
+      "roadAddress": "서울 중랑구 상봉중앙로1길 6",
+      "lat": "37.5998621787633",
+      "lng": "127.08719978393",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "중화1동 작은도서관",
+      "matchedName": "새마을문고중화1동분회 작은도서관",
+      "address": "서울 중랑구 중화동 287-3",
+      "roadAddress": "서울 중랑구 동일로134길 17",
+      "lat": "37.6011462387147",
+      "lng": "127.080655865167",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "묵1동 작은도서관",
+      "matchedName": "세방도서관",
+      "address": "서울 중랑구 묵동 383",
+      "roadAddress": "서울 중랑구 숙선옹주로9길 25",
+      "lat": "37.6155067638935",
+      "lng": "127.083736305498",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "묵2동 작은도서관",
+      "matchedName": "장미마을소망작은도서관",
+      "address": "서울 중랑구 묵동 240-75",
+      "roadAddress": "서울 중랑구 동일로157라길 12-22",
+      "lat": "37.6110138816103",
+      "lng": "127.075191653879",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "망우본동 작은도서관",
+      "matchedName": "양원역작은도서관",
+      "address": "서울 중랑구 망우동 239-1",
+      "roadAddress": "서울 중랑구 양원역로 50",
+      "lat": "37.605843960450585",
+      "lng": "127.10779101836887",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "망우3동 작은도서관",
+      "matchedName": "새마을문고망우3동분회작은도서관",
+      "address": "서울 중랑구 망우동 529-2",
+      "roadAddress": "서울 중랑구 겸재로61길 40",
+      "lat": "37.59189867085954",
+      "lng": "127.09491720421856",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "신내1동 작은도서관",
+      "matchedName": "신내우디안2단지나무그늘도서관",
+      "address": "서울 중랑구 신내동 150-6",
+      "roadAddress": "서울 중랑구 신내역로 165",
+      "lat": "37.6158125057481",
+      "lng": "127.109739968238",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "신내2동 작은도서관",
+      "matchedName": "성원아파트문고",
+      "address": "서울 중랑구 신내동 783",
+      "roadAddress": "서울 중랑구 신내로 51",
+      "lat": "37.6046422421825",
+      "lng": "127.094969633242",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "데시앙책울터작은도서관",
+      "matchedName": "데시앙책울터작은도서관",
+      "address": "서울 중랑구 신내동 317",
+      "roadAddress": "서울 중랑구 용마산로 669",
+      "lat": "37.60986991254689",
+      "lng": "127.09919279096178",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "장미작은도서관 중랑",
+      "matchedName": "장미작은도서관",
+      "address": "서울 중랑구 중화동 346",
+      "roadAddress": "서울 중랑구 중랑천로 243",
+      "lat": "37.60631819533034",
+      "lng": "127.07333075343467",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "겸재작은도서관",
+      "matchedName": "겸재작은도서관",
+      "address": "서울 중랑구 면목동 1031-22",
+      "roadAddress": "서울 중랑구 사가정로 305-137",
+      "lat": "37.58619657970043",
+      "lng": "127.07441716804328",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "행복터작은도서관",
+      "matchedName": "행복터작은도서관",
+      "address": "서울 중랑구 면목동 656",
+      "roadAddress": "서울 중랑구 답십리로81길 35",
+      "lat": "37.573036076247",
+      "lng": "127.083386486195",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "장미마을소망작은도서관",
+      "matchedName": "장미마을소망작은도서관",
+      "address": "서울 중랑구 묵동 240-75",
+      "roadAddress": "서울 중랑구 동일로157라길 12-22",
+      "lat": "37.6110138816103",
+      "lng": "127.075191653879",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "중화역 스마트도서관",
+      "matchedName": "중화역스마트도서관",
+      "address": "서울 중랑구 중화동 50-3",
+      "roadAddress": "서울 중랑구 동일로 지하 797",
+      "lat": "37.60157951886236",
+      "lng": "127.07946954444269",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "망우역 스마트도서관",
+      "matchedName": "망우역 스마트도서관 경의중앙선점",
+      "address": "서울 중랑구 상봉동 172",
+      "roadAddress": "서울 중랑구 망우로55길 11-10",
+      "lat": "37.5992915272497",
+      "lng": "127.092363980675",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "상봉역 스마트도서관",
+      "matchedName": "상봉역 스마트도서관",
+      "address": "서울 중랑구 상봉동 100-9",
+      "roadAddress": "서울 중랑구 망우로 297",
+      "lat": "37.595024810564446",
+      "lng": "127.0858998830322",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "사가정역 스마트도서관",
+      "matchedName": "사가정역 스마트도서관",
+      "address": "서울 중랑구 면목동 495",
+      "roadAddress": "서울 중랑구 사가정로 지하 393",
+      "lat": "37.5807944618422",
+      "lng": "127.088440982946",
+      "source": "initial"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "먹골역 스마트도서관",
+      "matchedName": "먹골역 스마트도서관",
+      "address": "서울 중랑구 묵동 189-5",
+      "roadAddress": "서울 중랑구 동일로 지하 901",
+      "lat": "37.6104535728973",
+      "lng": "127.07780731798",
+      "source": "initial"
+    },
+    {
+      "gu": "종로구",
+      "searchKeyword": "청운문학도서관",
+      "matchedName": "청운문학도서관",
+      "address": "서울 종로구 청운동 4-20",
+      "roadAddress": "서울 종로구 자하문로36길 40",
+      "lat": "37.5904038281362",
+      "lng": "126.96590530631",
+      "source": "initial"
+    },
+    {
+      "gu": "종로구",
+      "searchKeyword": "어린이청소년국학도서관",
+      "matchedName": "어린이청소년국학도서관",
+      "address": "서울 종로구 명륜3가 1-21",
+      "roadAddress": "서울 종로구 명륜길 26",
+      "lat": "37.588685970492",
+      "lng": "126.995538987522",
+      "source": "initial"
+    },
+    {
+      "gu": "종로구",
+      "searchKeyword": "창신소담도서관",
+      "matchedName": "창신소담도서관",
+      "address": "서울 종로구 창신동 641",
+      "roadAddress": "서울 종로구 창신길 83",
+      "lat": "37.575304056481244",
+      "lng": "127.01021094693026",
+      "source": "initial"
+    },
+    {
+      "gu": "종로구",
+      "searchKeyword": "아름꿈도서관",
+      "matchedName": "아름꿈도서관",
+      "address": "서울 종로구 숭인동 242-7",
+      "roadAddress": "서울 종로구 종로58가길 19",
+      "lat": "37.57270839098656",
+      "lng": "127.01712481634608",
+      "source": "initial"
+    },
+    {
+      "gu": "종로구",
+      "searchKeyword": "삼청공원숲속도서관",
+      "matchedName": "삼청공원숲속도서관",
+      "address": "서울 종로구 삼청동 산 2-2",
+      "roadAddress": "서울 종로구 북촌로 134-3",
+      "lat": "37.58856603956408",
+      "lng": "126.9840015215778",
+      "source": "initial"
+    },
+    {
+      "gu": "종로구",
+      "searchKeyword": "우리소리도서관",
+      "matchedName": "우리소리도서관",
+      "address": "서울 종로구 익선동 99",
+      "roadAddress": "서울 종로구 삼일대로30길 47",
+      "lat": "37.57455446423549",
+      "lng": "126.99020573976512",
+      "source": "initial"
+    },
+    {
+      "gu": "종로구",
+      "searchKeyword": "통인어린이작은도서관",
+      "matchedName": "통인어린이작은도서관",
+      "address": "서울 종로구 통인동 89-14",
+      "roadAddress": "서울 종로구 자하문로13길 20",
+      "lat": "37.580427496629554",
+      "lng": "126.97061038327504",
+      "source": "initial"
+    },
+    {
+      "gu": "종로구",
+      "searchKeyword": "도담도담한옥도서관",
+      "matchedName": "도담도담한옥도서관",
+      "address": "서울 종로구 숭인동 750",
+      "roadAddress": "서울 종로구 숭인동길 43",
+      "lat": "37.5769422701942",
+      "lng": "127.021934771739",
+      "source": "initial"
+    },
+    {
+      "gu": "종로구",
+      "searchKeyword": "청운효자동북카페 작은도서관",
+      "matchedName": "청운효자동북카페",
+      "address": "서울 종로구 궁정동 12-1",
+      "roadAddress": "서울 종로구 자하문로 92",
+      "lat": "37.5841377841518",
+      "lng": "126.970595338694",
+      "source": "initial"
+    },
+    {
+      "gu": "종로구",
+      "searchKeyword": "꿈꾸는평창동작은도서관",
+      "matchedName": "꿈꾸는평창동작은도서관",
+      "address": "서울 종로구 평창동 186-9",
+      "roadAddress": "서울 종로구 평창문화로 65",
+      "lat": "37.6063736786777",
+      "lng": "126.968366878601",
+      "source": "initial"
+    },
+    {
+      "gu": "종로구",
+      "searchKeyword": "무악다솜방작은도서관",
+      "matchedName": "무악다솜방",
+      "address": "서울 종로구 무악동 60-2",
+      "roadAddress": "서울 종로구 통일로14길 36",
+      "lat": "37.575972836530156",
+      "lng": "126.95818002584801",
+      "source": "initial"
+    },
+    {
+      "gu": "종로구",
+      "searchKeyword": "홍파랑북카페 작은도서관",
+      "matchedName": "홍파랑북카페",
+      "address": "서울 종로구 행촌동 180-10",
+      "roadAddress": "서울 종로구 송월길 154",
+      "lat": "37.5719142300397",
+      "lng": "126.961951797575",
+      "source": "initial"
+    },
+    {
+      "gu": "종로구",
+      "searchKeyword": "지혜만들기작은도서관",
+      "matchedName": "지혜만들기작은도서관",
+      "address": "서울 종로구 효제동 173-2",
+      "roadAddress": "서울 종로구 종로35가길 19",
+      "lat": "37.5720536016625",
+      "lng": "127.005026012636",
+      "source": "initial"
+    },
+    {
+      "gu": "종로구",
+      "searchKeyword": "혜화마을북카페 작은도서관",
+      "matchedName": "혜화마을북카페",
+      "address": "서울 종로구 혜화동 74-30",
+      "roadAddress": "서울 종로구 혜화로 12",
+      "lat": "37.58699038526627",
+      "lng": "127.00054912232842",
+      "source": "initial"
+    },
+    {
+      "gu": "종로구",
+      "searchKeyword": "숭인마루작은도서관",
+      "matchedName": "숭인마루작은도서관",
+      "address": "서울 종로구 숭인동 55-2",
+      "roadAddress": "서울 종로구 지봉로 86",
+      "lat": "37.5778298514755",
+      "lng": "127.01563165381",
+      "source": "initial"
+    },
+    {
+      "gu": "성북구",
+      "searchKeyword": "성북정보도서관",
+      "matchedName": "성북정보도서관",
+      "address": "서울 성북구 상월곡동 24-348",
+      "roadAddress": "서울 성북구 화랑로18자길 13",
+      "lat": "37.6049723386975",
+      "lng": "127.050599359915",
+      "source": "initial"
+    },
+    {
+      "gu": "성북구",
+      "searchKeyword": "아리랑도서관",
+      "matchedName": "아리랑도서관",
+      "address": "서울 성북구 돈암동 538-98",
+      "roadAddress": "서울 성북구 아리랑로 82",
+      "lat": "37.5998971677465",
+      "lng": "127.013978426334",
+      "source": "initial"
+    },
+    {
+      "gu": "성북구",
+      "searchKeyword": "해오름도서관 성북",
+      "matchedName": "해오름도서관",
+      "address": "서울 성북구 돈암동 609-1",
+      "roadAddress": "서울 성북구 성북로4길 52",
+      "lat": "37.5940518910298",
+      "lng": "127.010566791217",
+      "source": "initial"
+    },
+    {
+      "gu": "성북구",
+      "searchKeyword": "새날도서관 성북",
+      "matchedName": "종암동새날도서관",
+      "address": "서울 성북구 종암동 16-8",
+      "roadAddress": "서울 성북구 종암로 98-8",
+      "lat": "37.599110654103306",
+      "lng": "127.03530806376209",
+      "source": "initial"
+    },
+    {
+      "gu": "성북구",
+      "searchKeyword": "꿈마루도서관 성북",
+      "matchedName": "서경로꿈마루도서관",
+      "address": "서울 성북구 정릉동 227-176",
+      "roadAddress": "서울 성북구 서경로 94-1",
+      "lat": "37.6114586849824",
+      "lng": "127.013858271159",
+      "source": "initial"
+    },
+    {
+      "gu": "성북구",
+      "searchKeyword": "미리내도서관",
+      "matchedName": "석관동미리내도서관",
+      "address": "서울 성북구 석관동 134-2",
+      "roadAddress": "서울 성북구 한천로66길 203",
+      "lat": "37.6134847960337",
+      "lng": "127.065442349539",
+      "source": "initial"
+    },
+    {
+      "gu": "성북구",
+      "searchKeyword": "달빛마루도서관",
+      "matchedName": "달빛마루도서관",
+      "address": "서울 성북구 하월곡동 230",
+      "roadAddress": "서울 성북구 종암로 167",
+      "lat": "37.60439608687779",
+      "lng": "127.03132878074689",
+      "source": "initial"
+    },
+    {
+      "gu": "성북구",
+      "searchKeyword": "정릉도서관",
+      "matchedName": "정릉도서관",
+      "address": "서울 성북구 정릉동 966-1",
+      "roadAddress": "서울 성북구 정릉로 242",
+      "lat": "37.60467276414102",
+      "lng": "127.01065436177912",
+      "source": "initial"
+    },
+    {
+      "gu": "성북구",
+      "searchKeyword": "청수도서관",
+      "matchedName": "청수도서관",
+      "address": "서울 성북구 정릉동 266-121",
+      "roadAddress": "서울 성북구 보국문로16가길 20",
+      "lat": "37.6117509244959",
+      "lng": "127.01080487286",
+      "source": "initial"
+    },
+    {
+      "gu": "성북구",
+      "searchKeyword": "월곡꿈그림도서관",
+      "matchedName": "월곡꿈그림도서관",
+      "address": "서울 성북구 하월곡동 22",
+      "roadAddress": "서울 성북구 화랑로13길 17",
+      "lat": "37.6041108289933",
+      "lng": "127.04181080671",
+      "source": "initial"
+    },
+    {
+      "gu": "성북구",
+      "searchKeyword": "아리랑어린이도서관",
+      "matchedName": "아리랑어린이도서관",
+      "address": "서울 성북구 돈암동 535-51",
+      "roadAddress": "서울 성북구 아리랑로 75",
+      "lat": "37.5998251797014",
+      "lng": "127.013185729055",
+      "source": "initial"
+    },
+    {
+      "gu": "성북구",
+      "searchKeyword": "장위행복누림도서관",
+      "matchedName": "장위행복누림도서관",
+      "address": "서울 성북구 장위동 224-12",
+      "roadAddress": "서울 성북구 장위로21다길 53",
+      "lat": "37.6158149916945",
+      "lng": "127.045822401949",
+      "source": "initial"
+    },
+    {
+      "gu": "성북구",
+      "searchKeyword": "성북길빛도서관",
+      "matchedName": "성북길빛도서관",
+      "address": "서울 성북구 길음동 1288-12",
+      "roadAddress": "서울 성북구 숭인로8길 52",
+      "lat": "37.60987982029501",
+      "lng": "127.02637500769269",
+      "source": "initial"
+    },
+    {
+      "gu": "성북구",
+      "searchKeyword": "글빛도서관 성북",
+      "matchedName": "글빛도서관",
+      "address": "서울 성북구 길음동 1286-8",
+      "roadAddress": "서울 성북구 길음로7길 20",
+      "lat": "37.6037557517832",
+      "lng": "127.02219631446",
+      "source": "initial"
+    },
+    {
+      "gu": "성북구",
+      "searchKeyword": "오동숲속도서관",
+      "matchedName": "오동숲속도서관",
+      "address": "서울 성북구 하월곡동 산 2-41",
+      "roadAddress": "서울 성북구 화랑로13가길 110-10",
+      "lat": "37.610156770347146",
+      "lng": "127.04095344393794",
+      "source": "initial"
+    },
+    {
+      "gu": "성북구",
+      "searchKeyword": "보문숲길도서관",
+      "matchedName": "보문숲길도서관",
+      "address": "서울 성북구 보문동3가 168",
+      "roadAddress": "서울 성북구 보문사길 20",
+      "lat": "37.58425295063693",
+      "lng": "127.01626135085067",
+      "source": "initial"
+    },
+    {
+      "gu": "성북구",
+      "searchKeyword": "어린이청소년도서관 성북",
+      "matchedName": "성북어린이청소년도서관",
+      "address": "서울 성북구 삼선동2가 231-4",
+      "roadAddress": "서울 성북구 삼선교로16길 59",
+      "lat": "37.58578523327942",
+      "lng": "127.01114077647458",
+      "source": "initial"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "가온도서관",
+      "matchedName": "중구구립 가온도서관",
+      "address": "서울 중구 신당동 425-11",
+      "roadAddress": "서울 중구 동호로14길 18",
+      "lat": "37.55636596450095",
+      "lng": "127.0108387456178",
+      "source": "initial"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "남산타운어린이도서관",
+      "matchedName": "남산타운어린이도서관",
+      "address": "서울 중구 신당동 844",
+      "roadAddress": "서울 중구 다산로 32",
+      "lat": "37.54958945229392",
+      "lng": "127.01193885487169",
+      "source": "initial"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "신당누리도서관",
+      "matchedName": "신당누리도서관",
+      "address": "서울 중구 신당동 300-6",
+      "roadAddress": "서울 중구 다산로33길 3",
+      "lat": "37.5620193347533",
+      "lng": "127.014446716289",
+      "source": "initial"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "장충동작은도서관",
+      "matchedName": "장충동작은도서관",
+      "address": "서울 중구 장충동2가 193-69",
+      "roadAddress": "서울 중구 동호로25길 33",
+      "lat": "37.5591982886022",
+      "lng": "127.001362675545",
+      "source": "initial"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "손기정어린이도서관",
+      "matchedName": "손기정어린이도서관",
+      "address": "서울 중구 만리동2가 6-1",
+      "roadAddress": "서울 중구 손기정로 101-1",
+      "lat": "37.55517817508937",
+      "lng": "126.96469909343011",
+      "source": "initial"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "다산성곽도서관",
+      "matchedName": "다산성곽도서관",
+      "address": "서울 중구 신당동 432-612",
+      "roadAddress": "서울 중구 동호로17길 173",
+      "lat": "37.5516262305673",
+      "lng": "127.004390902135",
+      "source": "initial"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "손기정문화도서관",
+      "matchedName": "손기정문화도서관",
+      "address": "서울 중구 만리동2가 6-1",
+      "roadAddress": "서울 중구 손기정로 101-3",
+      "lat": "37.5559187448028",
+      "lng": "126.964531246472",
+      "source": "initial"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "광희동작은도서관",
+      "matchedName": "광희동작은도서관",
+      "address": "서울 중구 광희동1가 252",
+      "roadAddress": "서울 중구 퇴계로 303-9",
+      "lat": "37.5644708223941",
+      "lng": "127.0050164482",
+      "source": "initial"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "다산동작은도서관",
+      "matchedName": "다산동작은도서관",
+      "address": "서울 중구 신당동 379-16",
+      "roadAddress": "서울 중구 동호로12길 89",
+      "lat": "37.5592265133303",
+      "lng": "127.01205130785",
+      "source": "initial"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "동화동작은도서관",
+      "matchedName": "동화동작은도서관",
+      "address": "서울 중구 신당동 850",
+      "roadAddress": "서울 중구 다산로36길 100",
+      "lat": "37.5599751575001",
+      "lng": "127.019439832274",
+      "source": "initial"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "신당5동작은도서관",
+      "matchedName": "신당5동작은도서관",
+      "address": "서울 중구 신당동 155-10",
+      "roadAddress": "서울 중구 퇴계로90길 42",
+      "lat": "37.5634273954557",
+      "lng": "127.021631999156",
+      "source": "initial"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "신당동작은도서관",
+      "matchedName": "신당동작은도서관",
+      "address": "서울 중구 신당동 304-738",
+      "roadAddress": "서울 중구 다산로29길 10",
+      "lat": "37.5611040294442",
+      "lng": "127.013541084244",
+      "source": "initial"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "약수동작은도서관",
+      "matchedName": "약수동작은도서관",
+      "address": "서울 중구 신당동 844-5",
+      "roadAddress": "서울 중구 동호로5길 19",
+      "lat": "37.55185089357324",
+      "lng": "127.01256163915271",
+      "source": "initial"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "중구청작은도서관",
+      "matchedName": "중구청 작은도서관",
+      "address": "서울 중구 예관동 120-1",
+      "roadAddress": "서울 중구 창경궁로 17",
+      "lat": "37.5638185823227",
+      "lng": "126.997555181939",
+      "source": "initial"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "청구동작은도서관",
+      "matchedName": "청구동작은도서관",
+      "address": "서울 중구 신당동 333-130",
+      "roadAddress": "서울 중구 다산로22길 45",
+      "lat": "37.55701334546552",
+      "lng": "127.01484865537665",
+      "source": "initial"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "필동작은도서관",
+      "matchedName": "필동작은도서관",
+      "address": "서울 중구 필동2가 19-22",
+      "roadAddress": "서울 중구 필동로 11",
+      "lat": "37.560546127774636",
+      "lng": "126.99623107034387",
+      "source": "initial"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "황학동작은도서관",
+      "matchedName": "황학동작은도서관",
+      "address": "서울 중구 황학동 1010",
+      "roadAddress": "서울 중구 난계로11길 52",
+      "lat": "37.5673594048098",
+      "lng": "127.021289034399",
+      "source": "initial"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "회현동작은도서관",
+      "matchedName": "회현동작은도서관",
+      "address": "서울 중구 회현동1가 164",
+      "roadAddress": "서울 중구 퇴계로8길 46",
+      "lat": "37.5573044000554",
+      "lng": "126.979370248307",
+      "source": "initial"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "서울 강남구 정다운도서관",
+      "matchedName": "강남구립 정다운도서관",
+      "address": "서울 강남구 청담동 35-10",
+      "roadAddress": "서울 강남구 학동로67길 11",
+      "lat": "37.5190189719818",
+      "lng": "127.046450904874",
+      "source": "retry"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "서울 관악구 글사랑작은도서관",
+      "matchedName": "서림동글사랑작은도서관",
+      "address": "서울 관악구 신림동 1694-7",
+      "roadAddress": "서울 관악구 신림로29길 6",
+      "lat": "37.4749906550042",
+      "lng": "126.935008711789",
+      "source": "retry"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "서울 강서구 송정작은도서관",
+      "matchedName": "송정작은도서관",
+      "address": "서울 강서구 공항동 60-28",
+      "roadAddress": "서울 강서구 송정로 45",
+      "lat": "37.55878070207854",
+      "lng": "126.8101093700603",
+      "source": "retry"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "서울 성동구 무지개도서관",
+      "matchedName": "성동구립무지개도서관",
+      "address": "서울 성동구 행당동 7",
+      "roadAddress": "서울 성동구 고산자로 270",
+      "lat": "37.5631965077393",
+      "lng": "127.037065849396",
+      "source": "retry"
+    },
+    {
+      "gu": "성동구",
+      "searchKeyword": "서울 성동구 청계도서관",
+      "matchedName": "성동구립청계도서관",
+      "address": "서울 성동구 상왕십리동 813",
+      "roadAddress": "서울 성동구 마장로 141",
+      "lat": "37.56798563302177",
+      "lng": "127.02564032555944",
+      "source": "retry"
+    },
+    {
+      "gu": "노원구",
+      "searchKeyword": "서울 노원구 향기나무작은도서관",
+      "matchedName": "향기나무도서관",
+      "address": "서울 노원구 중계동 514-3",
+      "roadAddress": "서울 노원구 노원로 331",
+      "lat": "37.6454769132004",
+      "lng": "127.070313267835",
+      "source": "retry"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "서울 구로구 항동 작은도서관",
+      "matchedName": "항동주민센터작은도서관",
+      "address": "서울 구로구 항동 243-1",
+      "roadAddress": "서울 구로구 연동로 191-19",
+      "lat": "37.4790900444743",
+      "lng": "126.822445716192",
+      "source": "retry"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "서울 구로구 마중물작은도서관",
+      "matchedName": "마중물도서관",
+      "address": "서울 구로구 온수동 120-22",
+      "roadAddress": "서울 구로구 부일로1길 62",
+      "lat": "37.493306412882504",
+      "lng": "126.81906604882586",
+      "source": "retry"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "서울 서대문구 하늘샘작은도서관",
+      "matchedName": "천연동하늘샘작은도서관",
+      "address": "서울 서대문구 옥천동 45-6",
+      "roadAddress": "서울 서대문구 독립문로 27",
+      "lat": "37.5696218954768",
+      "lng": "126.96132812841",
+      "source": "retry"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "서울 서대문구 아이누리작은도서관",
+      "matchedName": "연희동아이누리작은도서관",
+      "address": "서울 서대문구 연희동 122-16",
+      "roadAddress": "서울 서대문구 증가로 13-10",
+      "lat": "37.569301652215145",
+      "lng": "126.93087223438357",
+      "source": "retry"
+    },
+    {
+      "gu": "서대문구",
+      "searchKeyword": "서울 서대문구 꿈이있는작은도서관",
+      "matchedName": "홍제2동꿈이있는작은도서관",
+      "address": "서울 서대문구 홍제동 459-4",
+      "roadAddress": "서울 서대문구 통일로34길 27",
+      "lat": "37.5861091625626",
+      "lng": "126.949354536909",
+      "source": "retry"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "서울 중랑구 신내동 나무그늘작은도서관",
+      "matchedName": "신내우디안2단지나무그늘도서관",
+      "address": "서울 중랑구 신내동 150-6",
+      "roadAddress": "서울 중랑구 신내역로 165",
+      "lat": "37.6158125057481",
+      "lng": "127.109739968238",
+      "source": "retry"
+    },
+    {
+      "gu": "종로구",
+      "searchKeyword": "서울 종로구 이화마을작은도서관",
+      "matchedName": "이화마을작은도서관",
+      "address": "서울 종로구 이화동 149-1",
+      "roadAddress": "서울 종로구 이화장길 33",
+      "lat": "37.5769802677812",
+      "lng": "127.004347108113",
+      "source": "retry"
+    },
+    {
+      "gu": "마포구",
+      "searchKeyword": "마포나루스페이스",
+      "matchedName": "마포나루 스페이스",
+      "address": "서울 마포구 마포동 450",
+      "roadAddress": "서울 마포구 마포대로 8",
+      "lat": "37.5373070964912",
+      "lng": "126.944273364964",
+      "source": "retry"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "서울 관악구 굴렁쇠 작은도서관",
+      "matchedName": "신림동굴렁쇠작은도서관",
+      "address": "서울 관악구 신림동 1417-19",
+      "roadAddress": "서울 관악구 신림로70길 46",
+      "lat": "37.487202526597706",
+      "lng": "126.93111756107072",
+      "source": "retry"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "송파구 위례도서관",
+      "matchedName": "송파위례도서관",
+      "address": "서울 송파구 장지동 882",
+      "roadAddress": "서울 송파구 위례광장로 210",
+      "lat": "37.48120648794883",
+      "lng": "127.1437800046066",
+      "source": "retry"
+    },
+    {
+      "gu": "송파구",
+      "searchKeyword": "송파구 책박물관",
+      "matchedName": "송파책박물관",
+      "address": "서울 송파구 가락동 479",
+      "roadAddress": "서울 송파구 송파대로37길 77",
+      "lat": "37.49888597821397",
+      "lng": "127.10438467827207",
+      "source": "retry"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "서울 도봉구 방학2동 책날다작은도서관",
+      "matchedName": "책날다작은도서관",
+      "address": "서울 도봉구 방학동 616-14",
+      "roadAddress": "서울 도봉구 시루봉로 201",
+      "lat": "37.667104262984",
+      "lng": "127.032808173303",
+      "source": "retry"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "서울 도봉구 창2동 아름다운도서관",
+      "matchedName": "아름다운도서관",
+      "address": "서울 도봉구 창동 629-26",
+      "roadAddress": "서울 도봉구 도봉로104길 63",
+      "lat": "37.6434571762112",
+      "lng": "127.035587382405",
+      "source": "retry"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "서울 도봉구 북서울중학교",
+      "matchedName": "북서울중학교",
+      "address": "서울 도봉구 도봉동 585",
+      "roadAddress": "서울 도봉구 도봉로169가길 33",
+      "lat": "37.6814292774922",
+      "lng": "127.042960601276",
+      "source": "retry"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "도봉문화정보도서관",
+      "matchedName": "도봉문화정보도서관",
+      "address": "서울 도봉구 창동 418",
+      "roadAddress": "서울 도봉구 덕릉로 315",
+      "lat": "37.6445499352563",
+      "lng": "127.043999919307",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "도봉아이나라도서관",
+      "matchedName": "도봉아이나라도서관",
+      "address": "서울 도봉구 창동 808-1",
+      "roadAddress": "서울 도봉구 노해로69길 151",
+      "lat": "37.659049979674",
+      "lng": "127.049489134922",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "학마을도서관",
+      "matchedName": "학마을도서관",
+      "address": "서울 도봉구 방학동 446-5",
+      "roadAddress": "서울 도봉구 시루봉로 128",
+      "lat": "37.6620663711816",
+      "lng": "127.027767080951",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "도봉기적의도서관",
+      "matchedName": "도봉기적의도서관",
+      "address": "서울 도봉구 도봉동 652-1",
+      "roadAddress": "서울 도봉구 마들로 797",
+      "lat": "37.68084438252608",
+      "lng": "127.05020873112919",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "쌍문채움도서관",
+      "matchedName": "쌍문채움도서관",
+      "address": "서울 도봉구 쌍문동 381-9",
+      "roadAddress": "서울 도봉구 우이천로 340",
+      "lat": "37.647025724040546",
+      "lng": "127.02622043531305",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "원당마을한옥도서관",
+      "matchedName": "원당마을한옥도서관",
+      "address": "서울 도봉구 방학동 543-2",
+      "roadAddress": "서울 도봉구 해등로32가길 17",
+      "lat": "37.6602836827756",
+      "lng": "127.021793804097",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "둘리도서관",
+      "matchedName": "둘리도서관",
+      "address": "서울 도봉구 쌍문동 산 240-5",
+      "roadAddress": "서울 도봉구 시루봉로1길 6",
+      "lat": "37.6521664216185",
+      "lng": "127.027591147992",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "김근태기념도서관",
+      "matchedName": "김근태기념도서관",
+      "address": "서울 도봉구 도봉동 279",
+      "roadAddress": "서울 도봉구 도봉산길 14",
+      "lat": "37.68766726029315",
+      "lng": "127.04401177464752",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "도봉구청행복작은도서관",
+      "matchedName": "도봉구청행복작은도서관",
+      "address": "서울 도봉구 방학동 720",
+      "roadAddress": "서울 도봉구 마들로 656",
+      "lat": "37.6687058692153",
+      "lng": "127.047101697212",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "무수골작은도서관",
+      "matchedName": "무수골도서관",
+      "address": "서울 도봉구 도봉동 577",
+      "roadAddress": "서울 도봉구 도봉로175길 10",
+      "lat": "37.6830186224679",
+      "lng": "127.042907101769",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "지혜의등대작은도서관",
+      "matchedName": "지혜의등대 작은도서관",
+      "address": "서울 도봉구 창동 662-7",
+      "roadAddress": "서울 도봉구 노해로 256",
+      "lat": "37.6510177925277",
+      "lng": "127.037009734146",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "김수영문학작은도서관",
+      "matchedName": "김수영문학도서관",
+      "address": "서울 도봉구 방학동 498-31",
+      "roadAddress": "서울 도봉구 해등로32길 80",
+      "lat": "37.6599886447797",
+      "lng": "127.023944756637",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "쌍문1동 작은도서관",
+      "matchedName": "쌍문1동공립작은도서관",
+      "address": "서울 도봉구 쌍문동 378-45",
+      "roadAddress": "서울 도봉구 노해로 147",
+      "lat": "37.6480186389579",
+      "lng": "127.026080275415",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "쌍문2동 작은도서관",
+      "matchedName": "쌍문2동공립작은도서관",
+      "address": "서울 도봉구 쌍문동 713-31",
+      "roadAddress": "서울 도봉구 도봉로137길 21",
+      "lat": "37.6599042036195",
+      "lng": "127.03971030701338",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "쌍문3동 작은도서관",
+      "matchedName": "쌍문3동공립작은도서관",
+      "address": "서울 도봉구 쌍문동 327",
+      "roadAddress": "서울 도봉구 노해로44길 9",
+      "lat": "37.6489444125104",
+      "lng": "127.027988825073",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "쌍문4동 작은도서관",
+      "matchedName": "쌍문4동공립작은도서관",
+      "address": "서울 도봉구 쌍문동 59-7",
+      "roadAddress": "서울 도봉구 시루봉로 62-7",
+      "lat": "37.65646391484052",
+      "lng": "127.02840528921175",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "창3동 작은도서관",
+      "matchedName": "창3동공립작은도서관",
+      "address": "서울 도봉구 창동 467-1",
+      "roadAddress": "서울 도봉구 덕릉로60차길 12",
+      "lat": "37.636782461061024",
+      "lng": "127.04175886358",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "창4동 작은도서관",
+      "matchedName": "창4동공립작은도서관",
+      "address": "서울 도봉구 창동 33-1",
+      "roadAddress": "서울 도봉구 노해로 390",
+      "lat": "37.6522412787113",
+      "lng": "127.051542508791",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "창5동 작은도서관",
+      "matchedName": "창5동공립작은도서관",
+      "address": "서울 도봉구 창동 224-41",
+      "roadAddress": "서울 도봉구 도봉로136나길 20",
+      "lat": "37.6563097164705",
+      "lng": "127.043594350294",
+      "source": "dobong"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "도봉2동 작은도서관",
+      "matchedName": "도봉2동공립작은도서관",
+      "address": "서울 도봉구 도봉동 636-9",
+      "roadAddress": "서울 도봉구 마들로 668",
+      "lat": "37.6697800550848",
+      "lng": "127.046553777858",
+      "source": "dobong"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "마루작은도서관",
+      "matchedName": "마루작은도서관",
+      "address": "서울 관악구 행운1길 43",
+      "roadAddress": "",
+      "lat": "37.480642566485",
+      "lng": "126.957030927968",
+      "source": "address"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "별별창작꿈터봉현작은도서관",
+      "matchedName": "별별창작꿈터봉현작은도서관",
+      "address": "서울 관악구 관악로 255-7",
+      "roadAddress": "",
+      "lat": "37.4872142871121",
+      "lng": "126.956633001026",
+      "source": "address"
+    },
+    {
+      "gu": "강서구",
+      "searchKeyword": "봉제산책쉼터",
+      "matchedName": "봉제산책쉼터",
+      "address": "서울 강서구 화곡동 산 41-6",
+      "roadAddress": "서울 강서구 초록마을로15길 33",
+      "lat": "37.54248874515874",
+      "lng": "126.85224498385428",
+      "source": "address"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "천호역 스마트도서관",
+      "matchedName": "천호역 스마트도서관",
+      "address": "서울 강동구 천호대로 997",
+      "roadAddress": "",
+      "lat": "37.5393391659214",
+      "lng": "127.123301730964",
+      "source": "address"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "용마산역 스마트도서관",
+      "matchedName": "용마산역 스마트도서관",
+      "address": "서울 중랑구 용마산로 지하 227",
+      "roadAddress": "",
+      "lat": "37.5740302107904",
+      "lng": "127.087038114766",
+      "source": "address"
+    },
+    {
+      "gu": "중구",
+      "searchKeyword": "어울림작은도서관",
+      "matchedName": "어울림작은도서관",
+      "address": "서울 중구 다산로38길 66-35",
+      "roadAddress": "",
+      "lat": "37.5617225433977",
+      "lng": "127.018930284366",
+      "source": "address"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "내방역 스마트도서관 (역 내부, 출구정보 추후 추가)",
+      "matchedName": "내방역 스마트도서관 (역 내부, 출구정보 추후 추가)",
+      "address": "서울 서초구 방배동 447-7",
+      "roadAddress": "서울 서초구 효령로 5",
+      "lat": "37.47630148696379",
+      "lng": "126.98548387906719",
+      "source": "address"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "구반포역 스마트도서관 (역 내부, 출구정보 추후 추가)",
+      "matchedName": "구반포역 스마트도서관 (역 내부, 출구정보 추후 추가)",
+      "address": "서울 서초구 방배동 3199",
+      "roadAddress": "",
+      "lat": "37.4895711493178",
+      "lng": "126.982568528067",
+      "source": "address"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "옹달샘작은도서관 (천왕3단지)",
+      "matchedName": "옹달샘작은도서관 (천왕3단지)",
+      "address": "서울 구로구 천왕로 56",
+      "roadAddress": "",
+      "lat": "37.48305321277",
+      "lng": "126.838914729764",
+      "source": "address"
+    },
+    {
+      "gu": "관악구",
+      "searchKeyword": "인헌동보물섬작은도서관",
+      "matchedName": "인헌동보물섬작은도서관",
+      "address": "서울 관악구 남부순환로246가길 20",
+      "roadAddress": "",
+      "lat": "37.4750993079191",
+      "lng": "126.965324324112",
+      "source": "address"
+    },
+    {
+      "gu": "서초구",
+      "searchKeyword": "새싹어린이공원 스마트도서관",
+      "matchedName": "새싹어린이공원 스마트도서관",
+      "address": "서울 서초구 서초동 1686-10",
+      "roadAddress": "",
+      "lat": "37.4975136708481",
+      "lng": "127.018267891664",
+      "source": "address"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "별빛맞이작은도서관 (하버라인8단지)",
+      "matchedName": "별빛맞이작은도서관 (하버라인8단지)",
+      "address": "서울 구로구 서해안로 2036",
+      "roadAddress": "",
+      "lat": "37.4756237727979",
+      "lng": "126.818706218661",
+      "source": "address"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "숲속작은도서관 (하버라인3단지)",
+      "matchedName": "숲속작은도서관 (하버라인3단지)",
+      "address": "서울 구로구 항동로 43",
+      "roadAddress": "",
+      "lat": "37.4789423906036",
+      "lng": "126.824571211875",
+      "source": "address"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "전곡마을작은도서관",
+      "matchedName": "전곡마을작은도서관",
+      "address": "서울 동대문구 전농동 199-56",
+      "roadAddress": "",
+      "lat": "37.5807490740791",
+      "lng": "127.054466687128",
+      "source": "address"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "장안가온누리작은도서관",
+      "matchedName": "장안가온누리작은도서관",
+      "address": "서울 동대문구 천호대로87길 43",
+      "roadAddress": "",
+      "lat": "37.5638584042159",
+      "lng": "127.067993704726",
+      "source": "address"
+    },
+    {
+      "gu": "동대문구",
+      "searchKeyword": "장안벗꽃길작은도서관",
+      "matchedName": "장안벗꽃길작은도서관",
+      "address": "서울 동대문구 장안벚꽃로 170",
+      "roadAddress": "",
+      "lat": "37.5750508145564",
+      "lng": "127.07698348106",
+      "source": "address"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "여의도브라이트도서관",
+      "matchedName": "여의도브라이트도서관",
+      "address": "서울 영등포구 국제금융로 39",
+      "roadAddress": "",
+      "lat": "37.5242915298626",
+      "lng": "126.929338616058",
+      "source": "address"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "반딧불북카페 작은도서관",
+      "matchedName": "반딧불북카페 작은도서관",
+      "address": "서울 강동구 천호대로 1183",
+      "roadAddress": "",
+      "lat": "37.5345623092458",
+      "lng": "127.142685789592",
+      "source": "address"
+    },
+    {
+      "gu": "강동구",
+      "searchKeyword": "작은도서관 웃는책",
+      "matchedName": "작은도서관 웃는책",
+      "address": "서울 강동구 구천면로42길 60",
+      "roadAddress": "",
+      "lat": "37.5449887814005",
+      "lng": "127.136262926344",
+      "source": "address"
+    },
+    {
+      "gu": "중랑구",
+      "searchKeyword": "송곡여고열린작은도서관",
+      "matchedName": "송곡여고열린작은도서관",
+      "address": "서울 중랑구 양원역로 67",
+      "roadAddress": "",
+      "lat": "37.6065806263938",
+      "lng": "127.10537791548",
+      "source": "address"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "창1동 작은도서관",
+      "matchedName": "창1동 작은도서관",
+      "address": "서울 도봉구 해등로 46",
+      "roadAddress": "",
+      "lat": "37.648377109037",
+      "lng": "127.043823820431",
+      "source": "address"
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "도봉1동 작은도서관",
+      "matchedName": "도봉1동 작은도서관",
+      "address": "서울 도봉구 도봉로169나길 22",
+      "roadAddress": "",
+      "lat": "37.6786908578614",
+      "lng": "127.043413256889",
+      "source": "address"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "신사동작은도서관",
+      "matchedName": "신사동작은도서관",
+      "address": "서울 강남구 압구정로 128",
+      "roadAddress": "",
+      "lat": "37.5239744838924",
+      "lng": "127.022796432269",
+      "source": "address"
+    },
+    {
+      "gu": "강남구",
+      "searchKeyword": "도곡2동작은도서관",
+      "matchedName": "도곡2동작은도서관",
+      "address": "서울 강남구 남부순환로378길 34-9",
+      "roadAddress": "",
+      "lat": "37.4837230766034",
+      "lng": "127.046406996821",
+      "source": "address"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "신길1동작은도서관",
+      "matchedName": "신길1동작은도서관",
+      "address": "서울 영등포구 영등포로84길 24-5",
+      "roadAddress": "",
+      "lat": "37.511168746002",
+      "lng": "126.921442246927",
+      "source": "address"
+    },
+    {
+      "gu": "영등포구",
+      "searchKeyword": "영등포본동작은도서관",
+      "matchedName": "영등포본동작은도서관",
+      "address": "서울 영등포구 신길로61길 17",
+      "roadAddress": "",
+      "lat": "37.5146663332687",
+      "lng": "126.909339360003",
+      "source": "address"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "구로1동작은도서관",
+      "matchedName": "구로1동작은도서관",
+      "address": "서울 구로구 구일로4길 57",
+      "roadAddress": "",
+      "lat": "37.4930400779698",
+      "lng": "126.87578825879",
+      "source": "address"
+    },
+    {
+      "gu": "구로구",
+      "searchKeyword": "수궁동도서관",
+      "matchedName": "수궁동도서관",
+      "address": "서울 구로구 오리로15길 32",
+      "roadAddress": "",
+      "lat": "37.4938915011652",
+      "lng": "126.83147678043",
+      "source": "address"
+    }
+  ],
+  "mergedAt": "2026-06-24T08:25:08.685Z",
+  "sourceFiles": [
+    "branch-coords.json",
+    "retry-coords.json",
+    "dobong-coords.json",
+    "address-coords.json"
+  ]
+}
