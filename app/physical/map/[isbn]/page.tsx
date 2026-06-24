@@ -169,12 +169,55 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
     [isbn, title]
   );
 
-  // 최초 진입 시 검색 — userLocation이 null이어도(권한 거부) DEFAULT_LOCATION으로 진행
+  /**
+   * [2026-06-24 추가] 최초 진입 시, 검색 화면이 sessionStorage에
+   * 저장해둔 데이터가 있는지 먼저 확인 — 있으면 그걸로 바로 마커를
+   * 그리고 API 호출(서울도서관 재검색)을 건너뜀. 검색 화면에서 이미
+   * 도서관별 대출가능 여부까지 다 받아온 데이터를 또 물어보는 중복을
+   * 없애기 위함(서울도서관 서버 부담 절반으로 줄임, 2026-06-24).
+   *
+   * sessionStorage에 없으면(사용자가 이 지도 URL로 직접 들어온 경우,
+   * 브라우저를 새로고침한 경우, 저장이 실패했던 경우 등) 기존처럼
+   * runSearch를 호출해 자체적으로 검색 — 안전장치로 유지.
+   *
+   * sessionStorage에서 읽은 데이터를 쓸 때도 lastSearchedLocation,
+   * districtLabel, 이동감지 타이머를 정상적으로 세팅해야 함 — 그래야
+   * 그 이후 "지도 이동 시 재검색" 기능이 똑같이 잘 동작함.
+   */
   useEffect(() => {
     async function initialLoad() {
       const lat = userLocation?.lat ?? DEFAULT_LOCATION.lat;
       const lng = userLocation?.lng ?? DEFAULT_LOCATION.lng;
-      await runSearch(lat, lng);
+
+      let usedCache = false;
+      try {
+        const cached = sessionStorage.getItem(`physical_book_${isbn}`);
+        if (cached) {
+          const book: PhysicalBook = JSON.parse(cached);
+          console.log("[physical map] sessionStorage에서 책 데이터 발견, API 재호출 스킵 — isbn:", isbn);
+
+          setLibraries(book.libraries ?? []);
+          setLastSearchedLocation({ lat, lng });
+          setDistrictLabel(computeDistrictLabel(lat, lng));
+          setShowResearchPrompt(false);
+          setPendingLocation(null);
+
+          moveDetectionEnabledRef.current = false;
+          setTimeout(() => {
+            moveDetectionEnabledRef.current = true;
+          }, MOVE_DETECTION_DELAY_MS);
+
+          sessionStorage.removeItem(`physical_book_${isbn}`);
+          usedCache = true;
+        }
+      } catch (e) {
+        console.log("[physical map] sessionStorage 읽기 실패, API로 진행:", e);
+      }
+
+      if (!usedCache) {
+        await runSearch(lat, lng);
+      }
+
       setLoading(false);
     }
     initialLoad();
