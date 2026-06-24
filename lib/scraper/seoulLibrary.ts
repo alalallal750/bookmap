@@ -1132,7 +1132,95 @@ type PhysicalRawRecord = {
 };
 
 /**
- * 종이책 검색 메인 함수.
+ * [2026-06-24 변경] category1과 검색어를 파라미터로 받는 내부 공용 함수로
+ * 분리. 제목 검색(searchPhysicalBooks)과 ISBN 검색(searchPhysicalBooksByIsbn)
+ * 둘 다 이 함수를 거침 — 중복 코드 방지.
+ *
+ * [마포구 예외] 마포구(dbnum 88421)는 ISBN 검색(category1=7)을 보내면
+ * 통합검색 중계가 마포구 시스템(mplib.mapo.go.kr)으로 ISBN을 제대로
+ * 전달하지 못해 항상 Failed로 응답함(2026-06-24 실측 확인 — uri 파라미터
+ * 안에 searchKeyword2가 빈 값으로 가는 것을 직접 확인). 반면 마포구는
+ * 제목 검색(category1=1)에서는 이미 ISBN을 정상적으로 포함해서 응답하고
+ * 있었음(사용자 확인). 그래서 마포구만: ISBN 검색을 먼저 시도하고,
+ * resultinfo가 Failed면 그 즉시 제목 검색으로 재시도하는 fallback을 둠.
+ * 마포구의 "제목"은 카카오에서 받은 후보의 title을 그대로 사용.
+ */
+const MAPO_DBNUM = "88421";
+
+async function fetchDistrictsByCategory(
+  dbnum: string,
+  category1: string,
+  searchText: string,
+  fallbackTitleForMapo: string | undefined,
+  id: string,
+  cookie: string,
+  defaultSearchUrl: string
+): Promise<PhysicalRawRecord[]> {
+  const buildUrl = (cat: string, text: string) => {
+    const encodedText = encodeURIComponent(text);
+    const searchQueryParams =
+      `category1=${cat}` +
+      `&category2=0&category3=0` +
+      `&text1=${encodedText}&text2=&text3=` +
+      `&op=0&op2=0&year1=&year2=` +
+      `&dbnum=${dbnum}` +
+      `&display=30&recstart=1&sort=rel`;
+    return `${BASE_URL}/index.php/ajax/engine/deploy?id=${id}&${searchQueryParams}&_=${Date.now()}`;
+  };
+
+  const fetchOnce = async (cat: string, text: string): Promise<{ xml: string; ok: boolean }> => {
+    const url = buildUrl(cat, text);
+    const res = await fetch(url, {
+      signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
+      headers: {
+        "User-Agent": "Mozilla/5.0",
+        ...(cookie ? { Cookie: cookie } : {}),
+        "X-Requested-With": "XMLHttpRequest",
+        Referer: defaultSearchUrl,
+        Accept: "text/xml, application/xml, */*",
+      },
+    });
+    console.log(`[seoulLibrary] physical deploy(${dbnum}, category1=${cat}) status:`, res.status);
+    if (!res.ok) return { xml: "", ok: false };
+    const xml = await res.text();
+    const isFailed = /<resultinfo[^>]*>\s*Failed\s*<\/resultinfo>/.test(xml);
+    return { xml, ok: !isFailed };
+  };
+
+  try {
+    let { xml, ok } = await fetchOnce(category1, searchText);
+
+    // 마포구 + ISBN 검색이 실패한 경우만 제목으로 재시도
+    if (!ok && dbnum === MAPO_DBNUM && category1 === "7" && fallbackTitleForMapo) {
+      console.log("[seoulLibrary] 마포구 ISBN 검색 실패 — 제목으로 재시도:", fallbackTitleForMapo);
+      const retry = await fetchOnce("1", fallbackTitleForMapo);
+      xml = retry.xml;
+      ok = retry.ok;
+    }
+
+    if (!xml) return [];
+
+    const recordCountInRaw = (xml.match(/<record/g) ?? []).length;
+    const fieldNameMatches = xml.match(/<field name="([^"]+)"/g) ?? [];
+    const uniqueFieldNames = Array.from(
+      new Set(fieldNameMatches.map((m) => m.match(/name="([^"]+)"/)?.[1]))
+    );
+    console.log(
+      `[DEBUG] deploy(${dbnum}) raw <record> tag count:`,
+      recordCountInRaw,
+      "| unique field names:",
+      uniqueFieldNames
+    );
+
+    return parsePhysicalXml(xml, dbnum);
+  } catch (e) {
+    console.log(`[seoulLibrary] physical deploy(${dbnum}) fetch failed:`, e);
+    return [];
+  }
+}
+
+/**
+ * 종이책 검색 메인 함수 (제목 검색 — 기존 동작 그대로 유지).
  *
  * @param query 검색어 (책 제목)
  * @param userLat 사용자 위도 (없으면 DEFAULT_LOCATION 사용)
@@ -1168,64 +1256,72 @@ export async function searchPhysicalBooks(
     console.log("[seoulLibrary] physical stage1 fetch failed:", e);
   }
 
-  const buildDeployUrl = (dbnum: string) => {
-    const encodedQuery = encodeURIComponent(query);
-    const searchQueryParams =
-      `category1=1` +
-      `&category2=0&category3=0` +
-      `&text1=${encodedQuery}&text2=&text3=` +
-      `&op=0&op2=0&year1=&year2=` +
-      `&dbnum=${dbnum}` +
-      `&display=30&recstart=1&sort=rel`;
-    return `${BASE_URL}/index.php/ajax/engine/deploy?id=${id}&${searchQueryParams}&_=${Date.now()}`;
-  };
-
-  const fetchOneDistrict = async (dbnum: string): Promise<PhysicalRawRecord[]> => {
-    const url = buildDeployUrl(dbnum);
-    try {
-      const res = await fetch(url, {
-        signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
-        headers: {
-          "User-Agent": "Mozilla/5.0",
-          ...(cookie ? { Cookie: cookie } : {}),
-          "X-Requested-With": "XMLHttpRequest",
-          Referer: defaultSearchUrl,
-          Accept: "text/xml, application/xml, */*",
-        },
-      });
-      console.log(`[seoulLibrary] physical deploy(${dbnum}) status:`, res.status);
-      if (!res.ok) return [];
-
-      const xml = await res.text();
-
-      // [DEBUG 2026-06-24] 25개 구 전체의 필드 이름 패턴을 일괄 점검하기
-      // 위한 로그. 송파구에서 ISBN 필드가 없어 전부 걸러지는 문제를
-      // 발견한 뒤, 다른 구도 같은 종류의 형식 차이가 있는지 확인하려고
-      // 추가함. field name="..." 안의 모든 고유 이름을 모아서 출력 —
-      // 표준 패턴(TITLE/Author/Publication/Date/ISBN/Image/도서관/
-      // Location/Loan)과 다른 이름이 보이면 그 구도 별도 대응 필요.
-      const recordCountInRaw = (xml.match(/<record/g) ?? []).length;
-      const fieldNameMatches = xml.match(/<field name="([^"]+)"/g) ?? [];
-      const uniqueFieldNames = Array.from(
-        new Set(fieldNameMatches.map((m) => m.match(/name="([^"]+)"/)?.[1]))
-      );
-      console.log(
-        `[DEBUG] deploy(${dbnum}) raw <record> tag count:`,
-        recordCountInRaw,
-        "| unique field names:",
-        uniqueFieldNames
-      );
-
-      return parsePhysicalXml(xml, dbnum);
-    } catch (e) {
-      console.log(`[seoulLibrary] physical deploy(${dbnum}) fetch failed:`, e);
-      return [];
-    }
-  };
-  const resultsByDistrict = await Promise.all(targetDbnums.map(fetchOneDistrict));
+  const resultsByDistrict = await Promise.all(
+    targetDbnums.map((dbnum) =>
+      fetchDistrictsByCategory(dbnum, "1", query, undefined, id, cookie, defaultSearchUrl)
+    )
+  );
   const rawRecords = resultsByDistrict.flat();
 
   console.log("[seoulLibrary] physical total parsed records:", rawRecords.length);
+  if (rawRecords.length === 0) return [];
+
+  return groupPhysicalBooksByIsbn(rawRecords);
+}
+
+/**
+ * [2026-06-24 추가] ISBN 기반 종이책 검색.
+ * 카카오 책 검색 API로 ISBN을 먼저 확정한 뒤 이 함수를 호출 — 서울도서관
+ * 응답의 ISBN 필드 유무에 의존하지 않아 송파구·성북구 문제가 발생하지
+ * 않음(2026-06-24 실측 확인). title은 마포구 fallback(제목 검색 재시도)에만
+ * 쓰이므로, 화면에서 사용자가 선택한 카카오 후보의 title을 그대로 넘기면 됨.
+ *
+ * @param isbn 13자리 ISBN
+ * @param title 마포구 fallback용 제목 (카카오 후보의 title)
+ * @param userLat 사용자 위도 (없으면 DEFAULT_LOCATION 사용)
+ * @param userLng 사용자 경도 (없으면 DEFAULT_LOCATION 사용)
+ */
+export async function searchPhysicalBooksByIsbn(
+  isbn: string,
+  title: string,
+  userLat?: number,
+  userLng?: number
+): Promise<PhysicalBook[]> {
+  const lat = userLat ?? DEFAULT_LOCATION.lat;
+  const lng = userLng ?? DEFAULT_LOCATION.lng;
+  const targetDbnums = getNearbyDbnums(lat, lng);
+
+  console.log(
+    "[seoulLibrary] searchPhysicalBooksByIsbn - isbn:",
+    isbn,
+    "location:",
+    { lat, lng },
+    "target dbnums:",
+    targetDbnums
+  );
+
+  const id = generateRequestId();
+  const defaultSearchUrl = `${BASE_URL}/index.php/default_search`;
+
+  let cookie = "";
+  try {
+    const res = await fetch(defaultSearchUrl, {
+      signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
+      headers: { "User-Agent": "Mozilla/5.0" },
+    });
+    cookie = extractCookies(res);
+  } catch (e) {
+    console.log("[seoulLibrary] physical(isbn) stage1 fetch failed:", e);
+  }
+
+  const resultsByDistrict = await Promise.all(
+    targetDbnums.map((dbnum) =>
+      fetchDistrictsByCategory(dbnum, "7", isbn, title, id, cookie, defaultSearchUrl)
+    )
+  );
+  const rawRecords = resultsByDistrict.flat();
+
+  console.log("[seoulLibrary] physical(isbn) total parsed records:", rawRecords.length);
   if (rawRecords.length === 0) return [];
 
   return groupPhysicalBooksByIsbn(rawRecords);

@@ -92,6 +92,22 @@ export type PhysicalBook = {
   coverImage?: string;
   libraries: PhysicalLibrary[];
 };
+
+/**
+ * [2026-06-24 추가] 카카오 책 검색 API(다음 책검색)로 받은 ISBN 후보 1건.
+ * PhysicalBook과 다른 점: 아직 도서관 소장 정보(libraries)가 없는,
+ * "이 책이 맞습니까?"를 사용자에게 확인받는 단계의 가벼운 타입.
+ * 사용자가 이 중 하나를 선택하면 그 isbn으로 PhysicalBook을 가져옴
+ * (app/physical/page.tsx, app/api/physical-search-by-isbn/route.ts 참조).
+ */
+export type KakaoBookCandidate = {
+  isbn: string; // 13자리로 정규화된 값
+  title: string;
+  authors: string[];
+  publisher: string;
+  thumbnail?: string;
+  publishedDate?: string; // datetime 필드, 화면에 "OOOO년" 형태로 보여줄 때 사용
+};
 // ─── API 응답 래퍼 ────────────────────────────────────────────
 export type ApiResponse<T> =
   | { success: true; data: T }
