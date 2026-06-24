@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
-import { PhysicalLibrary, PhysicalBook, ApiResponse } from "@/types";
+import { PhysicalLibrary, PhysicalBook, PhysicalSearchResponse, ApiResponse } from "@/types";
 import { LibraryDetail } from "@/components/map/LibraryDetail";
 import { DEFAULT_LOCATION, getNearbyDbnums, getDistrictName, distanceKm } from "@/lib/data/districtCoords";
 
@@ -94,6 +94,11 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
   const [lastSearchedLocation, setLastSearchedLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [districtLabel, setDistrictLabel] = useState<string>("");
   const [showResearchPrompt, setShowResearchPrompt] = useState(false);
+  // [2026-06-24 추가] "nearby"면 기존처럼 지도 이동 시 재검색 UI 동작,
+  // "all"이면 이미 서울 전체를 검색해서 들고 있으므로 재검색 UI 전체를
+  // 숨김. runSearch(직접 API 호출 경로)는 항상 nearby로 간주 — 위치
+  // 기준 좁은 검색을 하는 함수이므로.
+  const [searchScope, setSearchScope] = useState<"nearby" | "all">("nearby");
   const [pendingLocation, setPendingLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [researching, setResearching] = useState(false);
   const moveDetectionEnabledRef = useRef(false);
@@ -136,21 +141,31 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
    * 화면에서 그대로 재발함. ISBN으로 직접 검색하면 이 문제가 없음
    * (2026-06-24 실측 확인).
    */
+  /**
+   * [2026-06-24 변경] /api/physical-search 응답 형태가 PhysicalBook[]
+   * → { books, meta }로 바뀜에 따라 json.data.books를 읽도록 변경.
+   * 이 함수는 항상 좌표(lat, lng)를 받아 "그 위치 기준 좁은 범위"를
+   * 검색하는 함수이므로, 호출될 때마다 searchScope를 "nearby"로
+   * 명시 — 혹시 이전에 sessionStorage에서 scope: "all"로 세팅된
+   * 상태였더라도, runSearch가 한 번이라도 호출되면(최초 진입 시 캐시가
+   * 없어서거나, 사용자가 "찾기" 버튼을 눌러서) 그 시점부터는 위치 기준
+   * 검색이 시작된 것이므로 "all" 상태로 남아있으면 안 됨.
+   */
   const runSearch = useCallback(
     async (lat: number, lng: number) => {
       try {
-        const url = new URL("/api/physical-search-by-isbn", window.location.origin);
-        url.searchParams.set("isbn", isbn);
-        url.searchParams.set("title", title ?? isbn);
+        const url = new URL("/api/physical-search", window.location.origin);
+        url.searchParams.set("q", title ?? isbn);
         url.searchParams.set("lat", String(lat));
         url.searchParams.set("lng", String(lng));
 
         const res = await fetch(url.toString());
-        const json: ApiResponse<PhysicalBook[]> = await res.json();
+        const json: ApiResponse<PhysicalSearchResponse> = await res.json();
         if (!json.success) return;
 
-        const matched = json.data.find((b) => b.isbn === isbn);
+        const matched = json.data.books.find((b) => b.isbn === isbn);
         setLibraries(matched?.libraries ?? []);
+        setSearchScope("nearby");
 
         // 검색 기준점 갱신 + 구 이름 라벨 갱신 + 이동 감지 타이머 재시작
         setLastSearchedLocation({ lat, lng });
@@ -184,6 +199,15 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
    * districtLabel, 이동감지 타이머를 정상적으로 세팅해야 함 — 그래야
    * 그 이후 "지도 이동 시 재검색" 기능이 똑같이 잘 동작함.
    */
+  /**
+   * [2026-06-24 변경] sessionStorage 저장 형태가 PhysicalBook →
+   * { book: PhysicalBook, scope: "nearby" | "all" }로 바뀜에 따라
+   * 읽는 쪽도 맞춰 변경. scope가 "all"이면(위치 없어 25개 구 전체를
+   * 이미 다 검색한 경우) searchScope를 "all"로 세팅 — 이 값으로
+   * "이 지역에서 재검색" UI 전체를 숨김(아래 checkMapMoved, 화면
+   *렌더링 부분 참조). 이미 서울 전체를 다 검색해서 들고 있으므로,
+   * 지도를 어디로 옮기든 추가 검색이 필요 없음.
+   */
   useEffect(() => {
     async function initialLoad() {
       const lat = userLocation?.lat ?? DEFAULT_LOCATION.lat;
@@ -193,19 +217,30 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
       try {
         const cached = sessionStorage.getItem(`physical_book_${isbn}`);
         if (cached) {
-          const book: PhysicalBook = JSON.parse(cached);
-          console.log("[physical map] sessionStorage에서 책 데이터 발견, API 재호출 스킵 — isbn:", isbn);
+          const parsed: { book: PhysicalBook; scope: "nearby" | "all" } = JSON.parse(cached);
+          console.log(
+            "[physical map] sessionStorage에서 책 데이터 발견, API 재호출 스킵 — isbn:",
+            isbn,
+            "scope:",
+            parsed.scope
+          );
 
-          setLibraries(book.libraries ?? []);
-          setLastSearchedLocation({ lat, lng });
-          setDistrictLabel(computeDistrictLabel(lat, lng));
-          setShowResearchPrompt(false);
-          setPendingLocation(null);
+          setLibraries(parsed.book.libraries ?? []);
+          setSearchScope(parsed.scope);
 
-          moveDetectionEnabledRef.current = false;
-          setTimeout(() => {
-            moveDetectionEnabledRef.current = true;
-          }, MOVE_DETECTION_DELAY_MS);
+          if (parsed.scope === "nearby") {
+            setLastSearchedLocation({ lat, lng });
+            setDistrictLabel(computeDistrictLabel(lat, lng));
+            setShowResearchPrompt(false);
+            setPendingLocation(null);
+
+            moveDetectionEnabledRef.current = false;
+            setTimeout(() => {
+              moveDetectionEnabledRef.current = true;
+            }, MOVE_DETECTION_DELAY_MS);
+          }
+          // scope === "all"이면 이동 감지 타이머 자체를 켜지 않음 —
+          // checkMapMoved가 호출돼도 searchScope로 한번 더 막힘(아래 참조).
 
           sessionStorage.removeItem(`physical_book_${isbn}`);
           usedCache = true;
@@ -223,7 +258,6 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
     initialLoad();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isbn, title, userLocation]);
-
   // "찾기" 버튼 클릭 시 재검색
   async function handleResearchClick() {
     if (!pendingLocation || researching) return;
@@ -280,6 +314,11 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
   // 아직 보호시간 중이거나 5km 미만이면 아무 동작 안 함(중복 호출돼도
   // 안전 — 이미 showResearchPrompt가 true면 굳이 다시 안 바꿔도 결과 동일).
   const checkMapMoved = useCallback(() => {
+    // [2026-06-24 추가] scope가 "all"이면 이미 서울 전체를 검색해서
+    // 들고 있으므로, 지도를 어디로 옮기든 재검색이 필요 없음 — 그
+    // 즉시 리턴해서 "OO구에서 찾기" 안내 자체가 뜨지 않게 함.
+    if (searchScope === "all") return;
+
     const map = mapRef.current;
     if (!map || !lastSearchedLocation) return;
     if (!moveDetectionEnabledRef.current) return;
@@ -300,7 +339,7 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
       setDistrictLabel(computeDistrictLabel(currentLat, currentLng));
       setShowResearchPrompt(true);
     }
-  }, [lastSearchedLocation]);
+  }, [lastSearchedLocation, searchScope]);
 
   const drawMarkers = useCallback(() => {
     const map = mapRef.current;
@@ -413,7 +452,12 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
           </div>
         )}
 
-        {!loading && mapReady && showResearchPrompt && (
+        {/* [2026-06-24 변경] searchScope === "all"이면 이미 서울 전체를
+            검색해서 들고 있으므로, "이 지역에서 찾기" 버튼이 뜰 일이
+            없음 — showResearchPrompt 자체가 checkMapMoved에서 막혀서
+            true가 안 되지만, 혹시 모를 경우를 위해 searchScope 조건도
+            명시적으로 같이 검사. */}
+        {!loading && mapReady && showResearchPrompt && searchScope === "nearby" && (
           <button
             onClick={handleResearchClick}
             disabled={researching}

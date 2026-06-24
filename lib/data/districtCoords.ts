@@ -104,6 +104,19 @@ export function getNearbyDbnums(lat: number, lng: number): string[] {
   return closest ? [closest.dbnum] : [];
 }
 
+/**
+ * [2026-06-24 추가] 위치 정보가 없는 사용자를 위한 전체 구 dbnum 목록.
+ * 기존엔 위치가 없으면 DEFAULT_LOCATION(서울방배경찰서 인근)을 그냥
+ * 대신 써서, "위치 없음"과 "방배경찰서 근처에 있음"이 코드상 구분되지
+ * 않았음 — 그러면 위치가 멀어서 검색 대상에서 빠진 구에 있는 책은
+ * 사용자에게 "검색결과 없음"으로 잘못 보였을 수 있음(2026-06-24 논의).
+ * 위치가 없으면 좁혀서 추측하는 대신 25개 구 전부를 검색해, 놓치는
+ * 책이 없도록 함.
+ */
+export function getAllDbnums(): string[] {
+  return DISTRICTS.map((d) => d.dbnum);
+}
+
 /** dbnum → 구 이름 역조회 (화면 표시용) */
 export function getDistrictName(dbnum: string): string | undefined {
   return DISTRICTS.find((d) => d.dbnum === dbnum)?.gu;

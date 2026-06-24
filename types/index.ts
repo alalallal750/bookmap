@@ -94,6 +94,23 @@ export type PhysicalBook = {
 };
 
 /**
+ * [2026-06-24 추가] 종이책 검색 API(/api/physical-search) 응답 형태.
+ * 기존엔 PhysicalBook[]만 돌려줬는데, 위치 유무에 따른 검색 범위
+ * 분기(scope)와 실제 검색한 구 이름(districtNames)을 화면에 알려주기
+ * 위해 meta를 같이 묶음. 화면은 이 meta로 로딩 문구를("OO구에서
+ * 검색 중" / "서울시 모든 구에서 검색 중") 다르게 보여주고, 지도
+ * 화면은 scope가 "all"이면 "이 지역에서 재검색" 버튼을 숨김(이미
+ * 전체를 다 검색해서 들고 있으므로 재검색이 의미 없음).
+ */
+export type PhysicalSearchResponse = {
+  books: PhysicalBook[];
+  meta: {
+    scope: "nearby" | "all";
+    districtNames: string[];
+  };
+};
+
+/**
  * [2026-06-24 추가] 카카오 책 검색 API(다음 책검색)로 받은 ISBN 후보 1건.
  * PhysicalBook과 다른 점: 아직 도서관 소장 정보(libraries)가 없는,
  * "이 책이 맞습니까?"를 사용자에게 확인받는 단계의 가벼운 타입.

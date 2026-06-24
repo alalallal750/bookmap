@@ -65,7 +65,7 @@
 import * as cheerio from "cheerio";
 import * as iconv from "iconv-lite";
 import { EbookBook, EbookLibraryEntry, PhysicalBook, PhysicalLibrary, LibraryType } from "@/types";
-import { DEFAULT_LOCATION, getNearbyDbnums, getDistrictName } from "@/lib/data/districtCoords";
+import { DEFAULT_LOCATION, getNearbyDbnums, getAllDbnums, getDistrictName } from "@/lib/data/districtCoords";
 import { findBranchCoord } from "@/lib/data/branchCoords";
 import { findBranchHours } from "@/lib/data/branchHours";
 
@@ -1226,17 +1226,51 @@ async function fetchDistrictsByCategory(
  * @param userLat 사용자 위도 (없으면 DEFAULT_LOCATION 사용)
  * @param userLng 사용자 경도 (없으면 DEFAULT_LOCATION 사용)
  */
+export type PhysicalSearchMeta = {
+  /** "nearby"면 위치 기준 좁은 범위, "all"이면 위치 없어 25개 구 전체 검색 */
+  scope: "nearby" | "all";
+  /** 이번 검색이 대상으로 한 구 이름들(화면 로딩 문구에 사용) */
+  districtNames: string[];
+};
+
+export type PhysicalSearchResult = {
+  books: PhysicalBook[];
+  meta: PhysicalSearchMeta;
+};
+
+/**
+ * [2026-06-24 변경] 위치 정보 유무에 따라 검색 범위를 분기.
+ *   - 위치 있음(userLat/userLng 둘 다 제공): 기존처럼 반경 5km 안의
+ *     몇 개 구만 검색("nearby") — "내 근처에서 가장 빨리"라는 서비스
+ *     목적에 맞고, 도서관 서버 부담도 적음.
+ *   - 위치 없음: 25개 구 전체 검색("all") — 위치가 없으면 "근처"라는
+ *     기준 자체가 없으므로, 좁혀서 추측하는 대신 서울 전체에서 찾을
+ *     수 있는 데까지 다 보여주는 쪽을 택함(놓치는 책이 없도록).
+ *
+ * 반환값을 books 배열 단독에서 { books, meta } 형태로 변경 — meta에
+ * scope/districtNames를 담아 API 응답에 실어서, 화면이 로딩 문구를
+ * "OO구에서 검색 중"(nearby) 또는 "서울시 모든 구에서 검색 중"(all)
+ * 으로 다르게 보여줄 수 있게 함.
+ */
 export async function searchPhysicalBooks(
   query: string,
   userLat?: number,
   userLng?: number
-): Promise<PhysicalBook[]> {
+): Promise<PhysicalSearchResult> {
+  const hasLocation = userLat !== undefined && userLng !== undefined;
   const lat = userLat ?? DEFAULT_LOCATION.lat;
   const lng = userLng ?? DEFAULT_LOCATION.lng;
-  const targetDbnums = getNearbyDbnums(lat, lng);
+
+  const targetDbnums = hasLocation ? getNearbyDbnums(lat, lng) : getAllDbnums();
+  const scope: "nearby" | "all" = hasLocation ? "nearby" : "all";
+  const districtNames = targetDbnums
+    .map((dbnum) => getDistrictName(dbnum))
+    .filter((name): name is string => Boolean(name));
 
   console.log(
-    "[seoulLibrary] searchPhysicalBooks - location:",
+    "[seoulLibrary] searchPhysicalBooks - scope:",
+    scope,
+    "location:",
     { lat, lng },
     "target dbnums:",
     targetDbnums
@@ -1264,9 +1298,12 @@ export async function searchPhysicalBooks(
   const rawRecords = resultsByDistrict.flat();
 
   console.log("[seoulLibrary] physical total parsed records:", rawRecords.length);
-  if (rawRecords.length === 0) return [];
 
-  return groupPhysicalBooksByIsbn(rawRecords);
+  const meta: PhysicalSearchMeta = { scope, districtNames };
+
+  if (rawRecords.length === 0) return { books: [], meta };
+
+  return { books: groupPhysicalBooksByIsbn(rawRecords), meta };
 }
 
 /**
