@@ -1,225 +1,110 @@
 /**
- * lib/data/branchCoords.ts
+ * 서울 25개 구 — 종이책 검색용 dbnum + 대표좌표
  *
- * data/branch-coords.json (get-branch-coords.js 실행 결과 원본, 519건
- * matched + 23건 mismatched + 20건 notFound)을 읽어서, 분관 이름으로
- * 좌표를 조회할 수 있는 형태로 가공.
+ * dbnum: 서울도서관 통합검색(meta.seoul.go.kr/libseoul)에 "이 구 도서관들을
+ *        검색대상으로 넣어라"고 알려주는 코드. 위경도 정보는 없음.
+ *        (caniread 핸드오프 ver2 문서 3-2장 표 그대로)
  *
- * [2026-06-23] 숫자(위도/경도)를 손으로 옮겨적다 실수할 위험을 피하기
- * 위해, 원본 JSON 파일을 그대로 데이터 소스로 쓰고 이 코드에서 가공만
- * 수행함. 좌표 자체는 절대 이 파일에 직접 적지 않음.
- *
- * 처리 단계:
- *   1. mismatched 배열(23건) 전체 제외 — 동명이인 사고 등으로 이미
- *      "구 이름이 주소에 없다"고 자동 검증에서 걸러진 것들.
- *   2. matched 안에 있지만 추가 수동 검증으로 발견된 위험 항목 8건 제외
- *      (아래 SUSPICIOUS_KEYWORDS 참조) — searchKeyword와 matchedName이
- *      서로 다른 시설을 가리키는데도 자동 검증(구 이름 포함 여부)은
- *      통과해버린 사고들. 검증 안 된 채로 코드에 들어가면 위험하므로
- *      이름이 다시 확인되기 전까지 좌표 없음 처리.
+ * lat/lng: "사용자 위치 반경 5km 안에 이 구가 들어오는지" 판단할 때 쓰는
+ *          대표좌표. 그 구의 대표 도서관 위치를 카카오 Geocoding API로
+ *          조회한 값(get-coords.js 실행 결과, 2026-06-23).
+ *          정밀한 행정구역 경계가 아니라 "대략 가까운 구를 잡아내는" 용도로만
+ *          쓰이므로, 구청이 아닌 대표 도서관 좌표를 그대로 사용함.
  */
 
-import fs from "fs";
-import path from "path";
-
-type RawMatchedEntry = {
+export type District = {
   gu: string;
-  searchKeyword: string;
-  matchedName: string;
-  address?: string;
-  roadAddress?: string;
-  lat: string;
-  lng: string;
-};
-
-type RawBranchCoordsFile = {
-  matched: RawMatchedEntry[];
-  mismatched: unknown[];
-  notFound: unknown[];
-};
-
-/**
- * [2026-06-23 수동 검증으로 발견] matched 안에 있지만 신뢰할 수 없는 8건.
- * 키(gu+searchKeyword)로 식별. 검증 방법: searchKeyword가 가리키는 분관과
- * matchedName이 가리키는 분관이 이름상 서로 다른 시설인데, 같은 좌표가
- * 중복으로 채워져 있거나 이름이 전혀 안 맞는 경우.
- *
- *   - 강남구 "신사동주민도서관" → "압구정동주민센터 U도서관"과 동일 좌표로
- *     채워짐(신사동주민도서관 검색이 실패해서 그 위 항목 결과가 새어
- *     들어온 것으로 추정)
- *   - 강남구 "도곡2동주민도서관" → "개포1동 주민도서관"과 동일 좌표,
- *     이름이 전혀 다름
- *   - 영등포구 "대림1동 작은도서관" → "조롱박작은도서관"과 동일 좌표
- *   - 영등포구 "신길1동 작은도서관" → "밤동산작은도서관"과 동일 좌표
- *   - 영등포구 "영등포본동 작은도서관" → "청소년문화의집 작은도서관"과
- *     동일 좌표
- *   - 구로구 "구로1동 작은도서관" → "스마트도서관 구일역점", 이름 불일치
- *   - 구로구 "수궁동 작은도서관" → "온수역 스마트도서관", 이름 불일치
- *   - 서대문구 "아현역 스마트도서관" → 주소가 마포구로 나옴, 관할 구
- *     경계 문제인지 오매칭인지 불명확해 보류
- *
- * [2026-06-23 재검색(get-retry-coords.js) 결과 반영]
- * 추가 매칭 성공 20건은 SUSPICIOUS_KEYS에 없으므로 자동으로 포함됨.
- * 단, 아래는 재검색에서도 실패했거나 검토 후 제외 결정한 항목:
- *   - 강서구 "봉제산작은도서관" — 재검색해도 양천구 미감도서관이 잡힘,
- *     여전히 신뢰 불가
- *   - 강동구 "천호역 스마트도서관" — 재검색해도 송파구 시설이 잡힘
- *   - 중랑구 "용마산역 스마트도서관" — 재검색해도 광진구 시설이 잡힘
- *   - 중구 "어울림작은도서관" — 재검색해도 동대문구 시설이 잡힘
- *   - 관악구 "보물섬작은도서관"(신림동) — 재검색도 notFound
- *   - 관악구 "뜰안에작은도서관"·"샛별작은도서관"·"어울작은도서관"(신림동
- *     명시) — 여전히 다른 동의 동명 시설이 잡힘(예: "뜰안에"는 난향동에
- *     있고 "신림동"엔 없는 것으로 추정)
- *   - 관악구 "마루작은도서관" — 재검색해도 "한울작은도서관"이 잡힘,
- *     "마루"라는 이름 자체가 없을 가능성
- *   - 서초구 "내방역"·"구반포역" 작은도서관 — 재검색해도 무관한 동
- *     작은도서관이 잡힘, 그 역 주변에 작은도서관이 따로 없을 가능성
- *   - 서초구 "새싹어린이공원 스마트도서관" — 재검색도 notFound
- *   - 도봉구 "창1동"·"도봉1동" 작은도서관 — 재검색해도 다른 항목과
- *     좌표가 겹침, 정말로 해당 동엔 별도 작은도서관이 없을 가능성
- *   - 구로구 "옹달샘"·"별빛맞이"·"숲속"(단지명 포함 3건) — 재검색도
- *     notFound, 아파트 단지 내부 시설이라 카카오맵에 일반 장소로 등록
- *     안 되어 있을 가능성
- *   - 동대문구 "전곡마을"·"장안가온누리"·"장안벗꽃길" — 재검색도 notFound
- *   - 영등포구 "여의도브라이트도서관" — 재검색도 notFound
- *   - 강동구 "반딧불북카페"·"웃은책작은도서관" — 재검색도 notFound
- *   - 중랑구 "송곡여고열린작은도서관" — 재검색도 notFound
- *   - 관악구 "별별창작꿈터봉현작은도서관" — 재검색도 notFound
- *
- * 검토 후 정상으로 판단해 제외 명단에서 뺀 것(SUSPICIOUS_KEYS에 안 넣음):
- *   - 서대문구 "구청스마트도서관" — "서대문구청 스마트도서관"으로
- *     재검색해도 "서대문구 스마트도서관"이 나오는데, 핵심이름 비교가
- *     "구청"이라는 글자 하나 차이로 0이 나온 것일 뿐, "홍제역
- *     스마트도서관"의 결과(서대문구::홍제역 스마트도서관 = 같은 좌표)
- *     와도 겹치지 않아 독립된 정상 시설로 판단.
- *   - 서대문구 "아현역 스마트도서관" — 이름은 정확히 일치하나 주소가
- *     마포구로 나옴. 역 자체가 구 경계에 걸쳐있어 관할 표기가 다를 수
- *     있다고 판단, 좌표 자체는 신뢰하고 사용.
- */
-/**
- * [2026-06-23 전부 해소] 이전엔 7건이 남아있었으나, 사용자가
- * https://lib.seoul.go.kr/slibsrch/main에서 직접 확인한 정확한 주소로
- * 전부 크로스체크 완료 — 7건 모두 1차 검색에서 잘못 잡혔던 결과와는
- * 명백히 다른 별개 시설(주소가 전혀 다른 건물)로 확인됨. 현재는 빈
- * Set이지만, 구조는 남겨둠 — 앞으로 비슷한 사고가 또 발견되면 여기에
- * 추가하면 됨.
- */
-/**
- * [2026-06-24 재발견 — 빠뜨림] "7건 전부 해소"라고 기록했었으나, 실제로
- * address-coords.json 실행 결과(28건)를 세어보니 "대림1동작은도서관"이
- * 빠져있었음 — 요청한 주소(서울특별시 영등포구 디지털로 436)로 검색이
- * 실패한 것으로 추정. 비워뒀던 SUSPICIOUS_KEYS에 도로 추가함 — 검증
- * 안 된 채 "branch-coords.json"의 원래 잘못된 좌표(조롱박작은도서관과
- * 동일 좌표였던 그 사고)가 그대로 살아나는 걸 막기 위함.
- */
-const SUSPICIOUS_KEYS = new Set<string>(["영등포구::대림1동 작은도서관"]);
-
-function makeKey(gu: string, searchKeyword: string): string {
-  return `${gu}::${searchKeyword}`;
-}
-
-export type BranchCoord = {
-  gu: string;
-  /** 통합검색 XML의 "도서관" 필드와 매칭시킬 이름 — matchedName 그대로 사용 */
-  name: string;
+  dbnum: string;
   lat: number;
   lng: number;
 };
 
-let cachedCoords: BranchCoord[] | null = null;
+export const DISTRICTS: District[] = [
+  { gu: "동작구", dbnum: "43641", lat: 37.48403213246281, lng: 126.96735910708873 },
+  { gu: "관악구", dbnum: "42921", lat: 37.46705411409455, lng: 126.94476867051847 },
+  { gu: "중랑구", dbnum: "99071", lat: 37.61524044821545, lng: 127.0869527012108 },
+  { gu: "용산구", dbnum: "88341", lat: 37.5390036092211, lng: 126.965258884714 },
+  { gu: "광진구", dbnum: "19071", lat: 37.55106994644599, lng: 127.11060915357692 },
+  { gu: "동대문구", dbnum: "68831", lat: 37.5898911041047, lng: 127.047328254504 },
+  { gu: "도봉구", dbnum: "43361", lat: 37.6445499352563, lng: 127.043999919307 },
+  { gu: "노원구", dbnum: "43081", lat: 37.66106965639641, lng: 127.06500809784696 },
+  { gu: "성동구", dbnum: "34141", lat: 37.55918951636491, lng: 127.03496099832289 },
+  { gu: "은평구", dbnum: "33451", lat: 37.619049316454, lng: 126.928381841584 },
+  { gu: "송파구", dbnum: "44381", lat: 37.49498961772475, lng: 127.11547599284663 },
+  { gu: "종로구", dbnum: "88361", lat: 37.5904038281362, lng: 126.96590530631 },
+  { gu: "중구", dbnum: "44701", lat: 37.55636596450095, lng: 127.0108387456178 },
+  { gu: "구로구", dbnum: "42331", lat: 37.48906560958533, lng: 126.85890398698226 },
+  { gu: "강북구", dbnum: "88351", lat: 37.62489854721974, lng: 127.03601125702522 },
+  { gu: "강동구", dbnum: "21841", lat: 37.5650447488513, lng: 127.17388820169033 },
+  { gu: "서초구", dbnum: "88431", lat: 37.5024886017556, lng: 127.012544317106 },
+  { gu: "양천구", dbnum: "44451", lat: 37.508766650295534, lng: 126.86715169067735 },
+  { gu: "금천구", dbnum: "107191", lat: 37.45646657552785, lng: 126.89573760091004 },
+  { gu: "강남구", dbnum: "50421", lat: 37.4881641147195, lng: 127.038742912705 },
+  { gu: "강서구", dbnum: "42871", lat: 37.5594278014627, lng: 126.865302989472 },
+  { gu: "성북구", dbnum: "44301", lat: 37.6049723386975, lng: 127.050599359915 },
+  { gu: "마포구", dbnum: "88421", lat: 37.56373600080743, lng: 126.90811569951101 },
+  { gu: "서대문구", dbnum: "43921", lat: 37.572954443895654, lng: 126.95554868549858 },
+  { gu: "영등포구", dbnum: "88631", lat: 37.5216797272756, lng: 126.920048533997 },
+];
 
 /**
- * data/branch-coords.json(25개 구 1차 검색 결과)과
- * data/retry-coords.json(1차에서 실패한 48건을 키워드 보강해서 재검색한
- * 결과)을 둘 다 읽어서 합침. retry-coords.json은 없을 수도 있으므로
- * (재검색을 아직 안 했거나, 모두 1차에서 해결된 경우) 파일이 없으면
- * 조용히 건너뜀.
- *
- * mismatched + 위험 항목을 제외한 신뢰 가능한 좌표 목록을 반환. 결과는
- * 모듈 내에서 캐싱(서버 프로세스 생애주기 동안 파일을 한 번만 읽음).
+ * 위치 정보가 없을 때 기본값 — 서울방배경찰서 (동작구/서초구 경계,
+ * 동작대로 인근). [2026-06-23 결정]
  */
-export function loadBranchCoords(): BranchCoord[] {
-  if (cachedCoords) return cachedCoords;
+export const DEFAULT_LOCATION = { lat: 37.4922364, lng: 126.9876359 };
 
-  const result: BranchCoord[] = [];
-  let skippedSuspicious = 0;
-  let totalMismatched = 0;
-  let totalNotFound = 0;
+const EARTH_RADIUS_KM = 6371;
 
-  const dataFiles = [
-    "branch-coords.json",
-    "dobong-coords.json",
-    "retry-coords.json",
-    "address-coords.json",
-  ];
-
-  for (const fileName of dataFiles) {
-    const filePath = path.join(process.cwd(), "data", fileName);
-    if (!fs.existsSync(filePath)) {
-      console.log(`[branchCoords] ${fileName} 없음 — 건너뜀`);
-      continue;
-    }
-
-    const raw = fs.readFileSync(filePath, "utf-8");
-    const parsed: RawBranchCoordsFile = JSON.parse(raw);
-    totalMismatched += parsed.mismatched.length;
-    totalNotFound += parsed.notFound.length;
-
-    for (const entry of parsed.matched) {
-      const key = makeKey(entry.gu, entry.searchKeyword);
-      if (SUSPICIOUS_KEYS.has(key)) {
-        skippedSuspicious++;
-        continue;
-      }
-
-      const lat = parseFloat(entry.lat);
-      const lng = parseFloat(entry.lng);
-      if (Number.isNaN(lat) || Number.isNaN(lng)) continue;
-
-      result.push({
-        gu: entry.gu,
-        name: entry.matchedName,
-        lat,
-        lng,
-      });
-    }
-  }
-
-  console.log(
-    `[branchCoords] loaded ${result.length} branches` +
-      ` (excluded ${totalMismatched} mismatched,` +
-      ` ${skippedSuspicious} suspicious, ${totalNotFound} notFound,` +
-      ` across ${dataFiles.length} source files)`
-  );
-
-  cachedCoords = result;
-  return result;
+function toRad(deg: number): number {
+  return (deg * Math.PI) / 180;
 }
 
 /**
- * 분관 이름으로 좌표 조회. 서울도서관 통합검색 XML의 "도서관" 필드 값
- * (예: "사당솔밭도서관", "역삼도서관")을 그대로 넣으면 됨.
- *
- * 매칭 전략: 정확히 일치하는 이름을 먼저 찾고, 없으면 공백을 제거한 뒤
- * 한쪽이 다른 쪽을 포함하는지 느슨하게 재시도 — 통합검색 XML의 표기와
- * 카카오맵 검색 결과의 표기가 미세하게 다를 수 있음(예: "아트앤힐링작은
- * 도서관" vs "아트&힐링작은도서관").
+ * 두 좌표 사이의 실제 거리(km) — Haversine 공식.
+ * districtCoords.ts 안의 단순 위경도 차이 근사(* 111) 대신, 정확한 구면거리
+ * 계산을 사용함. 위도가 올라갈수록(서울처럼 위도 37도 부근) 경도 1도의
+ * 실제 거리가 줄어드는데, 단순 근사는 이를 반영하지 못해 동서 방향 거리를
+ * 과대평가하는 오차가 있음 — 자릿수상 큰 차이는 아니지만, 5km라는 좁은
+ * 반경을 기준으로 구를 가르는 작업이라 정확한 공식을 쓰는 쪽을 택함.
  */
-export function findBranchCoord(libraryName: string): BranchCoord | undefined {
-  const coords = loadBranchCoords();
+export function distanceKm(
+  lat1: number,
+  lng1: number,
+  lat2: number,
+  lng2: number
+): number {
+  const dLat = toRad(lat2 - lat1);
+  const dLng = toRad(lng2 - lng1);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return EARTH_RADIUS_KM * c;
+}
 
-  const exact = coords.find((c) => c.name === libraryName);
-  if (exact) return exact;
+const NEARBY_RADIUS_KM = 5;
 
-  const normalize = (s: string) => s.replace(/[\s&]/g, "");
-  const normalizedTarget = normalize(libraryName);
+/**
+ * 사용자 위치 기준 반경 5km 안에 대표좌표가 있는 구들의 dbnum 목록을 반환.
+ * 하나도 안 걸리면(외곽지역 등) 가장 가까운 구 1곳을 fallback으로 포함—
+ * "검색대상 구가 0개"인 상황을 방지.
+ */
+export function getNearbyDbnums(lat: number, lng: number): string[] {
+  const withDistance = DISTRICTS.map((d) => ({
+    ...d,
+    distance: distanceKm(lat, lng, d.lat, d.lng),
+  }));
 
-  return coords.find((c) => {
-    const normalizedName = normalize(c.name);
-    return (
-      normalizedName === normalizedTarget ||
-      normalizedName.includes(normalizedTarget) ||
-      normalizedTarget.includes(normalizedName)
-    );
-  });
+  const within = withDistance.filter((d) => d.distance <= NEARBY_RADIUS_KM);
+  if (within.length > 0) {
+    return within.map((d) => d.dbnum);
+  }
+
+  const closest = withDistance.sort((a, b) => a.distance - b.distance)[0];
+  return closest ? [closest.dbnum] : [];
+}
+
+/** dbnum → 구 이름 역조회 (화면 표시용) */
+export function getDistrictName(dbnum: string): string | undefined {
+  return DISTRICTS.find((d) => d.dbnum === dbnum)?.gu;
 }
