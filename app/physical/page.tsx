@@ -55,7 +55,22 @@ export default function PhysicalSearchPage() {
       const res = await fetch(url.toString());
       const json: ApiResponse<PhysicalBook[]> = await res.json();
       if (!json.success) throw new Error(json.error);
-      setState({ status: "done", books: json.data, query });
+
+      // [2026-06-24 추가] 소장 도서관 수 많은 순으로 정렬 — 동률이면
+      // 대출가능한 곳 많은 순. 정렬 기준이 없으면 25개 구 응답이 도착한
+      // 순서(네트워크 상황에 따라 매번 달라짐)대로 나열되어, 가이드북·
+      // 외국어판처럼 소장이 적은 책이 우연히 위쪽에 뜨는 노이즈 문제가
+      // 있었음. 소장이 많은 책일수록 표준판일 가능성이 높다는 판단으로
+      // 이 기준을 채택.
+      const sortedBooks = [...json.data].sort((a, b) => {
+        const diff = b.libraries.length - a.libraries.length;
+        if (diff !== 0) return diff;
+        const aAvail = a.libraries.filter((l) => l.available).length;
+        const bAvail = b.libraries.filter((l) => l.available).length;
+        return bAvail - aAvail;
+      });
+
+      setState({ status: "done", books: sortedBooks, query });
     } catch (e) {
       setState({
         status: "error",
@@ -134,24 +149,48 @@ export default function PhysicalSearchPage() {
                     <li key={book.isbn}>
                       <button
                         onClick={() => handleSelectBook(book)}
-                        className="w-full text-left bg-white rounded-2xl border border-gray-100 p-4 shadow-sm active:bg-gray-50"
+                        className="w-full flex items-start gap-3 text-left bg-white rounded-2xl border border-gray-100 p-4 shadow-sm active:bg-gray-50"
                       >
-                        <p className="font-bold text-gray-900 text-sm line-clamp-1">
-                          {book.title}
-                        </p>
-                        <p className="text-xs text-gray-400 mt-0.5">
-                          {book.author}
-                          {book.publisher ? ` · ${book.publisher}` : ""}
-                          {book.publishYear ? ` · ${book.publishYear}` : ""}
-                        </p>
-                        <p
-                          className={`text-xs mt-1.5 font-semibold ${
-                            availableCount > 0 ? "text-green-600" : "text-gray-400"
-                          }`}
-                        >
-                          {book.libraries.length}개 도서관 소장
-                          {availableCount > 0 ? ` · ${availableCount}곳 대출가능` : ""}
-                        </p>
+                        {/* [2026-06-24 추가] 표지 이미지 — 서울도서관 응답의
+                            Image 필드(book.coverImage)를 그대로 사용.
+                            기존 화면엔 이 부분 자체가 빠져 있었음(v11
+                            이슈 A와 동일한 패턴). 이미지가 없으면 빈
+                            칸 대신 책 아이콘으로 대체. */}
+                        <div className="flex-shrink-0 w-12 h-16 bg-gray-100 rounded-lg overflow-hidden">
+                          {book.coverImage ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              src={book.coverImage}
+                              alt={`${book.title} 표지`}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center">
+                              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-gray-300">
+                                <rect x="3" y="2" width="18" height="20" rx="2" stroke="currentColor" strokeWidth="1.5" />
+                                <path d="M7 7h10M7 11h10M7 15h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                              </svg>
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-bold text-gray-900 text-sm line-clamp-1">
+                            {book.title}
+                          </p>
+                          <p className="text-xs text-gray-400 mt-0.5">
+                            {book.author}
+                            {book.publisher ? ` · ${book.publisher}` : ""}
+                            {book.publishYear ? ` · ${book.publishYear}` : ""}
+                          </p>
+                          <p
+                            className={`text-xs mt-1.5 font-semibold ${
+                              availableCount > 0 ? "text-green-600" : "text-gray-400"
+                            }`}
+                          >
+                            {book.libraries.length}개 도서관 소장
+                            {availableCount > 0 ? ` · ${availableCount}곳 대출가능` : ""}
+                          </p>
+                        </div>
                       </button>
                     </li>
                   );
