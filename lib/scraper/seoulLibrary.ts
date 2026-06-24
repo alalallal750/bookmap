@@ -1198,12 +1198,23 @@ export async function searchPhysicalBooks(
 
       const xml = await res.text();
 
-      // [DEBUG 2026-06-24] 송파구(44381) 등 파싱 0건 원인 추적용 — 응답
-      // XML 앞부분을 그대로 로그로 남김. 원인 파악되면 제거할 것.
-      console.log(`[DEBUG] deploy(${dbnum}) xml length:`, xml.length);
-      console.log(`[DEBUG] deploy(${dbnum}) xml preview:`, xml.slice(0, 2000));
+      // [DEBUG 2026-06-24] 25개 구 전체의 필드 이름 패턴을 일괄 점검하기
+      // 위한 로그. 송파구에서 ISBN 필드가 없어 전부 걸러지는 문제를
+      // 발견한 뒤, 다른 구도 같은 종류의 형식 차이가 있는지 확인하려고
+      // 추가함. field name="..." 안의 모든 고유 이름을 모아서 출력 —
+      // 표준 패턴(TITLE/Author/Publication/Date/ISBN/Image/도서관/
+      // Location/Loan)과 다른 이름이 보이면 그 구도 별도 대응 필요.
       const recordCountInRaw = (xml.match(/<record/g) ?? []).length;
-      console.log(`[DEBUG] deploy(${dbnum}) raw <record> tag count:`, recordCountInRaw);
+      const fieldNameMatches = xml.match(/<field name="([^"]+)"/g) ?? [];
+      const uniqueFieldNames = Array.from(
+        new Set(fieldNameMatches.map((m) => m.match(/name="([^"]+)"/)?.[1]))
+      );
+      console.log(
+        `[DEBUG] deploy(${dbnum}) raw <record> tag count:`,
+        recordCountInRaw,
+        "| unique field names:",
+        uniqueFieldNames
+      );
 
       return parsePhysicalXml(xml, dbnum);
     } catch (e) {
