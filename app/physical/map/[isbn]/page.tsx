@@ -126,11 +126,22 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
   // 클릭 시(재검색) 둘 다 같은 책(title/isbn)을 기준으로, 위치만 바꿔서
   // 호출하는 공용 함수. 호출 성공 시 lastSearchedLocation을 그 위치로
   // 갱신하고, 15초 보호시간 타이머를 다시 시작함(moveDetectionEnabledRef).
+  /**
+   * [2026-06-24 변경] 제목 기반(/api/physical-search) → ISBN 기반
+   * (/api/physical-search-by-isbn)으로 변경. 이전 구조는 ISBN을 이미
+   * 알고 있으면서도 다시 제목으로 25개 구를 검색해 그 응답 안에서
+   * b.isbn === isbn인 책만 찾는 방식이었음 — 이러면 카카오로 ISBN을
+   * 확정해서 들어온 의미가 사라지고, 제목 검색 특유의 문제(송파구·
+   * 성북구가 제목 검색 응답에 ISBN을 안 주는 문제, 이슈 D)가 지도
+   * 화면에서 그대로 재발함. ISBN으로 직접 검색하면 이 문제가 없음
+   * (2026-06-24 실측 확인).
+   */
   const runSearch = useCallback(
     async (lat: number, lng: number) => {
       try {
-        const url = new URL("/api/physical-search", window.location.origin);
-        url.searchParams.set("q", title ?? isbn);
+        const url = new URL("/api/physical-search-by-isbn", window.location.origin);
+        url.searchParams.set("isbn", isbn);
+        url.searchParams.set("title", title ?? isbn);
         url.searchParams.set("lat", String(lat));
         url.searchParams.set("lng", String(lng));
 
