@@ -9,7 +9,7 @@ import { DEFAULT_LOCATION, getNearbyDbnums, getDistrictName, distanceKm } from "
 // [2026-06-24 추가] 지도 이동 시 "이 지역에서 재검색" UX 관련 상수
 // - 진입 후 이 시간(ms) 동안은 이동 감지를 끔(최초 위치 확인/확대 보호)
 // - 마지막 검색 위치에서 이 거리(km) 이상 벗어나야 "재검색 찾기" 문구로 전환
-const MOVE_DETECTION_DELAY_MS = 15000;
+const MOVE_DETECTION_DELAY_MS = 10000;
 const MOVE_DETECTION_DISTANCE_KM = 5;
 
 function LoadingDots({ message }: { message: string }) {
@@ -65,7 +65,6 @@ const LEGEND = [
   { label: "구립", color: "#2563eb" },
   { label: "작은", color: "#16a34a" },
   { label: "스마트", color: "#7c3aed" },
-  { label: "교육청", color: "#ea580c" },
 ];
 
 type MapPageProps = { params: { isbn: string }; searchParams: { title?: string } };

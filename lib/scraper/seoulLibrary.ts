@@ -64,7 +64,7 @@
 
 import * as cheerio from "cheerio";
 import * as iconv from "iconv-lite";
-import { EbookBook, EbookLibraryEntry, PhysicalBook, PhysicalLibrary } from "@/types";
+import { EbookBook, EbookLibraryEntry, PhysicalBook, PhysicalLibrary, LibraryType } from "@/types";
 import { DEFAULT_LOCATION, getNearbyDbnums, getDistrictName } from "@/lib/data/districtCoords";
 import { findBranchCoord } from "@/lib/data/branchCoords";
 import { findBranchHours } from "@/lib/data/branchHours";
@@ -1287,6 +1287,31 @@ function extractLibraryName(r: PhysicalRawRecord): string {
 }
 
 /**
+ * [2026-06-24 추가] 분관 이름 안의 문구로 도서관 유형 추론.
+ *
+ * 종이책 통합검색은 동작구 ver1과 달리 구립/작은/스마트도서관이 한
+ * 응답(dbnum)에 섞여서 나오고, 별도 유형 필드가 없음(v10 문서 5장:
+ * "스마트도서관 별도 처리 불필요, dbnum 통합검색에 이미 포함되어 나옴"
+ * 이라고만 적혀 있고, 그 안에서 유형을 구분하는 작업은 아직 안 함).
+ *
+ * 100% 정확하지는 않음 — "작은"이나 "스마트"라는 글자가 이름에 없는
+ * 분관은 구립으로 분류됨(예: 정식 명칭에 "작은도서관"이 안 들어가는
+ * 경우). 정확하지 않은 채로 색 구분을 보여주는 게, 전부 한 색으로
+ * 보여주는 것보다는 사용자에게 더 유용한 정보라고 판단해 1차로 적용.
+ * 추후 branchHours.ts의 정식 명단(slib-hours.json)에 있는 "type" 필드를
+ * 보조 신호로 같이 쓰면 정확도를 더 높일 수 있어 보임(다음 개선 후보).
+ */
+function inferLibraryType(branchName: string): LibraryType {
+  if (branchName.includes("스마트도서관") || branchName.includes("스마트")) {
+    return "smart_library";
+  }
+  if (branchName.includes("작은도서관") || branchName.includes("작은")) {
+    return "small_library";
+  }
+  return "library";
+}
+
+/**
  * [2026-06-23 실측 확정] Loan 필드는 "대출가능" 또는 "대출불가(사유)" 형식의
  * 한국어 텍스트. 비율(N/M)이 아니므로 전자책의 반전 버그 같은 위험이 없음.
  * "대출가능"으로 시작하면 가능, 그 외(대출불가 + 모든 변형)는 불가.
@@ -1369,16 +1394,13 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
       // 분관(예: 사용자가 직접 주소 확인해서 branchCoords.ts에만 있는
       // 14곳 등)은 그냥 undefined로 남음 — PhysicalLibrary의 tel/
       // openingHours가 원래 선택적 필드라 추가 처리 불필요.
-      const guName = getDistrictName(r.dbnum);
-      console.log("[DEBUG]   guName:", guName);
-
+     const guName = getDistrictName(r.dbnum);
       const hoursInfo = guName ? findBranchHours(branchName, guName) : undefined;
-      console.log("[DEBUG]   hoursInfo:", hoursInfo);
 
       return {
         id: `seoul_${r.dbnum}_${branchName}`,
         libraryName: branchName,
-        libraryType: "library",
+        libraryType: inferLibraryType(branchName),
         // [2026-06-24] 정식 명단에서 찾은 주소가 있으면 그걸 쓰고, 없으면
         // 빈 값. branchCoords.ts의 카카오맵 좌표 검색 결과 주소(address_name)
         // 는 현재 BranchCoord 타입에 없어서(좌표만 저장) 못 씀 — 필요해지면
