@@ -65,6 +65,9 @@
 import * as cheerio from "cheerio";
 import * as iconv from "iconv-lite";
 import { EbookBook, EbookLibraryEntry, PhysicalBook, PhysicalLibrary } from "@/types";
+import { DEFAULT_LOCATION, getNearbyDbnums, getDistrictName } from "@/lib/data/districtCoords";
+import { findBranchCoord } from "@/lib/data/branchCoords";
+import { findBranchHours } from "@/lib/data/branchHours";
 
 const BASE_URL = "https://meta.seoul.go.kr/libseoul";
 
