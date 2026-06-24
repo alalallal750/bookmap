@@ -93,3 +93,27 @@ export type SearchResult = {
   books: Book[];
   total: number;
 };
+
+// ─── types/index.ts에 "추가"할 내용 ─────────────────────────────
+// (기존 EbookBook, EbookLibraryEntry 타입 근처에 추가하면 됨)
+
+// 종이책(서울도서관 통합검색 기반) 책 1권(ISBN 기준) + 보유 분관별 목록
+// EbookBook과 짝이 되는 타입 — 전자책은 도서관(dbnum) 단위, 종이책은
+// 분관 단위로 더 잘게 나뉜다는 점이 다름.
+export type PhysicalBook = {
+  isbn: string;
+  title: string;
+  author: string;
+  publisher?: string;
+  publishYear?: number;
+  coverImage?: string;
+  libraries: PhysicalLibrary[];
+};
+
+// 기존 PhysicalLibrary는 변경 없음 — 그대로 재사용.
+// 종이책 검색에서 새로 채우는 필드: id, libraryName, libraryType("library"
+// 고정), available, callNumber, searchResultUrl, returnDueDate.
+// 비워두는 필드: address, latitude, longitude(분관 좌표 수집 전까지 0),
+// tel, openingHours, homepageUrl, distance, totalCount, availableCount,
+// copyInfo(종이책 통합검색 XML에 해당 정보 없음 — 동작구 dongjak.ts와 달리
+// record 1건이 이미 분관 1건 단위라 별도 집계 불필요).

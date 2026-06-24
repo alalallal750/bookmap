@@ -1,0 +1,258 @@
+{
+  "matched": [
+    {
+      "gu": "도봉구",
+      "searchKeyword": "도봉문화정보도서관",
+      "matchedName": "도봉문화정보도서관",
+      "address": "서울 도봉구 창동 418",
+      "roadAddress": "서울 도봉구 덕릉로 315",
+      "lat": "37.6445499352563",
+      "lng": "127.043999919307",
+      "similarity": 1
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "도봉아이나라도서관",
+      "matchedName": "도봉아이나라도서관",
+      "address": "서울 도봉구 창동 808-1",
+      "roadAddress": "서울 도봉구 노해로69길 151",
+      "lat": "37.659049979674",
+      "lng": "127.049489134922",
+      "similarity": 1
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "학마을도서관",
+      "matchedName": "학마을도서관",
+      "address": "서울 도봉구 방학동 446-5",
+      "roadAddress": "서울 도봉구 시루봉로 128",
+      "lat": "37.6620663711816",
+      "lng": "127.027767080951",
+      "similarity": 1
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "도봉기적의도서관",
+      "matchedName": "도봉기적의도서관",
+      "address": "서울 도봉구 도봉동 652-1",
+      "roadAddress": "서울 도봉구 마들로 797",
+      "lat": "37.68084438252608",
+      "lng": "127.05020873112919",
+      "similarity": 1
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "쌍문채움도서관",
+      "matchedName": "쌍문채움도서관",
+      "address": "서울 도봉구 쌍문동 381-9",
+      "roadAddress": "서울 도봉구 우이천로 340",
+      "lat": "37.647025724040546",
+      "lng": "127.02622043531305",
+      "similarity": 1
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "원당마을한옥도서관",
+      "matchedName": "원당마을한옥도서관",
+      "address": "서울 도봉구 방학동 543-2",
+      "roadAddress": "서울 도봉구 해등로32가길 17",
+      "lat": "37.6602836827756",
+      "lng": "127.021793804097",
+      "similarity": 1
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "둘리도서관",
+      "matchedName": "둘리도서관",
+      "address": "서울 도봉구 쌍문동 산 240-5",
+      "roadAddress": "서울 도봉구 시루봉로1길 6",
+      "lat": "37.6521664216185",
+      "lng": "127.027591147992",
+      "similarity": 1
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "김근태기념도서관",
+      "matchedName": "김근태기념도서관",
+      "address": "서울 도봉구 도봉동 279",
+      "roadAddress": "서울 도봉구 도봉산길 14",
+      "lat": "37.68766726029315",
+      "lng": "127.04401177464752",
+      "similarity": 1
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "도봉구청행복작은도서관",
+      "matchedName": "도봉구청행복작은도서관",
+      "address": "서울 도봉구 방학동 720",
+      "roadAddress": "서울 도봉구 마들로 656",
+      "lat": "37.6687058692153",
+      "lng": "127.047101697212",
+      "similarity": 1
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "무수골작은도서관",
+      "matchedName": "무수골도서관",
+      "address": "서울 도봉구 도봉동 577",
+      "roadAddress": "서울 도봉구 도봉로175길 10",
+      "lat": "37.6830186224679",
+      "lng": "127.042907101769",
+      "similarity": 1
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "지혜의등대작은도서관",
+      "matchedName": "지혜의등대 작은도서관",
+      "address": "서울 도봉구 창동 662-7",
+      "roadAddress": "서울 도봉구 노해로 256",
+      "lat": "37.6510177925277",
+      "lng": "127.037009734146",
+      "similarity": 1
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "김수영문학작은도서관",
+      "matchedName": "김수영문학도서관",
+      "address": "서울 도봉구 방학동 498-31",
+      "roadAddress": "서울 도봉구 해등로32길 80",
+      "lat": "37.6599886447797",
+      "lng": "127.023944756637",
+      "similarity": 1
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "쌍문1동 작은도서관",
+      "matchedName": "쌍문1동공립작은도서관",
+      "address": "서울 도봉구 쌍문동 378-45",
+      "roadAddress": "서울 도봉구 노해로 147",
+      "lat": "37.6480186389579",
+      "lng": "127.026080275415",
+      "similarity": 0.67
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "쌍문2동 작은도서관",
+      "matchedName": "쌍문2동공립작은도서관",
+      "address": "서울 도봉구 쌍문동 713-31",
+      "roadAddress": "서울 도봉구 도봉로137길 21",
+      "lat": "37.6599042036195",
+      "lng": "127.03971030701338",
+      "similarity": 0.67
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "쌍문3동 작은도서관",
+      "matchedName": "쌍문3동공립작은도서관",
+      "address": "서울 도봉구 쌍문동 327",
+      "roadAddress": "서울 도봉구 노해로44길 9",
+      "lat": "37.6489444125104",
+      "lng": "127.027988825073",
+      "similarity": 0.67
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "쌍문4동 작은도서관",
+      "matchedName": "쌍문4동공립작은도서관",
+      "address": "서울 도봉구 쌍문동 59-7",
+      "roadAddress": "서울 도봉구 시루봉로 62-7",
+      "lat": "37.65646391484052",
+      "lng": "127.02840528921175",
+      "similarity": 0.67
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "창3동 작은도서관",
+      "matchedName": "창3동공립작은도서관",
+      "address": "서울 도봉구 창동 467-1",
+      "roadAddress": "서울 도봉구 덕릉로60차길 12",
+      "lat": "37.636782461061024",
+      "lng": "127.04175886358",
+      "similarity": 0.6
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "창4동 작은도서관",
+      "matchedName": "창4동공립작은도서관",
+      "address": "서울 도봉구 창동 33-1",
+      "roadAddress": "서울 도봉구 노해로 390",
+      "lat": "37.6522412787113",
+      "lng": "127.051542508791",
+      "similarity": 0.6
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "창5동 작은도서관",
+      "matchedName": "창5동공립작은도서관",
+      "address": "서울 도봉구 창동 224-41",
+      "roadAddress": "서울 도봉구 도봉로136나길 20",
+      "lat": "37.6563097164705",
+      "lng": "127.043594350294",
+      "similarity": 0.6
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "도봉2동 작은도서관",
+      "matchedName": "도봉2동공립작은도서관",
+      "address": "서울 도봉구 도봉동 636-9",
+      "roadAddress": "서울 도봉구 마들로 668",
+      "lat": "37.6697800550848",
+      "lng": "127.046553777858",
+      "similarity": 0.67
+    }
+  ],
+  "mismatched": [],
+  "suspicious": [
+    {
+      "gu": "도봉구",
+      "searchKeyword": "방학2동 작은도서관",
+      "matchedName": "책날다작은도서관",
+      "address": "서울 도봉구 방학동 616-14",
+      "roadAddress": "서울 도봉구 시루봉로 201",
+      "lat": "37.667104262984",
+      "lng": "127.032808173303",
+      "similarity": 0
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "창1동 작은도서관",
+      "matchedName": "지혜의등대 작은도서관",
+      "address": "서울 도봉구 창동 662-7",
+      "roadAddress": "서울 도봉구 노해로 256",
+      "lat": "37.6510177925277",
+      "lng": "127.037009734146",
+      "similarity": 0
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "창2동 작은도서관",
+      "matchedName": "아름다운도서관",
+      "address": "서울 도봉구 창동 629-26",
+      "roadAddress": "서울 도봉구 도봉로104길 63",
+      "lat": "37.6434571762112",
+      "lng": "127.035587382405",
+      "similarity": 0
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "도봉1동 작은도서관",
+      "matchedName": "무수골도서관",
+      "address": "서울 도봉구 도봉동 577",
+      "roadAddress": "서울 도봉구 도봉로175길 10",
+      "lat": "37.6830186224679",
+      "lng": "127.042907101769",
+      "similarity": 0
+    },
+    {
+      "gu": "도봉구",
+      "searchKeyword": "북서울중학교 작은도서관",
+      "matchedName": "무수골도서관",
+      "address": "서울 도봉구 도봉동 577",
+      "roadAddress": "서울 도봉구 도봉로175길 10",
+      "lat": "37.6830186224679",
+      "lng": "127.042907101769",
+      "similarity": 0
+    }
+  ],
+  "notFound": []
+}

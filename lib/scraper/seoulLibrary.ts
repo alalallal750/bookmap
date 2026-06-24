@@ -1040,3 +1040,363 @@ function sortLibraryEntries(libraries: EbookLibraryEntry[]): EbookLibraryEntry[]
     })
     .map(({ lib }) => lib);
 }
+/**
+ * ===== 아래부터는 lib/scraper/seoulLibrary.ts 맨 아래에 "추가"할 내용 =====
+ *
+ * 기존 파일 상단의 import 구문에 추가 필요:
+ *   import { PhysicalLibrary, PhysicalBook } from "@/types";
+ *   import { getNearbyDbnums, getDistrictName, DEFAULT_LOCATION } from "@/lib/data/districtCoords";
+ *   import { findBranchCoord } from "@/lib/data/branchCoords";
+ *   import { findBranchHours } from "@/lib/data/branchHours";
+ *
+ * [2026-06-23 변경] PhysicalBook 타입은 이 파일이 아니라 types/index.ts로
+ * 옮김 — EbookBook과 같은 위치에 두는 게 일관적이고, 화면/API 라우트에서도
+ * import해서 써야 하므로 공용 타입 파일에 두는 게 맞음. 이 파일 맨 아래에
+ * 있던 `export type PhysicalBook = {...}` 정의는 제거하고 import로 대체.
+ *
+ * 전자책(searchEbooks)과 다른 점:
+ *   - dbnum이 고정 8개가 아니라, 위치 기반으로 매번 달라짐(districtCoords 참조)
+ *   - 판본 묶기 없음 — ISBN 완전일치만 사용(전자책처럼 제목/저자 정규화 불필요)
+ *   - 검색 1번 = 목록 + 대출가능 정보까지 한 번에 (별도 상세조회 단계 없음)
+ *   - 강남구 같은 "XML만으로 판단 불가, 상세페이지 추가조회 필요" 케이스가
+ *     있는지는 아직 확인 전 — 4번 결정("구현하면서 체크")에 따라, 실제 서비스
+ *     중 이상한 구가 보이면 그때 개별 대응.
+ *
+ * [검증 범위 — 중요] dbnum이 "구 하나 = dbnum 하나"로 충분한지는 현재까지
+ * 5개 구만 직접 검증됨: 동작구(43641), 서초구(88431), 마포구(88421),
+ * 강남구(50421), 양천구(44451). 5개 구 전부 "기존 dbnum 하나로 충분" 패턴
+ * 으로 일치함.
+ *
+ * 서초구는 88431(구립통합)과 44081(작은도서관) 둘 다 단독 호출해서 응답을
+ * 직접 대조했고, 44081의 16건 전부가 url까지 88431의 30건 안에 포함되는
+ * 완전한 부분집합임을 데이터로 확인함.
+ *
+ * 마포구·강남구는 "기존 dbnum 단독 호출" 결과 안에, 의심 가는 개별 분관이
+ * 이미 포함되어 있음을 직접 확인함.
+ *
+ * 양천구는 dbnum 자체는 문제없었으나, 종이책 dbnum 단독 호출 결과에
+ * "전자자료"(전자책)가 같이 섞여 나오는 새로운 문제를 발견함 — 아래
+ * parsePhysicalXml의 전자자료 필터링 참조. 표본이 늘수록 "dbnum 충분성"과는
+ * 다른 차원의 새 변수가 계속 나올 수 있다는 신호로 받아들일 것.
+ *
+ * 나머지 20개 구는 전부 미검증. 표본이 5개로 늘면서 "기존 dbnum 하나로
+ * 충분하다"는 가정의 신뢰도는 올라갔지만, 확정된 것은 아님. 아래 코드는
+ * 일단 ver2 핸드오프 표의 dbnum 하나씩으로 호출하는 구조로 작성하되, 실제
+ * 서비스 중 특정 구에서 결과가 누락되거나 이상한 데이터(전자책 혼입 등)가
+ * 보이면 그 구에 한해 개별 대응할 것.
+ *
+ * "특성별"(전자도서관, 평생학습관, 영상자료원, 교육청 산하 등) 카테고리는
+ * 1차 구현 범위에서 제외 — 이건 위 dbnum 포함 여부 검증과는 별개로 이미
+ * 결정된 사항(교육청도서관과 동일한 취급).
+ *
+ * 스마트도서관(서초구에서 확인): 별도 호출 불필요. 88431 응답 안에 "내방역",
+ * "양재근린공원" 등 스마트도서관이 구립/작은도서관과 함께 record로 섞여서
+ * 나왔음. 다만 이것도 서초구 한 곳만 확인된 것 — 다른 구도 같은 패턴인지는
+ * 미검증.
+ */
+type PhysicalRawRecord = {
+  dbnum: string;
+  dbname: string;
+  title: string;
+  url: string;
+  author: string;
+  publisher: string;
+  date: string;
+  isbn: string;
+  image?: string;
+  /**
+   * [2026-06-23 실측 확인 — 동작구·서초구 응답 대조]
+   * - "도서관" 필드 = 분관 이름 (예: "사당솔밭도서관", "서초4동")
+   * - "Location" 필드 = 자료실명 (예: "[사당솔밭]종합자료실Ⅱ", "서초4동 작은도서관")
+   *   (제가 처음에 추측했던 것과 정반대 — Location이 분관 이름이 아니라
+   *   자료실명이었음. 동작구는 "분관" + "자료실"이 둘 다 있고, 서초구는
+   *   "Location" 하나만 있고 "도서관" 필드 자체가 없는 경우도 있었음
+   *   — 44081 응답 참조, 이 경우는 Location 안의 "OO동" 부분이 곧 분관
+   *   이름을 겸하고 있어서 Location만으로도 분관 식별 가능)
+   * - "Loan" 필드 = 대출가능 텍스트, 비율(N/M) 아님. 직접 한국어 문구로
+   *   "대출가능" / "대출가능[비치중]" / "대출불가" / "대출불가(예약중)" /
+   *   "대출불가[대출중]" / "대출불가[상호대차중]" / "대출불가[상호대차예약중]" /
+   *   "대출불가[타관반납]" / "대출불가[책나르샤중]" 등 다양한 변형이 확인됨
+   *   (동작구·서초구는 소괄호(), 마포구·강남구는 대괄호[] 사용 — 표기만
+   *   다르고 의미는 동일). "대출가능"으로 시작하는지만 보면 충분 — 괄호
+   *   안 사유와 예약 인원/반납예정일은 화면 표시용 보조정보로만 사용.
+   *   [참고] 강남구는 반납예정일 표기가 "2026.06.27"(점), 다른 구는
+   *   "2026-06-27"(하이픈) — 날짜를 직접 파싱해서 쓸 경우 구별로 구분 필요.
+   */
+  library?: string; // "도서관" 필드 (없는 도서관도 있음, 그 경우 location에서 추출)
+  location?: string; // "Location" 필드 (자료실명, 또는 분관명을 겸하는 경우도 있음)
+  loan?: string; // "Loan" 필드 (대출가능 여부 텍스트)
+};
+
+/**
+ * 종이책 검색 메인 함수.
+ *
+ * @param query 검색어 (책 제목)
+ * @param userLat 사용자 위도 (없으면 DEFAULT_LOCATION 사용)
+ * @param userLng 사용자 경도 (없으면 DEFAULT_LOCATION 사용)
+ */
+export async function searchPhysicalBooks(
+  query: string,
+  userLat?: number,
+  userLng?: number
+): Promise<PhysicalBook[]> {
+  const lat = userLat ?? DEFAULT_LOCATION.lat;
+  const lng = userLng ?? DEFAULT_LOCATION.lng;
+  const targetDbnums = getNearbyDbnums(lat, lng);
+
+  console.log(
+    "[seoulLibrary] searchPhysicalBooks - location:",
+    { lat, lng },
+    "target dbnums:",
+    targetDbnums
+  );
+
+  const id = generateRequestId();
+  const defaultSearchUrl = `${BASE_URL}/index.php/default_search`;
+
+  let cookie = "";
+  try {
+    const res = await fetch(defaultSearchUrl, {
+      signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
+      headers: { "User-Agent": "Mozilla/5.0" },
+    });
+    cookie = extractCookies(res);
+  } catch (e) {
+    console.log("[seoulLibrary] physical stage1 fetch failed:", e);
+  }
+
+  const buildDeployUrl = (dbnum: string) => {
+    const encodedQuery = encodeURIComponent(query);
+    const searchQueryParams =
+      `category1=1` +
+      `&category2=0&category3=0` +
+      `&text1=${encodedQuery}&text2=&text3=` +
+      `&op=0&op2=0&year1=&year2=` +
+      `&dbnum=${dbnum}` +
+      `&display=30&recstart=1&sort=rel`;
+    return `${BASE_URL}/index.php/ajax/engine/deploy?id=${id}&${searchQueryParams}&_=${Date.now()}`;
+  };
+
+  const fetchOneDistrict = async (dbnum: string): Promise<PhysicalRawRecord[]> => {
+    const url = buildDeployUrl(dbnum);
+    try {
+      const res = await fetch(url, {
+        signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
+        headers: {
+          "User-Agent": "Mozilla/5.0",
+          ...(cookie ? { Cookie: cookie } : {}),
+          "X-Requested-With": "XMLHttpRequest",
+          Referer: defaultSearchUrl,
+          Accept: "text/xml, application/xml, */*",
+        },
+      });
+      console.log(`[seoulLibrary] physical deploy(${dbnum}) status:`, res.status);
+      if (!res.ok) return [];
+
+      const xml = await res.text();
+      return parsePhysicalXml(xml, dbnum);
+    } catch (e) {
+      console.log(`[seoulLibrary] physical deploy(${dbnum}) fetch failed:`, e);
+      return [];
+    }
+  };
+
+  const resultsByDistrict = await Promise.all(targetDbnums.map(fetchOneDistrict));
+  const rawRecords = resultsByDistrict.flat();
+
+  console.log("[seoulLibrary] physical total parsed records:", rawRecords.length);
+  if (rawRecords.length === 0) return [];
+
+  return groupPhysicalBooksByIsbn(rawRecords);
+}
+
+/**
+ * XML 파싱 — 필드 이름은 5개 구(동작구·서초구·마포구·강남구·양천구) 실제
+ * 응답으로 확인됨(2026-06-23). 전자자료(전자책) 필터링 포함(양천구에서
+ * 발견된 문제, 아래 참조).
+ */
+function parsePhysicalXml(xml: string, expectedDbnum: string): PhysicalRawRecord[] {
+  const $ = cheerio.load(xml, { xmlMode: true });
+  const records: PhysicalRawRecord[] = [];
+
+  $("record").each((_: number, el: any) => {
+    const dbnum = $(el).attr("dbnum") ?? "";
+    const dbname = $(el).attr("dbname") ?? "";
+
+    if (dbnum !== expectedDbnum) return;
+
+    const field = (name: string) =>
+      $(el).find(`field[name="${name}"] content`).first().text().trim();
+    const fieldUrl = (name: string) =>
+      $(el).find(`field[name="${name}"] url`).first().text().trim();
+
+    const title = field("TITLE");
+    const isbn = field("ISBN");
+    const location = field("Location") || undefined;
+
+    // ISBN 없는 항목은 스킵 — 5번 결정: 종이책은 ISBN 기준만 사용
+    if (!title || !isbn) return;
+
+    // [2026-06-23 양천구(44451) 실측 확인] 종이책 dbnum 단독 호출 결과에
+    // "전자자료"(전자책)가 같이 섞여 나오는 경우가 있음 — 제목에
+    // "[전자자료]"가 붙고 Location 필드가 정확히 "전자자료", ISBN도 종이책과
+    // 다름. 종이책 검색 화면에 전자책이 섞여 나오면 혼란을 주므로 제외.
+    if (location === "전자자료" || title.includes("[전자자료]")) return;
+
+    records.push({
+      dbnum,
+      dbname,
+      title,
+      url: fieldUrl("TITLE"),
+      author: field("Author"),
+      publisher: field("Publication"),
+      date: field("Date"),
+      isbn,
+      image: field("Image") || undefined,
+      library: field("도서관") || undefined,
+      location,
+      loan: field("Loan") || undefined,
+    });
+  });
+
+  return records;
+}
+
+/**
+ * 분관 이름 결정 — "도서관" 필드가 있으면 그걸 쓰고, 없으면(서초구 작은
+ * 도서관 dbnum=44081 사례처럼) Location 필드에서 추출.
+ * Location 예시: "서초4동 작은도서관" → "서초4동", "[사당솔밭]종합자료실Ⅱ"
+ * → 이 경우는 "도서관" 필드가 따로 있어서 이 fallback을 안 타지만, 혹시
+ * 다른 구에서 비슷한 "[이름]자료실" 형식만 있고 "도서관" 필드가 없는
+ * 경우를 대비해 괄호 안 이름도 추출 시도.
+ */
+function extractLibraryName(r: PhysicalRawRecord): string {
+  if (r.library) return r.library;
+  if (r.location) {
+    // "[사당솔밭]종합자료실Ⅱ" 형식 → 괄호 안 이름 추출
+    const bracketMatch = r.location.match(/^\[([^\]]+)\]/);
+    if (bracketMatch) return bracketMatch[1];
+    // "서초4동 작은도서관" 형식 → 첫 단어(동 이름 등) 추출
+    const firstWordMatch = r.location.match(/^(\S+)/);
+    if (firstWordMatch) return firstWordMatch[1];
+  }
+  return r.dbname; // 최후 수단 — 구 단위 이름
+}
+
+/**
+ * [2026-06-23 실측 확정] Loan 필드는 "대출가능" 또는 "대출불가(사유)" 형식의
+ * 한국어 텍스트. 비율(N/M)이 아니므로 전자책의 반전 버그 같은 위험이 없음.
+ * "대출가능"으로 시작하면 가능, 그 외(대출불가 + 모든 변형)는 불가.
+ */
+function isPhysicalAvailable(r: PhysicalRawRecord): boolean {
+  if (!r.loan) return false;
+  return r.loan.startsWith("대출가능");
+}
+
+/**
+ * [2026-06-23 실측 확인] ISBN 필드에 부가기호가 공백으로 붙어 나오는 경우가
+ * 있음 (예: "9791141602451 03810"). 부가기호는 같은 책이라도 인쇄 시점/공급
+ * 단위에 따라 붙거나 안 붙을 수 있어, 핵심 13자리 ISBN만 비교 기준으로 삼고
+ * 부가기호는 버림 — 안 그러면 같은 책이 ISBN 표기 차이로 다른 책처럼 분리됨.
+ */
+function normalizeIsbn(raw: string): string {
+  return raw.trim().split(/\s+/)[0];
+}
+
+/**
+ * [2026-06-23 실측 확인] 강남구·마포구 응답의 Loan 텍스트 안에 반납예정일이
+ * 같이 박혀 나오는 경우가 있음(예: "대출불가[대출중](예약: 3명)(반납예정일:
+ * 2026.07.01)", "대출불가[대출예약중] (예약: 5명 / 예약가능인원 : 5명)
+ * (반납예정일: 2026-06-27)"). 날짜 구분자가 구마다 다름(강남구는 점,
+ * 다른 구는 하이픈) — 둘 다 매칭되도록 구분자 문자 클래스로 처리.
+ * 반납예정일이 없는 변형(예: "대출불가[상호대차예약중]")도 있으므로 못
+ * 찾으면 undefined.
+ */
+function extractReturnDueDate(loan?: string): string | undefined {
+  if (!loan) return undefined;
+  const match = loan.match(/반납예정일\s*:\s*([\d.\-]+)/);
+  return match ? match[1] : undefined;
+}
+
+/**
+ * ISBN 완전일치로만 묶기 — 5번 결정: "종이책은 무조건 ISBN 기준 사용,
+ * 전자책의 제목/저자 정규화·정규식 보호장치는 ISBN이 없어서 만든 우회수단
+ * 이었으므로 종이책에는 불필요."
+ *
+ * 같은 ISBN, 같은 dbnum(구) 안에 여러 행이 있으면(동작구 dongjak.ts의
+ * "한 도서관에 같은 책 여러 권" 패턴과 동일) 분관별로 나눠서 보여줌 — 동작구
+ * dongjak.ts와 달리, 종이책 통합검색은 분관 단위(record 1건)가 이미 분관별로
+ * 쪼개져 있으므로 별도 "같은 도서관 집계" 단계 없이 그대로 1개 분관 = 1개
+ * PhysicalLibrary로 매핑.
+ */
+function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] {
+  const byIsbn = new Map<string, PhysicalRawRecord[]>();
+  for (const r of records) {
+    const key = normalizeIsbn(r.isbn);
+    const list = byIsbn.get(key) ?? [];
+    list.push(r);
+    byIsbn.set(key, list);
+  }
+
+  const books: PhysicalBook[] = [];
+
+  for (const [isbn, recordsForIsbn] of byIsbn) {
+    const first = recordsForIsbn[0];
+
+    const libraries: PhysicalLibrary[] = recordsForIsbn.map((r) => {
+      const branchName = extractLibraryName(r);
+      // branchCoords.ts에서 분관 이름으로 좌표 조회. 못 찾으면(아직 좌표
+      // 수집이 안 된 구, 또는 위험 항목으로 제외된 경우) 0,0으로 남김 —
+      // 화면에서 좌표가 0,0인 마커는 지도에 안 찍히도록 별도 필터링이
+      // 필요(app/physical 지도 화면에서 처리).
+      const coord = findBranchCoord(branchName);
+
+      // [2026-06-24 추가] branchHours.ts에서 운영시간·전화번호·주소 조회
+      // (서울도서관 정식 명단 기준, 1447건). r.dbnum으로 구 이름을 알아내
+      // 같은 구 안에서만 찾도록 해 동명이인 위험을 줄임. 정식 명단에 없는
+      // 분관(예: 사용자가 직접 주소 확인해서 branchCoords.ts에만 있는
+      // 14곳 등)은 그냥 undefined로 남음 — PhysicalLibrary의 tel/
+      // openingHours가 원래 선택적 필드라 추가 처리 불필요.
+      const guName = getDistrictName(r.dbnum);
+      const hoursInfo = guName ? findBranchHours(branchName, guName) : undefined;
+
+      return {
+        id: `seoul_${r.dbnum}_${branchName}`,
+        libraryName: branchName,
+        libraryType: "library",
+        // [2026-06-24] 정식 명단에서 찾은 주소가 있으면 그걸 쓰고, 없으면
+        // 빈 값. branchCoords.ts의 카카오맵 좌표 검색 결과 주소(address_name)
+        // 는 현재 BranchCoord 타입에 없어서(좌표만 저장) 못 씀 — 필요해지면
+        // BranchCoord에 address 필드를 추가해 fallback으로 쓸 수 있음.
+        address: hoursInfo?.address ?? "",
+        latitude: coord?.lat ?? 0,
+        longitude: coord?.lng ?? 0,
+        tel: hoursInfo?.tel,
+        openingHours: hoursInfo?.hours,
+        available: isPhysicalAvailable(r),
+        callNumber: r.location,
+        returnDueDate: isPhysicalAvailable(r) ? undefined : extractReturnDueDate(r.loan),
+        searchResultUrl: r.url || undefined,
+      };
+    });
+
+    books.push({
+      isbn,
+      title: first.title,
+      author: first.author,
+      publisher: first.publisher || undefined,
+      publishYear: parseInt(first.date.match(/\d{4}/)?.[0] ?? "0", 10) || undefined,
+      coverImage: first.image,
+      libraries,
+    });
+  }
+
+  return books;
+}
+
+/**
+ * [2026-06-23] PhysicalBook 타입은 types/index.ts로 이동함 (위 import 참조).
+ * EbookBook과 같은 위치에 두는 게 일관적이고, 화면/API 라우트에서도
+ * import해서 써야 하기 때문 — 이 파일에만 export되어 있으면 재사용하기
+ * 불편함.
+ */
