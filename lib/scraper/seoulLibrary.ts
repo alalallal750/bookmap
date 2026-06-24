@@ -1197,13 +1197,20 @@ export async function searchPhysicalBooks(
       if (!res.ok) return [];
 
       const xml = await res.text();
+
+      // [DEBUG 2026-06-24] 송파구(44381) 등 파싱 0건 원인 추적용 — 응답
+      // XML 앞부분을 그대로 로그로 남김. 원인 파악되면 제거할 것.
+      console.log(`[DEBUG] deploy(${dbnum}) xml length:`, xml.length);
+      console.log(`[DEBUG] deploy(${dbnum}) xml preview:`, xml.slice(0, 2000));
+      const recordCountInRaw = (xml.match(/<record/g) ?? []).length;
+      console.log(`[DEBUG] deploy(${dbnum}) raw <record> tag count:`, recordCountInRaw);
+
       return parsePhysicalXml(xml, dbnum);
     } catch (e) {
       console.log(`[seoulLibrary] physical deploy(${dbnum}) fetch failed:`, e);
       return [];
     }
   };
-
   const resultsByDistrict = await Promise.all(targetDbnums.map(fetchOneDistrict));
   const rawRecords = resultsByDistrict.flat();
 
