@@ -1388,8 +1388,12 @@ function parsePhysicalXml(xml: string, expectedDbnum: string): PhysicalRawRecord
     const isbn = field("ISBN");
     const location = field("Location") || undefined;
 
-    // ISBN 없는 항목은 스킵 — 5번 결정: 종이책은 ISBN 기준만 사용
-    if (!title || !isbn) return;
+    // [2026-06-25 수정] ISBN이 없어도 일단 살려둠 — ISBN 보강(필드→url→
+    // 제목/저자 합류→독립카드)은 groupPhysicalBooksByIsbn에서 처리.
+    // 여기서 미리 걸러버리면 그 보강 로직 자체가 실행될 기회가 없어짐
+    // (v13 핸드오프 0-1 버그). 제목이 없는 경우만 의미 없는 record로
+    // 보고 스킵.
+    if (!title) return;
 
     // [2026-06-23 양천구(44451) 실측 확인] 종이책 dbnum 단독 호출 결과에
     // "전자자료"(전자책)가 같이 섞여 나오는 경우가 있음 — 제목에
