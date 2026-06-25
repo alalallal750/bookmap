@@ -71,7 +71,7 @@ import { findBranchHours } from "@/lib/data/branchHours";
 
 const BASE_URL = "https://meta.seoul.go.kr/libseoul";
 
-const DEFAULT_TIMEOUT_MS = 8000;
+const DEFAULT_TIMEOUT_MS = 15000;
 const GANGNAM_TIMEOUT_MS = 15000;
 
 // handoff 3-1장: 전자책도서관 8곳
@@ -1608,10 +1608,15 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
     byIsbn.set(resolvedIsbn, list);
   }
 
-  // 정규화 비교용 — 전자책 normalizeTitle과 같은 발상이나, 종이책
+ // 정규화 비교용 — 전자책 normalizeTitle과 같은 발상이나, 종이책
   // 제목엔 권수 표시(". 2", " 2" 등 숫자)가 의미를 가지므로 숫자는
   // 보존하고 공백·구두점만 제거.
-  const normalizeForMatch = (s: string) => s.replace(/[\s.,:|\-]/g, "");
+  // [2026-06-25 추가] 성북구처럼 제목 맨 앞에 순번("1. ", "13. " 등)이
+  // 붙는 구가 있어, 다른 구의 같은 책(번호 없음)과 제목이 안 맞아
+  // 3순위 합류가 실패하던 문제 — 맨 앞 "숫자. " 패턴만 제거(중간에 있는
+  // 권수 숫자, 예: ". 2"는 맨 앞이 아니므로 영향 없음).
+  const normalizeForMatch = (s: string) =>
+    s.replace(/^\d+\.\s*/, "").replace(/[\s.,:|\-]/g, "");
 
   // 3단계: ISBN 없는 record들을 "제목+저자 일치" 기존 그룹에 합류 시도
   const unmatched: PhysicalRawRecord[] = [];
