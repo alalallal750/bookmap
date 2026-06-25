@@ -1670,6 +1670,16 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
     const coord = findBranchCoord(branchName, guName);
     const hoursInfo = guName ? findBranchHours(branchName, guName) : undefined;
 
+    // [임시 디버그] 좌표 매칭 실패 건을 구별로 모아 보기 위한 로그.
+    // extractLibraryName이 뽑은 이름과 좌표 데이터의 표기가 달라
+    // findBranchCoord가 못 찾으면 lat/lng가 0이 되고, 화면에서 조용히
+    // 마커가 빠짐 — 어느 구·어떤 이름에서 이게 일어나는지 확인용.
+    if (!coord) {
+      console.log(
+        `[DEBUG-COORD-MISS] gu: ${guName ?? "?"} | extracted branchName: "${branchName}" | raw location: "${r.location ?? ""}" | raw 도서관필드: "${r.library ?? ""}"`
+      );
+    }
+
     return {
       id: `seoul_${r.dbnum}_${branchName}`,
       libraryName: branchName,
