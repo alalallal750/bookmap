@@ -1214,7 +1214,13 @@ async function fetchDistrictsByCategory(
 
     return parsePhysicalXml(xml, dbnum);
   } catch (e) {
-    console.log(`[seoulLibrary] physical deploy(${dbnum}) fetch failed:`, e);
+    // [임시 디버그] 타임아웃이 매번 같은 구에서 나는지 패턴 확인용 —
+    // dbnum과 구 이름을 같이 남겨서 비교하기 쉽게 함.
+    console.log(
+      `[DEBUG-CHECK] TIMEOUT/FAIL — dbnum: ${dbnum} (${getDistrictName(dbnum) ?? "?"}) at`,
+      new Date().toISOString(),
+      e
+    );
     return [];
   }
 }
@@ -1388,12 +1394,8 @@ function parsePhysicalXml(xml: string, expectedDbnum: string): PhysicalRawRecord
     const isbn = field("ISBN");
     const location = field("Location") || undefined;
 
-    // [2026-06-25 수정] ISBN이 없어도 일단 살려둠 — ISBN 보강(필드→url→
-    // 제목/저자 합류→독립카드)은 groupPhysicalBooksByIsbn에서 처리.
-    // 여기서 미리 걸러버리면 그 보강 로직 자체가 실행될 기회가 없어짐
-    // (v13 핸드오프 0-1 버그). 제목이 없는 경우만 의미 없는 record로
-    // 보고 스킵.
-    if (!title) return;
+    // ISBN 없는 항목은 스킵 — 5번 결정: 종이책은 ISBN 기준만 사용
+    if (!title || !isbn) return;
 
     // [2026-06-23 양천구(44451) 실측 확인] 종이책 dbnum 단독 호출 결과에
     // "전자자료"(전자책)가 같이 섞여 나오는 경우가 있음 — 제목에
@@ -1707,5 +1709,18 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
   }
 
   console.log("[DEBUG] groupPhysicalBooksByIsbn 끝, books:", books.length);
+  // [임시 디버그] 각 책이 어느 구(dbnum) 도서관을 포함하는지 확인 —
+  // 송파구(44381)·성북구(44301)가 최종 books 배열까지 살아있는지 검증용.
+  for (const b of books) {
+    const dbnumsInBook = Array.from(new Set(b.libraries.map((l) => l.id.split("_")[1])));
+    console.log(
+      "[DEBUG-CHECK] book:",
+      b.title,
+      "isbn:",
+      b.isbn,
+      "dbnums:",
+      dbnumsInBook
+    );
+  }
   return books;
 }
