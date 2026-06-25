@@ -1390,9 +1390,23 @@ function parsePhysicalXml(xml: string, expectedDbnum: string): PhysicalRawRecord
     const fieldUrl = (name: string) =>
       $(el).find(`field[name="${name}"] url`).first().text().trim();
 
-    const title = field("TITLE");
+   const title = field("TITLE");
     const isbn = field("ISBN");
     const location = field("Location") || undefined;
+
+    // [임시 디버그] 송파구·성북구 응답에 "달러구트" 검색어가 진짜
+    // 있는지 없는지 확인용 — 필터링(전자자료, !title)에 걸리기 전
+    // 단계에서 모든 record의 제목을 그대로 출력.
+    if (expectedDbnum === "44381" || expectedDbnum === "44301") {
+      console.log(
+        `[DEBUG-CHECK] raw record (dbnum: ${expectedDbnum}) — title:`,
+        title,
+        "| location:",
+        location,
+        "| isbn:",
+        isbn
+      );
+    }
 
     // ISBN 없는 항목은 스킵 — 5번 결정: 종이책은 ISBN 기준만 사용
     if (!title || !isbn) return;
