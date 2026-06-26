@@ -1425,6 +1425,16 @@ function parsePhysicalXml(xml: string, expectedDbnum: string): PhysicalRawRecord
       );
     }
 
+    // [2026-06-26 임시 디버그] 마포구(88421) raw record 전체 확인용 —
+    // "불편한 편의점 2" 두 record가 ISBN 필드/url 둘 다 비어서 합류
+    // 실패하는 원인 확인. 같은 마포구 안에서 ISBN이 정상적으로 오는
+    // record와, 비어서 오는 record를 나란히 비교하기 위함.
+    if (expectedDbnum === "88421") {
+      console.log(
+        `[DEBUG-MAPO] record — title: "${title}" | author: "${authorField}" | isbn: "${isbn}" | titleUrl: "${titleUrl}" | location: "${location}" | library필드: "${libraryField}"`
+      );
+    }
+
     // [임시 디버그] 송파구·성북구 응답에 "달러구트" 검색어가 진짜
     // 있는지 없는지 확인용 — 필터링(전자자료, !title)에 걸리기 전
     // 단계에서 모든 record의 제목을 그대로 출력.
