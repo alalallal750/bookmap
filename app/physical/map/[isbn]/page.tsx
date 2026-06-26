@@ -177,7 +177,7 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
 
         const matched = json.data.books.find((b) => b.isbn === isbn);
         setLibraries(matched?.libraries ?? []);
-        setSearchScope("nearby");
+        setSearchScope(userLocation ? "nearby" : "all");
 
         // 검색 기준점 갱신 + 구 이름 라벨 갱신 + 이동 감지 타이머 재시작
         setLastSearchedLocation({ lat, lng });
@@ -193,7 +193,7 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
         console.log("[physical map] runSearch failed:", e);
       }
     },
-    [isbn, title]
+    [isbn, title, userLocation]
   );
 
   /**
