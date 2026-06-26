@@ -45,9 +45,18 @@ function computeDistrictLabel(lat: number, lng: number): string {
 
 function getMarkerColor(lib: PhysicalLibrary): string {
   if (!lib.available) return "#888780";
-  if (lib.libraryType === "smart_library") return "#7c3aed";
-  if (lib.libraryType === "small_library") return "#16a34a";
-  if (lib.libraryType === "edu_library") return "#ea580c";
+
+  // [2026-06-26 비활성화] 구립/작은/스마트도서관 색상 구분 — 정확도
+  // 문제로 비활성화. inferLibraryType이 분관 이름에 "작은"/"스마트"
+  // 글자가 있는지로 추측하는 방식인데, 실제로 구분이 안 맞는 경우가
+  // 많아서(예: 정식 명칭에 "작은도서관"이 안 들어가는 곳들) 일단
+  // 끔. 추후 더 정확한 구분 방법(branchHours.ts의 type 필드 등)을
+  // 찾으면 아래 주석을 풀어서 복원할 것.
+  //
+  // if (lib.libraryType === "smart_library") return "#7c3aed";
+  // if (lib.libraryType === "small_library") return "#16a34a";
+  // if (lib.libraryType === "edu_library") return "#ea580c";
+
   return "#2563eb";
 }
 
@@ -61,11 +70,14 @@ function createCustomOverlay(lib: PhysicalLibrary, onClick: () => void) {
   return div;
 }
 
-const LEGEND = [
-  { label: "구립", color: "#2563eb" },
-  { label: "작은", color: "#16a34a" },
-  { label: "스마트", color: "#7c3aed" },
-];
+// [2026-06-26 비활성화] 유형 구분 정확도 문제로 범례 표시 끔.
+// 복원 시 아래 배열로 되돌리면 됨:
+// const LEGEND = [
+//   { label: "구립", color: "#2563eb" },
+//   { label: "작은", color: "#16a34a" },
+//   { label: "스마트", color: "#7c3aed" },
+// ];
+const LEGEND: { label: string; color: string }[] = [];
 
 type MapPageProps = { params: { isbn: string }; searchParams: { title?: string } };
 

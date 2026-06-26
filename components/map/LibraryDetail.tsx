@@ -37,12 +37,14 @@ export function LibraryDetail({ library, bookTitle, onClose }: LibraryDetailProp
     }
   }
 
-  const typeLabel = {
-    library: "구립도서관",
-    small_library: "작은도서관",
-    smart_library: "스마트도서관",
-    edu_library: "교육청도서관",
-  }
+  // [2026-06-26 비활성화] 유형 라벨 정확도 문제로 표시 끔. 복원 시
+  // 아래 객체로 되돌리고, 헤더의 typeLabel[...] span도 다시 보이게 할 것.
+  // const typeLabel = {
+  //   library: "구립도서관",
+  //   small_library: "작은도서관",
+  //   smart_library: "스마트도서관",
+  //   edu_library: "교육청도서관",
+  // }
 
   return (
     <>
@@ -66,9 +68,11 @@ export function LibraryDetail({ library, bookTitle, onClose }: LibraryDetailProp
           <div className="flex items-start justify-between mb-4">
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
+                {/* [2026-06-26 비활성화] 유형 라벨 — 복원 시 아래 span 주석 해제
                 <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
                   {typeLabel[library.libraryType]}
                 </span>
+                */}
                 {library.available !== undefined && (
                   <AvailableBadge available={library.available} />
                 )}
