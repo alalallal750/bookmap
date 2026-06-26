@@ -1457,7 +1457,6 @@ function parsePhysicalXml(xml: string, expectedDbnum: string): PhysicalRawRecord
     //   - 노원구(43081), 은평구(33451): location 없음, Type: "전자책"
     //   - 관악구(42921): location에 "디지털자료실" 포함, title에 "[e-book]" 포함, Type: "전자자료"
     //   - 도봉구(43361): location에 "전자책도서관" 포함 (Type 필드 없음)
-    const typeField = field("Type") || undefined;
     const isElectronicByType =
       typeField === "전자책" || typeField === "E-BOOK" || typeField === "전자자료";
     const isElectronicByLocationOrTitle =
