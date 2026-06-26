@@ -80,6 +80,23 @@ export default function PhysicalSearchPage() {
         return bAvail - aAvail;
       });
 
+      // [임시 디버그] 화면이 실제로 받은 books 데이터 안에 송파구(44381)
+      // 도서관이 포함된 책이 있는지 브라우저 콘솔에서 직접 확인용.
+      // id 형식은 `seoul_${dbnum}_${branchName}` 이므로 "44381" 포함 여부로 판별.
+      console.log(
+        "[DEBUG-CLIENT] 송파구(44381) 포함된 책 목록:",
+        sortedBooks
+          .filter((b) => b.libraries.some((l) => l.id.includes("44381")))
+          .map((b) => ({
+            title: b.title,
+            isbn: b.isbn,
+            전체도서관수: b.libraries.length,
+            송파구분관: b.libraries
+              .filter((l) => l.id.includes("44381"))
+              .map((l) => ({ name: l.libraryName, lat: l.latitude, lng: l.longitude })),
+          }))
+      );
+
       setState({
         status: "done",
         books: sortedBooks,
