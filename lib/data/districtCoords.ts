@@ -48,13 +48,25 @@ export const DISTRICTS: District[] = [
 ];
 
 /**
- * [2026-06-26 임시] 3순위 구(송파구·성북구 — ISBN 필드도 url도 없어
- * 제목+저자 합류에만 의존하는 구)를 검색에서 임시 제외. 1·2순위
- * 23개 구만으로 ISBN 검색 로직이 정상 동작하는지 노이즈 없이
- * 검증하기 위한 목적. 검증 끝나면 이 선언과 아래 두 함수의 .filter()를
- * 제거하고 원래대로 복원할 것.
+ * [2026-06-26 확정] ISBN을 신뢰할 수 있게 제공하지 못하는 구 — 검색
+ * 대상에서 제외. 25개 구 전수조사로 확정함(절창/불편한편의점 2개
+ * 검색어로 교차검증, 강동구·서대문구는 url에서 ISBN 추출이 100%
+ * 정확함을 확인해 제외 대상에서 뺐음 — 2순위 로직 유지):
+ *   - 송파구(44381), 성북구(44301): ISBN 필드도 url도 둘 다 없음.
+ *     제목+저자 합류 시도도 record마다 부제/순번 표기가 제각각이라
+ *     실패율이 높고, 출판일(Date)이 연도까지만 와서 보조기준으로도
+ *     쓸 수 없음(전자책 groupBooks와 동일한 한계, v6 문서 참조) —
+ *     "차라리 검색 대상에서 빼는 게 정확도 우선 원칙에 맞다"고 결정.
+ *   - 금천구(107191): ISBN 필드는 있으나 일부 record에서 표준
+ *     ISBN(10/13자리)이 아닌 비정상 값(예: "662031678", 9자리)을
+ *     줌 — 그 구만의 다른 식별체계로 추정, 통용되는 ISBN이 아니라
+ *     신뢰 불가 판정.
+ *
+ * DISTRICTS 배열 자체는 그대로 유지 — 이건 "검색 시 사용할 dbnum
+ * 목록"에서만 제외하는 비활성화이며, 좌표/구 정보는 삭제하지 않음.
+ * 추후 해결되면 이 Set에서만 빼면 즉시 복원됨.
  */
-const TEMP_EXCLUDED_DBNUMS = new Set(["44381", "44301"]); // 송파구, 성북구
+const UNRELIABLE_ISBN_DBNUMS = new Set(["44381", "44301", "107191"]); // 송파구, 성북구, 금천구
 
 /**
  * 위치 정보가 없을 때 기본값 — 서울방배경찰서 (동작구/서초구 경계,
@@ -100,7 +112,7 @@ const NEARBY_RADIUS_KM = 5;
  */
 export function getNearbyDbnums(lat: number, lng: number): string[] {
   const withDistance = DISTRICTS
-    .filter((d) => !TEMP_EXCLUDED_DBNUMS.has(d.dbnum)) // [2026-06-26 임시] 3순위 구 제외
+    .filter((d) => !UNRELIABLE_ISBN_DBNUMS.has(d.dbnum)) // ISBN 신뢰 불가 구 제외
     .map((d) => ({
       ...d,
       distance: distanceKm(lat, lng, d.lat, d.lng),
@@ -127,7 +139,7 @@ export function getNearbyDbnums(lat: number, lng: number): string[] {
  * [2026-06-26 임시] 3순위 구(송파구·성북구)도 같은 이유로 제외.
  */
 export function getAllDbnums(): string[] {
-  return DISTRICTS.map((d) => d.dbnum).filter((dbnum) => !TEMP_EXCLUDED_DBNUMS.has(dbnum));
+  return DISTRICTS.map((d) => d.dbnum).filter((dbnum) => !UNRELIABLE_ISBN_DBNUMS.has(dbnum));
 }
 
 /** dbnum → 구 이름 역조회 (화면 표시용) */
