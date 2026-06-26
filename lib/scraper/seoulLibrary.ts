@@ -1212,6 +1212,23 @@ async function fetchDistrictsByCategory(
       uniqueFieldNames
     );
 
+    // [2026-06-26 임시 디버그] 전체 건수 필드 존재 여부 확인 — display=30
+    // 제한 때문에 30건 넘는 구(도봉구 68건 등)에서 결과가 잘리고 있는
+    // 문제를 페이지네이션으로 풀기 위해, raw XML의 <resultinfo> 또는
+    // 최상위 태그에 전체 건수를 알려주는 속성이 있는지 확인. record
+    // 개수가 30(display 값)과 같을 때만(=더 있을 가능성 있을 때만) 출력.
+    if (recordCountInRaw === 30) {
+      const resultInfoMatch = xml.match(/<resultinfo[^>]*>[\s\S]*?<\/resultinfo>/);
+      console.log(
+        `[DEBUG-PAGINATION] dbnum: ${dbnum} | record 30건 도달(더 있을 가능성) | resultinfo 블록:`,
+        resultInfoMatch ? resultInfoMatch[0] : "(resultinfo 태그 못 찾음)"
+      );
+      console.log(
+        `[DEBUG-PAGINATION] dbnum: ${dbnum} | xml 맨 앞 500자:`,
+        xml.slice(0, 500)
+      );
+    }
+
     return parsePhysicalXml(xml, dbnum);
   } catch (e) {
     // [임시 디버그] 타임아웃이 매번 같은 구에서 나는지 패턴 확인용 —
