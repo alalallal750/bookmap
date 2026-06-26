@@ -1435,6 +1435,20 @@ function parsePhysicalXml(xml: string, expectedDbnum: string): PhysicalRawRecord
       );
     }
 
+    // [2026-06-26 임시 디버그] 도봉구(43361) raw record 전체 확인용 —
+    // 30건이 들어왔는데 "불편한 편의점" 검색 최종 결과(정상 그룹,
+    // 합류 실패 모두)에 도봉구가 단 한 건도 안 보이는 원인 확인.
+    // 사용자가 도봉구 사이트에서 직접 확인 — 실제로 ISBN 있는 책이
+    // 여러 권 있음. parsePhysicalXml 필터링(전자자료, !title) 또는
+    // dbnum 검증(if (dbnum !== expectedDbnum) return)에서 걸리는지
+    // 확인 목적. 이 로그는 필터링 이전 단계(record 파싱 직후)에서
+    // 찍으므로, 필터링에 걸려 사라지는 record까지 전부 보여야 함.
+    if (expectedDbnum === "43361") {
+      console.log(
+        `[DEBUG-DOBONG] record — dbnum속성: "${dbnum}" | title: "${title}" | author: "${authorField}" | isbn: "${isbn}" | titleUrl: "${titleUrl}" | location: "${location}" | library필드: "${libraryField}"`
+      );
+    }
+
     // [임시 디버그] 송파구·성북구 응답에 "달러구트" 검색어가 진짜
     // 있는지 없는지 확인용 — 필터링(전자자료, !title)에 걸리기 전
     // 단계에서 모든 record의 제목을 그대로 출력.
