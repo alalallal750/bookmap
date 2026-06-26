@@ -48,6 +48,15 @@ export const DISTRICTS: District[] = [
 ];
 
 /**
+ * [2026-06-26 임시] 3순위 구(송파구·성북구 — ISBN 필드도 url도 없어
+ * 제목+저자 합류에만 의존하는 구)를 검색에서 임시 제외. 1·2순위
+ * 23개 구만으로 ISBN 검색 로직이 정상 동작하는지 노이즈 없이
+ * 검증하기 위한 목적. 검증 끝나면 이 선언과 아래 두 함수의 .filter()를
+ * 제거하고 원래대로 복원할 것.
+ */
+const TEMP_EXCLUDED_DBNUMS = new Set(["44381", "44301"]); // 송파구, 성북구
+
+/**
  * 위치 정보가 없을 때 기본값 — 서울방배경찰서 (동작구/서초구 경계,
  * 동작대로 인근). [2026-06-23 결정]
  */
@@ -90,10 +99,12 @@ const NEARBY_RADIUS_KM = 5;
  * "검색대상 구가 0개"인 상황을 방지.
  */
 export function getNearbyDbnums(lat: number, lng: number): string[] {
-  const withDistance = DISTRICTS.map((d) => ({
-    ...d,
-    distance: distanceKm(lat, lng, d.lat, d.lng),
-  }));
+  const withDistance = DISTRICTS
+    .filter((d) => !TEMP_EXCLUDED_DBNUMS.has(d.dbnum)) // [2026-06-26 임시] 3순위 구 제외
+    .map((d) => ({
+      ...d,
+      distance: distanceKm(lat, lng, d.lat, d.lng),
+    }));
 
   const within = withDistance.filter((d) => d.distance <= NEARBY_RADIUS_KM);
   if (within.length > 0) {
@@ -112,9 +123,11 @@ export function getNearbyDbnums(lat: number, lng: number): string[] {
  * 사용자에게 "검색결과 없음"으로 잘못 보였을 수 있음(2026-06-24 논의).
  * 위치가 없으면 좁혀서 추측하는 대신 25개 구 전부를 검색해, 놓치는
  * 책이 없도록 함.
+ *
+ * [2026-06-26 임시] 3순위 구(송파구·성북구)도 같은 이유로 제외.
  */
 export function getAllDbnums(): string[] {
-  return DISTRICTS.map((d) => d.dbnum);
+  return DISTRICTS.map((d) => d.dbnum).filter((dbnum) => !TEMP_EXCLUDED_DBNUMS.has(dbnum));
 }
 
 /** dbnum → 구 이름 역조회 (화면 표시용) */
