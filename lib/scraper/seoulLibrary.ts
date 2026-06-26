@@ -1445,11 +1445,26 @@ function parsePhysicalXml(xml: string, expectedDbnum: string): PhysicalRawRecord
     // (이전에 이 수정을 했었으나 어느 시점에 되돌아가 있었음 — 재적용)
     if (!title) return;
 
-    // [2026-06-23 양천구(44451) 실측 확인] 종이책 dbnum 단독 호출 결과에
-    // "전자자료"(전자책)가 같이 섞여 나오는 경우가 있음 — 제목에
-    // "[전자자료]"가 붙고 Location 필드가 정확히 "전자자료", ISBN도 종이책과
-    // 다름. 종이책 검색 화면에 전자책이 섞여 나오면 혼란을 주므로 제외.
-    if (location === "전자자료" || title.includes("[전자자료]")) return;
+    // [2026-06-26 확장] 전자책 record 필터링 — 22개 구 전수조사(절창,
+    // 불편한 편의점 2개 검색어)로 실제 확인된 패턴만 반영. 아직 확인되지
+    // 않은 구(14개)의 표기는 추측해서 넣지 않음 — 발견되면 그때 추가.
+    //
+    // 확인된 패턴:
+    //   - 양천구(44451): location === "전자자료" (기존)
+    //   - 성동구(34141): location에 "디지털도서관(전자책)" 포함, Type: "E-BOOK"
+    //   - 중랑구(99071): location에 "디지털자료실" 포함, title에 "[전자책]" 포함, Type: "전자책"
+    //   - 강서구(42871): location에 "소장형 전자책" 포함, Type: "전자책"
+    //   - 노원구(43081), 은평구(33451): location 없음, Type: "전자책"
+    //   - 관악구(42921): location에 "디지털자료실" 포함, title에 "[e-book]" 포함, Type: "전자자료"
+    //   - 도봉구(43361): location에 "전자책도서관" 포함 (Type 필드 없음)
+    const typeField = field("Type") || undefined;
+    const isElectronicByType =
+      typeField === "전자책" || typeField === "E-BOOK" || typeField === "전자자료";
+    const isElectronicByLocationOrTitle =
+      (location && /전자자료|디지털도서관\(전자책\)|디지털자료실|소장형 전자책|전자책도서관/.test(location)) ||
+      (title && /\[전자자료\]|\[전자책\]|\[e-book\]/i.test(title));
+
+    if (isElectronicByType || isElectronicByLocationOrTitle) return;
 
     records.push({
       dbnum,
