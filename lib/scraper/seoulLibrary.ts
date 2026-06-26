@@ -1393,6 +1393,19 @@ function parsePhysicalXml(xml: string, expectedDbnum: string): PhysicalRawRecord
    const title = field("TITLE");
     const isbn = field("ISBN");
     const location = field("Location") || undefined;
+    const titleUrl = fieldUrl("TITLE");
+    const libraryField = field("도서관") || undefined;
+    const authorField = field("Author");
+
+    // [2026-06-26 임시 디버그] 성동구(34141) raw record 전체 확인용 —
+    // 필터링(전자자료, !title)에 걸리기 전 단계에서 받은 record를
+    // 빠짐없이 전부 출력. "절창" ISBN 파싱 문제(no-isbn_34141_절창)
+    // 원인 확인 목적. 원인 확정되면 제거할 것.
+    if (expectedDbnum === "34141") {
+      console.log(
+        `[DEBUG-SEONGDONG] record — title: "${title}" | author: "${authorField}" | isbn: "${isbn}" | titleUrl: "${titleUrl}" | location: "${location}" | library필드: "${libraryField}"`
+      );
+    }
 
     // [임시 디버그] 송파구·성북구 응답에 "달러구트" 검색어가 진짜
     // 있는지 없는지 확인용 — 필터링(전자자료, !title)에 걸리기 전
