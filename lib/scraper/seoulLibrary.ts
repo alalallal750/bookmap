@@ -1396,6 +1396,24 @@ function parsePhysicalXml(xml: string, expectedDbnum: string): PhysicalRawRecord
     const titleUrl = fieldUrl("TITLE");
     const libraryField = field("도서관") || undefined;
     const authorField = field("Author");
+    const typeField = field("Type") || undefined;
+
+    // [2026-06-26 임시 디버그] 22개 구(ISBN 신뢰 가능 구) 전수조사 —
+    // location/title/Type 중 전자책 관련 키워드가 하나라도 들어간
+    // record를 전부 출력. 성동구에서 "디지털도서관(전자책)" 표기가
+    // 기존 필터(location === "전자자료")를 빠져나간 게 발견됨에 따라,
+    // 다른 구도 같은 패턴이 있는지 확인. 필터링(전자자료, !title)에
+    // 걸리기 전 단계에서 검사 — 새는 record를 그대로 잡아야 하므로.
+    const electronicKeywordHit =
+      (location && /전자|디지털|e-?book|digital/i.test(location)) ||
+      (title && /전자|디지털|e-?book|digital/i.test(title)) ||
+      (typeField && /전자|디지털|e-?book|digital/i.test(typeField));
+
+    if (electronicKeywordHit) {
+      console.log(
+        `[DEBUG-EBOOK-SCAN] dbnum: ${expectedDbnum} | title: "${title}" | location: "${location}" | type: "${typeField}" | isbn: "${isbn}"`
+      );
+    }
 
     // [2026-06-26 임시 디버그] 성동구(34141) raw record 전체 확인용 —
     // 필터링(전자자료, !title)에 걸리기 전 단계에서 받은 record를
