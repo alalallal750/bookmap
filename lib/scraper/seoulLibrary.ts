@@ -1699,6 +1699,16 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
     }
   }
 
+  // [2026-06-26 임시 디버그] 합류 실패한 record 전부를 빠짐없이 출력 —
+  // 어느 구의 어떤 책이 끝까지 ISBN을 못 찾고 독립 카드(no-isbn_...)로
+  // 떨어지는지 직접 확인하기 위함. 캡처로 본 성동구/마포구 "불편한
+  // 편의점" 사례가 정확히 이 목록에 있는지 검증 목적.
+  for (const r of unmatched) {
+    console.log(
+      `[DEBUG-UNMATCHED] dbnum: ${r.dbnum} | title: "${r.title}" | author: "${r.author}" | isbn필드: "${r.isbn}" | titleUrl: "${r.url}" | location: "${r.location ?? ""}"`
+    );
+  }
+
   console.log(
     "[DEBUG] 합류 실패(독립 카드로 유지):",
     unmatched.length,
