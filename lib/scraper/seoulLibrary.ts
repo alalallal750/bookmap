@@ -1383,6 +1383,17 @@ function parsePhysicalXml(xml: string, expectedDbnum: string): PhysicalRawRecord
     const dbnum = $(el).attr("dbnum") ?? "";
     const dbname = $(el).attr("dbname") ?? "";
 
+    // [2026-06-26 임시 디버그] 도봉구(43361) 검색에서 68건 중 대부분이
+    // 사라지는 원인 확인 — 실제 XML 응답의 dbnum 속성값이 요청값
+    // (expectedDbnum)과 정확히 일치하는지 필터링 전에 무조건 출력.
+    // 도봉구가 자체 시스템(unilib.dobong.kr)을 따로 쓰고 있어서, 중계
+    // 과정에서 dbnum 표기가 어긋날 가능성을 확인하기 위함.
+    if (expectedDbnum === "43361") {
+      console.log(
+        `[DEBUG-DOBONG-RAW] expectedDbnum: "${expectedDbnum}" | record의 dbnum속성: "${dbnum}" | dbname속성: "${dbname}" | 일치여부: ${dbnum === expectedDbnum}`
+      );
+    }
+
     if (dbnum !== expectedDbnum) return;
 
     const field = (name: string) =>
