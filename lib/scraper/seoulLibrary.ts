@@ -1258,21 +1258,6 @@ async function fetchDistrictsByCategory(
       }
     }
 
-    const recordCountTotal = xmlPages.reduce(
-      (sum, page) => sum + (page.match(/<record/g) ?? []).length,
-      0
-    );
-    const fieldNameMatches = xml.match(/<field name="([^"]+)"/g) ?? [];
-    const uniqueFieldNames = Array.from(
-      new Set(fieldNameMatches.map((m) => m.match(/name="([^"]+)"/)?.[1]))
-    );
-    console.log(
-      `[DEBUG] deploy(${dbnum}) raw <record> tag count (전체 페이지 합산):`,
-      recordCountTotal,
-      "| unique field names:",
-      uniqueFieldNames
-    );
-
     return xmlPages.flatMap((page) => parsePhysicalXml(page, dbnum));
   } catch (e) {
     // [임시 디버그] 타임아웃이 매번 같은 구에서 나는지 패턴 확인용 —
