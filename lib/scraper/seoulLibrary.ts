@@ -1444,17 +1444,6 @@ function parsePhysicalXml(xml: string, expectedDbnum: string): PhysicalRawRecord
     const dbnum = $(el).attr("dbnum") ?? "";
     const dbname = $(el).attr("dbname") ?? "";
 
-    // [2026-06-26 임시 디버그] 도봉구(43361) 검색에서 68건 중 대부분이
-    // 사라지는 원인 확인 — 실제 XML 응답의 dbnum 속성값이 요청값
-    // (expectedDbnum)과 정확히 일치하는지 필터링 전에 무조건 출력.
-    // 도봉구가 자체 시스템(unilib.dobong.kr)을 따로 쓰고 있어서, 중계
-    // 과정에서 dbnum 표기가 어긋날 가능성을 확인하기 위함.
-    if (expectedDbnum === "43361") {
-      console.log(
-        `[DEBUG-DOBONG-RAW] expectedDbnum: "${expectedDbnum}" | record의 dbnum속성: "${dbnum}" | dbname속성: "${dbname}" | 일치여부: ${dbnum === expectedDbnum}`
-      );
-    }
-
     if (dbnum !== expectedDbnum) return;
 
     const field = (name: string) =>
@@ -1462,7 +1451,7 @@ function parsePhysicalXml(xml: string, expectedDbnum: string): PhysicalRawRecord
     const fieldUrl = (name: string) =>
       $(el).find(`field[name="${name}"] url`).first().text().trim();
 
-   const title = field("TITLE");
+    const title = field("TITLE");
     const isbn = field("ISBN");
     const location = field("Location") || undefined;
     const titleUrl = fieldUrl("TITLE");
@@ -1470,12 +1459,11 @@ function parsePhysicalXml(xml: string, expectedDbnum: string): PhysicalRawRecord
     const authorField = field("Author");
     const typeField = field("Type") || undefined;
 
-    // [2026-06-26 임시 디버그] 22개 구(ISBN 신뢰 가능 구) 전수조사 —
+    // [2026-06-26 추가, 유지 중] 22개 구(ISBN 신뢰 가능 구) 전수조사 —
     // location/title/Type 중 전자책 관련 키워드가 하나라도 들어간
-    // record를 전부 출력. 성동구에서 "디지털도서관(전자책)" 표기가
-    // 기존 필터(location === "전자자료")를 빠져나간 게 발견됨에 따라,
-    // 다른 구도 같은 패턴이 있는지 확인. 필터링(전자자료, !title)에
-    // 걸리기 전 단계에서 검사 — 새는 record를 그대로 잡아야 하므로.
+    // record를 전부 출력. 8개 구(양천·성동·중랑·강서·노원·은평·관악·
+    // 도봉)는 패턴 확인 완료, 나머지 14개 구는 아직 전수조사 전이라
+    // 새로운 전자책 누출 패턴을 잡아내기 위해 계속 유지.
     const electronicKeywordHit =
       (location && /전자|디지털|e-?book|digital/i.test(location)) ||
       (title && /전자|디지털|e-?book|digital/i.test(title)) ||
@@ -1487,58 +1475,9 @@ function parsePhysicalXml(xml: string, expectedDbnum: string): PhysicalRawRecord
       );
     }
 
-    // [2026-06-26 임시 디버그] 성동구(34141) raw record 전체 확인용 —
-    // 필터링(전자자료, !title)에 걸리기 전 단계에서 받은 record를
-    // 빠짐없이 전부 출력. "절창" ISBN 파싱 문제(no-isbn_34141_절창)
-    // 원인 확인 목적. 원인 확정되면 제거할 것.
-    if (expectedDbnum === "34141") {
-      console.log(
-        `[DEBUG-SEONGDONG] record — title: "${title}" | author: "${authorField}" | isbn: "${isbn}" | titleUrl: "${titleUrl}" | location: "${location}" | library필드: "${libraryField}"`
-      );
-    }
-
-    // [2026-06-26 임시 디버그] 마포구(88421) raw record 전체 확인용 —
-    // "불편한 편의점 2" 두 record가 ISBN 필드/url 둘 다 비어서 합류
-    // 실패하는 원인 확인. 같은 마포구 안에서 ISBN이 정상적으로 오는
-    // record와, 비어서 오는 record를 나란히 비교하기 위함.
-    if (expectedDbnum === "88421") {
-      console.log(
-        `[DEBUG-MAPO] record — title: "${title}" | author: "${authorField}" | isbn: "${isbn}" | titleUrl: "${titleUrl}" | location: "${location}" | library필드: "${libraryField}"`
-      );
-    }
-
-    // [2026-06-26 임시 디버그] 도봉구(43361) raw record 전체 확인용 —
-    // 30건이 들어왔는데 "불편한 편의점" 검색 최종 결과(정상 그룹,
-    // 합류 실패 모두)에 도봉구가 단 한 건도 안 보이는 원인 확인.
-    // 사용자가 도봉구 사이트에서 직접 확인 — 실제로 ISBN 있는 책이
-    // 여러 권 있음. parsePhysicalXml 필터링(전자자료, !title) 또는
-    // dbnum 검증(if (dbnum !== expectedDbnum) return)에서 걸리는지
-    // 확인 목적. 이 로그는 필터링 이전 단계(record 파싱 직후)에서
-    // 찍으므로, 필터링에 걸려 사라지는 record까지 전부 보여야 함.
-    if (expectedDbnum === "43361") {
-      console.log(
-        `[DEBUG-DOBONG] record — dbnum속성: "${dbnum}" | title: "${title}" | author: "${authorField}" | isbn: "${isbn}" | titleUrl: "${titleUrl}" | location: "${location}" | library필드: "${libraryField}"`
-      );
-    }
-
-    // [임시 디버그] 송파구·성북구 응답에 "달러구트" 검색어가 진짜
-    // 있는지 없는지 확인용 — 필터링(전자자료, !title)에 걸리기 전
-    // 단계에서 모든 record의 제목을 그대로 출력.
-    if (expectedDbnum === "44381" || expectedDbnum === "44301") {
-      console.log(
-        `[DEBUG-CHECK] raw record (dbnum: ${expectedDbnum}) — title:`,
-        title,
-        "| location:",
-        location,
-        "| isbn:",
-        isbn
-      );
-    }
-
-    // [2026-06-25 재수정] ISBN이 없어도 일단 살려둠 — ISBN 보강(필드→url→
-    // 제목/저자 합류→독립카드)은 groupPhysicalBooksByIsbn에서 처리.
-    // 여기서 미리 걸러버리면 그 보강 로직 자체가 실행될 기회가 없어짐.
-    // (이전에 이 수정을 했었으나 어느 시점에 되돌아가 있었음 — 재적용)
+    // ISBN이 없어도 일단 살려둠 — ISBN 보강(필드→url) 또는 제외 판단은
+    // groupPhysicalBooksByIsbn에서 처리. 여기서 미리 걸러버리면 그 로직
+    // 자체가 실행될 기회가 없어짐.
     if (!title) return;
 
     // [2026-06-26 확장] 전자책 record 필터링 — 22개 구 전수조사(절창,
