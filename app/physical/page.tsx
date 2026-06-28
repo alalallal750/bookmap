@@ -163,14 +163,9 @@ export default function PhysicalSearchPage() {
             <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mb-3" />
             {state.scope === "all" ? (
               <p className="text-gray-400 text-sm">서울시 모든 구에서 검색 중...</p>
-            ) : state.scope === "nearby" && state.districtNames.length > 0 ? (
-              <p className="text-gray-400 text-sm">
-                {state.districtNames.join(", ")}에서 검색 중...
-              </p>
             ) : (
-              <p className="text-gray-400 text-sm">검색 중...</p>
+              <p className="text-gray-400 text-sm">지금 근처에서 빌릴 수 있는 책 찾는 중...</p>
             )}
-          </div>
         )}
 
         {state.status === "error" && (
