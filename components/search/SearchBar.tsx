@@ -1,3 +1,12 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+
+type SearchBarProps = {
+  onSearch: (query: string) => void;
+  loading?: boolean;
+  placeholder?: string;
+};
 export function SearchBar({
   onSearch,
   loading = false,
@@ -8,6 +17,7 @@ export function SearchBar({
   // 모바일에서 자동 포커스 시 키보드가 즉시 올라와 로고/안내문구를 가려버리는
   // 문제 발견(실기기 확인). 480px 이상(PC/태블릿)에서만 자동 포커스 적용.
   const [shouldAutoFocus, setShouldAutoFocus] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setShouldAutoFocus(window.innerWidth >= 480);
