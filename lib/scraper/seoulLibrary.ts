@@ -1147,6 +1147,12 @@ type PhysicalRawRecord = {
  */
 const MAPO_DBNUM = "88421";
 
+// [2026-06-27 추가] display=30 고정값을 200으로 올림(handoff v14 0-1장).
+// 실측된 최대 건수(구로구 128건)보다 충분히 크게 잡아, 대부분의 구는
+// 한 번의 요청으로 끝나도록 함. 그래도 이 값을 넘는 구가 나오면
+// total 기반 추가 페이지 호출로 자동 대응(아래 로직 참조).
+const PHYSICAL_SEARCH_DISPLAY = 200;
+
 async function fetchDistrictsByCategory(
   dbnum: string,
   category1: string,
@@ -1156,7 +1162,7 @@ async function fetchDistrictsByCategory(
   cookie: string,
   defaultSearchUrl: string
 ): Promise<PhysicalRawRecord[]> {
-  const buildUrl = (cat: string, text: string) => {
+  const buildUrl = (cat: string, text: string, recstart: number) => {
     const encodedText = encodeURIComponent(text);
     const searchQueryParams =
       `category1=${cat}` +
@@ -1164,12 +1170,16 @@ async function fetchDistrictsByCategory(
       `&text1=${encodedText}&text2=&text3=` +
       `&op=0&op2=0&year1=&year2=` +
       `&dbnum=${dbnum}` +
-      `&display=30&recstart=1&sort=rel`;
+      `&display=${PHYSICAL_SEARCH_DISPLAY}&recstart=${recstart}&sort=rel`;
     return `${BASE_URL}/index.php/ajax/engine/deploy?id=${id}&${searchQueryParams}&_=${Date.now()}`;
   };
 
-  const fetchOnce = async (cat: string, text: string): Promise<{ xml: string; ok: boolean }> => {
-    const url = buildUrl(cat, text);
+  const fetchOnce = async (
+    cat: string,
+    text: string,
+    recstart: number
+  ): Promise<{ xml: string; ok: boolean }> => {
+    const url = buildUrl(cat, text, recstart);
     const res = await fetch(url, {
       signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
       headers: {
@@ -1180,56 +1190,90 @@ async function fetchDistrictsByCategory(
         Accept: "text/xml, application/xml, */*",
       },
     });
-    console.log(`[seoulLibrary] physical deploy(${dbnum}, category1=${cat}) status:`, res.status);
+    console.log(
+      `[seoulLibrary] physical deploy(${dbnum}, category1=${cat}, recstart=${recstart}) status:`,
+      res.status
+    );
     if (!res.ok) return { xml: "", ok: false };
     const xml = await res.text();
     const isFailed = /<resultinfo[^>]*>\s*Failed\s*<\/resultinfo>/.test(xml);
     return { xml, ok: !isFailed };
   };
 
+  // [2026-06-27 추가] resultinfo의 total 속성 파싱 — 전체 결과 건수 확인용.
+  const parseTotal = (xml: string): number | undefined => {
+    const match = xml.match(/<resultinfo[^>]*\btotal="(\d+)"/);
+    return match ? parseInt(match[1], 10) : undefined;
+  };
+
   try {
-    let { xml, ok } = await fetchOnce(category1, searchText);
+    let cat = category1;
+    let text = searchText;
+    let { xml, ok } = await fetchOnce(cat, text, 1);
 
     // 마포구 + ISBN 검색이 실패한 경우만 제목으로 재시도
     if (!ok && dbnum === MAPO_DBNUM && category1 === "7" && fallbackTitleForMapo) {
       console.log("[seoulLibrary] 마포구 ISBN 검색 실패 — 제목으로 재시도:", fallbackTitleForMapo);
-      const retry = await fetchOnce("1", fallbackTitleForMapo);
+      cat = "1";
+      text = fallbackTitleForMapo;
+      const retry = await fetchOnce(cat, text, 1);
       xml = retry.xml;
       ok = retry.ok;
     }
 
     if (!xml) return [];
 
-    const recordCountInRaw = (xml.match(/<record/g) ?? []).length;
+    const xmlPages = [xml];
+    const total = parseTotal(xml);
+    const recordCountInFirstPage = (xml.match(/<record/g) ?? []).length;
+
+    console.log(
+      `[DEBUG-PAGINATION] dbnum: ${dbnum} | total: ${total ?? "(파싱 실패)"} | 1페이지 record 수: ${recordCountInFirstPage} | display: ${PHYSICAL_SEARCH_DISPLAY}`
+    );
+
+    // [2026-06-27 추가] total이 display(200)를 넘으면, 남은 페이지를
+    // 동시에 추가 호출해서 합침. 페이지 하나가 실패해도(타임아웃 등)
+    // 이미 받은 다른 페이지 결과는 버리지 않도록 개별로 catch 처리.
+    if (total !== undefined && total > PHYSICAL_SEARCH_DISPLAY) {
+      const pageCount = Math.ceil(total / PHYSICAL_SEARCH_DISPLAY);
+      console.log(
+        `[DEBUG-PAGINATION] dbnum: ${dbnum} | total(${total})이 display(${PHYSICAL_SEARCH_DISPLAY}) 초과 — 추가 ${pageCount - 1}페이지 호출`
+      );
+
+      const extraPages = await Promise.all(
+        Array.from({ length: pageCount - 1 }, (_, i) => {
+          const recstart = (i + 1) * PHYSICAL_SEARCH_DISPLAY + 1;
+          return fetchOnce(cat, text, recstart).catch((e) => {
+            console.log(
+              `[DEBUG-PAGINATION] dbnum: ${dbnum} | recstart=${recstart} 페이지 호출 실패:`,
+              e
+            );
+            return { xml: "", ok: false };
+          });
+        })
+      );
+
+      for (const page of extraPages) {
+        if (page.xml) xmlPages.push(page.xml);
+      }
+    }
+
+    const recordCountTotal = xmlPages.reduce(
+      (sum, page) => sum + (page.match(/<record/g) ?? []).length,
+      0
+    );
     const fieldNameMatches = xml.match(/<field name="([^"]+)"/g) ?? [];
     const uniqueFieldNames = Array.from(
       new Set(fieldNameMatches.map((m) => m.match(/name="([^"]+)"/)?.[1]))
     );
     console.log(
-      `[DEBUG] deploy(${dbnum}) raw <record> tag count:`,
-      recordCountInRaw,
+      `[DEBUG] deploy(${dbnum}) raw <record> tag count (전체 페이지 합산):`,
+      recordCountTotal,
       "| unique field names:",
       uniqueFieldNames
     );
 
-    // [2026-06-26 임시 디버그] 전체 건수 필드 존재 여부 확인 — display=30
-    // 제한 때문에 30건 넘는 구(도봉구 68건 등)에서 결과가 잘리고 있는
-    // 문제를 페이지네이션으로 풀기 위해, raw XML의 <resultinfo> 또는
-    // 최상위 태그에 전체 건수를 알려주는 속성이 있는지 확인. record
-    // 개수가 30(display 값)과 같을 때만(=더 있을 가능성 있을 때만) 출력.
-    if (recordCountInRaw === 30) {
-      const resultInfoMatch = xml.match(/<resultinfo[^>]*>[\s\S]*?<\/resultinfo>/);
-      console.log(
-        `[DEBUG-PAGINATION] dbnum: ${dbnum} | record 30건 도달(더 있을 가능성) | resultinfo 블록:`,
-        resultInfoMatch ? resultInfoMatch[0] : "(resultinfo 태그 못 찾음)"
-      );
-      console.log(
-        `[DEBUG-PAGINATION] dbnum: ${dbnum} | xml 맨 앞 500자:`,
-        xml.slice(0, 500)
-      );
-    }
-
-    return parsePhysicalXml(xml, dbnum);
+    return xmlPages.flatMap((page) => parsePhysicalXml(page, dbnum));
   } catch (e) {
     // [임시 디버그] 타임아웃이 매번 같은 구에서 나는지 패턴 확인용 —
     // dbnum과 구 이름을 같이 남겨서 비교하기 쉽게 함.
