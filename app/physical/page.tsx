@@ -112,7 +112,11 @@ export default function PhysicalSearchPage() {
       <header className="bg-white border-b border-gray-100 px-4 pt-14 pb-4 sticky top-0 z-10">
         <div className="flex items-center gap-3 mb-3">
           <img src="/logo-header.png" alt="지금빌려" className="h-10" />
-          <p className="text-xs text-gray-400">그 책, 지금 어디서 빌릴 수 있지?</p>
+          <p className="text-xs text-gray-400">
+            그 책, 지금 어디서 빌릴 수 있지?
+            <br />
+            나랑 가까운 서울시 도서관에서 찾아볼게요. ISBN이 없는 경우 검색되지 않아요.
+          </p>
         </div>
         <SearchBar onSearch={handleSearch} loading={state.status === "loading"} />
       </header>
