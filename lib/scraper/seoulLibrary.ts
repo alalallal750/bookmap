@@ -1709,6 +1709,16 @@ function extractReturnDueDate(loan?: string): string | undefined {
  * 같은 ISBN, 같은 dbnum(구) 안에 여러 행이 있으면 분관별로 나눠서
  * 보여줌 — 기존 동작과 동일.
  */
+/**
+ * [2026-06-28 변경 — handoff v14 0-2장 결정 반영] 3·4단계(합류 시도 →
+ * 실패 시 독립카드) 완전 제거. ISBN을 필드에서도, url에서도 확인할 수
+ * 없는 record는 화면에서 제외한다 — 어설프게 짜맞춘 카드(no-isbn_...)를
+ * 보여주는 것보다, 안 보여주는 쪽이 사용자에게 덜 혼란스럽다는 판단.
+ *
+ * 부작용으로 일부 구(특히 전자책이 많거나, ISBN 필드 자체를 잘 안
+ * 주는 구)에서 검색 결과가 줄어들 수 있음 — 실제 검색 결과를 보고
+ * 너무 부실하면 보조 수단을 추가하기로 함(사용자 결정, 2026-06-28).
+ */
 function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] {
   console.log("[DEBUG] groupPhysicalBooksByIsbn 시작, records:", records.length);
 
@@ -1739,77 +1749,28 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
   console.log(
     "[DEBUG] ISBN 확보:",
     withIsbn.length,
-    "건 / ISBN 없음(합류 시도 대상):",
+    "건 / ISBN 없음(제외 대상):",
     withoutIsbn.length,
     "건"
   );
 
-  // 2단계: ISBN이 확보된 record들로 먼저 그룹을 만듦
+  // [2026-06-28 추가] 제외되는 record 전부를 빠짐없이 출력 — 어느
+  // 구의 어떤 책이 화면에서 사라지는지 직접 확인하기 위함. 결과가
+  // 너무 부실하면 이 로그를 보고 보조 수단 추가 여부를 판단할 것.
+  for (const { record } of withoutIsbn) {
+    console.log(
+      `[DEBUG-EXCLUDED] dbnum: ${record.dbnum} | title: "${record.title}" | author: "${record.author}" | isbn필드: "${record.isbn}" | titleUrl: "${record.url}" | location: "${record.location ?? ""}"`
+    );
+  }
+
+  // 2단계: ISBN이 확보된 record들로 그룹을 만듦 (ISBN 없는 record는
+  // withoutIsbn에 남겨둔 채 더 이상 처리하지 않음 — 화면에서 제외됨)
   const byIsbn = new Map<string, PhysicalRawRecord[]>();
   for (const { record, resolvedIsbn } of withIsbn) {
     const list = byIsbn.get(resolvedIsbn) ?? [];
     list.push(record);
     byIsbn.set(resolvedIsbn, list);
   }
-
- // 정규화 비교용 — 전자책 normalizeTitle과 같은 발상이나, 종이책
-  // 제목엔 권수 표시(". 2", " 2" 등 숫자)가 의미를 가지므로 숫자는
-  // 보존하고 공백·구두점만 제거.
-  // [2026-06-25 추가] 성북구처럼 제목 맨 앞에 순번("1. ", "13. " 등)이
-  // 붙는 구가 있어, 다른 구의 같은 책(번호 없음)과 제목이 안 맞아
-  // 3순위 합류가 실패하던 문제 — 맨 앞 "숫자. " 패턴만 제거(중간에 있는
-  // 권수 숫자, 예: ". 2"는 맨 앞이 아니므로 영향 없음).
-  const normalizeForMatch = (s: string) =>
-    s.replace(/^\d+\.\s*/, "").replace(/[\s.,:|\-]/g, "");
-
-  // 3단계: ISBN 없는 record들을 "제목+저자 일치" 기존 그룹에 합류 시도
-  const unmatched: PhysicalRawRecord[] = [];
-  for (const { record } of withoutIsbn) {
-    const targetTitle = normalizeForMatch(record.title);
-    const targetAuthor = normalizeForMatch(record.author);
-
-    let matchedIsbn: string | undefined;
-    for (const [isbn, recordsForIsbn] of byIsbn) {
-      const sample = recordsForIsbn[0];
-      if (
-        normalizeForMatch(sample.title) === targetTitle &&
-        normalizeForMatch(sample.author) === targetAuthor
-      ) {
-        matchedIsbn = isbn;
-        break;
-      }
-    }
-
-    if (matchedIsbn) {
-      console.log(
-        "[DEBUG] ISBN 없는 record 합류 성공 — dbnum:",
-        record.dbnum,
-        "title:",
-        record.title,
-        "→ isbn:",
-        matchedIsbn
-      );
-      byIsbn.get(matchedIsbn)!.push(record);
-    } else {
-      unmatched.push(record);
-    }
-  }
-
-  // [2026-06-26 임시 디버그] 합류 실패한 record 전부를 빠짐없이 출력 —
-  // 어느 구의 어떤 책이 끝까지 ISBN을 못 찾고 독립 카드(no-isbn_...)로
-  // 떨어지는지 직접 확인하기 위함. 캡처로 본 성동구/마포구 "불편한
-  // 편의점" 사례가 정확히 이 목록에 있는지 검증 목적.
-  for (const r of unmatched) {
-    console.log(
-      `[DEBUG-UNMATCHED] dbnum: ${r.dbnum} | title: "${r.title}" | author: "${r.author}" | isbn필드: "${r.isbn}" | titleUrl: "${r.url}" | location: "${r.location ?? ""}"`
-    );
-  }
-
-  console.log(
-    "[DEBUG] 합류 실패(독립 카드로 유지):",
-    unmatched.length,
-    "건 — 송파구·성북구처럼 ISBN도 url도 없고, 다른 구에 같은 책도 없는 경우"
-  );
 
   console.log("[DEBUG] byIsbn 그룹 수:", byIsbn.size);
 
@@ -1853,35 +1814,6 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
 
     books.push({
       isbn,
-      title: first.title,
-      author: first.author,
-      publisher: first.publisher || undefined,
-      publishYear: parseInt(first.date.match(/\d{4}/)?.[0] ?? "0", 10) || undefined,
-      coverImage: first.image,
-      libraries,
-    });
-  }
-
-  // 4단계: 합류 실패한 record들 — ISBN 없이 독립 카드. 구+제목+저자를
-  // 묶음 키로 써서, 같은 책이 같은 구의 여러 분관에 있으면 한 카드로는
-  // 모아주되, 다른 구의 같은 책과는 못 합쳐짐(애초에 ISBN 확보가
-  // 불가능했던 경우라 어쩔 수 없는 한계).
-  const unmatchedGroups = new Map<string, PhysicalRawRecord[]>();
-  for (const r of unmatched) {
-    const key = `${r.dbnum}__${normalizeForMatch(r.title)}__${normalizeForMatch(r.author)}`;
-    const list = unmatchedGroups.get(key) ?? [];
-    list.push(r);
-    unmatchedGroups.set(key, list);
-  }
-
-  for (const recordsForGroup of unmatchedGroups.values()) {
-    const first = recordsForGroup[0];
-    const libraries = recordsForGroup.map(buildLibrary);
-
-    books.push({
-      // ISBN이 끝내 없으므로 임시 식별자 사용 — 화면에서 ISBN을 키로
-      // 쓰는 곳(React key, 지도 라우트 등)에 영향 줄 수 있음을 인지.
-      isbn: `no-isbn_${first.dbnum}_${normalizeForMatch(first.title)}`,
       title: first.title,
       author: first.author,
       publisher: first.publisher || undefined,

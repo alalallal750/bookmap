@@ -66,7 +66,7 @@ export const DISTRICTS: District[] = [
  * 목록"에서만 제외하는 비활성화이며, 좌표/구 정보는 삭제하지 않음.
  * 추후 해결되면 이 Set에서만 빼면 즉시 복원됨.
  */
-const UNRELIABLE_ISBN_DBNUMS = new Set(["44381", "44301", "107191"]); // 송파구, 성북구, 금천구
+const UNRELIABLE_ISBN_DBNUMS = new Set(["107191"]); // 금천구 (ISBN 필드는 있으나 형식이 잘못된 값을 줘서, "없으면 제외" 규칙으로 못 걸러짐 — 별도 제외 유지)
 
 /**
  * 위치 정보가 없을 때 기본값 — 서울방배경찰서 (동작구/서초구 경계,
