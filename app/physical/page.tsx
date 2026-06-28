@@ -166,6 +166,7 @@ export default function PhysicalSearchPage() {
             ) : (
               <p className="text-gray-400 text-sm">지금 근처에서 빌릴 수 있는 책 찾는 중...</p>
             )}
+          </div>
         )}
 
         {state.status === "error" && (
