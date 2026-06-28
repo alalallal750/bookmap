@@ -1,20 +1,8 @@
-"use client";
-
-import { useState, useRef, useEffect } from "react";
-
-type SearchBarProps = {
-  onSearch: (query: string) => void;
-  loading?: boolean;
-  placeholder?: string;
-};
-
 export function SearchBar({
   onSearch,
   loading = false,
-  placeholder = "책 제목을 입력하세요",
+  placeholder = "그 책, 제목이 뭐였지?",
 }: SearchBarProps) {
-  const [value, setValue] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
 
   // [2026-06-21] 자동 포커스(autoFocus)를 모바일에서 끄기 위한 화면 너비 판단.
   // 모바일에서 자동 포커스 시 키보드가 즉시 올라와 로고/안내문구를 가려버리는
