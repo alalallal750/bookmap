@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { PhysicalBook, PhysicalSearchResponse, ApiResponse } from "@/types";
 import { SearchBar } from "@/components/search/SearchBar";
@@ -28,6 +28,14 @@ type SearchState =
   | { status: "error"; message: string };
 
 export default function PhysicalSearchPage() {
+  return (
+    <Suspense>
+      <PhysicalSearchInner />
+    </Suspense>
+  );
+}
+
+function PhysicalSearchInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q") ?? "";

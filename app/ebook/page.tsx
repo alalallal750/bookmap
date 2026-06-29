@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ApiResponse, EbookBook, EbookLibraryEntry, EbookSearchResult } from "@/types";
 import { SearchBar } from "@/components/search/SearchBar";
@@ -13,6 +13,14 @@ type SearchState =
   | { status: "error"; message: string };
 
 export default function EbookSearchPage() {
+  return (
+    <Suspense>
+      <EbookSearchInner />
+    </Suspense>
+  );
+}
+
+function EbookSearchInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q") ?? "";
