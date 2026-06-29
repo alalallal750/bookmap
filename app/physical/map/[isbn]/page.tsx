@@ -400,8 +400,8 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
     window.kakao.maps.event.addListener(map, "idle", updateVisibleCount);
     window.kakao.maps.event.addListener(map, "idle", checkMapMoved);
     return () => {
-      window.kakao.maps.event.removeListener(map, "idle", updateVisibleCount);
-      window.kakao.maps.event.removeListener(map, "idle", checkMapMoved);
+      (window.kakao.maps.event as any).removeListener(map, "idle", updateVisibleCount);
+      (window.kakao.maps.event as any).removeListener(map, "idle", checkMapMoved);
     };
   }, [mapReady, updateVisibleCount, checkMapMoved]);
 

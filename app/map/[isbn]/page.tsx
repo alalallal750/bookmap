@@ -361,7 +361,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
     if (!mapReady || !mapRef.current) return;
     const map = mapRef.current;
     window.kakao.maps.event.addListener(map, "idle", updateVisibleCount);
-    return () => window.kakao.maps.event.removeListener(map, "idle", updateVisibleCount);
+    return () => (window.kakao.maps.event as any).removeListener(map, "idle", updateVisibleCount);
   }, [mapReady, updateVisibleCount]);
 
   useEffect(() => {
