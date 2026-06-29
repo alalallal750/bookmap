@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { PhysicalBook, PhysicalSearchResponse, ApiResponse } from "@/types";
 import { SearchBar } from "@/components/search/SearchBar";
@@ -40,11 +40,6 @@ function PhysicalSearchInner() {
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q") ?? "";
   const [state, setState] = useState<SearchState>({ status: "idle" });
-
-  useEffect(() => {
-    if (initialQuery) handleSearch(initialQuery);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   function goToEbookSearch() {
     const q = state.status === "done" ? state.query : "";

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ApiResponse, EbookBook, EbookLibraryEntry, EbookSearchResult } from "@/types";
 import { SearchBar } from "@/components/search/SearchBar";
@@ -25,11 +25,6 @@ function EbookSearchInner() {
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q") ?? "";
   const [state, setState] = useState<SearchState>({ status: "idle" });
-
-  useEffect(() => {
-    if (initialQuery) handleSearch(initialQuery);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   async function handleSearch(query: string) {
     setState({ status: "loading" });
