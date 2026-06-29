@@ -31,6 +31,10 @@ export default function PhysicalSearchPage() {
   const router = useRouter();
   const [state, setState] = useState<SearchState>({ status: "idle" });
 
+  function goToEbookSearch() {
+    router.push("/ebook");
+  }
+
   async function handleSearch(query: string) {
     // 위치를 아직 못 가져온 단계 — "pending"으로 표시, 위치 확보/타임아웃
     // 후 바로 진짜 scope로 갈아끼움(아래에서 setState로 갱신).
@@ -123,26 +127,36 @@ export default function PhysicalSearchPage() {
 
       <div className="flex-1 py-4">
         {state.status === "idle" && (
-          <div className="flex flex-col items-center justify-center pt-24 px-8 text-center">
-            <img
-              src="/logo-main.png"
-              alt="지금빌려 로고"
-              className="w-64 mb-6"
-              style={{ filter: "brightness(0.9)" }}
-            />
-            <p className="text-gray-500 text-base font-medium mb-1">
-              읽고 싶은 책을 검색하세요
-            </p>
-            <p className="text-gray-400 text-sm mb-4">
-              나랑 가까운 도서관에서 지금 빌릴 수 있는지 바로 확인해 드려요.
-            </p>
-            <div className="mt-10" />
-            <p className="text-gray-300 text-xs leading-relaxed">
-              서울시 전체 도서관 정보를 보여드려요.
-              <br />
-              실제 대출가능 여부는 도서관 홈페이지에서 다시 한번 확인해 주세요.
-            </p>
-          </div>
+          <>
+            <div className="flex flex-col items-center justify-center pt-24 px-8 text-center">
+              <img
+                src="/logo-main.png"
+                alt="지금빌려 로고"
+                className="w-64 mb-6"
+                style={{ filter: "brightness(0.9)" }}
+              />
+              <p className="text-gray-500 text-base font-medium mb-1">
+                읽고 싶은 책을 검색하세요
+              </p>
+              <p className="text-gray-400 text-sm mb-4">
+                나랑 가까운 도서관에서 지금 빌릴 수 있는지 바로 확인해 드려요.
+              </p>
+              <div className="mt-10" />
+              <p className="text-gray-300 text-xs leading-relaxed">
+                서울시 전체 도서관 정보를 보여드려요.
+                <br />
+                실제 대출가능 여부는 도서관 홈페이지에서 다시 한번 확인해 주세요.
+              </p>
+            </div>
+            <div className="fixed bottom-0 left-0 right-0 px-4 py-3 bg-white border-t border-gray-100">
+              <button
+                onClick={goToEbookSearch}
+                className="w-full py-3.5 rounded-xl bg-blue-600 text-white text-sm font-semibold active:bg-blue-800"
+              >
+                전자책으로 찾아보시겠어요?
+              </button>
+            </div>
+          </>
         )}
 
         {state.status === "loading" && (
@@ -219,6 +233,16 @@ export default function PhysicalSearchPage() {
                 })}
               </ul>
             )}
+
+            {/* 전자책으로 찾아보시겠어요 버튼 */}
+            <div className="mt-6 mb-2">
+              <button
+                onClick={goToEbookSearch}
+                className="w-full py-3.5 rounded-xl bg-blue-600 text-white text-sm font-semibold active:bg-blue-800"
+              >
+                전자책으로 찾아보시겠어요?
+              </button>
+            </div>
           </div>
         )}
       </div>

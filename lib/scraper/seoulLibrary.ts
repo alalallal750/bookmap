@@ -198,11 +198,7 @@ type RawRecord = {
  * 전자책 검색 메인 함수 (v9 — 서명(제목) 검색 전용)
  */
 export async function searchEbooks(query: string): Promise<EbookBook[]> {
-  console.log("[seoulLibrary] CODE VERSION MARKER: v24-groupbooks-cleanup-20260620");
-
   const id = generateRequestId();
-  console.log("[seoulLibrary] generated id (shared across all dbnum calls):", id);
-
   const defaultSearchUrl = `${BASE_URL}/index.php/default_search`;
 
   let cookie = "";
@@ -211,9 +207,7 @@ export async function searchEbooks(query: string): Promise<EbookBook[]> {
       signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
       headers: { "User-Agent": "Mozilla/5.0" },
     });
-    console.log("[seoulLibrary] stage1 (default_search) status:", res.status);
     cookie = extractCookies(res);
-    console.log("[seoulLibrary] stage1 cookie value:", cookie || "(empty)");
   } catch (e) {
     console.log("[seoulLibrary] stage1 fetch failed:", e);
   }
@@ -245,18 +239,9 @@ export async function searchEbooks(query: string): Promise<EbookBook[]> {
           Accept: "text/xml, application/xml, */*",
         },
       });
-      console.log(`[seoulLibrary] deploy(${dbnum}) status:`, res.status);
       if (!res.ok) return [];
 
       const xml = await res.text();
-      console.log(`[seoulLibrary] deploy(${dbnum}) xml length:`, xml.length);
-
-      const isEmptyResult = /count="0"/.test(xml);
-      if (!xml.includes("Success") && !isEmptyResult) {
-        console.log(`[seoulLibrary] deploy(${dbnum}) resultinfo did not report Success`);
-        console.log(`[seoulLibrary] deploy(${dbnum}) FULL RESPONSE (no Success):`, xml);
-      }
-
       return parseXml(xml, dbnum);
     } catch (e) {
       console.log(`[seoulLibrary] deploy(${dbnum}) fetch failed:`, e);
@@ -267,11 +252,6 @@ export async function searchEbooks(query: string): Promise<EbookBook[]> {
   const resultsByLibrary = await Promise.all(EBOOK_DBNUMS.map(fetchOneLibrary));
   const rawRecords = resultsByLibrary.flat();
 
-  console.log("[seoulLibrary] total parsed records across all libraries:", rawRecords.length);
-  console.log(
-    "[seoulLibrary] dbnums that returned results:",
-    Array.from(new Set(rawRecords.map((r) => r.dbnum)))
-  );
   if (rawRecords.length === 0) return [];
 
   const entries = await Promise.all(
@@ -457,7 +437,6 @@ async function resolveGangnamAvailability(
       signal: AbortSignal.timeout(GANGNAM_TIMEOUT_MS),
       headers: { "User-Agent": "Mozilla/5.0" },
     });
-    console.log("[seoulLibrary] gangnam detail page status:", res.status, "url:", r.url);
     if (!res.ok) {
       console.log("[seoulLibrary] gangnam: detail page fetch not ok, title:", r.title);
       return null;
@@ -466,7 +445,6 @@ async function resolveGangnamAvailability(
     const rawBuffer = await res.arrayBuffer();
     const decoder = new TextDecoder("euc-kr");
     const html = decoder.decode(rawBuffer);
-    console.log("[seoulLibrary] gangnam detail html length (EUC-KR decoded):", html.length);
 
     const $ = cheerio.load(html);
     const currentDiv = $(".book_info > div.current").first();
@@ -494,15 +472,6 @@ async function resolveGangnamAvailability(
     // 있으면 그 즉시 모두 예약자에게 우선권이 있다"고 보수적으로 가정하지
     // 않고, 우선 "보유-대출-예약" 합산식을 적용함(아래 주석 참조).
     const reservedText = findStrongByLabel("예약");
-
-    console.log(
-      "[seoulLibrary] gangnam label-based values - 보유:",
-      ownedText,
-      "대출:",
-      loanedText,
-      "예약:",
-      reservedText
-    );
 
     const owned = ownedText !== undefined ? parseInt(ownedText, 10) : NaN;
     const loaned = loanedText !== undefined ? parseInt(loanedText, 10) : NaN;
@@ -573,14 +542,11 @@ async function resolveChildrenLibraryAvailability(
       signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
       headers: { "User-Agent": "Mozilla/5.0" },
     });
-    console.log("[seoulLibrary] childrenLibrary detail page status:", res.status, "url:", r.url);
     if (!res.ok) {
       console.log("[seoulLibrary] childrenLibrary: detail page fetch not ok, title:", r.title);
       return null;
     }
     const html = await res.text();
-    console.log("[seoulLibrary] childrenLibrary detail html length:", html.length);
-
     const $ = cheerio.load(html);
 
     const loanLiText = $("ul.state li")
@@ -588,8 +554,6 @@ async function resolveChildrenLibraryAvailability(
       .first()
       .text()
       .trim();
-
-    console.log("[seoulLibrary] childrenLibrary loan li text:", JSON.stringify(loanLiText));
 
     const loanText = loanLiText.replace("대출", "").trim();
     const available = isRatioAvailable(loanText);
@@ -656,7 +620,6 @@ async function resolveSeochoAvailability(
       signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
       headers: { "User-Agent": "Mozilla/5.0", Accept: "application/json" },
     });
-    console.log("[seoulLibrary] seocho api status:", res.status, "url:", apiUrl);
     if (!res.ok) {
       console.log("[seoulLibrary] seocho: api fetch not ok, title:", r.title);
       return null;
@@ -673,15 +636,6 @@ async function resolveSeochoAvailability(
     const owned = data.copys;
     const loaned = data.loanCnt;
     const loanable = owned - loaned;
-
-    console.log(
-      "[seoulLibrary] seocho parsed - owned:",
-      owned,
-      "loaned:",
-      loaned,
-      "loanable (직접계산):",
-      loanable
-    );
 
     return {
       dbnum: r.dbnum,
@@ -742,12 +696,6 @@ function mergeDongdaemoonVendors(
     const existingLoanable = existing.entry.loanableCount ?? 0;
     const addingLoanable = item.entry.loanableCount ?? 0;
     const mergedLoanable = existingLoanable + addingLoanable;
-
-    console.log(
-      "[seoulLibrary] mergeDongdaemoonVendors: merging -",
-      `"${existing.raw.title}"(${existingLoanable}) + "${item.raw.title}"(${addingLoanable})`,
-      `= ${mergedLoanable}`
-    );
 
     mergedMap.set(key, {
       raw: existing.raw,
@@ -829,19 +777,6 @@ function normalizeTitle(title: string): string {
  * 다른 책이 잘못 합쳐지는 사고 방지.
  */
 function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): EbookBook[] {
-  console.log(
-    "[seoulLibrary] groupBooks DEBUG - raw items (dbnum, title, author, date, publisher):",
-    JSON.stringify(
-      items.map(({ raw }) => ({
-        dbnum: raw.dbnum,
-        title: raw.title,
-        author: raw.author,
-        date: raw.date,
-        publisher: raw.publisher,
-      }))
-    )
-  );
-
   // [2026-06-21 변경] 저자 필드가 공통문구(저/지음 등) 제거 후 빈 문자열이
   // 되는 항목 전용 처리. 실측 확인된 사례(동대문구+YES24 벤더, "난생처음
   // 킥복싱"·"달러구트" 등 3건 이상): 저자가 "저" 한 글자만 와서 정규화 후
@@ -908,10 +843,6 @@ function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): Eboo
     );
 
     if (matchingGroup) {
-      console.log(
-        "[seoulLibrary] groupBooks: empty-author item merged by title+publisher -",
-        `"${raw.title}"(${raw.dbnum}, publisher=${raw.publisher}) → joined "${matchingGroup.title}"(${matchingGroup.author})`
-      );
       if (!matchingGroup.libraries.some((l: EbookLibraryEntry) => l.dbnum === entry.dbnum)) {
         matchingGroup.libraries.push(entry);
       }
@@ -919,10 +850,6 @@ function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): Eboo
     } else {
       // 합류할 그룹이 없으면, 저자 빈 문자열 그대로 독립 키로 새 그룹 생성
       const fallbackKey = `${normalizedTitle}__${raw.dbnum}__${raw.date || ""}`;
-      console.log(
-        "[seoulLibrary] groupBooks: empty-author item has no matching group, kept separate -",
-        `"${raw.title}"(${raw.dbnum}, publisher=${raw.publisher})`
-      );
       groups.set(fallbackKey, {
         title: raw.title,
         author: raw.author,
@@ -950,11 +877,6 @@ function groupBooks(items: { raw: RawRecord; entry: EbookLibraryEntry }[]): Eboo
 
     const existing = mergedByDate.get(dateKey);
     if (existing) {
-      console.log(
-        "[seoulLibrary] groupBooks: merging by publishDate -",
-        `"${existing.title}"(${existing.author}) + "${group.title}"(${group.author})`,
-        `date=${dateKey}`
-      );
       for (const entry of group.libraries) {
         if (!existing.libraries.some((l: EbookLibraryEntry) => l.dbnum === entry.dbnum)) {
           existing.libraries.push(entry);
@@ -1147,6 +1069,220 @@ type PhysicalRawRecord = {
  */
 const MAPO_DBNUM = "88421";
 
+// 강동구/은평구/노원구: meta.seoul.go.kr API가 구 단위 1건만 반환(분관 없음) → 각 포털 API로 대체
+const GANGDONG_DBNUM = "21841";
+const EUNPYEONG_DBNUM = "33451";
+const NOWON_DBNUM = "43081";
+// 은평구 포털: Nuri 기반, speciesKey는 meta URL의 쿼리파라미터에서 파싱
+const EUNPYEONG_PORTAL = "https://www.eplib.or.kr";
+// 노원구 포털: Nuri 기반, speciesKey는 meta URL 경로 마지막 세그먼트
+const NOWON_PORTAL = "https://nowonlib.kr";
+const GANGDONG_GDLIBRARY_URL = "https://www.gdlibrary.or.kr/api/booksearch/collection";
+
+// gdlibrary manageCode → coords 파일 matchedName 매핑
+// auto-match 되지 않는 항목만 명시 (이름 표기 차이, 북카페 계열)
+const GANGDONG_CODE_TO_NAME: Record<string, string> = {
+  LA: "작은도서관 웃는책",
+  LI: "반딧불북카페작은도서관",  // gdlibrary: "반딧불 작은도서관"
+  SA: "암사종합시장점 북카페",    // gdlibrary: "북카페도서관 다독다독 암사시장점"
+  SB: "굽은다리역점 북카페",      // gdlibrary: "다독다독 굽은다리역점"
+  SC: "강일점 북카페",            // gdlibrary: "북카페도서관 강일점"
+  LY: "고분다리시장점 북카페",    // gdlibrary: "북카페도서관 고분다리시장점"
+  LZ: "고덕점 북카페",            // gdlibrary: "강동구 북카페도서관 다독다독 고덕점"
+};
+
+type GdlibraryItem = {
+  manageCode: string;
+  libName: string;
+  loanCode: string;
+  shelfLocName?: string;
+};
+
+function mapGangdongLoanCode(loanCode: string): string {
+  if (loanCode === "OK") return "대출가능";
+  if (loanCode === "OUT_ON_LOAN") return "대출불가[대출중]";
+  if (loanCode === "RESERVE_LOAN_READY") return "대출불가(예약중)";
+  return "대출불가";
+}
+
+async function fetchGangdongBranches(isbn: string, title: string): Promise<PhysicalRawRecord[]> {
+  try {
+    const res = await fetch(GANGDONG_GDLIBRARY_URL, {
+      method: "POST",
+      signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
+      headers: { "Content-Type": "application/json", "User-Agent": "Mozilla/5.0" },
+      body: JSON.stringify({ doc_type: "BO", isbn, species_key: "", vol_code: "" }),
+    });
+    if (!res.ok) {
+      console.log("[seoulLibrary] gdlibrary HTTP error:", res.status);
+      return [];
+    }
+    const items: GdlibraryItem[] = await res.json();
+    if (!Array.isArray(items) || items.length === 0) return [];
+    // manageCode별로 그룹화 (한 분관에 여러 권 존재 가능)
+    const byManageCode = new Map<string, GdlibraryItem[]>();
+    for (const item of items) {
+      const list = byManageCode.get(item.manageCode) ?? [];
+      list.push(item);
+      byManageCode.set(item.manageCode, list);
+    }
+
+    const records: PhysicalRawRecord[] = [];
+    for (const [manageCode, branchItems] of byManageCode) {
+      const first = branchItems[0];
+      // 한 권이라도 대출가능이면 대출가능으로 표시
+      const availableItem = branchItems.find((it) => it.loanCode === "OK");
+      const representative = availableItem ?? first;
+      const branchName = GANGDONG_CODE_TO_NAME[manageCode] ?? first.libName;
+      records.push({
+        dbnum: GANGDONG_DBNUM,
+        dbname: "강동구립도서관",
+        title,
+        url: `https://www.gdlibrary.or.kr/portal/menu/37/book/search?searchType=title&searchInput=${encodeURIComponent(title)}&autoSearch=true`,
+        author: "",
+        publisher: "",
+        date: "",
+        isbn,
+        library: branchName,
+        location: first.shelfLocName || undefined,
+        loan: mapGangdongLoanCode(representative.loanCode),
+      });
+    }
+    return records;
+  } catch (e) {
+    console.log("[seoulLibrary] gdlibrary fetch failed:", e);
+    return [];
+  }
+}
+
+/**
+ * 노원구/은평구처럼 Nuri 통합 시스템 기반 도서관 포털에서 분관별 소장정보를 가져온다.
+ *
+ * 공통 API:
+ *   GET {portalBase}/api/bookDetail/bookCollection/libList?pubFormCode=MO&speciesKey={keys}
+ *   → libList: [{ libCode, manageCode, libName, bookCount }]
+ *
+ *   GET {portalBase}/api/bookDetail/bookCollection/MOMM?pubFormCode=MO&speciesKey={keys}&manageCode={MC}
+ *   → collectionList: [{ loanStatus, returnPlanDate, callNo, shelfLocName }]
+ */
+async function fetchNuriBranches(
+  portalBase: string,
+  speciesKeys: string,
+  dbnum: string,
+  dbname: string,
+  isbn: string,
+  title: string,
+  searchUrl: string
+): Promise<PhysicalRawRecord[]> {
+  if (!speciesKeys) return [];
+  try {
+    const libListUrl = `${portalBase}/api/bookDetail/bookCollection/libList?pubFormCode=MO&speciesKey=${encodeURIComponent(speciesKeys)}`;
+    const libRes = await fetch(libListUrl, {
+      signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
+      headers: { "User-Agent": "Mozilla/5.0", Accept: "application/json" },
+    });
+    if (!libRes.ok) {
+      console.log(`[seoulLibrary] Nuri libList HTTP error (${dbnum}):`, libRes.status);
+      return [];
+    }
+    const libJson = await libRes.json();
+    const libList: { libCode: string; manageCode: string; libName: string; bookCount?: number }[] =
+      libJson?.contents?.libList ?? [];
+    if (libList.length === 0) return [];
+
+    const records = await Promise.all(
+      libList.map(async ({ manageCode, libName }) => {
+        const mommUrl = `${portalBase}/api/bookDetail/bookCollection/MOMM?pubFormCode=MO&speciesKey=${encodeURIComponent(speciesKeys)}&manageCode=${manageCode}`;
+        let loan: string | undefined;
+        let callNumber: string | undefined;
+        let returnPlanDate: string | undefined;
+        try {
+          const mommRes = await fetch(mommUrl, {
+            signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
+            headers: { "User-Agent": "Mozilla/5.0", Accept: "application/json" },
+          });
+          if (mommRes.ok) {
+            const mommJson = await mommRes.json();
+            const items: { loanStatus: string; returnPlanDate: string; callNo: string; shelfLocName: string }[] =
+              mommJson?.contents?.collectionList ?? [];
+            const avail = items.find((it) => it.loanStatus === "대출가능");
+            const rep = avail ?? items[0];
+            if (rep) {
+              loan = rep.loanStatus === "대출가능" ? "대출가능" : "대출불가";
+              callNumber = rep.callNo || rep.shelfLocName || undefined;
+              returnPlanDate = rep.returnPlanDate || undefined;
+            }
+          }
+        } catch (e) {
+          console.log(`[seoulLibrary] Nuri MOMM failed (${dbnum}, ${manageCode}):`, e);
+        }
+        const record: PhysicalRawRecord = {
+          dbnum,
+          dbname,
+          title,
+          url: searchUrl,
+          author: "",
+          publisher: "",
+          date: "",
+          isbn,
+          library: cleanNuriLibName(libName),
+          location: callNumber,
+          loan,
+        };
+        return record;
+      })
+    );
+    return records;
+  } catch (e) {
+    console.log(`[seoulLibrary] Nuri fetchBranches failed (${dbnum}):`, e);
+    return [];
+  }
+}
+
+/** 은평구 meta URL에서 speciesKey 추출 */
+function extractEunpyeongSpeciesKey(url: string): string {
+  const m = url.match(/[?&]speciesKey=([^&]+)/);
+  return m ? decodeURIComponent(m[1]) : "";
+}
+
+/** 노원구 ISBN으로 speciesKey 조회 (nowonlib.kr /api/search POST)
+ *  meta.seoul.go.kr URL에는 speciesKey가 없으므로 직접 검색API 호출
+ */
+async function fetchNowonSpeciesKey(isbn: string): Promise<string> {
+  try {
+    const res = await fetch(`${NOWON_PORTAL}/api/search`, {
+      method: "POST",
+      signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
+      headers: {
+        "User-Agent": "Mozilla/5.0",
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ searchKeyword: isbn, pubFormCode: "MO", display: 5, library: "nowonlib" }),
+    });
+    if (!res.ok) return "";
+    const j = await res.json();
+    return j?.contents?.bookList?.[0]?.speciesKey ?? "";
+  } catch (e) {
+    console.log("[seoulLibrary] fetchNowonSpeciesKey failed:", e);
+    return "";
+  }
+}
+
+/** Nuri 포털 API가 반환하는 분관 이름 정리
+ *  - "(공릉1동)" 같은 동 수식어 제거 → coords 매칭 용이
+ *  - 노원구 북카페 등 표기 차이 보정
+ */
+const NURI_NAME_FIXES: Record<string, string> = {
+  // 노원구: API name → coords matchedName
+  "책사랑북카페": "책사랑작은도서관",
+};
+
+function cleanNuriLibName(name: string): string {
+  const stripped = name.replace(/\([^)]+\)$/, "").trim();
+  return NURI_NAME_FIXES[stripped] ?? stripped;
+}
+
 // [2026-06-27 추가] display=30 고정값을 200으로 올림(handoff v14 0-1장).
 // 실측된 최대 건수(구로구 128건)보다 충분히 크게 잡아, 대부분의 구는
 // 한 번의 요청으로 끝나도록 함. 그래도 이 값을 넘는 구가 나오면
@@ -1190,10 +1326,6 @@ async function fetchDistrictsByCategory(
         Accept: "text/xml, application/xml, */*",
       },
     });
-    console.log(
-      `[seoulLibrary] physical deploy(${dbnum}, category1=${cat}, recstart=${recstart}) status:`,
-      res.status
-    );
     if (!res.ok) return { xml: "", ok: false };
     const xml = await res.text();
     const isFailed = /<resultinfo[^>]*>\s*Failed\s*<\/resultinfo>/.test(xml);
@@ -1225,31 +1357,14 @@ async function fetchDistrictsByCategory(
 
     const xmlPages = [xml];
     const total = parseTotal(xml);
-    const recordCountInFirstPage = (xml.match(/<record/g) ?? []).length;
 
-    console.log(
-      `[DEBUG-PAGINATION] dbnum: ${dbnum} | total: ${total ?? "(파싱 실패)"} | 1페이지 record 수: ${recordCountInFirstPage} | display: ${PHYSICAL_SEARCH_DISPLAY}`
-    );
-
-    // [2026-06-27 추가] total이 display(200)를 넘으면, 남은 페이지를
-    // 동시에 추가 호출해서 합침. 페이지 하나가 실패해도(타임아웃 등)
-    // 이미 받은 다른 페이지 결과는 버리지 않도록 개별로 catch 처리.
     if (total !== undefined && total > PHYSICAL_SEARCH_DISPLAY) {
       const pageCount = Math.ceil(total / PHYSICAL_SEARCH_DISPLAY);
-      console.log(
-        `[DEBUG-PAGINATION] dbnum: ${dbnum} | total(${total})이 display(${PHYSICAL_SEARCH_DISPLAY}) 초과 — 추가 ${pageCount - 1}페이지 호출`
-      );
 
       const extraPages = await Promise.all(
         Array.from({ length: pageCount - 1 }, (_, i) => {
           const recstart = (i + 1) * PHYSICAL_SEARCH_DISPLAY + 1;
-          return fetchOnce(cat, text, recstart).catch((e) => {
-            console.log(
-              `[DEBUG-PAGINATION] dbnum: ${dbnum} | recstart=${recstart} 페이지 호출 실패:`,
-              e
-            );
-            return { xml: "", ok: false };
-          });
+          return fetchOnce(cat, text, recstart).catch(() => ({ xml: "", ok: false }));
         })
       );
 
@@ -1319,15 +1434,6 @@ export async function searchPhysicalBooks(
     .map((dbnum) => getDistrictName(dbnum))
     .filter((name): name is string => Boolean(name));
 
-  console.log(
-    "[seoulLibrary] searchPhysicalBooks - scope:",
-    scope,
-    "location:",
-    { lat, lng },
-    "target dbnums:",
-    targetDbnums
-  );
-
   const id = generateRequestId();
   const defaultSearchUrl = `${BASE_URL}/index.php/default_search`;
 
@@ -1347,9 +1453,88 @@ export async function searchPhysicalBooks(
       fetchDistrictsByCategory(dbnum, "1", query, undefined, id, cookie, defaultSearchUrl)
     )
   );
-  const rawRecords = resultsByDistrict.flat();
+  const seoulLibRecords = resultsByDistrict.flat();
 
-  console.log("[seoulLibrary] physical total parsed records:", rawRecords.length);
+  // 강동구/은평구/노원구: meta.seoul.go.kr 결과는 구 단위 1건뿐 → 각 포털 API로 분관별 대체
+  const NURI_DBNUMS = new Set([GANGDONG_DBNUM, EUNPYEONG_DBNUM, NOWON_DBNUM]);
+  const gangdongSeoulRecords = seoulLibRecords.filter((r) => r.dbnum === GANGDONG_DBNUM);
+  const otherRecords = seoulLibRecords.filter((r) => !NURI_DBNUMS.has(r.dbnum));
+
+  const gangdongIsbnSet = new Set(
+    gangdongSeoulRecords
+      .map((r) => normalizeIsbn(r.isbn) || normalizeIsbn(extractIsbnFromUrl(r.url)))
+      .filter(Boolean)
+  );
+
+  const gangdongRecords = (
+    await Promise.all(
+      Array.from(gangdongIsbnSet).map((isbn) =>
+        fetchGangdongBranches(isbn, gangdongSeoulRecords.find(
+          (r) => (normalizeIsbn(r.isbn) || normalizeIsbn(extractIsbnFromUrl(r.url))) === isbn
+        )?.title ?? query)
+      )
+    )
+  ).flat();
+
+  // 은평구: title 검색 시 같은 제목의 다른 책(isbn 다름)이 여러 건 나올 수 있음.
+  // isbn별로 speciesKey를 분리해서 각각 fetchNuriBranches 호출 — 각 isbn 그룹에
+  // 올바른 분관 데이터가 들어가도록 함.
+  const eunpyeongAllRecords = seoulLibRecords.filter((r) => r.dbnum === EUNPYEONG_DBNUM);
+  const eunpyeongByIsbn = new Map<string, { keys: string[]; record: PhysicalRawRecord }>();
+  for (const r of eunpyeongAllRecords) {
+    const isbn = normalizeIsbn(r.isbn) || normalizeIsbn(extractIsbnFromUrl(r.url)) || "";
+    if (!isbn) continue;
+    const keys = extractEunpyeongSpeciesKey(r.url).split(",").filter(Boolean);
+    const existing = eunpyeongByIsbn.get(isbn);
+    if (existing) {
+      existing.keys = [...new Set([...existing.keys, ...keys])];
+    } else {
+      eunpyeongByIsbn.set(isbn, { keys, record: r });
+    }
+  }
+  const eunpyeongRecords = (
+    await Promise.all(
+      Array.from(eunpyeongByIsbn.entries()).map(([isbn, { keys, record }]) =>
+        fetchNuriBranches(
+          EUNPYEONG_PORTAL,
+          keys.join(","),
+          EUNPYEONG_DBNUM,
+          "은평구립도서관",
+          isbn,
+          record.title,
+          record.url
+        )
+      )
+    )
+  ).flat();
+
+  // 노원구: isbn별로 speciesKey를 각각 조회 — 같은 제목의 다른 책이 여러 건
+  // 나올 수 있으므로 첫 번째 record만 쓰지 않고 isbn별로 분리 처리
+  const nowonAllRecords = seoulLibRecords.filter((r) => r.dbnum === NOWON_DBNUM);
+  const nowonByIsbn = new Map<string, PhysicalRawRecord>();
+  for (const r of nowonAllRecords) {
+    const isbn = normalizeIsbn(r.isbn) || normalizeIsbn(extractIsbnFromUrl(r.url)) || "";
+    if (isbn && !nowonByIsbn.has(isbn)) nowonByIsbn.set(isbn, r);
+  }
+  const nowonRecords = (
+    await Promise.all(
+      Array.from(nowonByIsbn.entries()).map(async ([isbn, record]) => {
+        const speciesKey = await fetchNowonSpeciesKey(isbn);
+        if (!speciesKey) return [];
+        return fetchNuriBranches(
+          NOWON_PORTAL,
+          speciesKey,
+          NOWON_DBNUM,
+          "노원구립통합도서관",
+          isbn,
+          record.title,
+          `${NOWON_PORTAL}/KeywordSearchResult/${encodeURIComponent(record.title)}`
+        );
+      })
+    )
+  ).flat();
+
+  const rawRecords = [...otherRecords, ...gangdongRecords, ...eunpyeongRecords, ...nowonRecords];
 
   const meta: PhysicalSearchMeta = { scope, districtNames };
 
@@ -1380,15 +1565,6 @@ export async function searchPhysicalBooksByIsbn(
   const lng = userLng ?? DEFAULT_LOCATION.lng;
   const targetDbnums = getNearbyDbnums(lat, lng);
 
-  console.log(
-    "[seoulLibrary] searchPhysicalBooksByIsbn - isbn:",
-    isbn,
-    "location:",
-    { lat, lng },
-    "target dbnums:",
-    targetDbnums
-  );
-
   const id = generateRequestId();
   const defaultSearchUrl = `${BASE_URL}/index.php/default_search`;
 
@@ -1408,9 +1584,45 @@ export async function searchPhysicalBooksByIsbn(
       fetchDistrictsByCategory(dbnum, "7", isbn, title, id, cookie, defaultSearchUrl)
     )
   );
-  const rawRecords = resultsByDistrict.flat();
+  // 강동구/은평구/노원구: meta 결과 제거 후 각 포털 API로 분관별 대체
+  const NURI_DBNUMS_SET = new Set([GANGDONG_DBNUM, EUNPYEONG_DBNUM, NOWON_DBNUM]);
+  const allSeoulRecords = resultsByDistrict.flat();
+  const seoulLibRecords = allSeoulRecords.filter((r) => !NURI_DBNUMS_SET.has(r.dbnum));
 
-  console.log("[seoulLibrary] physical(isbn) total parsed records:", rawRecords.length);
+  const gangdongRecords = targetDbnums.includes(GANGDONG_DBNUM)
+    ? await fetchGangdongBranches(isbn, title)
+    : [];
+
+  const epRecord = allSeoulRecords.find((r) => r.dbnum === EUNPYEONG_DBNUM);
+  const eunpyeongRecords =
+    targetDbnums.includes(EUNPYEONG_DBNUM) && epRecord
+      ? await fetchNuriBranches(
+          EUNPYEONG_PORTAL,
+          extractEunpyeongSpeciesKey(epRecord.url),
+          EUNPYEONG_DBNUM,
+          "은평구립도서관",
+          isbn,
+          title,
+          epRecord.url
+        )
+      : [];
+
+  const nowonSpeciesKey =
+    targetDbnums.includes(NOWON_DBNUM) ? await fetchNowonSpeciesKey(isbn) : "";
+  const nowonRecords = nowonSpeciesKey
+    ? await fetchNuriBranches(
+        NOWON_PORTAL,
+        nowonSpeciesKey,
+        NOWON_DBNUM,
+        "노원구립통합도서관",
+        isbn,
+        title,
+        `${NOWON_PORTAL}/KeywordSearchResult/${encodeURIComponent(title)}`
+      )
+    : [];
+
+  const rawRecords = [...seoulLibRecords, ...gangdongRecords, ...eunpyeongRecords, ...nowonRecords];
+
   if (rawRecords.length === 0) return [];
 
   return groupPhysicalBooksByIsbn(rawRecords);
@@ -1513,7 +1725,14 @@ function parsePhysicalXml(xml: string, expectedDbnum: string): PhysicalRawRecord
  * 경우를 대비해 괄호 안 이름도 추출 시도.
  */
 function extractLibraryName(r: PhysicalRawRecord): string {
-  if (r.library) return r.library;
+  const lib = r.library?.trim();
+  if (lib) {
+    // "스마트도서관"만 달랑 오는 경우, location 필드에 역명이 있으면 조합
+    if (lib === "스마트도서관" && r.location?.trim()) {
+      return `${r.location.trim()} 스마트도서관`;
+    }
+    return lib;
+  }
   if (r.location) {
     // "[사당솔밭]종합자료실Ⅱ" 형식 → 괄호 안 이름 추출
     const bracketMatch = r.location.match(/^\[([^\]]+)\]/);
@@ -1644,8 +1863,6 @@ function extractReturnDueDate(loan?: string): string | undefined {
  * 너무 부실하면 보조 수단을 추가하기로 함(사용자 결정, 2026-06-28).
  */
 function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] {
-  console.log("[DEBUG] groupPhysicalBooksByIsbn 시작, records:", records.length);
-
   // 1단계: 각 record의 최종 ISBN을 확정 (필드 → url 순으로 시도)
   const withResolvedIsbn = records.map((r) => {
     const fieldIsbn = normalizeIsbn(r.isbn);
@@ -1654,14 +1871,6 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
     }
     const urlIsbn = extractIsbnFromUrl(r.url);
     if (urlIsbn) {
-      console.log(
-        "[DEBUG] ISBN 필드 없음, url에서 추출 성공 — dbnum:",
-        r.dbnum,
-        "title:",
-        r.title,
-        "extracted:",
-        urlIsbn
-      );
       return { record: r, resolvedIsbn: normalizeIsbn(urlIsbn), isbnSource: "url" as const };
     }
     return { record: r, resolvedIsbn: "", isbnSource: "none" as const };
@@ -1669,14 +1878,6 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
 
   const withIsbn = withResolvedIsbn.filter((x) => x.resolvedIsbn);
   const withoutIsbn = withResolvedIsbn.filter((x) => !x.resolvedIsbn);
-
-  console.log(
-    "[DEBUG] ISBN 확보:",
-    withIsbn.length,
-    "건 / ISBN 없음(제외 대상):",
-    withoutIsbn.length,
-    "건"
-  );
 
   // [2026-06-28 추가] 제외되는 record 전부를 빠짐없이 출력 — 어느
   // 구의 어떤 책이 화면에서 사라지는지 직접 확인하기 위함. 결과가
@@ -1695,8 +1896,6 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
     list.push(record);
     byIsbn.set(resolvedIsbn, list);
   }
-
-  console.log("[DEBUG] byIsbn 그룹 수:", byIsbn.size);
 
   const books: PhysicalBook[] = [];
 
@@ -1720,7 +1919,7 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
       id: `seoul_${r.dbnum}_${branchName}`,
       libraryName: branchName,
       libraryType: inferLibraryType(branchName),
-      address: hoursInfo?.address ?? "",
+      address: hoursInfo?.address || coord?.roadAddress || coord?.address || "",
       latitude: coord?.lat ?? 0,
       longitude: coord?.lng ?? 0,
       tel: hoursInfo?.tel,
@@ -1729,6 +1928,7 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
       callNumber: r.location,
       returnDueDate: isPhysicalAvailable(r) ? undefined : extractReturnDueDate(r.loan),
       searchResultUrl: r.url || undefined,
+      homepageUrl: hoursInfo?.homepage || undefined,
     };
   };
 
@@ -1747,19 +1947,5 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
     });
   }
 
-  console.log("[DEBUG] groupPhysicalBooksByIsbn 끝, books:", books.length);
-  // [임시 디버그] 각 책이 어느 구(dbnum) 도서관을 포함하는지 확인 —
-  // 송파구(44381)·성북구(44301)가 최종 books 배열까지 살아있는지 검증용.
-  for (const b of books) {
-    const dbnumsInBook = Array.from(new Set(b.libraries.map((l) => l.id.split("_")[1])));
-    console.log(
-      "[DEBUG-CHECK] book:",
-      b.title,
-      "isbn:",
-      b.isbn,
-      "dbnums:",
-      dbnumsInBook
-    );
-  }
   return books;
 }

@@ -124,6 +124,10 @@ export type BranchCoord = {
   name: string;
   lat: number;
   lng: number;
+  /** 도로명 주소 (coords 파일에서 로드, slib 미매칭 시 fallback 용도) */
+  roadAddress?: string;
+  /** 지번 주소 (도로명 없을 때 fallback) */
+  address?: string;
 };
 
 let cachedCoords: BranchCoord[] | null = null;
@@ -160,10 +164,10 @@ export function loadBranchCoords(): BranchCoord[] {
   const result: BranchCoord[] = [];
   let skippedSuspicious = 0;
 
-  const filePath = path.join(process.cwd(), "data", "branch-coords-merged.json");
+  const filePath = path.join(process.cwd(), "data", "branch-coords-v2.json");
 
   if (!fs.existsSync(filePath)) {
-    console.log("[branchCoords] branch-coords-merged.json 없음 — 좌표 없이 진행");
+    console.log("[branchCoords] branch-coords-v2.json 없음 — 좌표 없이 진행");
     cachedCoords = result;
     return result;
   }
@@ -187,6 +191,8 @@ export function loadBranchCoords(): BranchCoord[] {
       name: entry.matchedName,
       lat,
       lng,
+      roadAddress: entry.roadAddress || undefined,
+      address: entry.address || undefined,
     });
   }
 
@@ -229,6 +235,9 @@ export function findBranchCoord(
 
   const normalize = (s: string) => s.replace(/[\s&]/g, "");
   const normalizedTarget = normalize(libraryName);
+
+  // 빈 문자열로 검색하면 모든 항목과 매칭되어 잘못된 좌표가 반환되므로 차단
+  if (!normalizedTarget) return undefined;
 
   return pool.find((c) => {
     const normalizedName = normalize(c.name);

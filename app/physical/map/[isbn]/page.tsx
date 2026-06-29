@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { PhysicalLibrary, PhysicalBook, PhysicalSearchResponse, ApiResponse } from "@/types";
+import { formatLibraryName } from "@/lib/utils/formatLibraryName";
 import { LibraryDetail } from "@/components/map/LibraryDetail";
 import { DEFAULT_LOCATION, getNearbyDbnums, getDistrictName, distanceKm } from "@/lib/data/districtCoords";
 
@@ -65,7 +66,7 @@ function createCustomOverlay(lib: PhysicalLibrary, onClick: () => void) {
   const count = (lib as any).availableCount ?? (lib.available ? 1 : 0);
   const div = document.createElement("div");
   div.style.cssText = `background:${color};color:white;border-radius:10px;padding:5px 10px;font-size:12px;font-weight:500;text-align:center;cursor:pointer;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,0.2);line-height:1.4;`;
-  div.innerHTML = `${lib.libraryName}<br><span style="font-size:11px;opacity:0.9;">${count}권</span>`;
+  div.innerHTML = `${formatLibraryName(lib.libraryName)}<br><span style="font-size:11px;opacity:0.9;">${count}권</span>`;
   div.addEventListener("click", onClick);
   return div;
 }
@@ -88,6 +89,7 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
   const mapRef = useRef<any>(null);
   const overlaysRef = useRef<any[]>([]);
   const userMarkerRef = useRef<any>(null);
+  const hasLoadedRef = useRef(false);
 
   const [libraries, setLibraries] = useState<PhysicalLibrary[]>([]);
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
@@ -166,16 +168,17 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
   const runSearch = useCallback(
     async (lat: number, lng: number) => {
       try {
-        const url = new URL("/api/physical-search", window.location.origin);
-        url.searchParams.set("q", title ?? isbn);
+        const url = new URL("/api/physical-search-by-isbn", window.location.origin);
+        url.searchParams.set("isbn", isbn);
+        url.searchParams.set("title", title ?? isbn);
         url.searchParams.set("lat", String(lat));
         url.searchParams.set("lng", String(lng));
 
         const res = await fetch(url.toString());
-        const json: ApiResponse<PhysicalSearchResponse> = await res.json();
+        const json: ApiResponse<PhysicalBook[]> = await res.json();
         if (!json.success) return;
 
-        const matched = json.data.books.find((b) => b.isbn === isbn);
+        const matched = json.data.find((b) => b.isbn === isbn);
         setLibraries(matched?.libraries ?? []);
         setSearchScope(userLocation ? "nearby" : "all");
 
@@ -222,6 +225,10 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
    */
   useEffect(() => {
     async function initialLoad() {
+      // userLocation이 나중에 들어올 때 재실행되지 않도록 한 번만 실행
+      if (hasLoadedRef.current) return;
+      hasLoadedRef.current = true;
+
       const lat = userLocation?.lat ?? DEFAULT_LOCATION.lat;
       const lng = userLocation?.lng ?? DEFAULT_LOCATION.lng;
 
@@ -230,14 +237,8 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
         const cached = sessionStorage.getItem(`physical_book_${isbn}`);
         if (cached) {
           const parsed: { book: PhysicalBook; scope: "nearby" | "all" } = JSON.parse(cached);
-          console.log(
-            "[physical map] sessionStorage에서 책 데이터 발견, API 재호출 스킵 — isbn:",
-            isbn,
-            "scope:",
-            parsed.scope
-          );
-
-          setLibraries(parsed.book.libraries ?? []);
+          const libs = parsed.book.libraries ?? [];
+          setLibraries(libs);
           setSearchScope(parsed.scope);
 
           if (parsed.scope === "nearby") {
@@ -251,8 +252,6 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
               moveDetectionEnabledRef.current = true;
             }, MOVE_DETECTION_DELAY_MS);
           }
-          // scope === "all"이면 이동 감지 타이머 자체를 켜지 않음 —
-          // checkMapMoved가 호출돼도 searchScope로 한번 더 막힘(아래 참조).
 
           sessionStorage.removeItem(`physical_book_${isbn}`);
           usedCache = true;
@@ -353,6 +352,7 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
     }
   }, [lastSearchedLocation, searchScope]);
 
+  // 라이브러리 마커만 그림 (userLocation 변경 시 재실행 안 됨)
   const drawMarkers = useCallback(() => {
     const map = mapRef.current;
     if (!map || !window.kakao?.maps) return;
@@ -373,24 +373,37 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
         overlaysRef.current.push(overlay);
       });
 
-    if (userLocation) {
-      if (userMarkerRef.current) userMarkerRef.current.setMap(null);
-      const dot = document.createElement("div");
-      dot.style.cssText = `width:12px;height:12px;background:#2563eb;border-radius:50%;border:2.5px solid white;box-shadow:0 0 0 3px rgba(37,99,235,0.25);`;
-      const userOverlay = new (window.kakao.maps as any).CustomOverlay({
-        position: new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng),
-        content: dot,
-        yAnchor: 0.5,
-        map,
-      });
-      userMarkerRef.current = userOverlay;
-      overlaysRef.current.push(userOverlay);
-    }
+    updateVisibleCount();
+  }, [libraries, updateVisibleCount]);
 
+  // 사용자 위치 dot은 마커 전체 재그리기 없이 별도 업데이트
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !window.kakao?.maps) return;
+    if (userMarkerRef.current) userMarkerRef.current.setMap(null);
+    if (!userLocation) return;
+    const dot = document.createElement("div");
+    dot.style.cssText = `width:12px;height:12px;background:#2563eb;border-radius:50%;border:2.5px solid white;box-shadow:0 0 0 3px rgba(37,99,235,0.25);`;
+    const userOverlay = new (window.kakao.maps as any).CustomOverlay({
+      position: new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng),
+      content: dot,
+      yAnchor: 0.5,
+      map,
+    });
+    userMarkerRef.current = userOverlay;
+  }, [userLocation, mapReady]);
+
+  // idle 리스너는 지도 생성 후 한 번만 등록
+  useEffect(() => {
+    if (!mapReady || !mapRef.current) return;
+    const map = mapRef.current;
     window.kakao.maps.event.addListener(map, "idle", updateVisibleCount);
     window.kakao.maps.event.addListener(map, "idle", checkMapMoved);
-    updateVisibleCount();
-  }, [libraries, userLocation, updateVisibleCount, checkMapMoved]);
+    return () => {
+      window.kakao.maps.event.removeListener(map, "idle", updateVisibleCount);
+      window.kakao.maps.event.removeListener(map, "idle", checkMapMoved);
+    };
+  }, [mapReady, updateVisibleCount, checkMapMoved]);
 
   useEffect(() => {
     if (mapRef.current) drawMarkers();

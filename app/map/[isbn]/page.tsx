@@ -299,10 +299,11 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
     const dlng = userLocation ? userLocation.lng - 126.9508 : 0;
     const distKm = Math.sqrt(dlat * dlat + dlng * dlng) * 111;
     const isFar = distKm > 5;
-    const center = userLocation && !isFar
+    const center = userLocation
       ? new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng)
-      : new window.kakao.maps.LatLng(37.4967, 126.9508);
-    mapRef.current = new window.kakao.maps.Map(mapContainerRef.current, { center, level: 5 });
+      : new window.kakao.maps.LatLng(37.5665, 126.9780); // 서울 중심
+    const level = userLocation && !isFar ? 5 : userLocation ? 6 : 8; // 위치없으면 서울 전체
+    mapRef.current = new window.kakao.maps.Map(mapContainerRef.current, { center, level });
   }, [mapReady, userLocation, loading]);
   useEffect(() => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -323,6 +324,7 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
     setVisibleAvailableCount(count);
   }, [libraries]);
 
+  // 라이브러리 마커만 그림 (userLocation 변경 시 재실행 안 됨)
   const drawMarkers = useCallback(() => {
     const map = mapRef.current;
     if (!map || !window.kakao?.maps) return;
@@ -336,20 +338,31 @@ export default function MapPage({ params, searchParams }: MapPageProps) {
       });
       overlaysRef.current.push(overlay);
     });
-    if (userLocation) {
-      if (userMarkerRef.current) userMarkerRef.current.setMap(null);
-      const dot = document.createElement("div");
-      dot.style.cssText = `width:12px;height:12px;background:#2563eb;border-radius:50%;border:2.5px solid white;box-shadow:0 0 0 3px rgba(37,99,235,0.25);`;
-      const userOverlay = new (window.kakao.maps as any).CustomOverlay({
-        position: new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng),
-        content: dot, yAnchor: 0.5, map,
-      });
-      userMarkerRef.current = userOverlay;
-      overlaysRef.current.push(userOverlay);
-    }
-    window.kakao.maps.event.addListener(map, "idle", updateVisibleCount);
     updateVisibleCount();
-  }, [libraries, userLocation, updateVisibleCount]);
+  }, [libraries, updateVisibleCount]);
+
+  // 사용자 위치 dot은 마커 전체 재그리기 없이 별도 업데이트
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !window.kakao?.maps) return;
+    if (userMarkerRef.current) userMarkerRef.current.setMap(null);
+    if (!userLocation) return;
+    const dot = document.createElement("div");
+    dot.style.cssText = `width:12px;height:12px;background:#2563eb;border-radius:50%;border:2.5px solid white;box-shadow:0 0 0 3px rgba(37,99,235,0.25);`;
+    const userOverlay = new (window.kakao.maps as any).CustomOverlay({
+      position: new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng),
+      content: dot, yAnchor: 0.5, map,
+    });
+    userMarkerRef.current = userOverlay;
+  }, [userLocation, mapReady]);
+
+  // idle 리스너는 지도 생성 후 한 번만 등록
+  useEffect(() => {
+    if (!mapReady || !mapRef.current) return;
+    const map = mapRef.current;
+    window.kakao.maps.event.addListener(map, "idle", updateVisibleCount);
+    return () => window.kakao.maps.event.removeListener(map, "idle", updateVisibleCount);
+  }, [mapReady, updateVisibleCount]);
 
   useEffect(() => {
     if (mapRef.current) drawMarkers();

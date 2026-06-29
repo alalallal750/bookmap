@@ -3,6 +3,7 @@
 import { PhysicalLibrary } from "@/types";
 import { AvailableBadge } from "@/components/ui/Badge";
 import { formatDistance } from "@/lib/distance";
+import { formatLibraryName } from "@/lib/utils/formatLibraryName";
 
 type LibraryDetailProps = {
   library: PhysicalLibrary | null;
@@ -78,7 +79,7 @@ export function LibraryDetail({ library, bookTitle, onClose }: LibraryDetailProp
                 )}
               </div>
               <h2 className="font-bold text-gray-900 text-lg leading-tight">
-                {library.libraryName}
+                {formatLibraryName(library.libraryName)}
               </h2>
             </div>
             <button
@@ -98,7 +99,9 @@ export function LibraryDetail({ library, bookTitle, onClose }: LibraryDetailProp
               <p className="text-xs text-gray-400 mb-0.5">검색한 도서</p>
               <p className="text-sm font-medium text-gray-800 line-clamp-1">{bookTitle}</p>
               {library.callNumber && (
-                <p className="text-xs text-gray-500 mt-0.5">자료실: {library.callNumber}</p>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  자료실: {library.callNumber.replace(/\[.*?\]/g, "").trim()}
+                </p>
               )}
               {!library.available && library.returnDueDate && (
                 <p className="text-xs text-red-500 mt-0.5">

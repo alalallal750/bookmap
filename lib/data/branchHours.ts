@@ -50,6 +50,38 @@ export type BranchHours = {
   updatedDate: string;
 };
 
+/**
+ * 1차원본(Google Sheet / coords 파일) 이름과 slib 이름이 다른 경우를 위한
+ * 별칭 테이블. `findBranchHours`에서 1차 매칭 실패 시 이 맵을 통해 재시도.
+ * 주로 강동구 gdlibrary 스크래퍼가 사용하는 북카페/다독다독 계열 이름 차이.
+ */
+const SLIB_NAME_ALIASES: Record<string, string> = {
+  // 강동구: coords 이름 → slib 이름 (이름 표기 차이)
+  "다독다독 길동사거리점": "북카페도서관 길동점",
+  "고분다리시장점 북카페": "북카페도서관 다독다독 고분다리시장점",
+  "고덕점 북카페": "북카페도서관 다독다독 고덕점",
+  "암사종합시장점 북카페": "북카페도서관 다독다독 암사시장점",
+  "강일점 북카페": "북카페도서관 다독다독 강일점",
+
+  // 중랑구: 동별 작은도서관 → 새마을문고분회 이름으로 slib 등록
+  "면목2동작은도서관": "새마을문고면목2동분회작은도서관",
+  "면목4동작은도서관": "새마을문고면목4동분회작은도서관",
+  "면목5동작은도서관": "새마을문고면목5동분회작은도서관",
+  "면목7동작은도서관": "새마을문고면목7동분회작은도서관",
+  "상봉1동작은도서관": "새마을문고상봉1동분회작은도서관",
+  "묵1동작은도서관": "새마을문고묵1동분회작은도서관",
+  "묵2동작은도서관": "새마을문고묵2동분회작은도서관",
+  "망우본동작은도서관": "새마을문고망우본동분회작은도서관",
+  "망우3동작은도서관": "새마을문고망우3동분회작은도서관",
+  "신내1동작은도서관": "새마을문고신내1동분회작은도서관",
+  "신내2동작은도서관": "신내2동북카페",
+  "중화1동작은도서관": "새마을문고중화1동분회작은도서관",
+
+  // 영등포구: 공립 명칭 차이
+  "당산1동작은도서관": "당산1동 공립작은도서관",
+  "당산2동작은도서관": "당산2동 공립작은도서관",
+};
+
 let cachedEntries: RawSlibEntry[] | null = null;
 
 function loadRawEntries(): RawSlibEntry[] {
@@ -70,6 +102,12 @@ function loadRawEntries(): RawSlibEntry[] {
 
 function normalize(s: string): string {
   return s.replace(/[\s&.,:|\-()]/g, "");
+}
+
+/** 더 공격적인 정규화: "작은" 제거 + 기본 정규화. 동명이인 위험이 크므로
+ *  구(gu) 안에서만 사용하고, 매칭 단계의 맨 마지막 폴백으로만 시도. */
+function normalizeAggressive(s: string): string {
+  return normalize(s).replace(/작은/g, "");
 }
 
 /**
@@ -101,6 +139,20 @@ export function findBranchHours(
       return n.includes(normalizedTarget) || normalizedTarget.includes(n);
     });
     if (partial) return toBranchHours(partial);
+  }
+
+  // 별칭 테이블로 재시도
+  const aliasName = SLIB_NAME_ALIASES[libraryName];
+  if (aliasName) return findBranchHours(aliasName, gu);
+
+  // "작은" 제거 후 재매칭 (같은 구 안에서만, 동명이인 위험 최소화)
+  if (gu) {
+    const aggTarget = normalizeAggressive(libraryName);
+    const aggMatch = pool.find((e) => {
+      const n = normalizeAggressive(e.name);
+      return n === aggTarget || n.includes(aggTarget) || aggTarget.includes(n);
+    });
+    if (aggMatch) return toBranchHours(aggMatch);
   }
 
   return undefined;
