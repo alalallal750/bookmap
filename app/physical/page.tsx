@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { PhysicalBook, PhysicalSearchResponse, ApiResponse } from "@/types";
 import { SearchBar } from "@/components/search/SearchBar";
 
@@ -29,10 +29,18 @@ type SearchState =
 
 export default function PhysicalSearchPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams.get("q") ?? "";
   const [state, setState] = useState<SearchState>({ status: "idle" });
 
+  useEffect(() => {
+    if (initialQuery) handleSearch(initialQuery);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   function goToEbookSearch() {
-    router.push("/ebook");
+    const q = state.status === "done" ? state.query : "";
+    router.push(q ? `/ebook?q=${encodeURIComponent(q)}` : "/ebook");
   }
 
   async function handleSearch(query: string) {
@@ -115,14 +123,19 @@ export default function PhysicalSearchPage() {
     <main className="min-h-screen flex flex-col">
       <header className="bg-white border-b border-gray-100 px-4 pt-14 pb-4 sticky top-0 z-10">
         <div className="flex items-center gap-3 mb-3">
-          <img src="/logo-header.png" alt="지금빌려" className="h-10" />
+          <div className="flex flex-col items-start gap-1 flex-shrink-0">
+            <img src="/logo-header.png" alt="지금빌려" style={{ height: "40px", width: "107px" }} />
+            <span className="text-[10px] font-bold tracking-wide px-2 py-0.5 rounded-full bg-green-100 text-green-700">
+              종이책
+            </span>
+          </div>
           <p className="text-xs text-gray-400">
             그 책, 지금 어디서 빌릴 수 있지?
             <br />
             나랑 가까운 서울시 도서관에서 찾아볼게요. ISBN이 없는 경우 검색되지 않아요.
           </p>
         </div>
-        <SearchBar onSearch={handleSearch} loading={state.status === "loading"} />
+        <SearchBar onSearch={handleSearch} loading={state.status === "loading"} defaultValue={initialQuery} />
       </header>
 
       <div className="flex-1 py-4">

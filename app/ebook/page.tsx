@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ApiResponse, EbookBook, EbookLibraryEntry, EbookSearchResult } from "@/types";
 import { SearchBar } from "@/components/search/SearchBar";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
@@ -14,7 +14,14 @@ type SearchState =
 
 export default function EbookSearchPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams.get("q") ?? "";
   const [state, setState] = useState<SearchState>({ status: "idle" });
+
+  useEffect(() => {
+    if (initialQuery) handleSearch(initialQuery);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function handleSearch(query: string) {
     setState({ status: "loading" });
@@ -33,7 +40,8 @@ export default function EbookSearchPage() {
   }
 
   function goToPhysicalSearch() {
-    router.push("/physical");
+    const q = state.status === "done" ? state.query : "";
+    router.push(q ? `/physical?q=${encodeURIComponent(q)}` : "/physical");
   }
 
   return (
@@ -43,12 +51,16 @@ export default function EbookSearchPage() {
             가로 배치(min-[480px]: 임의값 사용). 로고는 w-auto+flex-shrink-0으로
             늘어나거나 찌그러지지 않게 고정. */}
         <div className="flex flex-col min-[480px]:flex-row min-[480px]:items-center gap-1 min-[480px]:gap-3 mb-3">
-          <img
-            src="/logo-header.png"
-            alt="지금빌려"
-            className="flex-shrink-0"
-            style={{ height: "40px", width: "107px" }}
-          />
+          <div className="flex flex-col items-start gap-1 flex-shrink-0">
+            <img
+              src="/logo-header.png"
+              alt="지금빌려"
+              style={{ height: "40px", width: "107px" }}
+            />
+            <span className="text-[10px] font-bold tracking-wide px-2 py-0.5 rounded-full bg-blue-100 text-blue-700">
+              전자책
+            </span>
+          </div>
           <p className="text-xs text-gray-400">
             지금 바로 읽을 수 있는 <span className="text-[#1d2b6b] font-bold" style={{ textShadow: "0 1px 1px rgba(29,43,107,0.18)" }}>전자책</span>이 있는지 검색할게요.
             <br />
@@ -60,6 +72,7 @@ export default function EbookSearchPage() {
           onSearch={handleSearch}
           loading={state.status === "loading"}
           placeholder="그 책, 제목이 뭐였더라?"
+          defaultValue={initialQuery}
         />
       </header>
 

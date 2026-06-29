@@ -6,17 +6,19 @@ type SearchBarProps = {
   onSearch: (query: string) => void;
   loading?: boolean;
   placeholder?: string;
+  defaultValue?: string;
 };
 export function SearchBar({
   onSearch,
   loading = false,
   placeholder = "그 책, 제목이 뭐였지?",
+  defaultValue = "",
 }: SearchBarProps) {
 
   // [2026-06-21] 자동 포커스(autoFocus)를 모바일에서 끄기 위한 화면 너비 판단.
   // 모바일에서 자동 포커스 시 키보드가 즉시 올라와 로고/안내문구를 가려버리는
   // 문제 발견(실기기 확인). 480px 이상(PC/태블릿)에서만 자동 포커스 적용.
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(defaultValue);
   const [shouldAutoFocus, setShouldAutoFocus] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
