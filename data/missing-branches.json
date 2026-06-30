@@ -1,0 +1,312 @@
+{
+  "_meta": {
+    "description": "COORD-MISS 전수조사(2026-06-30) 결과 — meta API가 반환하지만 branch-coords-v2.json에 좌표가 없는 도서관 목록",
+    "surveyIsbn": ["9791161571188","9788936434595","9791190090032","9791165341909","9788959896691","9791191056556","9791168340510","9788937460449","9788937460876","9788936433598"],
+    "statuses": {
+      "pending": "좌표 미수집",
+      "matched": "카카오 검색 성공 — branch-coords-v2.json에 추가 완료",
+      "needsReview": "카카오가 다른 시설 반환 — 수동 확인 필요",
+      "notFound": "카카오 검색 결과 없음 — 수동 확인 필요"
+    }
+  },
+  "branches": [
+    {
+      "gu": "강남구",
+      "apiName": "논현문화마루(별관)",
+      "kakaoResult": "논현문화마루도서관 별관",
+      "status": "matched"
+    },
+    {
+      "gu": "강남구",
+      "apiName": "청담도서관",
+      "kakaoResult": "청담도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "관악구",
+      "apiName": "낙성대공원도서관",
+      "kakaoResult": "낙성대공원도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "광진구",
+      "apiName": "구의제3동도서관",
+      "kakaoResult": "구의제3동도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "구로구",
+      "apiName": "NC신구로점스마트도서관",
+      "kakaoResult": "스마트도서관 NC신구로점",
+      "status": "resolved",
+      "officialAddress": "서울 구로구 구로동 (NC신구로점 1층 2번 출입구 통로, 구로역 1번 출구 도보 2분)",
+      "note": "신도림역스마트도서관(카카오 검색결과)과 동일 시설 — NC신구로점이 정식 명칭. 신도림역스마트도서관 항목과 통합 필요"
+    },
+    {
+      "gu": "구로구",
+      "apiName": "개봉역스마트도서관",
+      "kakaoResult": "개봉역 스마트도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "구로구",
+      "apiName": "구로천왕도서관",
+      "kakaoResult": "구로천왕도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "구로구",
+      "apiName": "구일역스마트도서관",
+      "kakaoResult": "스마트도서관 구일역점",
+      "status": "matched"
+    },
+    {
+      "gu": "구로구",
+      "apiName": "마중물도서관",
+      "kakaoResult": "마중물도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "구로구",
+      "apiName": "서서울생활과학고도서관",
+      "kakaoResult": "궁동어린이도서관",
+      "status": "resolved",
+      "officialAddress": "서울 구로구 오리로 1355-10",
+      "note": "구로구청 학교개방도서관 목록 확인. 학교도서관이라 카카오 미등록 — 주소로 좌표 수집 필요"
+    },
+    {
+      "gu": "구로구",
+      "apiName": "신도림고도서관",
+      "kakaoResult": "문래도서관(영등포구)",
+      "status": "resolved",
+      "officialAddress": "서울 구로구 경인로67길 159",
+      "note": "구로구청 학교개방도서관 목록 확인. 학교도서관이라 카카오 미등록 — 주소로 좌표 수집 필요"
+    },
+    {
+      "gu": "구로구",
+      "apiName": "신도림어린이영어작은도서관",
+      "kakaoResult": "신도림어린이영어작은도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "구로구",
+      "apiName": "신도림역스마트도서관",
+      "kakaoResult": "스마트도서관 NC신구로점",
+      "status": "resolved",
+      "officialAddress": "서울 구로구 구로동 (NC신구로점 1층 2번 출입구 통로)",
+      "note": "NC신구로점스마트도서관과 동일 시설 — meta API에서 두 이름으로 모두 등장함. 하나의 좌표로 통합"
+    },
+    {
+      "gu": "구로구",
+      "apiName": "오류동역스마트도서관",
+      "kakaoResult": "오류동역 스마트도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "구로구",
+      "apiName": "온수역스마트도서관",
+      "kakaoResult": "온수역 스마트도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "구로구",
+      "apiName": "우신고도서관",
+      "kakaoResult": "높은뜻우신교회 예배당",
+      "status": "resolved",
+      "officialAddress": "서울 구로구 부일로 917",
+      "note": "구로구청 학교개방도서관 목록 확인. 학교도서관이라 카카오 미등록 — 주소로 좌표 수집 필요"
+    },
+    {
+      "gu": "구로구",
+      "apiName": "천왕역스마트도서관",
+      "kakaoResult": "스마트도서관 천왕역점",
+      "status": "resolved",
+      "officialAddress": "서울 구로구 천왕동 14-45 (7호선 천왕역 지하1층 대합실, 1·4번 출구방향)",
+      "lat": "37.4863829396213",
+      "lng": "126.838887906617",
+      "note": "구로구립도서관 공식 페이지 + 카카오 확인. '스마트도서관 천왕역점' 검색으로 좌표 확보"
+    },
+    {
+      "gu": "구로구",
+      "apiName": "흥부네그림책작은도서관",
+      "kakaoResult": "흥부네그림책도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "도봉구",
+      "apiName": "도서나눔이",
+      "kakaoResult": null,
+      "status": "skipped",
+      "note": "창동육아지원센터 내 위치로 추정되나 불확실 — 좌표 DB 추가 보류"
+    },
+    {
+      "gu": "도봉구",
+      "apiName": "방학1동",
+      "kakaoResult": "도봉구청행복작은도서관",
+      "status": "resolved",
+      "officialName": "방학1동 공립작은도서관",
+      "officialAddress": "서울 도봉구 방학로2길 27, 2층",
+      "note": "도봉구통합도서관 공식 사이트 확인. 카카오 결과(도봉구청행복작은도서관)는 다른 시설"
+    },
+    {
+      "gu": "동대문구",
+      "apiName": "답십리1동작은도서관",
+      "kakaoResult": "답십리1동 아름드리 도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "동대문구",
+      "apiName": "답십리2동작은도서관",
+      "kakaoResult": "답십리2동민들레작은도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "동대문구",
+      "apiName": "이문1동작은도서관",
+      "kakaoResult": "이문1동꿈꾸는작은도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "동대문구",
+      "apiName": "이문숲속어린이도서관",
+      "kakaoResult": null,
+      "status": "resolved",
+      "officialName": "이문어린이도서관(숲속작은도서관)",
+      "officialAddress": "서울 동대문구 천장산로9길 68 (이문동)",
+      "note": "동대문구립도서관 공식 사이트 확인. 카카오 미등록이라 주소로 좌표 수집 필요"
+    },
+    {
+      "gu": "동대문구",
+      "apiName": "전농2동작은도서관",
+      "kakaoResult": "전농2동뜨락작은도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "동대문구",
+      "apiName": "휘경1동작은도서관",
+      "kakaoResult": "휘경1동새싹마루작은도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "동대문구",
+      "apiName": "휘경2동작은도서관",
+      "kakaoResult": "휘경2동 꿈빛누리 작은도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "동작구",
+      "apiName": "사당4동 작은도서관",
+      "kakaoResult": "다울작은도서관",
+      "status": "resolved",
+      "officialAddress": "서울 동작구 사당로16아길 6, 사당4동주민센터 2층",
+      "note": "서울도서관 공식 사이트 확인. 다울작은도서관과는 다른 시설 — 사당4동주민센터 내 별개 도서관"
+    },
+    {
+      "gu": "동작구",
+      "apiName": "신대방1동 작은도서관",
+      "kakaoResult": "양문작은도서관",
+      "status": "resolved",
+      "officialAddress": "서울 동작구 신대방길 72, 신대방1동주민센터 2층",
+      "note": "문화체육관광부 작은도서관 사이트 확인. 양문작은도서관과는 다른 시설 — 신대방1동주민센터 내 별개 도서관"
+    },
+    {
+      "gu": "동작구",
+      "apiName": "아트&힐링작은도서관",
+      "kakaoResult": "아트&힐링작은도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "양천구",
+      "apiName": "그린나래미술도서관",
+      "kakaoResult": "그린나래미술도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "양천구",
+      "apiName": "목1동 도서방",
+      "kakaoResult": "목1동도서방",
+      "status": "matched"
+    },
+    {
+      "gu": "양천구",
+      "apiName": "목마교육도서관",
+      "kakaoResult": "목마교육도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "양천구",
+      "apiName": "미감도서관",
+      "kakaoResult": "미감도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "양천구",
+      "apiName": "신월3북카페(달빛마을책쉼터)",
+      "kakaoResult": null,
+      "status": "resolved",
+      "officialName": "신월3 북카페",
+      "officialAddress": "서울 양천구 신정동 1319-4",
+      "note": "양천구 통합도서관 공식 사이트 확인. 카카오 미등록 — 주소로 좌표 수집 필요"
+    },
+    {
+      "gu": "양천구",
+      "apiName": "신정6동 도서방",
+      "kakaoResult": "신정6동도서방",
+      "status": "matched"
+    },
+    {
+      "gu": "양천구",
+      "apiName": "신정7동 도서방",
+      "kakaoResult": "신정7동도서방",
+      "status": "matched"
+    },
+    {
+      "gu": "영등포구",
+      "apiName": "영등포동 작은도서관",
+      "kakaoResult": "영등포동 작은도서관",
+      "status": "matched"
+    },
+    {
+      "gu": "영등포구",
+      "apiName": "영등포스마트도서관",
+      "kakaoResult": "영등포 제1스포츠센터",
+      "status": "resolved",
+      "note": "영등포구 스마트도서관은 총 4개 지점 — 각각 별도 항목으로 분리",
+      "subLocations": [
+        {
+          "name": "영등포구제1스포츠센터스마트도서관",
+          "address": "서울 영등포구 신풍로 1",
+          "lat": "37.5005230798016",
+          "lng": "126.906332878591"
+        },
+        {
+          "name": "영등포구제2스포츠센터스마트도서관",
+          "address": "서울 영등포구 국회대로 615",
+          "lat": "37.5266682049831",
+          "lng": "126.902740002534"
+        },
+        {
+          "name": "영등포구여의도역스마트도서관",
+          "address": "서울 영등포구 여의도동 3-6",
+          "lat": "37.521355347864315",
+          "lng": "126.92411787192195"
+        },
+        {
+          "name": "영등포구양평역스마트도서관",
+          "address": "서울 영등포구 양산로 지하 21",
+          "lat": "37.52564928816504",
+          "lng": "126.88576303332721"
+        }
+      ]
+    },
+    {
+      "gu": "중랑구",
+      "apiName": "면목3,8동",
+      "kakaoResult": "다모아어린이도서관",
+      "status": "resolved",
+      "officialName": "새마을문고면목3,8동분회작은도서관",
+      "officialAddress": "서울특별시 중랑구 사가정로51길 48 면목3,8동 주민센터 4층",
+      "note": "중랑구 공식 확인. 카카오 결과(다모아어린이도서관)는 다른 시설"
+    }
+  ]
+}
