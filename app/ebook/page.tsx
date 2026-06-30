@@ -54,7 +54,7 @@ function EbookSearchInner() {
             가로 배치(min-[480px]: 임의값 사용). 로고는 w-auto+flex-shrink-0으로
             늘어나거나 찌그러지지 않게 고정. */}
         <div className="flex flex-col min-[480px]:flex-row min-[480px]:items-center gap-1 min-[480px]:gap-3 mb-3">
-          <div className="flex flex-col items-start gap-1 flex-shrink-0">
+          <div className="flex flex-col items-end gap-1 flex-shrink-0">
             <img
               src="/logo-header.png"
               alt="지금빌려"

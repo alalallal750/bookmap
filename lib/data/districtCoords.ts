@@ -104,27 +104,25 @@ export function distanceKm(
 }
 
 const NEARBY_RADIUS_KM = 5;
+const NEARBY_MAX_COUNT = 3;
 
 /**
- * 사용자 위치 기준 반경 5km 안에 대표좌표가 있는 구들의 dbnum 목록을 반환.
- * 하나도 안 걸리면(외곽지역 등) 가장 가까운 구 1곳을 fallback으로 포함—
- * "검색대상 구가 0개"인 상황을 방지.
+ * 사용자 위치 기준 가장 가까운 최대 3개 구의 dbnum 목록을 반환.
+ * (반경 5km 초과 구는 제외, 0개일 경우 가장 가까운 1개 fallback)
+ * 도심 기준 5km 안에 6~8개 구가 걸리는 문제를 방지하기 위해 상한 설정.
  */
 export function getNearbyDbnums(lat: number, lng: number): string[] {
-  const withDistance = DISTRICTS
-    .filter((d) => !UNRELIABLE_ISBN_DBNUMS.has(d.dbnum)) // ISBN 신뢰 불가 구 제외
-    .map((d) => ({
-      ...d,
-      distance: distanceKm(lat, lng, d.lat, d.lng),
-    }));
+  const sorted = DISTRICTS
+    .filter((d) => !UNRELIABLE_ISBN_DBNUMS.has(d.dbnum))
+    .map((d) => ({ ...d, distance: distanceKm(lat, lng, d.lat, d.lng) }))
+    .sort((a, b) => a.distance - b.distance);
 
-  const within = withDistance.filter((d) => d.distance <= NEARBY_RADIUS_KM);
+  const within = sorted.filter((d) => d.distance <= NEARBY_RADIUS_KM);
   if (within.length > 0) {
-    return within.map((d) => d.dbnum);
+    return within.slice(0, NEARBY_MAX_COUNT).map((d) => d.dbnum);
   }
 
-  const closest = withDistance.sort((a, b) => a.distance - b.distance)[0];
-  return closest ? [closest.dbnum] : [];
+  return sorted[0] ? [sorted[0].dbnum] : [];
 }
 
 /**

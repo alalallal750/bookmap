@@ -1,9 +1,11 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { useState, Suspense, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { PhysicalBook, PhysicalSearchResponse, ApiResponse } from "@/types";
 import { SearchBar } from "@/components/search/SearchBar";
+
+const SEARCH_CACHE_KEY = "physical_search_state";
 
 /**
  * [2026-06-24 변경 — 위치 유무에 따른 검색 범위 분기 + 로딩 문구]
@@ -41,6 +43,17 @@ function PhysicalSearchInner() {
   const initialQuery = searchParams.get("q") ?? "";
   const [state, setState] = useState<SearchState>({ status: "idle" });
 
+  // 지도 화면에서 뒤로가기로 돌아올 때 검색 결과 복원
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem(SEARCH_CACHE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved) as Extract<SearchState, { status: "done" }>;
+        setState(parsed);
+      }
+    } catch {}
+  }, []);
+
   function goToEbookSearch() {
     const q = state.status === "done" ? state.query : "";
     router.push(q ? `/ebook?q=${encodeURIComponent(q)}` : "/ebook");
@@ -50,6 +63,7 @@ function PhysicalSearchInner() {
     // 위치를 아직 못 가져온 단계 — "pending"으로 표시, 위치 확보/타임아웃
     // 후 바로 진짜 scope로 갈아끼움(아래에서 setState로 갱신).
     setState({ status: "loading", scope: "pending", districtNames: [] });
+    try { sessionStorage.removeItem(SEARCH_CACHE_KEY); } catch {}
     try {
       const url = new URL("/api/physical-search", window.location.origin);
       url.searchParams.set("q", query);
@@ -95,13 +109,17 @@ function PhysicalSearchInner() {
         return bAvail - aAvail;
       });
 
-      setState({
+      const nextState: Extract<SearchState, { status: "done" }> = {
         status: "done",
         books: sortedBooks,
         query,
         scope: json.data.meta.scope,
         districtNames: json.data.meta.districtNames,
-      });
+      };
+      setState(nextState);
+      try {
+        sessionStorage.setItem(SEARCH_CACHE_KEY, JSON.stringify(nextState));
+      } catch {}
     } catch (e) {
       setState({
         status: "error",
@@ -126,7 +144,7 @@ function PhysicalSearchInner() {
     <main className="min-h-screen flex flex-col">
       <header className="bg-white border-b border-gray-100 px-4 pt-14 pb-4 sticky top-0 z-10">
         <div className="flex items-center gap-3 mb-3">
-          <div className="flex flex-col items-start gap-1 flex-shrink-0">
+          <div className="flex flex-col items-end gap-1 flex-shrink-0">
             <img src="/logo-header.png" alt="지금빌려" style={{ height: "40px", width: "107px" }} />
             <span className="text-[10px] font-bold tracking-wide px-2 py-0.5 rounded-full bg-green-100 text-green-700">
               종이책
