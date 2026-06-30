@@ -90,6 +90,8 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
   const overlaysRef = useRef<any[]>([]);
   const userMarkerRef = useRef<any>(null);
   const hasLoadedRef = useRef(false);
+  // sessionStorage 캐시를 사용했는지 추적 — userLocation 도착 시 lastSearchedLocation 보정에 사용
+  const usedCacheRef = useRef(false);
 
   const [libraries, setLibraries] = useState<PhysicalLibrary[]>([]);
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
@@ -242,8 +244,9 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
           setSearchScope(parsed.scope);
 
           if (parsed.scope === "nearby") {
-            setLastSearchedLocation({ lat, lng });
-            setDistrictLabel(computeDistrictLabel(lat, lng));
+            // lastSearchedLocation은 userLocation이 확보된 뒤 별도 useEffect에서 세팅.
+            // 여기서 DEFAULT_LOCATION을 쓰면 실제 GPS와 달라 버튼이 잘못 표시됨.
+            usedCacheRef.current = true;
             setShowResearchPrompt(false);
             setPendingLocation(null);
 
@@ -269,6 +272,13 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
     initialLoad();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isbn, title, userLocation]);
+  // 캐시로 진입한 경우, GPS 확보 시점에 lastSearchedLocation을 실제 위치로 보정
+  // (initialLoad가 GPS 없이 DEFAULT_LOCATION으로 세팅하는 race condition 방지)
+  useEffect(() => {
+    if (!userLocation || loading || !usedCacheRef.current) return;
+    setLastSearchedLocation(userLocation);
+  }, [userLocation, loading]);
+
   // "찾기" 버튼 클릭 시 재검색
   async function handleResearchClick() {
     if (!pendingLocation || researching) return;
@@ -325,11 +335,7 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
   // 아직 보호시간 중이거나 5km 미만이면 아무 동작 안 함(중복 호출돼도
   // 안전 — 이미 showResearchPrompt가 true면 굳이 다시 안 바꿔도 결과 동일).
   const checkMapMoved = useCallback(() => {
-    // [2026-06-24 추가] scope가 "all"이면 이미 서울 전체를 검색해서
-    // 들고 있으므로, 지도를 어디로 옮기든 재검색이 필요 없음 — 그
-    // 즉시 리턴해서 "OO구에서 찾기" 안내 자체가 뜨지 않게 함.
     if (searchScope === "all") return;
-
     const map = mapRef.current;
     if (!map || !lastSearchedLocation) return;
     if (!moveDetectionEnabledRef.current) return;
@@ -338,17 +344,23 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
     const currentLat = center.getLat();
     const currentLng = center.getLng();
 
-    const moved = distanceKm(
-      lastSearchedLocation.lat,
-      lastSearchedLocation.lng,
-      currentLat,
-      currentLng
-    );
+    // 이미 검색된 구 집합 vs 현재 지도 중심 기준 검색 대상 구 비교.
+    // 거리 기반 대신 dbnum 집합 차이로 판단 — "이미 결과가 있는 구"에서
+    // 머물고 있을 때는 버튼이 뜨지 않고, 새 구가 범위에 들어올 때만 표시.
+    const searchedSet = new Set(getNearbyDbnums(lastSearchedLocation.lat, lastSearchedLocation.lng));
+    const currentDbnums = getNearbyDbnums(currentLat, currentLng);
+    const newDbnums = currentDbnums.filter((d) => !searchedSet.has(d));
 
-    if (moved >= MOVE_DETECTION_DISTANCE_KM) {
+    if (newDbnums.length > 0) {
+      const newNames = newDbnums
+        .map((d) => getDistrictName(d))
+        .filter((n): n is string => Boolean(n))
+        .join(", ");
       setPendingLocation({ lat: currentLat, lng: currentLng });
-      setDistrictLabel(computeDistrictLabel(currentLat, currentLng));
+      setDistrictLabel(newNames);
       setShowResearchPrompt(true);
+    } else {
+      setShowResearchPrompt(false);
     }
   }, [lastSearchedLocation, searchScope]);
 
