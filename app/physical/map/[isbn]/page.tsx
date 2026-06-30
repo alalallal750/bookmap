@@ -123,8 +123,9 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
   useEffect(() => {
     if (!loading) return;
     const messages = [
-      { text: "도서관 찾는 중...", delay: 0 },
-      { text: "작은도서관·스마트도서관 확인 중...", delay: 3000 },
+      { text: "25개 구 도서관 검색 중...", delay: 0 },
+      { text: "작은도서관·스마트도서관 확인 중...", delay: 4000 },
+      { text: "거의 다 됐어요...", delay: 9000 },
     ];
     const timers = messages.map(({ text, delay }) => setTimeout(() => setLoadingMessage(text), delay));
     return () => timers.forEach(clearTimeout);

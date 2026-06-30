@@ -71,8 +71,8 @@ import { findBranchHours } from "@/lib/data/branchHours";
 
 const BASE_URL = "https://meta.seoul.go.kr/libseoul";
 
-const DEFAULT_TIMEOUT_MS = 15000;
-const GANGNAM_TIMEOUT_MS = 15000;
+const DEFAULT_TIMEOUT_MS = 8000;
+const GANGNAM_TIMEOUT_MS = 8000;
 
 // handoff 3-1장: 전자책도서관 8곳
 const EBOOK_LIBRARIES: Record<string, string> = {
@@ -1690,13 +1690,10 @@ export async function searchPhysicalBooks(
     )
   ).flat();
 
-  const gangbukRecords = targetDbnums.includes(GANGBUK_DBNUM)
-    ? await fetchGangbukBranches("Z", query, "", query)
-    : [];
-
-  const mapoRecords = targetDbnums.includes(MAPO_DBNUM)
-    ? await fetchMapoBranches(query)
-    : [];
+  const [gangbukRecords, mapoRecords] = await Promise.all([
+    targetDbnums.includes(GANGBUK_DBNUM) ? fetchGangbukBranches("Z", query, "", query) : Promise.resolve([]),
+    targetDbnums.includes(MAPO_DBNUM) ? fetchMapoBranches(query) : Promise.resolve([]),
+  ]);
 
   const rawRecords = [...otherRecords, ...gangdongRecords, ...eunpyeongRecords, ...nowonRecords, ...gangbukRecords, ...mapoRecords];
 
@@ -1757,45 +1754,24 @@ export async function searchPhysicalBooksByIsbn(
   const allSeoulRecords = resultsByDistrict.flat();
   const seoulLibRecords = allSeoulRecords.filter((r) => !NURI_DBNUMS_SET.has(r.dbnum));
 
-  const gangdongRecords = targetDbnums.includes(GANGDONG_DBNUM)
-    ? await fetchGangdongBranches(isbn, title)
-    : [];
-
   const epRecord = allSeoulRecords.find((r) => r.dbnum === EUNPYEONG_DBNUM);
-  const eunpyeongRecords =
+
+  const [gangdongRecords, eunpyeongRecords, nowonRecords, gangbukRecords, mapoRecords] = await Promise.all([
+    targetDbnums.includes(GANGDONG_DBNUM)
+      ? fetchGangdongBranches(isbn, title)
+      : Promise.resolve([]),
     targetDbnums.includes(EUNPYEONG_DBNUM) && epRecord
-      ? await fetchNuriBranches(
-          EUNPYEONG_PORTAL,
-          extractEunpyeongSpeciesKey(epRecord.url),
-          EUNPYEONG_DBNUM,
-          "은평구립도서관",
-          isbn,
-          title,
-          epRecord.url
-        )
-      : [];
-
-  const nowonSpeciesKey =
-    targetDbnums.includes(NOWON_DBNUM) ? await fetchNowonSpeciesKey(isbn) : "";
-  const nowonRecords = nowonSpeciesKey
-    ? await fetchNuriBranches(
-        NOWON_PORTAL,
-        nowonSpeciesKey,
-        NOWON_DBNUM,
-        "노원구립통합도서관",
-        isbn,
-        title,
-        `${NOWON_PORTAL}/KeywordSearchResult/${encodeURIComponent(title)}`
-      )
-    : [];
-
-  const gangbukRecords = targetDbnums.includes(GANGBUK_DBNUM)
-    ? await fetchGangbukBranches("I", isbn, isbn, title)
-    : [];
-
-  const mapoRecords = targetDbnums.includes(MAPO_DBNUM)
-    ? await fetchMapoBranches(title, isbn)
-    : [];
+      ? fetchNuriBranches(EUNPYEONG_PORTAL, extractEunpyeongSpeciesKey(epRecord.url), EUNPYEONG_DBNUM, "은평구립도서관", isbn, title, epRecord.url)
+      : Promise.resolve([]),
+    (async () => {
+      if (!targetDbnums.includes(NOWON_DBNUM)) return [];
+      const speciesKey = await fetchNowonSpeciesKey(isbn);
+      if (!speciesKey) return [];
+      return fetchNuriBranches(NOWON_PORTAL, speciesKey, NOWON_DBNUM, "노원구립통합도서관", isbn, title, `${NOWON_PORTAL}/KeywordSearchResult/${encodeURIComponent(title)}`);
+    })(),
+    targetDbnums.includes(GANGBUK_DBNUM) ? fetchGangbukBranches("I", isbn, isbn, title) : Promise.resolve([]),
+    targetDbnums.includes(MAPO_DBNUM) ? fetchMapoBranches(title, isbn) : Promise.resolve([]),
+  ]);
 
   const rawRecords = [...seoulLibRecords, ...gangdongRecords, ...eunpyeongRecords, ...nowonRecords, ...gangbukRecords, ...mapoRecords];
 
