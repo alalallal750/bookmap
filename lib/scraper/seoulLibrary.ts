@@ -1605,11 +1605,14 @@ export async function searchPhysicalBooks(
   const SKIP_META_DBNUMS = new Set([GANGBUK_DBNUM, MAPO_DBNUM]);
   const metaDbnums = targetDbnums.filter((d) => !SKIP_META_DBNUMS.has(d));
 
+  // 결과를 받아도 ISBN이 없어 최종 표시 안 되는 구 — 로딩 메시지에서 제외
+  const NO_PROGRESS_DBNUMS = new Set(["44381", "44301"]); // 송파구, 성북구
+
   const resultsByDistrict = await Promise.all(
     metaDbnums.map(async (dbnum) => {
       const records = await fetchDistrictsByCategory(dbnum, "1", query, undefined, id, cookie, defaultSearchUrl);
       const guName = getDistrictName(dbnum);
-      if (guName) onProgress?.(guName);
+      if (guName && records.length > 0 && !NO_PROGRESS_DBNUMS.has(dbnum)) onProgress?.(guName);
       return records;
     })
   );
@@ -1696,10 +1699,10 @@ export async function searchPhysicalBooks(
 
   const [gangbukRecords, mapoRecords] = await Promise.all([
     targetDbnums.includes(GANGBUK_DBNUM)
-      ? fetchGangbukBranches("Z", query, "", query).then((r) => { onProgress?.("강북구"); return r; })
+      ? fetchGangbukBranches("Z", query, "", query).then((r) => { if (r.length > 0) onProgress?.("강북구"); return r; })
       : Promise.resolve([]),
     targetDbnums.includes(MAPO_DBNUM)
-      ? fetchMapoBranches(query).then((r) => { onProgress?.("마포구"); return r; })
+      ? fetchMapoBranches(query).then((r) => { if (r.length > 0) onProgress?.("마포구"); return r; })
       : Promise.resolve([]),
   ]);
 
