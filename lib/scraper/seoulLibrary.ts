@@ -1403,6 +1403,12 @@ async function fetchMapoBranches(title: string, filterIsbn?: string): Promise<Ph
         if (!isbn) return;
         if (filterIsbn && normalizeIsbn(isbn) !== normalizeIsbn(filterIsbn)) return;
 
+        // ISBN 검색이 아닐 때: 포털 제목 검색이 느슨해 무관한 책이 섞임 → 실제 제목에 검색어 포함 여부로 필터
+        if (!filterIsbn) {
+          const itemTitle = $item.find("dt.tit a").text().trim();
+          if (!itemTitle.includes(title)) return;
+        }
+
         const libText = $item.find("dd.site span").first().text();
         const library = libText.replace("도서관:", "").trim();
 
