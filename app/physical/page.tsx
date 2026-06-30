@@ -45,9 +45,13 @@ function PhysicalSearchInner() {
   const [state, setState] = useState<SearchState>({ status: "idle" });
 
   // 지도 화면에서 뒤로가기로 돌아올 때 검색 결과 복원.
-  // ?q= 파라미터가 있으면 다른 페이지(전자책 등)에서 검색어를 전달한 것이므로
-  // sessionStorage 복원을 건너뜀 — 검색창·결과 충돌 방지.
+  // 새로고침(reload)이거나 ?q= 파라미터가 있으면 캐시를 클리어하고 idle로 시작.
   useEffect(() => {
+    const navType = (performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined)?.type;
+    if (navType === "reload") {
+      try { sessionStorage.removeItem(SEARCH_CACHE_KEY); } catch {}
+      return;
+    }
     if (initialQuery) return;
     try {
       const saved = sessionStorage.getItem(SEARCH_CACHE_KEY);
