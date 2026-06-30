@@ -1907,6 +1907,15 @@ function extractLibraryName(r: PhysicalRawRecord): string {
     if (lib === "스마트도서관" && r.location?.trim()) {
       return `${r.location.trim()} 스마트도서관`;
     }
+    // 영등포구: meta API가 스마트도서관 전체를 "영등포스마트도서관"으로 묶어서 반환.
+    // location 필드로 어느 스마트도서관인지 구분해 branchCoords 이름과 맞춤.
+    if (lib === "영등포스마트도서관" && r.location?.trim()) {
+      const loc = r.location.trim();
+      if (loc === "여의도역") return "여의도역 스마트도서관";
+      if (loc === "양평역") return "양평역 스마트도서관";
+      if (loc.includes("제2스포츠") || loc.includes("2스포츠")) return "영등포구 제2스포츠센터 스마트도서관";
+      if (loc.includes("제1스포츠") || loc.includes("1스포츠")) return "영등포구 제1스포츠센터 스마트도서관";
+    }
     return lib;
   }
   if (r.location) {
