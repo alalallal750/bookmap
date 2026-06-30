@@ -4,6 +4,7 @@ import { useState, Suspense, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { PhysicalBook, PhysicalSearchResponse, ApiResponse } from "@/types";
 import { SearchBar } from "@/components/search/SearchBar";
+import { getNearbyDbnums, getDistrictName } from "@/lib/data/districtCoords";
 
 const SEARCH_CACHE_KEY = "physical_search_state";
 
@@ -89,15 +90,17 @@ function PhysicalSearchInner() {
         url.searchParams.set("lat", String(coords.latitude));
         url.searchParams.set("lng", String(coords.longitude));
         hasLocation = true;
+
+        // GPS 확보 즉시 검색 대상 구 이름을 로컬에서 계산해 로딩 문구에 반영.
+        // API 응답 전이지만 getNearbyDbnums는 순수 로컬 계산이므로 바로 가능.
+        const nearbyNames = getNearbyDbnums(coords.latitude, coords.longitude)
+          .map((d) => getDistrictName(d))
+          .filter((n): n is string => Boolean(n));
+        setState({ status: "loading", scope: "nearby", districtNames: nearbyNames });
       } catch {
         // 위치 못 가져와도 검색은 진행 — scope: "all"로 처리됨
       }
 
-      // 위치 확보 시도가 끝난 시점(최대 3초) — 아직 응답은 안 왔지만,
-      // 이 시점부터는 scope를 짐작할 수 있으므로 로딩 문구를 더 정확하게
-      // 보여줄 수 있음. 다만 정확한 districtNames는 API 응답(meta)에만
-      // 있으므로, 여기서는 "전체 검색"인 경우만 먼저 문구를 확정하고,
-      // "위치 기반"인 경우는 응답이 올 때까지 "확인 중" 문구를 유지.
       if (!hasLocation) {
         setState({ status: "loading", scope: "all", districtNames: [] });
       }
@@ -203,8 +206,12 @@ function PhysicalSearchInner() {
             <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mb-3" />
             {state.scope === "all" ? (
               <p className="text-gray-400 text-sm">서울시 모든 구에서 검색 중...</p>
+            ) : state.scope === "nearby" && state.districtNames.length > 0 ? (
+              <p className="text-gray-400 text-sm">
+                지금 {state.districtNames.join(", ")}에서 검색 중...
+              </p>
             ) : (
-              <p className="text-gray-400 text-sm">지금 근처에서 빌릴 수 있는 책 찾는 중...</p>
+              <p className="text-gray-400 text-sm">현재 위치 확인 중...</p>
             )}
           </div>
         )}
