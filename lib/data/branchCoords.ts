@@ -233,7 +233,7 @@ export function findBranchCoord(
 
   if (!gu) return undefined;
 
-  const normalize = (s: string) => s.replace(/[\s&]/g, "");
+  const normalize = (s: string) => s.replace(/[\s&\[\]{}\(\),·]/g, "");
   const normalizedTarget = normalize(libraryName);
 
   // 빈 문자열로 검색하면 모든 항목과 매칭되어 잘못된 좌표가 반환되므로 차단
