@@ -7,6 +7,7 @@ import { SearchBar } from "@/components/search/SearchBar";
 import { getNearbyDbnums, getDistrictName } from "@/lib/data/districtCoords";
 
 const SEARCH_CACHE_KEY = "physical_search_state";
+const RETURN_FROM_MAP_KEY = "physical_returning_from_map";
 
 /**
  * [2026-06-24 변경 — 위치 유무에 따른 검색 범위 분기 + 로딩 문구]
@@ -44,16 +45,15 @@ function PhysicalSearchInner() {
   const initialQuery = searchParams.get("q") ?? "";
   const [state, setState] = useState<SearchState>({ status: "idle" });
 
-  // 지도 화면에서 뒤로가기로 돌아올 때 검색 결과 복원.
-  // 새로고침(reload)이거나 ?q= 파라미터가 있으면 캐시를 클리어하고 idle로 시작.
+  // 지도 화면에서 뒤로가기로 돌아올 때만 검색 결과 복원.
+  // 복원 조건: ?q= 없음 + "지도로 이동했다가 돌아옴" 플래그(RETURN_FROM_MAP_KEY) 존재.
+  // 새로고침/직접 진입/전자책 경유 등은 플래그가 없으므로 idle로 시작.
   useEffect(() => {
-    const navType = (performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined)?.type;
-    if (navType === "reload") {
-      try { sessionStorage.removeItem(SEARCH_CACHE_KEY); } catch {}
-      return;
-    }
     if (initialQuery) return;
     try {
+      const fromMap = sessionStorage.getItem(RETURN_FROM_MAP_KEY);
+      sessionStorage.removeItem(RETURN_FROM_MAP_KEY);
+      if (!fromMap) return;
       const saved = sessionStorage.getItem(SEARCH_CACHE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved) as Extract<SearchState, { status: "done" }>;
@@ -142,10 +142,8 @@ function PhysicalSearchInner() {
 
   function handleSelectBook(book: PhysicalBook, scope: "nearby" | "all") {
     try {
-      sessionStorage.setItem(
-        `physical_book_${book.isbn}`,
-        JSON.stringify({ book, scope })
-      );
+      sessionStorage.setItem(`physical_book_${book.isbn}`, JSON.stringify({ book, scope }));
+      sessionStorage.setItem(RETURN_FROM_MAP_KEY, "1");
     } catch (e) {
       console.log("[physical/page] sessionStorage 저장 실패:", e);
     }
