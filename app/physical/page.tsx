@@ -43,8 +43,11 @@ function PhysicalSearchInner() {
   const initialQuery = searchParams.get("q") ?? "";
   const [state, setState] = useState<SearchState>({ status: "idle" });
 
-  // 지도 화면에서 뒤로가기로 돌아올 때 검색 결과 복원
+  // 지도 화면에서 뒤로가기로 돌아올 때 검색 결과 복원.
+  // ?q= 파라미터가 있으면 다른 페이지(전자책 등)에서 검색어를 전달한 것이므로
+  // sessionStorage 복원을 건너뜀 — 검색창·결과 충돌 방지.
   useEffect(() => {
+    if (initialQuery) return;
     try {
       const saved = sessionStorage.getItem(SEARCH_CACHE_KEY);
       if (saved) {
@@ -55,8 +58,10 @@ function PhysicalSearchInner() {
   }, []);
 
   function goToEbookSearch() {
-    const q = state.status === "done" ? state.query : "";
-    router.push(q ? `/ebook?q=${encodeURIComponent(q)}` : "/ebook");
+    // 종이책 → 전자책 이동: 검색어/결과 전달 안 함.
+    // sessionStorage도 클리어 — 뒤로가기로 돌아왔을 때 이전 결과가 복원되지 않도록.
+    try { sessionStorage.removeItem(SEARCH_CACHE_KEY); } catch {}
+    router.push("/ebook");
   }
 
   async function handleSearch(query: string) {
