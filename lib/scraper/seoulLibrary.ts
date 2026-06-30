@@ -1068,6 +1068,7 @@ type PhysicalRawRecord = {
  * 마포구의 "제목"은 카카오에서 받은 후보의 title을 그대로 사용.
  */
 const MAPO_DBNUM = "88421";
+const GANGBUK_DBNUM = "88351";
 
 // 강동구/은평구/노원구: meta.seoul.go.kr API가 구 단위 1건만 반환(분관 없음) → 각 포털 API로 대체
 const GANGDONG_DBNUM = "21841";
@@ -1283,6 +1284,151 @@ function cleanNuriLibName(name: string): string {
   return NURI_NAME_FIXES[stripped] ?? stripped;
 }
 
+/**
+ * 강북구 포털(gblib.or.kr) — POST /ajaxForKolas.do
+ * queryField: "I"=ISBN 검색, "Z"=전체 검색(제목 포함)
+ * ISBN 검색 시 한 번 호출로 전 분관 결과(loanYN: "Y"/"N") 반환.
+ */
+async function fetchGangbukBranches(
+  queryField: "I" | "Z",
+  query: string,
+  isbn: string,
+  title: string
+): Promise<PhysicalRawRecord[]> {
+  const searchUrl = `https://www.gblib.or.kr/gangbuk/search/total.do#uri=list&a_lib=&a_key=&a_v=f&a_cp=1&a_qf=${queryField}&a_q=${encodeURIComponent(query)}&a_rf=T&a_rq=`;
+  try {
+    const body = new URLSearchParams({
+      uri: "lists", a_key: "", a_v: "f", a_cp: "1", a_lib: "",
+      tmp_a_lib: "", a_qf: queryField, a_q: query, a_rf: "T", a_rq: "",
+    });
+    const res = await fetch("https://www.gblib.or.kr/ajaxForKolas.do", {
+      method: "POST",
+      signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
+      headers: {
+        "User-Agent": "Mozilla/5.0",
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        "X-Requested-With": "XMLHttpRequest",
+        "Referer": "https://www.gblib.or.kr/search/gate.do?a_lib=",
+      },
+      body: body.toString(),
+    });
+    if (!res.ok) return [];
+    const json = await res.json();
+    const items: { libName: string; loanYN: string; isbn?: string; title?: string }[] = json?.item ?? [];
+    if (!Array.isArray(items) || items.length === 0) return [];
+    return items.map((item) => ({
+      dbnum: GANGBUK_DBNUM,
+      dbname: "강북구립도서관",
+      title: item.title || title,
+      url: searchUrl,
+      author: "",
+      publisher: "",
+      date: "",
+      isbn: item.isbn || isbn,
+      library: item.libName,
+      loan: item.loanYN === "Y" ? "대출가능" : "대출불가",
+    }));
+  } catch (e) {
+    console.log("[seoulLibrary] gangbuk fetch failed:", e);
+    return [];
+  }
+}
+
+/**
+ * 마포구 포털(mplib.mapo.go.kr) — GET 제목 검색 HTML 파싱
+ * ISBN 검색을 지원하지 않으므로 title로 검색 후 filterIsbn으로 좁힘.
+ * HTML 안에 분관명·ISBN·대출상태가 모두 포함되어 있음(서버 렌더링).
+ */
+const MAPO_LIBRARY_CODES = [
+  "HQ","MN","MA","HK","DO","MK","ML","MI","ME","MF","MC","MG","MH","MJ","MM","MB",
+];
+
+async function fetchMapoBranches(title: string, filterIsbn?: string): Promise<PhysicalRawRecord[]> {
+  const buildUrl = (page: number) => {
+    const base = "https://mplib.mapo.go.kr/mcl/MENU1039/PGM3007/plusSearchResultList.do";
+    const params = new URLSearchParams({
+      searchType: "SIMPLE", searchCategory: "BOOK", searchKey: "TITLE",
+      searchKeyword: title, searchLibrary: "ALL", searchSort: "SIMILAR",
+      searchOrder: "DESC", searchRecordCount: "100",
+      currentPageNo: String(page), viewStatus: "IMAGE",
+    });
+    for (const code of MAPO_LIBRARY_CODES) params.append("searchLibraryArr", code);
+    return `${base}?${params}`;
+  };
+
+  const fetchPage = async (page: number): Promise<string> => {
+    try {
+      const res = await fetch(buildUrl(page), {
+        signal: AbortSignal.timeout(DEFAULT_TIMEOUT_MS),
+        headers: {
+          "User-Agent": "Mozilla/5.0",
+          "Referer": "https://mplib.mapo.go.kr/",
+          "Accept": "text/html,application/xhtml+xml",
+        },
+      });
+      return res.ok ? res.text() : "";
+    } catch { return ""; }
+  };
+
+  try {
+    const html = await fetchPage(1);
+    if (!html) return [];
+
+    const $ = cheerio.load(html);
+    const searchUrl = buildUrl(1);
+
+    // 총 N건 파싱
+    const totalMatch = $("p.rtitle").text().match(/총\s*([\d,]+)건/);
+    const total = totalMatch ? parseInt(totalMatch[1].replace(",", "")) : 0;
+
+    const allHtmls = [html];
+    if (total > 100) {
+      const pageCount = Math.ceil(total / 100);
+      const extras = await Promise.all(
+        Array.from({ length: pageCount - 1 }, (_, i) => fetchPage(i + 2))
+      );
+      allHtmls.push(...extras.filter(Boolean));
+    }
+
+    const records: PhysicalRawRecord[] = [];
+    for (const pageHtml of allHtmls) {
+      const $p = cheerio.load(pageHtml);
+      $p(".bookStateBar").each((_, el) => {
+        const $item = $p(el).closest("li");
+
+        const isbnSpan = $item.find("span").filter((_, s) =>
+          $p(s).text().trim().startsWith("ISBN:")
+        ).first();
+        const isbn = isbnSpan.text().replace("ISBN:", "").trim().split(/\s+/)[0];
+        if (!isbn) return;
+        if (filterIsbn && normalizeIsbn(isbn) !== normalizeIsbn(filterIsbn)) return;
+
+        const libText = $item.find("dd.site span").first().text();
+        const library = libText.replace("도서관:", "").trim();
+
+        const loan = $p(el).find("p.txt b").first().text().trim() || undefined;
+
+        records.push({
+          dbnum: MAPO_DBNUM,
+          dbname: "마포구립도서관",
+          title,
+          url: searchUrl,
+          author: "",
+          publisher: "",
+          date: "",
+          isbn,
+          library,
+          loan,
+        });
+      });
+    }
+    return records;
+  } catch (e) {
+    console.log("[seoulLibrary] mapo portal fetch failed:", e);
+    return [];
+  }
+}
+
 // [2026-06-27 추가] display=30 고정값을 200으로 올림(handoff v14 0-1장).
 // 실측된 최대 건수(구로구 128건)보다 충분히 크게 잡아, 대부분의 구는
 // 한 번의 요청으로 끝나도록 함. 그래도 이 값을 넘는 구가 나오면
@@ -1448,8 +1594,12 @@ export async function searchPhysicalBooks(
     console.log("[seoulLibrary] physical stage1 fetch failed:", e);
   }
 
+  // 강북구·마포구는 meta API에서 Loan 필드 없음 → 포털 직접 호출, meta 호출 생략
+  const SKIP_META_DBNUMS = new Set([GANGBUK_DBNUM, MAPO_DBNUM]);
+  const metaDbnums = targetDbnums.filter((d) => !SKIP_META_DBNUMS.has(d));
+
   const resultsByDistrict = await Promise.all(
-    targetDbnums.map((dbnum) =>
+    metaDbnums.map((dbnum) =>
       fetchDistrictsByCategory(dbnum, "1", query, undefined, id, cookie, defaultSearchUrl)
     )
   );
@@ -1534,7 +1684,15 @@ export async function searchPhysicalBooks(
     )
   ).flat();
 
-  const rawRecords = [...otherRecords, ...gangdongRecords, ...eunpyeongRecords, ...nowonRecords];
+  const gangbukRecords = targetDbnums.includes(GANGBUK_DBNUM)
+    ? await fetchGangbukBranches("Z", query, "", query)
+    : [];
+
+  const mapoRecords = targetDbnums.includes(MAPO_DBNUM)
+    ? await fetchMapoBranches(query)
+    : [];
+
+  const rawRecords = [...otherRecords, ...gangdongRecords, ...eunpyeongRecords, ...nowonRecords, ...gangbukRecords, ...mapoRecords];
 
   const meta: PhysicalSearchMeta = { scope, districtNames };
 
@@ -1579,8 +1737,12 @@ export async function searchPhysicalBooksByIsbn(
     console.log("[seoulLibrary] physical(isbn) stage1 fetch failed:", e);
   }
 
+  // 강북구·마포구는 meta API에서 Loan 필드 없음 → 포털 직접 호출, meta 호출 생략
+  const SKIP_META_DBNUMS_ISBN = new Set([GANGBUK_DBNUM, MAPO_DBNUM]);
+  const metaDbnumsIsbn = targetDbnums.filter((d) => !SKIP_META_DBNUMS_ISBN.has(d));
+
   const resultsByDistrict = await Promise.all(
-    targetDbnums.map((dbnum) =>
+    metaDbnumsIsbn.map((dbnum) =>
       fetchDistrictsByCategory(dbnum, "7", isbn, title, id, cookie, defaultSearchUrl)
     )
   );
@@ -1621,7 +1783,15 @@ export async function searchPhysicalBooksByIsbn(
       )
     : [];
 
-  const rawRecords = [...seoulLibRecords, ...gangdongRecords, ...eunpyeongRecords, ...nowonRecords];
+  const gangbukRecords = targetDbnums.includes(GANGBUK_DBNUM)
+    ? await fetchGangbukBranches("I", isbn, isbn, title)
+    : [];
+
+  const mapoRecords = targetDbnums.includes(MAPO_DBNUM)
+    ? await fetchMapoBranches(title, isbn)
+    : [];
+
+  const rawRecords = [...seoulLibRecords, ...gangdongRecords, ...eunpyeongRecords, ...nowonRecords, ...gangbukRecords, ...mapoRecords];
 
   if (rawRecords.length === 0) return [];
 
