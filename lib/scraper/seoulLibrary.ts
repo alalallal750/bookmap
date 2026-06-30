@@ -2119,7 +2119,10 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
 
   for (const [isbn, recordsForIsbn] of byIsbn) {
     const first = recordsForIsbn[0];
-    const libraries = recordsForIsbn.map(buildLibrary);
+    // library·location 둘 다 비어있으면 분관 특정 불가(dbname fallback만 남음) — 제외
+    const libraries = recordsForIsbn
+      .filter((r) => r.library?.trim() || r.location?.trim())
+      .map(buildLibrary);
 
     books.push({
       isbn,
