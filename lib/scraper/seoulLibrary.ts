@@ -1574,7 +1574,8 @@ export type PhysicalSearchResult = {
 export async function searchPhysicalBooks(
   query: string,
   userLat?: number,
-  userLng?: number
+  userLng?: number,
+  onProgress?: (gu: string) => void
 ): Promise<PhysicalSearchResult> {
   const hasLocation = userLat !== undefined && userLng !== undefined;
   const lat = userLat ?? DEFAULT_LOCATION.lat;
@@ -1605,9 +1606,12 @@ export async function searchPhysicalBooks(
   const metaDbnums = targetDbnums.filter((d) => !SKIP_META_DBNUMS.has(d));
 
   const resultsByDistrict = await Promise.all(
-    metaDbnums.map((dbnum) =>
-      fetchDistrictsByCategory(dbnum, "1", query, undefined, id, cookie, defaultSearchUrl)
-    )
+    metaDbnums.map(async (dbnum) => {
+      const records = await fetchDistrictsByCategory(dbnum, "1", query, undefined, id, cookie, defaultSearchUrl);
+      const guName = getDistrictName(dbnum);
+      if (guName) onProgress?.(guName);
+      return records;
+    })
   );
   const seoulLibRecords = resultsByDistrict.flat();
 
@@ -1691,8 +1695,12 @@ export async function searchPhysicalBooks(
   ).flat();
 
   const [gangbukRecords, mapoRecords] = await Promise.all([
-    targetDbnums.includes(GANGBUK_DBNUM) ? fetchGangbukBranches("Z", query, "", query) : Promise.resolve([]),
-    targetDbnums.includes(MAPO_DBNUM) ? fetchMapoBranches(query) : Promise.resolve([]),
+    targetDbnums.includes(GANGBUK_DBNUM)
+      ? fetchGangbukBranches("Z", query, "", query).then((r) => { onProgress?.("강북구"); return r; })
+      : Promise.resolve([]),
+    targetDbnums.includes(MAPO_DBNUM)
+      ? fetchMapoBranches(query).then((r) => { onProgress?.("마포구"); return r; })
+      : Promise.resolve([]),
   ]);
 
   const rawRecords = [...otherRecords, ...gangdongRecords, ...eunpyeongRecords, ...nowonRecords, ...gangbukRecords, ...mapoRecords];

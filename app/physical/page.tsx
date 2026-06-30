@@ -21,7 +21,7 @@ const RETURN_FROM_MAP_KEY = "physical_returning_from_map";
  */
 type SearchState =
   | { status: "idle" }
-  | { status: "loading"; scope: "nearby" | "all" | "pending"; districtNames: string[] }
+  | { status: "loading"; scope: "nearby" | "all" | "pending"; districtNames: string[]; progressGu?: string }
   | {
       status: "done";
       books: PhysicalBook[];
@@ -110,10 +110,38 @@ function PhysicalSearchInner() {
       }
 
       const res = await fetch(url.toString());
-      const json: ApiResponse<PhysicalSearchResponse> = await res.json();
-      if (!json.success) throw new Error(json.error);
+      if (!res.body) throw new Error("스트림 없음");
 
-      const sortedBooks = [...json.data.books].sort((a, b) => {
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let finalData: PhysicalSearchResponse | null = null;
+      let errorMsg: string | null = null;
+      let buf = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buf += decoder.decode(value, { stream: true });
+        const lines = buf.split("\n");
+        buf = lines.pop() ?? "";
+        for (const line of lines) {
+          if (!line.trim()) continue;
+          const data = JSON.parse(line);
+          if (data.type === "progress" && !hasLocation) {
+            setState((prev) =>
+              prev.status === "loading" ? { ...prev, progressGu: data.gu } : prev
+            );
+          } else if (data.type === "done") {
+            if (data.success) finalData = data.data;
+            else errorMsg = data.error ?? "검색 중 오류가 발생했습니다.";
+          }
+        }
+      }
+
+      if (errorMsg) throw new Error(errorMsg);
+      if (!finalData) throw new Error("응답 없음");
+
+      const sortedBooks = [...finalData.books].sort((a, b) => {
         const diff = b.libraries.length - a.libraries.length;
         if (diff !== 0) return diff;
         const aAvail = a.libraries.filter((l) => l.available).length;
@@ -125,8 +153,8 @@ function PhysicalSearchInner() {
         status: "done",
         books: sortedBooks,
         query,
-        scope: json.data.meta.scope,
-        districtNames: json.data.meta.districtNames,
+        scope: finalData.meta.scope,
+        districtNames: finalData.meta.districtNames,
       };
       setState(nextState);
       try {
@@ -207,7 +235,9 @@ function PhysicalSearchInner() {
           <div className="flex flex-col items-center justify-center pt-24">
             <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mb-3" />
             {state.scope === "all" ? (
-              <p className="text-gray-400 text-sm">서울시 모든 구에서 검색 중...</p>
+              <p className="text-gray-400 text-sm">
+                {state.progressGu ? `${state.progressGu}에서 찾는 중...` : "서울시 모든 구에서 검색 중..."}
+              </p>
             ) : state.scope === "nearby" && state.districtNames.length > 0 ? (
               <p className="text-gray-400 text-sm">
                 지금 {state.districtNames.join(", ")}에서 검색 중...
