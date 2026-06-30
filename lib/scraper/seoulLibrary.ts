@@ -1708,6 +1708,21 @@ export async function searchPhysicalBooks(
 
   const rawRecords = [...otherRecords, ...gangdongRecords, ...eunpyeongRecords, ...nowonRecords, ...gangbukRecords, ...mapoRecords];
 
+  // 구별 결과 건수 요약 — 마커 누락 원인 파악용
+  const byGu = new Map<string, number>();
+  for (const r of rawRecords) {
+    const gu = getDistrictName(r.dbnum) ?? r.dbnum;
+    byGu.set(gu, (byGu.get(gu) ?? 0) + 1);
+  }
+  const missingGus = targetDbnums
+    .map((d) => getDistrictName(d) ?? d)
+    .filter((gu) => !byGu.has(gu));
+  console.log(
+    "[SEARCH-SUMMARY] query:", query,
+    "| 결과있는구:", [...byGu.entries()].map(([g, n]) => `${g}(${n})`).join(", ") || "없음",
+    "| 결과없는구:", missingGus.join(", ") || "없음"
+  );
+
   const meta: PhysicalSearchMeta = { scope, districtNames };
 
   if (rawRecords.length === 0) return { books: [], meta };
@@ -1785,6 +1800,21 @@ export async function searchPhysicalBooksByIsbn(
   ]);
 
   const rawRecords = [...seoulLibRecords, ...gangdongRecords, ...eunpyeongRecords, ...nowonRecords, ...gangbukRecords, ...mapoRecords];
+
+  // 구별 결과 건수 요약 — 마커 누락 원인 파악용
+  const byGuIsbn = new Map<string, number>();
+  for (const r of rawRecords) {
+    const gu = getDistrictName(r.dbnum) ?? r.dbnum;
+    byGuIsbn.set(gu, (byGuIsbn.get(gu) ?? 0) + 1);
+  }
+  const missingGusIsbn = targetDbnums
+    .map((d) => getDistrictName(d) ?? d)
+    .filter((gu) => !byGuIsbn.has(gu));
+  console.log(
+    "[SEARCH-SUMMARY-ISBN] isbn:", isbn,
+    "| 결과있는구:", [...byGuIsbn.entries()].map(([g, n]) => `${g}(${n})`).join(", ") || "없음",
+    "| 결과없는구:", missingGusIsbn.join(", ") || "없음"
+  );
 
   if (rawRecords.length === 0) return [];
 
