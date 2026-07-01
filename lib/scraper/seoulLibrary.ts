@@ -71,8 +71,8 @@ import { findBranchHours } from "@/lib/data/branchHours";
 
 const BASE_URL = "https://meta.seoul.go.kr/libseoul";
 
-const DEFAULT_TIMEOUT_MS = 8000;
-const GANGNAM_TIMEOUT_MS = 8000;
+const DEFAULT_TIMEOUT_MS = 15000;
+const GANGNAM_TIMEOUT_MS = 15000;
 
 // handoff 3-1장: 전자책도서관 8곳
 const EBOOK_LIBRARIES: Record<string, string> = {
