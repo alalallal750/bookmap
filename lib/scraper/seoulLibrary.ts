@@ -1248,8 +1248,12 @@ function extractEunpyeongSpeciesKey(url: string): string {
 
 /** 노원구 ISBN으로 speciesKey 조회 (nowonlib.kr /api/search POST)
  *  meta.seoul.go.kr URL에는 speciesKey가 없으므로 직접 검색API 호출
+ *
+ *  반환값: speciesKey 문자열(그 isbn 결과가 없으면 ""),
+ *  서버 접속 실패(타임아웃/HTTP 오류)면 null — 호출부가 "서버가 죽은
+ *  상태"를 구분해서 나머지 isbn 조회를 건너뛸 수 있게 함.
  */
-async function fetchNowonSpeciesKey(isbn: string): Promise<string> {
+async function fetchNowonSpeciesKey(isbn: string): Promise<string | null> {
   try {
     const res = await fetch(`${NOWON_PORTAL}/api/search`, {
       method: "POST",
@@ -1261,12 +1265,12 @@ async function fetchNowonSpeciesKey(isbn: string): Promise<string> {
       },
       body: JSON.stringify({ searchKeyword: isbn, pubFormCode: "MO", display: 5, library: "nowonlib" }),
     });
-    if (!res.ok) return "";
+    if (!res.ok) return null;
     const j = await res.json();
     return j?.contents?.bookList?.[0]?.speciesKey ?? "";
   } catch (e) {
-    console.log("[seoulLibrary] fetchNowonSpeciesKey failed:", e);
-    return "";
+    console.log("[seoulLibrary] fetchNowonSpeciesKey failed:", (e as Error)?.message ?? e);
+    return null;
   }
 }
 
@@ -1366,13 +1370,24 @@ async function fetchMapoBranches(title: string, filterIsbn?: string): Promise<Ph
           "Accept": "text/html,application/xhtml+xml",
         },
       });
-      return res.ok ? res.text() : "";
-    } catch { return ""; }
+      if (!res.ok) {
+        console.log(`[seoulLibrary] 마포구 page ${page} 응답 오류 — status ${res.status}`);
+        return "";
+      }
+      return res.text();
+    } catch (e) {
+      console.log(`[seoulLibrary] 마포구 page ${page} fetch 실패:`, (e as Error)?.message ?? e);
+      return "";
+    }
   };
 
   try {
     const html = await fetchPage(1);
-    if (!html) return [];
+    if (!html) {
+      // 마포구가 "결과없는구"로 뜰 때 타임아웃인지 파싱 문제인지 구분용
+      console.log(`[seoulLibrary] 마포구 결과 0건 처리 — 1페이지 HTML을 못 받음 (title: "${title}")`);
+      return [];
+    }
 
     const $ = cheerio.load(html);
     const searchUrl = buildUrl(1);
@@ -1427,6 +1442,13 @@ async function fetchMapoBranches(title: string, filterIsbn?: string): Promise<Ph
           loan,
         });
       });
+    }
+    if (records.length === 0) {
+      // total이 0이면 실제 미소장, total > 0인데 0건이면 HTML 구조 변화
+      // (파싱 실패) 또는 제목/ISBN 필터에 전부 걸러진 것 — 구분용 로그
+      console.log(
+        `[seoulLibrary] 마포구 결과 0건 — 포털 total 표기: ${total}건, 수신 페이지: ${allHtmls.length} (title: "${title}"${filterIsbn ? `, filterIsbn: ${filterIsbn}` : ""})`
+      );
     }
     return records;
   } catch (e) {
@@ -1493,7 +1515,20 @@ async function fetchDistrictsByCategory(
   try {
     let cat = category1;
     let text = searchText;
-    let { xml, ok } = await fetchOnce(cat, text, 1);
+    // [2026-07-07 추가] 간헐적 타임아웃 구(강서·영등포·서대문·동대문 등)
+    // 대응 — 1차 요청이 타임아웃/네트워크 오류로 실패하면 한 번만 재시도.
+    // 재시도도 실패하면 바깥 catch로 넘어가 기존처럼 빈 결과 처리.
+    let first: { xml: string; ok: boolean };
+    try {
+      first = await fetchOnce(cat, text, 1);
+    } catch (e) {
+      console.log(
+        `[DEBUG-CHECK] 1차 실패 — dbnum: ${dbnum} (${getDistrictName(dbnum) ?? "?"}) 1회 재시도:`,
+        (e as Error)?.message ?? e
+      );
+      first = await fetchOnce(cat, text, 1);
+    }
+    let { xml, ok } = first;
 
     // 마포구 + ISBN 검색이 실패한 경우만 제목으로 재시도
     if (!ok && dbnum === MAPO_DBNUM && category1 === "7" && fallbackTitleForMapo) {
@@ -1571,6 +1606,48 @@ export type PhysicalSearchResult = {
  * "OO구에서 검색 중"(nearby) 또는 "서울시 모든 구에서 검색 중"(all)
  * 으로 다르게 보여줄 수 있게 함.
  */
+/**
+ * [2026-07-07 변경] 구별 결과 요약을 "화면 표시 기준"으로 출력.
+ * 기존에는 raw record 수를 그대로 찍어서, 송파구·성북구처럼 record는
+ * 오지만 ISBN이 없어 전량 제외되는 구가 "결과있는구"로 보이는 착시가
+ * 있었음. ISBN 확보 여부(필드→url, groupPhysicalBooksByIsbn과 동일
+ * 기준)로 표시/제외를 구분해서 남김.
+ */
+function logSearchSummary(
+  tag: string,
+  label: string,
+  records: PhysicalRawRecord[],
+  targetDbnums: string[]
+): void {
+  const shown = new Map<string, number>();
+  const excluded = new Map<string, number>();
+  for (const r of records) {
+    const gu = getDistrictName(r.dbnum) ?? r.dbnum;
+    const hasIsbn = Boolean(normalizeIsbn(r.isbn) || normalizeIsbn(extractIsbnFromUrl(r.url)));
+    const target = hasIsbn ? shown : excluded;
+    target.set(gu, (target.get(gu) ?? 0) + 1);
+  }
+  const shownStr = [...shown.entries()]
+    .map(([gu, n]) => {
+      const ex = excluded.get(gu);
+      return ex ? `${gu}(${n}, 제외${ex})` : `${gu}(${n})`;
+    })
+    .join(", ");
+  const fullyExcludedStr = [...excluded.entries()]
+    .filter(([gu]) => !shown.has(gu))
+    .map(([gu, n]) => `${gu}(${n})`)
+    .join(", ");
+  const noResponse = targetDbnums
+    .map((d) => getDistrictName(d) ?? d)
+    .filter((gu) => !shown.has(gu) && !excluded.has(gu));
+  console.log(
+    `${tag} ${label}`,
+    "| 표시되는구:", shownStr || "없음",
+    "| ISBN없어 전량제외:", fullyExcludedStr || "없음",
+    "| 응답없는구:", noResponse.join(", ") || "없음"
+  );
+}
+
 export async function searchPhysicalBooks(
   query: string,
   userLat?: number,
@@ -1679,23 +1756,39 @@ export async function searchPhysicalBooks(
     const isbn = normalizeIsbn(r.isbn) || normalizeIsbn(extractIsbnFromUrl(r.url)) || "";
     if (isbn && !nowonByIsbn.has(isbn)) nowonByIsbn.set(isbn, r);
   }
-  const nowonRecords = (
-    await Promise.all(
-      Array.from(nowonByIsbn.entries()).map(async ([isbn, record]) => {
-        const speciesKey = await fetchNowonSpeciesKey(isbn);
-        if (!speciesKey) return [];
-        return fetchNuriBranches(
-          NOWON_PORTAL,
-          speciesKey,
-          NOWON_DBNUM,
-          "노원구립통합도서관",
-          isbn,
-          record.title,
-          `${NOWON_PORTAL}/KeywordSearchResult/${encodeURIComponent(record.title)}`
-        );
-      })
-    )
-  ).flat();
+  // [2026-07-07 변경] nowonlib.kr은 서버 접속 자체가 안 되는 날이 있음
+  // (connect timeout, 2026-07-07 로그로 확인 — isbn 70여 건이 전부 10초씩
+  // 접속 실패를 기다림). 첫 isbn 하나로 먼저 접속을 확인하고, 접속
+  // 실패(null)면 나머지 isbn 조회를 전부 건너뜀.
+  const nowonEntries = Array.from(nowonByIsbn.entries());
+  let nowonRecords: PhysicalRawRecord[] = [];
+  if (nowonEntries.length > 0) {
+    const [probeIsbn] = nowonEntries[0];
+    const probeKey = await fetchNowonSpeciesKey(probeIsbn);
+    if (probeKey === null) {
+      console.log(
+        `[seoulLibrary] 노원구 서버 접속 실패 — 나머지 ${nowonEntries.length - 1}건 speciesKey 조회 건너뜀`
+      );
+    } else {
+      nowonRecords = (
+        await Promise.all(
+          nowonEntries.map(async ([isbn, record], i) => {
+            const speciesKey = i === 0 ? probeKey : await fetchNowonSpeciesKey(isbn);
+            if (!speciesKey) return [];
+            return fetchNuriBranches(
+              NOWON_PORTAL,
+              speciesKey,
+              NOWON_DBNUM,
+              "노원구립통합도서관",
+              isbn,
+              record.title,
+              `${NOWON_PORTAL}/KeywordSearchResult/${encodeURIComponent(record.title)}`
+            );
+          })
+        )
+      ).flat();
+    }
+  }
 
   const [gangbukRecords, mapoRecords] = await Promise.all([
     targetDbnums.includes(GANGBUK_DBNUM)
@@ -1708,20 +1801,8 @@ export async function searchPhysicalBooks(
 
   const rawRecords = [...otherRecords, ...gangdongRecords, ...eunpyeongRecords, ...nowonRecords, ...gangbukRecords, ...mapoRecords];
 
-  // 구별 결과 건수 요약 — 마커 누락 원인 파악용
-  const byGu = new Map<string, number>();
-  for (const r of rawRecords) {
-    const gu = getDistrictName(r.dbnum) ?? r.dbnum;
-    byGu.set(gu, (byGu.get(gu) ?? 0) + 1);
-  }
-  const missingGus = targetDbnums
-    .map((d) => getDistrictName(d) ?? d)
-    .filter((gu) => !byGu.has(gu));
-  console.log(
-    "[SEARCH-SUMMARY] query:", query,
-    "| 결과있는구:", [...byGu.entries()].map(([g, n]) => `${g}(${n})`).join(", ") || "없음",
-    "| 결과없는구:", missingGus.join(", ") || "없음"
-  );
+  // 구별 결과 건수 요약 — 마커 누락 원인 파악용 (화면 표시 기준)
+  logSearchSummary("[SEARCH-SUMMARY]", `query: ${query}`, rawRecords, targetDbnums);
 
   const meta: PhysicalSearchMeta = { scope, districtNames };
 
@@ -1801,20 +1882,8 @@ export async function searchPhysicalBooksByIsbn(
 
   const rawRecords = [...seoulLibRecords, ...gangdongRecords, ...eunpyeongRecords, ...nowonRecords, ...gangbukRecords, ...mapoRecords];
 
-  // 구별 결과 건수 요약 — 마커 누락 원인 파악용
-  const byGuIsbn = new Map<string, number>();
-  for (const r of rawRecords) {
-    const gu = getDistrictName(r.dbnum) ?? r.dbnum;
-    byGuIsbn.set(gu, (byGuIsbn.get(gu) ?? 0) + 1);
-  }
-  const missingGusIsbn = targetDbnums
-    .map((d) => getDistrictName(d) ?? d)
-    .filter((gu) => !byGuIsbn.has(gu));
-  console.log(
-    "[SEARCH-SUMMARY-ISBN] isbn:", isbn,
-    "| 결과있는구:", [...byGuIsbn.entries()].map(([g, n]) => `${g}(${n})`).join(", ") || "없음",
-    "| 결과없는구:", missingGusIsbn.join(", ") || "없음"
-  );
+  // 구별 결과 건수 요약 — 마커 누락 원인 파악용 (화면 표시 기준)
+  logSearchSummary("[SEARCH-SUMMARY-ISBN]", `isbn: ${isbn}`, rawRecords, targetDbnums);
 
   if (rawRecords.length === 0) return [];
 
@@ -1882,10 +1951,11 @@ function parsePhysicalXml(xml: string, expectedDbnum: string): PhysicalRawRecord
     //   - 노원구(43081), 은평구(33451): location 없음, Type: "전자책"
     //   - 관악구(42921): location에 "디지털자료실" 포함, title에 "[e-book]" 포함, Type: "전자자료"
     //   - 도봉구(43361): location에 "전자책도서관" 포함 (Type 필드 없음)
+    //   - 도봉구(43361): location에 "전자책서고" 포함 ("[아이나라]전자책서고", 2026-07-07 확인)
     const isElectronicByType =
       typeField === "전자책" || typeField === "E-BOOK" || typeField === "전자자료";
     const isElectronicByLocationOrTitle =
-      (location && /전자자료|디지털도서관\(전자책\)|디지털자료실|소장형 전자책|전자책도서관/.test(location)) ||
+      (location && /전자자료|디지털도서관\(전자책\)|디지털자료실|소장형 전자책|전자책도서관|전자책서고/.test(location)) ||
       (title && /\[전자자료\]|\[전자책\]|\[e-book\]/i.test(title));
 
     if (isElectronicByType || isElectronicByLocationOrTitle) return;
