@@ -50,10 +50,9 @@ function EbookSearchInner() {
   return (
     <main className="min-h-screen flex flex-col">
       <header className="bg-white border-b border-gray-100 px-4 pt-14 pb-4 sticky top-0 z-10">
-        {/* [2026-06-21] 480px 미만에서는 로고/문구 세로 배치, 480px 이상에서
-            가로 배치(min-[480px]: 임의값 사용). 로고는 w-auto+flex-shrink-0으로
-            늘어나거나 찌그러지지 않게 고정. */}
-        <div className="flex flex-col min-[480px]:flex-row min-[480px]:items-center gap-1 min-[480px]:gap-3 mb-3">
+        {/* 종이책(physical) 페이지와 동일하게 모든 화면 폭에서 로고 왼쪽,
+            문구 오른쪽 가로 배치로 통일. */}
+        <div className="flex items-center gap-3 mb-3">
           <div className="flex flex-col items-end gap-1 flex-shrink-0">
             <img
               src="/logo-header.png"
