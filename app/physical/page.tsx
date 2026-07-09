@@ -191,7 +191,7 @@ function PhysicalSearchInner() {
           <p className="text-xs text-gray-400">
             그 책, 지금 어디서 빌릴 수 있지?
             <br />
-            나랑 가까운 서울시 도서관에서 찾아볼게요. ISBN이 없는 경우 검색되지 않아요.
+            나랑 가까운 <span className="text-[#1d2b6b] font-bold" style={{ textShadow: "0 1px 1px rgba(29,43,107,0.18)" }}>서울시 도서관</span>에서 찾아볼게요. ISBN이 없는 경우 검색되지 않아요.
           </p>
         </div>
         <SearchBar onSearch={handleSearch} loading={state.status === "loading"} defaultValue={initialQuery} />
