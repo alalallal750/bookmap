@@ -14,7 +14,41 @@ type LibraryDetailProps = {
 export function LibraryDetail({ library, bookTitle, onClose }: LibraryDetailProps) {
   if (!library) return null;
 
+  /**
+   * [2026-07-09] 위험도 기반 버튼 위계 (전 도서관 공통 규칙):
+   *   - ample(2권 이상 대출가능): 헛걸음 위험 무시 가능 → 길찾기 주 버튼
+   *   - tight(1권 또는 권수 미상 — 정보나루 출처는 권수를 모름):
+   *     마지막 1권이 방금 나갔을 수 있음 → "확인하기" 주 버튼
+   *   - unavailable(대출 불가): 갈 이유 불확실 → "확인하기"(예약 등) 주 버튼
+   * 정보나루 출처는 availableCount가 없으므로 자동으로 tight/unavailable에
+   * 떨어짐 — 별도 출처 분기 없음.
+   */
+  const riskLevel: "ample" | "tight" | "unavailable" = !library.available
+    ? "unavailable"
+    : library.availableCount === undefined || library.availableCount <= 1
+      ? "tight"
+      : "ample";
+
+  /** 확인/길찾기 클릭 계측 — Vercel 로그에서 "[track]"으로 검색 */
+  function track(event: "confirm" | "navi") {
+    try {
+      navigator.sendBeacon?.(
+        "/api/track",
+        JSON.stringify({
+          event,
+          libraryId: library!.id,
+          available: library!.available ?? null,
+          availableCount: library!.availableCount ?? null,
+          riskLevel,
+        })
+      );
+    } catch {
+      /* 계측 실패는 무시 */
+    }
+  }
+
   function openKakaoNavi() {
+    track("navi");
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     const webUrl = `https://map.kakao.com/link/to/${encodeURIComponent(library!.libraryName)},${library!.latitude},${library!.longitude}`;
 
@@ -31,6 +65,7 @@ export function LibraryDetail({ library, bookTitle, onClose }: LibraryDetailProp
   }
 
   function openHomepage() {
+    track("confirm");
     if (library?.searchResultUrl) {
       window.open(library.searchResultUrl, "_blank");
     } else if (library?.homepageUrl) {
@@ -103,6 +138,12 @@ export function LibraryDetail({ library, bookTitle, onClose }: LibraryDetailProp
                   자료실: {library.callNumber.replace(/\[.*?\]/g, "").trim()}
                 </p>
               )}
+              {/* [2026-07-09] 분관별 집계로 실권수가 생긴 경우 표시 (2권 이상 소장 시) */}
+              {library.totalCount !== undefined && library.totalCount > 1 && (
+                <p className="text-xs text-gray-500 mt-0.5">
+                  소장 {library.totalCount}권 · 대출가능 {library.availableCount}권
+                </p>
+              )}
               {!library.available && library.returnDueDate && (
                 <p className="text-xs text-red-500 mt-0.5">
                   반납예정: {library.returnDueDate}
@@ -131,41 +172,66 @@ export function LibraryDetail({ library, bookTitle, onClose }: LibraryDetailProp
             )}
           </div>
 
-          {/* 액션 버튼 */}
+          {/* 액션 버튼 — 위험도 기반 위계 (2026-07-09 결정):
+              여유(ample)는 길찾기 주 버튼(현행), 아슬(tight)·불가(unavailable)는
+              "확인하기" 주 버튼. 경고 문구 대신 버튼 순서로 "확인하고 가세요"를
+              전달한다. 스마트도서관은 전용 버튼 분기 유지(이 규칙 밖). */}
           <div className="space-y-2">
-            <button onClick={openKakaoNavi} className="btn-primary">
-              길찾기
-            </button>
             {library?.id?.startsWith("smart_") ? (
-  <button
-    onClick={() => {
-      const SMART_NO: Record<string, string> = {
-        smart_jangseungbaegi: "3",
-        smart_sindaebang: "1",
-        smart_isu: "2",
-        smart_nodeul: "4",
-        smart_kkamangdol: "5",
-        smart_gymnasium: "6",
-      };
-      const titlePreview = bookTitle ? bookTitle.slice(0, 10) : "";
-      if (library.id === "smart_EDU") {
-        window.open("https://djlib.sen.go.kr/djlib/module/unmannedReservation/search.do?menu_idx=130&locExquery=111013", "_blank");
-      } else {
-        const no = SMART_NO[library.id];
-        if (no) window.open(`http://smartlib.dongjak.go.kr:8088/EZ-950SL_Web/mainPage/SI_searchbookindex_Service.jsp?no=${no}`, "_blank");
-      }
-    }}
-    className="btn-secondary"
-  >
-    {bookTitle
-  ? `「${bookTitle.slice(0, 10)}${bookTitle.length > 10 ? "..." : ""}」 스마트도서관에서 검색하기`
-  : "스마트도서관에서 검색하기"}
-  </button>
-) : (
-  <button onClick={openHomepage} className="btn-secondary">
-    도서관 홈페이지에서 보기
-  </button>
-)}
+              <>
+                <button onClick={openKakaoNavi} className="btn-primary">
+                  길찾기
+                </button>
+                <button
+                  onClick={() => {
+                    const SMART_NO: Record<string, string> = {
+                      smart_jangseungbaegi: "3",
+                      smart_sindaebang: "1",
+                      smart_isu: "2",
+                      smart_nodeul: "4",
+                      smart_kkamangdol: "5",
+                      smart_gymnasium: "6",
+                    };
+                    if (library.id === "smart_EDU") {
+                      window.open("https://djlib.sen.go.kr/djlib/module/unmannedReservation/search.do?menu_idx=130&locExquery=111013", "_blank");
+                    } else {
+                      const no = SMART_NO[library.id];
+                      if (no) window.open(`http://smartlib.dongjak.go.kr:8088/EZ-950SL_Web/mainPage/SI_searchbookindex_Service.jsp?no=${no}`, "_blank");
+                    }
+                  }}
+                  className="btn-secondary"
+                >
+                  {bookTitle
+                    ? `「${bookTitle.slice(0, 10)}${bookTitle.length > 10 ? "..." : ""}」 스마트도서관에서 검색하기`
+                    : "스마트도서관에서 검색하기"}
+                </button>
+              </>
+            ) : riskLevel === "ample" ? (
+              <>
+                <button onClick={openKakaoNavi} className="btn-primary">
+                  길찾기
+                </button>
+                <button onClick={openHomepage} className="btn-secondary">
+                  도서관 홈페이지에서 보기
+                </button>
+              </>
+            ) : (
+              <>
+                <button onClick={openHomepage} className="btn-primary">
+                  {(() => {
+                    const t = bookTitle
+                      ? `「${bookTitle.slice(0, 10)}${bookTitle.length > 10 ? "..." : ""}」 `
+                      : "";
+                    return riskLevel === "tight"
+                      ? `${t}대출 가능한지 확인하기`
+                      : `${t}확인하기`;
+                  })()}
+                </button>
+                <button onClick={openKakaoNavi} className="btn-secondary">
+                  길찾기
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>

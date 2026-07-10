@@ -63,10 +63,18 @@ function getMarkerColor(lib: PhysicalLibrary): string {
 
 function createCustomOverlay(lib: PhysicalLibrary, onClick: () => void) {
   const color = getMarkerColor(lib);
-  const count = (lib as any).availableCount ?? (lib.available ? 1 : 0);
+  // [2026-07-09 변경] 권수를 아는 곳(스크래핑 — 분관별 집계로 실권수)만
+  // "N권", 권수 미상(정보나루 — 가능/불가만 제공)은 "가능"/"대출중"으로
+  // 표기. 기존의 "availableCount 없으면 1권"은 실데이터가 아니었음.
+  const label =
+    lib.availableCount !== undefined
+      ? `${lib.availableCount}권`
+      : lib.available
+        ? "가능"
+        : "대출중";
   const div = document.createElement("div");
   div.style.cssText = `background:${color};color:white;border-radius:10px;padding:5px 10px;font-size:12px;font-weight:500;text-align:center;cursor:pointer;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,0.2);line-height:1.4;`;
-  div.innerHTML = `${formatLibraryName(lib.libraryName)}<br><span style="font-size:11px;opacity:0.9;">${count}권</span>`;
+  div.innerHTML = `${formatLibraryName(lib.libraryName)}<br><span style="font-size:11px;opacity:0.9;">${label}</span>`;
   div.addEventListener("click", onClick);
   return div;
 }
@@ -94,7 +102,11 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
   const usedCacheRef = useRef(false);
 
   const [libraries, setLibraries] = useState<PhysicalLibrary[]>([]);
-  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+  // [2026-07-09 변경] undefined = 위치 조회 중, null = 실패/미지원, 좌표 = 성공.
+  // 기존엔 "조회 중"과 "실패"가 둘 다 null이라 최초 검색이 GPS 응답을 기다리지
+  // 않고 기본좌표(방배)로 나갔음 — 위치 없는 사용자의 전체 구 검색이 항상
+  // 방배 근처 3구로 좁혀지던 원인.
+  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null | undefined>(undefined);
   const [selectedLibrary, setSelectedLibrary] = useState<PhysicalLibrary | null>(null);
   const [mapReady, setMapReady] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -168,26 +180,57 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
    * 없어서거나, 사용자가 "찾기" 버튼을 눌러서) 그 시점부터는 위치 기준
    * 검색이 시작된 것이므로 "all" 상태로 남아있으면 안 됨.
    */
+  // [2026-07-09 변경] 좌표를 옵셔널로 — 좌표 없이 호출하면 서버가 25개 구
+  // 전체를 검색(scope "all"). 좌표가 있으면 기존과 동일한 근처 검색.
+  // 응답이 NDJSON 스트림으로 바뀜에 따라(/api/physical-search와 동일 형식)
+  // progress 이벤트로 "ㅇㅇ구 확인 중" 로딩 문구를 갱신.
   const runSearch = useCallback(
-    async (lat: number, lng: number) => {
+    async (lat?: number, lng?: number) => {
       try {
+        const hasCoords = lat !== undefined && lng !== undefined;
         const url = new URL("/api/physical-search-by-isbn", window.location.origin);
         url.searchParams.set("isbn", isbn);
         url.searchParams.set("title", title ?? isbn);
-        url.searchParams.set("lat", String(lat));
-        url.searchParams.set("lng", String(lng));
+        if (hasCoords) {
+          url.searchParams.set("lat", String(lat));
+          url.searchParams.set("lng", String(lng));
+        }
 
         const res = await fetch(url.toString());
-        const json: ApiResponse<PhysicalBook[]> = await res.json();
-        if (!json.success) return;
+        if (!res.body) throw new Error("스트림 없음");
 
-        const matched = json.data.find((b) => b.isbn === isbn);
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let finalBooks: PhysicalBook[] | null = null;
+        let buf = "";
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buf += decoder.decode(value, { stream: true });
+          const lines = buf.split("\n");
+          buf = lines.pop() ?? "";
+          for (const line of lines) {
+            if (!line.trim()) continue;
+            const data = JSON.parse(line);
+            if (data.type === "progress") {
+              setLoadingMessage(`${data.gu} 도서관 확인 중...`);
+            } else if (data.type === "done" && data.success) {
+              finalBooks = data.data;
+            }
+          }
+        }
+        if (!finalBooks) return;
+
+        const matched = finalBooks.find((b) => b.isbn === isbn);
         setLibraries(matched?.libraries ?? []);
-        setSearchScope(userLocation ? "nearby" : "all");
+        setSearchScope(hasCoords ? "nearby" : "all");
 
         // 검색 기준점 갱신 + 구 이름 라벨 갱신 + 이동 감지 타이머 재시작
-        setLastSearchedLocation({ lat, lng });
-        setDistrictLabel(computeDistrictLabel(lat, lng));
+        // (전체 검색이면 재검색 UI가 통째로 숨으므로 기준점·라벨 불필요)
+        if (hasCoords) {
+          setLastSearchedLocation({ lat: lat!, lng: lng! });
+          setDistrictLabel(computeDistrictLabel(lat!, lng!));
+        }
         setShowResearchPrompt(false);
         setPendingLocation(null);
 
@@ -199,7 +242,7 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
         console.log("[physical map] runSearch failed:", e);
       }
     },
-    [isbn, title, userLocation]
+    [isbn, title]
   );
 
   /**
@@ -230,15 +273,13 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
     async function initialLoad() {
       // userLocation이 나중에 들어올 때 재실행되지 않도록 한 번만 실행
       if (hasLoadedRef.current) return;
-      hasLoadedRef.current = true;
 
-      const lat = userLocation?.lat ?? DEFAULT_LOCATION.lat;
-      const lng = userLocation?.lng ?? DEFAULT_LOCATION.lng;
-
-      let usedCache = false;
+      // 1) 캐시는 위치와 무관하게 즉시 시도 — 검색 화면에서 넘어온 경우
+      //    GPS 대기 없이 바로 마커를 그린다 (기존 동작 유지)
       try {
         const cached = sessionStorage.getItem(`physical_book_${isbn}`);
         if (cached) {
+          hasLoadedRef.current = true;
           const parsed: { book: PhysicalBook; scope: "nearby" | "all" } = JSON.parse(cached);
           const libs = parsed.book.libraries ?? [];
           setLibraries(libs);
@@ -258,16 +299,21 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
           }
 
           sessionStorage.removeItem(`physical_book_${isbn}`);
-          usedCache = true;
+          setLoading(false);
+          return;
         }
       } catch (e) {
         console.log("[physical map] sessionStorage 읽기 실패, API로 진행:", e);
       }
 
-      if (!usedCache) {
-        await runSearch(lat, lng);
-      }
+      // 2) 캐시가 없으면 위치 확보가 끝날 때까지 대기 — getCurrentPosition은
+      //    성공(좌표) 또는 실패(null)로 최대 5초 안에 반드시 끝난다.
+      //    [2026-07-09] 기존엔 여기서 기다리지 않고 기본좌표(방배)로 검색해,
+      //    위치 없는 사용자도 방배 근처 3구만 검색되던 버그가 있었음.
+      if (userLocation === undefined) return; // 위치 조회 중 — 해결되면 effect 재실행
 
+      hasLoadedRef.current = true;
+      await runSearch(userLocation?.lat, userLocation?.lng);
       setLoading(false);
     }
     initialLoad();

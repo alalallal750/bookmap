@@ -65,7 +65,10 @@
 import * as cheerio from "cheerio";
 import * as iconv from "iconv-lite";
 import { EbookBook, EbookLibraryEntry, PhysicalBook, PhysicalLibrary, LibraryType } from "@/types";
-import { DEFAULT_LOCATION, getNearbyDbnums, getAllDbnums, getDistrictName } from "@/lib/data/districtCoords";
+import { DEFAULT_LOCATION, getNearbyDbnums, getAllDbnums, getDistrictName, getNearbyUnreliableDbnums, getUnreliableDbnums } from "@/lib/data/districtCoords";
+import { fetchHoldingLibCodes, fetchBookExist, logNaruUsage } from "@/lib/api/data4library";
+import { getNaruLibrariesByGu } from "@/lib/data/naruLibraries";
+import { buildNaruPortalSearchUrl } from "@/lib/data/naruPortalUrls";
 import { findBranchCoord } from "@/lib/data/branchCoords";
 import { findBranchHours } from "@/lib/data/branchHours";
 
@@ -1106,7 +1109,9 @@ function mapGangdongLoanCode(loanCode: string): string {
   return "대출불가";
 }
 
-async function fetchGangdongBranches(isbn: string, title: string): Promise<PhysicalRawRecord[]> {
+// [2026-07-09 변경] 커스텀 포털 fetcher들(강동/누리/강북/마포)도 실패와
+// 0건을 구분 — 실패 시 null 반환(정보나루 폴백 대상), 미소장 0건은 [].
+async function fetchGangdongBranches(isbn: string, title: string): Promise<PhysicalRawRecord[] | null> {
   try {
     const res = await fetch(GANGDONG_GDLIBRARY_URL, {
       method: "POST",
@@ -1116,7 +1121,7 @@ async function fetchGangdongBranches(isbn: string, title: string): Promise<Physi
     });
     if (!res.ok) {
       console.log("[seoulLibrary] gdlibrary HTTP error:", res.status);
-      return [];
+      return null;
     }
     const items: GdlibraryItem[] = await res.json();
     if (!Array.isArray(items) || items.length === 0) return [];
@@ -1152,7 +1157,7 @@ async function fetchGangdongBranches(isbn: string, title: string): Promise<Physi
     return records;
   } catch (e) {
     console.log("[seoulLibrary] gdlibrary fetch failed:", e);
-    return [];
+    return null;
   }
 }
 
@@ -1174,7 +1179,7 @@ async function fetchNuriBranches(
   isbn: string,
   title: string,
   searchUrl: string
-): Promise<PhysicalRawRecord[]> {
+): Promise<PhysicalRawRecord[] | null> {
   if (!speciesKeys) return [];
   try {
     const libListUrl = `${portalBase}/api/bookDetail/bookCollection/libList?pubFormCode=MO&speciesKey=${encodeURIComponent(speciesKeys)}`;
@@ -1184,7 +1189,7 @@ async function fetchNuriBranches(
     });
     if (!libRes.ok) {
       console.log(`[seoulLibrary] Nuri libList HTTP error (${dbnum}):`, libRes.status);
-      return [];
+      return null;
     }
     const libJson = await libRes.json();
     const libList: { libCode: string; manageCode: string; libName: string; bookCount?: number }[] =
@@ -1236,7 +1241,7 @@ async function fetchNuriBranches(
     return records;
   } catch (e) {
     console.log(`[seoulLibrary] Nuri fetchBranches failed (${dbnum}):`, e);
-    return [];
+    return null;
   }
 }
 
@@ -1298,7 +1303,7 @@ async function fetchGangbukBranches(
   query: string,
   isbn: string,
   title: string
-): Promise<PhysicalRawRecord[]> {
+): Promise<PhysicalRawRecord[] | null> {
   const searchUrl = `https://www.gblib.or.kr/gangbuk/search/total.do#uri=list&a_lib=&a_key=&a_v=f&a_cp=1&a_qf=${queryField}&a_q=${encodeURIComponent(query)}&a_rf=T&a_rq=`;
   try {
     const body = new URLSearchParams({
@@ -1316,7 +1321,7 @@ async function fetchGangbukBranches(
       },
       body: body.toString(),
     });
-    if (!res.ok) return [];
+    if (!res.ok) return null;
     const json = await res.json();
     const items: { libName: string; loanYN: string; isbn?: string; title?: string }[] = json?.item ?? [];
     if (!Array.isArray(items) || items.length === 0) return [];
@@ -1334,7 +1339,7 @@ async function fetchGangbukBranches(
     }));
   } catch (e) {
     console.log("[seoulLibrary] gangbuk fetch failed:", e);
-    return [];
+    return null;
   }
 }
 
@@ -1347,7 +1352,7 @@ const MAPO_LIBRARY_CODES = [
   "HQ","MN","MA","HK","DO","MK","ML","MI","ME","MF","MC","MG","MH","MJ","MM","MB",
 ];
 
-async function fetchMapoBranches(title: string, filterIsbn?: string): Promise<PhysicalRawRecord[]> {
+async function fetchMapoBranches(title: string, filterIsbn?: string): Promise<PhysicalRawRecord[] | null> {
   const buildUrl = (page: number) => {
     const base = "https://mplib.mapo.go.kr/mcl/MENU1039/PGM3007/plusSearchResultList.do";
     const params = new URLSearchParams({
@@ -1453,7 +1458,7 @@ async function fetchMapoBranches(title: string, filterIsbn?: string): Promise<Ph
     return records;
   } catch (e) {
     console.log("[seoulLibrary] mapo portal fetch failed:", e);
-    return [];
+    return null;
   }
 }
 
@@ -1463,6 +1468,15 @@ async function fetchMapoBranches(title: string, filterIsbn?: string): Promise<Ph
 // total 기반 추가 페이지 호출로 자동 대응(아래 로직 참조).
 const PHYSICAL_SEARCH_DISPLAY = 200;
 
+/**
+ * [2026-07-09 변경] 반환 타입에 failed 플래그 추가 — "타임아웃/에러로
+ * 못 가져옴"(failed: true)과 "정상 응답인데 소장 없음"(failed: false,
+ * records 0건)을 구분한다. 실패한 구만 정보나루 폴백 대상이 되고,
+ * 정상 0건(미소장)은 폴백하지 않는다 (2026-07-09 결정 — 0건에도
+ * 폴백하면 미소장 구 전부가 매 검색마다 정보나루를 호출해 한도 초과).
+ */
+type DistrictFetchResult = { records: PhysicalRawRecord[]; failed: boolean };
+
 async function fetchDistrictsByCategory(
   dbnum: string,
   category1: string,
@@ -1471,7 +1485,7 @@ async function fetchDistrictsByCategory(
   id: string,
   cookie: string,
   defaultSearchUrl: string
-): Promise<PhysicalRawRecord[]> {
+): Promise<DistrictFetchResult> {
   const buildUrl = (cat: string, text: string, recstart: number) => {
     const encodedText = encodeURIComponent(text);
     const searchQueryParams =
@@ -1515,20 +1529,12 @@ async function fetchDistrictsByCategory(
   try {
     let cat = category1;
     let text = searchText;
-    // [2026-07-07 추가] 간헐적 타임아웃 구(강서·영등포·서대문·동대문 등)
-    // 대응 — 1차 요청이 타임아웃/네트워크 오류로 실패하면 한 번만 재시도.
-    // 재시도도 실패하면 바깥 catch로 넘어가 기존처럼 빈 결과 처리.
-    let first: { xml: string; ok: boolean };
-    try {
-      first = await fetchOnce(cat, text, 1);
-    } catch (e) {
-      console.log(
-        `[DEBUG-CHECK] 1차 실패 — dbnum: ${dbnum} (${getDistrictName(dbnum) ?? "?"}) 1회 재시도:`,
-        (e as Error)?.message ?? e
-      );
-      first = await fetchOnce(cat, text, 1);
-    }
-    let { xml, ok } = first;
+    // [2026-07-09 변경] 2026-07-07에 넣었던 "실패 시 1회 재시도" 제거 —
+    // 재시도는 타임아웃 상한을 2배(최대 30초)로 늘려 전체 검색을 그만큼
+    // 붙잡는데, 이제 실패한 구는 정보나루 폴백이 결과를 대신 제공하므로
+    // 재시도로 대기시간을 사는 것보다 빨리 실패를 확정하고 폴백으로
+    // 넘기는 쪽이 낫다.
+    let { xml, ok } = await fetchOnce(cat, text, 1);
 
     // 마포구 + ISBN 검색이 실패한 경우만 제목으로 재시도
     if (!ok && dbnum === MAPO_DBNUM && category1 === "7" && fallbackTitleForMapo) {
@@ -1540,7 +1546,9 @@ async function fetchDistrictsByCategory(
       ok = retry.ok;
     }
 
-    if (!xml) return [];
+    // xml이 비었거나 엔진이 Failed를 반환한 경우 — 미소장(0건)이 아니라
+    // 조회 실패이므로 failed로 표시해 정보나루 폴백 대상이 되게 함.
+    if (!xml || !ok) return { records: [], failed: true };
 
     const xmlPages = [xml];
     const total = parseTotal(xml);
@@ -1560,7 +1568,7 @@ async function fetchDistrictsByCategory(
       }
     }
 
-    return xmlPages.flatMap((page) => parsePhysicalXml(page, dbnum));
+    return { records: xmlPages.flatMap((page) => parsePhysicalXml(page, dbnum)), failed: false };
   } catch (e) {
     // [임시 디버그] 타임아웃이 매번 같은 구에서 나는지 패턴 확인용 —
     // dbnum과 구 이름을 같이 남겨서 비교하기 쉽게 함.
@@ -1569,7 +1577,7 @@ async function fetchDistrictsByCategory(
       new Date().toISOString(),
       e
     );
-    return [];
+    return { records: [], failed: true };
   }
 }
 
@@ -1687,7 +1695,7 @@ export async function searchPhysicalBooks(
 
   const resultsByDistrict = await Promise.all(
     metaDbnums.map(async (dbnum) => {
-      const records = await fetchDistrictsByCategory(dbnum, "1", query, undefined, id, cookie, defaultSearchUrl);
+      const { records } = await fetchDistrictsByCategory(dbnum, "1", query, undefined, id, cookie, defaultSearchUrl);
       const guName = getDistrictName(dbnum);
       if (guName && records.length > 0 && !NO_PROGRESS_DBNUMS.has(dbnum)) onProgress?.(guName);
       return records;
@@ -1711,7 +1719,7 @@ export async function searchPhysicalBooks(
       Array.from(gangdongIsbnSet).map((isbn) =>
         fetchGangdongBranches(isbn, gangdongSeoulRecords.find(
           (r) => (normalizeIsbn(r.isbn) || normalizeIsbn(extractIsbnFromUrl(r.url))) === isbn
-        )?.title ?? query)
+        )?.title ?? query).then((r) => r ?? [])
       )
     )
   ).flat();
@@ -1743,7 +1751,7 @@ export async function searchPhysicalBooks(
           isbn,
           record.title,
           record.url
-        )
+        ).then((r) => r ?? [])
       )
     )
   ).flat();
@@ -1775,14 +1783,16 @@ export async function searchPhysicalBooks(
           nowonEntries.map(async ([isbn, record], i) => {
             const speciesKey = i === 0 ? probeKey : await fetchNowonSpeciesKey(isbn);
             if (!speciesKey) return [];
-            return fetchNuriBranches(
-              NOWON_PORTAL,
-              speciesKey,
-              NOWON_DBNUM,
-              "노원구립통합도서관",
-              isbn,
-              record.title,
-              `${NOWON_PORTAL}/KeywordSearchResult/${encodeURIComponent(record.title)}`
+            return (
+              (await fetchNuriBranches(
+                NOWON_PORTAL,
+                speciesKey,
+                NOWON_DBNUM,
+                "노원구립통합도서관",
+                isbn,
+                record.title,
+                `${NOWON_PORTAL}/KeywordSearchResult/${encodeURIComponent(record.title)}`
+              )) ?? []
             );
           })
         )
@@ -1792,10 +1802,10 @@ export async function searchPhysicalBooks(
 
   const [gangbukRecords, mapoRecords] = await Promise.all([
     targetDbnums.includes(GANGBUK_DBNUM)
-      ? fetchGangbukBranches("Z", query, "", query).then((r) => { if (r.length > 0) onProgress?.("강북구"); return r; })
+      ? fetchGangbukBranches("Z", query, "", query).then((r) => { if (r && r.length > 0) onProgress?.("강북구"); return r ?? []; })
       : Promise.resolve([]),
     targetDbnums.includes(MAPO_DBNUM)
-      ? fetchMapoBranches(query).then((r) => { if (r.length > 0) onProgress?.("마포구"); return r; })
+      ? fetchMapoBranches(query).then((r) => { if (r && r.length > 0) onProgress?.("마포구"); return r ?? []; })
       : Promise.resolve([]),
   ]);
 
@@ -1823,19 +1833,88 @@ export async function searchPhysicalBooks(
  * @param userLat 사용자 위도 (없으면 DEFAULT_LOCATION 사용)
  * @param userLng 사용자 경도 (없으면 DEFAULT_LOCATION 사용)
  */
+/**
+ * [2026-07-09 변경 — 정보나루 기본선 아키텍처] 구별 결과를 두 소스로
+ * 구성한다:
+ *   - 스크래핑 성공한 구: 기존 그대로 (분관·권수·실시간)
+ *   - 스크래핑이 불가능한 구(NARU_PRIMARY: 금천·송파·성북 — ISBN을
+ *     신뢰할 수 있게 못 줌) + 이번 검색에서 실패(타임아웃/에러)한 구:
+ *     정보나루 libSrchByBook+bookExist (가능/불가만, 전일 기준)
+ * 한 구의 결과는 항상 한 소스에서만 나옴 (병합·중복 없음). 정상 0건
+ * (미소장)은 폴백하지 않음.
+ */
+const NARU_PRIMARY_DBNUMS = new Set([
+  "107191", // 금천구 — ISBN 필드가 비표준 값 (2026-06-26 확정)
+  "44381", // 송파구 — ISBN 필드/url 모두 없음
+  "44301", // 성북구 — ISBN 필드/url 모두 없음
+]);
+
 export async function searchPhysicalBooksByIsbn(
   isbn: string,
   title: string,
   userLat?: number,
-  userLng?: number
+  userLng?: number,
+  // [2026-07-09 추가] 구별 결과 도착 시 진행 콜백 — 제목 검색(searchPhysicalBooks)과
+  // 동일한 "ㅇㅇ구 찾는 중" 스트리밍을 ISBN 흐름(지도 화면)에도 제공
+  onProgress?: (gu: string) => void
 ): Promise<PhysicalBook[]> {
-  const lat = userLat ?? DEFAULT_LOCATION.lat;
-  const lng = userLng ?? DEFAULT_LOCATION.lng;
-  const targetDbnums = getNearbyDbnums(lat, lng);
+  // [2026-07-09 수정] 위치가 없으면 기본좌표(방배) 근처로 좁히던 동작을
+  // 제거하고 25개 구 전체 검색으로 변경 — 제목 검색(searchPhysicalBooks)의
+  // 2026-06-24 결정("위치 없으면 전체")이 ISBN 흐름엔 빠져 있었음.
+  // 그 탓에 위치 없는 사용자에게 중구 등 원거리 구가 항상 누락됐음.
+  const hasLocation = userLat !== undefined && userLng !== undefined;
+  // 스크래핑 대상(금천구 제외 로직 포함, 기존과 동일) + 금천구는
+  // 정보나루 대상으로만 추가
+  const targetDbnums = hasLocation ? getNearbyDbnums(userLat, userLng) : getAllDbnums();
+  const naruOnlyDbnums = hasLocation
+    ? getNearbyUnreliableDbnums(userLat, userLng)
+    : getUnreliableDbnums();
 
   const id = generateRequestId();
   const defaultSearchUrl = `${BASE_URL}/index.php/default_search`;
 
+  // 결과가 도착한 구는 진행 콜백으로 알림 (null=실패는 제외)
+  const notifyProgress = (gu: string) => (r: PhysicalRawRecord[] | null) => {
+    if (r && r.length > 0) onProgress?.(gu);
+    return r;
+  };
+
+  // ── [2026-07-09 병렬화] meta 스크래핑과 무관한 작업들을 검색 시작과
+  // 동시에 출발 — 기존엔 meta 단계가 끝난 뒤 직렬로 붙어 있어서 전체
+  // 검색(25개 구)이 47초까지 걸렸음. 병렬화 대상:
+  //   1. 커스텀 포털 4곳(강동·노원·강북·마포 — meta 결과 불필요)
+  //   2. 정보나루 상시 구(금천·송파·성북 — 스크래핑 자체를 안 함)
+  // 은평만 meta 응답의 speciesKey가 필요해 meta 단계 뒤에 남음.
+  const gangdongPromise = targetDbnums.includes(GANGDONG_DBNUM)
+    ? fetchGangdongBranches(isbn, title).then(notifyProgress("강동구"))
+    : Promise.resolve([] as PhysicalRawRecord[]);
+  const nowonPromise = (async (): Promise<PhysicalRawRecord[] | null> => {
+    if (!targetDbnums.includes(NOWON_DBNUM)) return [];
+    const speciesKey = await fetchNowonSpeciesKey(isbn);
+    if (speciesKey === null) return null; // 서버 접속 실패 — 폴백 대상
+    if (!speciesKey) return []; // 정상 미소장
+    return fetchNuriBranches(NOWON_PORTAL, speciesKey, NOWON_DBNUM, "노원구립통합도서관", isbn, title, `${NOWON_PORTAL}/KeywordSearchResult/${encodeURIComponent(title)}`).then(notifyProgress("노원구"));
+  })();
+  const gangbukPromise = targetDbnums.includes(GANGBUK_DBNUM)
+    ? fetchGangbukBranches("I", isbn, isbn, title).then(notifyProgress("강북구"))
+    : Promise.resolve([] as PhysicalRawRecord[]);
+  const mapoPromise = targetDbnums.includes(MAPO_DBNUM)
+    ? fetchMapoBranches(title, isbn).then(notifyProgress("마포구"))
+    : Promise.resolve([] as PhysicalRawRecord[]);
+
+  const naruPrimaryGus = [
+    ...new Set(
+      [...naruOnlyDbnums, ...targetDbnums.filter((d) => NARU_PRIMARY_DBNUMS.has(d))]
+        .map((d) => getDistrictName(d))
+        .filter((gu): gu is string => Boolean(gu))
+    ),
+  ];
+  const naruPrimaryPromise =
+    naruPrimaryGus.length > 0
+      ? fetchNaruPhysicalLibraries(naruPrimaryGus, isbn, title)
+      : Promise.resolve([] as PhysicalLibrary[]);
+
+  // ── meta 스크래핑 단계 ────────────────────────────────────────────
   let cookie = "";
   try {
     const res = await fetch(defaultSearchUrl, {
@@ -1847,47 +1926,159 @@ export async function searchPhysicalBooksByIsbn(
     console.log("[seoulLibrary] physical(isbn) stage1 fetch failed:", e);
   }
 
-  // 강북구·마포구는 meta API에서 Loan 필드 없음 → 포털 직접 호출, meta 호출 생략
-  const SKIP_META_DBNUMS_ISBN = new Set([GANGBUK_DBNUM, MAPO_DBNUM]);
+  // meta 호출 생략 구: 강북·마포(포털 직접) + 정보나루 상시 구(송파·성북 —
+  // 응답이 와도 ISBN이 없어 전량 버려지므로 호출 자체가 낭비)
+  const SKIP_META_DBNUMS_ISBN = new Set([GANGBUK_DBNUM, MAPO_DBNUM, ...NARU_PRIMARY_DBNUMS]);
   const metaDbnumsIsbn = targetDbnums.filter((d) => !SKIP_META_DBNUMS_ISBN.has(d));
 
   const resultsByDistrict = await Promise.all(
-    metaDbnumsIsbn.map((dbnum) =>
-      fetchDistrictsByCategory(dbnum, "7", isbn, title, id, cookie, defaultSearchUrl)
-    )
+    metaDbnumsIsbn.map(async (dbnum) => {
+      const result = await fetchDistrictsByCategory(dbnum, "7", isbn, title, id, cookie, defaultSearchUrl);
+      const guName = getDistrictName(dbnum);
+      if (guName && !result.failed && result.records.length > 0) onProgress?.(guName);
+      return { dbnum, ...result };
+    })
   );
+
+  // 실패한 구 수집 — 정보나루 폴백 대상. 강동·노원은 meta 결과를 쓰지
+  // 않으므로(포털 직접 조회) meta 실패를 실패로 치지 않고, 포털 호출
+  // 실패(null)만 본다. 은평은 meta 응답의 speciesKey에 의존하므로 meta
+  // 실패도 은평 실패다.
+  const failedDbnums = new Set<string>();
+  for (const r of resultsByDistrict) {
+    if (r.failed && r.dbnum !== GANGDONG_DBNUM && r.dbnum !== NOWON_DBNUM) {
+      failedDbnums.add(r.dbnum);
+    }
+  }
+
   // 강동구/은평구/노원구: meta 결과 제거 후 각 포털 API로 분관별 대체
   const NURI_DBNUMS_SET = new Set([GANGDONG_DBNUM, EUNPYEONG_DBNUM, NOWON_DBNUM]);
-  const allSeoulRecords = resultsByDistrict.flat();
+  const allSeoulRecords = resultsByDistrict.flatMap((r) => r.records);
   const seoulLibRecords = allSeoulRecords.filter((r) => !NURI_DBNUMS_SET.has(r.dbnum));
 
   const epRecord = allSeoulRecords.find((r) => r.dbnum === EUNPYEONG_DBNUM);
 
-  const [gangdongRecords, eunpyeongRecords, nowonRecords, gangbukRecords, mapoRecords] = await Promise.all([
-    targetDbnums.includes(GANGDONG_DBNUM)
-      ? fetchGangdongBranches(isbn, title)
-      : Promise.resolve([]),
+  const [gangdongRes, eunpyeongRes, nowonRes, gangbukRes, mapoRes, naruPrimaryLibs] = await Promise.all([
+    gangdongPromise,
     targetDbnums.includes(EUNPYEONG_DBNUM) && epRecord
-      ? fetchNuriBranches(EUNPYEONG_PORTAL, extractEunpyeongSpeciesKey(epRecord.url), EUNPYEONG_DBNUM, "은평구립도서관", isbn, title, epRecord.url)
-      : Promise.resolve([]),
-    (async () => {
-      if (!targetDbnums.includes(NOWON_DBNUM)) return [];
-      const speciesKey = await fetchNowonSpeciesKey(isbn);
-      if (!speciesKey) return [];
-      return fetchNuriBranches(NOWON_PORTAL, speciesKey, NOWON_DBNUM, "노원구립통합도서관", isbn, title, `${NOWON_PORTAL}/KeywordSearchResult/${encodeURIComponent(title)}`);
-    })(),
-    targetDbnums.includes(GANGBUK_DBNUM) ? fetchGangbukBranches("I", isbn, isbn, title) : Promise.resolve([]),
-    targetDbnums.includes(MAPO_DBNUM) ? fetchMapoBranches(title, isbn) : Promise.resolve([]),
+      ? fetchNuriBranches(EUNPYEONG_PORTAL, extractEunpyeongSpeciesKey(epRecord.url), EUNPYEONG_DBNUM, "은평구립도서관", isbn, title, epRecord.url).then(notifyProgress("은평구"))
+      : Promise.resolve([] as PhysicalRawRecord[]),
+    nowonPromise,
+    gangbukPromise,
+    mapoPromise,
+    naruPrimaryPromise,
   ]);
 
-  const rawRecords = [...seoulLibRecords, ...gangdongRecords, ...eunpyeongRecords, ...nowonRecords, ...gangbukRecords, ...mapoRecords];
+  // 포털 직접 조회 구의 실패(null) 수집
+  const customResults: Array<[string, PhysicalRawRecord[] | null]> = [
+    [GANGDONG_DBNUM, gangdongRes],
+    [EUNPYEONG_DBNUM, eunpyeongRes],
+    [NOWON_DBNUM, nowonRes],
+    [GANGBUK_DBNUM, gangbukRes],
+    [MAPO_DBNUM, mapoRes],
+  ];
+  for (const [dbnum, res] of customResults) {
+    if (res === null) failedDbnums.add(dbnum);
+  }
+
+  const rawRecords = [
+    ...seoulLibRecords,
+    ...(gangdongRes ?? []),
+    ...(eunpyeongRes ?? []),
+    ...(nowonRes ?? []),
+    ...(gangbukRes ?? []),
+    ...(mapoRes ?? []),
+  ];
 
   // 구별 결과 건수 요약 — 마커 누락 원인 파악용 (화면 표시 기준)
   logSearchSummary("[SEARCH-SUMMARY-ISBN]", `isbn: ${isbn}`, rawRecords, targetDbnums);
 
-  if (rawRecords.length === 0) return [];
+  // ── 정보나루 폴백 (실패 구만 — 상시 구는 위에서 병렬로 이미 조회) ──
+  // 안전장치: 스크래핑 레코드가 하나라도 있는 구는 정보나루에서 제외
+  // (한 구 안에서 두 소스가 섞이지 않게)
+  const gusWithRecords = new Set(
+    rawRecords.map((r) => getDistrictName(r.dbnum)).filter(Boolean)
+  );
+  const naruFallbackGus = [
+    ...new Set(
+      [...failedDbnums]
+        .map((d) => getDistrictName(d))
+        .filter((gu): gu is string => Boolean(gu) && !gusWithRecords.has(gu!))
+    ),
+  ];
 
-  return groupPhysicalBooksByIsbn(rawRecords);
+  if (failedDbnums.size > 0) {
+    console.log(
+      `[seoulLibrary] 스크래핑 실패 → 정보나루 폴백:`,
+      [...failedDbnums].map((d) => getDistrictName(d) ?? d).join(", ")
+    );
+  }
+
+  const naruFallbackLibs =
+    naruFallbackGus.length > 0 ? await fetchNaruPhysicalLibraries(naruFallbackGus, isbn, title) : [];
+  const naruLibraries = [...naruPrimaryLibs, ...naruFallbackLibs];
+
+  const books = rawRecords.length > 0 ? groupPhysicalBooksByIsbn(rawRecords) : [];
+
+  if (naruLibraries.length > 0) {
+    const queryIsbn = normalizeIsbn(isbn);
+    const target = books.find((b) => normalizeIsbn(b.isbn) === queryIsbn);
+    if (target) {
+      target.libraries.push(...naruLibraries);
+    } else {
+      books.push({ isbn: queryIsbn, title, author: "", libraries: naruLibraries });
+    }
+  }
+
+  return books;
+}
+
+/**
+ * [2026-07-09 신규] 정보나루 경로 — 대상 구들의 참여관 중 이 책 소장관을
+ * 골라 대출가능 여부(전일 기준)를 PhysicalLibrary로 변환.
+ * 권수(availableCount/totalCount)는 정보나루가 제공하지 않으므로 비워둠
+ * — UI가 이 부재로 출처를 구분해 마커를 "가능"으로, 상세 패널을 "확인
+ * 우선" 버튼으로 그린다.
+ */
+async function fetchNaruPhysicalLibraries(
+  gus: string[],
+  isbn: string,
+  title: string
+): Promise<PhysicalLibrary[]> {
+  const holding = await fetchHoldingLibCodes(isbn);
+  if (holding === null) return []; // 키 없음/한도 초과/네트워크 — 조용히 생략
+
+  const candidates = gus
+    .flatMap((gu) => getNaruLibrariesByGu(gu))
+    .filter((l) => holding.has(l.libCode));
+  if (candidates.length === 0) return [];
+
+  const results = await Promise.all(
+    candidates.map((l) => fetchBookExist(l.libCode, isbn))
+  );
+  logNaruUsage(`bookExist ${gus.join(",")} isbn=${isbn}`, candidates.length);
+
+  const libs: PhysicalLibrary[] = [];
+  results.forEach((res, i) => {
+    if (!res || !res.hasBook) return;
+    const src = candidates[i];
+    libs.push({
+      id: `naru_${src.libCode}`,
+      libraryName: src.libName,
+      libraryType: inferLibraryType(src.libName),
+      address: src.address ?? "",
+      latitude: src.latitude,
+      longitude: src.longitude,
+      tel: src.tel,
+      available: res.loanAvailable,
+      searchResultUrl: buildNaruPortalSearchUrl(src.gu, isbn, title) ?? src.homepage,
+      homepageUrl: src.homepage,
+    });
+  });
+  console.log(
+    `[seoulLibrary] 정보나루 결과: ${gus.join(",")} — 소장 ${libs.length}관 (후보 ${candidates.length}관)`
+  );
+  return libs;
 }
 
 /**
@@ -2171,7 +2362,14 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
 
   const books: PhysicalBook[] = [];
 
-  const buildLibrary = (r: PhysicalRawRecord): PhysicalLibrary => {
+  // [2026-07-09 변경] 같은 (구, 분관)의 record 여러 건 = 그 분관의 소장
+  // 권수 — 기존엔 record마다 PhysicalLibrary를 따로 만들어 같은 분관
+  // 마커가 겹쳐 쌓였고, 화면의 "1권"은 record당 고정값(?? 1)이라 실제
+  // 권수가 아니었음. 분관 단위로 집계해 totalCount/availableCount를
+  // 실데이터로 채운다 (동작구 dongjak.ts의 집계 패턴과 동일).
+  const buildLibrary = (group: PhysicalRawRecord[]): PhysicalLibrary => {
+    const availableRecords = group.filter(isPhysicalAvailable);
+    const r = availableRecords[0] ?? group[0];
     const branchName = extractLibraryName(r);
     const guName = getDistrictName(r.dbnum);
     const coord = findBranchCoord(branchName, guName);
@@ -2187,6 +2385,11 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
       );
     }
 
+    const totalCount = group.length;
+    const availableCount = availableRecords.length;
+    const available = availableCount > 0;
+    const dueDate = group.map((g) => extractReturnDueDate(g.loan)).find(Boolean);
+
     return {
       id: `seoul_${r.dbnum}_${branchName}`,
       libraryName: branchName,
@@ -2196,20 +2399,29 @@ function groupPhysicalBooksByIsbn(records: PhysicalRawRecord[]): PhysicalBook[] 
       longitude: coord?.lng ?? 0,
       tel: hoursInfo?.tel,
       openingHours: hoursInfo?.hours,
-      available: isPhysicalAvailable(r),
+      available,
       callNumber: r.location,
-      returnDueDate: isPhysicalAvailable(r) ? undefined : extractReturnDueDate(r.loan),
+      returnDueDate: available ? undefined : dueDate,
       searchResultUrl: r.url || undefined,
       homepageUrl: hoursInfo?.homepage || undefined,
+      totalCount,
+      availableCount,
+      copyInfo: totalCount > 1 ? `${availableCount}/${totalCount}` : undefined,
     };
   };
 
   for (const [isbn, recordsForIsbn] of byIsbn) {
     const first = recordsForIsbn[0];
     // library·location 둘 다 비어있으면 분관 특정 불가(dbname fallback만 남음) — 제외
-    const libraries = recordsForIsbn
-      .filter((r) => r.library?.trim() || r.location?.trim())
-      .map(buildLibrary);
+    const byBranch = new Map<string, PhysicalRawRecord[]>();
+    for (const r of recordsForIsbn) {
+      if (!(r.library?.trim() || r.location?.trim())) continue;
+      const key = `${r.dbnum}|${extractLibraryName(r)}`;
+      const list = byBranch.get(key) ?? [];
+      list.push(r);
+      byBranch.set(key, list);
+    }
+    const libraries = [...byBranch.values()].map(buildLibrary);
 
     books.push({
       isbn,

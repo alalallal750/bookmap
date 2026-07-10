@@ -66,7 +66,10 @@ export const DISTRICTS: District[] = [
  * 목록"에서만 제외하는 비활성화이며, 좌표/구 정보는 삭제하지 않음.
  * 추후 해결되면 이 Set에서만 빼면 즉시 복원됨.
  */
-const UNRELIABLE_ISBN_DBNUMS = new Set(["107191"]); // 금천구 (ISBN 필드는 있으나 형식이 잘못된 값을 줘서, "없으면 제외" 규칙으로 못 걸러짐 — 별도 제외 유지)
+// 금천구 (ISBN 필드는 있으나 형식이 잘못된 값을 줘서, "없으면 제외" 규칙으로 못 걸러짐 — 별도 제외 유지)
+// [2026-07-09] 스크래핑 대상에서는 계속 제외하되, ISBN 검색 흐름이
+// getNearbyUnreliableDbnums로 이 구를 정보나루 조회 대상에 추가함 — 검색 복원됨.
+const UNRELIABLE_ISBN_DBNUMS = new Set(["107191"]);
 
 /**
  * 위치 정보가 없을 때 기본값 — 서울방배경찰서 (동작구/서초구 경계,
@@ -143,4 +146,23 @@ export function getAllDbnums(): string[] {
 /** dbnum → 구 이름 역조회 (화면 표시용) */
 export function getDistrictName(dbnum: string): string | undefined {
   return DISTRICTS.find((d) => d.dbnum === dbnum)?.gu;
+}
+
+/**
+ * [2026-07-09 추가 — 정보나루 기본선] 스크래핑 불가로 검색에서 제외된
+ * 구(UNRELIABLE_ISBN_DBNUMS = 금천구) 중 사용자 위치 반경 5km 안에
+ * 있는 것들의 dbnum. 기존 getNearbyDbnums의 스크래핑 대상 선정에는
+ * 영향을 주지 않으면서, ISBN 검색 흐름이 이 구들을 정보나루 조회
+ * 대상에 추가할 수 있게 함 (금천구 검색 복원).
+ */
+export function getNearbyUnreliableDbnums(lat: number, lng: number): string[] {
+  return DISTRICTS
+    .filter((d) => UNRELIABLE_ISBN_DBNUMS.has(d.dbnum))
+    .filter((d) => distanceKm(lat, lng, d.lat, d.lng) <= NEARBY_RADIUS_KM)
+    .map((d) => d.dbnum);
+}
+
+/** 위치 없는 전체 검색용 — 제외 구 전체 (정보나루 조회 대상) */
+export function getUnreliableDbnums(): string[] {
+  return DISTRICTS.filter((d) => UNRELIABLE_ISBN_DBNUMS.has(d.dbnum)).map((d) => d.dbnum);
 }
