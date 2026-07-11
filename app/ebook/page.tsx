@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ApiResponse, EbookBook, EbookLibraryEntry, EbookSearchResult } from "@/types";
 import { SearchBar } from "@/components/search/SearchBar";
@@ -25,6 +25,14 @@ function EbookSearchInner() {
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q") ?? "";
   const [state, setState] = useState<SearchState>({ status: "idle" });
+
+  // /ebook?q=제목 딥링크(MCP 검색 결과 링크 등)로 진입하면 자동 검색.
+  // 기존에는 검색어만 입력창에 채우고 대기해서, 링크로 공유받은 사용자가
+  // 버튼을 한 번 더 눌러야 했음.
+  useEffect(() => {
+    if (initialQuery) handleSearch(initialQuery);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function handleSearch(query: string) {
     setState({ status: "loading" });
