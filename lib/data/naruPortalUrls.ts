@@ -32,6 +32,15 @@ const PORTAL_SEARCH_URLS: Record<string, UrlBuilder> = {
     `?searchType=DETAIL&searchKey5=ISBN&searchKeyword5=${encodeURIComponent(isbn)}` +
     `&searchLibrary=ALL&searchSort=SIMILAR&searchOrder=DESC&searchRecordCount=20&currentPageNo=1&viewStatus=IMAGE`,
 
+  // [실측 확인 2026-07-11] 영등포(ydplib)도 송파·마포와 같은 plusSearch 계열 —
+  // ISBN 상세검색 결과에서 저자·ISBN·청구기호까지 정확히 일치 확인. 홍학의
+  // 자리로 저자 "정해연", 불편한 편의점으로 저자 "김호연" 각각 확인, 교차
+  // 검색 시 0건 확인(실제 <li> 카드 렌더링 기준 — 13-3 교훈 적용해 재확인).
+  영등포구: (isbn) =>
+    `https://www.ydplib.or.kr/intro/menu/10004/program/30002/plusSearchResultList.do` +
+    `?searchType=DETAIL&searchKey5=ISBN&searchKeyword5=${encodeURIComponent(isbn)}` +
+    `&searchLibrary=ALL&searchSort=SIMILAR&searchOrder=DESC&searchRecordCount=20&currentPageNo=1&viewStatus=IMAGE`,
+
   // [실측 확인 2026-07-11] 강동(gdlibrary)은 ISBN 검색 파라미터가 없어
   // 제목 검색으로 연결. 서버 렌더링 확인 — 홍학의 자리로 8건, 불편한
   // 편의점으로 22건, 교차 필터링(반대 제목 검색 시 0건) 확인.
@@ -75,6 +84,14 @@ const PORTAL_SEARCH_URLS: Record<string, UrlBuilder> = {
   //   노원: 제목 검색 결과 1건 + 소장정보 버튼 렌더링 확인
   //   강북: ISBN 검색 결과 + 분관별 소장 수(강북 2, 청소년 1, 미아 1) 확인
   노원구: (_isbn, title) => `https://nowonlib.kr/KeywordSearchResult/${encodeURIComponent(title)}`,
+
+  // [실측 확인 2026-07-11 — 헤드리스 크롬 렌더링 검증] 강서(lib.gangseo)는
+  // 노원과 동일한 Nuri 프런트엔드 계열(app 번들에서 같은 KeywordSearchResult
+  // 라우트 확인). 실제 책 카드(저자·발행처·청구기호·대출상태) 렌더링 +
+  // 저자 패싯 카운트("정해연(27)", "김호연(97)")로 진짜 결과임을 확인,
+  // 두 책 교차검증(반대 책 검색 시 0건) 통과.
+  강서구: (_isbn, title) => `https://lib.gangseo.seoul.kr/KeywordSearchResult/${encodeURIComponent(title)}`,
+
   강북구: (isbn) =>
     `https://www.gblib.or.kr/gangbuk/search/total.do` +
     `#uri=list&a_lib=&a_key=&a_v=f&a_cp=1&a_qf=I&a_q=${encodeURIComponent(isbn)}&a_rf=T&a_rq=`,
