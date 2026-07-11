@@ -5,13 +5,24 @@ import Link from "next/link";
 import { PhysicalLibrary, PhysicalBook, PhysicalSearchResponse, ApiResponse } from "@/types";
 import { formatLibraryName } from "@/lib/utils/formatLibraryName";
 import { LibraryDetail } from "@/components/map/LibraryDetail";
-import { DEFAULT_LOCATION, getNearbyDbnums, getDistrictName, distanceKm } from "@/lib/data/districtCoords";
+import { DEFAULT_LOCATION, getNearbyDbnums, getNearbyUnreliableDbnums, getDistrictName, distanceKm } from "@/lib/data/districtCoords";
 
 // [2026-06-24 추가] 지도 이동 시 "이 지역에서 재검색" UX 관련 상수
 // - 진입 후 이 시간(ms) 동안은 이동 감지를 끔(최초 위치 확인/확대 보호)
 // - 마지막 검색 위치에서 이 거리(km) 이상 벗어나야 "재검색 찾기" 문구로 전환
 const MOVE_DETECTION_DELAY_MS = 10000;
 const MOVE_DETECTION_DISTANCE_KM = 5;
+
+// [2026-07-10 추가] 제목 검색(캐시)에 절대 안 담기는 구 — 통합검색이 ISBN을
+// 안 줘서(송파·성북) 또는 비표준이라(금천) 스크래핑 결과가 항상 버려지는
+// 구. 캐시 진입 시 이 구들 + 검색 실패 구(failedGus)를 정보나루로 보강한다.
+const NARU_ALWAYS_GUS = ["금천구", "송파구", "성북구"];
+
+// 주소 문자열에서 구 이름 추출 — 캐시에 이미 결과가 있는 구를 정보나루
+// 보강 대상에서 빼는 데 사용("한 구의 결과는 한 소스" 원칙).
+function extractGuFromAddress(address: string | undefined): string | undefined {
+  return address?.match(/([가-힣]{1,4}구)(?=\s|$)/)?.[1];
+}
 
 function LoadingDots({ message }: { message: string }) {
   const [dotCount, setDotCount] = useState(0);
@@ -100,6 +111,8 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
   const hasLoadedRef = useRef(false);
   // sessionStorage 캐시를 사용했는지 추적 — userLocation 도착 시 lastSearchedLocation 보정에 사용
   const usedCacheRef = useRef(false);
+  // [2026-07-10 추가] nearby 캐시 진입 시 정보나루 보강을 GPS 확보 후로 미룸
+  const pendingNaruMergeRef = useRef<{ libs: PhysicalLibrary[]; failedGus?: string[] } | null>(null);
 
   const [libraries, setLibraries] = useState<PhysicalLibrary[]>([]);
   // [2026-07-09 변경] undefined = 위치 조회 중, null = 실패/미지원, 좌표 = 성공.
@@ -280,10 +293,24 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
         const cached = sessionStorage.getItem(`physical_book_${isbn}`);
         if (cached) {
           hasLoadedRef.current = true;
-          const parsed: { book: PhysicalBook; scope: "nearby" | "all" } = JSON.parse(cached);
+          const parsed: { book: PhysicalBook; scope: "nearby" | "all"; failedGus?: string[] } =
+            JSON.parse(cached);
           const libs = parsed.book.libraries ?? [];
           setLibraries(libs);
           setSearchScope(parsed.scope);
+
+          // [2026-07-10 추가] 캐시(제목 검색 결과)에는 정보나루 결과가 없다 —
+          // 제목 검색은 ISBN을 못 얻는 구(금천·송파·성북)를 항상 버리고,
+          // 실패한 구(노원·중구 타임아웃 등)의 폴백도 없기 때문. 여기서
+          // 그 구들만 백그라운드로 보강 조회해 마커에 합친다. 사용자는
+          // 아무 조작 없이 잠시 뒤 마커가 추가되는 것만 본다.
+          // scope가 "nearby"면 상시 구도 근처 기준으로 골라야 하므로 GPS
+          // 확보(userLocation 확정)를 기다렸다가 아래 useEffect에서 실행.
+          if (parsed.scope === "all") {
+            void mergeNaruLibraries(libs, parsed.failedGus, null);
+          } else {
+            pendingNaruMergeRef.current = { libs, failedGus: parsed.failedGus };
+          }
 
           if (parsed.scope === "nearby") {
             // lastSearchedLocation은 userLocation이 확보된 뒤 별도 useEffect에서 세팅.
@@ -326,6 +353,71 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
     setLastSearchedLocation(userLocation);
   }, [userLocation, loading]);
 
+  // [2026-07-10 추가] nearby 캐시 진입의 정보나루 보강 — GPS 확정(성공 또는
+  // 실패 null) 시점에 실행. GPS 실패면 근처를 알 수 없으므로 상시 구 전체를
+  // 조회(nearby 검색이었다면 드문 경우, 과조회 감수).
+  useEffect(() => {
+    const pending = pendingNaruMergeRef.current;
+    if (!pending || userLocation === undefined) return;
+    pendingNaruMergeRef.current = null;
+    void mergeNaruLibraries(pending.libs, pending.failedGus, userLocation);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userLocation]);
+
+  /**
+   * [2026-07-10 추가] 캐시 진입 시 정보나루 보강 — 상시 구(금천·송파·성북)
+   * + 제목 검색에서 fetch 실패한 구 중, 캐시에 결과가 하나도 없는 구만
+   * /api/naru-physical로 조회해 마커에 합친다. 실패하면 조용히 넘어감
+   * (기존 캐시 마커에는 영향 없음).
+   *
+   * location이 있으면(원래 검색이 nearby) 상시 구도 근처(반경 5km)에 있는
+   * 것만 조회 — ISBN 흐름의 getNearbyUnreliableDbnums와 같은 기준. 노원
+   * 근처 사용자를 위해 송파·성북·금천까지 조회하는 낭비(정보나루 한도)를
+   * 막는다. failedGus는 원래 검색 대상이었던 구이므로 위치와 무관하게 포함.
+   */
+  async function mergeNaruLibraries(
+    cachedLibs: PhysicalLibrary[],
+    failedGus: string[] | undefined,
+    location: { lat: number; lng: number } | null
+  ) {
+    try {
+      const alwaysGus = location
+        ? [
+            ...getNearbyDbnums(location.lat, location.lng),
+            ...getNearbyUnreliableDbnums(location.lat, location.lng),
+          ]
+            .map((d) => getDistrictName(d))
+            .filter((gu): gu is string => Boolean(gu) && NARU_ALWAYS_GUS.includes(gu!))
+        : NARU_ALWAYS_GUS;
+
+      const cachedGus = new Set(
+        cachedLibs.map((l) => extractGuFromAddress(l.address)).filter(Boolean)
+      );
+      const targetGus = [...new Set([...alwaysGus, ...(failedGus ?? [])])].filter(
+        (gu) => !cachedGus.has(gu)
+      );
+      if (targetGus.length === 0) return;
+
+      const url = new URL("/api/naru-physical", window.location.origin);
+      url.searchParams.set("isbn", isbn);
+      if (title) url.searchParams.set("title", title);
+      url.searchParams.set("gus", targetGus.join(","));
+
+      const res = await fetch(url.toString());
+      const json = await res.json();
+      if (!json.success || !Array.isArray(json.libraries) || json.libraries.length === 0) return;
+
+      setLibraries((prev) => {
+        const existingIds = new Set(prev.map((l) => l.id));
+        const added = (json.libraries as PhysicalLibrary[]).filter((l) => !existingIds.has(l.id));
+        console.log(`[physical map] 정보나루 보강: ${targetGus.join(",")} — ${added.length}관 추가`);
+        return added.length > 0 ? [...prev, ...added] : prev;
+      });
+    } catch (e) {
+      console.log("[physical map] 정보나루 보강 실패 (무시):", e);
+    }
+  }
+
   // "찾기" 버튼 클릭 시 재검색
   async function handleResearchClick() {
     if (!pendingLocation || researching) return;
@@ -361,6 +453,8 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
       ? new window.kakao.maps.LatLng(userLocation.lat, userLocation.lng)
       : new window.kakao.maps.LatLng(DEFAULT_LOCATION.lat, DEFAULT_LOCATION.lng);
     mapRef.current = new window.kakao.maps.Map(mapContainerRef.current, { center, level: 6 });
+    // 개발 모드 전용 — 브라우저 콘솔/자동화 검증에서 지도 조작용
+    if (process.env.NODE_ENV === "development") (window as any).__map = mapRef.current;
   }, [mapReady, userLocation, loading]);
 
   const updateVisibleCount = useCallback(() => {

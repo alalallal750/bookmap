@@ -107,6 +107,8 @@ export type PhysicalSearchResponse = {
   meta: {
     scope: "nearby" | "all";
     districtNames: string[];
+    /** [2026-07-10 추가] fetch 실패한 구 — 지도 화면의 정보나루 보강 대상 */
+    failedGus?: string[];
   };
 };
 

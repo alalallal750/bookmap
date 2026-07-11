@@ -45,6 +45,35 @@ export function logNaruUsage(context: string, callCount: number): void {
   console.log(`[naru-usage] ${context} | 호출 ${callCount}회`);
 }
 
+// [2026-07-10 추가] 일일 한도 도달 알림 — 같은 서버 인스턴스에서 하루 한
+// 번만 발송 (서버리스라 인스턴스마다 최대 1회씩은 올 수 있음, 감수).
+let lastLimitAlertDate = "";
+
+/**
+ * 한도 초과로 보이는 에러를 감지하면 "[naru-limit]" 로그를 남기고,
+ * NARU_ALERT_WEBHOOK 환경변수가 있으면 그 주소로 알림을 쏜다.
+ * Slack(text)·Discord(content) 웹훅 둘 다 받는 payload. 실패해도 조용히
+ * 무시 — 알림은 best-effort, 본 기능에 영향 주면 안 됨.
+ */
+function alertIfQuotaExceeded(errorText: string): void {
+  if (!/한도|초과|limit|exceed/i.test(errorText)) return;
+  console.log(`[naru-limit] 정보나루 일일 호출 한도 도달 추정: ${errorText}`);
+
+  const webhook = process.env.NARU_ALERT_WEBHOOK;
+  if (!webhook) return;
+  const today = new Date().toISOString().slice(0, 10);
+  if (lastLimitAlertDate === today) return;
+  lastLimitAlertDate = today;
+
+  const message = `[지금빌려] 정보나루 API 일일 한도 도달 (${today}) — 송파·성북·금천·폴백 구 마커가 오늘 하루 표시되지 않을 수 있습니다. 에러: ${errorText}`;
+  void fetch(webhook, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text: message, content: message }),
+    signal: AbortSignal.timeout(3000),
+  }).catch(() => {});
+}
+
 async function fetchNaruJson(url: string): Promise<any | null> {
   try {
     const res = await fetch(url, {
@@ -59,7 +88,9 @@ async function fetchNaruJson(url: string): Promise<any | null> {
     const r = json.response ?? json;
     if (r.error) {
       // 일일 한도 초과 등 — 에러 내용을 로그로 남기고 조용히 실패
-      console.log(`[naru] API error:`, JSON.stringify(r.error));
+      const errorText = JSON.stringify(r.error);
+      console.log(`[naru] API error:`, errorText);
+      alertIfQuotaExceeded(errorText);
       return null;
     }
     return r;

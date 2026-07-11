@@ -28,6 +28,8 @@ type SearchState =
       query: string;
       scope: "nearby" | "all";
       districtNames: string[];
+      /** [2026-07-10 추가] fetch 실패 구 — 지도 화면 정보나루 보강용으로 전달 */
+      failedGus?: string[];
     }
   | { status: "error"; message: string };
 
@@ -155,6 +157,7 @@ function PhysicalSearchInner() {
         query,
         scope: finalData.meta.scope,
         districtNames: finalData.meta.districtNames,
+        failedGus: finalData.meta.failedGus,
       };
       setState(nextState);
       try {
@@ -170,7 +173,9 @@ function PhysicalSearchInner() {
 
   function handleSelectBook(book: PhysicalBook, scope: "nearby" | "all") {
     try {
-      sessionStorage.setItem(`physical_book_${book.isbn}`, JSON.stringify({ book, scope }));
+      // failedGus: 지도 화면이 캐시 진입 시 정보나루로 보강할 실패 구 목록
+      const failedGus = state.status === "done" ? state.failedGus : undefined;
+      sessionStorage.setItem(`physical_book_${book.isbn}`, JSON.stringify({ book, scope, failedGus }));
       sessionStorage.setItem(RETURN_FROM_MAP_KEY, "1");
     } catch (e) {
       console.log("[physical/page] sessionStorage 저장 실패:", e);
