@@ -39,27 +39,38 @@ const PORTAL_SEARCH_URLS: Record<string, UrlBuilder> = {
     `https://www.gdlibrary.or.kr/portal/menu/37/book/search` +
     `?searchType=title&searchInput=${encodeURIComponent(title)}&autoSearch=true`,
 
-  // [미검증 2026-07-09] 아래 3곳은 검색 결과가 JS 렌더링이라 서버 응답만으로
-  // 자동 실행 여부를 확인 못 함 — 검색 페이지+파라미터로 연결(최소한 검색
-  // 화면에는 도달). 실기기에서 자동 실행이 안 되는 것으로 확인되면 파라미터
-  // 조정 또는 제목 검색으로 교체할 것.
-  성북구: (isbn) =>
-    `https://www.sblib.seoul.kr/library/menu/10012/program/30003/searchSimple.do` +
-    `?query=${encodeURIComponent(isbn)}&collection=ALL&startCount=0`,
-  중구: (isbn) =>
-    `https://www.junggulib.or.kr/SJGL/program/searchSimple.do` +
-    `?searchType=SIMPLE&searchKeyword=${encodeURIComponent(isbn)}`,
-  금천구: (isbn) =>
+  // [실측 확인 2026-07-11 — 헤드리스 크롬 렌더링 검증] 아래 3곳은 검색엔진이
+  // ISBN을 인식 못 하거나 거부(중구는 "ISBN 검색은 상세검색을 이용해주세요"
+  // 알럿으로 명시 거부)해서 제목 검색으로 연결. 세 곳 모두 홍학의 자리/
+  // 불편한 편의점 두 책으로 교차검증(반대 책 검색 시 0건) 통과.
+  // 기존 URL(2026-07-09 등록분)은 성북=검색 폼 페이지로만 이동, 중구=필수
+  // 파라미터(searchType·searchManageCode) 누락으로 진입 거부 — 실제로는
+  // 동작하지 않았음.
+  성북구: (_isbn, title) =>
+    `https://www.sblib.seoul.kr/library/menu/10012/program/30003/searchResultList.do` +
+    `?query=${encodeURIComponent(title)}&collection=ALL&startCount=0&resultCount=10`,
+  중구: (_isbn, title) =>
+    `https://www.junggulib.or.kr/SJGL/program/searchResultList.do` +
+    `?searchType=SIMPLE&searchManageCode=ALL&searchKeyword=${encodeURIComponent(title)}`,
+  금천구: (_isbn, title) =>
     `http://geumcheonlib.seoul.kr/geumcheonlib/uce/search/totalList.do` +
-    `?selfId=1097&searchKeyword=${encodeURIComponent(isbn)}`,
+    `?selfId=1097&searchKeyword=${encodeURIComponent(title)}`,
 
-  // [미검증 2026-07-11] SPA(Vue/React 등) 응답이라 curl로 결과 화면을
-  // 확인 못 함 — 검색 페이지에는 도달하나 자동 실행 여부 실기기 확인 필요.
-  // 없는 것보다 낫다는 판단으로 우선 연결(홈페이지 폴백보다 한 단계 나음).
+  // [실측 확인 2026-07-11 — 헤드리스 크롬 렌더링 검증] SPA지만 둘 다 해당
+  // 책 카드(표지·서지·소장정보)까지 자동 렌더링됨을 확인.
+  //   노원: 제목 검색 결과 1건 + 소장정보 버튼 렌더링 확인
+  //   강북: ISBN 검색 결과 + 분관별 소장 수(강북 2, 청소년 1, 미아 1) 확인
   노원구: (_isbn, title) => `https://nowonlib.kr/KeywordSearchResult/${encodeURIComponent(title)}`,
   강북구: (isbn) =>
     `https://www.gblib.or.kr/gangbuk/search/total.do` +
     `#uri=list&a_lib=&a_key=&a_v=f&a_cp=1&a_qf=I&a_q=${encodeURIComponent(isbn)}&a_rf=T&a_rq=`,
+
+  // [조사 완료 2026-07-11 — 자동 검색 불가] 은평(eplib)은 검색 상태를 URL이
+  // 아니라 sessionStorage(vuex-persistedstate)로 관리해서 딥링크로 검색어를
+  // 전달할 방법이 없음 (searchKeyword/keyword/q/query/searchWord 전부 무효,
+  // 프런트 JS 분석으로 확인). 검색 페이지 연결이 사이트 구조상 최선 —
+  // 사용자가 검색어만 입력하면 됨(홈페이지 폴백보다 한 단계 개선).
+  은평구: () => `https://www.eplib.or.kr/unified/search.asp`,
 };
 
 export function buildNaruPortalSearchUrl(
