@@ -102,6 +102,82 @@ const PORTAL_SEARCH_URLS: Record<string, UrlBuilder> = {
   // 프런트 JS 분석으로 확인). 검색 페이지 연결이 사이트 구조상 최선 —
   // 사용자가 검색어만 입력하면 됨(홈페이지 폴백보다 한 단계 개선).
   은평구: () => `https://www.eplib.or.kr/unified/search.asp`,
+
+  // ────────────────────────────────────────────────────────────────
+  // [2026-07-11 추가] 폴백은 25개 구 어디서든 발생할 수 있는데 위 11개
+  // 구만 등록돼 있어서, 그 외 구(정상 스크래핑 구가 그날 타임아웃나서
+  // 정보나루로 대체된 경우)는 전부 홈페이지로 떨어지고 있었음. 나머지
+  // 구도 전수 실측 검증(헤드리스 크롬 + 2권 교차검증, 13-3 기준)해서
+  // 채움. 구로구만 Angular SPA(4.4MB 미니파이 번들)라 API 엔드포인트를
+  // 정적 분석으로 못 찾아 보류.
+  // ────────────────────────────────────────────────────────────────
+
+  // ISBN 상세검색 (송파·마포·영등포와 같은 plusSearch 계열) — 전부
+  // 저자·ISBN·청구기호 일치 + 2권 교차검증(반대 ISBN 0건) 확인.
+  광진구: (isbn) =>
+    `https://www.gwangjinlib.seoul.kr/gjinfo/plusSearchResultList.do` +
+    `?searchType=DETAIL&searchKey5=ISBN&searchKeyword5=${encodeURIComponent(isbn)}` +
+    `&searchLibrary=ALL&searchSort=SIMILAR&searchOrder=DESC&searchRecordCount=20&currentPageNo=1&viewStatus=IMAGE`,
+  관악구: (isbn) =>
+    `https://lib.gwanak.go.kr/galib/menu/10004/program/30002/searchResultList.do` +
+    `?searchType=DETAIL&searchKey5=ISBN&searchKeyword5=${encodeURIComponent(isbn)}` +
+    `&searchLibrary=ALL&searchSort=SIMILAR&searchOrder=DESC&searchRecordCount=20&currentPageNo=1&viewStatus=IMAGE`,
+  동대문구: (isbn) =>
+    `https://www.l4d.or.kr/intro/plusSearchResultList.do` +
+    `?searchType=DETAIL&searchKey5=ISBN&searchKeyword5=${encodeURIComponent(isbn)}` +
+    `&searchLibrary=ALL&searchSort=SIMILAR&searchOrder=DESC&searchRecordCount=20&currentPageNo=1&viewStatus=IMAGE`,
+  강남구: (isbn) =>
+    `https://library.gangnam.go.kr/intro/plusSearchResultList.do` +
+    `?searchType=DETAIL&searchKey5=ISBN&searchKeyword5=${encodeURIComponent(isbn)}` +
+    `&searchLibrary=ALL&searchSort=SIMILAR&searchOrder=DESC&searchRecordCount=20&currentPageNo=1&viewStatus=IMAGE`,
+
+  // 제목 검색 (ISBN 미지원 또는 미검증) — 전부 실제 <li> 결과 카드(저자·
+  // 발행처·ISBN 등) 렌더링 확인 + 2권 교차검증 통과.
+  중랑구: (_isbn, title) =>
+    `https://www.jungnanglib.seoul.kr/intro/menu/10004/program/30002/searchResultList.do` +
+    `?searchType=SIMPLE&searchManageCode=ALL&searchKeyword=${encodeURIComponent(title)}`,
+  동작구: (_isbn, title) =>
+    `http://lib.dongjak.go.kr/dj/intro/search/index.do` +
+    `?menu_idx=111&booktype=BOOK&libraryCodes=lib_MA,lib_MD,lib_MF,lib_ME,lib_MH,lib_MJ,lib_MK,lib_ML,lib_MC,lib_MN,lib_MP` +
+    `&search_type=L_TITLE&search_text=${encodeURIComponent(title)}`,
+  서대문구: (_isbn, title) =>
+    `https://lib.sdm.or.kr/sdmlib/program/searchResultList.do` +
+    `?searchType=SIMPLE&searchManageCode=ALL&searchKeyword=${encodeURIComponent(title)}`,
+
+  // 용산: 상단 검색폼의 hidden 필드 searchLibraryArr=MA가 없으면 500
+  // 에러(경로가 잘못됨) — 실제 폼 그대로 반영해 해결.
+  용산구: (_isbn, title) =>
+    `https://www.yslibrary.or.kr/dream/searchResultList.do` +
+    `?searchLibraryArr=MA&searchType=SIMPLE&searchKey=ALL&searchKeyword=${encodeURIComponent(title)}`,
+
+  // 도봉·성동·양천·종로(정독도서관 시스템 — 종로·서울시립어린이도서관
+  // 소장정보까지 통합검색됨, 3관 전부 커버): 같은 벤더의 사이트 검색
+  // 시스템(site/search) 계열. 도봉·성동은 전체 분관 코드 나열, 양천은
+  // search_item=search_title 고정, 종로(정독)는 파라미터 없이 검색어만.
+  도봉구: (_isbn, title) =>
+    `https://www.unilib.dobong.kr/site/search/search00.do` +
+    `?cmd_name=bookandnonbooksearch&search_type=detail&search_item=` +
+    `&manage_code=MA,MB,MC,ME,MG,MJ,MF,MH,SA,MD,SB,SL,SM,SN,SO,SP,SK,SQ,SR,SS,ST,SU,SG,SH,SC` +
+    `&search_txt=${encodeURIComponent(title)}`,
+  성동구: (_isbn, title) =>
+    `https://www.sdlib.or.kr/main/site/search/search00.do` +
+    `?cmd_name=bookandnonbooksearch&search_type=detail&use_facet=N&search_item=search_title` +
+    `&search_txt=${encodeURIComponent(title)}`,
+  양천구: (_isbn, title) =>
+    `https://lib.yangcheon.or.kr/main/site/search/bookSearch.do` +
+    `?cmd_name=bookandnonbooksearch&search_type=detail&search_item=search_title` +
+    `&search_txt=${encodeURIComponent(title)}`,
+  종로구: (_isbn, title) =>
+    `http://jdlib.sen.go.kr/jdlib/intro/search/index.do?search_text=${encodeURIComponent(title)}`,
+
+  // 서초: 강서와 동일한 Nuri 프런트엔드 계열(app 번들 라우트 확인).
+  서초구: (_isbn, title) => `https://public.seocholib.or.kr/KeywordSearchResult/${encodeURIComponent(title)}`,
+
+  // [2026-07-11 조사 — 보류] 구로(Angular SPA, 4.4MB 미니파이 번들)는
+  // API 엔드포인트를 정적 분석으로 못 찾음. #/total-search?keyword=
+  // 라우트는 존재(state 정의 확인)하나 헤드리스 크롬으로 렌더링해도
+  // XHR 데이터가 안 채워짐 — CDP 기반 네트워크 캡처 등 별도 도구 필요.
+  // 미등록 상태로 두면 기존과 동일하게 홈페이지 폴백(악화 없음).
 };
 
 export function buildNaruPortalSearchUrl(

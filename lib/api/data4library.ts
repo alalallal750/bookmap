@@ -50,14 +50,19 @@ export function logNaruUsage(context: string, callCount: number): void {
 let lastLimitAlertDate = "";
 
 /**
- * 한도 초과로 보이는 에러를 감지하면 "[naru-limit]" 로그를 남기고,
+ * 한도 초과 에러를 감지하면 "[naru-limit]" 로그를 남기고,
  * NARU_ALERT_WEBHOOK 환경변수가 있으면 그 주소로 알림을 쏜다.
  * Slack(text)·Discord(content) 웹훅 둘 다 받는 payload. 실패해도 조용히
  * 무시 — 알림은 best-effort, 본 기능에 영향 주면 안 됨.
+ *
+ * [2026-07-11 수정] 실제 한도 초과 응답의 errCode는 "outOflimit"이고
+ * 메시지는 "1일 500건 이상 요청 시 IP 등록이 필요합니다..."라서 "한도/
+ * 초과/limit/exceed" 문구 매칭으로는 못 잡았음(실측으로 확인된 버그) —
+ * errCode 필드를 직접 검사하도록 변경.
  */
-function alertIfQuotaExceeded(errorText: string): void {
-  if (!/한도|초과|limit|exceed/i.test(errorText)) return;
-  console.log(`[naru-limit] 정보나루 일일 호출 한도 도달 추정: ${errorText}`);
+function alertIfQuotaExceeded(errCode: string | undefined, errorText: string): void {
+  if (errCode !== "outOflimit") return;
+  console.log(`[naru-limit] 정보나루 일일 호출 한도 도달: ${errorText}`);
 
   const webhook = process.env.NARU_ALERT_WEBHOOK;
   if (!webhook) return;
@@ -89,8 +94,8 @@ async function fetchNaruJson(url: string): Promise<any | null> {
     if (r.error) {
       // 일일 한도 초과 등 — 에러 내용을 로그로 남기고 조용히 실패
       const errorText = JSON.stringify(r.error);
-      console.log(`[naru] API error:`, errorText);
-      alertIfQuotaExceeded(errorText);
+      console.log(`[naru] API error:`, errorText, r.errCode ? `(errCode: ${r.errCode})` : "");
+      alertIfQuotaExceeded(r.errCode, errorText);
       return null;
     }
     return r;
