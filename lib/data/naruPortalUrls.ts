@@ -23,6 +23,22 @@ const PORTAL_SEARCH_URLS: Record<string, UrlBuilder> = {
     `?searchType=DETAIL&searchKey5=ISBN&searchKeyword5=${encodeURIComponent(isbn)}` +
     `&searchLibrary=ALL&searchSort=SIMILAR&searchOrder=DESC&searchRecordCount=20&currentPageNo=1&viewStatus=IMAGE`,
 
+  // [실측 확인 2026-07-11] 마포(mplib)도 송파와 같은 plusSearch 계열 —
+  // ISBN 상세검색이 서버 렌더링으로 동작. 홍학의 자리(9788954681155)로
+  // 48건, 불편한 편의점(9791161571188)으로 60건, 서로 교차 필터링(다른
+  // 책 ISBN으로는 0건) 확인해 필터링이 진짜 동작함을 검증.
+  마포구: (isbn) =>
+    `https://mplib.mapo.go.kr/mcl/MENU1039/PGM3007/plusSearchResultList.do` +
+    `?searchType=DETAIL&searchKey5=ISBN&searchKeyword5=${encodeURIComponent(isbn)}` +
+    `&searchLibrary=ALL&searchSort=SIMILAR&searchOrder=DESC&searchRecordCount=20&currentPageNo=1&viewStatus=IMAGE`,
+
+  // [실측 확인 2026-07-11] 강동(gdlibrary)은 ISBN 검색 파라미터가 없어
+  // 제목 검색으로 연결. 서버 렌더링 확인 — 홍학의 자리로 8건, 불편한
+  // 편의점으로 22건, 교차 필터링(반대 제목 검색 시 0건) 확인.
+  강동구: (_isbn, title) =>
+    `https://www.gdlibrary.or.kr/portal/menu/37/book/search` +
+    `?searchType=title&searchInput=${encodeURIComponent(title)}&autoSearch=true`,
+
   // [미검증 2026-07-09] 아래 3곳은 검색 결과가 JS 렌더링이라 서버 응답만으로
   // 자동 실행 여부를 확인 못 함 — 검색 페이지+파라미터로 연결(최소한 검색
   // 화면에는 도달). 실기기에서 자동 실행이 안 되는 것으로 확인되면 파라미터
@@ -36,6 +52,14 @@ const PORTAL_SEARCH_URLS: Record<string, UrlBuilder> = {
   금천구: (isbn) =>
     `http://geumcheonlib.seoul.kr/geumcheonlib/uce/search/totalList.do` +
     `?selfId=1097&searchKeyword=${encodeURIComponent(isbn)}`,
+
+  // [미검증 2026-07-11] SPA(Vue/React 등) 응답이라 curl로 결과 화면을
+  // 확인 못 함 — 검색 페이지에는 도달하나 자동 실행 여부 실기기 확인 필요.
+  // 없는 것보다 낫다는 판단으로 우선 연결(홈페이지 폴백보다 한 단계 나음).
+  노원구: (_isbn, title) => `https://nowonlib.kr/KeywordSearchResult/${encodeURIComponent(title)}`,
+  강북구: (isbn) =>
+    `https://www.gblib.or.kr/gangbuk/search/total.do` +
+    `#uri=list&a_lib=&a_key=&a_v=f&a_cp=1&a_qf=I&a_q=${encodeURIComponent(isbn)}&a_rf=T&a_rq=`,
 };
 
 export function buildNaruPortalSearchUrl(
