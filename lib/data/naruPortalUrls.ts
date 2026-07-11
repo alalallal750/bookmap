@@ -46,9 +46,23 @@ const PORTAL_SEARCH_URLS: Record<string, UrlBuilder> = {
   // 기존 URL(2026-07-09 등록분)은 성북=검색 폼 페이지로만 이동, 중구=필수
   // 파라미터(searchType·searchManageCode) 누락으로 진입 거부 — 실제로는
   // 동작하지 않았음.
+  //
+  // [2026-07-11 재수정] 첫 검증 방법의 결함 발견 — "홍학" 등 검색어 substring이
+  // 페이지에 등장하는지만 확인했는데, 이 세 사이트는 검색창이 입력값을 그대로
+  // 되돌려주는 에코(최근검색어·hidden input value)가 있어서 실제 결과 없이도
+  // 매치가 나왔음(교차검증도 이 에코가 항상 검색어와 일치해 우연히 통과).
+  // 실제 <li> 결과 카드(표지·저자·청구기호 등) 렌더링 여부로 재검증함.
+  //
+  // 성북: 최초 URL은 collection=ALL을 썼는데, 실제 검색 폼의 기본값은
+  // collection=book이고 range=A 필드가 없으면 결과가 0건으로 렌더링됨
+  // (도서관선택 목록의 모든 분관이 (0)으로 표시되는 걸로 확인). search.js의
+  // doSearch() 함수가 실제로 세팅하는 hidden 필드 전체를 그대로 반영.
   성북구: (_isbn, title) =>
     `https://www.sblib.seoul.kr/library/menu/10012/program/30003/searchResultList.do` +
-    `?query=${encodeURIComponent(title)}&collection=ALL&startCount=0&resultCount=10`,
+    `?query=${encodeURIComponent(title)}&collection=book&sort=${encodeURIComponent("RANK/DESC")}` +
+    `&searchField=&resultCount=10&startCount=0&range=A&resultType=imageType` +
+    `&categoryClassNo=ALL&categoryManageCode=&categoryEbookCatId=ALL`,
+  // 중구·금천은 재검증에서 실제 표지 이미지+저자/ISBN 일치까지 확인되어 그대로 유지.
   중구: (_isbn, title) =>
     `https://www.junggulib.or.kr/SJGL/program/searchResultList.do` +
     `?searchType=SIMPLE&searchManageCode=ALL&searchKeyword=${encodeURIComponent(title)}`,
