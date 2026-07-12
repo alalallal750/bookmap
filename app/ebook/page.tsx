@@ -4,6 +4,8 @@ import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ApiResponse, EbookBook, EbookLibraryEntry, EbookSearchResult } from "@/types";
 import { SearchBar } from "@/components/search/SearchBar";
+import { SuggestionChip } from "@/components/search/SuggestionChip";
+import { DataAttribution } from "@/components/search/DataAttribution";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
 type SearchState =
@@ -25,6 +27,7 @@ function EbookSearchInner() {
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q") ?? "";
   const [state, setState] = useState<SearchState>({ status: "idle" });
+  const [searchValue, setSearchValue] = useState(initialQuery);
 
   // /ebook?q=제목 딥링크(MCP 검색 결과 링크 등)로 진입하면 자동 검색.
   // 기존에는 검색어만 입력창에 채우고 대기해서, 링크로 공유받은 사용자가
@@ -55,6 +58,11 @@ function EbookSearchInner() {
     router.push(q ? `/physical?q=${encodeURIComponent(q)}` : "/physical");
   }
 
+  function handlePickSuggestion(title: string) {
+    setSearchValue(title);
+    handleSearch(title);
+  }
+
   return (
     <main className="min-h-screen flex flex-col">
       <header className="bg-white border-b border-gray-100 px-4 pt-14 pb-4 sticky top-0 z-10">
@@ -82,7 +90,12 @@ function EbookSearchInner() {
           onSearch={handleSearch}
           loading={state.status === "loading"}
           placeholder="그 책, 제목이 뭐였더라?"
-          defaultValue={initialQuery}
+          value={searchValue}
+          onChange={setSearchValue}
+        />
+        <SuggestionChip
+          visible={state.status === "idle" && searchValue.trim() === ""}
+          onPick={handlePickSuggestion}
         />
       </header>
 
@@ -111,6 +124,7 @@ function EbookSearchInner() {
               >
                 종이책으로 찾아보시겠어요?
               </button>
+              <DataAttribution />
             </div>
           </>
         )}
@@ -149,6 +163,7 @@ function EbookSearchInner() {
               >
                 종이책으로 찾아보시겠어요?
               </button>
+              <DataAttribution />
             </div>
           </>
         )}

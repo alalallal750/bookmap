@@ -7,18 +7,31 @@ type SearchBarProps = {
   loading?: boolean;
   placeholder?: string;
   defaultValue?: string;
+  /** 지정하면 controlled로 동작 — 부모가 실시간 입력값을 알아야 할 때(예: 검색창이
+   *  비어있는지에 따라 추천 칩을 노출하는 경우) value/onChange를 함께 전달.
+   *  생략하면 기존처럼 내부 state로만 관리(uncontrolled). */
+  value?: string;
+  onChange?: (value: string) => void;
 };
 export function SearchBar({
   onSearch,
   loading = false,
   placeholder = "그 책, 제목이 뭐였지?",
   defaultValue = "",
+  value: controlledValue,
+  onChange,
 }: SearchBarProps) {
 
   // [2026-06-21] 자동 포커스(autoFocus)를 모바일에서 끄기 위한 화면 너비 판단.
   // 모바일에서 자동 포커스 시 키보드가 즉시 올라와 로고/안내문구를 가려버리는
   // 문제 발견(실기기 확인). 480px 이상(PC/태블릿)에서만 자동 포커스 적용.
-  const [value, setValue] = useState(defaultValue);
+  const [internalValue, setInternalValue] = useState(defaultValue);
+  const isControlled = controlledValue !== undefined;
+  const value = isControlled ? controlledValue : internalValue;
+  function setValue(v: string) {
+    onChange?.(v);
+    if (!isControlled) setInternalValue(v);
+  }
   const [shouldAutoFocus, setShouldAutoFocus] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 

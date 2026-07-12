@@ -4,6 +4,8 @@ import { useState, Suspense, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { PhysicalBook, PhysicalSearchResponse, ApiResponse } from "@/types";
 import { SearchBar } from "@/components/search/SearchBar";
+import { SuggestionChip } from "@/components/search/SuggestionChip";
+import { DataAttribution } from "@/components/search/DataAttribution";
 import { getNearbyDbnums, getDistrictName } from "@/lib/data/districtCoords";
 
 const SEARCH_CACHE_KEY = "physical_search_state";
@@ -46,6 +48,7 @@ function PhysicalSearchInner() {
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q") ?? "";
   const [state, setState] = useState<SearchState>({ status: "idle" });
+  const [searchValue, setSearchValue] = useState(initialQuery);
 
   // 지도 화면에서 뒤로가기로 돌아올 때만 검색 결과 복원.
   // 복원 조건: ?q= 없음 + "지도로 이동했다가 돌아옴" 플래그(RETURN_FROM_MAP_KEY) 존재.
@@ -65,10 +68,17 @@ function PhysicalSearchInner() {
   }, []);
 
   function goToEbookSearch() {
-    // 종이책 → 전자책 이동: 검색어/결과 전달 안 함.
-    // sessionStorage도 클리어 — 뒤로가기로 돌아왔을 때 이전 결과가 복원되지 않도록.
+    // 종이책 → 전자책 이동: 검색어를 그대로 전달(2026-07-12부터 — 전자책→종이책
+    // 방향과 대칭). sessionStorage는 클리어 — 뒤로가기로 돌아왔을 때 이전 결과가
+    // 복원되지 않도록.
     try { sessionStorage.removeItem(SEARCH_CACHE_KEY); } catch {}
-    router.push("/ebook");
+    const q = state.status === "done" ? state.query : "";
+    router.push(q ? `/ebook?q=${encodeURIComponent(q)}` : "/ebook");
+  }
+
+  function handlePickSuggestion(title: string) {
+    setSearchValue(title);
+    handleSearch(title);
   }
 
   async function handleSearch(query: string) {
@@ -199,7 +209,16 @@ function PhysicalSearchInner() {
             나랑 가까운 <span className="text-[#1d2b6b] font-bold" style={{ textShadow: "0 1px 1px rgba(29,43,107,0.18)" }}>서울시 도서관</span>에서 찾아볼게요. ISBN이 없는 경우 검색되지 않아요.
           </p>
         </div>
-        <SearchBar onSearch={handleSearch} loading={state.status === "loading"} defaultValue={initialQuery} />
+        <SearchBar
+          onSearch={handleSearch}
+          loading={state.status === "loading"}
+          value={searchValue}
+          onChange={setSearchValue}
+        />
+        <SuggestionChip
+          visible={state.status === "idle" && searchValue.trim() === ""}
+          onPick={handlePickSuggestion}
+        />
       </header>
 
       <div className="flex-1 py-4">
@@ -232,6 +251,7 @@ function PhysicalSearchInner() {
               >
                 전자책으로 찾아보시겠어요?
               </button>
+              <DataAttribution />
             </div>
           </>
         )}
@@ -325,6 +345,7 @@ function PhysicalSearchInner() {
               >
                 전자책으로 찾아보시겠어요?
               </button>
+              <DataAttribution />
             </div>
           </div>
         )}
