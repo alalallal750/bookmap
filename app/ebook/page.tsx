@@ -92,10 +92,12 @@ function EbookSearchInner() {
           placeholder="그 책, 제목이 뭐였더라?"
           value={searchValue}
           onChange={setSearchValue}
+          theme="blue"
         />
         <SuggestionChip
           visible={state.status === "idle" && searchValue.trim() === ""}
           onPick={handlePickSuggestion}
+          theme="blue"
         />
       </header>
 
@@ -130,7 +132,7 @@ function EbookSearchInner() {
         )}
 
         {state.status === "loading" && (
-          <LoadingSpinner message="전자도서관에서 검색 중..." />
+          <LoadingSpinner message="전자도서관에서 검색 중..." theme="blue" />
         )}
 
         {state.status === "error" && (

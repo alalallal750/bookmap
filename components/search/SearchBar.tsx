@@ -12,6 +12,8 @@ type SearchBarProps = {
    *  생략하면 기존처럼 내부 state로만 관리(uncontrolled). */
   value?: string;
   onChange?: (value: string) => void;
+  /** 전자책(blue) / 종이책(green) 페이지 테마 — 검색창 포커스 링과 검색 버튼 색상에 반영. */
+  theme?: "blue" | "green";
 };
 export function SearchBar({
   onSearch,
@@ -20,7 +22,13 @@ export function SearchBar({
   defaultValue = "",
   value: controlledValue,
   onChange,
+  theme = "green",
 }: SearchBarProps) {
+  const ring = theme === "blue" ? "focus:ring-blue-500" : "focus:ring-green-500";
+  const button =
+    theme === "blue"
+      ? "bg-blue-600 active:bg-blue-800"
+      : "bg-green-600 active:bg-green-800";
 
   // [2026-06-21] 자동 포커스(autoFocus)를 모바일에서 끄기 위한 화면 너비 판단.
   // 모바일에서 자동 포커스 시 키보드가 즉시 올라와 로고/안내문구를 가려버리는
@@ -72,10 +80,10 @@ export function SearchBar({
           onChange={(e) => setValue(e.target.value)}
           placeholder={placeholder}
           disabled={loading}
-          className="w-full pl-11 pr-24 py-3.5 rounded-2xl border border-gray-200
+          className={`w-full pl-11 pr-24 py-3.5 rounded-2xl border border-gray-200
             bg-white text-base text-gray-900 placeholder:text-gray-400
-            focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent
-            disabled:opacity-60 shadow-sm"
+            focus:outline-none focus:ring-2 ${ring} focus:border-transparent
+            disabled:opacity-60 shadow-sm`}
           autoComplete="off"
           autoCorrect="off"
           autoCapitalize="off"
@@ -101,8 +109,8 @@ export function SearchBar({
         <button
           type="submit"
           disabled={!value.trim() || loading}
-          className="absolute right-2 px-4 py-2 bg-green-600 text-white text-sm font-semibold
-            rounded-xl disabled:opacity-40 transition-colors active:bg-green-800"
+          className={`absolute right-2 px-4 py-2 ${button} text-white text-sm font-semibold
+            rounded-xl disabled:opacity-40 transition-colors`}
         >
           {loading ? "검색중" : "검색"}
         </button>

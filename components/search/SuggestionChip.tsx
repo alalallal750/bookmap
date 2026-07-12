@@ -23,9 +23,12 @@ const LABEL_TEXT: Record<Suggestion["label"], string> = {
 export function SuggestionChip({
   visible,
   onPick,
+  theme = "green",
 }: {
   visible: boolean;
   onPick: (title: string) => void;
+  /** 전자책(blue) / 종이책(green) 페이지 테마 — 강조된 책 제목 색상에 반영. */
+  theme?: "blue" | "green";
 }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -83,7 +86,12 @@ export function SuggestionChip({
       </svg>
       <span className="flex-shrink-0">{LABEL_TEXT[current.label]}</span>
       <span ref={windowRef} className="max-w-[150px] overflow-hidden inline-block align-bottom">
-        <span ref={innerRef} className="inline-block whitespace-nowrap font-medium text-blue-600">
+        <span
+          ref={innerRef}
+          className={`inline-block whitespace-nowrap font-medium ${
+            theme === "blue" ? "text-blue-600" : "text-green-600"
+          }`}
+        >
           &apos;{current.title}&apos;
         </span>
       </span>
