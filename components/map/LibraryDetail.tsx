@@ -201,9 +201,7 @@ export function LibraryDetail({ library, bookTitle, onClose }: LibraryDetailProp
                   }}
                   className="btn-secondary"
                 >
-                  {bookTitle
-                    ? `「${bookTitle.slice(0, 10)}${bookTitle.length > 10 ? "..." : ""}」 스마트도서관에서 검색하기`
-                    : "스마트도서관에서 검색하기"}
+                  <BookActionLabel title={bookTitle} action="스마트도서관에서 검색하기" />
                 </button>
               </>
             ) : riskLevel === "ample" ? (
@@ -218,14 +216,10 @@ export function LibraryDetail({ library, bookTitle, onClose }: LibraryDetailProp
             ) : (
               <>
                 <button onClick={openHomepage} className="btn-primary">
-                  {(() => {
-                    const t = bookTitle
-                      ? `「${bookTitle.slice(0, 10)}${bookTitle.length > 10 ? "..." : ""}」 `
-                      : "";
-                    return riskLevel === "tight"
-                      ? `${t}대출 가능한지 확인하기`
-                      : `${t}확인하기`;
-                  })()}
+                  <BookActionLabel
+                    title={bookTitle}
+                    action={riskLevel === "tight" ? "대출 가능한지 확인하기" : "확인하기"}
+                  />
                 </button>
                 <button onClick={openKakaoNavi} className="btn-secondary">
                   길찾기
@@ -236,6 +230,22 @@ export function LibraryDetail({ library, bookTitle, onClose }: LibraryDetailProp
         </div>
       </div>
     </>
+  );
+}
+
+/**
+ * [2026-07-14] 확인/검색 버튼 문구 가변 처리:
+ * 폭이 충분하면 「책 제목」 전체를 보여주고, 부족하면 제목만 줄임표로
+ * 줄인다. 고정 문구(action)와 낫표는 절대 줄이지 않으며 항상 한 줄 유지.
+ */
+function BookActionLabel({ title, action }: { title?: string; action: string }) {
+  if (!title) return <>{action}</>;
+  return (
+    <span className="flex items-center justify-center min-w-0">
+      <span className="flex-shrink-0">「</span>
+      <span className="truncate">{title}</span>
+      <span className="flex-shrink-0 whitespace-nowrap">」 {action}</span>
+    </span>
   );
 }
 
