@@ -2,22 +2,28 @@
 
 import { useEffect, useRef, useState } from "react";
 import { suggestions, type Suggestion } from "@/lib/data/suggestions";
+import { SuggestionPopup } from "@/components/search/SuggestionPopup";
 
 const ROTATE_MS = 8000;
 const SCROLL_DELAY_MS = 1200;
 const SCROLL_PX_PER_SEC = 25;
 
+// [2026-07-17] 팝업 라벨("서울 20·30대 대출이 전월대비 급상승했어요")과 톤을
+// 맞춘 축약형. 문장 전체는 421px로 칩 폭(343px)을 넘어 축약형만 사용.
+// 이 라벨 길이에 맞춰 제목 창을 150→130px로 줄임(넘치는 제목은 기존
+// 자동 스크롤이 처리) — 360px 폭 기기까지 안전.
 const LABEL_TEXT: Record<Suggestion["label"], string> = {
-  hot: "2030 급상승",
-  popular: "2030 인기",
+  hot: "서울 20·30대 대출 급상승",
+  popular: "서울 20·30대 대출 인기",
 };
 
 /**
- * 검색창 밑 추천 문구. 탭하면 그 책 제목으로 그 화면(전자책이면 전자책,
- * 종이책이면 종이책)의 검색을 바로 실행 — 페이지 이동은 하지 않음(2026-07-12 논의:
- * 데이터는 종이책 대출 기준이지만, 어느 화면에 있느냐에 따라 그 화면의 검색을
- * 실행하는 게 맞음. 정보나루 대출 데이터라 종이책 소장 자체는 항상 보장되지만
- * 전자책은 그렇지 않을 수 있음 — 화면 그대로 검색해 결과를 보여주는 것으로 처리).
+ * 검색창 밑 추천 문구. [2026-07-17 변경] 탭하면 바로 검색하지 않고 도서 소개
+ * 팝업(SuggestionPopup)을 띄움 — 팝업의 CTA를 눌렀을 때만 그 책 제목으로
+ * 그 화면(전자책이면 전자책, 종이책이면 종이책)의 검색을 실행. 페이지 이동은
+ * 하지 않음(2026-07-12 논의: 데이터는 종이책 대출 기준이지만, 어느 화면에
+ * 있느냐에 따라 그 화면의 검색을 실행하는 게 맞음).
+ * 팝업이 떠 있는 동안 로테이션 정지, 닫으면 재개.
  * 노출 조건은 부모가 결정(idle 상태 + 검색창이 비어있을 때만 visible=true로 전달).
  */
 export function SuggestionChip({
@@ -32,6 +38,7 @@ export function SuggestionChip({
 }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [popupOpen, setPopupOpen] = useState(false);
   const windowRef = useRef<HTMLSpanElement>(null);
   const innerRef = useRef<HTMLSpanElement>(null);
 
@@ -41,12 +48,12 @@ export function SuggestionChip({
   }, []);
 
   useEffect(() => {
-    if (paused || !visible) return;
+    if (paused || popupOpen || !visible) return;
     const id = setInterval(() => {
       setIndex((i) => (i + 1) % suggestions.length);
     }, ROTATE_MS);
     return () => clearInterval(id);
-  }, [paused, visible]);
+  }, [paused, popupOpen, visible]);
 
   // 제목이 창 폭보다 길면 1.2초 대기 후 한 번만 끝까지 스크롤하고 정지(무한 반복 아님)
   useEffect(() => {
@@ -73,11 +80,24 @@ export function SuggestionChip({
   if (!current) return null;
 
   return (
+    <>
+    {popupOpen && (
+      <SuggestionPopup
+        suggestion={current}
+        theme={theme}
+        onClose={() => setPopupOpen(false)}
+        onSearch={(title) => {
+          setPopupOpen(false);
+          onPick(title);
+        }}
+      />
+    )}
     <button
       type="button"
-      onClick={() => onPick(current.title)}
+      onClick={() => setPopupOpen(true)}
       onTouchStart={() => setPaused(true)}
       onTouchEnd={() => setPaused(false)}
+      onTouchCancel={() => setPaused(false)}
       className="w-full flex items-center justify-center gap-1.5 py-2.5 text-[13px] text-gray-500"
     >
       <svg width="14" height="14" viewBox="0 0 20 20" fill="none" className="flex-shrink-0 text-gray-400">
@@ -85,7 +105,7 @@ export function SuggestionChip({
         <path d="M13 4h4v4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
       <span className="flex-shrink-0">{LABEL_TEXT[current.label]}</span>
-      <span ref={windowRef} className="max-w-[150px] overflow-hidden inline-block align-bottom">
+      <span ref={windowRef} className="max-w-[130px] overflow-hidden inline-block align-bottom">
         <span
           ref={innerRef}
           className={`inline-block whitespace-nowrap font-medium ${
@@ -99,5 +119,6 @@ export function SuggestionChip({
         <path d="M7 4l6 6-6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     </button>
+    </>
   );
 }
