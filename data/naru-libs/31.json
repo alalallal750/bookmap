@@ -1644,7 +1644,8 @@
   "libName": "고양시립백석도서관",
   "dtlRegion": "31103",
   "latitude": 37.6472487,
-  "longitude": 126.793775
+  "longitude": 126.793775,
+  "homepage": "https://www.goyanglib.or.kr/"
  },
  {
   "libCode": "141388",
@@ -1954,7 +1955,7 @@
   "longitude": 127.0854297,
   "address": "경기도 오산시 남부대로 459",
   "tel": "031-8036-6550",
-  "homepage": "-"
+  "homepage": "https://www.osanlibrary.go.kr/"
  },
  {
   "libCode": "741203",
@@ -1964,7 +1965,7 @@
   "longitude": 127.0822459,
   "address": "경기도 오산시 청호로 23-22, 105동 놀이터 안",
   "tel": "031-8036-6549",
-  "homepage": "-"
+  "homepage": "https://www.osanlibrary.go.kr/"
  },
  {
   "libCode": "741458",
@@ -1974,7 +1975,7 @@
   "longitude": 127.0679533,
   "address": "경기도 오산시 내삼미로 110, 2층",
   "tel": "031-8036-6548",
-  "homepage": "-"
+  "homepage": "https://www.osanlibrary.go.kr/"
  },
  {
   "libCode": "141540",
@@ -2494,7 +2495,7 @@
   "longitude": 127.1118736,
   "address": "경기도 용인시 기흥구 죽전로 30, 4층",
   "tel": "031-6193-1570",
-  "homepage": "lib.yongin.go.kr/bojeong"
+  "homepage": "http://lib.yongin.go.kr/bojeong"
  },
  {
   "libCode": "141643",
@@ -2544,7 +2545,7 @@
   "longitude": 127.0916188,
   "address": "경기도 용인시 수지구 수풍로 57-14",
   "tel": "031-6193-1720",
-  "homepage": "lib.yongin.go.kr/dongcheon"
+  "homepage": "http://lib.yongin.go.kr/dongcheon"
  },
  {
   "libCode": "141556",

@@ -945,7 +945,8 @@
   "dtlRegion": "38111",
   "latitude": 35.2334598,
   "longitude": 128.679058,
-  "address": "경상남도 창원시 의창구 용호로 50"
+  "address": "경상남도 창원시 의창구 용호로 50",
+  "homepage": "https://lib.changwon.go.kr/"
  },
  {
   "libCode": "148319",
@@ -973,7 +974,8 @@
   "dtlRegion": "38112",
   "latitude": 35.2020144,
   "longitude": 128.707115,
-  "address": "경상남도 창원시 성산구 외리로 47"
+  "address": "경상남도 창원시 성산구 외리로 47",
+  "homepage": "https://lib.changwon.go.kr/"
  },
  {
   "libCode": "148006",
@@ -1001,7 +1003,8 @@
   "dtlRegion": "38113",
   "latitude": 35.1830846,
   "longitude": 128.562812,
-  "address": "경상남도 창원시 마산합포구 월영동16길 22"
+  "address": "경상남도 창원시 마산합포구 월영동16길 22",
+  "homepage": "https://lib.changwon.go.kr/"
  },
  {
   "libCode": "148310",
@@ -1019,7 +1022,8 @@
   "dtlRegion": "38114",
   "latitude": 35.224668,
   "longitude": 128.57355,
-  "address": "경상남도 창원시 마산회원구 3&middot;15대로 558"
+  "address": "경상남도 창원시 마산회원구 3&middot;15대로 558",
+  "homepage": "https://lib.changwon.go.kr/"
  },
  {
   "libCode": "148050",
@@ -1037,7 +1041,8 @@
   "dtlRegion": "38115",
   "latitude": 35.152403,
   "longitude": 128.667443,
-  "address": "경상남도 창원시 진해구 충장로 141"
+  "address": "경상남도 창원시 진해구 충장로 141",
+  "homepage": "https://lib.changwon.go.kr/"
  },
  {
   "libCode": "148019",

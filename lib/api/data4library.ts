@@ -138,19 +138,24 @@ export async function fetchHoldingLibCodes(isbn13: string): Promise<Set<string> 
 }
 
 /**
- * [2026-07-18 전국판] 이 책(ISBN13)을 소장한 "시군구 단위" 도서관 libCode
- * 집합 — libSrchByBook에 region+dtl_region을 걸어 시군구당 1~2회로 조회.
+ * [2026-07-18 전국판] 이 책(ISBN13)을 소장한 "시도 단위" 도서관 libCode
+ * 집합 — libSrchByBook에 region만 걸어 시도당 1~2회로 조회.
+ *
+ * 처음엔 시군구(dtl_region) 단위로 호출했으나 같은 날 시도 단위로 전환
+ * (사용자 결정): 시도 1~2회 호출로 그 시도 전체 소장관을 받아 시군구
+ * 구분은 로컬 정적 데이터로 처리 — 인접 시군구 확장이 호출 0회로 공짜가
+ * 되고, 같은 책+같은 시도는 시군구 조합과 무관하게 6시간 캐시 1개를 공유.
  *
  * 전국판 호출 절약 원칙: 선행 호출은 이 함수만 쓰고, bookExist는 사용자가
  * 마커를 탭할 때 온디맨드로만 호출한다(서울 폴백처럼 관 수만큼 미리 쏘면
  * 참여관 많은 지역에서 검색 1회가 한도의 5~10%를 소비 — 실측 근거는
  * 인수인계 문서 0장 2026-07-11 항목).
  *
- * 실패 시 null — 호출부는 그 시군구를 결과에서 생략 (부분 실패 허용).
+ * 실패 시 null — 호출부는 그 시도를 결과에서 생략 (부분 실패 허용).
  */
-export async function fetchHoldingLibCodesByUnit(
+export async function fetchHoldingLibCodesByRegion(
   isbn13: string,
-  dtlRegion: string
+  region: string
 ): Promise<Set<string> | null> {
   const key = getAuthKey();
   if (!key) {
@@ -158,14 +163,13 @@ export async function fetchHoldingLibCodesByUnit(
     return null;
   }
 
-  const region = dtlRegion.slice(0, 2);
   const codes = new Set<string>();
   let pageNo = 1;
   let calls = 0;
   for (;;) {
     const url =
       `${BASE_URL}/libSrchByBook?authKey=${key}&isbn=${encodeURIComponent(isbn13)}` +
-      `&region=${region}&dtl_region=${encodeURIComponent(dtlRegion)}` +
+      `&region=${encodeURIComponent(region)}` +
       `&pageNo=${pageNo}&pageSize=300&format=json`;
     const r = await fetchNaruJson(url);
     calls++;
@@ -176,7 +180,7 @@ export async function fetchHoldingLibCodesByUnit(
     if (codes.size >= numFound || page.length === 0) break;
     pageNo += 1;
   }
-  logNaruUsage(`libSrchByBook unit=${dtlRegion} isbn=${isbn13} 소장 ${codes.size}관`, calls);
+  logNaruUsage(`libSrchByBook region=${region} isbn=${isbn13} 소장 ${codes.size}관`, calls);
   return codes;
 }
 

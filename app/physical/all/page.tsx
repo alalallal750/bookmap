@@ -19,11 +19,18 @@
  * 이 화면과 지도 화면 양쪽에 표기.
  */
 
-import { useState, Suspense } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ApiResponse, KakaoBookCandidate } from "@/types";
 import { SearchBar } from "@/components/search/SearchBar";
 import { KoreaRegionMap } from "@/components/search/KoreaRegionMap";
+import { SuggestionChip } from "@/components/search/SuggestionChip";
+import { suggestions } from "@/lib/data/suggestions";
+
+// 지도에서 뒤로 돌아왔을 때만 검색 상태를 복원 (서울판과 동일 패턴 —
+// 새로고침·직접 진입은 idle로 시작)
+const SEARCH_CACHE_KEY = "nationwide_search_state";
+const RETURN_FROM_MAP_KEY = "nationwide_returning_from_map";
 import {
   SearchUnit,
   getNearbyUnits,
@@ -69,11 +76,31 @@ export default function NationwidePhysicalPage() {
 
 function NationwideInner() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const initialQuery = searchParams.get("q") ?? "";
   const [state, setState] = useState<PageState>({ step: "idle" });
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState(initialQuery);
+
+  // 지도에서 뒤로가기로 돌아온 경우에만 후보 목록 복원
+  useEffect(() => {
+    if (initialQuery) return;
+    try {
+      const fromMap = sessionStorage.getItem(RETURN_FROM_MAP_KEY);
+      sessionStorage.removeItem(RETURN_FROM_MAP_KEY);
+      if (!fromMap) return;
+      const saved = sessionStorage.getItem(SEARCH_CACHE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved) as Extract<PageState, { step: "candidates" }>;
+        setState(parsed);
+        setSearchValue(parsed.query);
+      }
+    } catch {}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function handleSearch(query: string) {
     setState({ step: "loadingCandidates", query });
+    try { sessionStorage.removeItem(SEARCH_CACHE_KEY); } catch {}
     try {
       const res = await fetch(`/api/book-candidates?q=${encodeURIComponent(query)}`);
       const json: ApiResponse<KakaoBookCandidate[]> = await res.json();
@@ -82,7 +109,9 @@ function NationwideInner() {
         setState({ step: "error", message: "책을 찾지 못했어요. 다른 제목으로 검색해보세요." });
         return;
       }
-      setState({ step: "candidates", query, candidates: json.data });
+      const next = { step: "candidates" as const, query, candidates: json.data };
+      setState(next);
+      try { sessionStorage.setItem(SEARCH_CACHE_KEY, JSON.stringify(next)); } catch {}
     } catch (e) {
       setState({
         step: "error",
@@ -128,6 +157,35 @@ function NationwideInner() {
       // 위치 없음 — 시도 선택으로
       setState({ step: "regionSelect", book });
     }
+  }
+
+  /**
+   * [07-18] 추천 칩 경유 검색 — 추천 도서는 ISBN을 이미 알므로 판본 선택을
+   * 건너뛰고 바로 위치 판정으로(사용자 결정: 위치 있으면 바로 지도, 없으면
+   * 지역 선택). 뒤로가기 복원을 위해 단일 후보 상태를 캐시에 저장해 둠.
+   */
+  function handlePickSuggestion(title: string) {
+    const s = suggestions.find((x) => x.title === title);
+    if (!s) {
+      // 추천 목록에 없으면(방어) 일반 검색 흐름
+      setSearchValue(title);
+      handleSearch(title);
+      return;
+    }
+    const book: KakaoBookCandidate = {
+      isbn: s.isbn13,
+      title: s.title,
+      authors: [s.author],
+      publisher: s.publisher,
+      thumbnail: s.coverUrl,
+    };
+    try {
+      sessionStorage.setItem(
+        SEARCH_CACHE_KEY,
+        JSON.stringify({ step: "candidates", query: s.title, candidates: [book] })
+      );
+    } catch {}
+    handlePickBook(book);
   }
 
   function handlePickRegion(book: KakaoBookCandidate, region: string) {
@@ -180,6 +238,11 @@ function NationwideInner() {
           loading={state.step === "loadingCandidates"}
           value={searchValue}
           onChange={setSearchValue}
+          theme="green"
+        />
+        <SuggestionChip
+          visible={state.step === "idle" && searchValue.trim() === ""}
+          onPick={handlePickSuggestion}
           theme="green"
         />
       </header>
@@ -289,20 +352,21 @@ function NationwideInner() {
             <p className="text-sm text-gray-600 font-medium mb-3">
               {REGION_ORDER.find((r) => r.region === state.region)?.label} — 시군구를 선택하세요
             </p>
+            {/* [07-18] 참여관 0 시군구는 숨김 (사용자 결정 — 김천 등).
+                시군구 선택은 검색 범위가 아니라 지도 시작 위치 — 검색은
+                시도 전체 1~2회 호출로 이미 커버됨. */}
             <div className="grid grid-cols-3 gap-2">
-              {getUnitsByRegion(state.region).map((u) => (
-                <button
-                  key={u.code}
-                  disabled={u.libCount === 0}
-                  onClick={() => goToMap(state.book, [u])}
-                  className="py-3 px-1 rounded-xl bg-white border border-gray-200 text-[13px] font-semibold text-gray-700 active:bg-emerald-50 disabled:opacity-40"
-                >
-                  {u.district}
-                  {u.libCount === 0 ? (
-                    <span className="block text-[10px] font-normal text-gray-400">참여관 없음</span>
-                  ) : null}
-                </button>
-              ))}
+              {getUnitsByRegion(state.region)
+                .filter((u) => u.libCount > 0)
+                .map((u) => (
+                  <button
+                    key={u.code}
+                    onClick={() => goToMap(state.book, [u])}
+                    className="py-3 px-1 rounded-xl bg-white border border-gray-200 text-[13px] font-semibold text-gray-700 active:bg-emerald-50"
+                  >
+                    {u.district}
+                  </button>
+                ))}
             </div>
             <div className="mt-8">{noticeBlock}</div>
           </div>

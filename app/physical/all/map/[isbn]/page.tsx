@@ -105,11 +105,14 @@ export default function NationwideMapPage({ params, searchParams }: MapPageProps
         const json = await res.json();
         if (!json.success) throw new Error(json.error ?? "검색에 실패했습니다.");
         setLibraries(json.libraries as PhysicalLibrary[]);
-        const unitMeta: { code: string; district: string }[] = json.meta?.units ?? [];
-        setDistrictLabel(unitMeta.map((u) => u.district).join(", "));
-        const failed: string[] = (json.meta?.failedUnits ?? [])
-          .map((c: string) => getSearchUnit(c)?.district)
-          .filter(Boolean);
+        // [07-18 시도 단위 전환] 마커는 시도 전체 — 라벨도 시도 기준으로.
+        const regionMeta: { province: string }[] = json.meta?.regions ?? [];
+        setDistrictLabel(
+          regionMeta.length > 0 ? `${regionMeta.map((r) => r.province).join(", ")} 전체` : ""
+        );
+        const failed: string[] = (json.meta?.failedRegions ?? []).map(
+          (f: { province: string }) => f.province
+        );
         setFailedDistricts(failed);
       } catch (e) {
         setErrorMsg(e instanceof Error ? e.message : "검색 중 오류가 발생했습니다.");
@@ -235,7 +238,18 @@ export default function NationwideMapPage({ params, searchParams }: MapPageProps
     <main className="h-screen h-dvh flex flex-col overflow-hidden">
       <header className="bg-white border-b border-gray-100 px-4 pt-4 pb-3 flex-shrink-0 z-20">
         <div className="flex items-center gap-3">
-          <Link href="/physical/all" className="p-2 -ml-2 text-gray-500" aria-label="뒤로가기">
+          <Link
+            href="/physical/all"
+            className="p-2 -ml-2 text-gray-500"
+            aria-label="뒤로가기"
+            onClick={() => {
+              // 검색 화면이 sessionStorage의 결과를 복원하도록 "지도에서
+              // 돌아옴" 플래그를 남김 (서울판 RETURN_FROM_MAP 패턴)
+              try {
+                sessionStorage.setItem("nationwide_returning_from_map", "1");
+              } catch {}
+            }}
+          >
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M13 4l-6 6 6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
