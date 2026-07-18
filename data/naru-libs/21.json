@@ -1,0 +1,582 @@
+[
+ {
+  "libCode": "121012",
+  "libName": "부산광역시립중앙도서관",
+  "dtlRegion": "21010",
+  "latitude": 35.1101431,
+  "longitude": 129.02716,
+  "address": "부산광역시 중구 망양로193번길 146 ",
+  "tel": "051-250-0300",
+  "homepage": "https://home.pen.go.kr/joonganglib"
+ },
+ {
+  "libCode": "126173",
+  "libName": "부산광역시 서구아미드림도서관",
+  "dtlRegion": "21020",
+  "latitude": 35.1016672,
+  "longitude": 129.015934,
+  "address": "부산광역시 서구 까치고개로80번길 10",
+  "tel": "051-290-5720",
+  "homepage": "https://www.bsseogu.go.kr/amlib/main.do"
+ },
+ {
+  "libCode": "121002",
+  "libName": "부산광역시립구덕도서관",
+  "dtlRegion": "21020",
+  "latitude": 35.1216714,
+  "longitude": 129.0169264,
+  "address": "부산광역시 서구 대신공원로 41",
+  "tel": "051-220-3800",
+  "homepage": "https://home.pen.go.kr/guducklib"
+ },
+ {
+  "libCode": "121021",
+  "libName": "부산광역시 동구도서관",
+  "dtlRegion": "21030",
+  "latitude": 35.1379169,
+  "longitude": 129.0514958,
+  "address": "부산광역시 동구 성북로36번길 54",
+  "tel": "051-440-6411",
+  "homepage": "http://www.bsdonggu.go.kr/library"
+ },
+ {
+  "libCode": "126158",
+  "libName": "부산광역시 동구어린이영어도서관",
+  "dtlRegion": "21030",
+  "latitude": 35.1345788,
+  "longitude": 129.042125,
+  "address": "부산광역시 동구 수성로 21",
+  "tel": "051-440-6471",
+  "homepage": "http://www.bsdonggu.go.kr/kidseng"
+ },
+ {
+  "libCode": "121010",
+  "libName": "부산광역시립중앙도서관 수정분관",
+  "dtlRegion": "21030",
+  "latitude": 35.1246075,
+  "longitude": 129.0405662,
+  "address": "부산광역시 동구 홍곡로 53",
+  "tel": "051-440-0300",
+  "homepage": "https://home.pen.go.kr/joonganglib/cm/cntnts/cntntsView.do?mi=11095&cntntsId=1247"
+ },
+ {
+  "libCode": "121014",
+  "libName": "부산광역시 영도도서관",
+  "dtlRegion": "21040",
+  "latitude": 35.0755684,
+  "longitude": 129.066539,
+  "address": "부산광역시 영도구 함지로79번길 6",
+  "tel": "051-419-4831",
+  "homepage": "https://www.yeongdo.go.kr/library.web"
+ },
+ {
+  "libCode": "126015",
+  "libName": "부산광역시 영도도서관 남항분관",
+  "dtlRegion": "21040",
+  "latitude": 35.0885443,
+  "longitude": 129.039103,
+  "address": "부산광역시 영도구 절영로 71",
+  "tel": "051-419-5671",
+  "homepage": "http://www.yeongdo.go.kr/library/01351/01981.web"
+ },
+ {
+  "libCode": "126169",
+  "libName": "부산광역시 부산진구기적의도서관",
+  "dtlRegion": "21050",
+  "latitude": 35.1742882,
+  "longitude": 129.0650891,
+  "address": "부산광역시 부산진구 범양로125번길 19",
+  "tel": "051-605-8751",
+  "homepage": "https://www.busanjin.go.kr/library"
+ },
+ {
+  "libCode": "126175",
+  "libName": "부산광역시 부산진구당감도서관",
+  "dtlRegion": "21050",
+  "latitude": 35.1580196,
+  "longitude": 129.0474894,
+  "address": "부산광역시 부산진구 가야대로703번나길 33",
+  "tel": "051-605-8761",
+  "homepage": "https://www.busanjin.go.kr/library"
+ },
+ {
+  "libCode": "126147",
+  "libName": "부산광역시 부산진구어린이청소년도서관",
+  "dtlRegion": "21050",
+  "latitude": 35.1690132,
+  "longitude": 129.0396629,
+  "address": "부산광역시 부산진구 백양순환로110번길 25, 3층",
+  "tel": "051-605-5802",
+  "homepage": "https://www.busanjin.go.kr/cylib/index.busanjin"
+ },
+ {
+  "libCode": "121005",
+  "libName": "부산광역시립부전도서관",
+  "dtlRegion": "21050",
+  "latitude": 35.1558256,
+  "longitude": 129.0620476,
+  "address": "부산광역시 부산진구 동천로 79",
+  "tel": "051-802-5901",
+  "homepage": "https://home.pen.go.kr/bujunlib/"
+ },
+ {
+  "libCode": "121008",
+  "libName": "부산광역시립시민도서관",
+  "dtlRegion": "21050",
+  "latitude": 35.183443,
+  "longitude": 129.050125,
+  "address": "부산광역시 부산진구 월드컵대로 462 ",
+  "tel": "051-810-8200",
+  "homepage": "https://home.pen.go.kr/siminlib"
+ },
+ {
+  "libCode": "126014",
+  "libName": "부산영어도서관",
+  "dtlRegion": "21050",
+  "latitude": 35.156842,
+  "longitude": 129.0520642,
+  "address": "부산광역시 부산진구 가야대로 734",
+  "tel": "051-818-2800",
+  "homepage": "https://home.pen.go.kr/bellib"
+ },
+ {
+  "libCode": "126146",
+  "libName": "부산광역시 동래읍성도서관",
+  "dtlRegion": "21060",
+  "latitude": 35.207052,
+  "longitude": 129.094842,
+  "address": "부산광역시 동래구 동래로159번길 153",
+  "tel": "051-550-6901~4",
+  "homepage": "https://www.dongnae.go.kr/lib/dongnae/"
+ },
+ {
+  "libCode": "126153",
+  "libName": "부산광역시 안락누리도서관",
+  "dtlRegion": "21060",
+  "latitude": 35.1970401,
+  "longitude": 129.1077755,
+  "address": "부산광역시 동래구 명안로10번길 64",
+  "tel": "051-550-6911",
+  "homepage": "https://www.dongnae.go.kr/lib/allak/"
+ },
+ {
+  "libCode": "121015",
+  "libName": "부산광역시립명장도서관",
+  "dtlRegion": "21060",
+  "latitude": 35.2008549,
+  "longitude": 129.1065573,
+  "address": "부산광역시 동래구 명안로46번길 35",
+  "tel": "051-527-0582",
+  "homepage": "https://home.pen.go.kr/mjlib"
+ },
+ {
+  "libCode": "121019",
+  "libName": "부산광역시 남구도서관",
+  "dtlRegion": "21070",
+  "latitude": 35.1376994,
+  "longitude": 129.09456,
+  "address": "부산광역시 남구 수영로267번길 61 ",
+  "tel": "051-621-8160",
+  "homepage": "https://bsnamgu.go.kr/library/"
+ },
+ {
+  "libCode": "126155",
+  "libName": "부산광역시 분포도서관",
+  "dtlRegion": "21070",
+  "latitude": 35.1234937,
+  "longitude": 129.1137445,
+  "address": "부산광역시 남구 분포로 97",
+  "tel": "051-607-3640",
+  "homepage": "http://library.bsnamgu.go.kr/"
+ },
+ {
+  "libCode": "126171",
+  "libName": "부산광역시 우암도서관",
+  "dtlRegion": "21070",
+  "latitude": 35.1255577,
+  "longitude": 129.0777267,
+  "address": "부산광역시 남구 당산로 22",
+  "tel": "051-607-6511",
+  "homepage": "https://library.bsnamgu.go.kr"
+ },
+ {
+  "libCode": "126152",
+  "libName": "부산광역시 금곡도서관",
+  "dtlRegion": "21080",
+  "latitude": 35.2631352,
+  "longitude": 129.0176578,
+  "address": "부산광역시 북구 효열로203번길 34",
+  "tel": "051-309-6181",
+  "homepage": "https://www.bsbukgu.go.kr/bglib/"
+ },
+ {
+  "libCode": "121023",
+  "libName": "부산광역시 만덕도서관",
+  "dtlRegion": "21080",
+  "latitude": 35.2067391,
+  "longitude": 129.036694,
+  "address": "부산광역시 북구 은행나무로 26",
+  "tel": "051-309-2097",
+  "homepage": "https://www.bsbukgu.go.kr/mdlib/"
+ },
+ {
+  "libCode": "126025",
+  "libName": "부산광역시 화명도서관",
+  "dtlRegion": "21080",
+  "latitude": 35.232194,
+  "longitude": 129.0094016,
+  "address": "부산광역시 북구 화명대로12번길 59 ",
+  "tel": "051-309-6481",
+  "homepage": "https://www.bsbukgu.go.kr/hmlib/"
+ },
+ {
+  "libCode": "121003",
+  "libName": "부산광역시립구포도서관",
+  "dtlRegion": "21080",
+  "latitude": 35.1939846,
+  "longitude": 128.995975,
+  "address": "부산광역시 북구 백양대로1016번다길 43 ",
+  "tel": "051-330-6300",
+  "homepage": "https://home.pen.go.kr/gupolib/"
+ },
+ {
+  "libCode": "121022",
+  "libName": "부산광역시 반여도서관",
+  "dtlRegion": "21090",
+  "latitude": 35.2020277,
+  "longitude": 129.1338241,
+  "address": "부산광역시 해운대구 재반로282번길 38",
+  "tel": "051-749-6081~4",
+  "homepage": "https://www.haeundae.go.kr/library"
+ },
+ {
+  "libCode": "126008",
+  "libName": "부산광역시 재송어린이도서관",
+  "dtlRegion": "21090",
+  "latitude": 35.1896121,
+  "longitude": 129.1185191,
+  "address": "부산광역시 해운대구 해운대로76번길 35-1 ",
+  "tel": "051-749-7631",
+  "homepage": "http://www.haeundae.go.kr/library"
+ },
+ {
+  "libCode": "126154",
+  "libName": "부산광역시 해운대인문학도서관",
+  "dtlRegion": "21090",
+  "latitude": 35.2005415,
+  "longitude": 129.1236973,
+  "address": "부산광역시 해운대구 반여로 132",
+  "tel": "051-749-6580",
+  "homepage": "https://www.haeundae.go.kr/library"
+ },
+ {
+  "libCode": "121004",
+  "libName": "부산광역시립반송도서관",
+  "dtlRegion": "21090",
+  "latitude": 35.2250616,
+  "longitude": 129.1483378,
+  "address": "부산광역시 해운대구 아랫반송로 22",
+  "tel": "051-545-0102",
+  "homepage": "https://home.pen.go.kr/bansonglib"
+ },
+ {
+  "libCode": "126024",
+  "libName": "부산광역시립해운대도서관",
+  "dtlRegion": "21090",
+  "latitude": 35.1779728,
+  "longitude": 129.1688996,
+  "address": "부산광역시 해운대구 양운로 183 ",
+  "tel": "051-7090-900",
+  "homepage": "https://home.pen.go.kr/haeundaelib/"
+ },
+ {
+  "libCode": "121013",
+  "libName": "부산광역시립해운대도서관 우동분관",
+  "dtlRegion": "21090",
+  "latitude": 35.1688448,
+  "longitude": 129.1558258,
+  "address": "부산광역시 해운대구 우동1로 89",
+  "tel": "051-709-0980",
+  "homepage": "https://home.pen.go.kr/haeundaelib/"
+ },
+ {
+  "libCode": "126023",
+  "libName": "부산광역시 다대도서관",
+  "dtlRegion": "21100",
+  "latitude": 35.0504598,
+  "longitude": 128.96466,
+  "address": "부산광역시 사하구 다대낙조2길 9",
+  "tel": "051-220-5873",
+  "homepage": "https://saha.go.kr/dadaelib/"
+ },
+ {
+  "libCode": "126168",
+  "libName": "부산광역시 하단도서관",
+  "dtlRegion": "21100",
+  "latitude": 35.1016919,
+  "longitude": 128.9600598,
+  "address": "부산광역시 사하구 하신번영로 245, 3~5층",
+  "tel": "051-220-0184",
+  "homepage": "https://www.saha.go.kr/hadanlib/main.do"
+ },
+ {
+  "libCode": "121006",
+  "libName": "부산광역시립사하도서관",
+  "dtlRegion": "21100",
+  "latitude": 35.103086,
+  "longitude": 128.991053,
+  "address": "부산광역시 사하구 승학로 247",
+  "tel": "051-961-2700",
+  "homepage": "https://home.pen.go.kr/sahalib"
+ },
+ {
+  "libCode": "126163",
+  "libName": "부산광역시 금샘도서관",
+  "dtlRegion": "21110",
+  "latitude": 35.2391546,
+  "longitude": 129.0939285,
+  "address": "부산광역시 금정구 기찰로 94",
+  "tel": "051-519-5900",
+  "homepage": "https://www.geumjeong.go.kr/gslib"
+ },
+ {
+  "libCode": "121018",
+  "libName": "부산광역시 금정도서관",
+  "dtlRegion": "21110",
+  "latitude": 35.272458,
+  "longitude": 129.0961566,
+  "address": "부산광역시 금정구 금정도서관로 33",
+  "tel": "051-519-5600",
+  "homepage": "http://library.geumjeong.go.kr/"
+ },
+ {
+  "libCode": "121007",
+  "libName": "부산광역시립서동도서관",
+  "dtlRegion": "21110",
+  "latitude": 35.2198649,
+  "longitude": 129.0994296,
+  "address": "부산광역시 금정구 서부로76번길 5",
+  "tel": "051-522-0456",
+  "homepage": "https://home.pen.go.kr/seodonglib"
+ },
+ {
+  "libCode": "126156",
+  "libName": "부산광역시 강서기적의도서관",
+  "dtlRegion": "21120",
+  "latitude": 35.0872758,
+  "longitude": 128.9009941,
+  "address": "부산광역시 강서구 명지오션시티10로 80",
+  "tel": "051-970-2317",
+  "homepage": "https://library.bsgangseo.go.kr/gmlib/"
+ },
+ {
+  "libCode": "121020",
+  "libName": "부산광역시 강서도서관",
+  "dtlRegion": "21120",
+  "latitude": 35.1804359,
+  "longitude": 128.9571993,
+  "address": "부산광역시 강서구 공항로811번길 10",
+  "tel": "051-970-4068",
+  "homepage": "https://library.bsgangseo.go.kr/gslib/"
+ },
+ {
+  "libCode": "126161",
+  "libName": "부산광역시 지사도서관",
+  "dtlRegion": "21120",
+  "latitude": 35.1507897,
+  "longitude": 128.833334,
+  "address": "부산광역시 강서구 과학산단2로20번길 5, 3층",
+  "tel": "051-970-2383",
+  "homepage": "https://library.bsgangseo.go.kr/jslib/"
+ },
+ {
+  "libCode": "726305",
+  "libName": "신호작은도서관 아이들꿈자람터",
+  "dtlRegion": "21120",
+  "latitude": 35.0882599,
+  "longitude": 128.8724335,
+  "address": "부산광역시 강서구 르노삼성대로 14",
+  "tel": "051-970-2316",
+  "homepage": "https://library.bsgangseo.go.kr/gmlib/"
+ },
+ {
+  "libCode": "726304",
+  "libName": "아이꿈 작은도서관",
+  "dtlRegion": "21120",
+  "latitude": 35.0998348,
+  "longitude": 128.928286,
+  "address": "부산광역시 강서구 명지국제6로318번길 58",
+  "tel": "051-201-5202",
+  "homepage": "https://library.bsgangseo.go.kr/gmlib/"
+ },
+ {
+  "libCode": "126143",
+  "libName": "부산광역시 연제도서관",
+  "dtlRegion": "21130",
+  "latitude": 35.1714281,
+  "longitude": 129.0828652,
+  "address": "부산광역시 연제구 황령산로 612",
+  "tel": "051-665-5517",
+  "homepage": "http://www.yeonje.go.kr/library"
+ },
+ {
+  "libCode": "126167",
+  "libName": "부산광역시 연제만화도서관",
+  "dtlRegion": "21130",
+  "latitude": 35.1729668,
+  "longitude": 129.0931192,
+  "address": "부산광역시 연제구 연수로208번길 16",
+  "tel": "051-665-5532~3",
+  "homepage": "https://www.yeonje.go.kr/manhwalib"
+ },
+ {
+  "libCode": "121011",
+  "libName": "부산광역시립연산도서관",
+  "dtlRegion": "21130",
+  "latitude": 35.185874,
+  "longitude": 129.1041912,
+  "address": "부산광역시 연제구 고분로191번길 16",
+  "tel": "051-792-5400",
+  "homepage": "https://home.pen.go.kr/yeonsanlib"
+ },
+ {
+  "libCode": "121091",
+  "libName": "부산광역시 망미도서관",
+  "dtlRegion": "21140",
+  "latitude": 35.1734169,
+  "longitude": 129.1049445,
+  "address": "부산광역시 수영구 연수로315번길 23",
+  "tel": "051-610-4703",
+  "homepage": "http://www.suyeong.go.kr/library/index.suyeong"
+ },
+ {
+  "libCode": "121024",
+  "libName": "부산광역시 수영구도서관",
+  "dtlRegion": "21140",
+  "latitude": 35.1444008,
+  "longitude": 129.105256,
+  "address": "부산광역시 수영구 남천서로 33",
+  "tel": "051-610-3993",
+  "homepage": "http://www.suyeong.go.kr/library/index.suyeong"
+ },
+ {
+  "libCode": "126162",
+  "libName": "부산광역시 수영구어린이도서관",
+  "dtlRegion": "21140",
+  "latitude": 35.1596433,
+  "longitude": 129.1053337,
+  "address": "부산광역시 수영구 장대골로 75-6",
+  "tel": "051-610-3891",
+  "homepage": "https://suyeong.go.kr/library"
+ },
+ {
+  "libCode": "121025",
+  "libName": "부산광역시 사상도서관",
+  "dtlRegion": "21150",
+  "latitude": 35.1781217,
+  "longitude": 128.989771,
+  "address": "부산광역시 사상구 덕상로72번길 9",
+  "tel": "051-310-7971",
+  "homepage": "http://www.sasang.go.kr/library/"
+ },
+ {
+  "libCode": "126170",
+  "libName": "부산광역시 주례열린도서관",
+  "dtlRegion": "21150",
+  "latitude": 35.1461876,
+  "longitude": 129.0024809,
+  "address": "부산광역시 사상구 주례로 110",
+  "tel": "051-310-8500",
+  "homepage": "https://www.sasang.go.kr/jrlib"
+ },
+ {
+  "libCode": "126157",
+  "libName": "부산도서관",
+  "dtlRegion": "21150",
+  "latitude": 35.1728784,
+  "longitude": 128.9853065,
+  "address": "부산광역시 사상구 사상로310번길 33",
+  "tel": "051-310-5400",
+  "homepage": "https://library.busan.go.kr"
+ },
+ {
+  "libCode": "126159",
+  "libName": "부산광역시 고촌어울림도서관",
+  "dtlRegion": "21510",
+  "latitude": 35.2389142,
+  "longitude": 129.1723178,
+  "address": "부산광역시 기장군 철마면 고촌로 51",
+  "tel": "051-709-5381",
+  "homepage": "http://library.gijang.go.kr/gochon"
+ },
+ {
+  "libCode": "126165",
+  "libName": "부산광역시 교리도서관",
+  "dtlRegion": "21510",
+  "latitude": 35.2567089,
+  "longitude": 129.2158008,
+  "address": "부산광역시 기장군 기장읍 차성로417번길 11",
+  "tel": "051-709-5370",
+  "homepage": "http://library.gijang.go.kr/gyori/main.do"
+ },
+ {
+  "libCode": "121026",
+  "libName": "부산광역시 기장도서관",
+  "dtlRegion": "21510",
+  "latitude": 35.2497515,
+  "longitude": 129.2172571,
+  "address": "부산광역시 기장군 기장읍 차성동로126번길 13-5",
+  "tel": "051-709-5351",
+  "homepage": "http://library.gijang.go.kr/"
+ },
+ {
+  "libCode": "126032",
+  "libName": "부산광역시 기장디지털도서관",
+  "dtlRegion": "21510",
+  "latitude": 35.2435223,
+  "longitude": 129.2229656,
+  "address": "부산광역시 기장군 기장읍 기장대로 560, 7층",
+  "tel": "051-709-5071",
+  "homepage": "http://www.busanlib.net"
+ },
+ {
+  "libCode": "126160",
+  "libName": "부산광역시 내리새라도서관",
+  "dtlRegion": "21510",
+  "latitude": 35.2373835,
+  "longitude": 129.2154171,
+  "address": "부산광역시 기장군 기장읍 기장대로 51",
+  "tel": "051-709-3967",
+  "homepage": "http://library.gijang.go.kr/naeri/main.do"
+ },
+ {
+  "libCode": "126151",
+  "libName": "부산광역시 대라다목적도서관",
+  "dtlRegion": "21510",
+  "latitude": 35.2409871,
+  "longitude": 129.2104864,
+  "address": "부산광역시 기장군 기장읍 차성서로 86",
+  "tel": "051-709-3961",
+  "homepage": "http://www.busanlib.net"
+ },
+ {
+  "libCode": "126144",
+  "libName": "부산광역시 정관도서관",
+  "dtlRegion": "21510",
+  "latitude": 35.3279169,
+  "longitude": 129.1817747,
+  "address": "부산광역시 기장군 정관읍 정관중앙로 100",
+  "tel": "051-709-3901",
+  "homepage": "http://jglib.gijang.go.kr/main.do"
+ },
+ {
+  "libCode": "126134",
+  "libName": "부산광역시 정관에듀파크어린이도서관",
+  "dtlRegion": "21510",
+  "latitude": 35.322819,
+  "longitude": 129.177707,
+  "address": "부산광역시 기장군 정관읍 모전로 11",
+  "tel": "051-709-5386",
+  "homepage": "http://library.gijang.go.kr/jgchildlib"
+ }
+]

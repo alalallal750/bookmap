@@ -138,6 +138,49 @@ export async function fetchHoldingLibCodes(isbn13: string): Promise<Set<string> 
 }
 
 /**
+ * [2026-07-18 전국판] 이 책(ISBN13)을 소장한 "시군구 단위" 도서관 libCode
+ * 집합 — libSrchByBook에 region+dtl_region을 걸어 시군구당 1~2회로 조회.
+ *
+ * 전국판 호출 절약 원칙: 선행 호출은 이 함수만 쓰고, bookExist는 사용자가
+ * 마커를 탭할 때 온디맨드로만 호출한다(서울 폴백처럼 관 수만큼 미리 쏘면
+ * 참여관 많은 지역에서 검색 1회가 한도의 5~10%를 소비 — 실측 근거는
+ * 인수인계 문서 0장 2026-07-11 항목).
+ *
+ * 실패 시 null — 호출부는 그 시군구를 결과에서 생략 (부분 실패 허용).
+ */
+export async function fetchHoldingLibCodesByUnit(
+  isbn13: string,
+  dtlRegion: string
+): Promise<Set<string> | null> {
+  const key = getAuthKey();
+  if (!key) {
+    console.log("[naru] DATA4LIB_KEY 없음 — 정보나루 경로 생략");
+    return null;
+  }
+
+  const region = dtlRegion.slice(0, 2);
+  const codes = new Set<string>();
+  let pageNo = 1;
+  let calls = 0;
+  for (;;) {
+    const url =
+      `${BASE_URL}/libSrchByBook?authKey=${key}&isbn=${encodeURIComponent(isbn13)}` +
+      `&region=${region}&dtl_region=${encodeURIComponent(dtlRegion)}` +
+      `&pageNo=${pageNo}&pageSize=300&format=json`;
+    const r = await fetchNaruJson(url);
+    calls++;
+    if (r === null) return pageNo === 1 ? null : codes;
+    const page = (r.libs ?? []).map((x: any) => x.lib ?? x);
+    for (const lib of page) codes.add(String(lib.libCode));
+    const numFound = Number(r.numFound ?? 0);
+    if (codes.size >= numFound || page.length === 0) break;
+    pageNo += 1;
+  }
+  logNaruUsage(`libSrchByBook unit=${dtlRegion} isbn=${isbn13} 소장 ${codes.size}관`, calls);
+  return codes;
+}
+
+/**
  * 특정 도서관(libCode)의 소장·대출가능 여부 (전일 기준).
  * 실패 시 null — 호출부는 그 도서관만 결과에서 제외.
  */

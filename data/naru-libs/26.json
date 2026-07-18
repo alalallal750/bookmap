@@ -1,0 +1,452 @@
+[
+ {
+  "libCode": "731144",
+  "libName": "남외어린이도서관",
+  "dtlRegion": "26010",
+  "latitude": 35.5631431,
+  "longitude": 129.33659,
+  "address": "울산광역시 중구 번영로 614",
+  "tel": "052-290-4856",
+  "homepage": "https://lib.junggu.ulsan.kr"
+ },
+ {
+  "libCode": "731136",
+  "libName": "산전만화도서관",
+  "dtlRegion": "26010",
+  "latitude": 35.5778979,
+  "longitude": 129.3491503,
+  "address": "울산광역시 중구 산전6길 32-1",
+  "tel": "052-290-4859",
+  "homepage": "https://lib.junggu.ulsan.kr"
+ },
+ {
+  "libCode": "131076",
+  "libName": "약숫골도서관",
+  "dtlRegion": "26010",
+  "latitude": 35.5704567,
+  "longitude": 129.3372122,
+  "address": "울산광역시 중구 평산4길 38",
+  "tel": "052-290-4170",
+  "homepage": "http://lib.junggu.ulsan.kr/"
+ },
+ {
+  "libCode": "731005",
+  "libName": "옥골샘도서관",
+  "dtlRegion": "26010",
+  "latitude": 35.5574384,
+  "longitude": 129.3240874,
+  "address": "울산광역시 중구 중앙길 199",
+  "tel": "052-290-4185",
+  "homepage": "https://lib.junggu.ulsan.kr"
+ },
+ {
+  "libCode": "731053",
+  "libName": "외솔한옥도서관",
+  "dtlRegion": "26010",
+  "latitude": 35.5747679,
+  "longitude": 129.3480727,
+  "address": "울산광역시 중구 병영7길 36",
+  "tel": "052-290-4196",
+  "homepage": "https://lib.junggu.ulsan.kr"
+ },
+ {
+  "libCode": "731124",
+  "libName": "우정도서관",
+  "dtlRegion": "26010",
+  "latitude": 35.5553005,
+  "longitude": 129.3124996,
+  "address": "울산광역시 중구 장춘로 30",
+  "tel": "052-290-4658",
+  "homepage": "https://lib.junggu.ulsan.kr"
+ },
+ {
+  "libCode": "131085",
+  "libName": "울산종갓집도서관",
+  "dtlRegion": "26010",
+  "latitude": 35.5609793,
+  "longitude": 129.2972021,
+  "address": "울산광역시 중구 종가3길 29",
+  "tel": "052-700-5230",
+  "homepage": "https://lib.junggu.ulsan.kr/lib"
+ },
+ {
+  "libCode": "731006",
+  "libName": "태화루도서관",
+  "dtlRegion": "26010",
+  "latitude": 35.5564993,
+  "longitude": 129.3044194,
+  "address": "울산광역시 중구 유곡로 45",
+  "tel": "052-290-4190",
+  "homepage": "https://lib.junggu.ulsan.kr"
+ },
+ {
+  "libCode": "731133",
+  "libName": "학성도서관",
+  "dtlRegion": "26010",
+  "latitude": 35.5552975,
+  "longitude": 129.3345536,
+  "address": "울산광역시 중구 구교로 92",
+  "tel": "052-290-4508",
+  "homepage": "https://lib.junggu.ulsan.kr"
+ },
+ {
+  "libCode": "731013",
+  "libName": "함월도서관",
+  "dtlRegion": "26010",
+  "latitude": 35.574505,
+  "longitude": 129.3097748,
+  "address": "울산광역시 중구 백양로 34",
+  "tel": "052-290-4180",
+  "homepage": "https://lib.junggu.ulsan.kr"
+ },
+ {
+  "libCode": "131017",
+  "libName": "울산 남구 도산도서관",
+  "dtlRegion": "26020",
+  "latitude": 35.5307144,
+  "longitude": 129.3315455,
+  "address": "울산광역시 남구 번영로54번길 6",
+  "tel": "052-226-5710",
+  "homepage": "http://www.ulsannamgu.go.kr/library"
+ },
+ {
+  "libCode": "131072",
+  "libName": "울산 남구 신복도서관",
+  "dtlRegion": "26020",
+  "latitude": 35.5513724,
+  "longitude": 129.2553236,
+  "address": "울산광역시 남구 신복로72번길 18-13",
+  "tel": "052-226-2360",
+  "homepage": "http://www.ulsannamgu.go.kr/library"
+ },
+ {
+  "libCode": "131074",
+  "libName": "울산 남구 옥현어린이도서관",
+  "dtlRegion": "26020",
+  "latitude": 35.5391622,
+  "longitude": 129.264824,
+  "address": "울산광역시 남구 옥현로58번길 40",
+  "tel": "052-226-2370",
+  "homepage": "http://www.ulsannamgu.go.kr/library/"
+ },
+ {
+  "libCode": "131015",
+  "libName": "울산 남구 월봉도서관",
+  "dtlRegion": "26020",
+  "latitude": 35.5422963,
+  "longitude": 129.3198911,
+  "address": "울산광역시 남구 돋질로139번길 23",
+  "tel": "052-226-2377",
+  "homepage": "http://www.ulsannamgu.go.kr/library"
+ },
+ {
+  "libCode": "148014",
+  "libName": "울산남부도서관",
+  "dtlRegion": "26020",
+  "latitude": 35.535816,
+  "longitude": 129.2951888,
+  "address": "울산광역시 남구 거마로13번길 6",
+  "tel": "052-259-7532",
+  "homepage": "https://www.usnl.or.kr/"
+ },
+ {
+  "libCode": "131080",
+  "libName": "울산도서관",
+  "dtlRegion": "26020",
+  "latitude": 35.533571,
+  "longitude": 129.3360171,
+  "address": "울산광역시 남구 꽃대나리로 140",
+  "tel": "052-266-5670",
+  "homepage": "https://library.ulsan.go.kr"
+ },
+ {
+  "libCode": "131028",
+  "libName": "꽃바위작은도서관",
+  "dtlRegion": "26030",
+  "latitude": 35.4870523,
+  "longitude": 129.4113238,
+  "address": "울산광역시 동구 문현3길 6, 1층(꽃바위문화관)",
+  "tel": "052-209-4337",
+  "homepage": "https://library.donggu.ulsan.kr/"
+ },
+ {
+  "libCode": "131082",
+  "libName": "남목도서관",
+  "dtlRegion": "26030",
+  "latitude": 35.5455715,
+  "longitude": 129.4277546,
+  "address": "울산광역시 동구 남목12길 10",
+  "tel": "052-209-4580",
+  "homepage": "https://library.donggu.ulsan.kr/"
+ },
+ {
+  "libCode": "131016",
+  "libName": "마성만화도서관",
+  "dtlRegion": "26030",
+  "latitude": 35.5424852,
+  "longitude": 129.4255357,
+  "address": "울산광역시 동구 방어진순환도로 1170, 2층(남목1동 주민센터)",
+  "tel": "052-209-3947",
+  "homepage": "https://library.donggu.ulsan.kr/"
+ },
+ {
+  "libCode": "148015",
+  "libName": "울산동부도서관",
+  "dtlRegion": "26030",
+  "latitude": 35.5282078,
+  "longitude": 129.4250825,
+  "address": "울산광역시 동구 봉수로 505",
+  "tel": "052-241-2300",
+  "homepage": "https://www.usdl.or.kr"
+ },
+ {
+  "libCode": "131021",
+  "libName": "전하작은도서관",
+  "dtlRegion": "26030",
+  "latitude": 35.5093691,
+  "longitude": 129.4293383,
+  "address": "울산광역시 동구 진성8길 91, 1층(동구평생학습관)",
+  "tel": "052-209-3936",
+  "homepage": "https://library.donggu.ulsan.kr/"
+ },
+ {
+  "libCode": "131022",
+  "libName": "화정아이꿈누리도서관",
+  "dtlRegion": "26030",
+  "latitude": 35.4958848,
+  "longitude": 129.4226003,
+  "address": "울산광역시 동구 대송로 140, 1층(화정주민센터)",
+  "tel": "052-209-3950",
+  "homepage": "https://library.donggu.ulsan.kr/"
+ },
+ {
+  "libCode": "131059",
+  "libName": "가온누리작은도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.6454614,
+  "longitude": 129.346506,
+  "address": "울산광역시 북구 신천소공원로 15, 108동 1층",
+  "tel": "052-292-2774",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "131061",
+  "libName": "극동푸른작은도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.6415845,
+  "longitude": 129.3480783,
+  "address": "울산광역시 북구 신천로 27, 관리동 1층",
+  "tel": "052-285-3340",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "131043",
+  "libName": "꿈꾸는작은도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.6297775,
+  "longitude": 129.338959,
+  "address": "울산광역시 북구 아진로 75",
+  "tel": "052-282-0604",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "131037",
+  "libName": "다울림작은도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.6374664,
+  "longitude": 129.3300097,
+  "address": "울산광역시 북구 천곡길 137, 107동 지하2층",
+  "tel": "052-286-6022",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "131031",
+  "libName": "아름드리작은도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.6453706,
+  "longitude": 129.3544357,
+  "address": "울산광역시 북구 신기3길 19-6, 관리동 2층",
+  "tel": "070-4415-1212",
+  "homepage": "https://usbl.bukgu.ulsan.kr/index.html"
+ },
+ {
+  "libCode": "131057",
+  "libName": "양정작은도서관(달팽이)",
+  "dtlRegion": "26040",
+  "latitude": 35.5448314,
+  "longitude": 129.3848384,
+  "address": "울산광역시 북구 염포로 521-1",
+  "tel": "052-288-3709",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "131084",
+  "libName": "울산 북구 강동바다도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.632014,
+  "longitude": 129.4378682,
+  "address": "울산광역시 북구 산하중앙3로 62",
+  "tel": "052-241-7480",
+  "homepage": "https://usbl.bukgu.ulsan.kr"
+ },
+ {
+  "libCode": "131002",
+  "libName": "울산 북구 기적의도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.6622063,
+  "longitude": 129.3364797,
+  "address": "울산광역시 북구 이화5길 29-13 ",
+  "tel": "052-241-7420",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "131001",
+  "libName": "울산 북구 농소1동도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.6291873,
+  "longitude": 129.3545038,
+  "address": "울산광역시 북구 동대15길 27",
+  "tel": "052-241-7430",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "131003",
+  "libName": "울산 북구 농소3동도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.6330929,
+  "longitude": 129.3355864,
+  "address": "울산광역시 북구 아진1로 47",
+  "tel": "052-241-7440",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "131079",
+  "libName": "울산 북구 매곡도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.6441992,
+  "longitude": 129.3504917,
+  "address": "울산광역시 북구 매곡로 138-19",
+  "tel": "052-241-7470",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "131056",
+  "libName": "울산 북구 명촌어린이도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.5550074,
+  "longitude": 129.3553039,
+  "address": "울산광역시 북구 명촌12길 11",
+  "tel": "052-241-7460",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "131083",
+  "libName": "울산 북구 송정나래도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.4183288,
+  "longitude": 129.3311077,
+  "address": "울산광역시 북구 화산로 89, 3층",
+  "tel": "052-241-8590",
+  "homepage": "https://usbl.bukgu.ulsan.kr"
+ },
+ {
+  "libCode": "131019",
+  "libName": "울산 북구 염포양정도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.5318826,
+  "longitude": 129.3939096,
+  "address": "울산광역시 북구 염포로 685-1",
+  "tel": "052-241-7450",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "131005",
+  "libName": "울산 북구 중앙도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.5842174,
+  "longitude": 129.3679182,
+  "address": "울산광역시 북구 두부곡1길 9",
+  "tel": "052-241-7407",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "131025",
+  "libName": "책가방작은도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.631562,
+  "longitude": 129.3366859,
+  "address": "울산광역시 북구 천곡남로 38, 관리동 지하1층",
+  "tel": "052-967-8008",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "131027",
+  "libName": "책놀이터작은도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.6299962,
+  "longitude": 129.3422293,
+  "address": "울산광역시 북구 아진로 42, 관리동 지하1층",
+  "tel": "052-282-6630",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "131036",
+  "libName": "책누리작은도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.5509767,
+  "longitude": 129.3833239,
+  "address": "울산광역시 북구 염포로 459, 관리동 2층",
+  "tel": "052-289-3525",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "131041",
+  "libName": "책마루작은도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.6317616,
+  "longitude": 129.3269509,
+  "address": "울산광역시 북구 달천로 103-20",
+  "tel": "052-281-7785",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "131020",
+  "libName": "책사랑작은도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.6380752,
+  "longitude": 129.3274329,
+  "address": "울산광역시 북구 천곡길 165, 관리동 2층",
+  "tel": "052-935-1379",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "131029",
+  "libName": "푸른작은도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.6449758,
+  "longitude": 129.3530831,
+  "address": "울산광역시 북구 신천로 92, 관리동 2층",
+  "tel": "052-282-3814",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "131068",
+  "libName": "햇살작은도서관",
+  "dtlRegion": "26040",
+  "latitude": 35.6547535,
+  "longitude": 129.3506303,
+  "address": "울산광역시 북구 중산동로 37",
+  "tel": "052-292-9955",
+  "homepage": "https://usbl.bukgu.ulsan.kr/"
+ },
+ {
+  "libCode": "148018",
+  "libName": "울주도서관",
+  "dtlRegion": "26510",
+  "latitude": 35.5588501,
+  "longitude": 129.1373782,
+  "address": "울산광역시 울주군 언양읍 언양로 109",
+  "tel": "052-255-8133",
+  "homepage": "https://www.usul.or.kr"
+ }
+]

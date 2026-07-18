@@ -1,0 +1,1112 @@
+[
+ {
+  "libCode": "147125",
+  "libName": "구룡포 미르아라작은도서관",
+  "dtlRegion": "37011",
+  "latitude": 35.9911577,
+  "longitude": 129.552533,
+  "address": "경상북도 포항시 남구 구룡포읍 구룡포길65번길 7",
+  "tel": "054-276-4122",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147121",
+  "libName": "근로종합복지회관작은도서관",
+  "dtlRegion": "37011",
+  "latitude": 35.9772867,
+  "longitude": 129.379979,
+  "address": "경상북도 포항시 남구 철강로 388",
+  "tel": "054-270-4771",
+  "homepage": "-"
+ },
+ {
+  "libCode": "147102",
+  "libName": "대송면 큰솔작은도서관",
+  "dtlRegion": "37011",
+  "latitude": 35.97817,
+  "longitude": 129.36225,
+  "address": "경상북도 포항시 남구 대송면 운제로 111",
+  "tel": "054-286-7474",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147101",
+  "libName": "상대동 큰섬마을작은도서관",
+  "dtlRegion": "37011",
+  "latitude": 36.0233368,
+  "longitude": 129.364019,
+  "address": "경상북도 포항시 남구 대해로91번길 22 ",
+  "tel": "054-283-0030",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147109",
+  "libName": "송도동 솔향작은도서관",
+  "dtlRegion": "37011",
+  "latitude": 36.0389457,
+  "longitude": 129.376003,
+  "address": "경상북도 포항시 남구 서동로 162, 태왕아너스 관리소 2층",
+  "tel": "054-246-6688",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147100",
+  "libName": "연일읍 미르작은도서관",
+  "dtlRegion": "37011",
+  "latitude": 36.00766,
+  "longitude": 129.32019,
+  "address": "경상북도 포항시 남구 연일읍 유강길10번길 49, 코아루1단지아파트",
+  "tel": "054-281-2267",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147085",
+  "libName": "오천읍 해와달작은도서관",
+  "dtlRegion": "37011",
+  "latitude": 35.96402,
+  "longitude": 129.4016,
+  "address": "경상북도 포항시 남구 오천읍 철강로 685, 준양참마을 관리실 2층",
+  "tel": "054-291-0700",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147123",
+  "libName": "청림동 찬내작은도서관",
+  "dtlRegion": "37011",
+  "latitude": 35.99286,
+  "longitude": 129.40438,
+  "address": "경상북도 포항시 남구 정몽주로879번길 9-1",
+  "tel": "054-291-6454",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147087",
+  "libName": "청림동 푸른숲작은도서관",
+  "dtlRegion": "37011",
+  "latitude": 35.9926071,
+  "longitude": 129.410481,
+  "address": "경상북도 포항시 남구 동해안로 6001, 청림마을 독서실 2층",
+  "tel": "054-292-0129",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147172",
+  "libName": "포항시립구룡포도서관",
+  "dtlRegion": "37011",
+  "latitude": 35.9827066,
+  "longitude": 129.5506891,
+  "address": "경상북도 포항시 남구 구룡포읍 병포길52번길 17",
+  "tel": "054-270-5629",
+  "homepage": "https://phlib.pohang.go.kr"
+ },
+ {
+  "libCode": "147061",
+  "libName": "포항시립대잠도서관",
+  "dtlRegion": "37011",
+  "latitude": 36.0191816,
+  "longitude": 129.3432983,
+  "address": "경상북도 포항시 남구 시청로 1",
+  "tel": "054-270-5680(종합자료실), 054-270-5670(어린이자료실)",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147073",
+  "libName": "포항시립동해석곡도서관",
+  "dtlRegion": "37011",
+  "latitude": 35.9908951,
+  "longitude": 129.437424,
+  "address": "경상북도 포항시 남구 동해면 일월로41번길 19",
+  "tel": "054-270-4625",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147157",
+  "libName": "포항시립어린이영어도서관",
+  "dtlRegion": "37011",
+  "latitude": 36.006965,
+  "longitude": 129.35568,
+  "address": "경상북도 포항시 남구 뱃머리길 39 ",
+  "tel": "054-270-4386",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147171",
+  "libName": "포항시립연일도서관",
+  "dtlRegion": "37011",
+  "latitude": 35.9958959,
+  "longitude": 129.351182,
+  "address": "경상북도 포항시 남구 연일읍 동문로53번길 8-17",
+  "tel": "054-270-4626",
+  "homepage": "https://phlib.pohang.go.kr"
+ },
+ {
+  "libCode": "147037",
+  "libName": "포항시립영암도서관",
+  "dtlRegion": "37011",
+  "latitude": 36.0127761,
+  "longitude": 129.357763,
+  "address": "경상북도 포항시 남구 상공로 46번길 11",
+  "tel": "054-270-5685",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147036",
+  "libName": "포항시립포은오천도서관",
+  "dtlRegion": "37011",
+  "latitude": 35.9686415,
+  "longitude": 129.416446,
+  "address": "경상북도 포항시 남구 오천읍 정몽주로 566",
+  "tel": "054-270-5692",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147071",
+  "libName": "해도동 바다섬작은도서관",
+  "dtlRegion": "37011",
+  "latitude": 36.0194979,
+  "longitude": 129.370468,
+  "address": "경상북도 포항시 남구 중앙로68번길 7",
+  "tel": "054-282-9896",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147110",
+  "libName": "효곡동 그린숲작은도서관",
+  "dtlRegion": "37011",
+  "latitude": 36.0297139,
+  "longitude": 129.32309,
+  "address": "경상북도 포항시 남구 지곡로278번길 2",
+  "tel": "054-221-4924",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147138",
+  "libName": "효곡동 열린작은도서관",
+  "dtlRegion": "37011",
+  "latitude": 36.00493,
+  "longitude": 129.34348,
+  "address": "경상북도 포항시 남구 효성로 88",
+  "tel": "054-272-4434",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147086",
+  "libName": "효곡동 행복작은도서관",
+  "dtlRegion": "37011",
+  "latitude": 36.0061655,
+  "longitude": 129.332913,
+  "address": "경상북도 포항시 남구 새천년대로 306",
+  "tel": "054-282-1842",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147013",
+  "libName": "경상북도교육청 영일도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.113839,
+  "longitude": 129.345885,
+  "address": "경상북도 포항시 북구 흥해읍 흥해로 101",
+  "tel": "054-261-8856",
+  "homepage": "http://www.gbelib.kr/yi"
+ },
+ {
+  "libCode": "147105",
+  "libName": "경상북도교육청문화원 종합정보자료실",
+  "dtlRegion": "37012",
+  "latitude": 36.0736127,
+  "longitude": 129.3913615,
+  "address": "경상북도 포항시 북구 환호로 50",
+  "tel": "054-245-7768",
+  "homepage": "http://www.gbelib.kr/gbccs"
+ },
+ {
+  "libCode": "147108",
+  "libName": "기계면 버드내작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.0704002,
+  "longitude": 129.20648,
+  "address": "경상북도 포항시 북구 기계면 기계로 94",
+  "tel": "054-243-6565",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147072",
+  "libName": "두호동 두무치작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.0574535,
+  "longitude": 129.374743,
+  "address": "경상북도  포항시 북구 삼호로203번길 22",
+  "tel": "054-246-0300",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147146",
+  "libName": "두호동 책이랑바다랑작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.06095,
+  "longitude": 129.38005,
+  "address": "경상북도 포항시 북구 삼호로 260",
+  "tel": "070-7730-5119",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147070",
+  "libName": "신광면 비학산작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.1298718,
+  "longitude": 129.261625,
+  "address": "경상북도 포항시 북구 신광면 토성길25번길 10-5",
+  "tel": "054-241-0302",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147069",
+  "libName": "양학동 부학작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.02547,
+  "longitude": 129.35056,
+  "address": "경상북도 포항시 북구 양학로 22, 2층",
+  "tel": "054-614-7001",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147154",
+  "libName": "용흥동 솔개재작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.0431083,
+  "longitude": 129.352425,
+  "address": "경상북도 포항시 북구 대안길 56, 1층(122동 뒷편 우방독서실 내)",
+  "tel": "054-610-1120",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "747006",
+  "libName": "장량동 꿈마루작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.0894166,
+  "longitude": 129.395131,
+  "address": "경상북도 포항시 북구 장량중앙로 117",
+  "tel": "054-252-1622",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147136",
+  "libName": "장량동 다솜작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.092047,
+  "longitude": 129.382772,
+  "address": "경상북도 포항시 북구 장량중앙로 17",
+  "tel": "054-252-0016",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "747016",
+  "libName": "장량동 바람숲작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.0847418,
+  "longitude": 129.403442,
+  "address": "경상북도 포항시 북구 양덕로 60",
+  "tel": "054-251-2531",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147084",
+  "libName": "장량동 참사랑작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.0825892,
+  "longitude": 129.3775857,
+  "address": "경상북도 포항시 북구 침촌로 20",
+  "tel": "054-255-0022",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147156",
+  "libName": "장량동 해뜰참작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.0749668,
+  "longitude": 129.381851,
+  "address": "경상북도 포항시 북구 새천년대로 1235",
+  "tel": "054-246-0016",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147137",
+  "libName": "장량동 햇살작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.08476,
+  "longitude": 129.40569,
+  "address": "경상북도 포항시 북구 양덕로50번길 33",
+  "tel": "054-256-0016",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147124",
+  "libName": "죽도동 맑은물작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.03302,
+  "longitude": 129.36473,
+  "address": "경상북도 포항시 북구 죽도로 30, 빗물펌프장 1층",
+  "tel": "054-278-3081",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147104",
+  "libName": "죽도동 청암작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.03312,
+  "longitude": 129.36951,
+  "address": "경상북도 포항시 북구 죽도로 82-2",
+  "tel": "070-4125-3081",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147155",
+  "libName": "죽장면 참느리작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.241684,
+  "longitude": 129.215431,
+  "address": "경상북도 포항시 북구 죽장면 죽장로 1759",
+  "tel": "054-261-0330",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147135",
+  "libName": "청하면 해아작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.2014522,
+  "longitude": 129.340444,
+  "address": "경상북도 포항시 북구 청하면 청하로 247",
+  "tel": "054-231-6799",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147059",
+  "libName": "포항시립포은중앙도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.0437354,
+  "longitude": 129.3673931,
+  "address": "경상북도 포항시 북구 삼호로 31",
+  "tel": "054-270-4600",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147111",
+  "libName": "환여동 해맞이꿈터작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.0699147,
+  "longitude": 129.39142,
+  "address": "경상북도 포항시 북구 삼호로 391",
+  "tel": "054-251-5577",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147122",
+  "libName": "환여동 환호어린이작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.0677253,
+  "longitude": 129.393047,
+  "address": "경상북도 포항시 북구 환호공원길 30",
+  "tel": "054-251-5578",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147147",
+  "libName": "흥해읍 내맏이작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.08053,
+  "longitude": 129.32993,
+  "address": "경상북도 포항시 북구 흥해읍 도음로877번길 9",
+  "tel": "054-262-3997",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147148",
+  "libName": "흥해읍 어리골작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.07046,
+  "longitude": 129.33377,
+  "address": "경상북도 포항시 북구 흥해읍 달전로 291",
+  "tel": "054-262-3996",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "747005",
+  "libName": "흥해읍 참새미작은도서관",
+  "dtlRegion": "37012",
+  "latitude": 36.0761422,
+  "longitude": 129.339163,
+  "address": "경상북도 포항시 북구 흥해읍 달전로 365",
+  "tel": "054-262-3002",
+  "homepage": "http://phlib.pohang.go.kr/"
+ },
+ {
+  "libCode": "147016",
+  "libName": "경상북도교육청 외동도서관",
+  "dtlRegion": "37020",
+  "latitude": 35.7172229,
+  "longitude": 129.3245128,
+  "address": "경상북도 경주시 외동읍 입실로 98",
+  "tel": "054-776-6960",
+  "homepage": "http://www.gbelib.kr/od"
+ },
+ {
+  "libCode": "147042",
+  "libName": "경주시립감포도서관",
+  "dtlRegion": "37020",
+  "latitude": 35.798772,
+  "longitude": 129.4929311,
+  "address": "경상북도 경주시 감포읍 동해안로 2151",
+  "tel": "054-779-8912",
+  "homepage": "http://library.gyeongju.go.kr"
+ },
+ {
+  "libCode": "147044",
+  "libName": "경주시립단석도서관",
+  "dtlRegion": "37020",
+  "latitude": 35.8517385,
+  "longitude": 129.1025403,
+  "address": "경상북도 경주시 건천읍 작원3길 23",
+  "tel": "054-779-8919",
+  "homepage": "http://library.gyeongju.go.kr"
+ },
+ {
+  "libCode": "147025",
+  "libName": "경주시립도서관",
+  "dtlRegion": "37020",
+  "latitude": 35.8598841,
+  "longitude": 129.2186252,
+  "address": "경상북도 경주시 원화로 431-12",
+  "tel": "054-779-8891",
+  "homepage": "http://library.gyeongju.go.kr"
+ },
+ {
+  "libCode": "147120",
+  "libName": "경주시립송화도서관",
+  "dtlRegion": "37020",
+  "latitude": 35.8421572,
+  "longitude": 129.1816974,
+  "address": "경상북도 경주시 태종로 472-9",
+  "tel": "054-779-8907",
+  "homepage": "http://library.gyeongju.go.kr"
+ },
+ {
+  "libCode": "147026",
+  "libName": "경주시립중앙도서관",
+  "dtlRegion": "37020",
+  "latitude": 35.8384087,
+  "longitude": 129.2076376,
+  "address": "경상북도 경주시 금성로 236",
+  "tel": "054-779-8918",
+  "homepage": "http://library.gyeongju.go.kr"
+ },
+ {
+  "libCode": "147052",
+  "libName": "경주시립칠평도서관",
+  "dtlRegion": "37020",
+  "latitude": 35.992291,
+  "longitude": 129.2186912,
+  "address": "경상북도 경주시 안강읍 비화중로 51",
+  "tel": "-",
+  "homepage": "http://library.gyeongju.go.kr"
+ },
+ {
+  "libCode": "147010",
+  "libName": "경상북도교육청 안동도서관",
+  "dtlRegion": "37040",
+  "latitude": 36.5614924,
+  "longitude": 128.7170411,
+  "address": "경상북도 안동시 안기천로 48",
+  "tel": "054-840-8414",
+  "homepage": "http://www.gbelib.kr/ad"
+ },
+ {
+  "libCode": "147011",
+  "libName": "경상북도교육청 안동도서관 용상분관",
+  "dtlRegion": "37040",
+  "latitude": 36.5576204,
+  "longitude": 128.7516426,
+  "address": "경상북도 안동시 경동로 884-8",
+  "tel": "054-821-5491",
+  "homepage": "http://www.gbelib.kr/adys"
+ },
+ {
+  "libCode": "147039",
+  "libName": "경상북도교육청 안동도서관 풍산분관",
+  "dtlRegion": "37040",
+  "latitude": 36.5767134,
+  "longitude": 128.5752714,
+  "address": "경상북도 안동시 풍산읍 하리들길 22",
+  "tel": "054-858-7603",
+  "homepage": "https://www.gbelib.kr/adps"
+ },
+ {
+  "libCode": "147163",
+  "libName": "안동시립어린이도서관",
+  "dtlRegion": "37040",
+  "latitude": 36.548773,
+  "longitude": 128.729933,
+  "address": "경상북도 안동시 강남5길 113-14",
+  "tel": "054-858-5041",
+  "homepage": "https://lib.andong.go.kr"
+ },
+ {
+  "libCode": "147030",
+  "libName": "안동시립웅부도서관",
+  "dtlRegion": "37040",
+  "latitude": 36.5661267,
+  "longitude": 128.7351927,
+  "address": "경상북도 안동시 태사길 78",
+  "tel": "054-858-5041",
+  "homepage": "https://lib.andong.go.kr"
+ },
+ {
+  "libCode": "147170",
+  "libName": "안동시립중앙도서관",
+  "dtlRegion": "37040",
+  "latitude": 36.5669166,
+  "longitude": 128.6993119,
+  "address": "경상북도 안동시 경북대로 426-36",
+  "tel": "054-858-5041",
+  "homepage": "https://lib.andong.go.kr"
+ },
+ {
+  "libCode": "147003",
+  "libName": "경상북도교육청 구미도서관",
+  "dtlRegion": "37050",
+  "latitude": 36.1238074,
+  "longitude": 128.3315119,
+  "address": "경상북도 구미시 산책길 41",
+  "tel": "054-450-7000",
+  "homepage": "http://www.gbelib.kr/gm"
+ },
+ {
+  "libCode": "347034",
+  "libName": "경상북도교육청연수원 도서관",
+  "dtlRegion": "37050",
+  "latitude": 36.1243423,
+  "longitude": 128.3221001,
+  "address": "경상북도 구미시 금오산로 198-14",
+  "tel": "054-450-4340",
+  "homepage": "http://www.gbeti.or.kr"
+ },
+ {
+  "libCode": "14703810",
+  "libName": "구미생활문화센터작은도서관",
+  "dtlRegion": "37050",
+  "latitude": 36.1295677,
+  "longitude": 128.3341105,
+  "address": "경상북도 구미시 구미중앙로15길 20, 3층",
+  "tel": "054-480-6638",
+  "homepage": "https://lib.gumi.go.kr"
+ },
+ {
+  "libCode": "147062",
+  "libName": "구미시립봉곡도서관",
+  "dtlRegion": "37050",
+  "latitude": 36.1529195,
+  "longitude": 128.3076996,
+  "address": "경상북도 구미시 봉곡로15길 54",
+  "tel": "054-480-2100",
+  "homepage": "http://lib.gumi.go.kr"
+ },
+ {
+  "libCode": "147178",
+  "libName": "구미시립산동도서관",
+  "dtlRegion": "37050",
+  "latitude": 36.1602523,
+  "longitude": 128.4297342,
+  "address": "경상북도 구미시 산동읍 신당3로1길 4",
+  "tel": "054-480-4690",
+  "homepage": "https://lib.gumi.go.kr"
+ },
+ {
+  "libCode": "147119",
+  "libName": "구미시립상모정수도서관",
+  "dtlRegion": "37050",
+  "latitude": 36.0873769,
+  "longitude": 128.3564442,
+  "address": "경상북도 구미시 상사서로4길 10",
+  "tel": "054-480-4730",
+  "homepage": "http://lib.gumi.go.kr"
+ },
+ {
+  "libCode": "147029",
+  "libName": "구미시립선산도서관",
+  "dtlRegion": "37050",
+  "latitude": 36.2387879,
+  "longitude": 128.3048705,
+  "address": "경상북도 구미시 선산읍 선산대로 1400-16",
+  "tel": "054-480-2120",
+  "homepage": "http://lib.gumi.go.kr"
+ },
+ {
+  "libCode": "147169",
+  "libName": "구미시립양포도서관",
+  "dtlRegion": "37050",
+  "latitude": 36.1387724,
+  "longitude": 128.4187321,
+  "address": "경상북도 구미시 옥계북로 51",
+  "tel": "054-480-4770",
+  "homepage": "https://lib.gumi.go.kr"
+ },
+ {
+  "libCode": "147051",
+  "libName": "구미시립인동도서관",
+  "dtlRegion": "37050",
+  "latitude": 36.0990913,
+  "longitude": 128.4236401,
+  "address": "경상북도 구미시 인동14길 14",
+  "tel": "054-480-4700",
+  "homepage": "http://lib.gumi.go.kr"
+ },
+ {
+  "libCode": "147133",
+  "libName": "구미시립작은도서관",
+  "dtlRegion": "37050",
+  "latitude": 36.1282611,
+  "longitude": 128.3400386,
+  "address": "경상북도 구미시 금오시장로9길 21",
+  "tel": "054-441-1025",
+  "homepage": "https://lib.gumi.go.kr/page.do?mid=87"
+ },
+ {
+  "libCode": "147038",
+  "libName": "구미시립중앙도서관",
+  "dtlRegion": "37050",
+  "latitude": 36.1140333,
+  "longitude": 128.335603,
+  "address": "경상북도 구미시 경은로 85",
+  "tel": "054-480-4660",
+  "homepage": "http://lib.gumi.go.kr"
+ },
+ {
+  "libCode": "14703811",
+  "libName": "송정나래작은도서관",
+  "dtlRegion": "37050",
+  "latitude": 36.1178877,
+  "longitude": 128.3558445,
+  "address": "경상북도 구미시 송정대로10길 34-1",
+  "tel": "054-441-0118",
+  "homepage": "https://lib.gumi.go.kr"
+ },
+ {
+  "libCode": "14703812",
+  "libName": "평생학습원 자료실",
+  "dtlRegion": "37050",
+  "latitude": 36.1055081,
+  "longitude": 128.38439,
+  "address": "경상북도 구미시 산호대로 243",
+  "tel": "054-480-4329",
+  "homepage": "https://lib.gumi.go.kr"
+ },
+ {
+  "libCode": "14703813",
+  "libName": "한국폴리텍대학구미캠퍼스작은도서관",
+  "dtlRegion": "37050",
+  "latitude": 36.1184811,
+  "longitude": 128.3737328,
+  "address": "경상북도 구미시 수출대로3길 84",
+  "tel": "054-468-5134",
+  "homepage": "https://lib.gumi.go.kr"
+ },
+ {
+  "libCode": "14703801",
+  "libName": "해평누리작은도서관",
+  "dtlRegion": "37050",
+  "latitude": 36.2105806,
+  "longitude": 128.3831645,
+  "address": "경상북도 구미시 해평면 강동로 1652, 1층",
+  "tel": "054-472-8799",
+  "homepage": "https://lib.gumi.go.kr/page.do?mid=90"
+ },
+ {
+  "libCode": "147032",
+  "libName": "경상북도교육청 영주선비도서관",
+  "dtlRegion": "37060",
+  "latitude": 36.8198818,
+  "longitude": 128.6062617,
+  "address": "경상북도 영주시 영주로60번길 38",
+  "tel": "054-630-3800",
+  "homepage": "http://www.gbelib.kr/yj"
+ },
+ {
+  "libCode": "147024",
+  "libName": "경상북도교육청 영주선비도서관 풍기분관",
+  "dtlRegion": "37060",
+  "latitude": 36.8708438,
+  "longitude": 128.5196398,
+  "address": "경상북도 영주시 풍기읍 남원로 152-12",
+  "tel": "054-637-9811",
+  "homepage": "http://www.gbelib.kr/yjpg"
+ },
+ {
+  "libCode": "147014",
+  "libName": "경상북도교육청 금호도서관",
+  "dtlRegion": "37070",
+  "latitude": 35.9343797,
+  "longitude": 128.8806563,
+  "address": "경상북도 영천시 금호읍 금호로 173",
+  "tel": "054-336-2126",
+  "homepage": "http://www.gbelib.kr/ycgh"
+ },
+ {
+  "libCode": "147034",
+  "libName": "영천시립도서관",
+  "dtlRegion": "37070",
+  "latitude": 35.9754243,
+  "longitude": 128.932787,
+  "address": "경상북도 영천시 중앙동1길 80",
+  "tel": "054-339-7777",
+  "homepage": "http://www.yclib.go.kr/"
+ },
+ {
+  "libCode": "147008",
+  "libName": "경상북도교육청 상주도서관",
+  "dtlRegion": "37080",
+  "latitude": 36.4120515,
+  "longitude": 128.1584487,
+  "address": "경상북도 상주시 상서문1길 127",
+  "tel": "054-530-6300",
+  "homepage": "http://www.gbelib.kr/sj"
+ },
+ {
+  "libCode": "147040",
+  "libName": "경상북도교육청 상주도서관 화령분관",
+  "dtlRegion": "37080",
+  "latitude": 36.44241,
+  "longitude": 127.945837,
+  "address": "경상북도 상주시 화서면 중화로 2193",
+  "tel": "054-532-4754",
+  "homepage": "http://www.gbelib.kr/sjhr"
+ },
+ {
+  "libCode": "147020",
+  "libName": "경상북도교육청 점촌도서관",
+  "dtlRegion": "37090",
+  "latitude": 36.6058736,
+  "longitude": 128.2045857,
+  "address": "경상북도 문경시 호서로 133",
+  "tel": "054-550-3600",
+  "homepage": "http://www.gbelib.kr/jc"
+ },
+ {
+  "libCode": "147006",
+  "libName": "경상북도교육청 점촌도서관 가은분관",
+  "dtlRegion": "37090",
+  "latitude": 36.6470547,
+  "longitude": 128.0618016,
+  "address": "경상북도 문경시 가은읍 대야로 2508",
+  "tel": "054-572-0309",
+  "homepage": "http://www.gbelib.kr/jcge/index.do"
+ },
+ {
+  "libCode": "147001",
+  "libName": "경산시립도서관",
+  "dtlRegion": "37100",
+  "latitude": 35.9132142,
+  "longitude": 128.8129935,
+  "address": "경상북도 경산시 하양읍 문화로10길 15",
+  "tel": "053-853-8659",
+  "homepage": "https://www.gbgs.go.kr/lib/"
+ },
+ {
+  "libCode": "147165",
+  "libName": "경산시립장산도서관",
+  "dtlRegion": "37100",
+  "latitude": 35.8142997,
+  "longitude": 128.7311778,
+  "address": "경상북도 경산시 경산로 13길 7",
+  "tel": "053-816-2240",
+  "homepage": "https://www.gbgs.go.kr/lib/"
+ },
+ {
+  "libCode": "147046",
+  "libName": "경상북도교육청정보센터",
+  "dtlRegion": "37100",
+  "latitude": 35.822663,
+  "longitude": 128.7441109,
+  "address": "경상북도 경산시 원효로 60",
+  "tel": "053-810-9999",
+  "homepage": "http://www.gbelib.kr/geic"
+ },
+ {
+  "libCode": "147019",
+  "libName": "경상북도교육청 의성도서관",
+  "dtlRegion": "37520",
+  "latitude": 36.3537544,
+  "longitude": 128.700792,
+  "address": "경상북도 의성군 의성읍 중리길 44",
+  "tel": "054-834-7916",
+  "homepage": "http://www.gbelib.kr/us"
+ },
+ {
+  "libCode": "147174",
+  "libName": "봉양온누리터도서관",
+  "dtlRegion": "37520",
+  "latitude": 36.3000983,
+  "longitude": 128.5770715,
+  "address": "경상북도 의성군 봉양면 도리원3길 27-8",
+  "tel": "054-830-5219",
+  "homepage": "https://www.usc.go.kr/lib"
+ },
+ {
+  "libCode": "147053",
+  "libName": "의성군립도서관",
+  "dtlRegion": "37520",
+  "latitude": 36.3839638,
+  "longitude": 128.4401794,
+  "address": "경상북도 의성군 안계면 안계길 114",
+  "tel": "054-830-6957",
+  "homepage": "https://www.usc.go.kr/lib/"
+ },
+ {
+  "libCode": "147022",
+  "libName": "경상북도교육청 청송도서관",
+  "dtlRegion": "37530",
+  "latitude": 36.4366493,
+  "longitude": 129.0552349,
+  "address": "경상북도 청송군 청송읍 군청로 25",
+  "tel": "054-872-4907",
+  "homepage": "http://www.gbelib.kr/cs"
+ },
+ {
+  "libCode": "147012",
+  "libName": "경상북도교육청 영양도서관",
+  "dtlRegion": "37540",
+  "latitude": 36.6606963,
+  "longitude": 129.1108249,
+  "address": "경상북도 영양군 영양읍 동서대로 93-6",
+  "tel": "054-683-2829",
+  "homepage": "https://www.gbelib.kr/yy"
+ },
+ {
+  "libCode": "147031",
+  "libName": "경상북도교육청 영덕도서관",
+  "dtlRegion": "37550",
+  "latitude": 36.4146875,
+  "longitude": 129.3680705,
+  "address": "경상북도 영덕군 영덕읍 영덕로 201",
+  "tel": "054-734-3106",
+  "homepage": "http://www.gbelib.kr/yd"
+ },
+ {
+  "libCode": "147021",
+  "libName": "경상북도교육청 청도도서관",
+  "dtlRegion": "37560",
+  "latitude": 35.6452984,
+  "longitude": 128.7400677,
+  "address": "경상북도 청도군 청도읍 청화로 124",
+  "tel": "054-370-7600",
+  "homepage": "http://www.gbelib.kr/cd"
+ },
+ {
+  "libCode": "147002",
+  "libName": "경상북도교육청 고령도서관",
+  "dtlRegion": "37570",
+  "latitude": 35.7311981,
+  "longitude": 128.2675909,
+  "address": "경상북도 고령군 대가야읍 연조1길 10",
+  "tel": "054-955-2510",
+  "homepage": "http://www.gbelib.kr/gr"
+ },
+ {
+  "libCode": "147167",
+  "libName": "다산도서관",
+  "dtlRegion": "37570",
+  "latitude": 35.8219087,
+  "longitude": 128.4272761,
+  "address": "경상북도 고령군 다산면 다산로681",
+  "tel": "054-950-6276",
+  "homepage": "http://lib.goryeong.go.kr"
+ },
+ {
+  "libCode": "147009",
+  "libName": "경상북도교육청 성주도서관",
+  "dtlRegion": "37580",
+  "latitude": 35.9275785,
+  "longitude": 128.2835825,
+  "address": "경상북도 성주군 성주읍 주천로 15-11",
+  "tel": "054-933-2095",
+  "homepage": "http://www.gbelib.kr/sjl"
+ },
+ {
+  "libCode": "147023",
+  "libName": "경상북도교육청 칠곡도서관",
+  "dtlRegion": "37590",
+  "latitude": 35.996273,
+  "longitude": 128.4035346,
+  "address": "경상북도 칠곡군 왜관읍 중앙로 232, 5층",
+  "tel": "054-971-1507",
+  "homepage": "http://www.gbelib.kr/cg"
+ },
+ {
+  "libCode": "147075",
+  "libName": "칠곡군립도서관",
+  "dtlRegion": "37590",
+  "latitude": 35.9752164,
+  "longitude": 128.3995664,
+  "address": "경상북도 칠곡군 왜관읍 달오1길 6-7",
+  "tel": "054-979-6702",
+  "homepage": "https://library.chilgok.go.kr/"
+ },
+ {
+  "libCode": "147127",
+  "libName": "칠곡군립북삼도서관",
+  "dtlRegion": "37590",
+  "latitude": 36.0625978,
+  "longitude": 128.341825,
+  "address": "경상북도 칠곡군 북삼읍 인평2길 2",
+  "tel": "054-979-5975",
+  "homepage": "https://library.chilgok.go.kr/"
+ },
+ {
+  "libCode": "147134",
+  "libName": "칠곡군립석적도서관",
+  "dtlRegion": "37590",
+  "latitude": 36.0764014,
+  "longitude": 128.415881,
+  "address": "경상북도 칠곡군 석적읍 남중리2길 25",
+  "tel": "054-979-5985",
+  "homepage": "https://library.chilgok.go.kr/"
+ },
+ {
+  "libCode": "147168",
+  "libName": "경북도서관",
+  "dtlRegion": "37600",
+  "latitude": 36.5743881,
+  "longitude": 128.4879321,
+  "address": "경상북도 예천군 호명읍 도청대로 200",
+  "tel": "054-650-3900",
+  "homepage": "https://www.gb.go.kr/lib"
+ },
+ {
+  "libCode": "147015",
+  "libName": "경상북도교육청 예천도서관",
+  "dtlRegion": "37600",
+  "latitude": 36.6554127,
+  "longitude": 128.4546282,
+  "address": "경상북도 예천군 예천읍 중앙로 40-7",
+  "tel": "사무실 054-652-6076, 일반자료실 054-654-9662, 어린이자료실 054-654-9666",
+  "homepage": "http://www.gbelib.kr/yc"
+ },
+ {
+  "libCode": "147007",
+  "libName": "경상북도교육청 봉화도서관",
+  "dtlRegion": "37610",
+  "latitude": 36.8883933,
+  "longitude": 128.7401267,
+  "address": "경상북도 봉화군 봉화읍 내성로3길 6",
+  "tel": "054-673-0973",
+  "homepage": "http://www.gbelib.kr/bh"
+ },
+ {
+  "libCode": "147018",
+  "libName": "경상북도교육청 울진도서관",
+  "dtlRegion": "37620",
+  "latitude": 36.9863869,
+  "longitude": 129.3994624,
+  "address": "경상북도 울진군 울진읍 월변7길 17",
+  "tel": "054-783-2375",
+  "homepage": "http://www.gbelib.kr/uj"
+ },
+ {
+  "libCode": "147141",
+  "libName": "근남작은도서관",
+  "dtlRegion": "37620",
+  "latitude": 36.9636125,
+  "longitude": 129.3955823,
+  "address": "경상북도 울진군 근남면 울진북로 151-3, 2층",
+  "tel": "054-781-6651",
+  "homepage": "https://lib.uljin.go.kr"
+ },
+ {
+  "libCode": "147143",
+  "libName": "기성작은도서관",
+  "dtlRegion": "37620",
+  "latitude": 36.7983267,
+  "longitude": 129.4517485,
+  "address": "경상북도 울진군 기성면 척산길 67, 2층",
+  "tel": "054-788-6653",
+  "homepage": "https://lib.uljin.go.kr"
+ },
+ {
+  "libCode": "147144",
+  "libName": "매화작은도서관",
+  "dtlRegion": "37620",
+  "latitude": 36.9131007,
+  "longitude": 129.3799261,
+  "address": "경상북도 울진군 매화면 매화4길 3, 1층",
+  "tel": "054-781-6652",
+  "homepage": "https://lib.uljin.go.kr"
+ },
+ {
+  "libCode": "147057",
+  "libName": "북울진도서관",
+  "dtlRegion": "37620",
+  "latitude": 37.0648713,
+  "longitude": 129.4187867,
+  "address": "경상북도 울진군 죽변면 죽변북로 64-4",
+  "tel": "054-780-1910",
+  "homepage": "https://lib.uljin.go.kr"
+ },
+ {
+  "libCode": "147160",
+  "libName": "온정작은도서관",
+  "dtlRegion": "37620",
+  "latitude": 36.7239385,
+  "longitude": 129.3453391,
+  "address": "경상북도 울진군 온정면 소태로 23",
+  "tel": "054-788-6659",
+  "homepage": "https://lib.uljin.go.kr"
+ },
+ {
+  "libCode": "147107",
+  "libName": "울진남부도서관",
+  "dtlRegion": "37620",
+  "latitude": 36.6878112,
+  "longitude": 129.4439574,
+  "address": "경상북도 울진군 후포면 후포삼율로 194-13",
+  "tel": "054-788-1107",
+  "homepage": "https://lib.uljin.go.kr"
+ },
+ {
+  "libCode": "147142",
+  "libName": "울진작은도서관",
+  "dtlRegion": "37620",
+  "latitude": 36.9945179,
+  "longitude": 129.4029253,
+  "address": "경상북도 울진군 울진읍 읍내8길 26",
+  "tel": "054-781-6650",
+  "homepage": "https://lib.uljin.go.kr"
+ },
+ {
+  "libCode": "147159",
+  "libName": "평해작은도서관",
+  "dtlRegion": "37620",
+  "latitude": 36.7275651,
+  "longitude": 129.4420953,
+  "address": "경상북도 울진군 평해읍 평해7길 11",
+  "tel": "054-788-6654",
+  "homepage": "https://lib.uljin.go.kr"
+ },
+ {
+  "libCode": "747069",
+  "libName": "흥부작은도서관",
+  "dtlRegion": "37620",
+  "latitude": 37.1035975,
+  "longitude": 129.3726888,
+  "address": "경상북도 울진군 북면 부구4길 29-15, 4층",
+  "tel": "054-783-8446",
+  "homepage": "https://lib.uljin.go.kr/"
+ },
+ {
+  "libCode": "147017",
+  "libName": "경상북도교육청 울릉도서관",
+  "dtlRegion": "37630",
+  "latitude": 37.4993877,
+  "longitude": 130.901446,
+  "address": "경상북도 울릉군 울릉읍 봉래길 128-10",
+  "tel": "054-791-2294",
+  "homepage": "http://www.gbelib.kr/ul"
+ }
+]

@@ -1,0 +1,642 @@
+[
+ {
+  "libCode": "144040",
+  "libName": "충청남도교육청 평생교육원",
+  "dtlRegion": "34011",
+  "latitude": 36.7712376,
+  "longitude": 127.205155,
+  "address": "충청남도 천안시 동남구 목천읍 충절로 843",
+  "tel": "041-629-2013",
+  "homepage": "https://cle.cne.go.kr/"
+ },
+ {
+  "libCode": "144015",
+  "libName": "충청남도교육청 학생교육문화원",
+  "dtlRegion": "34011",
+  "latitude": 36.8094135,
+  "longitude": 127.1568306,
+  "address": "충청남도 천안시 동남구 옛농고1길 41",
+  "tel": "041-904-8445",
+  "homepage": "https://chsl.cne.go.kr/"
+ },
+ {
+  "libCode": "144177",
+  "libName": "천안아산상생협력센터도서관",
+  "dtlRegion": "34012",
+  "latitude": 36.8001686,
+  "longitude": 127.1064013,
+  "address": "충청남도 천안시 서북구 공원로 109",
+  "tel": "041-417-5031",
+  "homepage": "https://www.capc.go.kr/library"
+ },
+ {
+  "libCode": "144021",
+  "libName": "충청남도천안교육지원청 성환도서관",
+  "dtlRegion": "34012",
+  "latitude": 36.9132001,
+  "longitude": 127.1306784,
+  "address": "충청남도 천안시 서북구 성환읍 신선동길 25",
+  "tel": "041-581-9962",
+  "homepage": "https://shlib.cne.go.kr"
+ },
+ {
+  "libCode": "144043",
+  "libName": "공주기적의도서관",
+  "dtlRegion": "34020",
+  "latitude": 36.45934,
+  "longitude": 127.1266693,
+  "address": "충청남도 공주시 무령로 550-53",
+  "tel": "041-840-8955",
+  "homepage": "https://www.gongjulib.go.kr"
+ },
+ {
+  "libCode": "144014",
+  "libName": "공주시 웅진도서관",
+  "dtlRegion": "34020",
+  "latitude": 36.460818,
+  "longitude": 127.1111132,
+  "address": "충청남도 공주시 고마나루길 17",
+  "tel": "041-840-2205",
+  "homepage": "https://www.gongjulib.go.kr"
+ },
+ {
+  "libCode": "144001",
+  "libName": "충청남도공주교육지원청 공주도서관",
+  "dtlRegion": "34020",
+  "latitude": 36.4516876,
+  "longitude": 127.1263431,
+  "address": "충청남도 공주시 영명학당2길 24-5",
+  "tel": "041-855-7121",
+  "homepage": "https://gjlib.cne.go.kr"
+ },
+ {
+  "libCode": "144002",
+  "libName": "충청남도공주교육지원청 유구도서관",
+  "dtlRegion": "34020",
+  "latitude": 36.548806,
+  "longitude": 126.950039,
+  "address": "충청남도 공주시 유구읍 중앙1길 49-17",
+  "tel": "041-841-1196",
+  "homepage": "https://yglib.cne.go.kr"
+ },
+ {
+  "libCode": "144028",
+  "libName": "보령시중앙도서관",
+  "dtlRegion": "34030",
+  "latitude": 36.3512531,
+  "longitude": 126.6008944,
+  "address": "충청남도 보령시 명천로 39",
+  "tel": "041-930-0971",
+  "homepage": "https://brcn.go.kr/lib"
+ },
+ {
+  "libCode": "144006",
+  "libName": "충청남도보령교육지원청 보령도서관",
+  "dtlRegion": "34030",
+  "latitude": 36.3426797,
+  "longitude": 126.6004841,
+  "address": "충청남도 보령시 보령남로 27",
+  "tel": "041-934-0929",
+  "homepage": "https://brlib.cne.go.kr"
+ },
+ {
+  "libCode": "144007",
+  "libName": "충청남도보령교육지원청 웅천도서관",
+  "dtlRegion": "34030",
+  "latitude": 36.2322323,
+  "longitude": 126.6058401,
+  "address": "충청남도 보령시 웅천읍 방축길 90-39",
+  "tel": "041-934-1789",
+  "homepage": "https://uclib.cne.go.kr"
+ },
+ {
+  "libCode": "144045",
+  "libName": "아산시 꿈샘어린이청소년도서관",
+  "dtlRegion": "34040",
+  "latitude": 36.794453,
+  "longitude": 127.0043048,
+  "address": "충청남도 아산시 시민로 500",
+  "tel": "041-530-6721",
+  "homepage": "http://ascl.asan.go.kr/"
+ },
+ {
+  "libCode": "144024",
+  "libName": "아산시 둔포도서관",
+  "dtlRegion": "34040",
+  "latitude": 36.9267409,
+  "longitude": 127.0407865,
+  "address": "충청남도 아산시 둔포면 둔포중앙로161번길 27-6",
+  "tel": "041-536-8595",
+  "homepage": "https://ascl.asan.go.kr"
+ },
+ {
+  "libCode": "144037",
+  "libName": "아산시 배방도서관",
+  "dtlRegion": "34040",
+  "latitude": 36.7739116,
+  "longitude": 127.0577941,
+  "address": "충청남도 아산시 배방읍 모산로 182-14",
+  "tel": "041-537-3956",
+  "homepage": "https://ascl.asan.go.kr"
+ },
+ {
+  "libCode": "144182",
+  "libName": "아산시 배방월천도서관",
+  "dtlRegion": "34040",
+  "latitude": 36.7696875,
+  "longitude": 127.0782927,
+  "address": "충청남도 아산시 배방읍 월천5길 13",
+  "tel": "041-530-6380",
+  "homepage": "https://ascl.asan.go.kr"
+ },
+ {
+  "libCode": "144180",
+  "libName": "아산시 음봉어울샘도서관",
+  "dtlRegion": "34040",
+  "latitude": 36.8436561,
+  "longitude": 127.0687175,
+  "address": "충청남도 아산시 음봉면 음봉로 515-36",
+  "tel": "041-530-6450",
+  "homepage": "https://ascl.asan.go.kr"
+ },
+ {
+  "libCode": "144174",
+  "libName": "아산시 중앙도서관",
+  "dtlRegion": "34040",
+  "latitude": 36.7712088,
+  "longitude": 127.0092912,
+  "address": "충청남도 아산시 남부로 229",
+  "tel": "041-530-6610(1층), 6620(2층), 6630(3층)",
+  "homepage": "http://ascl.asan.go.kr"
+ },
+ {
+  "libCode": "144172",
+  "libName": "아산시 탕정온샘도서관",
+  "dtlRegion": "34040",
+  "latitude": 36.7902418,
+  "longitude": 127.0540115,
+  "address": "충청남도 아산시 탕정면 한내로 209",
+  "tel": "041-536-8740",
+  "homepage": "https://ascl.asan.go.kr"
+ },
+ {
+  "libCode": "144013",
+  "libName": "충청남도아산교육지원청 아산도서관",
+  "dtlRegion": "34040",
+  "latitude": 36.7896256,
+  "longitude": 126.9920146,
+  "address": "충청남도 아산시 문화로 53",
+  "tel": "041-541-1020",
+  "homepage": "https://aslib.cne.go.kr"
+ },
+ {
+  "libCode": "144111",
+  "libName": "고북작은도서관",
+  "dtlRegion": "34050",
+  "latitude": 36.667254,
+  "longitude": 126.533492,
+  "address": "충청남도 서산시 고북면 고북1로 294",
+  "tel": "070-8668-0880",
+  "homepage": "http://www.seosan.go.kr/citylib/index.do"
+ },
+ {
+  "libCode": "144032",
+  "libName": "대산도서관",
+  "dtlRegion": "34050",
+  "latitude": 36.9401513,
+  "longitude": 126.4396125,
+  "address": "충청남도 서산시 대산읍 대산1로 78-22",
+  "tel": "041-661-8087",
+  "homepage": "http://www.seosan.go.kr/citylib/index.do"
+ },
+ {
+  "libCode": "744153",
+  "libName": "동문작은도서관",
+  "dtlRegion": "34050",
+  "latitude": 36.7806793,
+  "longitude": 126.4599803,
+  "address": "충청남도 서산시 율지6로 6, 4층",
+  "tel": "041-660-3883",
+  "homepage": "https://www.seosna.go.kr/citylib/index.do"
+ },
+ {
+  "libCode": "144123",
+  "libName": "부석작은도서관",
+  "dtlRegion": "34050",
+  "latitude": 36.715289,
+  "longitude": 126.394067,
+  "address": "충청남도 서산시 부석면 취평2길 26-13",
+  "tel": "070-4366-2588",
+  "homepage": "http://www.seosan.go.kr/citylib/index.do"
+ },
+ {
+  "libCode": "144025",
+  "libName": "서산시립도서관",
+  "dtlRegion": "34050",
+  "latitude": 36.7883115,
+  "longitude": 126.4492221,
+  "address": "충청남도 서산시 부춘공원2로 26",
+  "tel": "041-660-2588",
+  "homepage": "http://www.seosan.go.kr/citylib/index.do"
+ },
+ {
+  "libCode": "744183",
+  "libName": "운산작은도서관",
+  "dtlRegion": "34050",
+  "latitude": 36.8109084,
+  "longitude": 126.5832526,
+  "address": "충청남도 서산시 운산면 운암로 1040",
+  "tel": "041-660-3838",
+  "homepage": "https://www.seosnan.go.kr/citylib/index.do"
+ },
+ {
+  "libCode": "144070",
+  "libName": "인지작은도서관",
+  "dtlRegion": "34050",
+  "latitude": 36.75337,
+  "longitude": 126.4247,
+  "address": "충청남도 서산시 인지면 둔당로 74-21",
+  "tel": "070-8244-2588",
+  "homepage": "http://www.seosan.go.kr/citylib/index.do"
+ },
+ {
+  "libCode": "144009",
+  "libName": "충청남도교육청 서부평생교육원",
+  "dtlRegion": "34050",
+  "latitude": 36.770175,
+  "longitude": 126.4645875,
+  "address": "충청남도 서산시 동서1로 41-4",
+  "tel": "041-661-8310",
+  "homepage": "https://csbl.cne.go.kr/"
+ },
+ {
+  "libCode": "144020",
+  "libName": "충청남도서산교육지원청 해미도서관",
+  "dtlRegion": "34050",
+  "latitude": 36.715799,
+  "longitude": 126.5433098,
+  "address": "충청남도 서산시 해미면 서문4길 12",
+  "tel": "041-688-0351",
+  "homepage": "https://hmlib.cne.go.kr"
+ },
+ {
+  "libCode": "144022",
+  "libName": "논산강경도서관",
+  "dtlRegion": "34060",
+  "latitude": 36.1591204,
+  "longitude": 127.0184433,
+  "address": "충청남도 논산시 강경읍 계백로 173",
+  "tel": "041-746-8980",
+  "homepage": "https://lib.nonsan.go.kr/lib.do"
+ },
+ {
+  "libCode": "144031",
+  "libName": "논산연무도서관",
+  "dtlRegion": "34060",
+  "latitude": 36.1264842,
+  "longitude": 127.0972574,
+  "address": "충청남도 논산시 연무읍 안심로47번길 6-11",
+  "tel": "041-746-8990",
+  "homepage": "https://lib.nonsan.go.kr/lib.do"
+ },
+ {
+  "libCode": "144178",
+  "libName": "논산열린도서관",
+  "dtlRegion": "34060",
+  "latitude": 36.1960813,
+  "longitude": 127.108748,
+  "address": "충청남도 논산시 관촉로 113-23",
+  "tel": "041-746-5991",
+  "homepage": "https://lib.nonsan.go.kr"
+ },
+ {
+  "libCode": "144004",
+  "libName": "충청남도교육청 남부평생교육원",
+  "dtlRegion": "34060",
+  "latitude": 36.1965685,
+  "longitude": 127.0861139,
+  "address": "충청남도 논산시 부창로 71",
+  "tel": "041-730-7733",
+  "homepage": "http://cnbl.cne.go.kr/"
+ },
+ {
+  "libCode": "144055",
+  "libName": "고대웃음꽃 작은도서관",
+  "dtlRegion": "34080",
+  "latitude": 36.9364382,
+  "longitude": 126.59208,
+  "address": "충청남도 당진시 고대면 고대로 65, 2층",
+  "tel": "041-350-4952",
+  "homepage": "http://www.dangjin.go.kr/lib.do"
+ },
+ {
+  "libCode": "144034",
+  "libName": "당진시립송악도서관",
+  "dtlRegion": "34080",
+  "latitude": 36.8903738,
+  "longitude": 126.6939875,
+  "address": "충청남도 당진시 송악읍 틀모시로 840",
+  "tel": "041-350-4946",
+  "homepage": "http://www.dangjin.go.kr/lib.do"
+ },
+ {
+  "libCode": "144062",
+  "libName": "당진시립중앙도서관",
+  "dtlRegion": "34080",
+  "latitude": 36.8936538,
+  "longitude": 126.632599,
+  "address": "충청남도 당진시 당진중앙2로 132-30",
+  "tel": "041-360-6916",
+  "homepage": "http://www.dangjin.go.kr/lib.do"
+ },
+ {
+  "libCode": "144023",
+  "libName": "당진시립합덕도서관",
+  "dtlRegion": "34080",
+  "latitude": 36.811625,
+  "longitude": 126.7605331,
+  "address": "충청남도 당진시 합덕읍 면천로 1578-1",
+  "tel": "041-350-4967",
+  "homepage": "http://www.dangjin.go.kr/lib.do"
+ },
+ {
+  "libCode": "144113",
+  "libName": "대호지책나래 작은도서관",
+  "dtlRegion": "34080",
+  "latitude": 36.8970354,
+  "longitude": 126.5072679,
+  "address": "충청남도 당진시 대호지면 4.4만세로 95, 1층",
+  "tel": "041-350-4964",
+  "homepage": "http://www.dangjin.go.kr/lib.do"
+ },
+ {
+  "libCode": "144056",
+  "libName": "석문생각나무 작은도서관",
+  "dtlRegion": "34080",
+  "latitude": 37.0188805,
+  "longitude": 126.5267646,
+  "address": "충청남도 당진시 석문면 대호만로 1736-13, 2층",
+  "tel": "041-350-4954",
+  "homepage": "http://www.dangjin.go.kr/lib.do"
+ },
+ {
+  "libCode": "144057",
+  "libName": "송산개미 작은도서관",
+  "dtlRegion": "34080",
+  "latitude": 36.9346288,
+  "longitude": 126.6799977,
+  "address": "충청남도 당진시 송산면 상거중앙길 81-6, 1층",
+  "tel": "041-350-4960",
+  "homepage": "http://www.dangjin.go.kr/lib.do"
+ },
+ {
+  "libCode": "144063",
+  "libName": "송악샘터 작은도서관",
+  "dtlRegion": "34080",
+  "latitude": 36.9367447,
+  "longitude": 126.7346498,
+  "address": "충청남도 당진시 송악읍 송악로 668-8, 2층",
+  "tel": "041-350-4962",
+  "homepage": "http://www.dangjin.go.kr/lib.do"
+ },
+ {
+  "libCode": "144109",
+  "libName": "송악해나루 작은도서관",
+  "dtlRegion": "34080",
+  "latitude": 36.9614169,
+  "longitude": 126.7754637,
+  "address": "충청남도 당진시 송악읍 부곡공단4길 53-13, 2층",
+  "tel": "041-350-4966",
+  "homepage": "http://www.dangjin.go.kr/lib.do"
+ },
+ {
+  "libCode": "144058",
+  "libName": "순성반딧불이 작은도서관",
+  "dtlRegion": "34080",
+  "latitude": 36.8618134,
+  "longitude": 126.6804163,
+  "address": "충청남도 당진시 순성면 남부로 1146, 순성가치삶센터 1층",
+  "tel": "041-350-4956",
+  "homepage": "http://www.dangjin.go.kr/lib.do"
+ },
+ {
+  "libCode": "744005",
+  "libName": "신평책다솜 작은도서관",
+  "dtlRegion": "34080",
+  "latitude": 36.886475,
+  "longitude": 126.7624815,
+  "address": "충청남도 당진시 신평면 말목길 20, 3층",
+  "tel": "041-350-4948",
+  "homepage": "http://www.dangjin.go.kr/lib.do"
+ },
+ {
+  "libCode": "144059",
+  "libName": "원당꿈초롱 작은도서관",
+  "dtlRegion": "34080",
+  "latitude": 36.9027198,
+  "longitude": 126.6432917,
+  "address": "충청남도 당진시 밤절로 103, 관리동 2층",
+  "tel": "041-350-4950",
+  "homepage": "http://www.dangjin.go.kr/lib.do"
+ },
+ {
+  "libCode": "144005",
+  "libName": "충청남도당진교육지원청 당진도서관",
+  "dtlRegion": "34080",
+  "latitude": 36.8953463,
+  "longitude": 126.6240333,
+  "address": "충청남도 당진시 서부로 266",
+  "tel": "041-352-5918",
+  "homepage": "https://djlib.cne.go.kr"
+ },
+ {
+  "libCode": "144041",
+  "libName": "금산기적의도서관",
+  "dtlRegion": "34510",
+  "latitude": 36.1109996,
+  "longitude": 127.4906171,
+  "address": "충청남도 금산군 금산읍 비단로 296-13",
+  "tel": "041-750-2951",
+  "homepage": "http://library.geumsan.go.kr/"
+ },
+ {
+  "libCode": "144046",
+  "libName": "금산인삼고을도서관",
+  "dtlRegion": "34510",
+  "latitude": 36.1112746,
+  "longitude": 127.4912762,
+  "address": "충청남도 금산군 금산읍 금산로 1543",
+  "tel": "041-750-3525",
+  "homepage": "http://library.geumsan.go.kr/"
+ },
+ {
+  "libCode": "144069",
+  "libName": "금산작은도서관",
+  "dtlRegion": "34510",
+  "latitude": 36.0975478,
+  "longitude": 127.4916323,
+  "address": "충청남도 금산군 금산읍 방아동4길 17",
+  "tel": "041-754-1318",
+  "homepage": "http://library.geumsan.go.kr/"
+ },
+ {
+  "libCode": "144168",
+  "libName": "진산도서관",
+  "dtlRegion": "34510",
+  "latitude": 36.1438886,
+  "longitude": 127.3698109,
+  "address": "충청남도 금산군 진산면 읍내로 63",
+  "tel": "041-750-2953",
+  "homepage": "http://library.geumsan.go.kr/"
+ },
+ {
+  "libCode": "144068",
+  "libName": "추부도서관",
+  "dtlRegion": "34510",
+  "latitude": 36.1909288,
+  "longitude": 127.4700975,
+  "address": "충청남도 금산군 추부면 하마전로 31",
+  "tel": "041-750-2955",
+  "homepage": "http://library.geumsan.go.kr/"
+ },
+ {
+  "libCode": "144003",
+  "libName": "충청남도금산교육지원청 금산도서관",
+  "dtlRegion": "34510",
+  "latitude": 36.1020211,
+  "longitude": 127.4843123,
+  "address": "충청남도 금산군 금산읍 금산천길 28",
+  "tel": "041-753-4710",
+  "homepage": "https://kslib.cne.go.kr"
+ },
+ {
+  "libCode": "144008",
+  "libName": "충청남도부여교육지원청 부여도서관",
+  "dtlRegion": "34530",
+  "latitude": 36.2838507,
+  "longitude": 126.9158564,
+  "address": "충청남도 부여군 부여읍 성왕로 259",
+  "tel": "041-835-2509",
+  "homepage": "https://bylib.cne.go.kr"
+ },
+ {
+  "libCode": "144170",
+  "libName": "홍산공공도서관",
+  "dtlRegion": "34530",
+  "latitude": 36.2166586,
+  "longitude": 126.7605264,
+  "address": "충청남도 부여군 홍산면 홍산로 77-1",
+  "tel": "041-830-2896",
+  "homepage": "https://www.hongsanlib.or.kr"
+ },
+ {
+  "libCode": "144026",
+  "libName": "장항공공도서관",
+  "dtlRegion": "34540",
+  "latitude": 36.0147499,
+  "longitude": 126.6924206,
+  "address": "충청남도 서천군 장항읍 장마로74번길 8",
+  "tel": "041-956-5016",
+  "homepage": "https://seocheon.go.kr/lib"
+ },
+ {
+  "libCode": "144010",
+  "libName": "충청남도서천교육지원청 서천도서관",
+  "dtlRegion": "34540",
+  "latitude": 36.0761039,
+  "longitude": 126.6986633,
+  "address": "충청남도 서천군 서천읍 서천로14번길 10",
+  "tel": "041-953-1518",
+  "homepage": "https://sclib.cne.go.kr"
+ },
+ {
+  "libCode": "144017",
+  "libName": "충청남도청양교육지원청 청양도서관",
+  "dtlRegion": "34550",
+  "latitude": 36.4527618,
+  "longitude": 126.8003983,
+  "address": "충청남도 청양군 청양읍 칠갑산로1길 15",
+  "tel": "041-943-4147",
+  "homepage": "https://cylib.cne.go.kr"
+ },
+ {
+  "libCode": "144033",
+  "libName": "광천공공도서관",
+  "dtlRegion": "34560",
+  "latitude": 36.4959512,
+  "longitude": 126.6199846,
+  "address": "충청남도 홍성군 광천읍 광천로 342",
+  "tel": "041-630-9573",
+  "homepage": "https://hongseong.go.kr/gclib.do"
+ },
+ {
+  "libCode": "144173",
+  "libName": "충남도서관",
+  "dtlRegion": "34560",
+  "latitude": 36.6303628,
+  "longitude": 126.6650714,
+  "address": "충청남도 홍성군 홍북읍 도청대로 577",
+  "tel": "041-635-8000",
+  "homepage": "https://library.chungnam.go.kr"
+ },
+ {
+  "libCode": "144019",
+  "libName": "충청남도홍성교육지원청 홍성도서관",
+  "dtlRegion": "34560",
+  "latitude": 36.5995606,
+  "longitude": 126.6671776,
+  "address": "충청남도 홍성군 홍성읍 충절로 1050",
+  "tel": "041-640-8800",
+  "homepage": "https://hslib.cne.go.kr"
+ },
+ {
+  "libCode": "144029",
+  "libName": "삽교공공도서관",
+  "dtlRegion": "34570",
+  "latitude": 36.6921266,
+  "longitude": 126.7432121,
+  "address": "충청남도 예산군 삽교읍 두리별리길 34",
+  "tel": "041-339-8225",
+  "homepage": "https://www.ysplib.go.kr"
+ },
+ {
+  "libCode": "144136",
+  "libName": "예산군립도서관",
+  "dtlRegion": "34570",
+  "latitude": 36.7072033,
+  "longitude": 126.8443314,
+  "address": "충청남도 예산군 예산읍 벚꽃로 214",
+  "tel": "041-339-8221",
+  "homepage": "https://www.ysplib.go.kr"
+ },
+ {
+  "libCode": "144012",
+  "libName": "충청남도예산교육지원청 예산도서관",
+  "dtlRegion": "34570",
+  "latitude": 36.6785315,
+  "longitude": 126.8329581,
+  "address": "충청남도 예산군 예산읍 예중길 42",
+  "tel": "041-335-2638",
+  "homepage": "https://yslib.cne.go.kr/"
+ },
+ {
+  "libCode": "144018",
+  "libName": "충청남도태안교육지원청 태안도서관",
+  "dtlRegion": "34580",
+  "latitude": 36.7595928,
+  "longitude": 126.2904382,
+  "address": "충청남도 태안군 태안읍 원이로 20",
+  "tel": "041-674-1369",
+  "homepage": "https://talib.cne.go.kr"
+ },
+ {
+  "libCode": "114157",
+  "libName": "태안군립중앙도서관",
+  "dtlRegion": "34580",
+  "latitude": 36.7576158,
+  "longitude": 126.3021603,
+  "address": "충청남도 태안군 태안읍 백화로 184",
+  "tel": "041-673-9030",
+  "homepage": "https://www.taean.go.kr/area/sub08_00.do"
+ }
+]

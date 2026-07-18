@@ -1,0 +1,172 @@
+[
+ {
+  "libCode": "150009",
+  "libName": "고운남측도서관",
+  "dtlRegion": "29010",
+  "latitude": 36.5049652,
+  "longitude": 127.235359,
+  "address": "세종특별자치시 마음로 64, 고운남측 복합커뮤니티센터 3층",
+  "tel": "044-301-7262",
+  "homepage": "https://lib.sejong.go.kr/gounsouth/"
+ },
+ {
+  "libCode": "150004",
+  "libName": "고운동도서관",
+  "dtlRegion": "29010",
+  "latitude": 36.5197146,
+  "longitude": 127.236587,
+  "address": "세종특별자치시 마음로 284, 고운동 복합커뮤니티센터 5층",
+  "tel": "044-301-6661",
+  "homepage": "https://lib.sejong.go.kr/goun/"
+ },
+ {
+  "libCode": "050001",
+  "libName": "국립세종도서관",
+  "dtlRegion": "29010",
+  "latitude": 36.4989631,
+  "longitude": 127.268342,
+  "address": "세종특별자치시 다솜3로 48",
+  "tel": "044-900-9114",
+  "homepage": "http://sejong.nl.go.kr/"
+ },
+ {
+  "libCode": "150016",
+  "libName": "나성동도서관",
+  "dtlRegion": "29010",
+  "latitude": 36.4966654,
+  "longitude": 127.2691064,
+  "address": "세종특별자치시 갈매로 280, 3층",
+  "tel": "044-301-7662",
+  "homepage": "https://lib.sejong.go.kr/nasung"
+ },
+ {
+  "libCode": "150011",
+  "libName": "다정동도서관",
+  "dtlRegion": "29010",
+  "latitude": 36.4945176,
+  "longitude": 127.250339,
+  "address": "세종특별자치시 다정남3로 10, 다정동 복합커뮤니티센터 1~2층",
+  "tel": "044-301-7161",
+  "homepage": "https://lib.sejong.go.kr/dajeong/"
+ },
+ {
+  "libCode": "150007",
+  "libName": "대평동도서관",
+  "dtlRegion": "29010",
+  "latitude": 36.4852235,
+  "longitude": 127.251872,
+  "address": "세종특별자치시 대평1길 10, 대평동 복합커뮤니티센터 4층",
+  "tel": "044-301-6961",
+  "homepage": "https://lib.sejong.go.kr/daepyung/"
+ },
+ {
+  "libCode": "150001",
+  "libName": "도담동도서관",
+  "dtlRegion": "29010",
+  "latitude": 36.5153999,
+  "longitude": 127.261748,
+  "address": "세종특별자치시 보람로 77, 도담동 복합커뮤니티센터 2층",
+  "tel": "044-301-6220",
+  "homepage": "https://lib.sejong.go.kr/dodam/"
+ },
+ {
+  "libCode": "150014",
+  "libName": "반곡동도서관",
+  "dtlRegion": "29010",
+  "latitude": 36.4987202,
+  "longitude": 127.31058,
+  "address": "세종특별자치시 반곡로 39, 반곡동 복합커뮤니티센터 6층",
+  "tel": "044-301-7362",
+  "homepage": "https://lib.sejong.go.kr/bangok/"
+ },
+ {
+  "libCode": "150005",
+  "libName": "보람동도서관",
+  "dtlRegion": "29010",
+  "latitude": 36.478691,
+  "longitude": 127.291308,
+  "address": "세종특별자치시 호려울로 42, 보람동 복합커뮤니티센터 5층",
+  "tel": "044-301-6761",
+  "homepage": "https://lib.sejong.go.kr/boram/"
+ },
+ {
+  "libCode": "150008",
+  "libName": "새롬동도서관",
+  "dtlRegion": "29010",
+  "latitude": 36.4813183,
+  "longitude": 127.249891,
+  "address": "세종특별자치시 새롬중앙로 44, 새롬동 복합커뮤니티센터 4층",
+  "tel": "044-301-6861",
+  "homepage": "https://lib.sejong.go.kr/saerom/"
+ },
+ {
+  "libCode": "144011",
+  "libName": "세종시교육청교육문화원 학습관자료실",
+  "dtlRegion": "29010",
+  "latitude": 36.6003538,
+  "longitude": 127.2876324,
+  "address": "세종특별자치시 조치원읍 문화2길 25",
+  "tel": "044-410-1429",
+  "homepage": "https://lib.sje.go.kr"
+ },
+ {
+  "libCode": "150012",
+  "libName": "세종시립도서관",
+  "dtlRegion": "29010",
+  "latitude": 36.5105059,
+  "longitude": 127.240567,
+  "address": "세종특별자치시 세종로 1207",
+  "tel": "044-301-4300",
+  "homepage": "https://lib.sejong.go.kr"
+ },
+ {
+  "libCode": "150010",
+  "libName": "소담동도서관",
+  "dtlRegion": "29010",
+  "latitude": 36.4841119,
+  "longitude": 127.300233,
+  "address": "세종특별자치시 한누리대로 2023, 소담동 복합커뮤니티센터 4~5층",
+  "tel": "044-301-7061",
+  "homepage": "https://lib.sejong.go.kr/sodam/"
+ },
+ {
+  "libCode": "150002",
+  "libName": "아름동도서관",
+  "dtlRegion": "29010",
+  "latitude": 36.5123404,
+  "longitude": 127.246891,
+  "address": "세종특별자치시 보듬3로 114, 아름동 복합커뮤니티센터 4층",
+  "tel": "044-301-6361",
+  "homepage": "https://lib.sejong.go.kr/areum/"
+ },
+ {
+  "libCode": "150003",
+  "libName": "종촌동도서관",
+  "dtlRegion": "29010",
+  "latitude": 36.5046267,
+  "longitude": 127.246866,
+  "address": "세종특별자치시 도움3로 125, 종촌동 복합커뮤니티센터 5층",
+  "tel": "044-301-6462",
+  "homepage": "https://lib.sejong.go.kr/jongchon/"
+ },
+ {
+  "libCode": "144146",
+  "libName": "한솔동도서관",
+  "dtlRegion": "29010",
+  "latitude": 36.4796401,
+  "longitude": 127.254342,
+  "address": "세종특별자치시 노을3로 85, 한솔동 복합커뮤니티센터 3층",
+  "tel": "044-301-6125",
+  "homepage": "https://lib.sejong.go.kr/hansol/"
+ },
+ {
+  "libCode": "150013",
+  "libName": "해밀동도서관",
+  "dtlRegion": "29010",
+  "latitude": 36.5278565,
+  "longitude": 127.268668,
+  "address": "세종특별자치시 해밀1로 45, 해밀동 복합커뮤니티센터 2~3층",
+  "tel": "044-301-7462",
+  "homepage": "https://lib.sejong.go.kr/haemil/"
+ }
+]

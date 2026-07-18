@@ -1,0 +1,942 @@
+[
+ {
+  "libCode": "127058",
+  "libName": "2.28도서관",
+  "dtlRegion": "22010",
+  "latitude": 35.8592504,
+  "longitude": 128.5894055,
+  "address": "대구광역시 중구 2&middot;28길 9",
+  "tel": "053-257-2280",
+  "homepage": "http://library.daegu.go.kr/228lib/index.do"
+ },
+ {
+  "libCode": "122004",
+  "libName": "국채보상운동기념도서관",
+  "dtlRegion": "22010",
+  "latitude": 35.868515,
+  "longitude": 128.60165,
+  "address": "대구광역시 중구 공평로10길 25",
+  "tel": "053-231-2000",
+  "homepage": "http://www.tglnet.or.kr/"
+ },
+ {
+  "libCode": "127016",
+  "libName": "남산4동 작은도서관",
+  "dtlRegion": "22010",
+  "latitude": 35.8582424,
+  "longitude": 128.5805671,
+  "address": "대구광역시 중구 남산로1길 42, 2층",
+  "tel": "053-661-3765",
+  "homepage": "https://library.daegu.go.kr/junggu/index.do"
+ },
+ {
+  "libCode": "127070",
+  "libName": "대구 중구 영어도서관",
+  "dtlRegion": "22010",
+  "latitude": 35.8616393,
+  "longitude": 128.6043643,
+  "address": "대구광역시 중구 달구벌대로440길 27, 2층",
+  "tel": "053-661-3963",
+  "homepage": "https://library.daegu.go.kr/junggu/index.do"
+ },
+ {
+  "libCode": "327009",
+  "libName": "대구 중구청 교양정보실",
+  "dtlRegion": "22010",
+  "latitude": 35.8692838,
+  "longitude": 128.6060779,
+  "address": "대구광역시 중구 국채보상로139길 1, 10층",
+  "tel": "053-661-3241",
+  "homepage": "https://library.daegu.go.kr/junggu/index.do"
+ },
+ {
+  "libCode": "727107",
+  "libName": "대봉2동 작은도서관",
+  "dtlRegion": "22010",
+  "latitude": 35.8589239,
+  "longitude": 128.599461,
+  "address": "대구광역시 중구 대봉로47길 31, 2층",
+  "tel": "053-661-3800",
+  "homepage": "https://library.daegu.go.kr/junggu/index.do"
+ },
+ {
+  "libCode": "727025",
+  "libName": "대신동 작은도서관",
+  "dtlRegion": "22010",
+  "latitude": 35.8648043,
+  "longitude": 128.5768868,
+  "address": "대구광역시 중구 달구벌대로389길 50",
+  "tel": "053-661-3685",
+  "homepage": "https://library.daegu.go.kr/junggu/index.do"
+ },
+ {
+  "libCode": "127056",
+  "libName": "동인느티나무 도서관",
+  "dtlRegion": "22010",
+  "latitude": 35.8713258,
+  "longitude": 128.607224,
+  "address": "대구광역시 중구 동덕로38길 47",
+  "tel": "053-661-3325",
+  "homepage": "https://library.daegu.go.kr/junggu/index.do"
+ },
+ {
+  "libCode": "727083",
+  "libName": "삼덕마루 작은도서관",
+  "dtlRegion": "22010",
+  "latitude": 35.8646621,
+  "longitude": 128.6090644,
+  "address": "대구광역시 중구 동덕로26길 103",
+  "tel": "053-661-3603",
+  "homepage": "https://library.daegu.go.kr/junggu/index.do"
+ },
+ {
+  "libCode": "727075",
+  "libName": "꿈날자문고 도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.8702298,
+  "longitude": 128.7259751,
+  "address": "대구광역시 동구 안심로73길 22, 2층",
+  "tel": "053-965-7811",
+  "homepage": "-"
+ },
+ {
+  "libCode": "727073",
+  "libName": "늘푸른 도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.8935022,
+  "longitude": 128.6451719,
+  "address": "대구광역시 동구 입석로 5",
+  "tel": "053-983-8211",
+  "homepage": "www.dcasia.or.kr"
+ },
+ {
+  "libCode": "127087",
+  "libName": "대구 동구 신천도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.8714979,
+  "longitude": 128.617743,
+  "address": "대구광역시 동구 동부로6길 65",
+  "tel": "053-980-2600",
+  "homepage": "https://library.daegu.go.kr/donggu/"
+ },
+ {
+  "libCode": "127049",
+  "libName": "대구 동구 안심도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.864646,
+  "longitude": 128.7025332,
+  "address": "대구광역시 동구 금호강변로 360",
+  "tel": "053-980-2600",
+  "homepage": "https://library.daegu.go.kr/donggu/"
+ },
+ {
+  "libCode": "122001",
+  "libName": "대구2.28기념학생도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.890772,
+  "longitude": 128.633712,
+  "address": "대구광역시 동구 아양로 41길 56",
+  "tel": "053-231-2847",
+  "homepage": "http://library.daegu.go.kr/228"
+ },
+ {
+  "libCode": "122010",
+  "libName": "대구광역시립동부도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.8901654,
+  "longitude": 128.6216004,
+  "address": "대구광역시 동구 신암북로11길 54",
+  "tel": "053-231-2200",
+  "homepage": "https://library.daegu.go.kr/dongbu"
+ },
+ {
+  "libCode": "127108",
+  "libName": "대구혁신도시 복합문화센터 물빛서원",
+  "dtlRegion": "22020",
+  "latitude": 35.8814915,
+  "longitude": 128.7176217,
+  "address": "대구광역시 동구 이노밸리로 180",
+  "tel": "053-962-7600",
+  "homepage": "https://library.daegu.go.kr/center/index.do"
+ },
+ {
+  "libCode": "127030",
+  "libName": "도평동 작은도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.91006,
+  "longitude": 128.65001,
+  "address": "대구광역시 동구 팔공로24길 171",
+  "tel": "053-957-9760",
+  "homepage": "http://www.donggu-lib.kr/"
+ },
+ {
+  "libCode": "727067",
+  "libName": "동촌역사 작은도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.8901575,
+  "longitude": 128.649822,
+  "address": "대구광역시 동구 동촌역사로3길 35",
+  "tel": "053-957-9763",
+  "homepage": "http://www.donggu-lib.kr/"
+ },
+ {
+  "libCode": "127031",
+  "libName": "반야월 작은도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.8723533,
+  "longitude": 128.724836,
+  "address": "대구광역시 동구 신서동 823-25",
+  "tel": "053-957-9766",
+  "homepage": "http://www.donggu-lib.kr/"
+ },
+ {
+  "libCode": "727068",
+  "libName": "방촌동 작은도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.8813411,
+  "longitude": 128.664457,
+  "address": "대구광역시 동구 동촌로46길 2, 2층",
+  "tel": "053-957-9764",
+  "homepage": "https://library.daegu.go.kr/donggu/index.do"
+ },
+ {
+  "libCode": "727121",
+  "libName": "방촌어린이 작은도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.8802839,
+  "longitude": 128.6638025,
+  "address": "대구광역시 동구 동촌로46길 17",
+  "tel": "053-981-8276",
+  "homepage": "-"
+ },
+ {
+  "libCode": "727065",
+  "libName": "불로어울림 작은도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.9096197,
+  "longitude": 128.641853,
+  "address": "대구광역시 동구 팔공로24길 5",
+  "tel": "053-957-9761",
+  "homepage": "http://www.donggu-lib.kr/"
+ },
+ {
+  "libCode": "727061",
+  "libName": "신암2동 작은도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.87994,
+  "longitude": 128.61265,
+  "address": "대구광역시 동구 신성로 56",
+  "tel": "053-957-9755",
+  "homepage": "http://www.donggu-lib.kr/"
+ },
+ {
+  "libCode": "727062",
+  "libName": "신암3동 작은도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.881058,
+  "longitude": 128.618882,
+  "address": "대구광역시 동구 아양로8길 10-1",
+  "tel": "053-957-9756",
+  "homepage": "http://www.donggu-lib.kr/"
+ },
+ {
+  "libCode": "727071",
+  "libName": "신암5동 작은도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.8897559,
+  "longitude": 128.6330629,
+  "address": "대구광역시 동구 아양로37길 92, 2층",
+  "tel": "053-951-9111",
+  "homepage": "http://cafe.daum.net/ddmbook"
+ },
+ {
+  "libCode": "127029",
+  "libName": "신천3동 작은도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.8755145,
+  "longitude": 128.623516,
+  "address": "대구광역시 동구 장등로 90-1",
+  "tel": "053-957-9757",
+  "homepage": "http://www.donggu-lib.kr/"
+ },
+ {
+  "libCode": "727076",
+  "libName": "율하5주민 작은도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.864188,
+  "longitude": 128.692047,
+  "address": "대구광역시 동구 율하서로 59, 율하휴먼시아5단지 507동 주민복지관 내",
+  "tel": "053-965-5955",
+  "homepage": "-"
+ },
+ {
+  "libCode": "727066",
+  "libName": "지저동 작은도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.8933991,
+  "longitude": 128.638275,
+  "address": "대구광역시 동구 해동로3길 80",
+  "tel": "053-957-9762",
+  "homepage": "http://www.donggu-lib.kr/"
+ },
+ {
+  "libCode": "727072",
+  "libName": "초록우산 도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.8698335,
+  "longitude": 128.709637,
+  "address": "대구광역시 동구 율하동로26길 67",
+  "tel": "053-964-3335",
+  "homepage": "www.dhildfund-deagu.or.kr"
+ },
+ {
+  "libCode": "727069",
+  "libName": "해안동 작은도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.8820847,
+  "longitude": 128.671675,
+  "address": "대구광역시 동구 방촌로29길 46",
+  "tel": "053-957-9765",
+  "homepage": "http://www.donggu-lib.kr/"
+ },
+ {
+  "libCode": "727074",
+  "libName": "행복 작은도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.8702091,
+  "longitude": 128.6213122,
+  "address": "대구광역시 동구 송라로2길 17-6",
+  "tel": "053-755-9392",
+  "homepage": "www.nurinumi.com"
+ },
+ {
+  "libCode": "727064",
+  "libName": "효목1동 작은도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.881649,
+  "longitude": 128.644913,
+  "address": "대구광역시 동구 화랑로41길 46",
+  "tel": "053-957-9758",
+  "homepage": "http://www.donggu-lib.kr/"
+ },
+ {
+  "libCode": "127048",
+  "libName": "효목2동 작은도서관",
+  "dtlRegion": "22020",
+  "latitude": 35.8781289,
+  "longitude": 128.641231,
+  "address": "대구광역시 동구 화랑로25길 45",
+  "tel": "053-957-9759",
+  "homepage": "http://www.donggu-lib.kr/"
+ },
+ {
+  "libCode": "127086",
+  "libName": "대구 서구 비산도서관",
+  "dtlRegion": "22030",
+  "latitude": 35.8685082,
+  "longitude": 128.5733059,
+  "address": "대구광역시 서구 달서로14길 13",
+  "tel": "053-663-3721",
+  "homepage": "https://library.daegu.go.kr/seogulib/"
+ },
+ {
+  "libCode": "127094",
+  "libName": "대구 서구 비원도서관",
+  "dtlRegion": "22030",
+  "latitude": 35.8861175,
+  "longitude": 128.5693057,
+  "address": "대구광역시 서구 달서천로61안길 10",
+  "tel": "053-663-3871",
+  "homepage": "https://library.daegu.go.kr/seogulib/"
+ },
+ {
+  "libCode": "127011",
+  "libName": "대구 서구 어린이도서관",
+  "dtlRegion": "22030",
+  "latitude": 35.8743119,
+  "longitude": 128.5463842,
+  "address": "대구광역시 서구 문화로 123",
+  "tel": "053-663-3701",
+  "homepage": "https://library.daegu.go.kr/seogulib/"
+ },
+ {
+  "libCode": "127095",
+  "libName": "대구 서구 영어도서관",
+  "dtlRegion": "22030",
+  "latitude": 35.8679313,
+  "longitude": 128.5442553,
+  "address": "대구광역시 서구 평리로35길 90-6",
+  "tel": "053-663-3861",
+  "homepage": "https://library.daegu.go.kr/seogulib/"
+ },
+ {
+  "libCode": "127098",
+  "libName": "대구 서구 원고개도서관",
+  "dtlRegion": "22030",
+  "latitude": 35.881787,
+  "longitude": 128.5707147,
+  "address": "대구광역시 서구 달서로43길 12",
+  "tel": "053-663-3941",
+  "homepage": "https://library.daegu.go.kr/seogulib/"
+ },
+ {
+  "libCode": "122008",
+  "libName": "대구광역시립서부도서관",
+  "dtlRegion": "22030",
+  "latitude": 35.8722558,
+  "longitude": 128.5576101,
+  "address": "대구광역시 서구 국채보상로49길 12",
+  "tel": "053-231-2400",
+  "homepage": "http://library.daegu.go.kr/seobu/index.do"
+ },
+ {
+  "libCode": "127015",
+  "libName": "꿈틀 작은도서관",
+  "dtlRegion": "22040",
+  "latitude": 35.8479555,
+  "longitude": 128.5723398,
+  "address": "대구광역시 남구 성명공원길 18, 2층",
+  "tel": "053-664-3557",
+  "homepage": "-"
+ },
+ {
+  "libCode": "122009",
+  "libName": "대구광역시립남부도서관",
+  "dtlRegion": "22040",
+  "latitude": 35.8321174,
+  "longitude": 128.5807653,
+  "address": "대구광역시 남구 앞산순환로 512",
+  "tel": "053-231-2300",
+  "homepage": "http://library.daegu.go.kr/nambu/index.do"
+ },
+ {
+  "libCode": "127111",
+  "libName": "대구도서관",
+  "dtlRegion": "22040",
+  "latitude": 35.8423493,
+  "longitude": 128.5981296,
+  "address": "대구광역시 남구 중앙대로22길 26",
+  "tel": "053-803-8700",
+  "homepage": "https://library.daegu.go.kr/dglib/index.do"
+ },
+ {
+  "libCode": "127091",
+  "libName": "대명어울림도서관",
+  "dtlRegion": "22040",
+  "latitude": 35.8417305,
+  "longitude": 128.5735803,
+  "address": "대구광역시 남구 두류공원로 38-1",
+  "tel": "053-664-3552",
+  "homepage": "https://library.daegu.go.kr/namdm/index.do"
+ },
+ {
+  "libCode": "127090",
+  "libName": "이천어울림도서관",
+  "dtlRegion": "22040",
+  "latitude": 35.8523156,
+  "longitude": 128.598696,
+  "address": "대구광역시 남구 이천로 124",
+  "tel": "053-664-3571",
+  "homepage": "https://library.daegu.go.kr/namic/index.do"
+ },
+ {
+  "libCode": "727055",
+  "libName": "노원동 작은도서관",
+  "dtlRegion": "22050",
+  "latitude": 35.8909297,
+  "longitude": 128.5663818,
+  "address": "대구광역시 북구 팔달로27길 42-3",
+  "tel": "053-320-5192",
+  "homepage": "https://library.daegu.go.kr/bukgs"
+ },
+ {
+  "libCode": "727098",
+  "libName": "노원행복 작은도서관",
+  "dtlRegion": "22050",
+  "latitude": 35.8969428,
+  "longitude": 128.5757695,
+  "address": "대구광역시 북구 노원로 134",
+  "tel": "053-320-5198",
+  "homepage": "https://library.daegu.go.kr/bukgs"
+ },
+ {
+  "libCode": "127009",
+  "libName": "대구 북구 구수산도서관",
+  "dtlRegion": "22050",
+  "latitude": 35.9387852,
+  "longitude": 128.5523825,
+  "address": "대구광역시 북구 대천로 21",
+  "tel": "053-320-5150",
+  "homepage": "https://library.daegu.go.kr/bukgs"
+ },
+ {
+  "libCode": "127084",
+  "libName": "대구 북구 대현도서관",
+  "dtlRegion": "22050",
+  "latitude": 35.8819758,
+  "longitude": 128.6073839,
+  "address": "대구광역시 북구 대현남로 43",
+  "tel": "053-320-5170",
+  "homepage": "https://library.daegu.go.kr/bukdh"
+ },
+ {
+  "libCode": "127110",
+  "libName": "대구 북구 서변숲도서관",
+  "dtlRegion": "22050",
+  "latitude": 35.9205633,
+  "longitude": 128.595029,
+  "address": "대구광역시 북구 서변로3길 54",
+  "tel": "053-320-3800",
+  "homepage": "https://library.daegu.go.kr/buksb/index.do"
+ },
+ {
+  "libCode": "727040",
+  "libName": "대구 북구 영어 작은도서관",
+  "dtlRegion": "22050",
+  "latitude": 35.881909,
+  "longitude": 128.5835861,
+  "address": "대구광역시 북구 고성로31길 21, 1층",
+  "tel": "053-320-5190",
+  "homepage": "https://library.daegu.go.kr/bukgs"
+ },
+ {
+  "libCode": "127088",
+  "libName": "대구 북구 태전도서관",
+  "dtlRegion": "22050",
+  "latitude": 35.9284645,
+  "longitude": 128.5456384,
+  "address": "대구광역시 북구 영송로 36-16",
+  "tel": "053-320-5180",
+  "homepage": "https://library.daegu.go.kr/buktj"
+ },
+ {
+  "libCode": "122003",
+  "libName": "대구광역시립북부도서관",
+  "dtlRegion": "22050",
+  "latitude": 35.885182,
+  "longitude": 128.5839,
+  "address": "대구광역시 북구 옥산로 75",
+  "tel": "053-231-2600",
+  "homepage": " http://library.daegu.go.kr/bukbu/index.do"
+ },
+ {
+  "libCode": "727038",
+  "libName": "산격1동 작은도서관",
+  "dtlRegion": "22050",
+  "latitude": 35.8980805,
+  "longitude": 128.6012847,
+  "address": "대구광역시 북구 연암공원로 89, 3층",
+  "tel": "053-320-5193",
+  "homepage": "https://library.daegu.go.kr/bukgs"
+ },
+ {
+  "libCode": "727088",
+  "libName": "서변동 작은도서관",
+  "dtlRegion": "22050",
+  "latitude": 35.9279702,
+  "longitude": 128.5979559,
+  "address": "대구광역시 북구 호국로57길 6, 1층",
+  "tel": "053-320-5194",
+  "homepage": "https://library.daegu.go.kr/bukgs"
+ },
+ {
+  "libCode": "727054",
+  "libName": "침산1동 작은도서관",
+  "dtlRegion": "22050",
+  "latitude": 35.8903277,
+  "longitude": 128.5812786,
+  "address": "대구광역시 북구 침산남로13길 16, 2층",
+  "tel": "053-320-5191",
+  "homepage": "https://library.daegu.go.kr/bukgs"
+ },
+ {
+  "libCode": "727102",
+  "libName": "한강공원부키 도서관",
+  "dtlRegion": "22050",
+  "latitude": 35.9012052,
+  "longitude": 128.5127602,
+  "address": "대구광역시 북구 사수동 811, 한강공원 일원",
+  "tel": "053-320-5199",
+  "homepage": "https://library.daegu.go.kr/bukgs"
+ },
+ {
+  "libCode": "122007",
+  "libName": "대구광역시립수성도서관",
+  "dtlRegion": "22060",
+  "latitude": 35.8720796,
+  "longitude": 128.6391377,
+  "address": "대구광역시 수성구 만촌로 151",
+  "tel": "053-231-2500",
+  "homepage": "https://library.daegu.go.kr/suseong"
+ },
+ {
+  "libCode": "127085",
+  "libName": "수성구립고산도서관",
+  "dtlRegion": "22060",
+  "latitude": 35.8379738,
+  "longitude": 128.710672,
+  "address": "대구광역시 수성구 달구벌대로650길 6",
+  "tel": "053-668-1900",
+  "homepage": "https://library.daegu.go.kr/gosan/"
+ },
+ {
+  "libCode": "127096",
+  "libName": "수성구립무학숲도서관",
+  "dtlRegion": "22060",
+  "latitude": 35.8353386,
+  "longitude": 128.6305615,
+  "address": "대구광역시 수성구 청수로40길 73-10",
+  "tel": "053-668-1760",
+  "homepage": "https://library.daegu.go.kr/yonghak/html/yonghakCalendar2.do?menu_idx=147"
+ },
+ {
+  "libCode": "127018",
+  "libName": "수성구립물망이도서관",
+  "dtlRegion": "22060",
+  "latitude": 35.854754,
+  "longitude": 128.619016,
+  "address": "대구광역시 수성구 명덕로 443-2",
+  "tel": "053-666-4390",
+  "homepage": "https://library.daegu.go.kr/beomeo/html/bemeoCalendar2.do?menu_idx=114"
+ },
+ {
+  "libCode": "127072",
+  "libName": "수성구립범어도서관",
+  "dtlRegion": "22060",
+  "latitude": 35.8591904,
+  "longitude": 128.6306,
+  "address": "대구광역시 수성구 달구벌대로 2451",
+  "tel": "053-668-1600",
+  "homepage": "https://library.daegu.go.kr/beomeo/index.do"
+ },
+ {
+  "libCode": "127021",
+  "libName": "수성구립사월책문화센터도서관",
+  "dtlRegion": "22060",
+  "latitude": 35.8368604,
+  "longitude": 128.716004,
+  "address": "대구광역시 수성구 성동로 70, 2층 사월책문화센터",
+  "tel": "053-668-1940",
+  "homepage": "https://library.daegu.go.kr/gosan/index.do"
+ },
+ {
+  "libCode": "127013",
+  "libName": "수성구립용학도서관",
+  "dtlRegion": "22060",
+  "latitude": 35.8211417,
+  "longitude": 128.646088,
+  "address": "대구광역시 수성구 지범로41길 36",
+  "tel": "053-668-1700",
+  "homepage": "https://library.daegu.go.kr/yonghak/index.do"
+ },
+ {
+  "libCode": "127017",
+  "libName": "수성구립책숲길도서관",
+  "dtlRegion": "22060",
+  "latitude": 35.844682,
+  "longitude": 128.612282,
+  "address": "대구광역시 수성구 수성로 215",
+  "tel": "053-668-1650",
+  "homepage": "https://library.daegu.go.kr/beomeo/html/bemeoCalendar1.do?menu_idx=113"
+ },
+ {
+  "libCode": "127019",
+  "libName": "수성구립파동도서관",
+  "dtlRegion": "22060",
+  "latitude": 35.8104135,
+  "longitude": 128.618237,
+  "address": "대구광역시 수성구 파동로3길 62",
+  "tel": "053-668-1801",
+  "homepage": "http://library.suseong.kr/yonghak/library/04.htm"
+ },
+ {
+  "libCode": "127093",
+  "libName": "달서구립가족문화도서관",
+  "dtlRegion": "22070",
+  "latitude": 35.8194184,
+  "longitude": 128.5228843,
+  "address": "대구광역시 달서구 조암남로 137",
+  "tel": "053-667-4970",
+  "homepage": "https://library.daegu.go.kr/dalseolib/index.do"
+ },
+ {
+  "libCode": "127099",
+  "libName": "달서구립달서영어도서관",
+  "dtlRegion": "22070",
+  "latitude": 35.8312519,
+  "longitude": 128.5552707,
+  "address": "대구광역시 달서구 중흥로6길 10",
+  "tel": "053-667-4950",
+  "homepage": "https://library.daegu.go.kr/dalseolib/index.do"
+ },
+ {
+  "libCode": "127001",
+  "libName": "달서구립도원도서관",
+  "dtlRegion": "22070",
+  "latitude": 35.8068385,
+  "longitude": 128.5389385,
+  "address": "대구광역시 달서구 한실로 113",
+  "tel": "053-667-4840",
+  "homepage": "https://library.daegu.go.kr/dalseolib/index.do"
+ },
+ {
+  "libCode": "127012",
+  "libName": "달서구립본리도서관",
+  "dtlRegion": "22070",
+  "latitude": 35.8405793,
+  "longitude": 128.5418185,
+  "address": "대구광역시 달서구 당산로 37-25",
+  "tel": "053-667-4930",
+  "homepage": "https://library.daegu.go.kr/dalseolib/index.do"
+ },
+ {
+  "libCode": "127005",
+  "libName": "달서구립성서도서관",
+  "dtlRegion": "22070",
+  "latitude": 35.8574567,
+  "longitude": 128.5144441,
+  "address": "대구광역시 달서구 선원남로 129",
+  "tel": "053-667-4900",
+  "homepage": "https://library.daegu.go.kr/dalseolib/index.do"
+ },
+ {
+  "libCode": "127002",
+  "libName": "달서구립어린이도서관",
+  "dtlRegion": "22070",
+  "latitude": 35.8224119,
+  "longitude": 128.5470738,
+  "address": "대구광역시 달서구 송현로 45",
+  "tel": "053-667-4860",
+  "homepage": "https://library.daegu.go.kr/dalseolib/index.do"
+ },
+ {
+  "libCode": "327002",
+  "libName": "달서아트센터 도서관",
+  "dtlRegion": "22070",
+  "latitude": 35.8433779,
+  "longitude": 128.5228444,
+  "address": "대구광역시 달서구 문화회관길160",
+  "tel": "053-584-9274",
+  "homepage": "www.dscf.or.kr"
+ },
+ {
+  "libCode": "122002",
+  "libName": "대구광역시립두류도서관",
+  "dtlRegion": "22070",
+  "latitude": 35.852632,
+  "longitude": 128.5604,
+  "address": "대구광역시 달서구 공원순환로 8",
+  "tel": "053-231-2700",
+  "homepage": "http://library.daegu.go.kr/duryu/index.do"
+ },
+ {
+  "libCode": "127006",
+  "libName": "용산1동 작은도서관",
+  "dtlRegion": "22070",
+  "latitude": 35.8566419,
+  "longitude": 128.5312386,
+  "address": "대구광역시 달서구 용산로 212-7",
+  "tel": "053-667-4279",
+  "homepage": "http://library.daegu.go.kr/dalseolib"
+ },
+ {
+  "libCode": "127066",
+  "libName": "이곡2동 작은도서관",
+  "dtlRegion": "22070",
+  "latitude": 35.8558089,
+  "longitude": 128.5008392,
+  "address": "대구광역시 달서구 계대동문로 77",
+  "tel": "053-667-4368",
+  "homepage": "http://library.daegu.go.kr/dalseolib"
+ },
+ {
+  "libCode": "127007",
+  "libName": "장기동 작은도서관",
+  "dtlRegion": "22070",
+  "latitude": 35.8433981,
+  "longitude": 128.5299636,
+  "address": "대구광역시 달서구 장기로 277",
+  "tel": "053-667-4244",
+  "homepage": "http://library.daegu.go.kr/dalseolib"
+ },
+ {
+  "libCode": "127008",
+  "libName": "죽전동 작은도서관",
+  "dtlRegion": "22070",
+  "latitude": 35.855797,
+  "longitude": 128.5398201,
+  "address": "대구광역시 달서구 와룡로56길 26, 2층(죽전동 행정복지센터)",
+  "tel": "053-667-4217",
+  "homepage": "http://library.daegu.go.kr/dalseolib"
+ },
+ {
+  "libCode": "727036",
+  "libName": "학산 작은도서관",
+  "dtlRegion": "22070",
+  "latitude": 35.8333518,
+  "longitude": 128.5417135,
+  "address": "대구광역시 달서구 학산로 140",
+  "tel": "053-721-8970",
+  "homepage": "http://library.daegu.go.kr/dalseolib"
+ },
+ {
+  "libCode": "327003",
+  "libName": "행정정보문고센터",
+  "dtlRegion": "22070",
+  "latitude": 35.8297339,
+  "longitude": 128.5326441,
+  "address": "대구광역시 달서구 학산로 45",
+  "tel": "053-667-4817",
+  "homepage": "http://library.daegu.go.kr/dalseolib"
+ },
+ {
+  "libCode": "127065",
+  "libName": "가창면 참꽃 작은도서관",
+  "dtlRegion": "22510",
+  "latitude": 35.8023213,
+  "longitude": 128.623414,
+  "address": "대구광역시 달성군 가창면 가창로220길 8",
+  "tel": "053-760-7731",
+  "homepage": "http://dalseong.daegu.kr/culture/index.do?menu_id=00001924"
+ },
+ {
+  "libCode": "727011",
+  "libName": "구지면 작은도서관",
+  "dtlRegion": "22510",
+  "latitude": 35.6604264,
+  "longitude": 128.415043,
+  "address": "대구광역시 달성군 구지면 창리로11길 90",
+  "tel": "053-614-0985",
+  "homepage": "http://dalseong.daegu.kr/culture/index.do?menu_id=00001928"
+ },
+ {
+  "libCode": "727010",
+  "libName": "논공읍 작은도서관",
+  "dtlRegion": "22510",
+  "latitude": 35.730443,
+  "longitude": 128.451975,
+  "address": "대구광역시 달성군 논공읍 논공로 697-9",
+  "tel": "053-615-9191",
+  "homepage": "http://dalseong.daegu.kr/culture/index.do?menu_id=00001922"
+ },
+ {
+  "libCode": "727012",
+  "libName": "다사읍 서재 작은도서관",
+  "dtlRegion": "22510",
+  "latitude": 35.8719858,
+  "longitude": 128.49424,
+  "address": "대구광역시 달성군 다사읍 서재본길 25",
+  "tel": "053-588-6261",
+  "homepage": "http://dalseong.daegu.kr/culture//index.do?menu_id=00001923"
+ },
+ {
+  "libCode": "727116",
+  "libName": "다사읍 작은도서관",
+  "dtlRegion": "22510",
+  "latitude": 35.8649215,
+  "longitude": 128.4571628,
+  "address": "대구광역시 달성군 다사읍 매곡로12길 37",
+  "tel": "053-591-3342",
+  "homepage": "-"
+ },
+ {
+  "libCode": "127081",
+  "libName": "달성군립도서관",
+  "dtlRegion": "22510",
+  "latitude": 35.8593619,
+  "longitude": 128.462388,
+  "address": "대구광역시 달성군 다사읍 달구벌대로174길 10-13",
+  "tel": "053-584-0011",
+  "homepage": "http://www.dalseonglib.kr/"
+ },
+ {
+  "libCode": "127027",
+  "libName": "달성군청 도서관",
+  "dtlRegion": "22510",
+  "latitude": 35.7745414,
+  "longitude": 128.4313244,
+  "address": "대구광역시 달성군 논공읍 달성군청로 33",
+  "tel": "053-668-3239",
+  "homepage": "-"
+ },
+ {
+  "libCode": "127042",
+  "libName": "달성군청소년센터 작은도서관",
+  "dtlRegion": "22510",
+  "latitude": 35.7238941,
+  "longitude": 128.4550625,
+  "address": "대구광역시 달성군 논공읍 논공로 252",
+  "tel": "053-670-1323",
+  "homepage": "-"
+ },
+ {
+  "libCode": "127109",
+  "libName": "달성어린이숲도서관",
+  "dtlRegion": "22510",
+  "latitude": 35.6969263,
+  "longitude": 128.4551735,
+  "address": "대구광역시 달성군 현풍읍 테크노중앙대로 231",
+  "tel": "053-615-0011",
+  "homepage": "https://library.daegu.go.kr/dalseongchild"
+ },
+ {
+  "libCode": "122011",
+  "libName": "대구광역시립달성도서관",
+  "dtlRegion": "22510",
+  "latitude": 35.6985758,
+  "longitude": 128.4475554,
+  "address": "대구광역시 달성군 현풍읍 현풍동로19길 26",
+  "tel": "053-231-2150",
+  "homepage": "https://library.daegu.go.kr/dalseong"
+ },
+ {
+  "libCode": "727026",
+  "libName": "옥포읍 작은도서관",
+  "dtlRegion": "22510",
+  "latitude": 35.7897667,
+  "longitude": 128.463909,
+  "address": "대구광역시 달성군 옥포읍 비슬로 2215",
+  "tel": "053-614-8314",
+  "homepage": "http://dalseong.daegu.kr/culture/index.do?menu_id=00001926"
+ },
+ {
+  "libCode": "727023",
+  "libName": "유가읍 작은도서관",
+  "dtlRegion": "22510",
+  "latitude": 35.6938869,
+  "longitude": 128.459815,
+  "address": "대구광역시 달성군 유가읍 테크노상업로 95",
+  "tel": "053-614-8048",
+  "homepage": "http://dalseong.daegu.kr/culture/index.do?menu_id=00001927"
+ },
+ {
+  "libCode": "727014",
+  "libName": "하빈면 작은도서관",
+  "dtlRegion": "22510",
+  "latitude": 35.8995147,
+  "longitude": 128.445877,
+  "address": "대구광역시 달성군 하빈면 하빈로84길 23",
+  "tel": "053-582-5610",
+  "homepage": "http://dalseong.daegu.kr/culture/index.do?menu_id=00001925"
+ },
+ {
+  "libCode": "727009",
+  "libName": "화원읍 작은도서관",
+  "dtlRegion": "22510",
+  "latitude": 35.803917,
+  "longitude": 128.500726,
+  "address": "대구광역시 달성군 화원읍 비슬로520길 17-1",
+  "tel": "053-668-5458",
+  "homepage": "http://dalseong.daegu.kr/culture/index.do?menu_id=00001921"
+ },
+ {
+  "libCode": "147004",
+  "libName": "대구광역시교육청삼국유사군위도서관",
+  "dtlRegion": "22520",
+  "latitude": 36.2394613,
+  "longitude": 128.5725268,
+  "address": "대구광역시 군위군 군위읍 군청로 175",
+  "tel": "054-380-4280",
+  "homepage": "https://library.daegu.go.kr/gw"
+ }
+]

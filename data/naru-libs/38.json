@@ -1,0 +1,1202 @@
+[
+ {
+  "libCode": "148020",
+  "libName": "경상남도교육청 남명도서관",
+  "dtlRegion": "38030",
+  "latitude": 35.1670616,
+  "longitude": 128.1660324,
+  "address": "경상남도 진주시 문산읍 동부로 588번길 24",
+  "tel": "055-761-2722",
+  "homepage": "https://nmlib.gne.go.kr"
+ },
+ {
+  "libCode": "148321",
+  "libName": "진주시립남부어린이도서관",
+  "dtlRegion": "38030",
+  "latitude": 35.1631632,
+  "longitude": 128.1117785,
+  "address": "경상남도 진주시 가호로44번길 4",
+  "tel": "055-749-5985",
+  "homepage": "https://lib.jinju.go.kr"
+ },
+ {
+  "libCode": "148086",
+  "libName": "진주시립도동어린이도서관",
+  "dtlRegion": "38030",
+  "latitude": 35.1861295,
+  "longitude": 128.1248461,
+  "address": "경상남도 진주시 상대로119번길 17",
+  "tel": "055-749-7496",
+  "homepage": "http://lib.jinju.go.kr/"
+ },
+ {
+  "libCode": "148068",
+  "libName": "진주시립비봉어린이도서관",
+  "dtlRegion": "38030",
+  "latitude": 35.1977308,
+  "longitude": 128.0905381,
+  "address": "경상남도 진주시 향교로 86",
+  "tel": "055-749-7494",
+  "homepage": "http://lib.jinju.go.kr/"
+ },
+ {
+  "libCode": "148040",
+  "libName": "진주시립서부도서관",
+  "dtlRegion": "38030",
+  "latitude": 35.1896559,
+  "longitude": 128.061617,
+  "address": "경상남도 진주시 평거로 249",
+  "tel": "055-749-5983",
+  "homepage": "http://lib.jinju.go.kr/"
+ },
+ {
+  "libCode": "148047",
+  "libName": "진주시립어린이전문도서관",
+  "dtlRegion": "38030",
+  "latitude": 35.1740636,
+  "longitude": 128.0653523,
+  "address": "경상남도 진주시 평거로 46",
+  "tel": "055-749-5984",
+  "homepage": "http://lib.jinju.go.kr/"
+ },
+ {
+  "libCode": "148022",
+  "libName": "진주시립연암도서관",
+  "dtlRegion": "38030",
+  "latitude": 35.1830905,
+  "longitude": 128.1019738,
+  "address": "경상남도 진주시 모덕로47번길 13-17",
+  "tel": "055-749-5982",
+  "homepage": "http://lib.jinju.go.kr/"
+ },
+ {
+  "libCode": "148315",
+  "libName": "진주시립혁신어린이도서관 ",
+  "dtlRegion": "38030",
+  "latitude": 35.1828367,
+  "longitude": 128.1355786,
+  "address": "경상남도 진주시 동진로 415",
+  "tel": "055-749-7490",
+  "homepage": "https://lib.jinju.go.kr"
+ },
+ {
+  "libCode": "148026",
+  "libName": "경상남도교육청 통영도서관",
+  "dtlRegion": "38050",
+  "latitude": 34.8278389,
+  "longitude": 128.4161814,
+  "address": "경상남도 통영시 봉수로 37",
+  "tel": "055-648-8092",
+  "homepage": "https://tylib.gne.go.kr"
+ },
+ {
+  "libCode": "148038",
+  "libName": "꿈이랑도서관",
+  "dtlRegion": "38050",
+  "latitude": 34.8028677,
+  "longitude": 128.393474,
+  "address": "경상남도 통영시 산양읍 둔전길 155",
+  "tel": "055-650-2500",
+  "homepage": "http://www.tongyeonglib.or.kr/"
+ },
+ {
+  "libCode": "148100",
+  "libName": "통영시립도서관",
+  "dtlRegion": "38050",
+  "latitude": 34.8618204,
+  "longitude": 128.424713,
+  "address": "경상남도 통영시 무전3길 29",
+  "tel": "055-650-2630",
+  "homepage": "http://www.tongyeonglib.or.kr/"
+ },
+ {
+  "libCode": "148044",
+  "libName": "통영시립욕지도서관",
+  "dtlRegion": "38050",
+  "latitude": 34.6367834,
+  "longitude": 128.263369,
+  "address": "경상남도 통영시 욕지면 중촌길 203",
+  "tel": "055-650-4580",
+  "homepage": "http://www.tongyeonglib.or.kr/"
+ },
+ {
+  "libCode": "148238",
+  "libName": "통영시립충무도서관",
+  "dtlRegion": "38050",
+  "latitude": 34.8732994,
+  "longitude": 128.420478,
+  "address": "경상남도 통영시 용남면 기호바깥길 7-87",
+  "tel": "055-650-2640",
+  "homepage": "http://www.tongyeonglib.or.kr/"
+ },
+ {
+  "libCode": "148009",
+  "libName": "경상남도교육청 사천도서관",
+  "dtlRegion": "38060",
+  "latitude": 35.0833041,
+  "longitude": 128.0874714,
+  "address": "경상남도 사천시 사천읍 평화2길 21",
+  "tel": "055-853-8401",
+  "homepage": "http://salib.gne.go.kr"
+ },
+ {
+  "libCode": "148011",
+  "libName": "경상남도교육청 삼천포도서관",
+  "dtlRegion": "38060",
+  "latitude": 34.9533106,
+  "longitude": 128.0772786,
+  "address": "경상남도 사천시 삼천포대교로 622",
+  "tel": "055-835-4436",
+  "homepage": "http://scplib.gne.go.kr"
+ },
+ {
+  "libCode": "148004",
+  "libName": "경상남도교육청 김해도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.2327245,
+  "longitude": 128.873884,
+  "address": "경상남도 김해시 왕릉길 72",
+  "tel": "055-320-5500",
+  "homepage": "https://ghlib.gne.go.kr"
+ },
+ {
+  "libCode": "148312",
+  "libName": "경상남도교육청 김해지혜의바다도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.236152,
+  "longitude": 128.8215732,
+  "address": "경상남도 김해시 주촌면 서부로1541번길 8",
+  "tel": "055-330-9800",
+  "homepage": "http://ghjhlib.gne.go.kr"
+ },
+ {
+  "libCode": "148021",
+  "libName": "경상남도교육청 진영도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.3047655,
+  "longitude": 128.7414169,
+  "address": "경상남도 김해시 진영읍 진영로265번길 9-61",
+  "tel": "055-343-8791",
+  "homepage": "https://jylib.gne.go.kr"
+ },
+ {
+  "libCode": "148075",
+  "libName": "글혜윰작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.310179,
+  "longitude": 128.730168,
+  "address": "경상남도 김해시 진영읍 김해대로361번길 34, 진영코아루아파트 관리동 2층",
+  "tel": "055-342-0674",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00116.web"
+ },
+ {
+  "libCode": "148085",
+  "libName": "김해글로벗도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.234074,
+  "longitude": 128.881242,
+  "address": "경상남도 김해시 진영읍 장등로6번길 74-1, 1층",
+  "tel": "055-338-1616",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/01304.web"
+ },
+ {
+  "libCode": "148180",
+  "libName": "김해기적의도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.175871,
+  "longitude": 128.810384,
+  "address": "경상남도 김해시 율하1로 55",
+  "tel": "055-330-4651",
+  "homepage": "http://lib.gimhae.go.kr/miracle.web"
+ },
+ {
+  "libCode": "148309",
+  "libName": "김해율하도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.1718789,
+  "longitude": 128.8138273,
+  "address": "경상남도 김해시 율하2로 210",
+  "tel": "055-340-7161",
+  "homepage": "http://lib.gimhae.go.kr"
+ },
+ {
+  "libCode": "148071",
+  "libName": "김해청소년문화의집",
+  "dtlRegion": "38070",
+  "latitude": 35.242247,
+  "longitude": 128.87837,
+  "address": "경상남도 김해시 가락로176번길 3",
+  "tel": "055-330-4634",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00208.web"
+ },
+ {
+  "libCode": "148087",
+  "libName": "내외작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.237567,
+  "longitude": 128.857848,
+  "address": "경상남도 김해시 금관대로1255",
+  "tel": "055-337-0050",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00172.web"
+ },
+ {
+  "libCode": "148078",
+  "libName": "대동푸른뜰작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.236135,
+  "longitude": 128.993895,
+  "address": "경상남도 김해시 대동면 동남로41번길 13-11",
+  "tel": "070-8883-4883",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00143.web"
+ },
+ {
+  "libCode": "148063",
+  "libName": "대동한마음작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.232696,
+  "longitude": 128.865009,
+  "address": "경상남도 김해시 함박로101번길 19, 대동한마음타운 관리동 2층",
+  "tel": "055-326-7760",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00168.web"
+ },
+ {
+  "libCode": "148067",
+  "libName": "대포천작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.30723,
+  "longitude": 128.930649,
+  "address": "경상남도 김해시 상동면 장척로756번길6",
+  "tel": "055-323-8766",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00139.web"
+ },
+ {
+  "libCode": "148059",
+  "libName": "덕산작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.232338,
+  "longitude": 128.867496,
+  "address": "경상남도 김해시 함박로119번길 6, 덕산아파트 관리동 2층",
+  "tel": "070-7760-0775",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00169.web"
+ },
+ {
+  "libCode": "148097",
+  "libName": "떡갈나무숲작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.168306,
+  "longitude": 128.817546,
+  "address": "경상남도 김해시 율하2로 164, 율현주공13단지아파트 주민공동시설 1층",
+  "tel": "055-329-8005",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00223.web"
+ },
+ {
+  "libCode": "148080",
+  "libName": "뜨란채작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.233109,
+  "longitude": 128.860607,
+  "address": "경상남도 김해시 우암로 36, 뜨란채아파트 관리동 2층",
+  "tel": "055-336-1250",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00171.web"
+ },
+ {
+  "libCode": "148094",
+  "libName": "리첼작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.176391,
+  "longitude": 128.804088,
+  "address": "경상남도 김해시 덕정로 187, 세영리첼아파트 주민공동시설 지하1층",
+  "tel": "055-321-7764",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00222.web"
+ },
+ {
+  "libCode": "148083",
+  "libName": "분성IPARK작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.266828,
+  "longitude": 128.868101,
+  "address": "경상남도 김해시 삼계로232, 현대I'PARK아파트 관리동 지하1층",
+  "tel": "055-331-5301",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00210.web"
+ },
+ {
+  "libCode": "148064",
+  "libName": "불암동작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.222348,
+  "longitude": 128.926009,
+  "address": "경상남도 김해시 식만로389-5",
+  "tel": "055-336-7879",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00215.web"
+ },
+ {
+  "libCode": "148082",
+  "libName": "삼계로얄작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.269517,
+  "longitude": 128.865363,
+  "address": "경상남도 김해시 가야로60, 동원로얄듀크아파트 관리동 2층",
+  "tel": "055-311-2151",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00209.web"
+ },
+ {
+  "libCode": "148065",
+  "libName": "삼계푸르지오작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.271318,
+  "longitude": 128.862157,
+  "address": "경상남도 김해시 가야로19, 푸르지오1차아파트 관리동 2층",
+  "tel": "055-339-7870",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00206.web"
+ },
+ {
+  "libCode": "148069",
+  "libName": "생각이크는작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.310164,
+  "longitude": 128.728697,
+  "address": "경상남도 김해시 진영읍 김해대로361번길 31, 진영자이아파트 관리동 지하1층",
+  "tel": "055-346-4406",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00113.web"
+ },
+ {
+  "libCode": "148077",
+  "libName": "석봉마을작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.202238,
+  "longitude": 128.813129,
+  "address": "경상남도 김해시 금관대로599번길 11, 대동1단지아파트 복리동 2층",
+  "tel": "070-8165-0213",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00218.web"
+ },
+ {
+  "libCode": "148091",
+  "libName": "소리작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.235203,
+  "longitude": 128.8821,
+  "address": "경상남도 김해시 가락로94번길 7",
+  "tel": "055-314-3657",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00151.web"
+ },
+ {
+  "libCode": "148076",
+  "libName": "우리작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.191327,
+  "longitude": 128.808435,
+  "address": "경상남도 김해시 삼문로 88, 장유e그린1차부영아파트 복리동 2층",
+  "tel": "055-312-3342",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00897.web"
+ },
+ {
+  "libCode": "148061",
+  "libName": "월산주공작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.203889,
+  "longitude": 128.802051,
+  "address": "경상남도 김해시 월산로 101, 월산주공11단지아파트 관리동 2층",
+  "tel": "055-311-0261",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00216.web"
+ },
+ {
+  "libCode": "748097",
+  "libName": "유토피아작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.2433707,
+  "longitude": 128.9034897,
+  "address": "경상남도 김해시 인제로 167, 관리동 2층",
+  "tel": "055-312-1300",
+  "homepage": "http://lib.gimhae.go.kr/01293/00214.web"
+ },
+ {
+  "libCode": "148234",
+  "libName": "율하e편한작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.171072,
+  "longitude": 128.82092,
+  "address": "경상남도 김해시 율하2로 198, 율하e편한세상아파트 휘트니스센터 내",
+  "tel": "055-905-1154",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00224.web"
+ },
+ {
+  "libCode": "148081",
+  "libName": "이안나누리작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.27375,
+  "longitude": 128.867792,
+  "address": "경상남도 김해시 해반천로278번길12-27, 이안아파트 커뮤니센터 1층",
+  "tel": "070-8168-0648",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00211.web"
+ },
+ {
+  "libCode": "148095",
+  "libName": "일동한신꿈나무작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.231751,
+  "longitude": 128.84809,
+  "address": "경상남도 김해시 분성로 14, 일동한신아파트 관리동 2층",
+  "tel": "055-322-4141",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00173.web"
+ },
+ {
+  "libCode": "148062",
+  "libName": "장유대우작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.176558,
+  "longitude": 128.791376,
+  "address": "경상남도 김해시 팔판로 71, 푸르지오5단지아파트 복리동 2층",
+  "tel": "055-312-4489",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00220.web"
+ },
+ {
+  "libCode": "148042",
+  "libName": "장유도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.191583,
+  "longitude": 128.79696,
+  "address": "경상남도 김해시 대청로176번길 7",
+  "tel": "055-330-7461",
+  "homepage": "http://lib.gimhae.go.kr/jangyu.web"
+ },
+ {
+  "libCode": "148056",
+  "libName": "젤미작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.196245,
+  "longitude": 128.797396,
+  "address": "경상남도 김해시 능동로 32, 젤미부영e그린7차아파트 관리동 지하1층",
+  "tel": "055-313-4149",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00219.web"
+ },
+ {
+  "libCode": "148098",
+  "libName": "주촌디딤돌작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.238248,
+  "longitude": 128.830825,
+  "address": "경상남도 김해시 주촌면 선지로8번길 19, 2층",
+  "tel": "055-329-0079",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00123.web"
+ },
+ {
+  "libCode": "148235",
+  "libName": "중흥샘이깊은작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.308763,
+  "longitude": 128.732954,
+  "address": "경상남도 김해시 진영읍 장등로19번길 18, 중흥s클래스2단지아파트 관리동 2층",
+  "tel": "055-346-7181",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00119.web"
+ },
+ {
+  "libCode": "148066",
+  "libName": "진례작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.249028,
+  "longitude": 128.750676,
+  "address": "경상남도 김해시 진례면 송현로 21-1",
+  "tel": "055-345-4277",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00127.web"
+ },
+ {
+  "libCode": "148084",
+  "libName": "진영한빛도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.304562,
+  "longitude": 128.736912,
+  "address": "경상남도 김해시 진영읍 김해대로 440",
+  "tel": "055-330-4831",
+  "homepage": "http://lib.gimhae.go.kr/hanvit.web"
+ },
+ {
+  "libCode": "148070",
+  "libName": "책고래작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.193875,
+  "longitude": 128.810209,
+  "address": "경상남도 김해시 장유로334번길 76, 장유e편한세상아파트 관리동 3층",
+  "tel": "055-314-5879",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00217.web"
+ },
+ {
+  "libCode": "148039",
+  "libName": "칠암도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.244641,
+  "longitude": 128.910439,
+  "address": "경상남도 김해시 활천로285번길 14",
+  "tel": "055-330-4591",
+  "homepage": "http://lib.gimhae.go.kr/chilam.web"
+ },
+ {
+  "libCode": "148058",
+  "libName": "캐슬작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.242284,
+  "longitude": 128.884509,
+  "address": "경상남도 김해시 가야로451번길 9, 롯데캐슬1단지아파트 관리동 2층",
+  "tel": "055-334-4822",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00147.web"
+ },
+ {
+  "libCode": "748063",
+  "libName": "팔판빛오름작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.1794629,
+  "longitude": 128.7966061,
+  "address": "경상남도 김해시 덕정로 108, 복리동 지하층",
+  "tel": "055-904-2408",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00225.web"
+ },
+ {
+  "libCode": "148074",
+  "libName": "팔판작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.179286,
+  "longitude": 128.792246,
+  "address": "경상남도 김해시 덕정로 68, 팔판마을e그린3차아파트 관리동 지하1층",
+  "tel": "055-312-9822",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00221.web"
+ },
+ {
+  "libCode": "148060",
+  "libName": "하늘빛작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.253942,
+  "longitude": 128.869623,
+  "address": "경상남도 김해시 구산로5번길 57, 구지마을동원아파트 복리동 지하1층",
+  "tel": "055-314-3601",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00207.web"
+ },
+ {
+  "libCode": "148236",
+  "libName": "한국작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.230341,
+  "longitude": 128.86376,
+  "address": "경상남도 김해시 분성로 155, 한국2차아파트 관리동 지하1층",
+  "tel": "055-334-5400",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00159.web"
+ },
+ {
+  "libCode": "148057",
+  "libName": "한림미래작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.338277,
+  "longitude": 128.785936,
+  "address": "경상남도 김해시 한림면 한림로 458번길 20, 2층",
+  "tel": "055-346-7274",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00131.web"
+ },
+ {
+  "libCode": "148079",
+  "libName": "한신책사랑작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.231371,
+  "longitude": 128.85225,
+  "address": "경상남도 김해시 분성로48번길 16, 한신아파트 관리동 2층",
+  "tel": "055-337-5151",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00170.web"
+ },
+ {
+  "libCode": "148054",
+  "libName": "화정글샘도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.26224,
+  "longitude": 128.866382,
+  "address": "경상남도 김해시 삼계중앙로13번길 19",
+  "tel": "055-330-2991",
+  "homepage": "http://lib.gimhae.go.kr/hwajeong.web"
+ },
+ {
+  "libCode": "148099",
+  "libName": "활천행복작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.229053,
+  "longitude": 128.899879,
+  "address": "경상남도 김해시 인제로11번길51",
+  "tel": "055-337-5544",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00213.web"
+ },
+ {
+  "libCode": "148096",
+  "libName": "U보라작은도서관",
+  "dtlRegion": "38070",
+  "latitude": 35.223558,
+  "longitude": 128.874226,
+  "address": "경상남도 김해시 전하로176번길 71, 반도보라아파트 주민공동시설 2층",
+  "tel": "055-324-3335",
+  "homepage": "http://lib.gimhae.go.kr/01293/01298/00212.web"
+ },
+ {
+  "libCode": "148007",
+  "libName": "경상남도교육청 밀양도서관",
+  "dtlRegion": "38080",
+  "latitude": 35.4000943,
+  "longitude": 128.8414162,
+  "address": "경상남도 밀양시 삼랑진읍 만어로 7",
+  "tel": "055-353-6977",
+  "homepage": "https://mrlib.gne.go.kr"
+ },
+ {
+  "libCode": "148036",
+  "libName": "경상남도교육청 하남도서관",
+  "dtlRegion": "38080",
+  "latitude": 35.3763692,
+  "longitude": 128.7121536,
+  "address": "경상남도 밀양시 하남읍 수산중앙로 63",
+  "tel": "055-391-1848",
+  "homepage": "https://hnlib.gne.go.kr"
+ },
+ {
+  "libCode": "148008",
+  "libName": "밀양시립도서관",
+  "dtlRegion": "38080",
+  "latitude": 35.4867664,
+  "longitude": 128.7548041,
+  "address": "경상남도 밀양시 중앙로 265",
+  "tel": "055-359-6036",
+  "homepage": "http://www.myclib.or.kr/"
+ },
+ {
+  "libCode": "148300",
+  "libName": "밀양시립영어도서관",
+  "dtlRegion": "38080",
+  "latitude": 35.4867664,
+  "longitude": 128.7548041,
+  "address": "경상남도 밀양시 중앙로 265",
+  "tel": "055-359-6045",
+  "homepage": "http://eng.myclib.or.kr/"
+ },
+ {
+  "libCode": "148302",
+  "libName": "거제시립수양도서관",
+  "dtlRegion": "38090",
+  "latitude": 34.8877852,
+  "longitude": 128.6462266,
+  "address": "경상남도 거제시 제산로5길 26",
+  "tel": "055-639-3891",
+  "homepage": "https://lib.geoje.go.kr"
+ },
+ {
+  "libCode": "148317",
+  "libName": "거제시립아주도서관",
+  "dtlRegion": "38090",
+  "latitude": 34.8633998,
+  "longitude": 128.6938561,
+  "address": "경상남도 거제시 탑곡로 73, 4층",
+  "tel": "055-639-7320",
+  "homepage": "https://lib.geoje.go.kr/"
+ },
+ {
+  "libCode": "148089",
+  "libName": "거제시립옥포도서관",
+  "dtlRegion": "38090",
+  "latitude": 34.8970408,
+  "longitude": 128.6875731,
+  "address": "경상남도 거제시 진목로 20",
+  "tel": "055-639-3881",
+  "homepage": "https://lib.geoje.go.kr"
+ },
+ {
+  "libCode": "148033",
+  "libName": "거제시립장승포도서관",
+  "dtlRegion": "38090",
+  "latitude": 34.8699012,
+  "longitude": 128.7313594,
+  "address": "경상남도 거제시 신부로 36",
+  "tel": "055-639-3871",
+  "homepage": "https://lib.geoje.go.kr"
+ },
+ {
+  "libCode": "148184",
+  "libName": "거제시립장평도서관",
+  "dtlRegion": "38090",
+  "latitude": 34.889635,
+  "longitude": 128.609325,
+  "address": "경상남도 거제시 장평3로 10",
+  "tel": "055-639-3861",
+  "homepage": "https://lib.geoje.go.kr"
+ },
+ {
+  "libCode": "148307",
+  "libName": "거제시립하청도서관",
+  "dtlRegion": "38090",
+  "latitude": 34.9554532,
+  "longitude": 128.6550841,
+  "address": "경상남도 거제시 하청면 하청로 12-7",
+  "tel": "055-639-3921",
+  "homepage": "https://lib.geoje.go.kr"
+ },
+ {
+  "libCode": "148001",
+  "libName": "경상남도교육청 거제도서관",
+  "dtlRegion": "38090",
+  "latitude": 34.8789706,
+  "longitude": 128.6229211,
+  "address": "경상남도 거제시 계룡로7길 2",
+  "tel": "055-637-6311",
+  "homepage": "https://gjlib.gne.go.kr/index.es?sid=c7"
+ },
+ {
+  "libCode": "148170",
+  "libName": "글밭작은도서관",
+  "dtlRegion": "38090",
+  "latitude": 34.8843826,
+  "longitude": 128.6189394,
+  "address": "경상남도 거제시 계룡로13길 6",
+  "tel": "055-636-3019",
+  "homepage": "https://lib.geoje.go.kr/"
+ },
+ {
+  "libCode": "748134",
+  "libName": "둔덕청마꽃들작은도서관",
+  "dtlRegion": "38090",
+  "latitude": 34.8365111,
+  "longitude": 128.5047773,
+  "address": "경상남도 거제시 둔덕면 거제남서로 4624",
+  "tel": "055-638-0011",
+  "homepage": "https://lib.geoje.go.kr/"
+ },
+ {
+  "libCode": "148211",
+  "libName": "옥포작은도서관",
+  "dtlRegion": "38090",
+  "latitude": 34.8938695,
+  "longitude": 128.6961156,
+  "address": "경상남도 거제시 옥포대첩로 84",
+  "tel": "055-680-7021",
+  "homepage": "https://lib.geoje.go.kr"
+ },
+ {
+  "libCode": "748165",
+  "libName": "외포바다마을작은도서관",
+  "dtlRegion": "38090",
+  "latitude": 34.9429229,
+  "longitude": 128.7155215,
+  "address": "경상남도 거제시 장목면 외포4길 12, 2층",
+  "tel": "055-639-6745",
+  "homepage": "https://lib.geoje.go.kr/"
+ },
+ {
+  "libCode": "748095",
+  "libName": "참새미작은도서관",
+  "dtlRegion": "38090",
+  "latitude": 34.8510652,
+  "longitude": 128.5960669,
+  "address": "경상남도 거제시 거제면 동상3길 26",
+  "tel": "055-639-6565",
+  "homepage": "https://lib.geoje.go.kr/"
+ },
+ {
+  "libCode": "148227",
+  "libName": "푸른숲작은도서관",
+  "dtlRegion": "38090",
+  "latitude": 34.8669546,
+  "longitude": 128.6298359,
+  "address": "경상남도 거제시 상동7길 30",
+  "tel": "055-633-8849",
+  "homepage": "https://lib.geoje.go.kr/"
+ },
+ {
+  "libCode": "148012",
+  "libName": "경상남도교육청 양산도서관",
+  "dtlRegion": "38100",
+  "latitude": 35.3477893,
+  "longitude": 129.0439266,
+  "address": "경상남도 양산시 물금읍 신주2길 24",
+  "tel": "055-385-7003~4",
+  "homepage": "https://yslib.gne.go.kr"
+ },
+ {
+  "libCode": "748286",
+  "libName": "삼성공립작은도서관",
+  "dtlRegion": "38100",
+  "latitude": 35.3617144,
+  "longitude": 129.0481046,
+  "address": "경상남도 양산시 북정중앙로 34, 1층",
+  "tel": "055-363-5987",
+  "homepage": "https://lib.yangsan.go.kr/small/GROUP_00000000000291/intro.do"
+ },
+ {
+  "libCode": "748245",
+  "libName": "상하북종합사회복지관 작은도서관",
+  "dtlRegion": "38100",
+  "latitude": 35.417606,
+  "longitude": 129.0665701,
+  "address": "경상남도 양산시 상북면 삼계동길 27, 1층",
+  "tel": "070-4888-2597",
+  "homepage": "https://lib.yangsan.go.kr/small/GROUP_00000000000258/intro.do"
+ },
+ {
+  "libCode": "748077",
+  "libName": "순지공립작은도서관",
+  "dtlRegion": "38100",
+  "latitude": 35.492362,
+  "longitude": 129.084722,
+  "address": "경상남도 양산시 하북면 신평중앙길 24",
+  "tel": "055-382-7941",
+  "homepage": "https://lib.yangsan.go.kr"
+ },
+ {
+  "libCode": "148304",
+  "libName": "양산시립 상북도서관",
+  "dtlRegion": "38100",
+  "latitude": 35.4157099,
+  "longitude": 129.059162,
+  "address": "경상남도 양산시 상북면 반회서7길 14-16",
+  "tel": "055-392-5936",
+  "homepage": "https://lib.yangsan.go.kr"
+ },
+ {
+  "libCode": "148314",
+  "libName": "양산시립 서창도서관",
+  "dtlRegion": "38100",
+  "latitude": 35.4106438,
+  "longitude": 129.1722774,
+  "address": "경상남도 양산시 삼호로 105",
+  "tel": "055-392-5880",
+  "homepage": "https://lib.yangsan.go.kr/ME/main.do"
+ },
+ {
+  "libCode": "148301",
+  "libName": "양산시립 영어도서관",
+  "dtlRegion": "38100",
+  "latitude": 35.4144861,
+  "longitude": 129.164018,
+  "address": "경상남도 양산시 대평들1길 9-10",
+  "tel": "055-392-5940",
+  "homepage": "https://lib.yangsan.go.kr/MC/main.do"
+ },
+ {
+  "libCode": "148041",
+  "libName": "양산시립 웅상도서관",
+  "dtlRegion": "38100",
+  "latitude": 35.3894429,
+  "longitude": 129.15527,
+  "address": "경상남도 양산시 웅상대로 1009-2",
+  "tel": "055-392-5950",
+  "homepage": "http://lib.yangsan.go.kr/"
+ },
+ {
+  "libCode": "148318",
+  "libName": "양산시립 윤현진도서관",
+  "dtlRegion": "38100",
+  "latitude": 35.3477893,
+  "longitude": 129.0439266,
+  "address": "경상남도 양산시 희망1길 25",
+  "tel": "055-392-5870",
+  "homepage": "https://lib.yangsan.go.kr"
+ },
+ {
+  "libCode": "148122",
+  "libName": "양산시립 중앙도서관",
+  "dtlRegion": "38100",
+  "latitude": 35.3252568,
+  "longitude": 128.996509,
+  "address": "경상남도 양산시 물금읍 청룡로 11",
+  "tel": "055-392-5900",
+  "homepage": "http://lib.yangsan.go.kr/"
+ },
+ {
+  "libCode": "748149",
+  "libName": "원동공립작은도서관",
+  "dtlRegion": "38100",
+  "latitude": 35.3702553,
+  "longitude": 128.920549,
+  "address": "경상남도 양산시 원동면 원동로 1598",
+  "tel": "055-372-2682",
+  "homepage": "https://lib.yangsan.go.kr"
+ },
+ {
+  "libCode": "148308",
+  "libName": "경남대표도서관",
+  "dtlRegion": "38111",
+  "latitude": 35.2490494,
+  "longitude": 128.6820973,
+  "address": "경상남도 창원시 의창구 사림로45번길 59",
+  "tel": "055-254-4811",
+  "homepage": "https://lib.gyeongnam.go.kr/index.lib"
+ },
+ {
+  "libCode": "148052",
+  "libName": "고향의봄도서관",
+  "dtlRegion": "38111",
+  "latitude": 35.2566018,
+  "longitude": 128.6186053,
+  "address": "경상남도 창원시 의창구 평산로135번길 32",
+  "tel": "055-225-7371",
+  "homepage": "https://lib.changwon.go.kr/gh/index_real.php"
+ },
+ {
+  "libCode": "148237",
+  "libName": "명곡도서관",
+  "dtlRegion": "38111",
+  "latitude": 35.2531164,
+  "longitude": 128.6485265,
+  "address": "경상남도 창원시 의창구 서곡길 21",
+  "tel": "055-225-7321",
+  "homepage": "https://lib.changwon.go.kr/mg/index_real.php"
+ },
+ {
+  "libCode": "148035",
+  "libName": "창원중앙도서관",
+  "dtlRegion": "38111",
+  "latitude": 35.2334598,
+  "longitude": 128.679058,
+  "address": "경상남도 창원시 의창구 용호로 50"
+ },
+ {
+  "libCode": "148319",
+  "libName": "최윤덕도서관",
+  "dtlRegion": "38111",
+  "latitude": 35.3202121,
+  "longitude": 128.5808213,
+  "address": "경상남도 창원시 의창구 북면 무동서로 67",
+  "tel": "055-225-7991",
+  "homepage": "https://lib.changwon.go.kr/bm/index_real.php"
+ },
+ {
+  "libCode": "148025",
+  "libName": "경상남도교육청 창원도서관",
+  "dtlRegion": "38112",
+  "latitude": 35.2243237,
+  "longitude": 128.6641208,
+  "address": "경상남도 창원시 성산구 두대로 197-33",
+  "tel": "055-278-2800",
+  "homepage": "http://cwlib.gne.go.kr"
+ },
+ {
+  "libCode": "148120",
+  "libName": "성산도서관",
+  "dtlRegion": "38112",
+  "latitude": 35.2020144,
+  "longitude": 128.707115,
+  "address": "경상남도 창원시 성산구 외리로 47"
+ },
+ {
+  "libCode": "148006",
+  "libName": "경상남도교육청 마산도서관",
+  "dtlRegion": "38113",
+  "latitude": 35.2130262,
+  "longitude": 128.584792,
+  "address": "경상남도 창원시 마산합포구 용마산길 12",
+  "tel": "055-240-4555",
+  "homepage": "http://mslib.gne.go.kr"
+ },
+ {
+  "libCode": "148034",
+  "libName": "경상남도교육청 진동도서관",
+  "dtlRegion": "38113",
+  "latitude": 35.1193316,
+  "longitude": 128.4897935,
+  "address": "경상남도 창원시 마산합포구 진동면 삼진의거대로 661-94",
+  "tel": "055-271-8144",
+  "homepage": "http://jdlib.gne.go.kr"
+ },
+ {
+  "libCode": "148043",
+  "libName": "마산합포도서관",
+  "dtlRegion": "38113",
+  "latitude": 35.1830846,
+  "longitude": 128.562812,
+  "address": "경상남도 창원시 마산합포구 월영동16길 22"
+ },
+ {
+  "libCode": "148310",
+  "libName": "경상남도교육청 마산지혜의바다도서관",
+  "dtlRegion": "38114",
+  "latitude": 35.2567086,
+  "longitude": 128.597716,
+  "address": "경상남도 창원시 마산회원구 구암북12길 24-1",
+  "tel": "055-252-3860",
+  "homepage": "https://jhlib.gne.go.kr"
+ },
+ {
+  "libCode": "148013",
+  "libName": "마산회원도서관",
+  "dtlRegion": "38114",
+  "latitude": 35.224668,
+  "longitude": 128.57355,
+  "address": "경상남도 창원시 마산회원구 3&middot;15대로 558"
+ },
+ {
+  "libCode": "148050",
+  "libName": "동부도서관",
+  "dtlRegion": "38115",
+  "latitude": 35.1003039,
+  "longitude": 128.8172481,
+  "address": "경상남도 창원시 진해구 용재로 66",
+  "tel": "055-225-7331",
+  "homepage": "https://lib.changwon.go.kr/db"
+ },
+ {
+  "libCode": "148023",
+  "libName": "진해도서관",
+  "dtlRegion": "38115",
+  "latitude": 35.152403,
+  "longitude": 128.667443,
+  "address": "경상남도 창원시 진해구 충장로 141"
+ },
+ {
+  "libCode": "148019",
+  "libName": "경상남도교육청 의령도서관",
+  "dtlRegion": "38510",
+  "latitude": 35.319722,
+  "longitude": 128.2669478,
+  "address": "경상남도 의령군 의령읍 의병로25길 9-8",
+  "tel": "055-572-0941",
+  "homepage": "http://urlib.gne.go.kr"
+ },
+ {
+  "libCode": "148028",
+  "libName": "경상남도교육청 함안도서관",
+  "dtlRegion": "38520",
+  "latitude": 35.2714708,
+  "longitude": 128.4082277,
+  "address": "경상남도 함안군 가야읍 선왕길 16",
+  "tel": "055-583-6919",
+  "homepage": "http://hmlib.gne.go.kr"
+ },
+ {
+  "libCode": "148182",
+  "libName": "함안군립칠원도서관",
+  "dtlRegion": "38520",
+  "latitude": 35.30493,
+  "longitude": 128.5154692,
+  "address": "경상남도 함안군 칠원읍 원서로 56",
+  "tel": "055-580-3647",
+  "homepage": "https://www.haman.go.kr/chirwonlib.web"
+ },
+ {
+  "libCode": "148032",
+  "libName": "경상남도교육청 남지도서관",
+  "dtlRegion": "38530",
+  "latitude": 35.3891529,
+  "longitude": 128.4713668,
+  "address": "경상남도 창녕군 남지읍 낙동로 437",
+  "tel": "055-526-1490",
+  "homepage": "https://njlib.gne.go.kr"
+ },
+ {
+  "libCode": "148024",
+  "libName": "경상남도교육청 창녕도서관",
+  "dtlRegion": "38530",
+  "latitude": 35.5359284,
+  "longitude": 128.5035663,
+  "address": "경상남도 창녕군 창녕읍 남창녕로 52",
+  "tel": "055-532-9501",
+  "homepage": "https://cnlib.gne.go.kr"
+ },
+ {
+  "libCode": "148268",
+  "libName": "창녕군 영산도서관",
+  "dtlRegion": "38530",
+  "latitude": 35.4526581,
+  "longitude": 128.5304141,
+  "address": "경상남도 창녕군 영산면 원다리길 34",
+  "tel": "055-530-1931",
+  "homepage": "https://www.cng.go.kr/ysl.web"
+ },
+ {
+  "libCode": "148003",
+  "libName": "경상남도교육청 고성도서관",
+  "dtlRegion": "38540",
+  "latitude": 34.9792068,
+  "longitude": 128.3263477,
+  "address": "경상남도 고성군 고성읍 동외로 195번길 6",
+  "tel": "055-673-8460",
+  "homepage": "https://gslib.gne.go.kr"
+ },
+ {
+  "libCode": "148005",
+  "libName": "경상남도교육청 남해도서관",
+  "dtlRegion": "38550",
+  "latitude": 34.8343568,
+  "longitude": 127.8948644,
+  "address": "경상남도 남해군 남해읍 화전로43번길 11-3",
+  "tel": "055-864-0973",
+  "homepage": "https://nhlib.gne.go.kr"
+ },
+ {
+  "libCode": "148055",
+  "libName": "남해화전도서관",
+  "dtlRegion": "38550",
+  "latitude": 34.8388957,
+  "longitude": 127.8907146,
+  "address": "경상남도 남해군 남해읍 망운로 30번길 9",
+  "tel": "055-860-3871",
+  "homepage": "https://www.namhae.go.kr/lib/Index.do"
+ },
+ {
+  "libCode": "148027",
+  "libName": "경상남도교육청 하동도서관",
+  "dtlRegion": "38560",
+  "latitude": 35.0638743,
+  "longitude": 127.7447672,
+  "address": "경상남도 하동군 하동읍 경서대로 80",
+  "tel": "055-884-7983",
+  "homepage": "https://hdlib.gne.go.kr"
+ },
+ {
+  "libCode": "148010",
+  "libName": "경상남도교육청 산청도서관",
+  "dtlRegion": "38570",
+  "latitude": 35.4168475,
+  "longitude": 127.8764157,
+  "address": "경상남도 산청군 산청읍 꽃봉산로 79번길 45",
+  "tel": "055-973-2544",
+  "homepage": "https://sanlib.gne.go.kr/"
+ },
+ {
+  "libCode": "148316",
+  "libName": "경상남도교육청 산청지리산도서관",
+  "dtlRegion": "38570",
+  "latitude": 35.3014196,
+  "longitude": 127.9744965,
+  "address": "경상남도 산청군 신안면 원지강변로 101",
+  "tel": "055-974-1611",
+  "homepage": "https://sjlib.gne.go.kr"
+ },
+ {
+  "libCode": "148029",
+  "libName": "경상남도교육청 함양도서관",
+  "dtlRegion": "38580",
+  "latitude": 35.5211121,
+  "longitude": 127.7270663,
+  "address": "경상남도 함양군 함양읍 함양로 1143-1",
+  "tel": "055-963-3186",
+  "homepage": "https://hylib.gne.go.kr"
+ },
+ {
+  "libCode": "148046",
+  "libName": "거창군립한마음도서관",
+  "dtlRegion": "38590",
+  "latitude": 35.6891619,
+  "longitude": 127.9037437,
+  "address": "경상남도 거창군 거창읍 거열로6길 11",
+  "tel": "055-940-8470",
+  "homepage": "http://library.geochang.go.kr/"
+ },
+ {
+  "libCode": "148002",
+  "libName": "경상남도교육청 거창도서관",
+  "dtlRegion": "38590",
+  "latitude": 35.6871543,
+  "longitude": 127.9115485,
+  "address": "경상남도 거창군 거창읍 하동1길 9",
+  "tel": "055-944-8594",
+  "homepage": "http://gclib.gne.go.kr"
+ },
+ {
+  "libCode": "148030",
+  "libName": "경상남도교육청 합천도서관",
+  "dtlRegion": "38600",
+  "latitude": 35.5643101,
+  "longitude": 128.1689735,
+  "address": "경상남도 합천군 합천읍 동서로 152",
+  "tel": "055-932-0521",
+  "homepage": "https://hclib.gne.go.kr"
+ }
+]

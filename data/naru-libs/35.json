@@ -1,0 +1,632 @@
+[
+ {
+  "libCode": "145075",
+  "libName": "전북도청도서관",
+  "dtlRegion": "35011",
+  "latitude": 35.8207082,
+  "longitude": 127.101491,
+  "address": "전북특별자치도 전주시 완산구 효자로 225",
+  "tel": "063-280-2452",
+  "homepage": "http://library.jeonbuk.go.kr/"
+ },
+ {
+  "libCode": "145035",
+  "libName": "전주시 삼천도서관",
+  "dtlRegion": "35011",
+  "latitude": 35.7989436,
+  "longitude": 127.121693,
+  "address": "전북특별자치도 전주시 완산구 용리로 107",
+  "tel": "063-281-6464",
+  "homepage": "http://lib.jeonju.go.kr/"
+ },
+ {
+  "libCode": "145051",
+  "libName": "전주시 서신도서관",
+  "dtlRegion": "35011",
+  "latitude": 35.8310167,
+  "longitude": 127.11525,
+  "address": "전북특별자치도 전주시 완산구 서신천변14길 10",
+  "tel": "063-281-6550",
+  "homepage": "http://lib.jeonju.go.kr/"
+ },
+ {
+  "libCode": "145017",
+  "libName": "전주시 완산도서관",
+  "dtlRegion": "35011",
+  "latitude": 35.8094167,
+  "longitude": 127.147738,
+  "address": "전북특별자치도 전주시 완산구 곤지산4길 12",
+  "tel": "063-230-1817",
+  "homepage": "http://lib.jeonju.go.kr/"
+ },
+ {
+  "libCode": "145097",
+  "libName": "전주시 평화도서관",
+  "dtlRegion": "35011",
+  "latitude": 35.7914868,
+  "longitude": 127.134854,
+  "address": "전북특별자치도 전주시 완산구 평화14길 27-51",
+  "tel": "063-281-6420",
+  "homepage": "http://lib.jeonju.go.kr/"
+ },
+ {
+  "libCode": "145145",
+  "libName": "전주시 효자도서관",
+  "dtlRegion": "35011",
+  "latitude": 35.8109943,
+  "longitude": 127.1005948,
+  "address": "전북특별자치도 전주시 완산구 우전로 181",
+  "tel": "063-281-6490",
+  "homepage": "http://lib.jeonju.go.kr/"
+ },
+ {
+  "libCode": "145150",
+  "libName": "전주시립도서관 꽃심",
+  "dtlRegion": "35011",
+  "latitude": 35.8102151,
+  "longitude": 127.1267053,
+  "address": "전북특별자치도 전주시 완산구 백제대로 306",
+  "tel": "063-230-1840",
+  "homepage": "https://lib.jeonju.go.kr/"
+ },
+ {
+  "libCode": "145016",
+  "libName": "전북특별자치도교육청 전주학생교육문화관",
+  "dtlRegion": "35012",
+  "latitude": 35.8291331,
+  "longitude": 127.1378158,
+  "address": "전북특별자치도 전주시 덕진구 안덕원로 71",
+  "tel": "063-270-1643",
+  "homepage": "https://lib.jbe.go.kr/jec"
+ },
+ {
+  "libCode": "145142",
+  "libName": "전주시 건지도서관",
+  "dtlRegion": "35012",
+  "latitude": 35.8541298,
+  "longitude": 127.151551,
+  "address": "전북특별자치도 전주시 덕진구 호성로 25",
+  "tel": "063-281-6607,6608",
+  "homepage": "http://lib.jeonju.go.kr/"
+ },
+ {
+  "libCode": "145018",
+  "libName": "전주시 금암도서관",
+  "dtlRegion": "35012",
+  "latitude": 35.8364087,
+  "longitude": 127.139964,
+  "address": "전북특별자치도 전주시 덕진구 거북바우로 13",
+  "tel": "063-281-6440",
+  "homepage": "http://lib.jeonju.go.kr/"
+ },
+ {
+  "libCode": "145039",
+  "libName": "전주시 송천도서관",
+  "dtlRegion": "35012",
+  "latitude": 35.8693071,
+  "longitude": 127.128237,
+  "address": "전북특별자치도 전주시 덕진구 솔내로 212",
+  "tel": "063-281-2798",
+  "homepage": "http://lib.jeonju.go.kr/"
+ },
+ {
+  "libCode": "145131",
+  "libName": "전주시 아중도서관",
+  "dtlRegion": "35012",
+  "latitude": 35.8262181,
+  "longitude": 127.162659,
+  "address": "전북특별자치도 전주시 덕진구 무삼지2길 7",
+  "tel": "063-281-6475",
+  "homepage": "http://lib.jeonju.go.kr/"
+ },
+ {
+  "libCode": "145030",
+  "libName": "전주시 인후도서관",
+  "dtlRegion": "35012",
+  "latitude": 35.8395057,
+  "longitude": 127.1634,
+  "address": "전북특별자치도 전주시 덕진구 안덕원로 349",
+  "tel": "063-281-6408, 6409",
+  "homepage": "http://lib.jeonju.go.kr/"
+ },
+ {
+  "libCode": "145139",
+  "libName": "전주시 쪽구름도서관",
+  "dtlRegion": "35012",
+  "latitude": 35.8715131,
+  "longitude": 127.07571,
+  "address": "전북특별자치도 전주시 덕진구 여암2길 9",
+  "tel": "063-281-6530",
+  "homepage": "http://lib.jeonju.go.kr/"
+ },
+ {
+  "libCode": "145155",
+  "libName": "군산시립금강도서관",
+  "dtlRegion": "35020",
+  "latitude": 35.9676772,
+  "longitude": 126.7366293,
+  "address": "전북특별자치도 군산시 궁포3로 30",
+  "tel": "063-454-5670",
+  "homepage": "https://lib.gunsan.go.kr/index.gunsan"
+ },
+ {
+  "libCode": "145121",
+  "libName": "군산시립늘푸른도서관",
+  "dtlRegion": "35020",
+  "latitude": 35.9606645,
+  "longitude": 126.6989171,
+  "address": "전북특별자치도 군산시 하나운로 17",
+  "tel": "063-454-5980",
+  "homepage": "http://lib.gunsan.go.kr"
+ },
+ {
+  "libCode": "145002",
+  "libName": "군산시립도서관",
+  "dtlRegion": "35020",
+  "latitude": 35.9658352,
+  "longitude": 126.7112168,
+  "address": "전북특별자치도 군산시 축동로 72",
+  "tel": "063-454-5620",
+  "homepage": "http://lib.gunsan.go.kr"
+ },
+ {
+  "libCode": "145151",
+  "libName": "군산시립산들도서관",
+  "dtlRegion": "35020",
+  "latitude": 35.9204731,
+  "longitude": 126.6696889,
+  "address": "전북특별자치도 군산시 옥구읍 옥구로 27",
+  "tel": "063-454-5800",
+  "homepage": "https://lib.gunsan.go.kr/index.gunsan"
+ },
+ {
+  "libCode": "145122",
+  "libName": "군산시립설림도서관",
+  "dtlRegion": "35020",
+  "latitude": 35.9730164,
+  "longitude": 126.6844042,
+  "address": "전북특별자치도 군산시 설림길 25",
+  "tel": "063-454-5707",
+  "homepage": "http://lib.gunsan.go.kr"
+ },
+ {
+  "libCode": "145029",
+  "libName": "군산시립임피채만식도서관",
+  "dtlRegion": "35020",
+  "latitude": 35.9872902,
+  "longitude": 126.8486696,
+  "address": "전북특별자치도 군산시 임피면 임피향교길 39",
+  "tel": "063-454-5655",
+  "homepage": "http://lib.gunsan.go.kr"
+ },
+ {
+  "libCode": "145036",
+  "libName": "전북특별자치도교육청 군산학생교육문화관",
+  "dtlRegion": "35020",
+  "latitude": 35.9708598,
+  "longitude": 126.7365741,
+  "address": "전북특별자치도 군산시 조촌4길 46",
+  "tel": "063-450-3246",
+  "homepage": "https://lib.jbe.go.kr/gec"
+ },
+ {
+  "libCode": "145009",
+  "libName": "전북특별자치도교육청 군산학생교육문화관 대야분관",
+  "dtlRegion": "35020",
+  "latitude": 35.9489434,
+  "longitude": 126.8188947,
+  "address": "전북특별자치도 군산시 대야면 석화로 84",
+  "tel": "063-451-2669",
+  "homepage": "https://lib.jbe.go.kr/gecdy"
+ },
+ {
+  "libCode": "145153",
+  "libName": "익산시립금마도서관",
+  "dtlRegion": "35030",
+  "latitude": 35.994183,
+  "longitude": 127.054825,
+  "address": "전북특별자치도 익산시 금마면 고도길 26-53",
+  "tel": "063-859-7514",
+  "homepage": "https://lib.iksan.go.kr/gm"
+ },
+ {
+  "libCode": "145024",
+  "libName": "익산시립마동도서관",
+  "dtlRegion": "35030",
+  "latitude": 35.9404093,
+  "longitude": 126.9690213,
+  "address": "전북특별자치도 익산시 선화1로 99",
+  "tel": "063-859-3465",
+  "homepage": "https://lib.iksan.go.kr/md"
+ },
+ {
+  "libCode": "145095",
+  "libName": "익산시립모현도서관",
+  "dtlRegion": "35030",
+  "latitude": 35.949644,
+  "longitude": 126.9360088,
+  "address": "전북특별자치도 익산시 선화로6길 7",
+  "tel": "063-859-3731",
+  "homepage": "https://lib.iksan.go.kr/mh"
+ },
+ {
+  "libCode": "145116",
+  "libName": "익산시립부송도서관",
+  "dtlRegion": "35030",
+  "latitude": 35.9639592,
+  "longitude": 126.9941517,
+  "address": "전북특별자치도 익산시 무왕로25길 30",
+  "tel": "063-859-3717",
+  "homepage": "https://lib.iksan.go.kr/bs"
+ },
+ {
+  "libCode": "145042",
+  "libName": "익산시립영등도서관",
+  "dtlRegion": "35030",
+  "latitude": 35.9626723,
+  "longitude": 126.9777362,
+  "address": "전북특별자치도 익산시 궁동로 57",
+  "tel": "063-859-4661",
+  "homepage": "https://lib.iksan.go.kr/yd"
+ },
+ {
+  "libCode": "145154",
+  "libName": "익산시립유천도서관",
+  "dtlRegion": "35030",
+  "latitude": 35.9282186,
+  "longitude": 126.9736443,
+  "address": "전북특별자치도 익산시 동천로 86",
+  "tel": "063-859-7555",
+  "homepage": "https://lib.iksan.go.kr/yc"
+ },
+ {
+  "libCode": "145144",
+  "libName": "익산시립황등도서관",
+  "dtlRegion": "35030",
+  "latitude": 36.0044937,
+  "longitude": 126.9434981,
+  "address": "전북특별자치도 익산시 황등면 황등8길 7",
+  "tel": "063-859-3721",
+  "homepage": "https://lib.iksan.go.kr/hd"
+ },
+ {
+  "libCode": "145034",
+  "libName": "전북특별자치도교육청 익산학생교육문화관",
+  "dtlRegion": "35030",
+  "latitude": 35.9389516,
+  "longitude": 126.9606218,
+  "address": "전북특별자치도 익산시 고봉로 55",
+  "tel": "063-840-7200",
+  "homepage": "https://lib.jbe.go.kr/isec"
+ },
+ {
+  "libCode": "145013",
+  "libName": "전북특별자치도교육청 익산학생교육문화관 함열분관",
+  "dtlRegion": "35030",
+  "latitude": 36.0785875,
+  "longitude": 126.9634646,
+  "address": "전북특별자치도 익산시 함열읍 함열중앙로 53",
+  "tel": "063-861-1474",
+  "homepage": "https://lib.jbe.go.kr/hyisec"
+ },
+ {
+  "libCode": "145019",
+  "libName": "정읍학생복지회관",
+  "dtlRegion": "35040",
+  "latitude": 35.5712741,
+  "longitude": 126.8518922,
+  "address": "전북특별자치도 정읍시 구미길 14-4",
+  "tel": "063-533-6528",
+  "homepage": "https://lib.jbe.go.kr/jshall"
+ },
+ {
+  "libCode": "145050",
+  "libName": "남원시립도서관",
+  "dtlRegion": "35050",
+  "latitude": 35.4076967,
+  "longitude": 127.380214,
+  "address": "전북특별자치도 남원시 광한북로 54",
+  "tel": "063-620-8976",
+  "homepage": "https://www.namwon.go.kr/lib"
+ },
+ {
+  "libCode": "145149",
+  "libName": "남원시어린이청소년도서관",
+  "dtlRegion": "35050",
+  "latitude": 35.4198906,
+  "longitude": 127.3997991,
+  "address": "전북특별자치도 남원시 역재3길 12",
+  "tel": "063-620-5294",
+  "homepage": "https://www.namwon.go.kr/lib/"
+ },
+ {
+  "libCode": "145156",
+  "libName": "남원시어울림도서관",
+  "dtlRegion": "35050",
+  "latitude": 35.4016026,
+  "longitude": 127.3719661,
+  "address": "전북특별자치도 남원시 금동로 32",
+  "tel": "063-620-7788",
+  "homepage": "https://www.namwon.go.kr/lib/web/index.do"
+ },
+ {
+  "libCode": "145004",
+  "libName": "전북특별자치도교육청 남원학생교육문화관",
+  "dtlRegion": "35050",
+  "latitude": 35.4101177,
+  "longitude": 127.3819549,
+  "address": "전북특별자치도 남원시 용성로 49",
+  "tel": "063-630-1281",
+  "homepage": "https://lib.jbe.go.kr/necc"
+ },
+ {
+  "libCode": "145011",
+  "libName": "전북특별자치도교육청 남원학생교육문화관 운봉분관",
+  "dtlRegion": "35050",
+  "latitude": 35.4409827,
+  "longitude": 127.5320598,
+  "address": "전북특별자치도 남원시 운봉읍 서하길 7-8",
+  "tel": "063-634-0716",
+  "homepage": "https://lib.jbe.go.kr/neccl"
+ },
+ {
+  "libCode": "745073",
+  "libName": "검산작은도서관",
+  "dtlRegion": "35060",
+  "latitude": 35.8074283,
+  "longitude": 126.8964428,
+  "address": "전북특별자치도 김제시 요촌북로 110",
+  "tel": "063-543-5007",
+  "homepage": "https://gjl.gimje.go.kr/"
+ },
+ {
+  "libCode": "145133",
+  "libName": "교동골작은도서관",
+  "dtlRegion": "35060",
+  "latitude": 35.7969055,
+  "longitude": 126.8797427,
+  "address": "전북특별자치도 김제시 동서1길 9-24",
+  "tel": "063-547-0431",
+  "homepage": "https://gjl.gimje.go.kr/"
+ },
+ {
+  "libCode": "145048",
+  "libName": "길보작은도서관",
+  "dtlRegion": "35060",
+  "latitude": 35.7997455,
+  "longitude": 126.9004444,
+  "address": "전북특별자치도 김제시 금성로 93",
+  "tel": "063-545-1923",
+  "homepage": "https://gjl.gimje.go.kr/"
+ },
+ {
+  "libCode": "145077",
+  "libName": "김제교육문화회관",
+  "dtlRegion": "35060",
+  "latitude": 35.8067653,
+  "longitude": 126.89217,
+  "address": "전북특별자치도 김제시 요촌북로 72",
+  "tel": "063-540-6800",
+  "homepage": "https://lib.jbe.go.kr/gecc"
+ },
+ {
+  "libCode": "145041",
+  "libName": "김제금구도서관",
+  "dtlRegion": "35060",
+  "latitude": 35.7751438,
+  "longitude": 127.0125269,
+  "address": "전북특별자치도 김제시 금구면 양시7길 57",
+  "tel": "063-540-4155",
+  "homepage": "https://gjl.gimje.go.kr/"
+ },
+ {
+  "libCode": "145033",
+  "libName": "김제만경도서관",
+  "dtlRegion": "35060",
+  "latitude": 35.8492989,
+  "longitude": 126.8169325,
+  "address": "전북특별자치도 김제시 만경읍 만경로 776",
+  "tel": "063-540-4145",
+  "homepage": "https://gjl.gimje.go.kr/"
+ },
+ {
+  "libCode": "145026",
+  "libName": "김제시립도서관",
+  "dtlRegion": "35060",
+  "latitude": 35.7990764,
+  "longitude": 126.8925556,
+  "address": "전북특별자치도 김제시 서낭당길 151",
+  "tel": "063-540-4141",
+  "homepage": "https://gjl.gimje.go.kr/"
+ },
+ {
+  "libCode": "745074",
+  "libName": "새마을작은도서관",
+  "dtlRegion": "35060",
+  "latitude": 35.8016882,
+  "longitude": 126.8911784,
+  "address": "전북특별자치도 김제시 동서로 213",
+  "tel": "063-544-5567",
+  "homepage": "https://gjl.gimje.go.kr/"
+ },
+ {
+  "libCode": "145022",
+  "libName": "전북특별자치도교육청 김제학생교육문화관 금산분관",
+  "dtlRegion": "35060",
+  "latitude": 35.7173185,
+  "longitude": 126.9946612,
+  "address": "전북특별자치도 김제시 금산면 원평로 97",
+  "tel": "063-545-1670",
+  "homepage": "https://lib.jbe.go.kr/wpl"
+ },
+ {
+  "libCode": "145126",
+  "libName": "죽산작은도서관",
+  "dtlRegion": "35060",
+  "latitude": 35.7699752,
+  "longitude": 126.814062,
+  "address": "전북특별자치도 김제시 죽산면 죽산1길 30-9",
+  "tel": "063-546-2079",
+  "homepage": "https://gjl.gimje.go.kr/"
+ },
+ {
+  "libCode": "145074",
+  "libName": "희망남포작은도서관",
+  "dtlRegion": "35060",
+  "latitude": 35.8098809,
+  "longitude": 126.7882714,
+  "address": "전북특별자치도 김제시 성덕면 남포2길 85",
+  "tel": "063-542-0211",
+  "homepage": "https://gjl.gimje.go.kr/"
+ },
+ {
+  "libCode": "145038",
+  "libName": "완주군립고산도서관",
+  "dtlRegion": "35510",
+  "latitude": 35.9764763,
+  "longitude": 127.20535,
+  "address": "전북특별자치도 완주군 고산면 고산로 69-13",
+  "tel": "063-290-2647",
+  "homepage": "http://lib.wanju.go.kr/"
+ },
+ {
+  "libCode": "145134",
+  "libName": "완주군립둔산영어도서관",
+  "dtlRegion": "35510",
+  "latitude": 35.9609204,
+  "longitude": 127.125344,
+  "address": "전북특별자치도 완주군 봉동읍 둔산2로 62",
+  "tel": "063-290-2241/2248",
+  "homepage": "http://lib.wanju.go.kr/"
+ },
+ {
+  "libCode": "145025",
+  "libName": "완주군립삼례도서관",
+  "dtlRegion": "35510",
+  "latitude": 35.9204022,
+  "longitude": 127.093254,
+  "address": "전북특별자치도 완주군 삼례읍 삼봉로 215-12",
+  "tel": "063-290-2642",
+  "homepage": "http://lib.wanju.go.kr/"
+ },
+ {
+  "libCode": "145118",
+  "libName": "완주군립중앙도서관",
+  "dtlRegion": "35510",
+  "latitude": 35.9048726,
+  "longitude": 127.160787,
+  "address": "전북특별자치도 완주군 용진읍 지암로 61",
+  "tel": "063-290-2652 / 어린이자료실 063-290-2656 / 종합자료실 063-290-2657",
+  "homepage": "http://lib.wanju.go.kr/"
+ },
+ {
+  "libCode": "145148",
+  "libName": "완주군립콩쥐팥쥐도서관",
+  "dtlRegion": "35510",
+  "latitude": 35.8206231,
+  "longitude": 127.0225475,
+  "address": "전북특별자치도 완주군 이서면 갈산로 40",
+  "tel": "063-290-2440",
+  "homepage": "https://lib.wanju.go.kr"
+ },
+ {
+  "libCode": "145010",
+  "libName": "전라북도교육청완주도서관",
+  "dtlRegion": "35510",
+  "latitude": 35.9381762,
+  "longitude": 127.1642661,
+  "address": "전북특별자치도 완주군 봉동읍 봉동동서로 109",
+  "tel": "063-262-2239",
+  "homepage": "https://lib.jbe.go.kr/wjplib"
+ },
+ {
+  "libCode": "145021",
+  "libName": "전북특별자치도교육청 진안도서관",
+  "dtlRegion": "35520",
+  "latitude": 35.7893374,
+  "longitude": 127.422116,
+  "address": "전북특별자치도 진안군 진안읍 대광길 4",
+  "tel": "063-433-2433",
+  "homepage": "https://lib.jbe.go.kr/jinanplib"
+ },
+ {
+  "libCode": "145037",
+  "libName": "무주형설지공도서관",
+  "dtlRegion": "35530",
+  "latitude": 36.0020347,
+  "longitude": 127.6625918,
+  "address": "전북특별자치도 무주군 무주읍 최북로7",
+  "tel": "063-320-5622",
+  "homepage": "https://library.muju.go.kr/main/"
+ },
+ {
+  "libCode": "145006",
+  "libName": "전라북도교육청무주도서관",
+  "dtlRegion": "35530",
+  "latitude": 36.0106559,
+  "longitude": 127.6604406,
+  "address": "전북특별자치도 무주군 무주읍 향한로 37",
+  "tel": "063-322-4635",
+  "homepage": "https://lib.jbe.go.kr/mjl"
+ },
+ {
+  "libCode": "145015",
+  "libName": "전라북도교육청장수도서관",
+  "dtlRegion": "35540",
+  "latitude": 35.6510324,
+  "longitude": 127.5214147,
+  "address": "전북특별자치도 장수군 장수읍 호비로 58",
+  "tel": "063-351-5488",
+  "homepage": "https://lib.jbe.go.kr/jpl"
+ },
+ {
+  "libCode": "145014",
+  "libName": "전라북도교육청임실도서관",
+  "dtlRegion": "35550",
+  "latitude": 35.6138819,
+  "longitude": 127.2787824,
+  "address": "전북특별자치도 임실군 임실읍 봉황로 145",
+  "tel": "063-643-3525",
+  "homepage": "https://lib.jbe.go.kr/islib"
+ },
+ {
+  "libCode": "145140",
+  "libName": "순창군립도서관",
+  "dtlRegion": "35560",
+  "latitude": 35.3735182,
+  "longitude": 127.1406453,
+  "address": "전북특별자치도 순창군 순창읍 순창5길 18",
+  "tel": "063-650-5678",
+  "homepage": "http://lib.sunchang.go.kr/"
+ },
+ {
+  "libCode": "145008",
+  "libName": "전라북도교육청순창도서관",
+  "dtlRegion": "35560",
+  "latitude": 35.3766053,
+  "longitude": 127.1440507,
+  "address": "전북특별자치도 순창군 순창읍 장류로 379",
+  "tel": "063-652-0994",
+  "homepage": "https://lib.jbe.go.kr/sclib"
+ },
+ {
+  "libCode": "145001",
+  "libName": "전북특별자치도교육청 고창도서관",
+  "dtlRegion": "35570",
+  "latitude": 35.4341415,
+  "longitude": 126.7039748,
+  "address": "전북특별자치도 고창군 고창읍 천변북로 109",
+  "tel": "063-563-2720",
+  "homepage": "https://lib.jbe.go.kr/gcplib"
+ },
+ {
+  "libCode": "145007",
+  "libName": "전북특별자치도교육청 부안학생교육문화관",
+  "dtlRegion": "35580",
+  "latitude": 35.7307316,
+  "longitude": 126.7348965,
+  "address": "전북특별자치도 부안군 부안읍 남문안길 10",
+  "tel": "063-580-1323",
+  "homepage": "https://lib.jbe.go.kr/bec"
+ }
+]

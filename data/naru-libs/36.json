@@ -1,0 +1,572 @@
+[
+ {
+  "libCode": "146009",
+  "libName": "목포시립도서관",
+  "dtlRegion": "36010",
+  "latitude": 34.8035055,
+  "longitude": 126.4029774,
+  "address": "전라남도 목포시 용당로160번길 32",
+  "tel": "061-278-3320",
+  "homepage": "https://www.mokpolib.or.kr"
+ },
+ {
+  "libCode": "146071",
+  "libName": "목포어린이도서관",
+  "dtlRegion": "36010",
+  "latitude": 34.8148008,
+  "longitude": 126.4256048,
+  "address": "전라남도 목포시 옥암로186번길 30-7",
+  "tel": "061-287-1922",
+  "homepage": "https://www.mokpolib.or.kr"
+ },
+ {
+  "libCode": "146182",
+  "libName": "목포어울림도서관",
+  "dtlRegion": "36010",
+  "latitude": 34.818246,
+  "longitude": 126.394942,
+  "address": "전라남도 목포시 용해지구로 31",
+  "tel": "061-270-1250",
+  "homepage": "https://www.mokpolib.or.kr"
+ },
+ {
+  "libCode": "146173",
+  "libName": "목포영어도서관",
+  "dtlRegion": "36010",
+  "latitude": 34.8148008,
+  "longitude": 126.4256048,
+  "address": "전라남도 목포시 옥암로186번길 30-11",
+  "tel": "061-285-8020",
+  "homepage": "https://www.mokpolib.or.kr"
+ },
+ {
+  "libCode": "146010",
+  "libName": "전라남도교육청목포도서관",
+  "dtlRegion": "36010",
+  "latitude": 34.8070064,
+  "longitude": 126.3763424,
+  "address": "전라남도 목포시 원산주택로3번길 6",
+  "tel": "061-270-3800",
+  "homepage": "http://mplib.jne.go.kr/"
+ },
+ {
+  "libCode": "146036",
+  "libName": "여수시립돌산도서관",
+  "dtlRegion": "36020",
+  "latitude": 34.7160081,
+  "longitude": 127.7499315,
+  "address": "전라남도 여수시 돌산읍 강남해안로 129",
+  "tel": "061-659-4823",
+  "homepage": "http://yslib.yeosu.go.kr/"
+ },
+ {
+  "libCode": "146038",
+  "libName": "여수시립소라도서관",
+  "dtlRegion": "36020",
+  "latitude": 34.7886128,
+  "longitude": 127.6334897,
+  "address": "전라남도 여수시 소라면 덕양로 344",
+  "tel": "061-659-4833",
+  "homepage": "http://yslib.yeosu.go.kr/"
+ },
+ {
+  "libCode": "146026",
+  "libName": "여수시립쌍봉도서관",
+  "dtlRegion": "36020",
+  "latitude": 34.7630441,
+  "longitude": 127.658722,
+  "address": "전라남도 여수시 학동서4길 18-12",
+  "tel": "061-659-4770",
+  "homepage": "http://yslib.yeosu.go.kr/"
+ },
+ {
+  "libCode": "146045",
+  "libName": "여수시립율촌도서관",
+  "dtlRegion": "36020",
+  "latitude": 34.8837459,
+  "longitude": 127.5786328,
+  "address": "전라남도 여수시 율촌면 율촌로 100-11",
+  "tel": "061-659-4848",
+  "homepage": "http://yslib.yeosu.go.kr/"
+ },
+ {
+  "libCode": "146015",
+  "libName": "여수시립현암도서관",
+  "dtlRegion": "36020",
+  "latitude": 34.7571412,
+  "longitude": 127.7314764,
+  "address": "전라남도 여수시 충민사길 43",
+  "tel": "061-659-4810",
+  "homepage": "http://yslib.yeosu.go.kr/"
+ },
+ {
+  "libCode": "146052",
+  "libName": "여수시립환경도서관",
+  "dtlRegion": "36020",
+  "latitude": 34.7542288,
+  "longitude": 127.7010727,
+  "address": "전라남도 여수시 문수로 53-32",
+  "tel": "061-659-4811",
+  "homepage": "http://yslib.yeosu.go.kr/"
+ },
+ {
+  "libCode": "146179",
+  "libName": "여수시이순신도서관",
+  "dtlRegion": "36020",
+  "latitude": 35.8102151,
+  "longitude": 127.1267053,
+  "address": "전라남도 여수시 웅천6길 51",
+  "tel": "061-659-2850",
+  "homepage": "https://yslib.yeosu.go.kr"
+ },
+ {
+  "libCode": "146059",
+  "libName": "전라남도교육청학생교육문화회관",
+  "dtlRegion": "36020",
+  "latitude": 34.7804358,
+  "longitude": 127.6439821,
+  "address": "전라남도 여수시 대통1길 55",
+  "tel": "061-8080-114",
+  "homepage": "http://jsecc.jne.go.kr/"
+ },
+ {
+  "libCode": "146118",
+  "libName": "순천기적의도서관",
+  "dtlRegion": "36030",
+  "latitude": 34.9471695,
+  "longitude": 127.527657,
+  "address": "전라남도 순천시 해룡면 기적의도서관길 60",
+  "tel": "061-749-8890",
+  "homepage": "https://library.suncheon.go.kr/miracle/"
+ },
+ {
+  "libCode": "146014",
+  "libName": "순천시립그림책도서관",
+  "dtlRegion": "36030",
+  "latitude": 34.9579091,
+  "longitude": 127.4862543,
+  "address": "전라남도 순천시 도서관길 33",
+  "tel": "749-8929",
+  "homepage": "https://library.suncheon.go.kr/pblibrary/"
+ },
+ {
+  "libCode": "146120",
+  "libName": "순천시립삼산도서관",
+  "dtlRegion": "36030",
+  "latitude": 34.9666906,
+  "longitude": 127.4865762,
+  "address": "전라남도 순천시 중앙로 232",
+  "tel": "061-749-6691",
+  "homepage": "https://library.suncheon.go.kr/"
+ },
+ {
+  "libCode": "146175",
+  "libName": "순천시립신대도서관",
+  "dtlRegion": "36030",
+  "latitude": 34.935271,
+  "longitude": 127.563376,
+  "address": "전라남도 순천시 해룡면 좌야로 71",
+  "tel": "061-749-4374",
+  "homepage": "https://library.suncheon.go.kr/"
+ },
+ {
+  "libCode": "146187",
+  "libName": "순천시립어울림도서관",
+  "dtlRegion": "36030",
+  "latitude": 34.9422352,
+  "longitude": 127.4994466,
+  "address": "전라남도 순천시 동천저류지길 37",
+  "tel": "061-749-6952",
+  "homepage": "https://library.suncheon.go.kr"
+ },
+ {
+  "libCode": "146034",
+  "libName": "순천시립연향도서관",
+  "dtlRegion": "36030",
+  "latitude": 34.9471023,
+  "longitude": 127.5185748,
+  "address": "전라남도 순천시 연향번영길 54",
+  "tel": "061-749-8555",
+  "homepage": "https://library.suncheon.go.kr/"
+ },
+ {
+  "libCode": "146068",
+  "libName": "순천시립조례호수도서관",
+  "dtlRegion": "36030",
+  "latitude": 34.9640551,
+  "longitude": 127.5245258,
+  "address": "전라남도 순천시 조례2길 31",
+  "tel": "061-749-8891",
+  "homepage": "https://library.suncheon.go.kr/"
+ },
+ {
+  "libCode": "146067",
+  "libName": "풍덕글마루작은도서관",
+  "dtlRegion": "36030",
+  "latitude": 34.9421877,
+  "longitude": 127.4972527,
+  "address": "전라남도 순천시 풍덕1길 52",
+  "tel": "061-749-8454",
+  "homepage": "https://library.suncheon.go.kr/"
+ },
+ {
+  "libCode": "146069",
+  "libName": "해룡농어촌도서관",
+  "dtlRegion": "36030",
+  "latitude": 34.9137107,
+  "longitude": 127.5367558,
+  "address": "전라남도 순천시 해룡면 해룡로 1120",
+  "tel": "061-749-8647",
+  "homepage": "https://library.suncheon.go.kr/"
+ },
+ {
+  "libCode": "146007",
+  "libName": "전라남도교육청나주도서관",
+  "dtlRegion": "36040",
+  "latitude": 35.0294249,
+  "longitude": 126.7165623,
+  "address": "전라남도 나주시 남고문로 51",
+  "tel": "061-330-6750",
+  "homepage": "http://njlib.jne.go.kr/"
+ },
+ {
+  "libCode": "146006",
+  "libName": "전라남도교육청남평도서관",
+  "dtlRegion": "36040",
+  "latitude": 35.0425906,
+  "longitude": 126.8459762,
+  "address": "전라남도 나주시 남평읍 남평3로 14-13",
+  "tel": "061-337-9436",
+  "homepage": "http://nplib.jne.go.kr/"
+ },
+ {
+  "libCode": "146185",
+  "libName": "광양광영도서관",
+  "dtlRegion": "36060",
+  "latitude": 34.9622046,
+  "longitude": 127.7206014,
+  "address": "전라남도 광양시 광영로 74, 4-7층",
+  "tel": "061-797-3768",
+  "homepage": "https://lib.gwangyang.go.kr"
+ },
+ {
+  "libCode": "146181",
+  "libName": "광양금호도서관",
+  "dtlRegion": "36060",
+  "latitude": 34.937951,
+  "longitude": 127.722018,
+  "address": "전라남도 광양시 초원길 42",
+  "tel": "061-797-3830",
+  "homepage": "https://lib.gwangyang.go.kr"
+ },
+ {
+  "libCode": "146049",
+  "libName": "광양용강도서관",
+  "dtlRegion": "36060",
+  "latitude": 34.9741298,
+  "longitude": 127.607381,
+  "address": "전라남도 광양시 광양읍 기두5길 5",
+  "tel": "061-797-3869",
+  "homepage": "http://lib.gwangyang.go.kr"
+ },
+ {
+  "libCode": "146050",
+  "libName": "광양중마도서관",
+  "dtlRegion": "36060",
+  "latitude": 34.9374495,
+  "longitude": 127.6905967,
+  "address": "전라남도 광양시 광장로 14",
+  "tel": "061-797-2430",
+  "homepage": "http://lib.gwangyang.go.kr"
+ },
+ {
+  "libCode": "146024",
+  "libName": "광양중앙도서관",
+  "dtlRegion": "36060",
+  "latitude": 34.9802034,
+  "longitude": 127.5875486,
+  "address": "전라남도 광양시 광양읍 향교길 9-30",
+  "tel": "061-797-2530",
+  "homepage": "http://lib.gwangyang.go.kr"
+ },
+ {
+  "libCode": "146177",
+  "libName": "광양희망도서관",
+  "dtlRegion": "36060",
+  "latitude": 34.9751297,
+  "longitude": 127.5805497,
+  "address": "전라남도 광양시 광양읍 인덕로 1022",
+  "tel": "061-797-4700",
+  "homepage": "http://lib.gwangyang.go.kr"
+ },
+ {
+  "libCode": "146025",
+  "libName": "전남광주통합특별시교육청광양도서관",
+  "dtlRegion": "36060",
+  "latitude": 34.9437478,
+  "longitude": 127.6934705,
+  "address": "전라남도 광양시 중마로 262",
+  "tel": "061-797-5300",
+  "homepage": "http://gylib.jne.go.kr/"
+ },
+ {
+  "libCode": "146042",
+  "libName": "전라남도교육청광양평생교육관",
+  "dtlRegion": "36060",
+  "latitude": 34.9617375,
+  "longitude": 127.7175337,
+  "address": "전라남도 광양시 안산길 23",
+  "tel": "061-815-1611",
+  "homepage": "http://gylife.jne.go.kr/"
+ },
+ {
+  "libCode": "146008",
+  "libName": "전라남도교육청담양도서관",
+  "dtlRegion": "36510",
+  "latitude": 35.3120442,
+  "longitude": 126.983942,
+  "address": "전라남도 담양군 담양읍 미리산길 31-48",
+  "tel": "061-383-7435",
+  "homepage": "http://dylib.jne.go.kr/"
+ },
+ {
+  "libCode": "146186",
+  "libName": "곡성어린이도서관",
+  "dtlRegion": "36520",
+  "latitude": 35.2820149,
+  "longitude": 127.3016678,
+  "address": "전라남도 곡성군 곡성읍 곡성로 903",
+  "tel": "061-363-9852",
+  "homepage": "https://www.gokseong.go.kr/library"
+ },
+ {
+  "libCode": "146041",
+  "libName": "옥과공공도서관",
+  "dtlRegion": "36520",
+  "latitude": 35.2744583,
+  "longitude": 127.1355749,
+  "address": "전라남도 곡성군 옥과면 리문4길 16",
+  "tel": "061-363-1078",
+  "homepage": "http://www.gokseong.go.kr/library/"
+ },
+ {
+  "libCode": "146003",
+  "libName": "전라남도교육청곡성교육문화회관",
+  "dtlRegion": "36520",
+  "latitude": 35.2821509,
+  "longitude": 127.2897463,
+  "address": "전라남도 곡성군 곡성읍 읍내7길 29",
+  "tel": "061-362-0671",
+  "homepage": "http://gslib.jne.go.kr/"
+ },
+ {
+  "libCode": "146040",
+  "libName": "구례군 매천도서관",
+  "dtlRegion": "36530",
+  "latitude": 35.2025,
+  "longitude": 127.4627778,
+  "address": "전라남도 구례군 구례읍 봉성로 38",
+  "tel": "061-780-8156",
+  "homepage": "https://lib.gurye.go.kr/library"
+ },
+ {
+  "libCode": "146005",
+  "libName": "전라남도교육청구례도서관",
+  "dtlRegion": "36530",
+  "latitude": 35.2101649,
+  "longitude": 127.4614034,
+  "address": "전라남도 구례군 구례읍 중앙초등길 14",
+  "tel": "061-782-2366",
+  "homepage": "http://grlib.jne.go.kr/"
+ },
+ {
+  "libCode": "146035",
+  "libName": "고흥군립남부도서관",
+  "dtlRegion": "36550",
+  "latitude": 34.5275467,
+  "longitude": 127.1415292,
+  "address": "전라남도 고흥군 도양읍 녹동신항8길 5-4",
+  "tel": "061-830-6901",
+  "homepage": "https://www.ghlib.go.kr"
+ },
+ {
+  "libCode": "146051",
+  "libName": "고흥군립북부도서관",
+  "dtlRegion": "36550",
+  "latitude": 34.780904,
+  "longitude": 127.3306506,
+  "address": "전라남도 고흥군 동강면 동강중촌길 35",
+  "tel": "061-830-5951",
+  "homepage": "https://www.ghlib.go.kr"
+ },
+ {
+  "libCode": "146077",
+  "libName": "고흥군립중앙도서관",
+  "dtlRegion": "36550",
+  "latitude": 34.609695,
+  "longitude": 127.2889664,
+  "address": "전라남도 고흥군 고흥읍 고흥로 1793",
+  "tel": "061-830-6951",
+  "homepage": "https://www.ghlib.go.kr"
+ },
+ {
+  "libCode": "146002",
+  "libName": "전라남도교육청고흥평생교육관",
+  "dtlRegion": "36550",
+  "latitude": 34.6018554,
+  "longitude": 127.2775802,
+  "address": "전라남도 고흥군 고흥읍 고흥로 1647-13",
+  "tel": "061-830-2585",
+  "homepage": "http://ghlife.jne.go.kr/"
+ },
+ {
+  "libCode": "146013",
+  "libName": "전라남도교육청벌교도서관",
+  "dtlRegion": "36560",
+  "latitude": 34.8441295,
+  "longitude": 127.3420751,
+  "address": "전라남도 보성군 벌교읍 월곡길 13",
+  "tel": "061-858-0503",
+  "homepage": "http://bglib.jne.go.kr/"
+ },
+ {
+  "libCode": "146012",
+  "libName": "전라남도교육청보성도서관",
+  "dtlRegion": "36560",
+  "latitude": 34.7684656,
+  "longitude": 127.0784428,
+  "address": "전라남도 보성군 보성읍 현충로 140",
+  "tel": "061-852-3891",
+  "homepage": "http://bslib.jne.go.kr/"
+ },
+ {
+  "libCode": "146023",
+  "libName": "전라남도교육청화순도서관",
+  "dtlRegion": "36570",
+  "latitude": 35.0622774,
+  "longitude": 126.9819212,
+  "address": "전라남도 화순군 화순읍 도서관길 15",
+  "tel": "061-372-0531",
+  "homepage": "http://hslib.jne.go.kr/"
+ },
+ {
+  "libCode": "146019",
+  "libName": "전라남도교육청장흥도서관",
+  "dtlRegion": "36580",
+  "latitude": 34.6814189,
+  "longitude": 126.9104251,
+  "address": "전라남도 장흥군 장흥읍 중앙로2길 33",
+  "tel": "061-862-3555",
+  "homepage": "http://jhlib.jne.go.kr/"
+ },
+ {
+  "libCode": "146001",
+  "libName": "강진군도서관",
+  "dtlRegion": "36590",
+  "latitude": 34.640635,
+  "longitude": 126.7695711,
+  "address": "전라남도 강진군 강진읍 남문길 10",
+  "tel": "061-430-3832",
+  "homepage": "http://www.gjlib.go.kr "
+ },
+ {
+  "libCode": "146022",
+  "libName": "전라남도교육청해남도서관",
+  "dtlRegion": "36600",
+  "latitude": 34.5749867,
+  "longitude": 126.5947131,
+  "address": "전라남도 해남군 해남읍 서성1길 33",
+  "tel": "061-536-2483",
+  "homepage": "http://hnlib.jne.go.kr/"
+ },
+ {
+  "libCode": "146039",
+  "libName": "해남군립도서관",
+  "dtlRegion": "36600",
+  "latitude": 34.5735147,
+  "longitude": 126.5994916,
+  "address": "전라남도 해남군 해남읍 군청길 4",
+  "tel": "061-530-5890",
+  "homepage": "https://lib.haenam.go.kr"
+ },
+ {
+  "libCode": "146017",
+  "libName": "전라남도교육청영암도서관",
+  "dtlRegion": "36610",
+  "latitude": 34.7998538,
+  "longitude": 126.6943839,
+  "address": "전라남도 영암군 영암읍 서남역로 27-11",
+  "tel": "061-473-0692",
+  "homepage": "http://yalib.jne.go.kr/"
+ },
+ {
+  "libCode": "146126",
+  "libName": "전남광주통합특별시 전남도서관",
+  "dtlRegion": "36620",
+  "latitude": 34.8049913,
+  "longitude": 126.461486,
+  "address": "전라남도 무안군 삼향읍 남악로 210",
+  "tel": "061-288-5200",
+  "homepage": "https://lib.jeonnam.go.kr"
+ },
+ {
+  "libCode": "146011",
+  "libName": "전라남도교육청무안도서관",
+  "dtlRegion": "36620",
+  "latitude": 34.9881415,
+  "longitude": 126.4685488,
+  "address": "전라남도 무안군 무안읍 교촌길 42",
+  "tel": "061-452-8300",
+  "homepage": "http://malib.jne.go.kr/"
+ },
+ {
+  "libCode": "146021",
+  "libName": "전라남도교육청함평도서관",
+  "dtlRegion": "36630",
+  "latitude": 35.0670217,
+  "longitude": 126.5189576,
+  "address": "전라남도 함평군 함평읍 신기산길 46-12",
+  "tel": "061-322-0515",
+  "homepage": "http://hplib.jne.go.kr/"
+ },
+ {
+  "libCode": "146016",
+  "libName": "전라남도교육청영광도서관",
+  "dtlRegion": "36640",
+  "latitude": 35.2735455,
+  "longitude": 126.5046696,
+  "address": "전라남도 영광군 영광읍 천년로13길 2-16",
+  "tel": "061-353-2690",
+  "homepage": "http://yglib.jne.go.kr/"
+ },
+ {
+  "libCode": "146018",
+  "libName": "전라남도교육청장성도서관",
+  "dtlRegion": "36650",
+  "latitude": 35.3045976,
+  "longitude": 126.784688,
+  "address": "전라남도 장성군 장성읍 청운7길 22",
+  "tel": "061-399-1630",
+  "homepage": "http://jslib.jne.go.kr/"
+ },
+ {
+  "libCode": "146020",
+  "libName": "전라남도교육청진도도서관",
+  "dtlRegion": "36670",
+  "latitude": 34.4857948,
+  "longitude": 126.2668355,
+  "address": "전라남도 진도군 진도읍 철마길 12",
+  "tel": "061-544-2937",
+  "homepage": "http://jdlib.jne.go.kr/"
+ },
+ {
+  "libCode": "146032",
+  "libName": "신안군립도서관",
+  "dtlRegion": "36680",
+  "latitude": 34.8626257,
+  "longitude": 126.3177994,
+  "address": "전라남도 신안군 압해읍 압해로 876-22",
+  "tel": "061-240-4074",
+  "homepage": "http://www.shinan.go.kr/home/library/"
+ }
+]

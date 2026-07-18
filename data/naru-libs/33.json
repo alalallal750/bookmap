@@ -1,0 +1,552 @@
+[
+ {
+  "libCode": "142124",
+  "libName": "원주시립그림책도서관",
+  "dtlRegion": "32020",
+  "latitude": 37.3411249,
+  "longitude": 127.9502572,
+  "address": "강원특별자치도 원주시 향교길 77",
+  "tel": "033-737-4702",
+  "homepage": "https://lib.wonju.go.kr/pb"
+ },
+ {
+  "libCode": "143135",
+  "libName": "서충주도서관",
+  "dtlRegion": "33020",
+  "latitude": 37.0160894,
+  "longitude": 127.8303095,
+  "address": "충청북도 충주시 중앙탑면 원앙4길 48",
+  "tel": "043-850-7412",
+  "homepage": "https://lib.chungju.go.kr/web/index.do"
+ },
+ {
+  "libCode": "143008",
+  "libName": "중원교육도서관",
+  "dtlRegion": "33020",
+  "latitude": 36.97246,
+  "longitude": 127.7862678,
+  "address": "충청북도 충주시 주덕읍 창전길 221",
+  "tel": "043-846-0629",
+  "homepage": "http://www.jwelib.go.kr/"
+ },
+ {
+  "libCode": "143011",
+  "libName": "충주시립도서관",
+  "dtlRegion": "33020",
+  "latitude": 36.974893,
+  "longitude": 127.9342231,
+  "address": "충청북도 충주시 예성로 207",
+  "tel": "043-850-3972",
+  "homepage": "https://lib.chungju.go.kr/web/index.do"
+ },
+ {
+  "libCode": "143130",
+  "libName": "충주시립어린이청소년도서관",
+  "dtlRegion": "33020",
+  "latitude": 36.9639529,
+  "longitude": 127.9417729,
+  "address": "충청북도 충주시 금봉6길 21",
+  "tel": "043-850-3982",
+  "homepage": "https://lib.chungju.go.kr/web/index.do"
+ },
+ {
+  "libCode": "143121",
+  "libName": "충주시립엄정꿈터도서관",
+  "dtlRegion": "33020",
+  "latitude": 37.0868929,
+  "longitude": 127.9153843,
+  "address": "충청북도 충주시 엄정면 자바위길 8",
+  "tel": "043-854-3031",
+  "homepage": "https://lib.chungju.go.kr/web/index.do"
+ },
+ {
+  "libCode": "143026",
+  "libName": "충주시립호암도서관",
+  "dtlRegion": "33020",
+  "latitude": 36.9644929,
+  "longitude": 127.9259958,
+  "address": "충청북도 충주시 중원대로 3324",
+  "tel": "043-850-7410",
+  "homepage": "https://lib.chungju.go.kr/web/index.do"
+ },
+ {
+  "libCode": "143140",
+  "libName": "충주시립호암어린이도서관",
+  "dtlRegion": "33020",
+  "latitude": 36.9536195,
+  "longitude": 127.9334128,
+  "address": "충청북도 충주시 호암토성3길 5, 2층",
+  "tel": "043-853-0109",
+  "homepage": "https://lib.chungju.go.kr/web/index.do"
+ },
+ {
+  "libCode": "143012",
+  "libName": "충청북도중원교육문화원",
+  "dtlRegion": "33020",
+  "latitude": 36.9549462,
+  "longitude": 127.931265,
+  "address": "충청북도 충주시 호암대로 50",
+  "tel": "043-841-8950",
+  "homepage": "http://www.jwec.go.kr/"
+ },
+ {
+  "libCode": "143143",
+  "libName": "남부도서관",
+  "dtlRegion": "33030",
+  "latitude": 37.1176932,
+  "longitude": 128.2042723,
+  "address": "충청북도 제천시 강명길 24-2",
+  "tel": "043-641-3972",
+  "homepage": "https://www.jecheon.go.kr/jclib/index.do"
+ },
+ {
+  "libCode": "743102",
+  "libName": "산책도서관",
+  "dtlRegion": "33030",
+  "latitude": 37.1397987,
+  "longitude": 128.1997124,
+  "address": "충청북도 제천시 용두대로15길 18-13",
+  "tel": "043-645-6990",
+  "homepage": "https://jccfresh.or.kr"
+ },
+ {
+  "libCode": "143025",
+  "libName": "제천기적의도서관",
+  "dtlRegion": "33030",
+  "latitude": 37.155232,
+  "longitude": 128.2201007,
+  "address": "충청북도 제천시 용두천로38길 30 (고암동)",
+  "tel": "043-644-1215",
+  "homepage": "http://www.kidslib.org/"
+ },
+ {
+  "libCode": "143015",
+  "libName": "제천시립도서관",
+  "dtlRegion": "33030",
+  "latitude": 37.145074,
+  "longitude": 128.220288,
+  "address": "충청북도 제천시 내제로 318",
+  "tel": "043-646-2019",
+  "homepage": "https://www.jecheon.go.kr/jclib/index.do"
+ },
+ {
+  "libCode": "143007",
+  "libName": "제천학생회관",
+  "dtlRegion": "33030",
+  "latitude": 37.1459009,
+  "longitude": 128.2022633,
+  "address": "충청북도 제천시 숭의로 29",
+  "tel": "043-647-8588",
+  "homepage": "http://www.jcsh.go.kr/"
+ },
+ {
+  "libCode": "143010",
+  "libName": "미원교육도서관",
+  "dtlRegion": "33041",
+  "latitude": 36.6372156,
+  "longitude": 127.660374,
+  "address": "충청북도 청주시 상당구 미원면 단재로 2494-1",
+  "tel": "043-297-1525",
+  "homepage": "https://www.mwelib.go.kr"
+ },
+ {
+  "libCode": "143131",
+  "libName": "청주금빛도서관",
+  "dtlRegion": "33041",
+  "latitude": 36.6279017,
+  "longitude": 127.5146713,
+  "address": "충청북도 청주시 상당구 호미로 272",
+  "tel": "043-201-4136",
+  "homepage": "https://library.cheongju.go.kr/lib/front/index.php"
+ },
+ {
+  "libCode": "143060",
+  "libName": "청주상당도서관",
+  "dtlRegion": "33041",
+  "latitude": 36.6427997,
+  "longitude": 127.4912789,
+  "address": "충청북도 청주시 상당구 대성로 195",
+  "tel": "043-201-4103",
+  "homepage": "https://library.cheongju.go.kr/lib/front/index.php"
+ },
+ {
+  "libCode": "143022",
+  "libName": "청주시립도서관",
+  "dtlRegion": "33041",
+  "latitude": 36.5955005,
+  "longitude": 127.5062172,
+  "address": "충청북도 청주시 상당구 용암로 55",
+  "tel": "043-201-4074",
+  "homepage": "https://library.cheongju.go.kr/"
+ },
+ {
+  "libCode": "143023",
+  "libName": "청주기적의도서관",
+  "dtlRegion": "33042",
+  "latitude": 36.6180108,
+  "longitude": 127.4833992,
+  "address": "충청북도 청주시 서원구 구룡산로 356",
+  "tel": "043-283-1845",
+  "homepage": "https://library.cheongju.go.kr"
+ },
+ {
+  "libCode": "143086",
+  "libName": "청주서원도서관",
+  "dtlRegion": "33042",
+  "latitude": 36.6087159,
+  "longitude": 127.4886413,
+  "address": "충청북도 청주시 서원구 분평로 35",
+  "tel": "043-201-4186",
+  "homepage": "https://library.cheongju.go.kr/lib/front/"
+ },
+ {
+  "libCode": "143013",
+  "libName": "충청북도교육도서관",
+  "dtlRegion": "33042",
+  "latitude": 36.632765,
+  "longitude": 127.477825,
+  "address": "충청북도 청주시 서원구 충렬로 19",
+  "tel": "043-276-8305",
+  "homepage": "http://www.cbelib.go.kr"
+ },
+ {
+  "libCode": "143136",
+  "libName": "청주가로수도서관",
+  "dtlRegion": "33043",
+  "latitude": 36.6197723,
+  "longitude": 127.4271768,
+  "address": "충청북도 청주시 흥덕구 서현서로 5",
+  "tel": "043-201-4232",
+  "homepage": "https://library.cheongju.go.kr/lib/"
+ },
+ {
+  "libCode": "143128",
+  "libName": "청주강내도서관",
+  "dtlRegion": "33043",
+  "latitude": 36.6283436,
+  "longitude": 127.413699,
+  "address": "충청북도 청주시 흥덕구 강내면 가로수로 568",
+  "tel": "043-201-4196",
+  "homepage": "https://library.cheongju.go.kr"
+ },
+ {
+  "libCode": "143029",
+  "libName": "청주신율봉어린이도서관",
+  "dtlRegion": "33043",
+  "latitude": 36.631442,
+  "longitude": 127.4468251,
+  "address": "충청북도 청주시 흥덕구 신율로153번길 16",
+  "tel": "043-201-4225",
+  "homepage": "https://library.cheongju.go.kr"
+ },
+ {
+  "libCode": "143123",
+  "libName": "청주오송도서관",
+  "dtlRegion": "33043",
+  "latitude": 36.6350215,
+  "longitude": 127.3232938,
+  "address": "충청북도 청주시 흥덕구 오송읍 오송생명1로 180",
+  "tel": "043-201-4167",
+  "homepage": "https://library.cheongju.go.kr"
+ },
+ {
+  "libCode": "143020",
+  "libName": "청주옥산도서관",
+  "dtlRegion": "33043",
+  "latitude": 36.6661019,
+  "longitude": 127.3693273,
+  "address": "충청북도 청주시 흥덕구 옥산면 오산5길 10",
+  "tel": "043-201-4216",
+  "homepage": "https://library.cheongju.go.kr"
+ },
+ {
+  "libCode": "143028",
+  "libName": "청주흥덕도서관",
+  "dtlRegion": "33043",
+  "latitude": 36.6349497,
+  "longitude": 127.4313721,
+  "address": "충청북도 청주시 흥덕구 증안로90번길 34",
+  "tel": "043-201-4208",
+  "homepage": "https://library.cheongju.go.kr"
+ },
+ {
+  "libCode": "143106",
+  "libName": "청주내수도서관",
+  "dtlRegion": "33044",
+  "latitude": 36.7239271,
+  "longitude": 127.5348235,
+  "address": "충청북도 청주시 청원구 내수읍 마산3길 49",
+  "tel": "043-201-4736~7",
+  "homepage": "https://library.cheongju.go.kr/lib/front/index.php"
+ },
+ {
+  "libCode": "143063",
+  "libName": "청주오창도서관",
+  "dtlRegion": "33044",
+  "latitude": 36.7426335,
+  "longitude": 127.4548817,
+  "address": "충청북도 청주시 청원구 오창읍 두릉유리로 1141-10",
+  "tel": "아동자료실 : 043-201-4143, 4144 / 종합자료실 : 043-201-4146, 4147",
+  "homepage": "https://library.cheongju.go.kr/lib/front/index.php"
+ },
+ {
+  "libCode": "143126",
+  "libName": "청주오창호수도서관",
+  "dtlRegion": "33044",
+  "latitude": 36.7127511,
+  "longitude": 127.4236715,
+  "address": "충청북도 청주시 청원구 오창읍 오창공원로 102",
+  "tel": "043-201-4096",
+  "homepage": "https://library.cheongju.go.kr/lib/front/index.php"
+ },
+ {
+  "libCode": "143027",
+  "libName": "청주청원도서관",
+  "dtlRegion": "33044",
+  "latitude": 36.666181,
+  "longitude": 127.4749188,
+  "address": "충청북도 청주시 청원구 사뜸로61번길 88-14",
+  "tel": "043-201-4129",
+  "homepage": "https://library.cheongju.go.kr/lib/front/index.php"
+ },
+ {
+  "libCode": "143014",
+  "libName": "충청북도교육문화원",
+  "dtlRegion": "33044",
+  "latitude": 36.6828517,
+  "longitude": 127.4799929,
+  "address": "충청북도 청주시 청원구 밀레니엄2로 21",
+  "tel": "043-229-2600",
+  "homepage": "http://cbec.go.kr/"
+ },
+ {
+  "libCode": "143003",
+  "libName": "보은교육도서관",
+  "dtlRegion": "33520",
+  "latitude": 36.484076,
+  "longitude": 127.7160615,
+  "address": "충청북도 보은군 보은읍 삼산로 56-10",
+  "tel": "043-542-5473",
+  "homepage": "http://www.beelib.go.kr/"
+ },
+ {
+  "libCode": "143137",
+  "libName": "보은군립도서관",
+  "dtlRegion": "33520",
+  "latitude": 36.4873402,
+  "longitude": 127.7231235,
+  "address": "충청북도 보은군 보은읍 뱃들로 68-22",
+  "tel": "043-540-3571",
+  "homepage": "https://lib.boeun.go.kr"
+ },
+ {
+  "libCode": "143142",
+  "libName": "가양도서관",
+  "dtlRegion": "33530",
+  "latitude": 36.3028341,
+  "longitude": 127.5601127,
+  "address": "충청북도 옥천군 옥천읍 가화4길 58",
+  "tel": "043-730-3613",
+  "homepage": "https://oc.go.kr/lib"
+ },
+ {
+  "libCode": "143005",
+  "libName": "옥천교육도서관",
+  "dtlRegion": "33530",
+  "latitude": 36.300914,
+  "longitude": 127.5724097,
+  "address": "충청북도 옥천군 옥천읍 관성로3길 7",
+  "tel": "043-731-7051",
+  "homepage": "http://www.ocelib.go.kr/"
+ },
+ {
+  "libCode": "143078",
+  "libName": "옥천군민도서관",
+  "dtlRegion": "33530",
+  "latitude": 36.3004381,
+  "longitude": 127.5746837,
+  "address": "충청북도 옥천군 옥천읍 관성로4길 10",
+  "tel": "043-730-3612",
+  "homepage": "http://www.oc.go.kr/lib"
+ },
+ {
+  "libCode": "143004",
+  "libName": "영동교육도서관",
+  "dtlRegion": "33540",
+  "latitude": 36.1713844,
+  "longitude": 127.7722622,
+  "address": "충청북도 영동군 영동읍 학산영동로 1220",
+  "tel": "043-744-5754",
+  "homepage": "http://www.ydelib.go.kr/"
+ },
+ {
+  "libCode": "143129",
+  "libName": "생거진천혁신도시도서관",
+  "dtlRegion": "33550",
+  "latitude": 36.8990812,
+  "longitude": 127.5273718,
+  "address": "충청북도 진천군 덕산읍 대하로 52",
+  "tel": "043-539-7790",
+  "homepage": "https://lib.jincheon.go.kr"
+ },
+ {
+  "libCode": "143009",
+  "libName": "진천교육도서관",
+  "dtlRegion": "33550",
+  "latitude": 36.8557046,
+  "longitude": 127.4392093,
+  "address": "충청북도 진천군 진천읍 상산1길 11",
+  "tel": "043-533-4404",
+  "homepage": "http://www.jcelib.go.kr/"
+ },
+ {
+  "libCode": "143077",
+  "libName": "진천군립광혜원도서관",
+  "dtlRegion": "33550",
+  "latitude": 36.9928823,
+  "longitude": 127.4387055,
+  "address": "충청북도 진천군 광혜원면 화랑길 72",
+  "tel": "043-539-7766",
+  "homepage": "https://lib.jincheon.go.kr"
+ },
+ {
+  "libCode": "143076",
+  "libName": "진천군립도서관",
+  "dtlRegion": "33550",
+  "latitude": 36.8574203,
+  "longitude": 127.4374947,
+  "address": "충청북도 진천군 진천읍 포석길 37-6",
+  "tel": "043-539-7733",
+  "homepage": "https://lib.jincheon.go.kr"
+ },
+ {
+  "libCode": "143001",
+  "libName": "괴산교육도서관",
+  "dtlRegion": "33560",
+  "latitude": 36.8109221,
+  "longitude": 127.7920861,
+  "address": "충청북도 괴산군 괴산읍 읍내로12길 38",
+  "tel": "043-833-0319",
+  "homepage": "http://www.gselib.go.kr/"
+ },
+ {
+  "libCode": "143141",
+  "libName": "괴산군립도서관",
+  "dtlRegion": "33560",
+  "latitude": 36.8033369,
+  "longitude": 127.7854426,
+  "address": "충청북도 괴산군 괴산읍 괴산타운2길 88",
+  "tel": "043-830-3755",
+  "homepage": "https://lib.goesan.go.kr"
+ },
+ {
+  "libCode": "143124",
+  "libName": "감곡도서관",
+  "dtlRegion": "33570",
+  "latitude": 37.1196808,
+  "longitude": 127.6371611,
+  "address": "충청북도 음성군 감곡면 장감로131번길 8",
+  "tel": "043-871-4991",
+  "homepage": "https://lib.eumseong.go.kr/"
+ },
+ {
+  "libCode": "143017",
+  "libName": "금왕교육도서관",
+  "dtlRegion": "33570",
+  "latitude": 36.9901121,
+  "longitude": 127.5921688,
+  "address": "충청북도 음성군 금왕읍 응천서길27번길 33",
+  "tel": "043-877-8761",
+  "homepage": "http://www.gwelib.go.kr/"
+ },
+ {
+  "libCode": "143024",
+  "libName": "대소도서관",
+  "dtlRegion": "33570",
+  "latitude": 36.9674899,
+  "longitude": 127.4849331,
+  "address": "충청북도 음성군 대소면 오태로 80-14",
+  "tel": "043-871-4961",
+  "homepage": "https://lib.eumseong.go.kr/"
+ },
+ {
+  "libCode": "143138",
+  "libName": "맹동혁신도서관",
+  "dtlRegion": "33570",
+  "latitude": 36.913024,
+  "longitude": 127.544901,
+  "address": "충청북도 음성군 맹동면 사예2길 37",
+  "tel": "043-871-4951",
+  "homepage": "https://lib.eumseong.go.kr/"
+ },
+ {
+  "libCode": "143134",
+  "libName": "삼성도서관",
+  "dtlRegion": "33570",
+  "latitude": 37.0197379,
+  "longitude": 127.4979969,
+  "address": "충청북도 음성군 삼성면 덕정로 53-2",
+  "tel": "043-871-4971",
+  "homepage": "https://lib.eumseong.go.kr/"
+ },
+ {
+  "libCode": "143006",
+  "libName": "음성교육도서관",
+  "dtlRegion": "33570",
+  "latitude": 36.939997,
+  "longitude": 127.6928173,
+  "address": "충청북도 음성군 음성읍 시장로126번길 29",
+  "tel": "043-873-2977",
+  "homepage": "http://www.eselib.go.kr/"
+ },
+ {
+  "libCode": "143002",
+  "libName": "단양교육도서관",
+  "dtlRegion": "33580",
+  "latitude": 36.9796323,
+  "longitude": 128.356686,
+  "address": "충청북도 단양군 단양읍 상진12길 18",
+  "tel": "043-423-1095~6",
+  "homepage": "http://dyelib.go.kr/"
+ },
+ {
+  "libCode": "143019",
+  "libName": "단양군립매포도서관",
+  "dtlRegion": "33580",
+  "latitude": 37.0324361,
+  "longitude": 128.2972475,
+  "address": "충청북도 단양군 매포읍 평동로 111-43",
+  "tel": "043-422-1937",
+  "homepage": "https://www.danyang.go.kr/mepolib"
+ },
+ {
+  "libCode": "143094",
+  "libName": "단양군립올누림도서관",
+  "dtlRegion": "33580",
+  "latitude": 36.985817,
+  "longitude": 128.3707666,
+  "address": "충청북도 단양군 단양읍 군청로 85",
+  "tel": "043-420-2966, 2968",
+  "homepage": "https://www.danyang.go.kr/lib"
+ },
+ {
+  "libCode": "143016",
+  "libName": "증평교육도서관",
+  "dtlRegion": "33590",
+  "latitude": 36.7829406,
+  "longitude": 127.5886432,
+  "address": "충청북도 증평군 증평읍 광장로 154",
+  "tel": "043-836-9477",
+  "homepage": "http://www.jpelib.go.kr"
+ },
+ {
+  "libCode": "143122",
+  "libName": "증평군립도서관",
+  "dtlRegion": "33590",
+  "latitude": 36.7853074,
+  "longitude": 127.5814886,
+  "address": "충청북도 증평군 증평읍 광장로 37",
+  "tel": "043-835-4671",
+  "homepage": "https://lib.jp.go.kr/"
+ }
+]

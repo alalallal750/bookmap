@@ -1,0 +1,292 @@
+[
+ {
+  "libCode": "129003",
+  "libName": "계림꿈나무도서관",
+  "dtlRegion": "24010",
+  "latitude": 35.1585312,
+  "longitude": 126.9196578,
+  "address": "광주광역시 동구 경양로247번길 26",
+  "tel": "062-608-3920",
+  "homepage": "https://lib.donggu.kr"
+ },
+ {
+  "libCode": "124008",
+  "libName": "광주광역시립산수도서관",
+  "dtlRegion": "24010",
+  "latitude": 35.1543981,
+  "longitude": 126.9284698,
+  "address": "광주광역시 동구 경양로 355",
+  "tel": "062-613-7831",
+  "homepage": "https://citylib.gwangju.go.kr/main"
+ },
+ {
+  "libCode": "124002",
+  "libName": "전남광주통합특별시교육청중앙도서관",
+  "dtlRegion": "24010",
+  "latitude": 35.1485032,
+  "longitude": 126.9253348,
+  "address": "광주광역시 동구 장동로 23-16",
+  "tel": "062-607-1300",
+  "homepage": "http://lib.gen.go.kr/jungang"
+ },
+ {
+  "libCode": "129231",
+  "libName": "책정원도서관",
+  "dtlRegion": "24010",
+  "latitude": 35.0942815,
+  "longitude": 126.9392255,
+  "address": "광주광역시 동구 남계길 49",
+  "tel": "062-608-4700",
+  "homepage": "https://lib.donggu.kr"
+ },
+ {
+  "libCode": "124009",
+  "libName": "광주 서구 문화의숲도서관",
+  "dtlRegion": "24020",
+  "latitude": 35.1308667,
+  "longitude": 126.8603824,
+  "address": "광주광역시 서구 마재로 3",
+  "tel": "062-654-4306",
+  "homepage": "https://www.seogu.gwangju.kr/library/"
+ },
+ {
+  "libCode": "129222",
+  "libName": "광주 서구 상록도서관",
+  "dtlRegion": "24020",
+  "latitude": 35.1551865,
+  "longitude": 126.8889039,
+  "address": "광주광역시 서구 상무대로1171번길 11",
+  "tel": "062-350-4580",
+  "homepage": "https://www.seogu.gwangju.kr/library/"
+ },
+ {
+  "libCode": "129230",
+  "libName": "광주 서구 서빛마루도서관",
+  "dtlRegion": "24020",
+  "latitude": 35.1310521,
+  "longitude": 126.8805831,
+  "address": "광주광역시 서구 풍암공원로 30, 4층",
+  "tel": "062-350-4032",
+  "homepage": "https://library.seogu.gwangju.kr"
+ },
+ {
+  "libCode": "129004",
+  "libName": "광주 서구 어린이생태학습도서관",
+  "dtlRegion": "24020",
+  "latitude": 35.1297987,
+  "longitude": 126.8818583,
+  "address": "광주광역시 서구 풍암공원로 8",
+  "tel": "062-350-4584",
+  "homepage": "https://www.seogu.gwangju.kr/library/"
+ },
+ {
+  "libCode": "124011",
+  "libName": "전남광주통합특별시교육청광주학생교육문화회관",
+  "dtlRegion": "24020",
+  "latitude": 35.1570531,
+  "longitude": 126.858156,
+  "address": "광주광역시 서구 상무민주로 61",
+  "tel": "062-380-8800",
+  "homepage": "http://lib.gen.go.kr/gecs"
+ },
+ {
+  "libCode": "124005",
+  "libName": "전남광주통합특별시교육청학생독립운동기념회관",
+  "dtlRegion": "24020",
+  "latitude": 35.1416737,
+  "longitude": 126.8659601,
+  "address": "광주광역시 서구 학생독립로 30",
+  "tel": "062-221-5500",
+  "homepage": "http://lib.gen.go.kr/student"
+ },
+ {
+  "libCode": "124004",
+  "libName": "광주광역시립사직도서관",
+  "dtlRegion": "24030",
+  "latitude": 35.1395202,
+  "longitude": 126.9139332,
+  "address": "광주광역시 남구 제중로 56",
+  "tel": "062-613-7783",
+  "homepage": "https://citylib.gwangju.go.kr/main"
+ },
+ {
+  "libCode": "124012",
+  "libName": "광주남구문화정보도서관",
+  "dtlRegion": "24030",
+  "latitude": 35.1220332,
+  "longitude": 126.9175553,
+  "address": "광주광역시 남구 봉선로 208",
+  "tel": "062-607-2526",
+  "homepage": "http://lib.namgu.gwangju.kr/"
+ },
+ {
+  "libCode": "129224",
+  "libName": "광주남구청소년도서관",
+  "dtlRegion": "24030",
+  "latitude": 35.1207747,
+  "longitude": 126.9071242,
+  "address": "광주광역시 남구 제석로 100",
+  "tel": "062-607-2546",
+  "homepage": "https://lib.namgu.gwangju.kr/"
+ },
+ {
+  "libCode": "129219",
+  "libName": "광주남구푸른길도서관",
+  "dtlRegion": "24030",
+  "latitude": 35.1292558,
+  "longitude": 126.8951485,
+  "address": "광주광역시 남구 금당로 140",
+  "tel": "062-607-2531",
+  "homepage": "http://lib.namgu.gwangju.kr/"
+ },
+ {
+  "libCode": "146184",
+  "libName": "광주남구효천어울림도서관",
+  "dtlRegion": "24030",
+  "latitude": 35.1020219,
+  "longitude": 126.8944439,
+  "address": "광주광역시 남구 효우로 208",
+  "tel": "062-607-2552",
+  "homepage": "https://lib.namgu.gwangju.kr"
+ },
+ {
+  "libCode": "124007",
+  "libName": "전남광주통합특별시교육청금호평생교육관",
+  "dtlRegion": "24030",
+  "latitude": 35.1453424,
+  "longitude": 126.9006562,
+  "address": "광주광역시 남구 중앙로 15",
+  "tel": "062-360-6600",
+  "homepage": "http://lib.gen.go.kr/geumho"
+ },
+ {
+  "libCode": "124003",
+  "libName": "광주광역시립무등도서관",
+  "dtlRegion": "24040",
+  "latitude": 35.1765283,
+  "longitude": 126.9253482,
+  "address": "광주광역시 북구 면앙로 130",
+  "tel": "062-613-7753",
+  "homepage": "https://citylib.gwangju.go.kr/main"
+ },
+ {
+  "libCode": "129227",
+  "libName": "전남광주통합특별시 북구 신용도서관",
+  "dtlRegion": "24040",
+  "latitude": 35.2076447,
+  "longitude": 126.8617291,
+  "address": "전남광주통합특별시 북구 첨단연신로107번길 24",
+  "tel": "062-410-6853",
+  "homepage": "https://lib.bukgu.gwangju.kr"
+ },
+ {
+  "libCode": "129225",
+  "libName": "전남광주통합특별시 북구 양산도서관",
+  "dtlRegion": "24040",
+  "latitude": 37.6036883,
+  "longitude": 127.0226004,
+  "address": "전남광주통합특별시 북구 하서로 299",
+  "tel": "062-410-8242",
+  "homepage": "https://lib.bukgu.gwangju.kr"
+ },
+ {
+  "libCode": "129131",
+  "libName": "전남광주통합특별시 북구 운암도서관",
+  "dtlRegion": "24040",
+  "latitude": 35.1801822,
+  "longitude": 126.8753206,
+  "address": "전남광주통합특별시 북구 북문대로 118",
+  "tel": "062-410-6960",
+  "homepage": "https://lib.bukgu.gwangju.kr"
+ },
+ {
+  "libCode": "124010",
+  "libName": "전남광주통합특별시 북구 일곡도서관",
+  "dtlRegion": "24040",
+  "latitude": 35.208023,
+  "longitude": 126.895467,
+  "address": "전남광주통합특별시 북구 일곡로 55",
+  "tel": "062-410-6895",
+  "homepage": "https://lib.bukgu.gwangju.kr"
+ },
+ {
+  "libCode": "129226",
+  "libName": "전남광주통합특별시 북구 중흥도서관",
+  "dtlRegion": "24040",
+  "latitude": 35.169805,
+  "longitude": 126.9144483,
+  "address": "전남광주통합특별시 북구 당뫼로 39",
+  "tel": "062-410-6860",
+  "homepage": "https://lib.bukgu.gwangju.kr"
+ },
+ {
+  "libCode": "129221",
+  "libName": "전남광주통합특별시교육청중앙도서관 분관 최상준도서관",
+  "dtlRegion": "24040",
+  "latitude": 35.1876539,
+  "longitude": 126.897735,
+  "address": "광주광역시 북구 설죽로 315번길 8",
+  "tel": "062-576-8106",
+  "homepage": "http://lib.gen.go.kr/seokbong"
+ },
+ {
+  "libCode": "129001",
+  "libName": "광산구립신가도서관",
+  "dtlRegion": "24050",
+  "latitude": 35.1827519,
+  "longitude": 126.8285849,
+  "address": "광주광역시 광산구 신가로40번길 24",
+  "tel": "062-960-8548",
+  "homepage": "http://lib.gwangsan.go.kr"
+ },
+ {
+  "libCode": "129005",
+  "libName": "광산구립운남어린이도서관",
+  "dtlRegion": "24050",
+  "latitude": 35.1730207,
+  "longitude": 126.8219798,
+  "address": "광주광역시 광산구 목련로217번길 10",
+  "tel": "062-960-8302",
+  "homepage": "http://lib.gwangsan.go.kr"
+ },
+ {
+  "libCode": "129223",
+  "libName": "광산구립이야기꽃도서관",
+  "dtlRegion": "24050",
+  "latitude": 35.1484289,
+  "longitude": 126.7798985,
+  "address": "광주광역시 광산구 선운중앙로67번길 6",
+  "tel": "062-960-6818",
+  "homepage": "http://lib.gwangsan.go.kr"
+ },
+ {
+  "libCode": "129190",
+  "libName": "광산구립장덕도서관",
+  "dtlRegion": "24050",
+  "latitude": 35.1910934,
+  "longitude": 126.8140936,
+  "address": "광주광역시 광산구 풍영로 179",
+  "tel": "062-960-3997",
+  "homepage": "http://lib.gwangsan.go.kr"
+ },
+ {
+  "libCode": "129002",
+  "libName": "광산구립첨단도서관",
+  "dtlRegion": "24050",
+  "latitude": 35.2167923,
+  "longitude": 126.832239,
+  "address": "광주광역시 광산구 임방울대로 673-12",
+  "tel": "062-960-8298",
+  "homepage": "http://lib.gwangsan.go.kr"
+ },
+ {
+  "libCode": "124001",
+  "libName": "전남광주통합특별시교육청송정다가치문화도서관",
+  "dtlRegion": "24050",
+  "latitude": 35.1453164,
+  "longitude": 126.7996039,
+  "address": "광주광역시 광산구 송정공원로 8-13",
+  "tel": "062-940-8900",
+  "homepage": "http://lib.gen.go.kr/songjung"
+ }
+]

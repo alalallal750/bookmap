@@ -1,0 +1,522 @@
+[
+ {
+  "libCode": "142019",
+  "libName": "강원특별자치도교육청 춘성교육도서관",
+  "dtlRegion": "32010",
+  "latitude": 37.9273184,
+  "longitude": 127.7506508,
+  "address": "강원특별자치도 춘천시 신북읍 신샘밭로 359-32",
+  "tel": "033-242-6636",
+  "homepage": "https://lib.gwe.go.kr/cslib"
+ },
+ {
+  "libCode": "142021",
+  "libName": "강원특별자치도교육청 춘천교육문화관",
+  "dtlRegion": "32010",
+  "latitude": 37.8757842,
+  "longitude": 127.7241858,
+  "address": "강원특별자치도 춘천시 중앙로107번길 14",
+  "tel": "033-258-2500",
+  "homepage": "https://lib.gwe.go.kr/chuncheonecc"
+ },
+ {
+  "libCode": "142050",
+  "libName": "담작은도서관",
+  "dtlRegion": "32010",
+  "latitude": 37.871844,
+  "longitude": 127.7316012,
+  "address": "강원특별자치도 춘천시 효자문길7번길 10",
+  "tel": "033-256-6363",
+  "homepage": "https://library.chuncheon.go.kr/"
+ },
+ {
+  "libCode": "142039",
+  "libName": "춘천시립남산도서관",
+  "dtlRegion": "32010",
+  "latitude": 37.7928106,
+  "longitude": 127.643413,
+  "address": "강원특별자치도 춘천시 남산면 강촌로 311",
+  "tel": "033-245-5560",
+  "homepage": "https://library.chuncheon.go.kr/"
+ },
+ {
+  "libCode": "142020",
+  "libName": "춘천시립도서관",
+  "dtlRegion": "32010",
+  "latitude": 37.8631687,
+  "longitude": 127.7503805,
+  "address": "강원특별자치도 춘천시 우석로 100",
+  "tel": "033-245-5102",
+  "homepage": "https://library.chuncheon.go.kr/"
+ },
+ {
+  "libCode": "142040",
+  "libName": "춘천시립동내도서관",
+  "dtlRegion": "32010",
+  "latitude": 37.8360921,
+  "longitude": 127.7625953,
+  "address": "강원특별자치도 춘천시 동내면 학곡동1길 17-4",
+  "tel": "033-245-5130",
+  "homepage": "https://library.chuncheon.go.kr/"
+ },
+ {
+  "libCode": "142045",
+  "libName": "춘천시립서면도서관",
+  "dtlRegion": "32010",
+  "latitude": 37.9174902,
+  "longitude": 127.6954023,
+  "address": "강원특별자치도 춘천시 서면 박사로 948",
+  "tel": "033-245-5173",
+  "homepage": "https://library.chuncheon.go.kr/"
+ },
+ {
+  "libCode": "142041",
+  "libName": "춘천시립소양도서관",
+  "dtlRegion": "32010",
+  "latitude": 37.8926589,
+  "longitude": 127.7451648,
+  "address": "강원특별자치도 춘천시 삭주로145번길 69-8",
+  "tel": "033-245-5142",
+  "homepage": "https://library.chuncheon.go.kr/"
+ },
+ {
+  "libCode": "142043",
+  "libName": "춘천시립신사우도서관",
+  "dtlRegion": "32010",
+  "latitude": 37.9056894,
+  "longitude": 127.7281987,
+  "address": "강원특별자치도 춘천시 사우4길 26",
+  "tel": "033-245-5135",
+  "homepage": "https://library.chuncheon.go.kr/"
+ },
+ {
+  "libCode": "142110",
+  "libName": "춘천시립청소년도서관",
+  "dtlRegion": "32010",
+  "latitude": 37.8703944,
+  "longitude": 127.7111063,
+  "address": "강원특별자치도 춘천시 옛경춘로 830-24",
+  "tel": "033-245-5792",
+  "homepage": "https://library.chuncheon.go.kr/"
+ },
+ {
+  "libCode": "142007",
+  "libName": "강원특별자치도교육청 문막교육도서관",
+  "dtlRegion": "32020",
+  "latitude": 37.3050229,
+  "longitude": 127.8146418,
+  "address": "강원특별자치도 원주시 문막읍 문막시장1길 76-6",
+  "tel": "033-735-3682",
+  "homepage": "https://lib.gwe.go.kr/mmlib"
+ },
+ {
+  "libCode": "142014",
+  "libName": "강원특별자치도교육청 원주교육문화관",
+  "dtlRegion": "32020",
+  "latitude": 37.3517321,
+  "longitude": 127.9359125,
+  "address": "강원특별자치도 원주시 북원로 2312",
+  "tel": "033-737-1001",
+  "homepage": "https://lib.gwe.go.kr/wjecc"
+ },
+ {
+  "libCode": "142118",
+  "libName": "원주시립미리내도서관",
+  "dtlRegion": "32020",
+  "latitude": 37.3536617,
+  "longitude": 127.9431874,
+  "address": "강원특별자치도 원주시 양지로 46",
+  "tel": "033-737-2828",
+  "homepage": "https://lib.wonju.go.kr/mr"
+ },
+ {
+  "libCode": "142123",
+  "libName": "원주시립샘마루도서관",
+  "dtlRegion": "32020",
+  "latitude": 37.3795506,
+  "longitude": 127.8761022,
+  "address": "강원특별자치도 원주시 지정면 가곡로 61",
+  "tel": "033-737-5099",
+  "homepage": "https://lib.wonju.go.kr/sm"
+ },
+ {
+  "libCode": "142129",
+  "libName": "원주시립생각자람어린이도서관",
+  "dtlRegion": "32020",
+  "latitude": 37.3314607,
+  "longitude": 127.9335641,
+  "address": "강원특별자치도 원주시 시청로 160-9",
+  "tel": "033-737-3700",
+  "homepage": "https://lib.wonju.go.kr/sj"
+ },
+ {
+  "libCode": "142015",
+  "libName": "원주시립중앙도서관",
+  "dtlRegion": "32020",
+  "latitude": 37.3263503,
+  "longitude": 127.9533323,
+  "address": "강원특별자치도 원주시 서원대로 472-12",
+  "tel": "033-737-4360",
+  "homepage": "http://lib.wonju.go.kr/"
+ },
+ {
+  "libCode": "142058",
+  "libName": "원주시립태장도서관",
+  "dtlRegion": "32020",
+  "latitude": 37.3605853,
+  "longitude": 127.9537209,
+  "address": "강원특별자치도 원주시 치악로 2068",
+  "tel": "033-737-4485",
+  "homepage": "https://lib.wonju.go.kr/tj/"
+ },
+ {
+  "libCode": "142001",
+  "libName": "강원특별자치도교육청 강릉교육문화관",
+  "dtlRegion": "32030",
+  "latitude": 37.745942,
+  "longitude": 128.9000051,
+  "address": "강원특별자치도 강릉시 노암등길 37-1",
+  "tel": "033-640-9941",
+  "homepage": "https://lib.gwe.go.kr/gnecc"
+ },
+ {
+  "libCode": "142006",
+  "libName": "강원특별자치도교육청 명주교육도서관",
+  "dtlRegion": "32030",
+  "latitude": 37.8867734,
+  "longitude": 128.8263907,
+  "address": "강원특별자치도 강릉시 주문진읍 해안3길 11",
+  "tel": "033-660-6907",
+  "homepage": "https://lib.gwe.go.kr/mjlib"
+ },
+ {
+  "libCode": "142089",
+  "libName": "강원특별자치도교육청 동해교육도서관",
+  "dtlRegion": "32040",
+  "latitude": 37.5384865,
+  "longitude": 129.109787,
+  "address": "강원특별자치도 동해시 부곡5길 22",
+  "tel": "033-533-4436",
+  "homepage": "https://lib.gwe.go.kr/dhlib"
+ },
+ {
+  "libCode": "142121",
+  "libName": "동해시립꿈빛마루도서관",
+  "dtlRegion": "32040",
+  "latitude": 37.5245099,
+  "longitude": 129.1123966,
+  "address": "강원특별자치도 동해시 천곡로 114",
+  "tel": "033-530-2501",
+  "homepage": "https://www.donghaelib.go.kr"
+ },
+ {
+  "libCode": "142034",
+  "libName": "동해시립발한도서관",
+  "dtlRegion": "32040",
+  "latitude": 37.5482038,
+  "longitude": 129.1059792,
+  "address": "강원특별자치도 동해시 해안로 535",
+  "tel": "033-530-2480",
+  "homepage": "http://donghaelib.go.kr"
+ },
+ {
+  "libCode": "142037",
+  "libName": "동해시립북삼도서관",
+  "dtlRegion": "32040",
+  "latitude": 37.4926885,
+  "longitude": 129.1044104,
+  "address": "강원특별자치도 동해시 효자로 649",
+  "tel": "033-530-2490",
+  "homepage": "http://donghaelib.go.kr"
+ },
+ {
+  "libCode": "142057",
+  "libName": "등대작은도서관",
+  "dtlRegion": "32040",
+  "latitude": 37.5586983,
+  "longitude": 129.114202,
+  "address": "강원특별자치도 동해시 논골길 78, 2층",
+  "tel": "033-535-5162",
+  "homepage": "http://donghaelib.go.kr"
+ },
+ {
+  "libCode": "142051",
+  "libName": "무릉작은도서관",
+  "dtlRegion": "32040",
+  "latitude": 37.4882653,
+  "longitude": 129.0682535,
+  "address": "강원특별자치도 동해시 무릉1길 4, 3층",
+  "tel": "033-534-8811",
+  "homepage": "http://donghaelib.go.kr"
+ },
+ {
+  "libCode": "142056",
+  "libName": "이도작은도서관",
+  "dtlRegion": "32040",
+  "latitude": 37.4800496,
+  "longitude": 129.1088441,
+  "address": "강원특별자치도 동해시 이원길 151",
+  "tel": "033-521-5163",
+  "homepage": "http://donghaelib.go.kr"
+ },
+ {
+  "libCode": "142023",
+  "libName": "강원특별자치도교육청 태백교육도서관",
+  "dtlRegion": "32050",
+  "latitude": 37.1578745,
+  "longitude": 128.989316,
+  "address": "강원특별자치도 태백시 태백로 1126",
+  "tel": "033-553-1237",
+  "homepage": "https://lib.gwe.go.kr/tblib"
+ },
+ {
+  "libCode": "142030",
+  "libName": "태백시립도서관",
+  "dtlRegion": "32050",
+  "latitude": 37.0996919,
+  "longitude": 129.0219603,
+  "address": "강원특별자치도 태백시 평화길 12",
+  "tel": "033-550-2755",
+  "homepage": "https://www.taebaek.go.kr/lib"
+ },
+ {
+  "libCode": "142112",
+  "libName": "태백시립산소드림도서관",
+  "dtlRegion": "32050",
+  "latitude": 37.1798638,
+  "longitude": 128.9848913,
+  "address": "강원특별자치도 태백시 장수길 33",
+  "tel": "033-550-2757",
+  "homepage": "https://www.taebaek.go.kr/lib"
+ },
+ {
+  "libCode": "142010",
+  "libName": "강원특별자치도교육청 속초교육도서관",
+  "dtlRegion": "32060",
+  "latitude": 38.2026986,
+  "longitude": 128.5804605,
+  "address": "강원특별자치도 속초시 번영로 15",
+  "tel": "033-636-1495",
+  "homepage": "https://lib.gwe.go.kr/sclib"
+ },
+ {
+  "libCode": "142009",
+  "libName": "강원특별자치도교육청 속초교육문화관",
+  "dtlRegion": "32060",
+  "latitude": 38.2063896,
+  "longitude": 128.5861305,
+  "address": "강원특별자치도 속초시 번영로 82",
+  "tel": "033-630-0204",
+  "homepage": "https://lib.gwe.go.kr/sokecc"
+ },
+ {
+  "libCode": "142106",
+  "libName": "속초시립도서관",
+  "dtlRegion": "32060",
+  "latitude": 38.186751,
+  "longitude": 128.5908462,
+  "address": "강원특별자치도 속초시 조양로 89",
+  "tel": "033-631-1443",
+  "homepage": "http://library.sokcho.go.kr"
+ },
+ {
+  "libCode": "142131",
+  "libName": "속초어린이영어도서관",
+  "dtlRegion": "32060",
+  "latitude": 38.1940142,
+  "longitude": 128.5849848,
+  "address": "강원특별자치도 속초시 엑스포로 132",
+  "tel": "033-635-0351",
+  "homepage": "https://library.sokcho.go.kr/eng"
+ },
+ {
+  "libCode": "742005",
+  "libName": "풀이음작은도서관",
+  "dtlRegion": "32060",
+  "latitude": 38.2053951,
+  "longitude": 128.572028,
+  "address": "강원특별자치도 속초시 미시령로3337번길 6-15",
+  "tel": "033-636-1484",
+  "homepage": "https://library.sokcho.go.kr/"
+ },
+ {
+  "libCode": "142008",
+  "libName": "강원특별자치도교육청 삼척교육문화관",
+  "dtlRegion": "32070",
+  "latitude": 37.445145,
+  "longitude": 129.1650073,
+  "address": "강원특별자치도 삼척시 진주로 48-41",
+  "tel": "종합자료실: 033-570-5530~1 / 어린이자료실: 033-570-5533~4 / 문화강좌: 033-570-5522~3",
+  "homepage": "https://lib.gwe.go.kr/samecc"
+ },
+ {
+  "libCode": "142025",
+  "libName": "강원특별자치도교육청 홍천교육도서관",
+  "dtlRegion": "32510",
+  "latitude": 37.6916857,
+  "longitude": 127.8839978,
+  "address": "강원특별자치도 홍천군 홍천읍 꽃뫼로 93",
+  "tel": "033-434-3236",
+  "homepage": "https://lib.gwe.go.kr/hclib"
+ },
+ {
+  "libCode": "142027",
+  "libName": "강원특별자치도교육청 횡성교육도서관",
+  "dtlRegion": "32520",
+  "latitude": 37.4871586,
+  "longitude": 127.9795054,
+  "address": "강원특별자치도 횡성군 횡성읍 교항로 32",
+  "tel": "033-344-6591",
+  "homepage": "https://lib.gwe.go.kr/hslib"
+ },
+ {
+  "libCode": "142013",
+  "libName": "강원특별자치도교육청 영월교육도서관",
+  "dtlRegion": "32530",
+  "latitude": 37.1802997,
+  "longitude": 128.4588221,
+  "address": "강원특별자치도 영월군 영월읍 영월로 1914-7",
+  "tel": "033-373-9315",
+  "homepage": "https://lib.gwe.go.kr/ywlib"
+ },
+ {
+  "libCode": "142024",
+  "libName": "강원특별자치도교육청 평창교육도서관",
+  "dtlRegion": "32540",
+  "latitude": 37.3696066,
+  "longitude": 128.3943975,
+  "address": "강원특별자치도 평창군 평창읍 평창중앙로 83-17",
+  "tel": "033-332-2615",
+  "homepage": "https://lib.gwe.go.kr/pclib"
+ },
+ {
+  "libCode": "142115",
+  "libName": "평창군립대관령도서관",
+  "dtlRegion": "32540",
+  "latitude": 37.7091321,
+  "longitude": 128.6860708,
+  "address": "강원특별자치도 평창군 대관령면 대관령로 83-2",
+  "tel": "033-330-2847",
+  "homepage": "http://www.pc.go.kr/lib"
+ },
+ {
+  "libCode": "142042",
+  "libName": "평창군립대화도서관",
+  "dtlRegion": "32540",
+  "latitude": 37.5014012,
+  "longitude": 128.4576694,
+  "address": "강원특별자치도 평창군 대화면 남산2길 27",
+  "tel": "033-330-2549",
+  "homepage": "http://www.pc.go.kr/lib"
+ },
+ {
+  "libCode": "142097",
+  "libName": "평창군립봉평도서관",
+  "dtlRegion": "32540",
+  "latitude": 37.6161406,
+  "longitude": 128.3793607,
+  "address": "강원특별자치도 평창군 봉평면 기풍4길 10",
+  "tel": "033-330-2826",
+  "homepage": "http://www.pc.go.kr/lib"
+ },
+ {
+  "libCode": "142036",
+  "libName": "평창군립진부도서관",
+  "dtlRegion": "32540",
+  "latitude": 37.6352994,
+  "longitude": 128.5543606,
+  "address": "강원특별자치도 평창군 진부면 석두로 12-8",
+  "tel": "033-330-2821",
+  "homepage": "http://www.pc.go.kr/lib"
+ },
+ {
+  "libCode": "142017",
+  "libName": "강원특별자치도교육청 정선교육도서관",
+  "dtlRegion": "32550",
+  "latitude": 37.3782494,
+  "longitude": 128.6613918,
+  "address": "강원특별자치도 정선군 정선읍 봉양4길 9",
+  "tel": "033-563-5330",
+  "homepage": "https://lib.gwe.go.kr/jslib"
+ },
+ {
+  "libCode": "142035",
+  "libName": "사북공공도서관",
+  "dtlRegion": "32550",
+  "latitude": 37.2242124,
+  "longitude": 128.824665,
+  "address": "강원특별자치도 정선군 사북읍 파랑새길 33",
+  "tel": "033-592-5757",
+  "homepage": "http://www.sbl.or.kr"
+ },
+ {
+  "libCode": "142125",
+  "libName": "정선군립도서관",
+  "dtlRegion": "32550",
+  "latitude": 37.3815122,
+  "longitude": 128.6723438,
+  "address": "강원특별자치도 정선군 정선읍 녹송2길 26",
+  "tel": "033-563-6777",
+  "homepage": "https://lib.jeongseon.go.kr"
+ },
+ {
+  "libCode": "142018",
+  "libName": "강원특별자치도교육청 철원교육도서관",
+  "dtlRegion": "32560",
+  "latitude": 38.2106209,
+  "longitude": 127.2122376,
+  "address": "강원특별자치도 철원군 철원읍 금학로273번길 21-14",
+  "tel": "033-455-6928",
+  "homepage": "https://lib.gwe.go.kr/cwlib"
+ },
+ {
+  "libCode": "142026",
+  "libName": "강원특별자치도교육청 화천교육도서관",
+  "dtlRegion": "32570",
+  "latitude": 38.1074923,
+  "longitude": 127.7042923,
+  "address": "강원특별자치도 화천군 화천읍 상승로3길 22",
+  "tel": "033-441-6343",
+  "homepage": "https://lib.gwe.go.kr/hwlib"
+ },
+ {
+  "libCode": "142011",
+  "libName": "강원특별자치도교육청 양구교육도서관",
+  "dtlRegion": "32580",
+  "latitude": 38.101864,
+  "longitude": 127.9874258,
+  "address": "강원특별자치도 양구군 양구읍 우정로119번길 30",
+  "tel": "033-482-0284",
+  "homepage": "https://lib.gwe.go.kr/yglib"
+ },
+ {
+  "libCode": "142016",
+  "libName": "강원특별자치도교육청 인제교육도서관",
+  "dtlRegion": "32590",
+  "latitude": 38.0702268,
+  "longitude": 128.1706713,
+  "address": "강원특별자치도 인제군 인제읍 인제로193번길 15-1",
+  "tel": "033-460-1077",
+  "homepage": "https://lib.gwe.go.kr/ijlib"
+ },
+ {
+  "libCode": "142003",
+  "libName": "강원특별자치도교육청 고성교육도서관",
+  "dtlRegion": "32600",
+  "latitude": 38.4392611,
+  "longitude": 128.4500889,
+  "address": "강원특별자치도 고성군 거진읍 거탄진로29번길 7",
+  "tel": "033-682-4886",
+  "homepage": "https://lib.gwe.go.kr/gslib"
+ },
+ {
+  "libCode": "142012",
+  "libName": "강원특별자치도교육청 양양교육도서관",
+  "dtlRegion": "32610",
+  "latitude": 38.0758946,
+  "longitude": 128.618285,
+  "address": "강원특별자치도 양양군 양양읍 남문로 50",
+  "tel": "033-672-2679",
+  "homepage": "https://lib.gwe.go.kr/yylib"
+ }
+]

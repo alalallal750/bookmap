@@ -1,0 +1,3999 @@
+[
+ {
+  "libCode": "141010",
+  "libName": "경기도교육청중앙도서관",
+  "dtlRegion": "31011",
+  "latitude": 37.2979705,
+  "longitude": 127.0232861,
+  "address": "경기도 수원시 장안구 조원로 18",
+  "tel": "031-240-4064",
+  "homepage": "https://lib.goe.go.kr/gg/"
+ },
+ {
+  "libCode": "141537",
+  "libName": "수원시립대추골도서관",
+  "dtlRegion": "31011",
+  "latitude": 37.3066694,
+  "longitude": 127.008064,
+  "address": "경기도 수원시 장안구 수일로 164",
+  "tel": "031-5191-1377",
+  "homepage": "https://www.suwonlib.go.kr/dcg/"
+ },
+ {
+  "libCode": "141092",
+  "libName": "수원시립북수원도서관",
+  "dtlRegion": "31011",
+  "latitude": 37.2976867,
+  "longitude": 126.9883,
+  "address": "경기도 수원시 장안구 만석로 65",
+  "tel": "031-5191-1365",
+  "homepage": "https://www.suwonlib.go.kr/buk/"
+ },
+ {
+  "libCode": "141085",
+  "libName": "수원시립슬기샘어린이도서관",
+  "dtlRegion": "31011",
+  "latitude": 37.2973777,
+  "longitude": 126.9993464,
+  "address": "경기도 수원시 장안구 송정로 9",
+  "tel": "031-242-6633",
+  "homepage": "https://www.suwonlib.go.kr"
+ },
+ {
+  "libCode": "141557",
+  "libName": "수원시립일월도서관",
+  "dtlRegion": "31011",
+  "latitude": 37.2868358,
+  "longitude": 126.9780895,
+  "address": "경기도 수원시 장안구 일월천로77",
+  "tel": "031-5191-1395",
+  "homepage": "https://www.suwonlib.go.kr/iw/"
+ },
+ {
+  "libCode": "141141",
+  "libName": "경기도교육청평생학습관",
+  "dtlRegion": "31012",
+  "latitude": 37.2522357,
+  "longitude": 127.0321226,
+  "address": "경기도 수원시 권선구 권중로 55",
+  "tel": "031-259-1029",
+  "homepage": "https://lib.goe.go.kr/gglec/"
+ },
+ {
+  "libCode": "141550",
+  "libName": "수원시립버드내도서관",
+  "dtlRegion": "31012",
+  "latitude": 37.2569221,
+  "longitude": 127.01497,
+  "address": "경기도 수원시 권선구 세권로 94번길 29",
+  "tel": "031-5191-1350",
+  "homepage": "https://www.suwonlib.go.kr/bdn/"
+ },
+ {
+  "libCode": "141093",
+  "libName": "수원시립서수원지식정보도서관",
+  "dtlRegion": "31012",
+  "latitude": 37.2732139,
+  "longitude": 126.97201,
+  "address": "경기도 수원시 권선구 탑동로57번길 35",
+  "tel": "031-5191-1323",
+  "homepage": "https://www.suwonlib.go.kr/seo/"
+ },
+ {
+  "libCode": "141086",
+  "libName": "수원시립지혜샘어린이도서관",
+  "dtlRegion": "31012",
+  "latitude": 37.24878,
+  "longitude": 127.0406181,
+  "address": "경기도 수원시 권선구 동탄원천로 818",
+  "tel": "031-225-5566",
+  "homepage": "https://www.suwonlib.go.kr/jkid/"
+ },
+ {
+  "libCode": "141542",
+  "libName": "수원시립한림도서관",
+  "dtlRegion": "31012",
+  "latitude": 37.2375562,
+  "longitude": 127.024833,
+  "address": "경기도 수원시 권선구 동수원로25번길 32-110",
+  "tel": "031-5191-1333",
+  "homepage": "https://www.suwonlib.go.kr/hl/"
+ },
+ {
+  "libCode": "141552",
+  "libName": "수원시립호매실도서관",
+  "dtlRegion": "31012",
+  "latitude": 37.2663884,
+  "longitude": 126.957947,
+  "address": "경기도 수원시 권선구 칠보로 169",
+  "tel": "031-5191-1307",
+  "homepage": "https://www.suwonlib.go.kr/hms/"
+ },
+ {
+  "libCode": "141107",
+  "libName": "수원시립희망샘도서관",
+  "dtlRegion": "31012",
+  "latitude": 37.2477413,
+  "longitude": 126.9728911,
+  "address": "경기도 수원시 매송고색로 620",
+  "tel": "031-291-6942",
+  "homepage": "https://www.suwonlib.go.kr/swhope"
+ },
+ {
+  "libCode": "141025",
+  "libName": "수원시립선경도서관",
+  "dtlRegion": "31013",
+  "latitude": 37.2839131,
+  "longitude": 127.010475,
+  "address": "경기도 수원시 팔달구 신풍로23번길 68",
+  "tel": "031-5191-1251",
+  "homepage": "https://www.suwonlib.go.kr/sk/"
+ },
+ {
+  "libCode": "141024",
+  "libName": "수원시립중앙도서관",
+  "dtlRegion": "31013",
+  "latitude": 37.2735905,
+  "longitude": 127.012107,
+  "address": "경기도 수원시 팔달구 팔달산로 318",
+  "tel": "031-5191-1268",
+  "homepage": "https://www.suwonlib.go.kr/ct/"
+ },
+ {
+  "libCode": "141549",
+  "libName": "수원시립창룡도서관",
+  "dtlRegion": "31013",
+  "latitude": 37.2908387,
+  "longitude": 127.027625,
+  "address": "경기도 수원시 팔달구 월드컵로 381번길 36",
+  "tel": "031-5191-1280",
+  "homepage": "https://www.suwonlib.go.kr/cy/"
+ },
+ {
+  "libCode": "141064",
+  "libName": "수원시립한아름도서관",
+  "dtlRegion": "31013",
+  "latitude": 37.2741231,
+  "longitude": 127.0348936,
+  "address": "경기도 수원시 팔달구 권광로 293",
+  "tel": "031-218-0322",
+  "homepage": "https://www.suwonlib.go.kr/sycc"
+ },
+ {
+  "libCode": "141572",
+  "libName": "수원시립화서다산도서관",
+  "dtlRegion": "31013",
+  "latitude": 37.2847561,
+  "longitude": 126.9966581,
+  "address": "경기도 수원시 팔달구 화양로68번길 7-35",
+  "tel": "031-5191-1292",
+  "homepage": "http://www.suwonlib.go.kr/hd/"
+ },
+ {
+  "libCode": "141595",
+  "libName": "수원시립광교푸른숲도서관",
+  "dtlRegion": "31014",
+  "latitude": 37.2753925,
+  "longitude": 127.0674623,
+  "address": "경기도 수원시 영통구 광교호수로 131",
+  "tel": "031-5191-1457",
+  "homepage": "https://www.suwonlib.go.kr/gps/"
+ },
+ {
+  "libCode": "141551",
+  "libName": "수원시립광교홍재도서관",
+  "dtlRegion": "31014",
+  "latitude": 37.3030711,
+  "longitude": 127.047418,
+  "address": "경기도 수원시 영통구 대학로 88",
+  "tel": "031-5191-1413",
+  "homepage": "https://www.suwonlib.go.kr/gh/"
+ },
+ {
+  "libCode": "141612",
+  "libName": "수원시립망포글빛도서관",
+  "dtlRegion": "31014",
+  "latitude": 37.2406408,
+  "longitude": 127.0438075,
+  "address": "경기도 수원시 영통구 망포로 100",
+  "tel": "031-5191-1484",
+  "homepage": "https://www.suwonlib.go.kr/mpgb"
+ },
+ {
+  "libCode": "141596",
+  "libName": "수원시립매여울도서관",
+  "dtlRegion": "31014",
+  "latitude": 37.2596306,
+  "longitude": 127.042358,
+  "address": "경기도 수원시 영통구 효원로 415",
+  "tel": "031-5191-1474 ",
+  "homepage": "https://www.suwonlib.go.kr/myu"
+ },
+ {
+  "libCode": "141087",
+  "libName": "수원시립바른샘어린이도서관",
+  "dtlRegion": "31014",
+  "latitude": 37.2688292,
+  "longitude": 127.0524309,
+  "address": "경기도 수원시 영통구 매봉로 10",
+  "tel": "031-216-9933",
+  "homepage": "https://www.suwonlib.go.kr/bkid/"
+ },
+ {
+  "libCode": "141138",
+  "libName": "수원시립반달어린이도서관",
+  "dtlRegion": "31014",
+  "latitude": 37.2505935,
+  "longitude": 127.0773347,
+  "address": "경기도 수원시 영통구 반달로 45",
+  "tel": "031-201-8349",
+  "homepage": "https://www.suwonlib.go.kr/bandal/"
+ },
+ {
+  "libCode": "141061",
+  "libName": "수원시립영통도서관",
+  "dtlRegion": "31014",
+  "latitude": 37.2571838,
+  "longitude": 127.072096,
+  "address": "경기도 수원시 영통구 청명로 151",
+  "tel": "031-228-4758, 4755, 4756",
+  "homepage": "https://www.suwonlib.go.kr/yt/"
+ },
+ {
+  "libCode": "141301",
+  "libName": "수원시립태장마루도서관",
+  "dtlRegion": "31014",
+  "latitude": 37.2388399,
+  "longitude": 127.051017,
+  "address": "경기도 수원시 영통구 태장로 46",
+  "tel": "031-5191-1441",
+  "homepage": "https://www.suwonlib.go.kr/tm/"
+ },
+ {
+  "libCode": "141008",
+  "libName": "경기도교육청성남도서관",
+  "dtlRegion": "31021",
+  "latitude": 37.2979705,
+  "longitude": 127.0232861,
+  "address": "경기도 성남시 수정구 공원로370번길 26",
+  "tel": "031-730-3500",
+  "homepage": "https://lib.goe.go.kr/sn/index.do"
+ },
+ {
+  "libCode": "141665",
+  "libName": "성남시 고등도서관",
+  "dtlRegion": "31021",
+  "latitude": 37.4316527,
+  "longitude": 127.1032074,
+  "address": "경기도 성남시 수정구 대왕판교로 985",
+  "tel": "031-729-1730",
+  "homepage": "https://www.snlib.go.kr/gd/index.do"
+ },
+ {
+  "libCode": "741042",
+  "libName": "성남시 논골도서관",
+  "dtlRegion": "31021",
+  "latitude": 37.4560537,
+  "longitude": 127.1596671,
+  "address": "경기도 성남시 수정구 논골로23번길 2",
+  "tel": "031-729-4440",
+  "homepage": "https://www.snlib.go.kr/ng"
+ },
+ {
+  "libCode": "141623",
+  "libName": "성남시 복정도서관",
+  "dtlRegion": "31021",
+  "latitude": 37.5231244,
+  "longitude": 127.0313267,
+  "address": "경기도 성남시 수정구 복정로118번길 7",
+  "tel": "031-729-8710",
+  "homepage": "https://www.snlib.go.kr/bj"
+ },
+ {
+  "libCode": "141060",
+  "libName": "성남시 수정도서관",
+  "dtlRegion": "31021",
+  "latitude": 37.4522753,
+  "longitude": 127.1531016,
+  "address": "경기도 성남시 수정구 수정로332번길 32",
+  "tel": "031-743-9600",
+  "homepage": "https://www.snlib.go.kr/sj"
+ },
+ {
+  "libCode": "141628",
+  "libName": "성남시 위례도서관",
+  "dtlRegion": "31021",
+  "latitude": 37.4752772,
+  "longitude": 127.1417456,
+  "address": "경기도 성남시 수정구 위례순환로 125, 3·4층",
+  "tel": "031-729-8950",
+  "homepage": "https://snlib.go.kr/wr"
+ },
+ {
+  "libCode": "141053",
+  "libName": "성남시 중원도서관",
+  "dtlRegion": "31022",
+  "latitude": 37.4302108,
+  "longitude": 127.1401167,
+  "address": "경기도 성남시 중원구 원터로17번길 46",
+  "tel": "031-752-3913",
+  "homepage": "https://www.snlib.go.kr/jw"
+ },
+ {
+  "libCode": "141258",
+  "libName": "성남시 중원어린이도서관",
+  "dtlRegion": "31022",
+  "latitude": 37.4475657,
+  "longitude": 127.1631352,
+  "address": "경기도 성남시 중원구 산성대로408번길 42",
+  "tel": "031-729-4350",
+  "homepage": "https://www.snlib.go.kr/cjw"
+ },
+ {
+  "libCode": "141588",
+  "libName": "성남시 해오름도서관",
+  "dtlRegion": "31022",
+  "latitude": 37.428659,
+  "longitude": 127.153577,
+  "address": "경기도 성남시 중원구 희망로 403",
+  "tel": "031-729-8770",
+  "homepage": "https://www.snlib.go.kr/hor"
+ },
+ {
+  "libCode": "141142",
+  "libName": "성남시 구미도서관",
+  "dtlRegion": "31023",
+  "latitude": 37.3454424,
+  "longitude": 127.1077636,
+  "address": "경기도 성남시 분당구 미금일로 105",
+  "tel": "031-729-4700",
+  "homepage": "https://www.snlib.go.kr/gm"
+ },
+ {
+  "libCode": "141518",
+  "libName": "성남시 무지개도서관",
+  "dtlRegion": "31023",
+  "latitude": 37.3395814,
+  "longitude": 127.1208293,
+  "address": "경기도 성남시 분당구 구미로 111",
+  "tel": "031-729-4773",
+  "homepage": "https://www.snlib.go.kr/mjg"
+ },
+ {
+  "libCode": "141052",
+  "libName": "성남시 분당도서관",
+  "dtlRegion": "31023",
+  "latitude": 37.3580965,
+  "longitude": 127.1165676,
+  "address": "경기도 성남시 분당구 불정로 110",
+  "tel": "031-729-4800",
+  "homepage": "https://www.snlib.go.kr/bd"
+ },
+ {
+  "libCode": "141601",
+  "libName": "성남시 서현도서관",
+  "dtlRegion": "31023",
+  "latitude": 37.3807258,
+  "longitude": 127.1290412,
+  "address": "경기도 성남시 분당구 중앙공원로 77",
+  "tel": "031-729-8700",
+  "homepage": "https://www.snlib.go.kr/sh"
+ },
+ {
+  "libCode": "141672",
+  "libName": "성남시 수내도서관",
+  "dtlRegion": "31023",
+  "latitude": 37.3653573,
+  "longitude": 127.1223623,
+  "address": "경기도 성남시 분당구 불정로 272",
+  "tel": "031-729-1717",
+  "homepage": "https://www.snlib.go.kr/sn/index.do"
+ },
+ {
+  "libCode": "141484",
+  "libName": "성남시 운중도서관",
+  "dtlRegion": "31023",
+  "latitude": 37.3899728,
+  "longitude": 127.0750756,
+  "address": "경기도 성남시 분당구 판교원로81번길 9",
+  "tel": "031-729-4370",
+  "homepage": "https://www.snlib.go.kr/uj"
+ },
+ {
+  "libCode": "141069",
+  "libName": "성남시 중앙도서관",
+  "dtlRegion": "31023",
+  "latitude": 37.3985507,
+  "longitude": 127.1068146,
+  "address": "경기도 성남시 분당구 판교로 546",
+  "tel": "031-729-4500",
+  "homepage": "https://www.snlib.go.kr/ct"
+ },
+ {
+  "libCode": "141649",
+  "libName": "성남시 책테마파크도서관",
+  "dtlRegion": "31023",
+  "latitude": 37.3812917,
+  "longitude": 127.1511409,
+  "address": "경기도 성남시 분당구 문정로 145",
+  "tel": "031-729-1765",
+  "homepage": "https://www.snlib.go.kr/bt"
+ },
+ {
+  "libCode": "141231",
+  "libName": "성남시 판교도서관",
+  "dtlRegion": "31023",
+  "latitude": 37.3918506,
+  "longitude": 127.0908622,
+  "address": "경기도 성남시 분당구 판교공원로4길 27",
+  "tel": "031-729-4900",
+  "homepage": "https://www.snlib.go.kr/pg"
+ },
+ {
+  "libCode": "141548",
+  "libName": "성남시 판교어린이도서관",
+  "dtlRegion": "31023",
+  "latitude": 37.3897865,
+  "longitude": 127.1098561,
+  "address": "경기도 성남시 분당구 판교역로 75",
+  "tel": "031-729-4394",
+  "homepage": "https://www.snlib.go.kr/cpg"
+ },
+ {
+  "libCode": "141597",
+  "libName": "가재울도서관",
+  "dtlRegion": "31030",
+  "latitude": 37.7483818,
+  "longitude": 127.0441896,
+  "address": "경기도 의정부시 평화로 633",
+  "tel": "031-828-8660",
+  "homepage": "http://www.uilib.go.kr/"
+ },
+ {
+  "libCode": "141106",
+  "libName": "경기도교육청의정부도서관",
+  "dtlRegion": "31030",
+  "latitude": 37.763362,
+  "longitude": 127.036438,
+  "address": "경기도 의정부시 체육로 265-25",
+  "tel": "031-836-9504",
+  "homepage": "https://lib.goe.go.kr/ujb/index.do"
+ },
+ {
+  "libCode": "141131",
+  "libName": "의정부과학도서관",
+  "dtlRegion": "31030",
+  "latitude": 37.744874,
+  "longitude": 127.0690533,
+  "address": "경기도 의정부시 추동로124번길 52",
+  "tel": "031-828-8670",
+  "homepage": "http://www.uilib.go.kr/"
+ },
+ {
+  "libCode": "141627",
+  "libName": "의정부미술도서관",
+  "dtlRegion": "31030",
+  "latitude": 37.7533135,
+  "longitude": 127.1073975,
+  "address": "경기도 의정부시 민락로 248",
+  "tel": "031-828-8870",
+  "homepage": "https://www.uilib.go.kr"
+ },
+ {
+  "libCode": "141119",
+  "libName": "의정부영어도서관",
+  "dtlRegion": "31030",
+  "latitude": 37.7265004,
+  "longitude": 127.0426093,
+  "address": "경기도 의정부시 회룡로 79",
+  "tel": "031-828-8710",
+  "homepage": "https://www.uilib.go.kr/english/index.do"
+ },
+ {
+  "libCode": "141642",
+  "libName": "의정부음악도서관",
+  "dtlRegion": "31030",
+  "latitude": 37.7297293,
+  "longitude": 127.0552995,
+  "address": "경기도 의정부시 장곡로 280",
+  "tel": "031-828-4850",
+  "homepage": "https://www.uilib.go.kr"
+ },
+ {
+  "libCode": "141075",
+  "libName": "의정부정보도서관",
+  "dtlRegion": "31030",
+  "latitude": 37.7364786,
+  "longitude": 127.0339219,
+  "address": "경기도 의정부시 의정로 41",
+  "tel": "031-828-8700",
+  "homepage": "http://www.uilib.go.kr/"
+ },
+ {
+  "libCode": "141027",
+  "libName": "안양시립만안도서관",
+  "dtlRegion": "31041",
+  "latitude": 37.3861604,
+  "longitude": 126.9261235,
+  "address": "경기도 안양시 만안구 냉천로 51",
+  "tel": "031-8045-6167",
+  "homepage": "https://lib.anyang.go.kr/manan/index.do"
+ },
+ {
+  "libCode": "141095",
+  "libName": "안양시립박달도서관",
+  "dtlRegion": "31041",
+  "latitude": 37.4023867,
+  "longitude": 126.9035499,
+  "address": "경기도 안양시 만안구 박달로 459",
+  "tel": "031-8045-6183",
+  "homepage": "https://lib.anyang.go.kr/bakdal/index.do"
+ },
+ {
+  "libCode": "141573",
+  "libName": "안양시립삼덕도서관",
+  "dtlRegion": "31041",
+  "latitude": 37.396052,
+  "longitude": 126.9151635,
+  "address": "경기도 안양시 만안구 병목안로 58",
+  "tel": "031-8045-6350",
+  "homepage": "https://lib.anyang.go.kr/samdeok/index.do"
+ },
+ {
+  "libCode": "141077",
+  "libName": "안양시립석수도서관",
+  "dtlRegion": "31041",
+  "latitude": 37.4115139,
+  "longitude": 126.9031152,
+  "address": "경기도 안양시 만안구 양화로217번길 34",
+  "tel": "031-8045-6104",
+  "homepage": "https://lib.anyang.go.kr/seoksu/index.do"
+ },
+ {
+  "libCode": "141669",
+  "libName": "안양시립큰샘어린이도서관",
+  "dtlRegion": "31041",
+  "latitude": 37.3881451,
+  "longitude": 126.9356564,
+  "address": "경기도 안양시 만안구 덕천로 102",
+  "tel": "031-8045-6450",
+  "homepage": "https://lib.anyang.go.kr/keunsaem/index.do"
+ },
+ {
+  "libCode": "141571",
+  "libName": "안양시립관양도서관",
+  "dtlRegion": "31042",
+  "latitude": 37.4110138,
+  "longitude": 126.9703115,
+  "address": "경기도 안양시 동안구 동편로 124",
+  "tel": "031-8045-6321",
+  "homepage": "https://lib.anyang.go.kr/gwanyang/index.do"
+ },
+ {
+  "libCode": "141538",
+  "libName": "안양시립벌말도서관",
+  "dtlRegion": "31042",
+  "latitude": 37.3938077,
+  "longitude": 126.9764148,
+  "address": "경기도 안양시 동안구 흥안대로434번길 19-27",
+  "tel": "031-8045-6301",
+  "homepage": "https://lib.anyang.go.kr/beolmal/index.do"
+ },
+ {
+  "libCode": "141263",
+  "libName": "안양시립비산도서관",
+  "dtlRegion": "31042",
+  "latitude": 37.3990721,
+  "longitude": 126.9376412,
+  "address": "경기도 안양시 동안구 관악대로 123",
+  "tel": "031-8045-6243",
+  "homepage": "https://lib.anyang.go.kr/bisan/index.do"
+ },
+ {
+  "libCode": "141132",
+  "libName": "안양시립어린이도서관",
+  "dtlRegion": "31042",
+  "latitude": 37.3849431,
+  "longitude": 126.9545823,
+  "address": "경기도 안양시 동안구 동안로 66",
+  "tel": "031-8045-6281",
+  "homepage": "https://lib.anyang.go.kr/child/index.do"
+ },
+ {
+  "libCode": "141036",
+  "libName": "안양시립평촌도서관",
+  "dtlRegion": "31042",
+  "latitude": 37.395758,
+  "longitude": 126.9576926,
+  "address": "경기도 안양시 동안구 동안로 66, 2층",
+  "tel": "031-8045-6204, 6223",
+  "homepage": "https://lib.anyang.go.kr/pyeongchon/index.do"
+ },
+ {
+  "libCode": "141047",
+  "libName": "안양시립호계도서관",
+  "dtlRegion": "31042",
+  "latitude": 37.3830706,
+  "longitude": 126.9505071,
+  "address": "경기도 안양시 동안구 경수대로685번길 26",
+  "tel": "031-8045-6261",
+  "homepage": "https://lib.anyang.go.kr/hogye/index.do"
+ },
+ {
+  "libCode": "741001",
+  "libName": "글마루작은도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.4789141,
+  "longitude": 126.796399,
+  "address": "경기도 부천시 경인옛로38번길 41",
+  "tel": "032-346-3451",
+  "homepage": "https://www.bcl.go.kr/"
+ },
+ {
+  "libCode": "141215",
+  "libName": "꿈꾸는새싹작은도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.52592,
+  "longitude": 126.79781,
+  "address": "경기도 부천시 성오로149번길 18, 3층",
+  "tel": "032-679-8004",
+  "homepage": "https://www.bcl.go.kr/"
+ },
+ {
+  "libCode": "141182",
+  "libName": "도란도란작은도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.52704,
+  "longitude": 126.82495,
+  "address": "경기도 부천시 고리울로 79 ",
+  "tel": "032-679-9702",
+  "homepage": "https://www.bcl.go.kr/"
+ },
+ {
+  "libCode": "141185",
+  "libName": "민들레홀씨작은도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.50819,
+  "longitude": 126.75087,
+  "address": "경기도 부천시 상동로117번길 48",
+  "tel": "032-322-9702",
+  "homepage": "https://www.bcl.go.kr"
+ },
+ {
+  "libCode": "141186",
+  "libName": "복사꽃필무렵작은도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.480664,
+  "longitude": 126.780105,
+  "address": "경기도 부천시 성주로249번길 19, 2층",
+  "tel": "032-665-6053",
+  "homepage": "http://www.bcl.go.kr/"
+ },
+ {
+  "libCode": "141065",
+  "libName": "부천시립꿈빛도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.50817,
+  "longitude": 126.773731,
+  "address": "경기도 부천시 신흥로275번길 19",
+  "tel": "032-625-4622",
+  "homepage": "https://www.bcl.go.kr"
+ },
+ {
+  "libCode": "141248",
+  "libName": "부천시립꿈여울도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.5155641,
+  "longitude": 126.805529,
+  "address": "경기도 부천시 까치로 103",
+  "tel": "032-625-4688",
+  "homepage": "http://www.bcl.go.kr/"
+ },
+ {
+  "libCode": "141583",
+  "libName": "부천시립도당도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.5191835,
+  "longitude": 126.7919202,
+  "address": "경기도 부천시 부천로 360",
+  "tel": "032-625-4500",
+  "homepage": "http://www.bcl.go.kr/"
+ },
+ {
+  "libCode": "141315",
+  "libName": "부천시립동화도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.4949031,
+  "longitude": 126.7543519,
+  "address": "경기도 부천시 장말로 107",
+  "tel": "032-625-4650",
+  "homepage": "http://www.bcl.go.kr/"
+ },
+ {
+  "libCode": "141652",
+  "libName": "부천시립별빛마루도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.4651126,
+  "longitude": 126.8199948,
+  "address": "경기도 부천시 옥길로 105",
+  "tel": "032-625-9780",
+  "homepage": "https://www.bcl.go.kr"
+ },
+ {
+  "libCode": "141056",
+  "libName": "부천시립북부도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.5205458,
+  "longitude": 126.794658,
+  "address": "경기도 부천시 삼작로301번길 5",
+  "tel": "032-625-4605",
+  "homepage": "http://www.bcl.go.kr/"
+ },
+ {
+  "libCode": "141321",
+  "libName": "부천시립상동도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.4900669,
+  "longitude": 126.7446997,
+  "address": "경기도 부천시 상이로 12",
+  "tel": "032-625-4705",
+  "homepage": "http://www.bcl.go.kr/"
+ },
+ {
+  "libCode": "141559",
+  "libName": "부천시립송내도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.4849885,
+  "longitude": 126.771038,
+  "address": "경기도 부천시 경인로92번길 33",
+  "tel": "032-625-4515",
+  "homepage": "http://www.bcl.go.kr/"
+ },
+ {
+  "libCode": "141651",
+  "libName": "부천시립수주도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.5255334,
+  "longitude": 126.816524,
+  "address": "경기도 부천시 고리울로8번길 77",
+  "tel": "032-625-4330",
+  "homepage": "https://www.bcl.go.kr"
+ },
+ {
+  "libCode": "141043",
+  "libName": "부천시립심곡도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.4803981,
+  "longitude": 126.783837,
+  "address": "경기도 부천시 성무로 24",
+  "tel": "032-625-4588",
+  "homepage": "http://www.bcl.go.kr/"
+ },
+ {
+  "libCode": "141603",
+  "libName": "부천시립역곡도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.4886425,
+  "longitude": 126.8026956,
+  "address": "경기도 부천시 지봉로51번길 54",
+  "tel": "032-625-4594",
+  "homepage": "http://www.bcl.go.kr/"
+ },
+ {
+  "libCode": "141660",
+  "libName": "부천시립역곡밝은도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.4841734,
+  "longitude": 126.8170313,
+  "address": "경기도 부천시 경인로 536번길 37",
+  "tel": "-",
+  "homepage": "https://www.bcl.go.kr"
+ },
+ {
+  "libCode": "141584",
+  "libName": "부천시립오정도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.528314,
+  "longitude": 126.7960717,
+  "address": "경기도 부천시 성오로 172",
+  "tel": "032-625-4106",
+  "homepage": "http://www.bcl.go.kr/"
+ },
+ {
+  "libCode": "141535",
+  "libName": "부천시립원미도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.4990095,
+  "longitude": 126.798221,
+  "address": "경기도 부천시 소사로 456",
+  "tel": "032-625-4723",
+  "homepage": "http://www.bcl.go.kr/"
+ },
+ {
+  "libCode": "141115",
+  "libName": "부천시립책마루도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.4939282,
+  "longitude": 126.770049,
+  "address": "경기도 부천시 심중로 121",
+  "tel": "032-625-4645",
+  "homepage": "http://www.bcl.go.kr/"
+ },
+ {
+  "libCode": "141151",
+  "libName": "부천시립한울빛도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.4679263,
+  "longitude": 126.796549,
+  "address": "경기도 부천시 소사로 107",
+  "tel": "032-625-4670",
+  "homepage": "http://www.bcl.go.kr/"
+ },
+ {
+  "libCode": "741223",
+  "libName": "부천행정정보도서관 시정담벼락",
+  "dtlRegion": "31050",
+  "latitude": 37.5034813,
+  "longitude": 126.7658019,
+  "address": "경기도 부천시 길주로 210",
+  "tel": "-",
+  "homepage": "https://www.bcl.go.kr/"
+ },
+ {
+  "libCode": "141198",
+  "libName": "사랑나무가족도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.50069,
+  "longitude": 126.78288,
+  "address": "경기도 부천시 계남로 336, 2층(부천시노동자종합복지관)",
+  "tel": "032-661-3034",
+  "homepage": "https://www.bcl.go.kr"
+ },
+ {
+  "libCode": "741533",
+  "libName": "상동어울마당작은도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.4888402,
+  "longitude": 126.7627195,
+  "address": "경기도 부천시 석천로16번길 50, 2층",
+  "tel": "032-612-5615",
+  "homepage": "https://www.bcl.go.kr"
+ },
+ {
+  "libCode": "741005",
+  "libName": "상동역칙칙폭폭도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.5058136,
+  "longitude": 126.753162,
+  "address": "경기도 부천시 길주로 104",
+  "tel": "032-625-4786",
+  "homepage": "http://bcsl.go.kr/"
+ },
+ {
+  "libCode": "732001",
+  "libName": "소사칙칙폭폭도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.5064378,
+  "longitude": 126.8030795,
+  "address": "경기도 부천시 원미구 소사로 284",
+  "tel": "032-625-9789",
+  "homepage": "https://www.bcl.go.kr"
+ },
+ {
+  "libCode": "741006",
+  "libName": "숲속작은도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.4997953,
+  "longitude": 126.765349,
+  "address": "경기도 부천시 소향로 162",
+  "tel": "032-625-4555",
+  "homepage": "https://www.bcl.go.kr"
+ },
+ {
+  "libCode": "641015",
+  "libName": "시온고등학교 열린작은도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.4715246,
+  "longitude": 126.805999,
+  "address": "경기도 부천시 은성로 172-20",
+  "tel": "032-340-0194",
+  "homepage": "https://www.bcl.go.kr"
+ },
+ {
+  "libCode": "741298",
+  "libName": "신중동역칙칙폭폭도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.503052,
+  "longitude": 126.77596,
+  "address": "경기도 부천시 길주로 314",
+  "tel": "032-625-4787",
+  "homepage": "https://www.bcl.go.kr"
+ },
+ {
+  "libCode": "741459",
+  "libName": "신흥어울마당작은도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.5198721,
+  "longitude": 126.7932853,
+  "address": "경기도 부천시 삼작로 109, 4~5층",
+  "tel": "032-625-4691",
+  "homepage": "https://www.bcl.go.kr"
+ },
+ {
+  "libCode": "741004",
+  "libName": "아름드리작은도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.51968,
+  "longitude": 126.76656,
+  "address": "경기도 부천시 삼작로 52",
+  "tel": "032-323-3160",
+  "homepage": "https://www.bcl.go.kr"
+ },
+ {
+  "libCode": "141211",
+  "libName": "약대신나는가족도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.51333,
+  "longitude": 126.77127,
+  "address": "경기도 부천시 수도로 44",
+  "tel": "032-682-5800",
+  "homepage": "https://www.bcl.go.kr"
+ },
+ {
+  "libCode": "741077",
+  "libName": "진말책향기작은도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.4909759,
+  "longitude": 126.780646,
+  "address": "경기도 부천시 원미구 장말로351번길 9, 2층",
+  "tel": "032-661-8366",
+  "homepage": "https://www.bcl.go.kr"
+ },
+ {
+  "libCode": "141144",
+  "libName": "해밀도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.4944602,
+  "longitude": 126.7804681,
+  "address": "경기도 부천시 옥산로10번길 4",
+  "tel": "032-650-4600",
+  "homepage": "https://www.hmlib.or.kr/library/"
+ },
+ {
+  "libCode": "141206",
+  "libName": "햇살이가득한작은도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.487325,
+  "longitude": 126.787116,
+  "address": "경기도 부천시 부천로90번길 51, 원미별마루 2층",
+  "tel": "032-652-3172",
+  "homepage": "https://www.bcl.go.kr"
+ },
+ {
+  "libCode": "141096",
+  "libName": "행복한작은도서관",
+  "dtlRegion": "31050",
+  "latitude": 37.5240083,
+  "longitude": 126.785087,
+  "address": "경기도 부천시 상오정로 10",
+  "tel": "032-679-2907",
+  "homepage": "https://www.bcl.go.kr"
+ },
+ {
+  "libCode": "141080",
+  "libName": "광명시광명도서관",
+  "dtlRegion": "31060",
+  "latitude": 37.4653018,
+  "longitude": 126.8513075,
+  "address": "경기도 광명시 원광명안로 48",
+  "tel": "02-2680-6541",
+  "homepage": "https://gmlib.gm.go.kr/"
+ },
+ {
+  "libCode": "141561",
+  "libName": "광명시소하도서관",
+  "dtlRegion": "31060",
+  "latitude": 37.4454883,
+  "longitude": 126.8880089,
+  "address": "경기도 광명시 소하일로 7",
+  "tel": "02-2680-0900",
+  "homepage": "https://gmlib.gm.go.kr/"
+ },
+ {
+  "libCode": "141613",
+  "libName": "광명시연서도서관",
+  "dtlRegion": "31060",
+  "latitude": 37.482755,
+  "longitude": 126.8646514,
+  "address": "경기도 광명시 연서일로 10",
+  "tel": "02-2680-6630",
+  "homepage": "https://gmlib.gm.go.kr"
+ },
+ {
+  "libCode": "141405",
+  "libName": "광명시철산도서관",
+  "dtlRegion": "31060",
+  "latitude": 37.4769575,
+  "longitude": 126.8723412,
+  "address": "경기도 광명시 철산로 56",
+  "tel": "02-2680-6820",
+  "homepage": "https://gmlib.gm.go.kr/"
+ },
+ {
+  "libCode": "141155",
+  "libName": "광명시충현도서관",
+  "dtlRegion": "31060",
+  "latitude": 37.4340114,
+  "longitude": 126.8847294,
+  "address": "경기도 광명시 충현로42번길 19",
+  "tel": "02-2680-6111",
+  "homepage": "https://gmlib.gm.go.kr/"
+ },
+ {
+  "libCode": "141019",
+  "libName": "광명시하안도서관",
+  "dtlRegion": "31060",
+  "latitude": 37.4676204,
+  "longitude": 126.8735159,
+  "address": "경기도 광명시 철망산로 46",
+  "tel": "02-2680-2871",
+  "homepage": "https://gmlib.gm.go.kr/"
+ },
+ {
+  "libCode": "141009",
+  "libName": "경기도교육청평택도서관",
+  "dtlRegion": "31070",
+  "latitude": 37.0730819,
+  "longitude": 127.0626649,
+  "address": "경기도 평택시 서정북로125번길 103",
+  "tel": "031-8054-8401",
+  "homepage": "https://lib.goe.go.kr/pt/"
+ },
+ {
+  "libCode": "141318",
+  "libName": "매봉작은도서관",
+  "dtlRegion": "31070",
+  "latitude": 36.996053,
+  "longitude": 127.1032486,
+  "address": "경기도 평택시 평택5로 185",
+  "tel": "031-657-6931",
+  "homepage": "https://www.ptlib.go.kr/bjsmall/index.do"
+ },
+ {
+  "libCode": "141320",
+  "libName": "서정작은도서관",
+  "dtlRegion": "31070",
+  "latitude": 37.0661624,
+  "longitude": 127.0557558,
+  "address": "경기도 평택시 서정로 202",
+  "tel": "031-611-3764",
+  "homepage": "https://www.ptlib.go.kr/sjsmall/index.do"
+ },
+ {
+  "libCode": "141319",
+  "libName": "송탄작은도서관",
+  "dtlRegion": "31070",
+  "latitude": 37.0332993,
+  "longitude": 127.0995513,
+  "address": "경기도 평택시 원칠원길 76",
+  "tel": "031-611-8917",
+  "homepage": "https://www.ptlib.go.kr/stsmall/index.do"
+ },
+ {
+  "libCode": "141598",
+  "libName": "평택시립배다리도서관",
+  "dtlRegion": "31070",
+  "latitude": 37.0104896,
+  "longitude": 127.143078,
+  "address": "경기도 평택시 죽백6로 20",
+  "tel": "031-8024-5467",
+  "homepage": "https://www.ptlib.go.kr"
+ },
+ {
+  "libCode": "141031",
+  "libName": "평택시립비전도서관",
+  "dtlRegion": "31070",
+  "latitude": 36.9958544,
+  "longitude": 127.0937084,
+  "address": "경기도 평택시 비전로 27",
+  "tel": "031-8024-5477",
+  "homepage": "https://www.ptlib.go.kr/sllib/index.do"
+ },
+ {
+  "libCode": "141589",
+  "libName": "평택시립세교도서관",
+  "dtlRegion": "31070",
+  "latitude": 37.0047507,
+  "longitude": 127.0680239,
+  "address": "경기도 평택시 은실고가길 180",
+  "tel": "031-8024-5445",
+  "homepage": "https://www.ptlib.go.kr/sglib/index.do"
+ },
+ {
+  "libCode": "141084",
+  "libName": "평택시립안중도서관",
+  "dtlRegion": "31070",
+  "latitude": 36.9896318,
+  "longitude": 126.919648,
+  "address": "경기도 평택시 안중읍 서동대로 1531",
+  "tel": "031-8024-8344",
+  "homepage": "https://www.ptlib.go.kr/ajlib/index.do"
+ },
+ {
+  "libCode": "141514",
+  "libName": "평택시립오성도서관",
+  "dtlRegion": "31070",
+  "latitude": 37.0104751,
+  "longitude": 126.980303,
+  "address": "경기도 평택시 오성면 오성새싹길 3",
+  "tel": "031-8024-8565",
+  "homepage": "https://www.ptlib.go.kr/oslib/index.do"
+ },
+ {
+  "libCode": "141513",
+  "libName": "평택시립장당도서관",
+  "dtlRegion": "31070",
+  "latitude": 37.0514017,
+  "longitude": 127.0640751,
+  "address": "경기도 평택시 장당길 116",
+  "tel": "031-8024-7465",
+  "homepage": "https://www.ptlib.go.kr/jdlib/index.do"
+ },
+ {
+  "libCode": "141103",
+  "libName": "평택시립지산초록도서관",
+  "dtlRegion": "31070",
+  "latitude": 37.0789243,
+  "longitude": 127.0603369,
+  "address": "경기도 평택시 지산로 48",
+  "tel": "031-8024-7451",
+  "homepage": "https://www.ptlib.go.kr/jslib/index.do"
+ },
+ {
+  "libCode": "141580",
+  "libName": "평택시립진위도서관",
+  "dtlRegion": "31070",
+  "latitude": 37.1067112,
+  "longitude": 127.0736811,
+  "address": "경기도 평택시 진위면 진위서로 137",
+  "tel": "031-8024-7474",
+  "homepage": "https://www.ptlib.go.kr/jwlib/index.do"
+ },
+ {
+  "libCode": "141569",
+  "libName": "평택시립청북도서관",
+  "dtlRegion": "31070",
+  "latitude": 37.017143,
+  "longitude": 126.9175348,
+  "address": "경기도 평택시 청북읍 안청로2길 60",
+  "tel": "031-8024-8580~1",
+  "homepage": "https://www.ptlib.go.kr/cbsmall/index.do"
+ },
+ {
+  "libCode": "141016",
+  "libName": "평택시립팽성도서관",
+  "dtlRegion": "31070",
+  "latitude": 36.9648641,
+  "longitude": 127.0516539,
+  "address": "경기도 평택시 팽성읍 안정로95번길 15-25",
+  "tel": "031-8024-5481",
+  "homepage": "https://www.ptlib.go.kr/pslib/index.do"
+ },
+ {
+  "libCode": "141515",
+  "libName": "포승작은도서관",
+  "dtlRegion": "31070",
+  "latitude": 36.9883653,
+  "longitude": 126.845691,
+  "address": "경기도 평택시 포승읍 여술로 47",
+  "tel": "031-8024-8570",
+  "homepage": "https://www.ptlib.go.kr/pssmall/index.do"
+ },
+ {
+  "libCode": "141089",
+  "libName": "동두천꿈나무정보도서관",
+  "dtlRegion": "31080",
+  "latitude": 37.8921183,
+  "longitude": 127.0513705,
+  "address": "경기도 동두천시 지행로 38",
+  "tel": "031-860-3281",
+  "homepage": "https://lib.ddc.go.kr/"
+ },
+ {
+  "libCode": "141022",
+  "libName": "동두천시립도서관",
+  "dtlRegion": "31080",
+  "latitude": 37.9068364,
+  "longitude": 127.0474073,
+  "address": "경기도 동두천시 상패로 60",
+  "tel": "031-860-3261",
+  "homepage": "https://lib.ddc.go.kr/"
+ },
+ {
+  "libCode": "141667",
+  "libName": "동두천오르빛도서관",
+  "dtlRegion": "31080",
+  "latitude": 37.8981436,
+  "longitude": 127.0550319,
+  "address": "경기도 동두천시 동두천로 314",
+  "tel": "031-860-2707",
+  "homepage": "https://lib.ddc.go.kr"
+ },
+ {
+  "libCode": "141190",
+  "libName": "사2동 꿈을키우는도서관",
+  "dtlRegion": "31091",
+  "latitude": 37.27974,
+  "longitude": 126.8511,
+  "address": "경기도 안산시 상록구 영화5길 15",
+  "tel": "031-417-2707",
+  "homepage": "http://lib.ansan.go.kr/smalllib"
+ },
+ {
+  "libCode": "141478",
+  "libName": "사3동작은도서관",
+  "dtlRegion": "31091",
+  "latitude": 37.29469,
+  "longitude": 126.82009,
+  "address": "경기도 안산시 상록구 해양로 8",
+  "tel": "031-481-5774",
+  "homepage": "http://lib.ansan.go.kr/smalllib"
+ },
+ {
+  "libCode": "141051",
+  "libName": "안산시 감골도서관",
+  "dtlRegion": "31091",
+  "latitude": 37.2926167,
+  "longitude": 126.8544536,
+  "address": "경기도 안산시 상록구 감골공원안길 16-1",
+  "tel": "031-481-3710",
+  "homepage": "http://lib.ansan.go.kr/gamgol"
+ },
+ {
+  "libCode": "141188",
+  "libName": "안산시 반월도서관",
+  "dtlRegion": "31091",
+  "latitude": 37.304155,
+  "longitude": 126.900016,
+  "address": "경기도 안산시 상록구 반월새싹길 39-3",
+  "tel": "031-481-2663",
+  "homepage": "http://lib.ansan.go.kr/banwol"
+ },
+ {
+  "libCode": "141482",
+  "libName": "안산시 본오도서관",
+  "dtlRegion": "31091",
+  "latitude": 37.2939804,
+  "longitude": 126.8723016,
+  "address": "경기도 안산시 상록구 각골로 49",
+  "tel": "031-481-3698",
+  "homepage": "http://lib.ansan.go.kr/bono"
+ },
+ {
+  "libCode": "141252",
+  "libName": "안산시 부곡도서관",
+  "dtlRegion": "31091",
+  "latitude": 37.3326644,
+  "longitude": 126.8608588,
+  "address": "경기도 안산시 상록구 성호로 333",
+  "tel": "031-481-3603",
+  "homepage": "http://lib.ansan.go.kr/bugok"
+ },
+ {
+  "libCode": "141662",
+  "libName": "안산시 상록수도서관",
+  "dtlRegion": "31091",
+  "latitude": 37.2988296,
+  "longitude": 126.8629271,
+  "address": "경기도 안산시 상록구 샘골로 167",
+  "tel": "031-481-3035",
+  "homepage": "https://lib.ansan.go.kr/sanglocksoo"
+ },
+ {
+  "libCode": "141134",
+  "libName": "안산시 상록어린이도서관",
+  "dtlRegion": "31091",
+  "latitude": 37.3073887,
+  "longitude": 126.8633133,
+  "address": "경기도 안산시 상록구 구룡체육관로 45",
+  "tel": "031-481-2671",
+  "homepage": "http://lib.ansan.go.kr/sangnok"
+ },
+ {
+  "libCode": "141050",
+  "libName": "안산시 성포도서관",
+  "dtlRegion": "31091",
+  "latitude": 37.3251788,
+  "longitude": 126.8503406,
+  "address": "경기도 안산시 상록구 충장로 528",
+  "tel": "031-481-2755",
+  "homepage": "http://lib.ansan.go.kr/seongpo"
+ },
+ {
+  "libCode": "141481",
+  "libName": "안산시 수암도서관",
+  "dtlRegion": "31091",
+  "latitude": 37.36182,
+  "longitude": 126.87322,
+  "address": "경기도 안산시 상록구 원당골1길 23-3",
+  "tel": "031-481-3967",
+  "homepage": "http://lib.ansan.go.kr/suam"
+ },
+ {
+  "libCode": "141654",
+  "libName": "안산시 월피예술도서관",
+  "dtlRegion": "31091",
+  "latitude": 37.3356641,
+  "longitude": 126.8446867,
+  "address": "경기도 안산시 상록구 광덕산안길 32",
+  "tel": "031-369-1850",
+  "homepage": "https://lib.ansan.go.kr/wolpi"
+ },
+ {
+  "libCode": "141406",
+  "libName": "안산시평생학습관작은도서관",
+  "dtlRegion": "31091",
+  "latitude": 37.29905,
+  "longitude": 126.84641,
+  "address": "경기도 안산시 상록구 차돌배기로 24-1",
+  "tel": "070-4492-0796",
+  "homepage": "http://lib.ansan.go.kr/smalllib"
+ },
+ {
+  "libCode": "141189",
+  "libName": "다문화작은도서관",
+  "dtlRegion": "31092",
+  "latitude": 37.332383,
+  "longitude": 126.790301,
+  "address": "경기도 안산시 단원구 부부로 43",
+  "tel": "031-493-2661",
+  "homepage": "http://lib.ansan.go.kr/smalllib"
+ },
+ {
+  "libCode": "741450",
+  "libName": "달미작은도서관",
+  "dtlRegion": "31092",
+  "latitude": 37.3482617,
+  "longitude": 126.8103029,
+  "address": "경기도 안산시 단원구 선삼로4안길 25-9",
+  "tel": "031-481-3750",
+  "homepage": "https://lib.ansan.go.kr/smalllib"
+ },
+ {
+  "libCode": "741011",
+  "libName": "당곡작은도서관",
+  "dtlRegion": "31092",
+  "latitude": 37.3237954,
+  "longitude": 126.8375919,
+  "address": "경기도 안산시 단원구 예술대학로 76",
+  "tel": "031-481-3879",
+  "homepage": "http://lib.ansan.go.kr/smalllib"
+ },
+ {
+  "libCode": "141253",
+  "libName": "석수골작은도서관",
+  "dtlRegion": "31092",
+  "latitude": 37.3465693,
+  "longitude": 126.8039588,
+  "address": "경기도 안산시 단원구 석수로9길 20",
+  "tel": "031-439-2707",
+  "homepage": "http://lib.ansan.go.kr/smalllib"
+ },
+ {
+  "libCode": "141509",
+  "libName": "선부3동선녀마을작은도서관",
+  "dtlRegion": "31092",
+  "latitude": 37.3425683,
+  "longitude": 126.8130929,
+  "address": "경기도 안산시 단원구 우목골길 7-15",
+  "tel": "031-411-3784",
+  "homepage": "http://lib.ansan.go.kr/smalllib"
+ },
+ {
+  "libCode": "141191",
+  "libName": "신길샛별도서관",
+  "dtlRegion": "31092",
+  "latitude": 37.3377496,
+  "longitude": 126.7775478,
+  "address": "경기도 안산시 단원구 새뿔길 67",
+  "tel": "031-492-2707",
+  "homepage": "http://lib.ansan.go.kr/smalllib"
+ },
+ {
+  "libCode": "741541",
+  "libName": "신길작은도서관",
+  "dtlRegion": "31092",
+  "latitude": 37.3348019,
+  "longitude": 126.7831445,
+  "address": "경기도 안산시 단원구 삼일로 42-7, 4층",
+  "tel": "031-481-3833",
+  "homepage": "https://lib.ansan.go.kr/smalllib"
+ },
+ {
+  "libCode": "141032",
+  "libName": "안산시 관산도서관",
+  "dtlRegion": "31092",
+  "latitude": 37.3321319,
+  "longitude": 126.7995588,
+  "address": "경기도 안산시 단원구 관산길 29",
+  "tel": "031-481-2751",
+  "homepage": "http://lib.ansan.go.kr/gwansan"
+ },
+ {
+  "libCode": "141133",
+  "libName": "안산시 단원어린이도서관",
+  "dtlRegion": "31092",
+  "latitude": 37.3311927,
+  "longitude": 126.8161013,
+  "address": "경기도 안산시 단원구 화정로 30 ",
+  "tel": "031-481-2678",
+  "homepage": "http://lib.ansan.go.kr/danwon"
+ },
+ {
+  "libCode": "141563",
+  "libName": "안산시 대부도서관",
+  "dtlRegion": "31092",
+  "latitude": 37.2405386,
+  "longitude": 126.5829946,
+  "address": "경기도 안산시 단원구 대남로 30",
+  "tel": "031-481-3955",
+  "homepage": "http://lib.ansan.go.kr/daebu"
+ },
+ {
+  "libCode": "141567",
+  "libName": "안산시 미디어도서관",
+  "dtlRegion": "31092",
+  "latitude": 37.307187,
+  "longitude": 126.8312518,
+  "address": "경기도 안산시 단원구 광덕1로 198",
+  "tel": "031-481-3961",
+  "homepage": "http://lib.ansan.go.kr/medialib"
+ },
+ {
+  "libCode": "141554",
+  "libName": "안산시 선부도서관",
+  "dtlRegion": "31092",
+  "latitude": 37.3411073,
+  "longitude": 126.8061847,
+  "address": "경기도 안산시 단원구 선부로 100",
+  "tel": "031-481-3888",
+  "homepage": "http://lib.ansan.go.kr/seonbu"
+ },
+ {
+  "libCode": "141508",
+  "libName": "안산시 원고잔도서관",
+  "dtlRegion": "31092",
+  "latitude": 37.3245985,
+  "longitude": 126.8247479,
+  "address": "경기도 안산시 단원구 원고잔공원로 33",
+  "tel": "031-481-3877",
+  "homepage": "http://lib.ansan.go.kr/wongojan"
+ },
+ {
+  "libCode": "141099",
+  "libName": "안산시 중앙도서관",
+  "dtlRegion": "31092",
+  "latitude": 37.3044036,
+  "longitude": 126.8212469,
+  "address": "경기도 안산시 단원구 안산천남로 14",
+  "tel": "031-481-2703",
+  "homepage": "http://lib.ansan.go.kr/jungang"
+ },
+ {
+  "libCode": "741046",
+  "libName": "와동별빛누리작은도서관",
+  "dtlRegion": "31092",
+  "latitude": 37.34059,
+  "longitude": 126.82726,
+  "address": "경기도 안산시 단원구 와동로 118",
+  "tel": "031-402-7492",
+  "homepage": "http://lib.ansan.go.kr/smalllib"
+ },
+ {
+  "libCode": "141657",
+  "libName": "고양시립높빛도서관",
+  "dtlRegion": "31101",
+  "latitude": 37.7105651,
+  "longitude": 126.9056069,
+  "address": "경기도 고양시 덕양구 푸른마을로 34-8",
+  "tel": "031-8075-9393",
+  "homepage": "https://www.goyanglib.or.kr/MV/index.do"
+ },
+ {
+  "libCode": "141635",
+  "libName": "고양시립별꿈도서관",
+  "dtlRegion": "31101",
+  "latitude": 37.6534467,
+  "longitude": 126.8519658,
+  "address": "경기도 고양시 덕양구 고양대로 1937",
+  "tel": "031-8075-9305",
+  "homepage": "https://www.goyanglib.or.kr/MQ/index.do"
+ },
+ {
+  "libCode": "141555",
+  "libName": "고양시립삼송도서관",
+  "dtlRegion": "31101",
+  "latitude": 37.6488432,
+  "longitude": 126.884639,
+  "address": "경기도 고양시 덕양구 덕수천1로 73",
+  "tel": "031-8075-9360",
+  "homepage": "https://www.goyanglib.or.kr/MP/index.do"
+ },
+ {
+  "libCode": "141546",
+  "libName": "고양시립신원도서관",
+  "dtlRegion": "31101",
+  "latitude": 37.6663747,
+  "longitude": 126.886347,
+  "address": "경기도 고양시 덕양구 신원2로 24",
+  "tel": "031-8075-9340",
+  "homepage": "https://www.goyanglib.or.kr/MO/index.do"
+ },
+ {
+  "libCode": "141059",
+  "libName": "고양시립원당도서관",
+  "dtlRegion": "31101",
+  "latitude": 37.6562321,
+  "longitude": 126.838837,
+  "address": "-",
+  "tel": "-",
+  "homepage": "https://www.goyanglib.or.kr/MC/index.do"
+ },
+ {
+  "libCode": "141018",
+  "libName": "고양시립행신도서관",
+  "dtlRegion": "31101",
+  "latitude": 37.6207524,
+  "longitude": 126.828326,
+  "address": "경기도 고양시 덕양구 행당로33번길 25-6",
+  "tel": "031-8075-9240",
+  "homepage": "https://www.goyanglib.or.kr/MB/index.do"
+ },
+ {
+  "libCode": "141126",
+  "libName": "고양시립행신어린이도서관",
+  "dtlRegion": "31101",
+  "latitude": 37.6147771,
+  "longitude": 126.843475,
+  "address": "경기도 고양시 덕양구 소원로181번길 42",
+  "tel": "031-8075-9278",
+  "homepage": "https://www.goyanglib.or.kr/MH/index.do"
+ },
+ {
+  "libCode": "141072",
+  "libName": "고양시립화정도서관",
+  "dtlRegion": "31101",
+  "latitude": 37.637831,
+  "longitude": 126.837192,
+  "address": "경기도 고양시 덕양구 은빛로77번길 8",
+  "tel": "031-8075-9215",
+  "homepage": "https://www.goyanglib.or.kr/ME/index.do"
+ },
+ {
+  "libCode": "141125",
+  "libName": "고양시립화정어린이도서관",
+  "dtlRegion": "31101",
+  "latitude": 37.6328887,
+  "longitude": 126.826242,
+  "address": "경기도 고양시 덕양구 화신로 323",
+  "tel": "031-8075-9299",
+  "homepage": "https://www.goyanglib.or.kr/MI/index.do"
+ },
+ {
+  "libCode": "141202",
+  "libName": "관산작은도서관",
+  "dtlRegion": "31101",
+  "latitude": 37.6879734,
+  "longitude": 126.8625188,
+  "address": "경기도 고양시 덕양구 통일로 789, 2층",
+  "tel": "031-962-1969",
+  "homepage": "https://www.goyanglib.or.kr"
+ },
+ {
+  "libCode": "741511",
+  "libName": "내유작은도서관",
+  "dtlRegion": "31101",
+  "latitude": 37.7281026,
+  "longitude": 126.8470859,
+  "address": "경기도 고양시 덕양구 유산길 96, 1층",
+  "tel": "070-4422-2580",
+  "homepage": "https://www.goyanglib.or.kr"
+ },
+ {
+  "libCode": "741210",
+  "libName": "대덕작은도서관",
+  "dtlRegion": "31101",
+  "latitude": 37.588315,
+  "longitude": 126.8755625,
+  "address": "경기도 고양시 덕양구 덕은로 34, 1층",
+  "tel": "02-3159-8501",
+  "homepage": "https://www.goyanglib.or.kr"
+ },
+ {
+  "libCode": "741224",
+  "libName": "마상공원작은도서관",
+  "dtlRegion": "31101",
+  "latitude": 37.6607627,
+  "longitude": 126.8328915,
+  "address": "경기도 고양시 덕양구 원당로69번길 46, 마상공원 내 주차장 옆",
+  "tel": "070-4422-2587",
+  "homepage": "https://www.goyanglib.or.kr"
+ },
+ {
+  "libCode": "741189",
+  "libName": "화전작은도서관",
+  "dtlRegion": "31101",
+  "latitude": 37.5994295,
+  "longitude": 126.8727318,
+  "address": "경기도 고양시 덕양구 화랑로 1-1, 2층",
+  "tel": "02-3159-2266",
+  "homepage": "https://www.goyanglib.or.kr"
+ },
+ {
+  "libCode": "141055",
+  "libName": "고양시립마두도서관",
+  "dtlRegion": "31103",
+  "latitude": 37.6664887,
+  "longitude": 126.782103,
+  "address": "경기도 고양시 일산동구 일산로 355",
+  "tel": "031-8075-9067",
+  "homepage": "https://www.goyanglib.or.kr/MA/index.do"
+ },
+ {
+  "libCode": "141073",
+  "libName": "고양시립백석도서관",
+  "dtlRegion": "31103",
+  "latitude": 37.6472487,
+  "longitude": 126.793775
+ },
+ {
+  "libCode": "141388",
+  "libName": "고양시립식사도서관",
+  "dtlRegion": "31103",
+  "latitude": 37.6760845,
+  "longitude": 126.815918,
+  "address": "경기도 고양시 일산동구 위시티2로 43-6",
+  "tel": "031-8075-9190",
+  "homepage": "https://www.goyanglib.or.kr/MM/index.do"
+ },
+ {
+  "libCode": "141123",
+  "libName": "고양시립아람누리도서관",
+  "dtlRegion": "31103",
+  "latitude": 37.6615541,
+  "longitude": 126.7745,
+  "address": "경기도 고양시 일산동구 중앙로 1286",
+  "tel": "031-8075-9038",
+  "homepage": "https://www.goyanglib.or.kr/MF/index.do"
+ },
+ {
+  "libCode": "141150",
+  "libName": "고양시립풍동도서관",
+  "dtlRegion": "31103",
+  "latitude": 37.6705562,
+  "longitude": 126.795196,
+  "address": "경기도 고양시 일산동구 숲속마을로 108",
+  "tel": "031-8075-9148",
+  "homepage": "https://www.goyanglib.or.kr/ML/index.do"
+ },
+ {
+  "libCode": "741461",
+  "libName": "모당공원작은도서관",
+  "dtlRegion": "31103",
+  "latitude": 37.6778914,
+  "longitude": 126.7814611,
+  "address": "경기도 고양시 일산동구 중산로 73-2, 모당공원 내",
+  "tel": "070-4244-7442",
+  "homepage": "https://www.goyanglib.or.kr"
+ },
+ {
+  "libCode": "741192",
+  "libName": "사리현작은도서관",
+  "dtlRegion": "31103",
+  "latitude": 37.6978732,
+  "longitude": 126.8458643,
+  "address": "경기도 고양시 일산동구 공릉천로 64, 관리동 2층",
+  "tel": "031-815-5530",
+  "homepage": "https://www.goyanglib.or.kr"
+ },
+ {
+  "libCode": "141574",
+  "libName": "고양시립가좌도서관",
+  "dtlRegion": "31104",
+  "latitude": 37.6861719,
+  "longitude": 126.7202262,
+  "address": "경기도 고양시 일산서구 가좌3로 16",
+  "tel": "031-8075-9380",
+  "homepage": "https://www.goyanglib.or.kr/MT/index.do"
+ },
+ {
+  "libCode": "141139",
+  "libName": "고양시립대화도서관",
+  "dtlRegion": "31104",
+  "latitude": 37.6809678,
+  "longitude": 126.753923,
+  "address": "경기도 고양시 일산서구 일산로 689",
+  "tel": "031-8075-9130",
+  "homepage": "https://www.goyanglib.or.kr/MJ/index.do"
+ },
+ {
+  "libCode": "141398",
+  "libName": "고양시립덕이도서관",
+  "dtlRegion": "31104",
+  "latitude": 37.7029746,
+  "longitude": 126.754531,
+  "address": "경기도 고양시 일산서구 하이파크로 128",
+  "tel": "031-8075-9320",
+  "homepage": "https://www.goyanglib.or.kr/MN/index.do"
+ },
+ {
+  "libCode": "141631",
+  "libName": "고양시립일산도서관",
+  "dtlRegion": "31104",
+  "latitude": 37.6850421,
+  "longitude": 126.7642552,
+  "address": "경기도 고양시 일산서구 고양대로 586-65",
+  "tel": "031-8075-9420",
+  "homepage": "https://www.goyanglib.or.kr/MU/index.do"
+ },
+ {
+  "libCode": "141124",
+  "libName": "고양시립주엽어린이도서관",
+  "dtlRegion": "31104",
+  "latitude": 37.6684857,
+  "longitude": 126.756534,
+  "address": "경기도 고양시 일산서구 주엽로 104",
+  "tel": "031-8075-9168",
+  "homepage": "https://www.goyanglib.or.kr/MG/index.do"
+ },
+ {
+  "libCode": "141140",
+  "libName": "고양시립한뫼도서관",
+  "dtlRegion": "31104",
+  "latitude": 37.6935842,
+  "longitude": 126.776286,
+  "address": "경기도 고양시 일산서구 탄중로 284",
+  "tel": "031-8075-9115",
+  "homepage": "https://www.goyanglib.or.kr/MK/index.do"
+ },
+ {
+  "libCode": "141004",
+  "libName": "경기도교육청과천도서관",
+  "dtlRegion": "31110",
+  "latitude": 37.432262,
+  "longitude": 126.9965747,
+  "address": "경기도 과천시 도서관길 36",
+  "tel": "02-3677-0371",
+  "homepage": "https://lib.goe.go.kr/kwa/"
+ },
+ {
+  "libCode": "141062",
+  "libName": "과천시정보과학도서관",
+  "dtlRegion": "31110",
+  "latitude": 37.4187291,
+  "longitude": 126.9897092,
+  "address": "경기도 과천시 중앙로24",
+  "tel": "02-2150-3008",
+  "homepage": "http://www.gclib.go.kr"
+ },
+ {
+  "libCode": "141656",
+  "libName": "구리시립 갈매도서관",
+  "dtlRegion": "31120",
+  "latitude": 37.6314655,
+  "longitude": 127.1176152,
+  "address": "경기도 구리시 갈매중앙로 80, 4~6층",
+  "tel": "031-550-8999",
+  "homepage": "https://www.gurilib.go.kr/gallib/index.do"
+ },
+ {
+  "libCode": "141020",
+  "libName": "구리시립 교문방정환도서관",
+  "dtlRegion": "31120",
+  "latitude": 37.5951497,
+  "longitude": 127.13455,
+  "address": "경기도 구리시 안골로30번길 45",
+  "tel": "031-550-2593",
+  "homepage": "http://www.gurilib.go.kr/"
+ },
+ {
+  "libCode": "141070",
+  "libName": "구리시립 인창도서관",
+  "dtlRegion": "31120",
+  "latitude": 37.6050723,
+  "longitude": 127.1456099,
+  "address": "경기도 구리시 건원대로34번길 90",
+  "tel": "031-550-2936",
+  "homepage": "http://www.gurilib.go.kr/"
+ },
+ {
+  "libCode": "141225",
+  "libName": "구리시립 토평도서관",
+  "dtlRegion": "31120",
+  "latitude": 37.5860642,
+  "longitude": 127.1457728,
+  "address": "경기도 구리시 장자대로 140",
+  "tel": "031-550-8325",
+  "homepage": "http://www.gurilib.go.kr/"
+ },
+ {
+  "libCode": "141137",
+  "libName": "남양주시 별내도서관",
+  "dtlRegion": "31130",
+  "latitude": 37.7081965,
+  "longitude": 127.1177053,
+  "address": "경기도 남양주시 별내면 청학로 86-1",
+  "tel": "031-590-8808",
+  "homepage": "http://lib.nyj.go.kr/bnae/"
+ },
+ {
+  "libCode": "141568",
+  "libName": "남양주시 별빛도서관",
+  "dtlRegion": "31130",
+  "latitude": 37.6509135,
+  "longitude": 127.1204532,
+  "address": "경기도 남양주시 별내중앙로 102",
+  "tel": "031-590-5350",
+  "homepage": "http://lib.nyj.go.kr/bbit/"
+ },
+ {
+  "libCode": "141176",
+  "libName": "남양주시 오남도서관",
+  "dtlRegion": "31130",
+  "latitude": 37.6980757,
+  "longitude": 127.1976087,
+  "address": "경기도 남양주시 오남읍 양지로240번길 12",
+  "tel": "031-590-8531",
+  "homepage": "http://lib.nyj.go.kr/onam/"
+ },
+ {
+  "libCode": "141146",
+  "libName": "남양주시 와부도서관",
+  "dtlRegion": "31130",
+  "latitude": 37.5856432,
+  "longitude": 127.2174767,
+  "address": "경기도 남양주시 와부읍 월문천로 43",
+  "tel": "031-590-8920",
+  "homepage": "http://lib.nyj.go.kr/waboo/"
+ },
+ {
+  "libCode": "141625",
+  "libName": "남양주시 이석영뉴미디어도서관",
+  "dtlRegion": "31130",
+  "latitude": 37.658042,
+  "longitude": 127.2952154,
+  "address": "경기도 남양주시 화도읍 맷돌로 84",
+  "tel": "031-595-8390",
+  "homepage": "https://lib.nyj.go.kr/lsy"
+ },
+ {
+  "libCode": "141035",
+  "libName": "남양주시 정약용도서관",
+  "dtlRegion": "31130",
+  "latitude": 37.5859178,
+  "longitude": 127.1707352,
+  "address": "경기도 남양주시 다산중앙로82번안길 138",
+  "tel": "031-590-2586",
+  "homepage": "https://lib.nyj.go.kr/jyy"
+ },
+ {
+  "libCode": "141091",
+  "libName": "남양주시 진건도서관",
+  "dtlRegion": "31130",
+  "latitude": 37.6550996,
+  "longitude": 127.1774145,
+  "address": "경기도 남양주시 진건읍 진건오남로 41-25",
+  "tel": "031-590-8260",
+  "homepage": "http://lib.nyj.go.kr/jingeon/"
+ },
+ {
+  "libCode": "141521",
+  "libName": "남양주시 진접도서관",
+  "dtlRegion": "31130",
+  "latitude": 37.7306138,
+  "longitude": 127.193936,
+  "address": "경기도 남양주시 진접읍 금강로 1554-11",
+  "tel": "031-590-5310",
+  "homepage": "http://lib.nyj.go.kr/jinjeop/"
+ },
+ {
+  "libCode": "141536",
+  "libName": "남양주시 진접푸른숲도서관",
+  "dtlRegion": "31130",
+  "latitude": 37.7153353,
+  "longitude": 127.1926723,
+  "address": "경기도 남양주시 진접읍 해밀예당2로 35",
+  "tel": "031-590-5330",
+  "homepage": "http://lib.nyj.go.kr/jinjeopgw/"
+ },
+ {
+  "libCode": "141401",
+  "libName": "남양주시 퇴계원도서관",
+  "dtlRegion": "31130",
+  "latitude": 37.6490687,
+  "longitude": 127.1455537,
+  "address": "경기도 남양주시 퇴계원읍 도제원로 12",
+  "tel": "031-590-3910",
+  "homepage": "http://lib.nyj.go.kr/toegyewon/"
+ },
+ {
+  "libCode": "141175",
+  "libName": "남양주시 평내도서관",
+  "dtlRegion": "31130",
+  "latitude": 37.6417066,
+  "longitude": 127.2388929,
+  "address": "경기도 남양주시 의안로 134",
+  "tel": "031-590-8562",
+  "homepage": "http://lib.nyj.go.kr/pynae/"
+ },
+ {
+  "libCode": "141585",
+  "libName": "남양주시 호평도서관",
+  "dtlRegion": "31130",
+  "latitude": 37.6675666,
+  "longitude": 127.2481052,
+  "address": "경기도 남양주시 천마산로 67",
+  "tel": "031-590-8340",
+  "homepage": "https://lib.nyj.go.kr/hp/"
+ },
+ {
+  "libCode": "141071",
+  "libName": "남양주시 화도도서관",
+  "dtlRegion": "31130",
+  "latitude": 37.6500989,
+  "longitude": 127.3058023,
+  "address": "경기도 남양주시 화도읍 수레로1260번길 33",
+  "tel": "031-590-4587",
+  "homepage": "http://lib.nyj.go.kr/hwado/"
+ },
+ {
+  "libCode": "741297",
+  "libName": "고현초꿈키움도서관",
+  "dtlRegion": "31140",
+  "latitude": 37.1336377,
+  "longitude": 127.0854297,
+  "address": "경기도 오산시 남부대로 459",
+  "tel": "031-8036-6550",
+  "homepage": "-"
+ },
+ {
+  "libCode": "741203",
+  "libName": "무지개도서관",
+  "dtlRegion": "31140",
+  "latitude": 37.1298897,
+  "longitude": 127.0822459,
+  "address": "경기도 오산시 청호로 23-22, 105동 놀이터 안",
+  "tel": "031-8036-6549",
+  "homepage": "-"
+ },
+ {
+  "libCode": "741458",
+  "libName": "세교쌍용예가 시민개방도서관",
+  "dtlRegion": "31140",
+  "latitude": 37.1645681,
+  "longitude": 127.0679533,
+  "address": "경기도 오산시 내삼미로 110, 2층",
+  "tel": "031-8036-6548",
+  "homepage": "-"
+ },
+ {
+  "libCode": "141540",
+  "libName": "오산시 꿈두레도서관",
+  "dtlRegion": "31140",
+  "latitude": 37.1817029,
+  "longitude": 127.045268,
+  "address": "경기도 오산시 세마역로 20",
+  "tel": "031-8036-6520",
+  "homepage": "http://www.osanlibrary.go.kr/kkumdure/main.do"
+ },
+ {
+  "libCode": "141610",
+  "libName": "오산시 소리울도서관",
+  "dtlRegion": "31140",
+  "latitude": 37.1339152,
+  "longitude": 127.0732373,
+  "address": "경기도 오산시 경기대로 102-25",
+  "tel": "031-8036-6670",
+  "homepage": "https://www.osanlibrary.go.kr/soriul/main.do"
+ },
+ {
+  "libCode": "141174",
+  "libName": "오산시 양산도서관",
+  "dtlRegion": "31140",
+  "latitude": 37.1943263,
+  "longitude": 127.032212,
+  "address": "경기도 오산시 양산로 410번길 34  ",
+  "tel": "031-8036-6143",
+  "homepage": "http://www.osanlibrary.go.kr/yangsan/main.do"
+ },
+ {
+  "libCode": "141158",
+  "libName": "오산시 중앙도서관",
+  "dtlRegion": "31140",
+  "latitude": 37.15388,
+  "longitude": 127.076939,
+  "address": "경기도 오산시 운암로 85",
+  "tel": "031-8036-6140",
+  "homepage": "http://www.osanlibrary.go.kr/jungang/main.do"
+ },
+ {
+  "libCode": "141014",
+  "libName": "오산시 청학도서관",
+  "dtlRegion": "31140",
+  "latitude": 37.1550825,
+  "longitude": 127.063967,
+  "address": "경기도 오산시 청학로 65",
+  "tel": "031-8036-6490",
+  "homepage": "http://www.osanlibrary.go.kr/cheonghak/main.do"
+ },
+ {
+  "libCode": "141264",
+  "libName": "오산시 초평도서관",
+  "dtlRegion": "31140",
+  "latitude": 37.1427084,
+  "longitude": 127.046599,
+  "address": "경기도 오산시 발안로 1353-11",
+  "tel": "031-8036-6195",
+  "homepage": "http://www.osanlibrary.go.kr/chopyeong/main.do"
+ },
+ {
+  "libCode": "141127",
+  "libName": "오산시 햇살마루도서관",
+  "dtlRegion": "31140",
+  "latitude": 37.1384499,
+  "longitude": 127.071734,
+  "address": "경기도 오산시 오산로132번길 28-6",
+  "tel": "031-8036-6500",
+  "homepage": "http://www.osanlibrary.go.kr/hatsalmaru/main.do"
+ },
+ {
+  "libCode": "141245",
+  "libName": "시흥시 군자도서관",
+  "dtlRegion": "31150",
+  "latitude": 37.3456428,
+  "longitude": 126.7852369,
+  "address": "경기도 시흥시 군자로 499",
+  "tel": "031-310-5196",
+  "homepage": "https://lib.siheung.go.kr"
+ },
+ {
+  "libCode": "141260",
+  "libName": "시흥시 능곡도서관",
+  "dtlRegion": "31150",
+  "latitude": 37.371378,
+  "longitude": 126.8131315,
+  "address": "경기도 시흥시 능곡중앙로 85",
+  "tel": "031-310-2555",
+  "homepage": "https://lib.siheung.go.kr"
+ },
+ {
+  "libCode": "141045",
+  "libName": "시흥시 대야도서관",
+  "dtlRegion": "31150",
+  "latitude": 37.4454052,
+  "longitude": 126.79664,
+  "address": "경기도 시흥시 은행로173번길 14",
+  "tel": "031-310-5274",
+  "homepage": "https://lib.siheung.go.kr"
+ },
+ {
+  "libCode": "141396",
+  "libName": "시흥시 매화도서관",
+  "dtlRegion": "31150",
+  "latitude": 37.4175609,
+  "longitude": 126.8155221,
+  "address": "경기도 시흥시 매화로 20",
+  "tel": "031-310-2580",
+  "homepage": "https://lib.siheung.go.kr"
+ },
+ {
+  "libCode": "141609",
+  "libName": "시흥시 목감도서관",
+  "dtlRegion": "31150",
+  "latitude": 37.3798877,
+  "longitude": 126.8031025,
+  "address": "경기도 시흥시 솔고개길 33",
+  "tel": "031-310-2590",
+  "homepage": "https://lib.siheung.go.kr"
+ },
+ {
+  "libCode": "141632",
+  "libName": "시흥시 배곧도서관",
+  "dtlRegion": "31150",
+  "latitude": 37.3762129,
+  "longitude": 126.7290632,
+  "address": "경기도 시흥시 배곧4로 102",
+  "tel": "031-310-5280",
+  "homepage": "https://lib.siheung.go.kr"
+ },
+ {
+  "libCode": "141316",
+  "libName": "시흥시 소래빛도서관",
+  "dtlRegion": "31150",
+  "latitude": 37.4438392,
+  "longitude": 126.7925775,
+  "address": "경기도 시흥시 비둘기공원로 25",
+  "tel": "031-310-5245",
+  "homepage": "https://lib.siheung.go.kr"
+ },
+ {
+  "libCode": "141314",
+  "libName": "시흥시 신천도서관",
+  "dtlRegion": "31150",
+  "latitude": 37.438379,
+  "longitude": 126.7850242,
+  "address": "경기도 시흥시 신천로 89-18",
+  "tel": "031-310-2570",
+  "homepage": "https://lib.siheung.go.kr"
+ },
+ {
+  "libCode": "141199",
+  "libName": "시흥시 월곶도서관",
+  "dtlRegion": "31150",
+  "latitude": 37.3887435,
+  "longitude": 126.7362223,
+  "address": "경기도 시흥시 월곶해안로161번길 7",
+  "tel": "031-310-2591",
+  "homepage": "https://lib.siheung.go.kr"
+ },
+ {
+  "libCode": "141562",
+  "libName": "시흥시 장곡도서관",
+  "dtlRegion": "31150",
+  "latitude": 37.3775319,
+  "longitude": 126.7829625,
+  "address": "경기도 시흥시 인선길 52",
+  "tel": "031-310-5233",
+  "homepage": "https://lib.siheung.go.kr/"
+ },
+ {
+  "libCode": "141280",
+  "libName": "시흥시 정왕어린이도서관",
+  "dtlRegion": "31150",
+  "latitude": 37.3452203,
+  "longitude": 126.7479977,
+  "address": "경기도 시흥시 정왕시장길 45",
+  "tel": "031-310-5181",
+  "homepage": "https://lib.siheung.go.kr"
+ },
+ {
+  "libCode": "141066",
+  "libName": "시흥시 중앙도서관",
+  "dtlRegion": "31150",
+  "latitude": 37.348122,
+  "longitude": 126.735583,
+  "address": "경기도 시흥시 정왕대로 191",
+  "tel": "031-310-5230",
+  "homepage": "https://lib.siheung.go.kr"
+ },
+ {
+  "libCode": "141135",
+  "libName": "군포시중앙도서관",
+  "dtlRegion": "31160",
+  "latitude": 37.3551341,
+  "longitude": 126.9157442,
+  "address": "경기도 군포시 수리산로 79",
+  "tel": "031-390-8866",
+  "homepage": "https://www.gunpolib.go.kr/"
+ },
+ {
+  "libCode": "111112",
+  "libName": "내손책고운도서관",
+  "dtlRegion": "31170",
+  "latitude": 37.37826,
+  "longitude": 126.97563,
+  "address": "경기도 의왕시 갈미2로 4",
+  "tel": "031-345-3225",
+  "homepage": "http://www.uwlib.or.kr/"
+ },
+ {
+  "libCode": "141112",
+  "libName": "부곡글고운도서관",
+  "dtlRegion": "31170",
+  "latitude": 37.3184983,
+  "longitude": 126.956818,
+  "address": "경기도 의왕시 부곡시장길 75",
+  "tel": "031-345-3155",
+  "homepage": "http://www.uwlib.or.kr/"
+ },
+ {
+  "libCode": "741103",
+  "libName": "숲속옹달샘작은도서관",
+  "dtlRegion": "31170",
+  "latitude": 37.4012495,
+  "longitude": 126.9877489,
+  "address": "경기도 의왕시 이미로 17, 209동 1층",
+  "tel": "070-7812-0004",
+  "homepage": "https://uwlib.or.kr/small/index.do"
+ },
+ {
+  "libCode": "141111",
+  "libName": "오전빛고운도서관",
+  "dtlRegion": "31170",
+  "latitude": 37.3535029,
+  "longitude": 126.971653,
+  "address": "경기도 의왕시 찬우물길 11",
+  "tel": "031-345-3195",
+  "homepage": "http://www.uwlib.or.kr/"
+ },
+ {
+  "libCode": "741761",
+  "libName": "왕송호수작은도서관",
+  "dtlRegion": "31170",
+  "latitude": 37.306757,
+  "longitude": 126.9527992,
+  "address": "경기도 의왕시 왕송못동로 307, 1층",
+  "tel": "031-345-3650",
+  "homepage": "https://uwlib.or.kr/small/index.do"
+ },
+ {
+  "libCode": "141237",
+  "libName": "의왕시글로벌도서관",
+  "dtlRegion": "31170",
+  "latitude": 37.3576815,
+  "longitude": 126.970498,
+  "address": "경기도 의왕시 보식골로 30-10",
+  "tel": "031-345-3681",
+  "homepage": "http://www.uwlib.or.kr/"
+ },
+ {
+  "libCode": "141039",
+  "libName": "의왕시내손도서관",
+  "dtlRegion": "31170",
+  "latitude": 37.387659,
+  "longitude": 126.982053,
+  "address": "경기도 의왕시 복지로 109",
+  "tel": "031-345-2654",
+  "homepage": "http://www.uwlib.or.kr/"
+ },
+ {
+  "libCode": "141648",
+  "libName": "의왕시백운호수도서관",
+  "dtlRegion": "31170",
+  "latitude": 37.3700411,
+  "longitude": 127.0076551,
+  "address": "경기도 의왕시 백운중앙로 74",
+  "tel": "031-345-3436",
+  "homepage": "https://www.uwlib.or.kr/baegun"
+ },
+ {
+  "libCode": "141120",
+  "libName": "의왕시중앙도서관",
+  "dtlRegion": "31170",
+  "latitude": 37.3422301,
+  "longitude": 126.969448,
+  "address": "경기도 의왕시 골우물길 49",
+  "tel": "031-345-3656",
+  "homepage": "http://www.uwlib.or.kr/"
+ },
+ {
+  "libCode": "141633",
+  "libName": "의왕시포일어울림도서관",
+  "dtlRegion": "31170",
+  "latitude": 37.3965596,
+  "longitude": 126.9827991,
+  "address": "경기도 의왕시 안양판교로 82",
+  "tel": "031-345-3994~5",
+  "homepage": "https://www.uwlib.or.kr/poil"
+ },
+ {
+  "libCode": "741521",
+  "libName": "청계숲고운도서관",
+  "dtlRegion": "31170",
+  "latitude": 37.3927263,
+  "longitude": 126.9976692,
+  "address": "경기도 의왕시 덕장로 19, 3층",
+  "tel": "031-345-2637",
+  "homepage": "https://www.uwlib.or.kr"
+ },
+ {
+  "libCode": "141214",
+  "libName": "청계참고운도서관",
+  "dtlRegion": "31170",
+  "latitude": 37.3885035,
+  "longitude": 126.995965,
+  "address": "경기도 의왕시 안양판교로 232",
+  "tel": "031-345-3285",
+  "homepage": "http://www.uwlib.or.kr/"
+ },
+ {
+  "libCode": "141171",
+  "libName": "하남시 나룰도서관",
+  "dtlRegion": "31180",
+  "latitude": 37.553494,
+  "longitude": 127.2080673,
+  "address": "경기도 하남시 덕풍북로 180",
+  "tel": "031-790-6887",
+  "homepage": "https://www.hanamlib.go.kr/nalib"
+ },
+ {
+  "libCode": "141579",
+  "libName": "하남시 덕풍도서관",
+  "dtlRegion": "31180",
+  "latitude": 37.5334758,
+  "longitude": 127.2006586,
+  "address": "경기도 하남시 역말로 14",
+  "tel": "031-790-6959",
+  "homepage": "https://www.hanamlib.go.kr/dulib/index.do"
+ },
+ {
+  "libCode": "141608",
+  "libName": "하남시 디지털도서관",
+  "dtlRegion": "31180",
+  "latitude": 37.5691025,
+  "longitude": 127.18498,
+  "address": "경기도 하남시 미사강변한강로 290-2",
+  "tel": "031-790-6811",
+  "homepage": "https://www.hanamlib.go.kr/dilib"
+ },
+ {
+  "libCode": "141622",
+  "libName": "하남시 미사도서관",
+  "dtlRegion": "31180",
+  "latitude": 37.5603879,
+  "longitude": 127.1498654,
+  "address": "경기도 하남시 아리수로 545",
+  "tel": "031-790-6884",
+  "homepage": "https://www.hanamlib.go.kr/mslib"
+ },
+ {
+  "libCode": "141607",
+  "libName": "하남시 세미도서관",
+  "dtlRegion": "31180",
+  "latitude": 37.8448703,
+  "longitude": 127.0625473,
+  "address": "경기도 하남시 세미로1길 15",
+  "tel": "031-790-6804",
+  "homepage": "https://www.hanamlib.go.kr/selib"
+ },
+ {
+  "libCode": "141046",
+  "libName": "하남시 신장도서관",
+  "dtlRegion": "31180",
+  "latitude": 37.5382832,
+  "longitude": 127.2137405,
+  "address": "경기도 하남시 하남대로 740",
+  "tel": "031-790-6945",
+  "homepage": "https://www.hanamlib.go.kr/silib"
+ },
+ {
+  "libCode": "141636",
+  "libName": "하남시 위례도서관",
+  "dtlRegion": "31180",
+  "latitude": 37.4769457,
+  "longitude": 127.1495765,
+  "address": "경기도 하남시 위례대로 230",
+  "tel": "031-790-6036",
+  "homepage": "https://www.hanamlib.go.kr/wilib"
+ },
+ {
+  "libCode": "741725",
+  "libName": "하남시 일가도서관",
+  "dtlRegion": "31180",
+  "latitude": 37.0011541,
+  "longitude": 127.2732211,
+  "address": "경기도 하남시 미사강변남로 10",
+  "tel": "031-5182-1046",
+  "homepage": "https://www.hanamlib.go.kr/iglib"
+ },
+ {
+  "libCode": "141599",
+  "libName": "남사도서관",
+  "dtlRegion": "31191",
+  "latitude": 37.1523515,
+  "longitude": 127.1726883,
+  "address": "경기도 용인시 처인구 남사읍 한숲로 61",
+  "tel": "031-6193-1370",
+  "homepage": "https://lib.yongin.go.kr/namsa"
+ },
+ {
+  "libCode": "141389",
+  "libName": "모현도서관",
+  "dtlRegion": "31191",
+  "latitude": 37.3356296,
+  "longitude": 127.2496605,
+  "address": "경기도 용인시 처인구 모현읍 백옥대로 2378",
+  "tel": "031-6193-1330",
+  "homepage": "http://lib.yongin.go.kr/mohyeon/"
+ },
+ {
+  "libCode": "141217",
+  "libName": "양지해밀도서관",
+  "dtlRegion": "31191",
+  "latitude": 37.2374844,
+  "longitude": 127.2858167,
+  "address": "경기도 용인시 처인구 양지면 교동로18번길 8",
+  "tel": "031-6193-1285",
+  "homepage": "http://lib.yongin.go.kr/haemil/"
+ },
+ {
+  "libCode": "141038",
+  "libName": "용인중앙도서관",
+  "dtlRegion": "31191",
+  "latitude": 37.2334148,
+  "longitude": 127.1902732,
+  "address": "경기도 용인시 처인구 명지로 27",
+  "tel": "031-6193-1260",
+  "homepage": "http://lib.yongin.go.kr/yongin/"
+ },
+ {
+  "libCode": "141582",
+  "libName": "이동꿈틀도서관",
+  "dtlRegion": "31191",
+  "latitude": 37.1390828,
+  "longitude": 127.1997473,
+  "address": "경기도 용인시 처인구 이동읍 경기동로705번길 16",
+  "tel": "031-6193-1390",
+  "homepage": "http://lib.yongin.go.kr/idong/"
+ },
+ {
+  "libCode": "141110",
+  "libName": "포곡도서관",
+  "dtlRegion": "31191",
+  "latitude": 37.2789044,
+  "longitude": 127.2326774,
+  "address": "경기도 용인시 처인구 포곡읍 포곡로278번길 8",
+  "tel": "031-6193-1290",
+  "homepage": "http://lib.yongin.go.kr/pogok/"
+ },
+ {
+  "libCode": "141129",
+  "libName": "구갈희망누리도서관",
+  "dtlRegion": "31192",
+  "latitude": 37.2726108,
+  "longitude": 127.13032,
+  "address": "경기도 용인시 기흥구 갈곡로12번길 1",
+  "tel": "031-6193-1465",
+  "homepage": "http://lib.yongin.go.kr/gugal/"
+ },
+ {
+  "libCode": "141118",
+  "libName": "구성도서관",
+  "dtlRegion": "31192",
+  "latitude": 37.2965012,
+  "longitude": 127.1189634,
+  "address": "경기도 용인시 기흥구 구성로77번길 17",
+  "tel": "031-6193-1470",
+  "homepage": "http://lib.yongin.go.kr/guseong/"
+ },
+ {
+  "libCode": "141239",
+  "libName": "기흥도서관",
+  "dtlRegion": "31192",
+  "latitude": 37.2862231,
+  "longitude": 127.1141009,
+  "address": "경기도 용인시 기흥구 기흥로116번길 10",
+  "tel": "031-6193-1440",
+  "homepage": "http://lib.yongin.go.kr/giheung/"
+ },
+ {
+  "libCode": "141160",
+  "libName": "동백도서관",
+  "dtlRegion": "31192",
+  "latitude": 37.2740661,
+  "longitude": 127.1581171,
+  "address": "경기도 용인시 기흥구 동백3로 80",
+  "tel": "031-6193-1310",
+  "homepage": "http://lib.yongin.go.kr/dongbaek/"
+ },
+ {
+  "libCode": "141390",
+  "libName": "보라도서관",
+  "dtlRegion": "31192",
+  "latitude": 37.2483772,
+  "longitude": 127.1090488,
+  "address": "경기도 용인시 기흥구 한보라2로 116 (보라동)",
+  "tel": "031-6193-1490",
+  "homepage": "http://lib.yongin.go.kr/bora/"
+ },
+ {
+  "libCode": "141677",
+  "libName": "보정도서관",
+  "dtlRegion": "31192",
+  "latitude": 37.320446,
+  "longitude": 127.1118736,
+  "address": "경기도 용인시 기흥구 죽전로 30, 4층",
+  "tel": "031-6193-1570",
+  "homepage": "lib.yongin.go.kr/bojeong"
+ },
+ {
+  "libCode": "141643",
+  "libName": "서농도서관",
+  "dtlRegion": "31192",
+  "latitude": 37.2375781,
+  "longitude": 127.0688748,
+  "address": "경기도 용인시 기흥구 서천서로 83",
+  "tel": "031-324-4533",
+  "homepage": "https://lib.yongin.go.kr/seonong"
+ },
+ {
+  "libCode": "141564",
+  "libName": "청덕도서관",
+  "dtlRegion": "31192",
+  "latitude": 37.292608,
+  "longitude": 127.1458667,
+  "address": "경기도 용인시 기흥구 구성1로 44",
+  "tel": "031-6193-1350",
+  "homepage": "http://lib.yongin.go.kr/cheongdeok/"
+ },
+ {
+  "libCode": "141541",
+  "libName": "흥덕도서관",
+  "dtlRegion": "31192",
+  "latitude": 37.2632347,
+  "longitude": 127.0862662,
+  "address": "경기도 용인시 기흥구 흥덕중앙로 153",
+  "tel": "031-6193-1510",
+  "homepage": "http://lib.yongin.go.kr/heungdeok/"
+ },
+ {
+  "libCode": "141083",
+  "libName": "느티나무도서관",
+  "dtlRegion": "31193",
+  "latitude": 37.3340177,
+  "longitude": 127.096092,
+  "address": "경기도 용인시 수지구 수풍로116번길 22",
+  "tel": "031-262-3494",
+  "homepage": "http://www.neutinamu.org/"
+ },
+ {
+  "libCode": "141668",
+  "libName": "동천도서관",
+  "dtlRegion": "31193",
+  "latitude": 37.3293723,
+  "longitude": 127.0916188,
+  "address": "경기도 용인시 수지구 수풍로 57-14",
+  "tel": "031-6193-1720",
+  "homepage": "lib.yongin.go.kr/dongcheon"
+ },
+ {
+  "libCode": "141556",
+  "libName": "상현도서관",
+  "dtlRegion": "31193",
+  "latitude": 37.2993199,
+  "longitude": 127.0735488,
+  "address": "경기도 용인시 수지구 법조로 232",
+  "tel": "031-6193-1670",
+  "homepage": "http://lib.yongin.go.kr/sanghyeon/"
+ },
+ {
+  "libCode": "141646",
+  "libName": "성복도서관",
+  "dtlRegion": "31193",
+  "latitude": 37.3169968,
+  "longitude": 127.0630138,
+  "address": "경기도 용인시 수지구 성복1로164번길 6",
+  "tel": "031-324-4719",
+  "homepage": "https://lib.yongin.go.kr/seongbok"
+ },
+ {
+  "libCode": "141079",
+  "libName": "수지도서관",
+  "dtlRegion": "31193",
+  "latitude": 37.3201871,
+  "longitude": 127.0945017,
+  "address": "경기도 용인시 수지구 문정로7번길 23",
+  "tel": "031-6193-1620",
+  "homepage": "http://lib.yongin.go.kr/suji/"
+ },
+ {
+  "libCode": "141149",
+  "libName": "죽전도서관",
+  "dtlRegion": "31193",
+  "latitude": 37.3301254,
+  "longitude": 127.118765,
+  "address": "경기도 용인시 수지구 대지로 89",
+  "tel": "031-6193-1650",
+  "homepage": "http://lib.yongin.go.kr/jukjeon/"
+ },
+ {
+  "libCode": "141268",
+  "libName": "금곡작은도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.8846186,
+  "longitude": 126.8778329,
+  "address": "경기도 파주시 법원읍 술이홀로 1315",
+  "tel": "031-959-9506",
+  "homepage": "https://lib.paju.go.kr"
+ },
+ {
+  "libCode": "741292",
+  "libName": "금촌무지개작은도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.766106,
+  "longitude": 126.774515,
+  "address": "경기도 파주시 새꽃로 193, 금촌역사 내 1층",
+  "tel": "031-941-2958",
+  "homepage": "https://lib.paju.go.kr/"
+ },
+ {
+  "libCode": "141267",
+  "libName": "탄현작은도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.7699029,
+  "longitude": 126.7030425,
+  "address": "경기도 파주시 탄현면 소금쟁이길 71",
+  "tel": "031-946-0350",
+  "homepage": "https://lib.paju.go.kr"
+ },
+ {
+  "libCode": "141544",
+  "libName": "파주시립가람도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.7305536,
+  "longitude": 126.763913,
+  "address": "경기도 파주시 가람로116번길 170",
+  "tel": "031-949-2552",
+  "homepage": "https://lib.paju.go.kr/grlib"
+ },
+ {
+  "libCode": "141243",
+  "libName": "파주시립광탄도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.7803433,
+  "longitude": 126.8525858,
+  "address": "경기도 파주시 광탄면 심궁로 23",
+  "tel": "031-940-5825",
+  "homepage": "https://lib.paju.go.kr/gtlib"
+ },
+ {
+  "libCode": "141156",
+  "libName": "파주시립교하도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.7234851,
+  "longitude": 126.712431,
+  "address": "경기도 파주시 숲속노을로 256 ",
+  "tel": "031-940-5153",
+  "homepage": "https://lib.paju.go.kr/ghlib"
+ },
+ {
+  "libCode": "141397",
+  "libName": "파주시립금촌3동솔빛도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.7714418,
+  "longitude": 126.778564,
+  "address": "경기도 파주시 시청로 194, 금촌3동 행정복지센터",
+  "tel": "031-944-8211",
+  "homepage": "https://lib.paju.go.kr/gclib3"
+ },
+ {
+  "libCode": "141040",
+  "libName": "파주시립금촌도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.7585597,
+  "longitude": 126.780114,
+  "address": "경기도 파주시 시민회관길 40",
+  "tel": "031-940-4381",
+  "homepage": "https://lib.paju.go.kr/gclib"
+ },
+ {
+  "libCode": "141041",
+  "libName": "파주시립문산도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.8532474,
+  "longitude": 126.783437,
+  "address": "경기도 파주시 문산읍 방촌로 1671",
+  "tel": "031-820-7250",
+  "homepage": "https://lib.paju.go.kr/mslib"
+ },
+ {
+  "libCode": "141489",
+  "libName": "파주시립물푸레도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.7340185,
+  "longitude": 126.720118,
+  "address": "경기도 파주시 청석로 360",
+  "tel": "031-944-5951",
+  "homepage": "https://lib.paju.go.kr/mplib"
+ },
+ {
+  "libCode": "141049",
+  "libName": "파주시립법원도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.8474969,
+  "longitude": 126.886213,
+  "address": "경기도 파주시 법원읍 사임당로 947",
+  "tel": "031-940-4193",
+  "homepage": "https://lib.paju.go.kr/bwlib"
+ },
+ {
+  "libCode": "141630",
+  "libName": "파주시립술이홀도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.8305402,
+  "longitude": 126.8198325,
+  "address": "경기도 파주시 파주읍 술이홀로 295",
+  "tel": "031-940-5082",
+  "homepage": "https://lib.paju.go.kr/srlib"
+ },
+ {
+  "libCode": "141614",
+  "libName": "파주시립월롱도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.7995562,
+  "longitude": 126.7891988,
+  "address": "경기도 파주시 월롱면 엘지로 17",
+  "tel": "031-940-8570",
+  "homepage": "https://lib.paju.go.kr/wllib"
+ },
+ {
+  "libCode": "141242",
+  "libName": "파주시립적성도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.9541763,
+  "longitude": 126.917375,
+  "address": "경기도 파주시 적성면 청송로 1013, 적성면 행정복지센터",
+  "tel": "031-940-8552",
+  "homepage": "https://lib.paju.go.kr/jslib"
+ },
+ {
+  "libCode": "141251",
+  "libName": "파주시립조리도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.747529,
+  "longitude": 126.806657,
+  "address": "경기도 파주시 조리읍 내산길 29",
+  "tel": "031-944-2945",
+  "homepage": "https://lib.paju.go.kr/jrlib"
+ },
+ {
+  "libCode": "141566",
+  "libName": "파주시립탄현도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.8024426,
+  "longitude": 126.7161779,
+  "address": "경기도 파주시 탄현면 방촌로649번길 24-7, 탄현면 행정복지센터 2층",
+  "tel": "031-940-8458",
+  "homepage": "https://lib.paju.go.kr/thlib"
+ },
+ {
+  "libCode": "141602",
+  "libName": "파주시립파평도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.9217217,
+  "longitude": 126.8378254,
+  "address": "경기도 파주시 파평면 청송로 189-21",
+  "tel": "031-940-5990",
+  "homepage": "https://lib.paju.go.kr/pplib"
+ },
+ {
+  "libCode": "141517",
+  "libName": "파주시립한빛도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.7119174,
+  "longitude": 126.749405,
+  "address": "경기도 파주시 와석순환로 94",
+  "tel": "031-940-5777",
+  "homepage": "https://lib.paju.go.kr/hblib"
+ },
+ {
+  "libCode": "141604",
+  "libName": "파주시립한울도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.7172045,
+  "longitude": 126.7435306,
+  "address": "경기도 파주시 교하로 239",
+  "tel": "031-940-5007",
+  "homepage": "https://lib.paju.go.kr/hulib"
+ },
+ {
+  "libCode": "141326",
+  "libName": "파주시립해솔도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.7266026,
+  "longitude": 126.748162,
+  "address": "경기도 파주시 해솔로 34",
+  "tel": "031-940-5140",
+  "homepage": "https://lib.paju.go.kr/hslib"
+ },
+ {
+  "libCode": "141299",
+  "libName": "파주시립행복어린이도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.8567287,
+  "longitude": 126.79098,
+  "address": "경기도 파주시 문산읍 통일로 1680, 문산읍 행정복지센터 3층",
+  "tel": "031-940-8571",
+  "homepage": "https://lib.paju.go.kr/hclib"
+ },
+ {
+  "libCode": "141082",
+  "libName": "파주시중앙도서관",
+  "dtlRegion": "31200",
+  "latitude": 37.7499775,
+  "longitude": 126.7706867,
+  "address": "경기도 파주시 쇠재로 33 ",
+  "tel": "031-940-5661",
+  "homepage": "https://lib.paju.go.kr/jalib"
+ },
+ {
+  "libCode": "141446",
+  "libName": "대월작은도서관",
+  "dtlRegion": "31210",
+  "latitude": 37.2298164,
+  "longitude": 127.4921844,
+  "address": "경기도 이천시 대월면 사동로 1-10",
+  "tel": "031-637-0997",
+  "homepage": "http://small.icheonlib.go.kr"
+ },
+ {
+  "libCode": "741449",
+  "libName": "모가작은도서관",
+  "dtlRegion": "31210",
+  "latitude": 37.1715184,
+  "longitude": 127.4821767,
+  "address": "경기도 이천시 모가면 대월로63번길 46",
+  "tel": "031-636-6025",
+  "homepage": "http://small.icheonlib.go.kr"
+ },
+ {
+  "libCode": "141487",
+  "libName": "백사작은도서관",
+  "dtlRegion": "31210",
+  "latitude": 37.3392586,
+  "longitude": 127.4913661,
+  "address": "경기도 이천시 백사면 현방로 69",
+  "tel": "031-634-1981",
+  "homepage": "http://small.icheonlib.go.kr"
+ },
+ {
+  "libCode": "741246",
+  "libName": "설성작은도서관",
+  "dtlRegion": "31210",
+  "latitude": 37.1321024,
+  "longitude": 127.5216842,
+  "address": "경기도 이천시 설성면 설장로17번길 6-6",
+  "tel": "031-636-2490",
+  "homepage": "http://small.icheonlib.go.kr"
+ },
+ {
+  "libCode": "741151",
+  "libName": "시청작은도서관",
+  "dtlRegion": "31210",
+  "latitude": 37.2717955,
+  "longitude": 127.4347107,
+  "address": "경기도 이천시 부악로 40",
+  "tel": "031-644-4390",
+  "homepage": "http://small.icheonlib.go.kr"
+ },
+ {
+  "libCode": "741360",
+  "libName": "신둔작은도서관",
+  "dtlRegion": "31210",
+  "latitude": 37.3061619,
+  "longitude": 127.4040543,
+  "address": "경기도 이천시 신둔면 경충대로 3128",
+  "tel": "031-631-8130",
+  "homepage": "http://small.icheonlib.go.kr"
+ },
+ {
+  "libCode": "141029",
+  "libName": "이천시립도서관",
+  "dtlRegion": "31210",
+  "latitude": 37.2868263,
+  "longitude": 127.4368133,
+  "address": "경기도 이천시 설봉로81번길 50",
+  "tel": "031-644-4351",
+  "homepage": "http://www.icheonlib.go.kr/"
+ },
+ {
+  "libCode": "141594",
+  "libName": "이천시립마장도서관",
+  "dtlRegion": "31210",
+  "latitude": 37.2503901,
+  "longitude": 127.3557511,
+  "address": "경기도 이천시 마장면 마장로 11",
+  "tel": "031-645-3441",
+  "homepage": "http://icheonlib.go.kr"
+ },
+ {
+  "libCode": "141166",
+  "libName": "이천시립어린이도서관",
+  "dtlRegion": "31210",
+  "latitude": 37.278046,
+  "longitude": 127.441157,
+  "address": "경기도 이천시 남천로 31",
+  "tel": "031-644-4381",
+  "homepage": "http://www.icheonlib.go.kr/"
+ },
+ {
+  "libCode": "141068",
+  "libName": "이천시립청미도서관",
+  "dtlRegion": "31210",
+  "latitude": 37.1169278,
+  "longitude": 127.6152627,
+  "address": "경기도 이천시 장호원읍 장호원3리 371",
+  "tel": "031-644-4371",
+  "homepage": "http://www.icheonlib.go.kr/"
+ },
+ {
+  "libCode": "141539",
+  "libName": "이천시립효양도서관",
+  "dtlRegion": "31210",
+  "latitude": 37.2615995,
+  "longitude": 127.4779588,
+  "address": "경기도 이천시 부발읍 경충대로2250번길 35",
+  "tel": "031-644-4391",
+  "homepage": "http://www.icheonlib.go.kr/"
+ },
+ {
+  "libCode": "741361",
+  "libName": "증포송정작은도서관",
+  "dtlRegion": "31210",
+  "latitude": 37.2892999,
+  "longitude": 127.4454311,
+  "address": "경기도 이천시 아리역로 34",
+  "tel": "031-631-1479",
+  "homepage": "http://small.icheonlib.go.kr"
+ },
+ {
+  "libCode": "741362",
+  "libName": "평생학습북카페작은도서관",
+  "dtlRegion": "31210",
+  "latitude": 37.282645,
+  "longitude": 127.4503999,
+  "address": "경기도 이천시 애련정로136번길 84",
+  "tel": "031-631-5793",
+  "homepage": "http://small.icheonlib.go.kr"
+ },
+ {
+  "libCode": "741348",
+  "libName": "호법작은도서관",
+  "dtlRegion": "31210",
+  "latitude": 37.2228461,
+  "longitude": 127.4247522,
+  "address": "경기도 이천시 호법면 이섭대천로527번길 27",
+  "tel": "031-631-0996",
+  "homepage": "http://small.icheonlib.go.kr"
+ },
+ {
+  "libCode": "14116801",
+  "libName": "안성대림동산작은도서관",
+  "dtlRegion": "31220",
+  "latitude": 37.0139555,
+  "longitude": 127.2031019,
+  "address": "경기도 안성시 공도읍 대림동산길 36",
+  "tel": "070-4942-0049",
+  "homepage": "https://www.anseong.go.kr/library/"
+ },
+ {
+  "libCode": "141291",
+  "libName": "안성부영작은도서관",
+  "dtlRegion": "31220",
+  "latitude": 37.0081396,
+  "longitude": 127.183659,
+  "address": "경기도 안성시 공도읍 만수로 31, 부영아파트 관리사무소 2층",
+  "tel": "031-618-0089",
+  "homepage": "http://www.apl.go.kr/"
+ },
+ {
+  "libCode": "141296",
+  "libName": "안성삼죽작은도서관",
+  "dtlRegion": "31220",
+  "latitude": 37.0725486,
+  "longitude": 127.374635,
+  "address": "경기도 안성시 삼죽면 삼죽로 112",
+  "tel": "031-671-7940",
+  "homepage": "http://www.apl.go.kr/"
+ },
+ {
+  "libCode": "141292",
+  "libName": "안성송정작은도서관",
+  "dtlRegion": "31220",
+  "latitude": 37.00451,
+  "longitude": 127.20054,
+  "address": "경기도 안성시 공도읍 양기길 46, 송정아파트 관리사무소 2층",
+  "tel": "031-618-0064",
+  "homepage": "http://www.apl.go.kr/"
+ },
+ {
+  "libCode": "141290",
+  "libName": "안성시 공도도서관",
+  "dtlRegion": "31220",
+  "latitude": 37.0033824,
+  "longitude": 127.172642,
+  "address": "경기도 안성시 공도읍 공도5로 26",
+  "tel": "031-678-3210",
+  "homepage": "http://www.apl.go.kr/"
+ },
+ {
+  "libCode": "141289",
+  "libName": "안성시 보개도서관",
+  "dtlRegion": "31220",
+  "latitude": 37.0150259,
+  "longitude": 127.322491,
+  "address": "경기도 안성시 보개면 종합운동장로 205",
+  "tel": "031-678-5330",
+  "homepage": "http://www.apl.go.kr/"
+ },
+ {
+  "libCode": "141026",
+  "libName": "안성시 아양도서관",
+  "dtlRegion": "31220",
+  "latitude": 37.0162227,
+  "longitude": 127.2681605,
+  "address": "경기도 안성시 아양로 88",
+  "tel": "031-678-0730",
+  "homepage": "https://anseong.go.kr/library/main.do"
+ },
+ {
+  "libCode": "141294",
+  "libName": "안성시 일죽도서관",
+  "dtlRegion": "31220",
+  "latitude": 37.0942077,
+  "longitude": 127.475151,
+  "address": "경기도 안성시 일죽면 금일로 433, 4층",
+  "tel": "031-678-3230",
+  "homepage": "http://www.apl.go.kr/"
+ },
+ {
+  "libCode": "141168",
+  "libName": "안성시 중앙도서관",
+  "dtlRegion": "31220",
+  "latitude": 37.0152864,
+  "longitude": 127.2686,
+  "address": "경기도 안성시 안성맞춤대로 1150",
+  "tel": "031-676-7941",
+  "homepage": "http://www.apl.go.kr/"
+ },
+ {
+  "libCode": "141547",
+  "libName": "안성시 진사도서관",
+  "dtlRegion": "31220",
+  "latitude": 36.9941373,
+  "longitude": 127.144458,
+  "address": "경기도 안성시 공도읍 진사2길 70",
+  "tel": "031-678-4090",
+  "homepage": "http://www.apl.go.kr/"
+ },
+ {
+  "libCode": "141295",
+  "libName": "안성죽산작은도서관",
+  "dtlRegion": "31220",
+  "latitude": 37.0770255,
+  "longitude": 127.423944,
+  "address": "경기도 안성시 죽산면 중부길 41",
+  "tel": "031-677-7941",
+  "homepage": "http://www.apl.go.kr/"
+ },
+ {
+  "libCode": "141213",
+  "libName": "안성태산작은도서관",
+  "dtlRegion": "31220",
+  "latitude": 37.0009401,
+  "longitude": 127.153541,
+  "address": "경기도 안성시 공도읍 벚꽃길 36, 태산아파트 관리사무소 3층",
+  "tel": "031-618-0084",
+  "homepage": "http://www.apl.go.kr/"
+ },
+ {
+  "libCode": "141293",
+  "libName": "안성풍림작은도서관",
+  "dtlRegion": "31220",
+  "latitude": 36.9989,
+  "longitude": 127.159,
+  "address": "경기도 안성시 공도읍 서동대로 4081, 주은풍림아파트 상가동",
+  "tel": "031-618-0062",
+  "homepage": "http://www.apl.go.kr/"
+ },
+ {
+  "libCode": "141006",
+  "libName": "경기도교육청김포도서관",
+  "dtlRegion": "31230",
+  "latitude": 37.6209475,
+  "longitude": 126.7117185,
+  "address": "경기도 김포시 봉화로 68",
+  "tel": "031-984-3536",
+  "homepage": "https://lib.goe.go.kr/gimpo/"
+ },
+ {
+  "libCode": "741008",
+  "libName": "구래작은도서관",
+  "dtlRegion": "31230",
+  "latitude": 37.2937629,
+  "longitude": 127.0000255,
+  "address": "경기도 김포시 김포한강9로115번길 25, 2층",
+  "tel": "031-5186-4837",
+  "homepage": "http://www.gimpo.go.kr/lib/index.do"
+ },
+ {
+  "libCode": "141591",
+  "libName": "김포시고촌도서관",
+  "dtlRegion": "31230",
+  "latitude": 37.6032053,
+  "longitude": 126.7711481,
+  "address": "경기도 김포시 고촌읍 장차로 14",
+  "tel": "031-5186-4850",
+  "homepage": "https://www.gimpo.go.kr/gochon/index.do"
+ },
+ {
+  "libCode": "141640",
+  "libName": "김포시마산도서관",
+  "dtlRegion": "31230",
+  "latitude": 37.6342473,
+  "longitude": 126.7370613,
+  "address": "경기도 김포시 김포한강7로22번길 174-6",
+  "tel": "031-5186-4890",
+  "homepage": "https://www.gimpo.go.kr/masan/index.do"
+ },
+ {
+  "libCode": "141670",
+  "libName": "김포시모담도서관",
+  "dtlRegion": "31230",
+  "latitude": 37.6493504,
+  "longitude": 126.6896544,
+  "address": "경기도 김포시 모담공원로 118",
+  "tel": "031-5186-3950",
+  "homepage": "https://www.gimpo.go.kr/modam/index.do"
+ },
+ {
+  "libCode": "141404",
+  "libName": "김포시양곡도서관",
+  "dtlRegion": "31230",
+  "latitude": 37.6616215,
+  "longitude": 126.6314142,
+  "address": "경기도 김포시 양촌읍 양곡4로197번길 40",
+  "tel": "031-5186-4830",
+  "homepage": "https://www.gimpo.go.kr/yanggok/index.do"
+ },
+ {
+  "libCode": "141593",
+  "libName": "김포시장기도서관",
+  "dtlRegion": "31230",
+  "latitude": 37.6417974,
+  "longitude": 126.6765915,
+  "address": "경기도 김포시 김포한강2로 42",
+  "tel": "031-5186-4680",
+  "homepage": "https://www.gimpo.go.kr/janggi/index.do"
+ },
+ {
+  "libCode": "141057",
+  "libName": "김포시중봉도서관",
+  "dtlRegion": "31230",
+  "latitude": 37.6256899,
+  "longitude": 126.7067349,
+  "address": "경기도 김포시 봉화로130번길 26",
+  "tel": "-",
+  "homepage": "https://www.gimpo.go.kr/lib/index.do"
+ },
+ {
+  "libCode": "141169",
+  "libName": "김포시통진도서관",
+  "dtlRegion": "31230",
+  "latitude": 37.6939423,
+  "longitude": 126.5920404,
+  "address": "경기도 김포시 통진읍 조강로 132",
+  "tel": "031-5186-4980",
+  "homepage": "https://www.gimpo.go.kr/tongjin/index.do"
+ },
+ {
+  "libCode": "141606",
+  "libName": "김포시풍무도서관",
+  "dtlRegion": "31230",
+  "latitude": 37.6081598,
+  "longitude": 126.7262332,
+  "address": "경기도 김포시 풍무로146번길 101",
+  "tel": "031-5186-4870",
+  "homepage": "https://www.gimpo.go.kr/pungmu/index.do"
+ },
+ {
+  "libCode": "141121",
+  "libName": "누리봄작은도서관",
+  "dtlRegion": "31230",
+  "latitude": 37.6248158,
+  "longitude": 126.7145551,
+  "address": "경기도 김포시 김포대로926번길 14, 2층",
+  "tel": "031-5186-4888",
+  "homepage": "http://www.gimpo.go.kr/lib/index.do"
+ },
+ {
+  "libCode": "141266",
+  "libName": "대곶작은도서관",
+  "dtlRegion": "31230",
+  "latitude": 37.6521773,
+  "longitude": 126.5840833,
+  "address": "경기도 김포시 대곶면 율생로 83-23, 대곶문화복지센터 3층",
+  "tel": "031-5186-4838",
+  "homepage": "http://www.gimpo.go.kr/lib/index.do"
+ },
+ {
+  "libCode": "141130",
+  "libName": "경기도교육청화성도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.1331056,
+  "longitude": 126.9201978,
+  "address": "경기도 화성시 향남읍 발안로 85-10",
+  "tel": "031-369-5700",
+  "homepage": "https://lib.goe.go.kr/hs/"
+ },
+ {
+  "libCode": "141283",
+  "libName": "화성동탄중앙도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.200341,
+  "longitude": 127.075396,
+  "address": "경기도 화성시 동탄중앙로 120",
+  "tel": "031-5189-5873",
+  "homepage": "https://www.hscitylib.or.kr/dtlib/"
+ },
+ {
+  "libCode": "141247",
+  "libName": "화성시립기아행복마루작은도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.0646935,
+  "longitude": 126.7956006,
+  "address": "경기도 화성시 우정읍 기아자동차로 559",
+  "tel": "031-358-2597",
+  "homepage": "https://www.hscitylib.or.kr/small"
+ },
+ {
+  "libCode": "141042",
+  "libName": "화성시립남양도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.2117634,
+  "longitude": 126.8237722,
+  "address": "경기도 화성시 남양읍 역골중앙로 143",
+  "tel": "031-356-5241",
+  "homepage": "https://www.hscitylib.or.kr/nylib/"
+ },
+ {
+  "libCode": "141645",
+  "libName": "화성시립노을빛도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.2078276,
+  "longitude": 127.0337163,
+  "address": "경기도 화성시 병점노을로 19",
+  "tel": "031-226-3301",
+  "homepage": "https://www.hscitylib.or.kr/neblib/index.do"
+ },
+ {
+  "libCode": "741827",
+  "libName": "화성시립늘봄이음터작은도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.2175611,
+  "longitude": 127.1095261,
+  "address": "경기도 화성시 동탄대로24길 49",
+  "tel": "031-378-5696",
+  "homepage": "https://www.hscitylib.or.kr/small"
+ },
+ {
+  "libCode": "141661",
+  "libName": "화성시립달빛나래어린이도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.2798429,
+  "longitude": 127.1130107,
+  "address": "경기도 화성시 영통로60번길 15",
+  "tel": "031-273-8878",
+  "homepage": "https://www.hscitylib.or.kr/mlnarae"
+ },
+ {
+  "libCode": "141611",
+  "libName": "화성시립동탄다원이음터도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.199327,
+  "longitude": 127.0970177,
+  "address": "경기도 화성시 동탄순환대로 754-14",
+  "tel": "031-372-9611",
+  "homepage": "http://www.hscitylib.or.kr/dwlib/index.jsp"
+ },
+ {
+  "libCode": "141624",
+  "libName": "화성시립동탄목동이음터도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.1894624,
+  "longitude": 127.1290084,
+  "address": "경기도 화성시 동탄순환대로20길 6",
+  "tel": "031-378-6771",
+  "homepage": "http://www.hscitylib.or.kr/mdlib/index.jsp"
+ },
+ {
+  "libCode": "141578",
+  "libName": "화성시립동탄중앙이음터도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.1974276,
+  "longitude": 127.1025942,
+  "address": "경기도 화성시 동탄대로시범길 115",
+  "tel": "031-378-7344",
+  "homepage": "https://www.hscitylib.or.kr/iutlib/"
+ },
+ {
+  "libCode": "141170",
+  "libName": "화성시립두빛나래어린이도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.2094269,
+  "longitude": 127.0566065,
+  "address": "경기도 화성시 동탄숲속로 69-14",
+  "tel": "031-8003-0748",
+  "homepage": "https://www.hscitylib.or.kr/dbnarae/"
+ },
+ {
+  "libCode": "141241",
+  "libName": "화성시립둥지나래어린이도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.1291399,
+  "longitude": 126.9247636,
+  "address": "경기도 화성시 향남읍 행정중앙2로 88",
+  "tel": " 031-353-8162",
+  "homepage": "https://www.hscitylib.or.kr/djnarae/"
+ },
+ {
+  "libCode": "741568",
+  "libName": "화성시립마도작은도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.2049822,
+  "longitude": 126.7702991,
+  "address": "경기도 화성시 만세구 마도면 마도북로 387, 2층 (마도문화센터)",
+  "tel": "031-5189-2338",
+  "homepage": "https://www.hscitylib.or.kr/small"
+ },
+ {
+  "libCode": "141088",
+  "libName": "화성시립병점도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.2122319,
+  "longitude": 127.0461332,
+  "address": "경기도 화성시 병점3로 132-6",
+  "tel": "031-226-1822",
+  "homepage": "https://www.hscitylib.or.kr/bjlib/"
+ },
+ {
+  "libCode": "141233",
+  "libName": "화성시립봉담도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.2192823,
+  "longitude": 126.9490624,
+  "address": "경기도 화성시 봉담읍 샘마을1길 8-4",
+  "tel": "031-227-7281",
+  "homepage": "https://www.hscitylib.or.kr/bdlib/"
+ },
+ {
+  "libCode": "141679",
+  "libName": "화성시립봉담와우도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.2162706,
+  "longitude": 126.9731294,
+  "address": "경기도 화성시 효행구 봉담읍 와우로15번길 7",
+  "tel": "031-235-0335",
+  "homepage": "https://www.hscitylib.or.kr/bwlib"
+ },
+ {
+  "libCode": "741680",
+  "libName": "화성시립봉담커피앤북작은도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.2260181,
+  "longitude": 126.9440272,
+  "address": "경기도 화성시 효행구 봉담읍 상리3길 38",
+  "tel": "070-4040-9833",
+  "homepage": "https://www.hscitylib.or.kr/small"
+ },
+ {
+  "libCode": "741226",
+  "libName": "화성시립비봉작은도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.2338463,
+  "longitude": 126.8735861,
+  "address": "경기도 화성시 비봉면 비봉로71번길 1",
+  "tel": "031-355-4551",
+  "homepage": "https://www.hscitylib.or.kr/small"
+ },
+ {
+  "libCode": "141076",
+  "libName": "화성시립삼괴도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.0891899,
+  "longitude": 126.8142869,
+  "address": "경기도 화성시 우정읍 쌍봉로 109-26",
+  "tel": "031-358-2101",
+  "homepage": "https://www.hscitylib.or.kr/sglib/"
+ },
+ {
+  "libCode": "141145",
+  "libName": "화성시립샘내작은도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.2446509,
+  "longitude": 126.9461843,
+  "address": "경기도 화성시 매송면 매송고색로375번길 11",
+  "tel": "031-293-7307",
+  "homepage": "https://www.hscitylib.or.kr/small"
+ },
+ {
+  "libCode": "741937",
+  "libName": "화성시립서신작은도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.1662107,
+  "longitude": 126.7088664,
+  "address": "경기도 화성시 만세구 서신면 궁평항로 1702, 2층",
+  "tel": "031-5189-6489",
+  "homepage": "https://www.hscitylib.or.kr/small/index.do"
+ },
+ {
+  "libCode": "141644",
+  "libName": "화성시립서연이음터도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.2098027,
+  "longitude": 127.0587938,
+  "address": "경기도 화성시 동탄순환대로8길 57",
+  "tel": "031-378-1352",
+  "homepage": "https://www.hscitylib.or.kr/sylib/"
+ },
+ {
+  "libCode": "141621",
+  "libName": "화성시립송린이음터도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.2793971,
+  "longitude": 126.8228144,
+  "address": "경기도 화성시 수노을2로 150",
+  "tel": "031-356-9680",
+  "homepage": "http://www.hscitylib.or.kr/srlib/index.jsp"
+ },
+ {
+  "libCode": "141403",
+  "libName": "화성시립송산도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.2165915,
+  "longitude": 126.7393467,
+  "address": "경기도 화성시 송산면 삼일공원로 87",
+  "tel": "031-355-5798",
+  "homepage": "https://www.hscitylib.or.kr/sslib/"
+ },
+ {
+  "libCode": "741473",
+  "libName": "화성시립양감작은도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.0818625,
+  "longitude": 126.9460528,
+  "address": "경기도 화성시 만세구 양감면 초록로 7, 1층 (양감면 행정복지센터)",
+  "tel": "031-5189-3004",
+  "homepage": "https://www.hscitylib.or.kr/small"
+ },
+ {
+  "libCode": "141637",
+  "libName": "화성시립왕배푸른숲도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.1815826,
+  "longitude": 127.1113377,
+  "address": "경기도 화성시 동탄대로 12길 102",
+  "tel": "031-372-4435",
+  "homepage": "https://www.hscitylib.or.kr/wblib"
+ },
+ {
+  "libCode": "141519",
+  "libName": "화성시립정남도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.1682957,
+  "longitude": 126.9830089,
+  "address": "경기도 화성시 정남면 만년로 527",
+  "tel": "031-8059-4947",
+  "homepage": "https://www.hscitylib.or.kr/jnlib/"
+ },
+ {
+  "libCode": "141575",
+  "libName": "화성시립진안도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.2076452,
+  "longitude": 127.0412738,
+  "address": "경기도 화성시 병점중앙로 229",
+  "tel": "031-224-9977",
+  "homepage": "https://www.hscitylib.or.kr/jalib/"
+ },
+ {
+  "libCode": "141048",
+  "libName": "화성시립태안도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.2054211,
+  "longitude": 127.0142827,
+  "address": "경기도 화성시 화산중앙로 19",
+  "tel": "031-223-4764",
+  "homepage": "https://www.hscitylib.or.kr/talib/"
+ },
+ {
+  "libCode": "741567",
+  "libName": "화성시립팔탄작은도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.1620622,
+  "longitude": 126.9048367,
+  "address": "경기도 화성시 만세구 팔탄면 구장길 14, 2층(팔탄면 행정복지센터)",
+  "tel": "031-5189-2339",
+  "homepage": "https://www.hscitylib.or.kr/small"
+ },
+ {
+  "libCode": "141671",
+  "libName": "화성시립향남복합문화센터도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.1159734,
+  "longitude": 126.9048998,
+  "address": "경기도 화성시 향남읍 상신하길로273번길 17",
+  "tel": "031-8059-6800",
+  "homepage": "https://www.hscitylib.or.kr/hnlib/index.do"
+ },
+ {
+  "libCode": "741828",
+  "libName": "화성시립호연이음터작은도서관",
+  "dtlRegion": "31240",
+  "latitude": 37.1628806,
+  "longitude": 127.104777,
+  "address": "경기도 화성시 동탄대로3길 17-9",
+  "tel": "031-378-7116",
+  "homepage": "https://www.hscitylib.or.kr/small"
+ },
+ {
+  "libCode": "141005",
+  "libName": "경기도교육청광주도서관",
+  "dtlRegion": "31250",
+  "latitude": 37.4108381,
+  "longitude": 127.2552863,
+  "address": "경기도 광주시 경안안길58번길 3",
+  "tel": "031-768-6923",
+  "homepage": "https://lib.goe.go.kr/gj/"
+ },
+ {
+  "libCode": "741089",
+  "libName": "광남작은도서관",
+  "dtlRegion": "31250",
+  "latitude": 37.3855352,
+  "longitude": 127.2365257,
+  "address": "경기도 광주시 회안대로 350-17",
+  "tel": "031-760-8745",
+  "homepage": "https://lib.gjcity.go.kr/slib"
+ },
+ {
+  "libCode": "141235",
+  "libName": "광주시립곤지암도서관",
+  "dtlRegion": "31250",
+  "latitude": 37.3489171,
+  "longitude": 127.3410147,
+  "address": "경기도 광주시 곤지암읍 곤지암로11번길 47",
+  "tel": "031-760-5666",
+  "homepage": "https://lib.gjcity.go.kr/gj"
+ },
+ {
+  "libCode": "141576",
+  "libName": "광주시립능평도서관",
+  "dtlRegion": "31250",
+  "latitude": 37.3496999,
+  "longitude": 127.1671923,
+  "address": "경기도 광주시 창뜰아랫길 6",
+  "tel": "031-760-5912",
+  "homepage": "https://lib.gjcity.go.kr/np"
+ },
+ {
+  "libCode": "141236",
+  "libName": "광주시립오포도서관",
+  "dtlRegion": "31250",
+  "latitude": 37.3692382,
+  "longitude": 127.2312356,
+  "address": "경기도 광주시 태봉로 193",
+  "tel": "031-760-5697",
+  "homepage": "https://lib.gjcity.go.kr/op"
+ },
+ {
+  "libCode": "141114",
+  "libName": "광주시립중앙도서관",
+  "dtlRegion": "31250",
+  "latitude": 37.4105616,
+  "longitude": 127.2528784,
+  "address": "경기도 광주시 문화로 82",
+  "tel": "031-760-5678",
+  "homepage": "https://lib.gjcity.go.kr"
+ },
+ {
+  "libCode": "141512",
+  "libName": "광주시립초월도서관",
+  "dtlRegion": "31250",
+  "latitude": 37.3870605,
+  "longitude": 127.2909196,
+  "address": "경기도 광주시 초월읍 무들로 3-26",
+  "tel": "031-760-5688",
+  "homepage": "https://lib.gjcity.go.kr/cw"
+ },
+ {
+  "libCode": "741464",
+  "libName": "남한산성작은도서관",
+  "dtlRegion": "31250",
+  "latitude": 37.4773703,
+  "longitude": 127.1872933,
+  "address": "경기도 광주시 남한산성면 남한산성로 745",
+  "tel": "031-760-8740",
+  "homepage": "https://lib.gjcity.go.kr/slib"
+ },
+ {
+  "libCode": "141147",
+  "libName": "대주작은도서관",
+  "dtlRegion": "31250",
+  "latitude": 37.3757817,
+  "longitude": 127.2614716,
+  "address": "경기도 광주시 오포읍 마루들길 276",
+  "tel": "031-760-8744",
+  "homepage": "https://lib.gjcity.go.kr/slib"
+ },
+ {
+  "libCode": "141399",
+  "libName": "도척작은도서관",
+  "dtlRegion": "31250",
+  "latitude": 37.3046236,
+  "longitude": 127.3311836,
+  "address": "경기도 광주시 도척면 노곡로 20",
+  "tel": "031-760-5690",
+  "homepage": "https://lib.gjcity.go.kr/slib/lay1/program/S39T419C1526/libstatus/intro.do#n"
+ },
+ {
+  "libCode": "141392",
+  "libName": "퇴촌작은도서관",
+  "dtlRegion": "31250",
+  "latitude": 37.4706233,
+  "longitude": 127.3092664,
+  "address": "경기도 광주시 퇴촌면 광동로 57-2",
+  "tel": "031-760-5691",
+  "homepage": "https://lib.gjcity.go.kr/slib"
+ },
+ {
+  "libCode": "741758",
+  "libName": "고암작은도서관",
+  "dtlRegion": "31260",
+  "latitude": 37.8333114,
+  "longitude": 127.0708782,
+  "address": "경기도 양주시 고암길 251-1",
+  "tel": "031-8082-7489",
+  "homepage": "https://www.libyj.go.kr/goamlib/index.do"
+ },
+ {
+  "libCode": "141323",
+  "libName": "양주시립고읍도서관",
+  "dtlRegion": "31260",
+  "latitude": 37.7925771,
+  "longitude": 127.0843348,
+  "address": "경기도 양주시 고읍남로 207",
+  "tel": "031-8082-7447",
+  "homepage": "https://www.libyj.go.kr/gulib/"
+ },
+ {
+  "libCode": "141581",
+  "libName": "양주시립광적도서관",
+  "dtlRegion": "31260",
+  "latitude": 37.8213656,
+  "longitude": 126.986781,
+  "address": "경기도 양주시 광적면 광적로42번길 5",
+  "tel": "031-8082-7483",
+  "homepage": "https://www.libyj.go.kr/gjlib/"
+ },
+ {
+  "libCode": "141098",
+  "libName": "양주시립꿈나무도서관",
+  "dtlRegion": "31260",
+  "latitude": 37.7923901,
+  "longitude": 126.9871678,
+  "address": "경기도 양주시 백석읍 꿈나무로 199",
+  "tel": "031-8082-7411",
+  "homepage": "https://www.libyj.go.kr/childlib/"
+ },
+ {
+  "libCode": "141154",
+  "libName": "양주시립남면도서관",
+  "dtlRegion": "31260",
+  "latitude": 37.8980773,
+  "longitude": 126.9758804,
+  "address": "경기도 양주시 남면 개나리17길 24",
+  "tel": "031-8082-7436",
+  "homepage": "https://www.libyj.go.kr/nmlib/"
+ },
+ {
+  "libCode": "141545",
+  "libName": "양주시립덕계도서관",
+  "dtlRegion": "31260",
+  "latitude": 37.8224492,
+  "longitude": 127.0478443,
+  "address": "경기도 양주시 평화로1475번길 39",
+  "tel": "031-8082-7456",
+  "homepage": "https://www.libyj.go.kr/dklib/"
+ },
+ {
+  "libCode": "141037",
+  "libName": "양주시립덕정도서관",
+  "dtlRegion": "31260",
+  "latitude": 37.842918,
+  "longitude": 127.0631264,
+  "address": "경기도 양주시 화합로1371번길 11",
+  "tel": "031-8082-7420",
+  "homepage": "https://www.libyj.go.kr/djlib/"
+ },
+ {
+  "libCode": "141605",
+  "libName": "양주시립옥정호수도서관",
+  "dtlRegion": "31260",
+  "latitude": 37.8203009,
+  "longitude": 127.0864731,
+  "address": "경기도 양주시 옥정동로7길 110",
+  "tel": "031-8082-7477",
+  "homepage": "https://www.libyj.go.kr/ojlake/index.do"
+ },
+ {
+  "libCode": "141558",
+  "libName": "양주희망도서관",
+  "dtlRegion": "31260",
+  "latitude": 37.7979256,
+  "longitude": 127.103811,
+  "address": "경기도 양주시 삼숭로38번길 78-47",
+  "tel": "031-8082-7466",
+  "homepage": "https://www.libyj.go.kr/hmlib/"
+ },
+ {
+  "libCode": "141300",
+  "libName": "장흥작은도서관",
+  "dtlRegion": "31260",
+  "latitude": 37.7137571,
+  "longitude": 126.9693719,
+  "address": "경기도 양주시 장흥면 호국로 470",
+  "tel": "031-8082-7468",
+  "homepage": "https://www.libyj.go.kr/jhlib/index.do"
+ },
+ {
+  "libCode": "141553",
+  "libName": "가산도서관",
+  "dtlRegion": "31270",
+  "latitude": 37.8484029,
+  "longitude": 127.186356,
+  "address": "경기도 포천시 가산면 선마로 223",
+  "tel": "031-538-3987",
+  "homepage": "https://lib.pocheon.go.kr/gasan"
+ },
+ {
+  "libCode": "141017",
+  "libName": "경기도교육청포천도서관",
+  "dtlRegion": "31270",
+  "latitude": 37.8944791,
+  "longitude": 127.2018087,
+  "address": "경기도 포천시 중앙로 92-6",
+  "tel": "031-536-9590",
+  "homepage": "https://lib.goe.go.kr/pc/"
+ },
+ {
+  "libCode": "141333",
+  "libName": "면암중앙도서관",
+  "dtlRegion": "31270",
+  "latitude": 37.9053026,
+  "longitude": 127.206376,
+  "address": "경기도 포천시 신북면 중앙로207번길 26 ",
+  "tel": "031-538-3911",
+  "homepage": "https://lib.pocheon.go.kr/center/"
+ },
+ {
+  "libCode": "141634",
+  "libName": "선단도서관",
+  "dtlRegion": "31270",
+  "latitude": 37.8536908,
+  "longitude": 127.1577518,
+  "address": "경기도 포천시 삼육사로2186번길 7",
+  "tel": "031-538-3991",
+  "homepage": "https://lib.pocheon.go.kr/seondan"
+ },
+ {
+  "libCode": "141172",
+  "libName": "소흘도서관",
+  "dtlRegion": "31270",
+  "latitude": 37.8296046,
+  "longitude": 127.1375338,
+  "address": "경기도 포천시 소흘읍 송우로 101-29",
+  "tel": "031-538-3951",
+  "homepage": "https://lib.pocheon.go.kr/soheul"
+ },
+ {
+  "libCode": "141520",
+  "libName": "영북도서관",
+  "dtlRegion": "31270",
+  "latitude": 38.0876825,
+  "longitude": 127.2741705,
+  "address": "경기도 포천시 영북면 운천안길 3",
+  "tel": "031-538-3972",
+  "homepage": "https://lib.pocheon.go.kr/yeongbuk"
+ },
+ {
+  "libCode": "141102",
+  "libName": "영중꿈나무도서관",
+  "dtlRegion": "31270",
+  "latitude": 38.0056285,
+  "longitude": 127.2453024,
+  "address": "경기도 포천시 영중면 양문로 151",
+  "tel": "031-538-3945",
+  "homepage": "https://lib.pocheon.go.kr/yeongjung"
+ },
+ {
+  "libCode": "141094",
+  "libName": "일동도서관",
+  "dtlRegion": "31270",
+  "latitude": 37.9549363,
+  "longitude": 127.3154556,
+  "address": "경기도 포천시 일동면 화동로 1021",
+  "tel": "031-538-3932",
+  "homepage": "https://lib.pocheon.go.kr/ildong"
+ },
+ {
+  "libCode": "141012",
+  "libName": "경기도교육청여주가남도서관",
+  "dtlRegion": "31280",
+  "latitude": 37.2041633,
+  "longitude": 127.5461529,
+  "address": "경기도 여주시 가남읍 태평2길 28-7",
+  "tel": "031-882-1066",
+  "homepage": "https://lib.goe.go.kr/gn/index.do"
+ },
+ {
+  "libCode": "741094",
+  "libName": "북내작은도서관",
+  "dtlRegion": "31280",
+  "latitude": 37.3275858,
+  "longitude": 127.6833952,
+  "address": "경기도 여주시 북내면 여강로 337-38",
+  "tel": "031-887-3317",
+  "homepage": "http://www.yjlib.go.kr"
+ },
+ {
+  "libCode": "141177",
+  "libName": "산북작은도서관",
+  "dtlRegion": "31280",
+  "latitude": 37.4033349,
+  "longitude": 127.4432674,
+  "address": "경기도 여주시 산북면 상품로 113, 3층",
+  "tel": "031-887-3316",
+  "homepage": "http://www.yjlib.go.kr"
+ },
+ {
+  "libCode": "141641",
+  "libName": "여주기적의도서관",
+  "dtlRegion": "31280",
+  "latitude": 37.2423391,
+  "longitude": 127.5545328,
+  "address": "경기도 여주시 세종대왕면 양화로 913",
+  "tel": "031-887-2965",
+  "homepage": "https://www.yjlib.go.kr"
+ },
+ {
+  "libCode": "141615",
+  "libName": "여주시립금사도서관 ",
+  "dtlRegion": "31280",
+  "latitude": 37.3884387,
+  "longitude": 127.5345689,
+  "address": "경기도 여주시 흥천면 이여로 1278-2",
+  "tel": "031-887-3390",
+  "homepage": "https://www.yjlib.go.kr"
+ },
+ {
+  "libCode": "141600",
+  "libName": "여주시립대신도서관",
+  "dtlRegion": "31280",
+  "latitude": 37.3732427,
+  "longitude": 127.5859505,
+  "address": "경기도 여주시 대신면 율촌1길 12-10",
+  "tel": "031-887-3361",
+  "homepage": "http://www.yjlib.go.kr"
+ },
+ {
+  "libCode": "141054",
+  "libName": "여주시립세종도서관",
+  "dtlRegion": "31280",
+  "latitude": 37.2971351,
+  "longitude": 127.6249408,
+  "address": "경기도 여주시 영릉로 125",
+  "tel": "031-887-2861",
+  "homepage": "http://www.yjlib.go.kr"
+ },
+ {
+  "libCode": "141331",
+  "libName": "여주시립여주도서관",
+  "dtlRegion": "31280",
+  "latitude": 37.2998502,
+  "longitude": 127.6511676,
+  "address": "경기도 여주시 여양로 190-17",
+  "tel": "031-885-4242",
+  "homepage": "http://www.yjlib.go.kr"
+ },
+ {
+  "libCode": "141586",
+  "libName": "점동도서관",
+  "dtlRegion": "31280",
+  "latitude": 37.2058741,
+  "longitude": 127.662854,
+  "address": "경기도 여주시 점동면 청안로 130-15",
+  "tel": "031-887-3331",
+  "homepage": "http://www.yjlib.go.kr"
+ },
+ {
+  "libCode": "741044",
+  "libName": "무등실작은도서관",
+  "dtlRegion": "31550",
+  "latitude": 38.058449,
+  "longitude": 127.0127464,
+  "address": "경기도 연천군 왕징면 왕산로 44",
+  "tel": "031-833-4417",
+  "homepage": "http://library.yeoncheon.go.kr/"
+ },
+ {
+  "libCode": "741168",
+  "libName": "신서작은도서관",
+  "dtlRegion": "31550",
+  "latitude": 38.1828197,
+  "longitude": 127.1070521,
+  "address": "경기도 연천군 신서면 연신로 1130",
+  "tel": "031-834-4406",
+  "homepage": "http://library.yeoncheon.go.kr/"
+ },
+ {
+  "libCode": "141013",
+  "libName": "연천군중앙도서관",
+  "dtlRegion": "31550",
+  "latitude": 38.0323136,
+  "longitude": 127.0708708,
+  "address": "경기도 연천군 전곡읍 전은길 9-26",
+  "tel": "031-839-4414",
+  "homepage": "http://library.yeoncheon.go.kr/"
+ },
+ {
+  "libCode": "141117",
+  "libName": "연천도서관",
+  "dtlRegion": "31550",
+  "latitude": 38.0981063,
+  "longitude": 127.0767593,
+  "address": "경기도 연천군 연천읍 차현로 76-7",
+  "tel": "031-839-4401",
+  "homepage": "http://library.yeoncheon.go.kr/"
+ },
+ {
+  "libCode": "141250",
+  "libName": "청산작은도서관",
+  "dtlRegion": "31550",
+  "latitude": 38.0322863,
+  "longitude": 127.108779,
+  "address": "경기도 연천군 아우라지길 9",
+  "tel": "031-835-3644",
+  "homepage": "http://library.yeoncheon.go.kr/"
+ },
+ {
+  "libCode": "141228",
+  "libName": "학마을작은도서관",
+  "dtlRegion": "31550",
+  "latitude": 38.0301448,
+  "longitude": 126.9172184,
+  "address": "경기도 연천군 백학면 청정로 534",
+  "tel": "031-839-4408",
+  "homepage": "http://library.yeoncheon.go.kr/"
+ },
+ {
+  "libCode": "141143",
+  "libName": "가평군 설악도서관",
+  "dtlRegion": "31570",
+  "latitude": 37.683239,
+  "longitude": 127.4908736,
+  "address": "경기도 가평군 설악면 자잠로 65",
+  "tel": "031-580-4313",
+  "homepage": "https://www.gaplib.go.kr"
+ },
+ {
+  "libCode": "141105",
+  "libName": "가평군 조종도서관",
+  "dtlRegion": "31570",
+  "latitude": 37.818321,
+  "longitude": 127.3529165,
+  "address": "경기도 가평군 조종면 조종희망로26번길 22",
+  "tel": "031-580-4303",
+  "homepage": "https://www.gaplib.go.kr"
+ },
+ {
+  "libCode": "141286",
+  "libName": "가평군 청평도서관",
+  "dtlRegion": "31570",
+  "latitude": 37.7395914,
+  "longitude": 127.4241821,
+  "address": "경기도 가평군 청평면 은고개로 31",
+  "tel": "031-580-4332",
+  "homepage": "https://www.gaplib.go.kr"
+ },
+ {
+  "libCode": "141001",
+  "libName": "가평군 한석봉도서관",
+  "dtlRegion": "31570",
+  "latitude": 37.8248081,
+  "longitude": 127.5067831,
+  "address": "경기도 가평군 가평읍 문화로 187",
+  "tel": "031-580-4679",
+  "homepage": "https://www.gaplib.go.kr"
+ }
+]

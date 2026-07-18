@@ -1,0 +1,342 @@
+[
+ {
+  "libCode": "128098",
+  "libName": "영종하늘도서관",
+  "dtlRegion": "23010",
+  "latitude": 37.4944932,
+  "longitude": 126.5640039,
+  "address": "인천광역시 중구 하늘중앙로 132",
+  "tel": "032-746-9143",
+  "homepage": "https://www.incheonlib.go.kr/yjs/main.do"
+ },
+ {
+  "libCode": "128061",
+  "libName": "인천 중구 꿈벗도서관",
+  "dtlRegion": "23010",
+  "latitude": 37.4730202,
+  "longitude": 126.625125,
+  "address": "인천광역시 중구 홍예문로 32",
+  "tel": "032-764-6111",
+  "homepage": "https://kblib.or.kr"
+ },
+ {
+  "libCode": "128015",
+  "libName": "인천광역시 영종도서관",
+  "dtlRegion": "23010",
+  "latitude": 37.4956123,
+  "longitude": 126.4879083,
+  "address": "인천광역시 중구 영종대로 85",
+  "tel": "032-745-6000",
+  "homepage": "http://www.ylib.or.kr/"
+ },
+ {
+  "libCode": "128046",
+  "libName": "인천광역시 율목도서관",
+  "dtlRegion": "23010",
+  "latitude": 37.4693677,
+  "longitude": 126.6325952,
+  "address": "인천광역시 중구 답동로24번길 17",
+  "tel": "032-770-3800",
+  "homepage": "https://www.imla.kr/ym/index.do"
+ },
+ {
+  "libCode": "123007",
+  "libName": "인천광역시교육청화도진도서관",
+  "dtlRegion": "23020",
+  "latitude": 37.4818318,
+  "longitude": 126.6283464,
+  "address": "인천광역시 동구 화도진로 122",
+  "tel": "032-760-4100",
+  "homepage": "https://lib.ice.go.kr/hwadojin"
+ },
+ {
+  "libCode": "328015",
+  "libName": "송도국제기구도서관",
+  "dtlRegion": "23040",
+  "latitude": 37.3961117,
+  "longitude": 126.6343272,
+  "address": "인천광역시 연수구 아트센터대로 175, 2층",
+  "tel": "032-851-6650",
+  "homepage": "https://www.incheonlib.go.kr/sio/main.do"
+ },
+ {
+  "libCode": "123010",
+  "libName": "인천광역시교육청연수도서관",
+  "dtlRegion": "23040",
+  "latitude": 37.4178811,
+  "longitude": 126.6853117,
+  "address": "인천광역시 연수구 함박뫼로152번길 96",
+  "tel": "032-899-7500",
+  "homepage": "https://lib.ice.go.kr/yeonsu/index.do"
+ },
+ {
+  "libCode": "128010",
+  "libName": "인천광역시교육청평생학습관",
+  "dtlRegion": "23040",
+  "latitude": 37.3981721,
+  "longitude": 126.6721058,
+  "address": "인천광역시 연수구 경원대로 73",
+  "tel": "032-899-1588",
+  "homepage": "https://lib.ice.go.kr/ilec/index.do"
+ },
+ {
+  "libCode": "128112",
+  "libName": "남동논현도서관",
+  "dtlRegion": "23050",
+  "latitude": 37.402323,
+  "longitude": 126.7263206,
+  "address": "인천광역시 남동구 청능대로611번길 15",
+  "tel": "032-453-6430",
+  "homepage": "https://www.namdonglib.go.kr"
+ },
+ {
+  "libCode": "128050",
+  "libName": "서창도서관",
+  "dtlRegion": "23050",
+  "latitude": 37.4363211,
+  "longitude": 126.7462122,
+  "address": "인천광역시 남동구 독곡로16번길 15",
+  "tel": "032-453-5950",
+  "homepage": "https://www.namdonglib.go.kr"
+ },
+ {
+  "libCode": "128049",
+  "libName": "소래도서관",
+  "dtlRegion": "23050",
+  "latitude": 37.3944155,
+  "longitude": 126.704517,
+  "address": "인천광역시 남동구 앵고개로 793",
+  "tel": "032-453-5940",
+  "homepage": "https://www.namdonglib.go.kr"
+ },
+ {
+  "libCode": "123006",
+  "libName": "인천광역시교육청중앙도서관",
+  "dtlRegion": "23050",
+  "latitude": 37.4561418,
+  "longitude": 126.7030292,
+  "address": "인천광역시 남동구 정각로 9",
+  "tel": "032-421-1152",
+  "homepage": "https://lib.ice.go.kr/jungang"
+ },
+ {
+  "libCode": "123001",
+  "libName": "인천도서관",
+  "dtlRegion": "23050",
+  "latitude": 37.4469986,
+  "longitude": 126.7248424,
+  "address": "인천광역시 남동구 인주대로776번길 53",
+  "tel": "032-462-3900",
+  "homepage": "https://www.incheonlib.go.kr/"
+ },
+ {
+  "libCode": "128040",
+  "libName": "부평구립갈산도서관",
+  "dtlRegion": "23060",
+  "latitude": 37.517625,
+  "longitude": 126.727425,
+  "address": "인천광역시 부평구 주부토로 254",
+  "tel": "032-362-0261",
+  "homepage": "https://www.bppl.or.kr/galsan/index.do"
+ },
+ {
+  "libCode": "128057",
+  "libName": "부평구립부개도서관",
+  "dtlRegion": "23060",
+  "latitude": 37.4910257,
+  "longitude": 126.7394883,
+  "address": "인천광역시 부평구 부일로83번길 46",
+  "tel": "032-505-0062",
+  "homepage": "http://www.bppl.or.kr/"
+ },
+ {
+  "libCode": "128035",
+  "libName": "부평구립부개어린이도서관",
+  "dtlRegion": "23060",
+  "latitude": 37.4855358,
+  "longitude": 126.737013,
+  "address": "인천광역시 부평구 동수로 166, 3층",
+  "tel": "032-505-1131",
+  "homepage": "https://www.bppl.or.kr/bugaech/index.do"
+ },
+ {
+  "libCode": "128056",
+  "libName": "부평구립삼산도서관",
+  "dtlRegion": "23060",
+  "latitude": 37.5222385,
+  "longitude": 126.743041,
+  "address": "인천광역시 부평구 부평북로 445",
+  "tel": "032-330-7012",
+  "homepage": "https://www.bppl.or.kr/samsan/index.do"
+ },
+ {
+  "libCode": "128085",
+  "libName": "부평구립청천도서관",
+  "dtlRegion": "23060",
+  "latitude": 37.5059306,
+  "longitude": 126.714393,
+  "address": "인천광역시 부평구 원길로 23",
+  "tel": "032-330-9171",
+  "homepage": "http://www.bppl.or.kr/"
+ },
+ {
+  "libCode": "128007",
+  "libName": "부평기적의도서관",
+  "dtlRegion": "23060",
+  "latitude": 37.503443,
+  "longitude": 126.740173,
+  "address": "인천광역시 부평구 길주남로 166",
+  "tel": "032-505-0612",
+  "homepage": "https://www.bppl.or.kr/miracle/index.do"
+ },
+ {
+  "libCode": "123002",
+  "libName": "인천광역시교육청부평도서관",
+  "dtlRegion": "23060",
+  "latitude": 37.4849955,
+  "longitude": 126.7048383,
+  "address": "인천광역시 부평구 경원대로 1191",
+  "tel": "032-510-7300",
+  "homepage": "https://lib.ice.go.kr/bupyeong/"
+ },
+ {
+  "libCode": "123003",
+  "libName": "인천광역시교육청신트리도서관",
+  "dtlRegion": "23060",
+  "latitude": 37.5066139,
+  "longitude": 126.7236467,
+  "address": "인천광역시 부평구 신트리로 21",
+  "tel": "032-363-5000",
+  "homepage": "https://lib.ice.go.kr/shintree/"
+ },
+ {
+  "libCode": "123009",
+  "libName": "인천광역시교육청계양도서관",
+  "dtlRegion": "23070",
+  "latitude": 37.5460166,
+  "longitude": 126.7301724,
+  "address": "인천광역시 계양구 계양산로134번길 18",
+  "tel": "032-540-4400",
+  "homepage": "https://lib.ice.go.kr/gyeyang/index.do"
+ },
+ {
+  "libCode": "128001",
+  "libName": "검단도서관",
+  "dtlRegion": "23080",
+  "latitude": 37.6004027,
+  "longitude": 126.666328,
+  "address": "인천광역시 검단구 완정로92번길 18",
+  "tel": "032-561-4117",
+  "homepage": "http://www.issl.go.kr/"
+ },
+ {
+  "libCode": "128102",
+  "libName": "검암도서관",
+  "dtlRegion": "23080",
+  "latitude": 37.5660754,
+  "longitude": 126.6831116,
+  "address": "인천광역시 서해구 검암로20번길 20",
+  "tel": "032-565-1610",
+  "homepage": "http://www.issl.go.kr/"
+ },
+ {
+  "libCode": "128107",
+  "libName": "마전도서관",
+  "dtlRegion": "23080",
+  "latitude": 37.5909462,
+  "longitude": 126.6512451,
+  "address": "인천광역시 서구 원당대로 563",
+  "tel": "032-590-2800",
+  "homepage": "https://www.incheonlib.go.kr/maj/main.do"
+ },
+ {
+  "libCode": "128008",
+  "libName": "석남도서관",
+  "dtlRegion": "23080",
+  "latitude": 37.5117615,
+  "longitude": 126.6782612,
+  "address": "인천광역시 서해구 서달로137번길 6-12",
+  "tel": "032-575-2600",
+  "homepage": "http://www.issl.go.kr/"
+ },
+ {
+  "libCode": "128055",
+  "libName": "신석도서관",
+  "dtlRegion": "23080",
+  "latitude": 37.5116268,
+  "longitude": 126.6682828,
+  "address": "인천광역시 서해구 염곡로 299",
+  "tel": "032-571-9457",
+  "homepage": "http://www.issl.go.kr/"
+ },
+ {
+  "libCode": "128024",
+  "libName": "심곡도서관",
+  "dtlRegion": "23080",
+  "latitude": 37.5424302,
+  "longitude": 126.6731937,
+  "address": "인천광역시 서해구 심곡로 31",
+  "tel": "032-568-0133",
+  "homepage": "http://www.issl.go.kr/"
+ },
+ {
+  "libCode": "128118",
+  "libName": "인천 서구 단봉늘봄도서관",
+  "dtlRegion": "23080",
+  "latitude": 37.5958111,
+  "longitude": 126.6415875,
+  "address": "인천광역시 서구 오동로 25",
+  "tel": "032-251-7410",
+  "homepage": "https://www.issl.go.kr"
+ },
+ {
+  "libCode": "123004",
+  "libName": "인천광역시교육청서구도서관",
+  "dtlRegion": "23080",
+  "latitude": 37.4943306,
+  "longitude": 126.6796541,
+  "address": "인천광역시 서구 건지로334번길 45",
+  "tel": "032-585-7100",
+  "homepage": "https://lib.ice.go.kr/seogu/"
+ },
+ {
+  "libCode": "128096",
+  "libName": "청라국제도서관",
+  "dtlRegion": "23080",
+  "latitude": 37.5351372,
+  "longitude": 126.6607243,
+  "address": "인천광역시 서구 담지로 24",
+  "tel": "032-562-6823",
+  "homepage": "https://www.incheonlib.go.kr/cni/main.do"
+ },
+ {
+  "libCode": "128097",
+  "libName": "청라호수도서관",
+  "dtlRegion": "23080",
+  "latitude": 37.5521188,
+  "longitude": 126.6441068,
+  "address": "인천광역시 서구 크리스탈로 59",
+  "tel": "032-563-9579",
+  "homepage": "https://www.incheonlib.go.kr/cnl/main.do"
+ },
+ {
+  "libCode": "128017",
+  "libName": "인천광역시 수봉도서관",
+  "dtlRegion": "23090",
+  "latitude": 37.4626544,
+  "longitude": 126.6667545,
+  "address": "인천광역시 미추홀구 경인로 218",
+  "tel": "032-870-9100",
+  "homepage": "http://www.imla.kr/sb"
+ },
+ {
+  "libCode": "123005",
+  "libName": "인천광역시교육청주안도서관",
+  "dtlRegion": "23090",
+  "latitude": 37.4556812,
+  "longitude": 126.6927926,
+  "address": "인천광역시 미추홀구 구월남로 27",
+  "tel": "032-450-9100",
+  "homepage": "https://lib.ice.go.kr/juan"
+ }
+]

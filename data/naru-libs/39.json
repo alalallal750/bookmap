@@ -1,0 +1,162 @@
+[
+ {
+  "libCode": "149036",
+  "libName": "제주 꿈바당어린이도서관",
+  "dtlRegion": "39010",
+  "latitude": 33.4806652,
+  "longitude": 126.4999898,
+  "address": "제주특별자치도 제주시 연오로 140",
+  "tel": "064-745-7101",
+  "homepage": "https://www.jjdreamlib.or.kr/index.htm"
+ },
+ {
+  "libCode": "149011",
+  "libName": "제주 애월도서관",
+  "dtlRegion": "39010",
+  "latitude": 33.4633179,
+  "longitude": 126.3313125,
+  "address": "제주특별자치도 제주시 애월읍 일주서로 6339",
+  "tel": "064-728-1507",
+  "homepage": "http://lib.jeju.go.kr/"
+ },
+ {
+  "libCode": "149006",
+  "libName": "제주 우당도서관",
+  "dtlRegion": "39010",
+  "latitude": 33.5154244,
+  "longitude": 126.5487423,
+  "address": "제주특별자치도 제주시 사라봉동길 30",
+  "tel": "064-728-1503",
+  "homepage": "http://lib.jeju.go.kr/"
+ },
+ {
+  "libCode": "149014",
+  "libName": "제주 조천읍도서관",
+  "dtlRegion": "39010",
+  "latitude": 33.5377434,
+  "longitude": 126.6676946,
+  "address": "제주특별자치도 제주시 조천읍 일주동로 1189",
+  "tel": "064-728-1505",
+  "homepage": "http://lib.jeju.go.kr/"
+ },
+ {
+  "libCode": "149005",
+  "libName": "제주 탐라도서관",
+  "dtlRegion": "39010",
+  "latitude": 33.479268,
+  "longitude": 126.477125,
+  "address": "제주특별자치도 제주시 정원로 50",
+  "tel": "064-728-1506",
+  "homepage": "http://lib.jeju.go.kr/"
+ },
+ {
+  "libCode": "149016",
+  "libName": "제주 한경도서관",
+  "dtlRegion": "39010",
+  "latitude": 33.3500434,
+  "longitude": 126.1845632,
+  "address": "제주특별자치도 제주시 한경면 신한로 13",
+  "tel": "064-728-1508",
+  "homepage": "http://lib.jeju.go.kr/"
+ },
+ {
+  "libCode": "149019",
+  "libName": "제주기적의도서관",
+  "dtlRegion": "39010",
+  "latitude": 33.5017041,
+  "longitude": 126.5354668,
+  "address": "제주특별자치도 제주시 동광로12길 19",
+  "tel": "064-728-1504",
+  "homepage": "http://lib.jeju.go.kr/"
+ },
+ {
+  "libCode": "149023",
+  "libName": "한라도서관",
+  "dtlRegion": "39010",
+  "latitude": 33.476399,
+  "longitude": 126.516288,
+  "address": "제주특별자치도 제주시 오남로 221",
+  "tel": "064-710-8666",
+  "homepage": "http://lib.jeju.go.kr/"
+ },
+ {
+  "libCode": "149022",
+  "libName": "서귀포기적의도서관",
+  "dtlRegion": "39020",
+  "latitude": 33.2543478,
+  "longitude": 126.5699445,
+  "address": "제주특별자치도 서귀포시 일주동로 8593",
+  "tel": "064-732-3251",
+  "homepage": "http://lib.jeju.go.kr/"
+ },
+ {
+  "libCode": "149013",
+  "libName": "제주 동부도서관",
+  "dtlRegion": "39020",
+  "latitude": 33.261775,
+  "longitude": 126.608288,
+  "address": "제주특별자치도 서귀포시 일주동로 8232",
+  "tel": "064-767-1524",
+  "homepage": "http://lib.jeju.go.kr/"
+ },
+ {
+  "libCode": "149002",
+  "libName": "제주 삼매봉도서관",
+  "dtlRegion": "39020",
+  "latitude": 33.24426,
+  "longitude": 126.5521,
+  "address": "제주특별자치도 서귀포시 남성중로153번길 15",
+  "tel": "064-733-1524",
+  "homepage": "http://lib.jeju.go.kr/"
+ },
+ {
+  "libCode": "149017",
+  "libName": "제주 서부도서관",
+  "dtlRegion": "39020",
+  "latitude": 33.250821,
+  "longitude": 126.432371,
+  "address": "제주특별자치도 서귀포시 중문관광로 346",
+  "tel": "064-739-9862",
+  "homepage": "http://lib.jeju.go.kr/"
+ },
+ {
+  "libCode": "149012",
+  "libName": "제주 성산일출도서관",
+  "dtlRegion": "39020",
+  "latitude": 33.4556963,
+  "longitude": 126.9121171,
+  "address": "제주특별자치도 서귀포시 성산읍 고성오조로 133",
+  "tel": "064-783-4227",
+  "homepage": "http://lib.jeju.go.kr/"
+ },
+ {
+  "libCode": "149015",
+  "libName": "제주 안덕산방도서관",
+  "dtlRegion": "39020",
+  "latitude": 33.2550768,
+  "longitude": 126.3306645,
+  "address": "제주특별자치도 서귀포시 안덕면 화순서서로 44",
+  "tel": "064-794-2489",
+  "homepage": "http://lib.jeju.go.kr/"
+ },
+ {
+  "libCode": "149008",
+  "libName": "제주 중앙도서관",
+  "dtlRegion": "39020",
+  "latitude": 33.2513754,
+  "longitude": 126.5076048,
+  "address": "제주특별자치도 서귀포시 김정문화로 32",
+  "tel": "064-739-1516",
+  "homepage": "http://lib.jeju.go.kr/"
+ },
+ {
+  "libCode": "149018",
+  "libName": "제주 표선도서관",
+  "dtlRegion": "39020",
+  "latitude": 33.3239223,
+  "longitude": 126.8385708,
+  "address": "제주특별자치도 서귀포시 표선면 표선백사로110번길 17-10",
+  "tel": "064-787-5488",
+  "homepage": "http://lib.jeju.go.kr/"
+ }
+]
