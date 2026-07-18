@@ -198,7 +198,10 @@ function PhysicalSearchInner() {
       <header className="bg-white border-b border-gray-100 px-4 pt-14 pb-4 sticky top-0 z-10">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex flex-col items-end gap-1 flex-shrink-0">
-            <img src="/logo-header.png" alt="지금빌려" style={{ height: "40px", width: "107px" }} />
+            {/* 로고 클릭 시 일반 <a>로 전체 새로고침하여 검색 전(idle) 화면으로 복귀 */}
+            <a href="/physical">
+              <img src="/logo-header.png" alt="지금빌려" style={{ height: "40px", width: "107px" }} />
+            </a>
             <span className="text-[10px] font-bold tracking-wide px-2 py-0.5 rounded-full bg-green-100 text-green-700">
               종이책
             </span>

@@ -70,11 +70,14 @@ function EbookSearchInner() {
             문구 오른쪽 가로 배치로 통일. */}
         <div className="flex items-center gap-3 mb-3">
           <div className="flex flex-col items-end gap-1 flex-shrink-0">
-            <img
-              src="/logo-header.png"
-              alt="지금빌려"
-              style={{ height: "40px", width: "107px" }}
-            />
+            {/* 로고 클릭 시 일반 <a>로 전체 새로고침하여 검색 전(idle) 화면으로 복귀 */}
+            <a href="/ebook">
+              <img
+                src="/logo-header.png"
+                alt="지금빌려"
+                style={{ height: "40px", width: "107px" }}
+              />
+            </a>
             <span className="text-[10px] font-bold tracking-wide px-2 py-0.5 rounded-full bg-blue-100 text-blue-700">
               전자책
             </span>
