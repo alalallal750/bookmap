@@ -23,6 +23,7 @@ import { useState, Suspense } from "react";
 import { useRouter } from "next/navigation";
 import { ApiResponse, KakaoBookCandidate } from "@/types";
 import { SearchBar } from "@/components/search/SearchBar";
+import { KoreaRegionMap } from "@/components/search/KoreaRegionMap";
 import {
   SearchUnit,
   getNearbyUnits,
@@ -270,16 +271,8 @@ function NationwideInner() {
             <p className="text-xs text-gray-400 mb-3">
               위치 정보가 없어 지역을 직접 선택해 주세요.
             </p>
-            <div className="grid grid-cols-4 gap-2">
-              {REGION_ORDER.map(({ region, label }) => (
-                <button
-                  key={region}
-                  onClick={() => handlePickRegion(state.book, region)}
-                  className="py-3 rounded-xl bg-white border border-gray-200 text-sm font-semibold text-gray-700 active:bg-emerald-50"
-                >
-                  {label}
-                </button>
-              ))}
+            <div className="max-w-sm mx-auto">
+              <KoreaRegionMap onSelect={(region) => handlePickRegion(state.book, region)} />
             </div>
             <div className="mt-8">{noticeBlock}</div>
           </div>
