@@ -1,19 +1,22 @@
 "use client";
 
 /**
- * [2026-07-18 신규 — 전국판] 전국 종이책 검색 화면 (인수인계 17장 설계).
+ * [2026-07-18 신규 — 전국판] 전국 종이책 검색 화면 (인수인계 17~18장).
  *
  * 기존 /physical(서울)과 별개 신규 페이지 — 기존 파이프라인 무수정 원칙.
  * 흐름:
  *   1. 제목 검색 → 카카오 책 후보(판본) 목록 → 사용자가 판본 선택
  *      (전국 검색은 ISBN 완전일치 단일 판본 — 판본 확장은 3순위 로드맵)
- *   2. 위치 있으면: 가까운 시군구 3곳(현재+인접) 자동 검색.
- *      가장 가까운 곳이 서울이면 기존 서울 지도(/physical/map)로 보냄
- *      — 서울은 스크래핑 실권수·실시간 데이터가 더 좋다.
- *   3. 위치 없으면: 시도 → 시군구 2단계 선택 후 그 시군구만 검색.
- *      (원 설계는 광역시 탭 즉시 전체 검색이지만, 호출 절약 원칙에 따라
- *      광역시도 시군구 선택으로 통일 — 부산 전체 즉시 검색은 16회 소비.
- *      서울 선택은 기존 /physical로 이동.)
+ *   2. 위치 있으면: 가까운 시군구 기준 시도 전체 자동 검색 후 바로 지도.
+ *      가장 가까운 곳이 서울이면 기존 서울 지도(/physical/map)로 —
+ *      서울은 스크래핑 실권수·실시간 데이터가 더 좋다.
+ *   3. 위치 없으면: [07-18 2차 피드백] SVG 시도 지도를 "팝업"으로 띄워
+ *      선택 → 선택 즉시 팝업이 닫히며 지도 페이지로 이동 (별도 페이지
+ *      단계 없음). 광역시·세종은 시도 탭 즉시, 도는 팝업 안에서 시군구
+ *      2단계. 검색은 어차피 시도 전체 1~2회 호출 — 시군구는 지도 시작
+ *      위치일 뿐.
+ *   4. 추천 칩 경유는 판본 선택 생략(ISBN 기지) — 위치 있으면 바로 지도,
+ *      없으면 지역 팝업 (사용자 확정 동선).
  *
  * 정보나루 제약 안내 3종(전일 기준 / 권수 미제공 / 신간 누락 가능)은
  * 이 화면과 지도 화면 양쪽에 표기.
@@ -26,45 +29,35 @@ import { SearchBar } from "@/components/search/SearchBar";
 import { KoreaRegionMap } from "@/components/search/KoreaRegionMap";
 import { SuggestionChip } from "@/components/search/SuggestionChip";
 import { suggestions } from "@/lib/data/suggestions";
-
-// 지도에서 뒤로 돌아왔을 때만 검색 상태를 복원 (서울판과 동일 패턴 —
-// 새로고침·직접 진입은 idle로 시작)
-const SEARCH_CACHE_KEY = "nationwide_search_state";
-const RETURN_FROM_MAP_KEY = "nationwide_returning_from_map";
 import {
   SearchUnit,
   getNearbyUnits,
   getUnitsByRegion,
 } from "@/lib/data/searchUnits";
 
-const REGION_ORDER: { region: string; label: string }[] = [
-  { region: "11", label: "서울" },
-  { region: "31", label: "경기" },
-  { region: "23", label: "인천" },
-  { region: "21", label: "부산" },
-  { region: "22", label: "대구" },
-  { region: "24", label: "광주" },
-  { region: "25", label: "대전" },
-  { region: "26", label: "울산" },
-  { region: "29", label: "세종" },
-  { region: "32", label: "강원" },
-  { region: "33", label: "충북" },
-  { region: "34", label: "충남" },
-  { region: "35", label: "전북" },
-  { region: "36", label: "전남" },
-  { region: "37", label: "경북" },
-  { region: "38", label: "경남" },
-  { region: "39", label: "제주" },
-];
+// 지도에서 뒤로 돌아왔을 때만 검색 상태를 복원 (서울판과 동일 패턴 —
+// 새로고침·직접 진입은 idle로 시작)
+const SEARCH_CACHE_KEY = "nationwide_search_state";
+const RETURN_FROM_MAP_KEY = "nationwide_returning_from_map";
+
+const REGION_LABEL: Record<string, string> = {
+  "11": "서울", "21": "부산", "22": "대구", "23": "인천", "24": "광주",
+  "25": "대전", "26": "울산", "29": "세종", "31": "경기", "32": "강원",
+  "33": "충북", "34": "충남", "35": "전북", "36": "전남", "37": "경북",
+  "38": "경남", "39": "제주",
+};
+
+// 광역시·세종 — 시도 탭 즉시 지도로 (지도 시작점은 참여관 최다 시군구)
+const METRO_REGIONS = new Set(["21", "22", "23", "24", "25", "26", "29"]);
 
 type PageState =
   | { step: "idle" }
   | { step: "loadingCandidates"; query: string }
   | { step: "candidates"; query: string; candidates: KakaoBookCandidate[] }
-  | { step: "locating"; book: KakaoBookCandidate }
-  | { step: "regionSelect"; book: KakaoBookCandidate }
-  | { step: "districtSelect"; book: KakaoBookCandidate; region: string }
   | { step: "error"; message: string };
+
+/** 지역 선택 팝업 상태 — book이 있으면 열림, region이 있으면 시군구 단계 */
+type PickerState = { book: KakaoBookCandidate; region?: string } | null;
 
 export default function NationwidePhysicalPage() {
   return (
@@ -80,6 +73,8 @@ function NationwideInner() {
   const initialQuery = searchParams.get("q") ?? "";
   const [state, setState] = useState<PageState>({ step: "idle" });
   const [searchValue, setSearchValue] = useState(initialQuery);
+  const [picker, setPicker] = useState<PickerState>(null);
+  const [locating, setLocating] = useState(false);
 
   // 지도에서 뒤로가기로 돌아온 경우에만 후보 목록 복원
   useEffect(() => {
@@ -99,6 +94,7 @@ function NationwideInner() {
   }, []);
 
   async function handleSearch(query: string) {
+    setPicker(null);
     setState({ step: "loadingCandidates", query });
     try { sessionStorage.removeItem(SEARCH_CACHE_KEY); } catch {}
     try {
@@ -127,8 +123,12 @@ function NationwideInner() {
     );
   }
 
+  /**
+   * 판본 확정 후 진입점 — 위치를 시도하고, 성공하면 바로 지도로(현재
+   * 화면 위에 스피너만), 실패하면 지역 선택 팝업을 띄운다.
+   */
   async function handlePickBook(book: KakaoBookCandidate) {
-    setState({ step: "locating", book });
+    setLocating(true);
     try {
       const coords = await new Promise<GeolocationCoordinates>((resolve, reject) => {
         if (!navigator.geolocation) {
@@ -143,7 +143,7 @@ function NationwideInner() {
       });
       const nearby = getNearbyUnits(coords.latitude, coords.longitude, 3);
       if (nearby.length === 0) {
-        setState({ step: "regionSelect", book });
+        setPicker({ book });
         return;
       }
       // 가장 가까운 시군구가 서울이면 기존 서울 파이프라인(스크래핑
@@ -154,15 +154,16 @@ function NationwideInner() {
       }
       goToMap(book, nearby);
     } catch {
-      // 위치 없음 — 시도 선택으로
-      setState({ step: "regionSelect", book });
+      setPicker({ book }); // 위치 없음 — 지역 선택 팝업
+    } finally {
+      setLocating(false);
     }
   }
 
   /**
    * [07-18] 추천 칩 경유 검색 — 추천 도서는 ISBN을 이미 알므로 판본 선택을
    * 건너뛰고 바로 위치 판정으로(사용자 결정: 위치 있으면 바로 지도, 없으면
-   * 지역 선택). 뒤로가기 복원을 위해 단일 후보 상태를 캐시에 저장해 둠.
+   * 지역 팝업). 뒤로가기 복원을 위해 단일 후보 상태를 캐시에 저장해 둠.
    */
   function handlePickSuggestion(title: string) {
     const s = suggestions.find((x) => x.title === title);
@@ -188,6 +189,7 @@ function NationwideInner() {
     handlePickBook(book);
   }
 
+  /** 팝업에서 시도 선택 */
   function handlePickRegion(book: KakaoBookCandidate, region: string) {
     if (region === "11") {
       // 서울은 기존 파이프라인 — 위치 없는 검색도 기존 화면이 전체 구를 처리
@@ -196,10 +198,16 @@ function NationwideInner() {
     }
     const units = getUnitsByRegion(region).filter((u) => u.libCount > 0);
     if (units.length === 1) {
-      goToMap(book, units); // 세종처럼 단일 시군구는 바로 검색
+      goToMap(book, units); // 세종처럼 단일 시군구는 바로
       return;
     }
-    setState({ step: "districtSelect", book, region });
+    if (METRO_REGIONS.has(region)) {
+      // 광역시: 탭 즉시 지도로 — 시작점은 참여관이 가장 많은 구(중심부 근사)
+      const start = [...units].sort((a, b) => b.libCount - a.libCount)[0];
+      goToMap(book, [start]);
+      return;
+    }
+    setPicker({ book, region }); // 도: 팝업 안에서 시군구 단계로
   }
 
   const noticeBlock = (
@@ -319,65 +327,82 @@ function NationwideInner() {
           </div>
         )}
 
-        {state.step === "locating" && (
-          <div className="flex flex-col items-center justify-center pt-24">
-            <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin mb-3" />
-            <p className="text-gray-400 text-sm">현재 위치 확인 중...</p>
-          </div>
-        )}
-
-        {state.step === "regionSelect" && (
-          <div className="px-4">
-            <p className="text-sm text-gray-600 font-medium mb-1">
-              어느 지역에서 찾을까요?
-            </p>
-            <p className="text-xs text-gray-400 mb-3">
-              위치 정보가 없어 지역을 직접 선택해 주세요.
-            </p>
-            <div className="max-w-sm mx-auto">
-              <KoreaRegionMap onSelect={(region) => handlePickRegion(state.book, region)} />
-            </div>
-            <div className="mt-8">{noticeBlock}</div>
-          </div>
-        )}
-
-        {state.step === "districtSelect" && (
-          <div className="px-4">
-            <button
-              onClick={() => setState({ step: "regionSelect", book: state.book })}
-              className="text-xs text-gray-400 mb-2"
-            >
-              ← 지역 다시 선택
-            </button>
-            <p className="text-sm text-gray-600 font-medium mb-3">
-              {REGION_ORDER.find((r) => r.region === state.region)?.label} — 시군구를 선택하세요
-            </p>
-            {/* [07-18] 참여관 0 시군구는 숨김 (사용자 결정 — 김천 등).
-                시군구 선택은 검색 범위가 아니라 지도 시작 위치 — 검색은
-                시도 전체 1~2회 호출로 이미 커버됨. */}
-            <div className="grid grid-cols-3 gap-2">
-              {getUnitsByRegion(state.region)
-                .filter((u) => u.libCount > 0)
-                .map((u) => (
-                  <button
-                    key={u.code}
-                    onClick={() => goToMap(state.book, [u])}
-                    className="py-3 px-1 rounded-xl bg-white border border-gray-200 text-[13px] font-semibold text-gray-700 active:bg-emerald-50"
-                  >
-                    {u.district}
-                  </button>
-                ))}
-            </div>
-            <div className="mt-8">{noticeBlock}</div>
-          </div>
-        )}
-
         {state.step === "error" && (
           <div className="flex flex-col items-center justify-center pt-24 px-8 text-center">
             <p className="text-red-500 text-sm">{state.message}</p>
           </div>
         )}
       </div>
+
+      {/* 위치 확인 중 오버레이 — 화면 전환 없이 스피너만 */}
+      {locating && (
+        <div className="fixed inset-0 z-40 bg-black/10 flex items-center justify-center">
+          <div className="bg-white rounded-2xl px-6 py-5 shadow-lg flex flex-col items-center">
+            <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin mb-2" />
+            <p className="text-gray-500 text-sm">현재 위치 확인 중...</p>
+          </div>
+        </div>
+      )}
+
+      {/* [07-18 2차 피드백] 지역 선택 팝업 — 선택 즉시 닫히며 지도로 이동 */}
+      {picker && (
+        <div className="fixed inset-0 z-50">
+          <div className="absolute inset-0 bg-black/30" onClick={() => setPicker(null)} />
+          <div className="absolute inset-x-3 top-1/2 -translate-y-1/2 max-w-md mx-auto bg-white rounded-3xl shadow-2xl p-4 max-h-[85vh] overflow-y-auto">
+            <div className="flex items-center justify-between mb-2">
+              <div>
+                <p className="text-sm font-bold text-gray-800">
+                  {picker.region
+                    ? `${REGION_LABEL[picker.region]} — 시군구를 선택하세요`
+                    : "어느 지역에서 찾을까요?"}
+                </p>
+                <p className="text-[11px] text-gray-400 mt-0.5">
+                  「{picker.book.title}」 소장 도서관을 찾아드려요
+                </p>
+              </div>
+              <button
+                onClick={() => setPicker(null)}
+                className="p-1.5 text-gray-400 active:text-gray-600"
+                aria-label="닫기"
+              >
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                  <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
+
+            {!picker.region ? (
+              <KoreaRegionMap
+                onSelect={(region) => handlePickRegion(picker.book, region)}
+              />
+            ) : (
+              <>
+                <button
+                  onClick={() => setPicker({ book: picker.book })}
+                  className="text-xs text-gray-400 mb-2"
+                >
+                  ← 지역 다시 선택
+                </button>
+                {/* 참여관 0 시군구는 숨김 (김천 등 — 정보나루 미참여).
+                    시군구는 지도 시작 위치 — 검색은 시도 전체 1~2회 호출. */}
+                <div className="grid grid-cols-3 gap-2">
+                  {getUnitsByRegion(picker.region)
+                    .filter((u) => u.libCount > 0)
+                    .map((u) => (
+                      <button
+                        key={u.code}
+                        onClick={() => goToMap(picker.book, [u])}
+                        className="py-3 px-1 rounded-xl bg-white border border-gray-200 text-[13px] font-semibold text-gray-700 active:bg-emerald-50"
+                      >
+                        {u.district}
+                      </button>
+                    ))}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </main>
   );
 }
