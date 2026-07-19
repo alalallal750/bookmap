@@ -209,6 +209,29 @@ const PORTAL_TEMPLATES: Record<string, NationwideUrlBuilder> = {
   "www.uilib.go.kr": (title) =>
     `https://www.uilib.go.kr/main/intro/search/index.do?menu_idx=9&booktype=ALL` +
     `&title=${encodeURIComponent(title)}`,
+
+  // 김포(지점 7곳) — 통합검색은 없고 지점별 간략검색만 가능. 각 지점
+  // 공식 페이지 메뉴에서 추출한 key·manageCode 사용, 장기·모담 2곳
+  // 교차검증으로 패턴 일반화 확인. 지점 경로가 없는 관(/lib/ 등)은
+  // undefined → 홈페이지 폴백
+  "www.gimpo.go.kr": (title, homepage) => {
+    const branches: Record<string, { key: string; mc: string }> = {
+      janggi: { key: "2780", mc: "JG" },
+      modam: { key: "11488", mc: "MD" },
+      pungmu: { key: "3052", mc: "PM" },
+      gochon: { key: "2984", mc: "GC" },
+      masan: { key: "6997", mc: "MS" },
+      yanggok: { key: "2916", mc: "YG" },
+      tongjin: { key: "3120", mc: "TJ" },
+    };
+    const sub = new URL(homepage).pathname.split("/").filter(Boolean)[0];
+    const b = sub ? branches[sub] : undefined;
+    if (!b) return undefined;
+    return (
+      `https://www.gimpo.go.kr/${sub}/bookSearchList.do?key=${b.key}&rep=1&option=0` +
+      `&pageUnit=10&manageCode=${b.mc}&searchKrwd=${encodeURIComponent(title)}`
+    );
+  },
 };
 
 /**
