@@ -174,6 +174,32 @@ const PORTAL_TEMPLATES: Record<string, NationwideUrlBuilder> = {
   "ascl.asan.go.kr": (title) =>
     `https://lib.asan.go.kr/dls_le/index.php?mod=wdDataSearch&act=searchIList&deSearch=2&item=total` +
     `&word=${encodeURIComponent(title)}`,
+
+  // ── 2026-07-19 3차: 웹검색("지역명 도서관 통합검색") 기반 발굴 ────────
+  // 사용자 제안 방법. 검색엔진에 인덱싱된 검색결과 URL·통합 포털을 수집해
+  // 동일 기준(두 책 교차검증)으로 검증한 것만 등록.
+
+  // 화성(31관) — 검색엔진에 인덱싱된 searchResultList.do URL 그대로 통과
+  "www.hscitylib.or.kr": (title) =>
+    `https://www.hscitylib.or.kr/intro/menu/10008/program/30001/searchResultList.do` +
+    `?searchType=SIMPLE&searchManageCode=ALL&searchKeyword=${encodeURIComponent(title)}`,
+
+  // 고양(27관) — 화성과 같은 벤더, 검색 폼 페이지(searchSimple.do)의 결과
+  // 경로(searchResultList.do)로 통과
+  "www.goyanglib.or.kr": (title) =>
+    `https://www.goyanglib.or.kr/center/menu/10003/program/30001/searchResultList.do` +
+    `?searchType=SIMPLE&searchManageCode=ALL&searchKeyword=${encodeURIComponent(title)}`,
+
+  // 청주(15관) — 아산과 같은 dls 벤더의 "도서관 통합자료 검색"
+  "library.cheongju.go.kr": (title) =>
+    `https://cjlibrary.cheongju.go.kr/lib/dls_le/index.php?mod=wdDataSearch&act=searchIList` +
+    `&deSearch=2&item=total&word=${encodeURIComponent(title)}`,
+
+  // 당진(12관) — 아산·청주와 같은 dls 벤더 (1단계 ssr-verified였다가 탈락한
+  // search2.jsp 대신 시립도서관 통합검색으로)
+  "www.dangjin.go.kr": (title) =>
+    `https://lib.dangjin.go.kr/dls_le/index.php?mod=wdDataSearch&act=searchIList` +
+    `&deSearch=2&item=total&word=${encodeURIComponent(title)}`,
 };
 
 /**
