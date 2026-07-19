@@ -119,10 +119,17 @@ const PORTAL_TEMPLATES: Record<string, NationwideUrlBuilder> = {
     `https://usbl.bukgu.ulsan.kr/main/site/search/bookSearch.do?cmd_name=bookandnonbooksearch` +
     `&search_type=detail&search_item=search_title&search_txt=${encodeURIComponent(title)}`,
 
-  // 경기도교육청(11관)
-  "lib.goe.go.kr": (title) =>
-    `https://lib.goe.go.kr/lib/intro/search/index.do?menu_idx=10&booktype=BOOKANDNONBOOK` +
-    `&search_text=${encodeURIComponent(title)}`,
+  // 경기도교육청(11관) — 대구처럼 지점별 하위경로(gg·sn·ujb·pt·kwa·gimpo·
+  // hs·gj·pc·gn·gglec). 과천(사용자 캡처 URL)·성남·중앙(lib) 3곳 교차검증
+  // 통과로 패턴 일반화. 하위경로 없으면 undefined → 홈페이지 폴백
+  "lib.goe.go.kr": (title, homepage) => {
+    const sub = new URL(homepage).pathname.split("/").filter(Boolean)[0];
+    if (!sub) return undefined;
+    return (
+      `https://lib.goe.go.kr/${sub}/intro/search/index.do?menu_idx=10&booktype=BOOKANDNONBOOK` +
+      `&search_text=${encodeURIComponent(title)}#search_result`
+    );
+  },
 
   // 인천교육청(9관)
   "lib.ice.go.kr": (title) =>
@@ -222,6 +229,37 @@ const PORTAL_TEMPLATES: Record<string, NationwideUrlBuilder> = {
     `?searchType=SIMPLE&searchCategory=BOOK&searchKey=ALL&searchPbLibrary=ALL&searchSort=SIMILAR` +
     `&searchOrder=DESC&searchRecordCount=20&currentPageNo=1&viewStatus=IMAGE` +
     `&searchKeyword=${encodeURIComponent(title)}`,
+
+  // ── 2026-07-19 5차: 사용자 캡처 URL 역산 ─────────────────────────────
+  // 사용자가 각 사이트에서 검색 1회 실행 후 캡처한 URL에서 템플릿 역산.
+
+  // 강원교육청(22관) — 전 지점 manageCodes 나열 (캡처 URL 그대로)
+  "lib.gwe.go.kr": (title) =>
+    `https://lib.gwe.go.kr/portal/menu/568/book/search?search=true&searchType=normal&page=1&size=10` +
+    `&searchCondition=searchTxt&searchInput=${encodeURIComponent(title)}` +
+    `&manageCodes=MC&manageCodes=MX&manageCodes=MY&manageCodes=MH&manageCodes=MG&manageCodes=ME` +
+    `&manageCodes=MJ&manageCodes=MD&manageCodes=MV&manageCodes=MK&manageCodes=MQ&manageCodes=MB` +
+    `&manageCodes=MW&manageCodes=MS&manageCodes=MT&manageCodes=MF&manageCodes=MA&manageCodes=MM` +
+    `&manageCodes=MR&manageCodes=MN&manageCodes=MU&manageCodes=MP`,
+
+  // 남양주(13관) — plusSearch 벤더 (jyy 포털 경로, searchLibrary=ALL로 전관)
+  "lib.nyj.go.kr": (title) =>
+    `https://lib.nyj.go.kr/jyy/plusSearchResultList.do?searchType=SIMPLE&searchCategory=ALL` +
+    `&searchLibrary=ALL&searchKey=ALL&searchKeyword=${encodeURIComponent(title)}`,
+
+  // 의왕(10관) — 서대문과 같은 program/searchResultList 계열
+  "www.uwlib.or.kr": (title) =>
+    `http://www.uwlib.or.kr/jungang/program/searchResultList.do?searchPbLibrary=ALL&searchType=SIMPLE` +
+    `&searchCategory=ALL&searchField=ALL&searchLibrary=ALL&searchSmLibrary=ALL` +
+    `&searchWord=${encodeURIComponent(title)}`,
+  "uwlib.or.kr": (title) =>
+    `http://www.uwlib.or.kr/jungang/program/searchResultList.do?searchPbLibrary=ALL&searchType=SIMPLE` +
+    `&searchCategory=ALL&searchField=ALL&searchLibrary=ALL&searchSmLibrary=ALL` +
+    `&searchWord=${encodeURIComponent(title)}`,
+
+  // 양평(8관) — 경로형 searchResult
+  "www.yplib.go.kr": (title) =>
+    `https://www.yplib.go.kr/searchResult?keyword=${encodeURIComponent(title)}&pageIndex=1`,
 
   // 포천(7관) — 2단 프로브(자료검색 페이지에서 타이핑 제출)로 발견.
   // 용인·성남과 같은 plusSearch 벤더
