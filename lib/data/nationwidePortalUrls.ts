@@ -210,6 +210,19 @@ const PORTAL_TEMPLATES: Record<string, NationwideUrlBuilder> = {
     `https://www.uilib.go.kr/main/intro/search/index.do?menu_idx=9&booktype=ALL` +
     `&title=${encodeURIComponent(title)}`,
 
+  // 안양(11관) — 사용자 캡처 상세페이지 URL에서 목록(searchResultList.do)
+  // 역산. 화성·고양과 같은 벤더
+  "lib.anyang.go.kr": (title) =>
+    `https://lib.anyang.go.kr/intro/menu/10003/program/30001/searchResultList.do` +
+    `?searchType=SIMPLE&searchManageCode=ALL&searchKeyword=${encodeURIComponent(title)}`,
+
+  // 성남(17관) — 사용자 캡처 URL에서 역산. 송파·용인과 같은 plusSearch 벤더
+  "www.snlib.go.kr": (title) =>
+    `https://www.snlib.go.kr/intro/menu/10041/program/30009/plusSearchResultList.do` +
+    `?searchType=SIMPLE&searchCategory=BOOK&searchKey=ALL&searchPbLibrary=ALL&searchSort=SIMILAR` +
+    `&searchOrder=DESC&searchRecordCount=20&currentPageNo=1&viewStatus=IMAGE` +
+    `&searchKeyword=${encodeURIComponent(title)}`,
+
   // 김포(지점 7곳) — 통합검색은 없고 지점별 간략검색만 가능. 각 지점
   // 공식 페이지 메뉴에서 추출한 key·manageCode 사용, 장기·모담 2곳
   // 교차검증으로 패턴 일반화 확인. 지점 경로가 없는 관(/lib/ 등)은
