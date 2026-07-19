@@ -3,6 +3,7 @@ import { fetchHoldingLibCodesByRegion } from "@/lib/api/data4library";
 import { getLibrariesByUnit } from "@/lib/data/nationwideLibraries";
 import { getSearchUnit, getUnitsByRegion } from "@/lib/data/searchUnits";
 import { buildNaruPortalSearchUrl } from "@/lib/data/naruPortalUrls";
+import { buildNationwidePortalSearchUrl } from "@/lib/data/nationwidePortalUrls";
 import type { LibraryType, PhysicalLibrary } from "@/types";
 
 /**
@@ -98,12 +99,13 @@ export async function GET(request: NextRequest) {
             longitude: src.longitude,
             tel: src.tel,
             // available/availableCount 없음 — 온디맨드 bookExist 전까지 미정.
-            // 서울 구는 실측 검증된 포털 검색 URL 재사용, 그 외는 홈페이지
+            // 서울 구는 실측 검증된 포털 검색 URL 재사용, 비서울은 헤드리스
+            // 검증 통과 도메인만 딥링크, 그 외는 홈페이지
             // (딥링크는 실측 검증 없이는 만들지 않음 — 13-3 교훈)
             searchResultUrl:
               (region === "11"
                 ? buildNaruPortalSearchUrl(unit.district, isbn, title)
-                : undefined) ?? src.homepage,
+                : buildNationwidePortalSearchUrl(src.homepage, title)) ?? src.homepage,
             homepageUrl: src.homepage,
           });
         }
