@@ -177,18 +177,35 @@ const PORTAL_TEMPLATES: Record<string, NationwideUrlBuilder> = {
 };
 
 /**
+ * 시도 단위 통합 포털 (hostname 매핑이 안 될 때의 폴백).
+ * 대전처럼 관별 homepage 도메인은 제각각이지만 시 전체를 검색하는 통합
+ * 포털이 따로 있는 경우 — region 코드(units 앞 2자리)로 연결.
+ */
+const REGION_TEMPLATES: Record<string, (title: string) => string> = {
+  // [실측 확인 2026-07-19 — 사용자 제보 URL] 대전 통합도서관(u-library.kr).
+  // 이천 작은도서관과 동일 벤더(search/tot/result). 렌더링 확인: 소장처
+  // 필터에 가수원·가오·갈마·관평·구암 등 29곳(한밭·유성·대덕 포함) —
+  // 대전 전역 통합검색 맞음. 두 책 교차검증 통과.
+  "25": (title) =>
+    `https://www.u-library.kr/search/tot/result?st=KWRD&si=TOTAL&q=${encodeURIComponent(title)}`,
+};
+
+/**
  * 비서울 도서관의 검색결과 딥링크. 도서관 homepage의 hostname이 검증된
- * 도메인이면 검색결과 URL, 아니면 undefined (호출부가 homepage로 폴백).
+ * 도메인이면 검색결과 URL, 없으면 시도 통합 포털, 그것도 없으면 undefined
+ * (호출부가 homepage로 폴백).
  */
 export function buildNationwidePortalSearchUrl(
   homepage: string | undefined,
-  title: string
+  title: string,
+  region?: string
 ): string | undefined {
-  if (!homepage || !title) return undefined;
+  if (!title) return undefined;
   try {
-    const host = new URL(homepage).hostname;
-    return PORTAL_TEMPLATES[host]?.(title, homepage);
+    const host = homepage ? new URL(homepage).hostname : undefined;
+    const byHost = host ? PORTAL_TEMPLATES[host]?.(title, homepage!) : undefined;
+    return byHost ?? (region ? REGION_TEMPLATES[region]?.(title) : undefined);
   } catch {
-    return undefined;
+    return region ? REGION_TEMPLATES[region]?.(title) : undefined;
   }
 }

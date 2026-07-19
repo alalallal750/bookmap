@@ -105,7 +105,7 @@ export async function GET(request: NextRequest) {
             searchResultUrl:
               (region === "11"
                 ? buildNaruPortalSearchUrl(unit.district, isbn, title)
-                : buildNationwidePortalSearchUrl(src.homepage, title)) ?? src.homepage,
+                : buildNationwidePortalSearchUrl(src.homepage, title, region)) ?? src.homepage,
             homepageUrl: src.homepage,
           });
         }
