@@ -223,6 +223,22 @@ const PORTAL_TEMPLATES: Record<string, NationwideUrlBuilder> = {
     `&searchOrder=DESC&searchRecordCount=20&currentPageNo=1&viewStatus=IMAGE` +
     `&searchKeyword=${encodeURIComponent(title)}`,
 
+  // 포천(7관) — 2단 프로브(자료검색 페이지에서 타이핑 제출)로 발견.
+  // 용인·성남과 같은 plusSearch 벤더
+  "lib.pocheon.go.kr": (title) =>
+    `https://lib.pocheon.go.kr/intro/menu/10023/program/30003/plusSearchResultList.do` +
+    `?searchType=SIMPLE&searchCategory=ALL&aaa=ALL&searchKey=TITLE&searchLibrary=ALL` +
+    `&searchLibraryArr=MA&searchLibraryArr=MB&searchLibraryArr=MF&searchLibraryArr=MC` +
+    `&searchLibraryArr=MD&searchLibraryArr=ME&searchLibraryArr=MG` +
+    `&searchKeyword=${encodeURIComponent(title)}`,
+
+  // 부산교육청(14관) — 통합도서관(one-library) 검색. 렌더링 확인: 전 구·군
+  // 소장처 879건 — 부산 전역 검색 맞음
+  "home.pen.go.kr": (title) =>
+    `https://one-library.busan.go.kr/busanbooks/?mode=tBookList&page_id=result&mapflag=` +
+    `&manage_code=&search_title=${encodeURIComponent(title)}` +
+    `&search_author=&search_publisher=&search_keyword=&search_start_date=&search_end_date=`,
+
   // 김포(지점 7곳) — 통합검색은 없고 지점별 간략검색만 가능. 각 지점
   // 공식 페이지 메뉴에서 추출한 key·manageCode 사용, 장기·모담 2곳
   // 교차검증으로 패턴 일반화 확인. 지점 경로가 없는 관(/lib/ 등)은
@@ -253,6 +269,15 @@ const PORTAL_TEMPLATES: Record<string, NationwideUrlBuilder> = {
  * 포털이 따로 있는 경우 — region 코드(units 앞 2자리)로 연결.
  */
 const REGION_TEMPLATES: Record<string, (title: string) => string> = {
+  // [실측 확인 2026-07-19 — 2단 프로브] 부산 도서관포털 통합자료검색.
+  // 렌더링 확인: 전 구·군 선택지 + 소장처별 결과 915건 — 부산 전역 맞음.
+  // manageCode 전체 나열은 실제 검색 실행 시 폼이 만드는 URL 그대로.
+  "21": (title) =>
+    `https://library.busan.go.kr/portal/intro/search/indexForAll.do?menu_idx=93` +
+    `&booktype=BOOKANDNONBOOK&mode=tBookList&page_id=result&viewPage=1` +
+    `&manageCode=BJ%2CBG%2CAX%2CBV%2CCA%2CBZ%2CKP%2CJG%2CAP%2CAF%2CKF%2CHN%2CJV%2CHR%2CJJ%2CHQ%2CJN%2CJP%2CJS%2CJQ%2CJU%2CJR%2CKA%2CKD%2CJM%2CKE%2CKG%2CKK%2CKL%2CAC%2CAT%2CAZ%2CBD%2CAL%2CBR%2CGQ%2CKS%2CBK%2CAN%2CBP%2CGL%2CBH%2CAJ%2CKN%2CHS%2CHT%2CHU%2CJW%2CAV%2CAY%2CAO%2CHX%2CAB%2CBN%2CAU%2CBE%2CGP%2CJX%2CJY%2CBL%2CAD%2CAG%2CBA%2CGB%2CGC%2CGD%2CGE%2CGF%2CGG%2CGH%2CGJ%2CJZ%2CAQ%2CJT%2CGM%2CGN%2CAS%2CAH%2CBT%2CFR%2CJK%2CJL%2CAW%2CBS%2CHY%2CHZ%2CJD%2CJE%2CJB%2CJC%2CKB%2CKC%2CJA%2CAR%2CBQ%2CCB%2CBC%2CAE%2CGS%2CGT%2CGU%2CGW%2CGY%2CGZ%2CHA%2CHC%2CHD%2CHE%2CHG%2CHH%2CHJ%2CAA%2CFQ%2CFE%2CFF%2CFG%2CFH%2CFJ%2CFK%2CFL%2CFM%2CFN%2CFP%2CKQ%2CAK%2CFA%2CFB%2CFC%2CFD%2CAM%2CBB%2CFS%2CFT%2CFU%2CFV%2CFW%2CFX%2CFY%2CFZ%2CGA%2CJH%2CKT` +
+    `&title=${encodeURIComponent(title)}`,
+
   // [실측 확인 2026-07-19 — 사용자 제보 URL] 대전 통합도서관(u-library.kr).
   // 이천 작은도서관과 동일 벤더(search/tot/result). 렌더링 확인: 소장처
   // 필터에 가수원·가오·갈마·관평·구암 등 29곳(한밭·유성·대덕 포함) —
