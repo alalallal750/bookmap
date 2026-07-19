@@ -200,6 +200,15 @@ const PORTAL_TEMPLATES: Record<string, NationwideUrlBuilder> = {
   "www.dangjin.go.kr": (title) =>
     `https://lib.dangjin.go.kr/dls_le/index.php?mod=wdDataSearch&act=searchIList` +
     `&deSearch=2&item=total&word=${encodeURIComponent(title)}`,
+
+  // 부천(34관) — 도서검색 시스템(alpasq)의 경로형 키워드 검색
+  "www.bcl.go.kr": (title) =>
+    `https://alpasq.bcl.go.kr/search/keyword/${encodeURIComponent(title)}`,
+
+  // 의정부(6관) — 대표홈페이지 자료검색, 폼 직렬화(booktype=ALL)로 통과
+  "www.uilib.go.kr": (title) =>
+    `https://www.uilib.go.kr/main/intro/search/index.do?menu_idx=9&booktype=ALL` +
+    `&title=${encodeURIComponent(title)}`,
 };
 
 /**
