@@ -2,11 +2,15 @@
 
 /**
  * [2026-07-18 신규 — 전국판] 전국 종이책 검색 화면 (인수인계 17~18장).
+ * [2026-07-20] 라우트 /physical/all → /nationwide 이전. 서울전용(기존
+ * /physical)과 별도 운영 — 서울 지도로 넘길 때 from=nationwide를 붙여
+ * 뒤로가기가 전국판 검색으로 돌아오게 한다.
  *
  * 기존 /physical(서울)과 별개 신규 페이지 — 기존 파이프라인 무수정 원칙.
  * 흐름:
  *   1. 제목 검색 → 카카오 책 후보(판본) 목록 → 사용자가 판본 선택
  *      (전국 검색은 ISBN 완전일치 단일 판본 — 판본 확장은 3순위 로드맵)
+ *      제목 0건이면 저자 검색으로 자동 재시도 (kakaoBook.ts 폴백).
  *   2. 위치 있으면: 가까운 시군구 기준 시도 전체 자동 검색 후 바로 지도.
  *      가장 가까운 곳이 서울이면 기존 서울 지도(/physical/map)로 —
  *      서울은 스크래핑 실권수·실시간 데이터가 더 좋다.
@@ -17,9 +21,6 @@
  *      위치일 뿐.
  *   4. 추천 칩 경유는 판본 선택 생략(ISBN 기지) — 위치 있으면 바로 지도,
  *      없으면 지역 팝업 (사용자 확정 동선).
- *
- * 정보나루 제약 안내 3종(전일 기준 / 권수 미제공 / 신간 누락 가능)은
- * 이 화면과 지도 화면 양쪽에 표기.
  */
 
 import { useState, useEffect, Suspense } from "react";
@@ -28,6 +29,7 @@ import { ApiResponse, KakaoBookCandidate } from "@/types";
 import { SearchBar } from "@/components/search/SearchBar";
 import { KoreaRegionMap } from "@/components/search/KoreaRegionMap";
 import { SuggestionChip } from "@/components/search/SuggestionChip";
+import { GuidePopup } from "@/components/search/GuidePopup";
 import { suggestions } from "@/lib/data/suggestions";
 import {
   SearchUnit,
@@ -65,6 +67,7 @@ function NationwideInner() {
   const [searchValue, setSearchValue] = useState(initialQuery);
   const [picker, setPicker] = useState<PickerState>(null);
   const [locating, setLocating] = useState(false);
+  const [guideOpen, setGuideOpen] = useState(false);
 
   // 지도에서 뒤로가기로 돌아온 경우에만 후보 목록 복원
   useEffect(() => {
@@ -108,8 +111,9 @@ function NationwideInner() {
 
   function goToMap(book: KakaoBookCandidate, units: SearchUnit[], wide = false) {
     const codes = units.map((u) => u.code).join(",");
+    const author = book.authors.join(", ");
     router.push(
-      `/physical/all/map/${book.isbn}?title=${encodeURIComponent(book.title)}&units=${codes}${wide ? "&wide=1" : ""}`
+      `/nationwide/map/${book.isbn}?title=${encodeURIComponent(book.title)}&author=${encodeURIComponent(author)}&units=${codes}${wide ? "&wide=1" : ""}`
     );
   }
 
@@ -138,8 +142,11 @@ function NationwideInner() {
       }
       // 가장 가까운 시군구가 서울이면 기존 서울 파이프라인(스크래핑
       // 실권수·실시간)으로 — 지도 화면이 ISBN+위치로 자체 검색한다.
+      // from=nationwide: 서울 지도의 뒤로가기가 전국판 검색으로 돌아오게.
       if (nearby[0].region === "11") {
-        router.push(`/physical/map/${book.isbn}?title=${encodeURIComponent(book.title)}`);
+        router.push(
+          `/physical/map/${book.isbn}?title=${encodeURIComponent(book.title)}&from=nationwide`
+        );
         return;
       }
       goToMap(book, nearby);
@@ -187,7 +194,9 @@ function NationwideInner() {
   function handlePickRegion(book: KakaoBookCandidate, region: string) {
     if (region === "11") {
       // 서울은 기존 파이프라인 — 위치 없는 검색도 기존 화면이 전체 구를 처리
-      router.push(`/physical/map/${book.isbn}?title=${encodeURIComponent(book.title)}`);
+      router.push(
+        `/physical/map/${book.isbn}?title=${encodeURIComponent(book.title)}&from=nationwide`
+      );
       return;
     }
     const units = getUnitsByRegion(region).filter((u) => u.libCount > 0);
@@ -197,36 +206,37 @@ function NationwideInner() {
     goToMap(book, [start], true);
   }
 
-  const noticeBlock = (
-    <p className="text-gray-300 text-xs leading-relaxed text-center">
-      전국 도서관 데이터는 도서관 정보나루 기준이에요.
-      <br />
-      대출가능 여부는 전일 기준이고, 보유 권수는 제공되지 않아요.
-      <br />
-      최근에 들어온 신간은 빠져 있을 수 있어요.
-    </p>
-  );
-
   return (
     <main className="min-h-screen flex flex-col">
       <header className="bg-white border-b border-gray-100 px-4 pt-14 pb-4 sticky top-0 z-10">
-        <div className="flex items-center gap-3 mb-3">
+        <div className="flex items-start gap-3 mb-3">
           <div className="flex flex-col items-end gap-1 flex-shrink-0">
-            <a href="/physical/all">
+            <a href="/nationwide">
               <img src="/logo-header.png" alt="지금빌려" style={{ height: "40px", width: "107px" }} />
             </a>
             <span className="text-[10px] font-bold tracking-wide px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700">
               종이책 · 전국
             </span>
           </div>
-          <p className="text-xs text-gray-400">
+          <p className="text-[11px] leading-relaxed text-gray-400 flex-1 min-w-0">
             그 책, 지금 어디서 빌릴 수 있지?
             <br />
-            <span className="text-[#1d2b6b] font-bold" style={{ textShadow: "0 1px 1px rgba(29,43,107,0.18)" }}>
-              전국 도서관
-            </span>
-            에서 찾아볼게요.
+            원하는 위치의 도서관에서 바로 찾아볼게요.
+            <br />
+            <span className="font-bold text-gray-500">책이음 서비스</span> 바코드가
+            있으시면 전국 도서관에서 책을 빌릴 수 있어요. (참여기관에 한함)
           </p>
+          <button
+            onClick={() => setGuideOpen(true)}
+            className="flex-shrink-0 p-1 -mr-1 text-gray-400 active:text-gray-600"
+            aria-label="이용 안내"
+          >
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.5" />
+              <path d="M10 9v4.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              <circle cx="10" cy="6.3" r="1" fill="currentColor" />
+            </svg>
+          </button>
         </div>
         <SearchBar
           onSearch={handleSearch}
@@ -234,6 +244,7 @@ function NationwideInner() {
           value={searchValue}
           onChange={setSearchValue}
           theme="green"
+          placeholder="그 책, 뭐였더라?"
         />
         <SuggestionChip
           visible={state.step === "idle" && searchValue.trim() === ""}
@@ -258,7 +269,31 @@ function NationwideInner() {
               전국 공공도서관에서 소장 여부를 확인해 드려요.
             </p>
             <div className="mt-10" />
-            {noticeBlock}
+            <p className="text-gray-400 text-xs leading-relaxed">
+              <a
+                href="https://books.nl.go.kr/tech/contents/TE4010300000.do?schM=view&id=57806"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 font-medium"
+              >
+                카카오
+              </a>
+              /
+              <a
+                href="https://books.nl.go.kr/tech/contents/TE4010300000.do?schOpt5=PUNOTICE&schOpt6=U&schM=view&act=UPDATE&page=2&ordFld=regdt&ordBy=DESC&viewCount=10&id=48545&schBdcode=&schGroupCode="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 font-medium"
+              >
+                네이버
+              </a>{" "}
+              등에서 책이음 회원 카드를 발급받으시면,
+              <br />
+              전국 공공도서관에서 책을 빌릴 수 있어요.
+            </p>
+            <p className="mt-4 text-gray-300 text-xs leading-relaxed">
+              대출가능여부는 도서관 홈페이지에서 다시 확인해 주세요.
+            </p>
             <p className="mt-6 text-[10px] text-gray-400">
               도서관 소장 데이터 출처 :{" "}
               <a
@@ -360,6 +395,9 @@ function NationwideInner() {
           </div>
         </div>
       )}
+
+      {/* ⓘ 이용 안내 팝업 — 헤더 우측 버튼 탭 시에만 열림 */}
+      {guideOpen && <GuidePopup onClose={() => setGuideOpen(false)} />}
     </main>
   );
 }

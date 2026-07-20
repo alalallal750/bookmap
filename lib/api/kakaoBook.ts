@@ -33,25 +33,13 @@ function extractIsbn13(raw: string): string {
   return isbn13 ?? "";
 }
 
-/**
- * 책 제목으로 카카오 책 검색 → ISBN 후보 목록 반환.
- * ISBN이 끝내 없는 항목(extractIsbn13 결과가 빈 문자열)은 애초에
- * 후보 목록에서 제외 — 이번 설계는 ISBN이 있어야만 다음 단계(서울도서관
- * ISBN 검색)로 진행 가능하므로, ISBN 없는 후보를 보여주는 건 의미 없음.
- *
- * 카카오 검색 자체가 0건이면 빈 배열 반환 — 호출부(API 라우트)에서
- * "0건이면 제목으로 직접 fallback" 처리를 하게 됨.
- */
-export async function searchKakaoBookCandidates(
-  query: string
+/** target별 카카오 책 검색 1회 → ISBN 있는 후보만 반환 */
+async function fetchCandidates(
+  query: string,
+  restApiKey: string,
+  target: "title" | "person"
 ): Promise<KakaoBookCandidate[]> {
-  const restApiKey = process.env.KAKAO_REST_KEY;
-  if (!restApiKey) {
-    console.log("[kakaoBook] KAKAO_REST_KEY 환경변수 없음 — 카카오 검색 스킵");
-    return [];
-  }
-
-  const url = `https://dapi.kakao.com/v3/search/book?target=title&size=20&query=${encodeURIComponent(
+  const url = `https://dapi.kakao.com/v3/search/book?target=${target}&size=20&query=${encodeURIComponent(
     query
   )}`;
 
@@ -61,7 +49,7 @@ export async function searchKakaoBookCandidates(
       signal: AbortSignal.timeout(5000),
     });
 
-    console.log("[kakaoBook] 응답 상태:", res.status, "query:", query);
+    console.log("[kakaoBook] 응답 상태:", res.status, "target:", target, "query:", query);
 
     if (!res.ok) {
       console.log("[kakaoBook] 응답 실패, body:", await res.text());
@@ -105,4 +93,33 @@ export async function searchKakaoBookCandidates(
     console.log("[kakaoBook] 요청 실패:", e);
     return [];
   }
+}
+
+/**
+ * 책 제목으로 카카오 책 검색 → ISBN 후보 목록 반환.
+ * ISBN이 끝내 없는 항목(extractIsbn13 결과가 빈 문자열)은 애초에
+ * 후보 목록에서 제외 — 이번 설계는 ISBN이 있어야만 다음 단계(서울도서관
+ * ISBN 검색)로 진행 가능하므로, ISBN 없는 후보를 보여주는 건 의미 없음.
+ *
+ * [2026-07-20] 제목(target=title) 검색이 0건이면 저자(target=person)로
+ * 1회 재시도 — "김영하"처럼 저자명을 검색해도 결과가 나오게. 제목 검색
+ * 정확도는 그대로 유지되고, 정보나루 한도와는 무관(카카오 호출만 +1회).
+ *
+ * 그래도 0건이면 빈 배열 반환 — 호출부(API 라우트)에서
+ * "0건이면 제목으로 직접 fallback" 처리를 하게 됨.
+ */
+export async function searchKakaoBookCandidates(
+  query: string
+): Promise<KakaoBookCandidate[]> {
+  const restApiKey = process.env.KAKAO_REST_KEY;
+  if (!restApiKey) {
+    console.log("[kakaoBook] KAKAO_REST_KEY 환경변수 없음 — 카카오 검색 스킵");
+    return [];
+  }
+
+  const byTitle = await fetchCandidates(query, restApiKey, "title");
+  if (byTitle.length > 0) return byTitle;
+
+  console.log("[kakaoBook] 제목 0건 — 저자(person)로 재시도:", query);
+  return fetchCandidates(query, restApiKey, "person");
 }

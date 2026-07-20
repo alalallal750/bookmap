@@ -62,12 +62,13 @@ function createOverlayContent(lib: PhysicalLibrary, onClick: () => void) {
 
 type MapPageProps = {
   params: { isbn: string };
-  searchParams: { title?: string; units?: string; wide?: string };
+  searchParams: { title?: string; author?: string; units?: string; wide?: string };
 };
 
 export default function NationwideMapPage({ params, searchParams }: MapPageProps) {
   const { isbn } = params;
   const title = searchParams?.title;
+  const author = searchParams?.author;
   const unitsParam = searchParams?.units ?? "";
   const wide = searchParams?.wide === "1";
 
@@ -88,7 +89,6 @@ export default function NationwideMapPage({ params, searchParams }: MapPageProps
   const [mapReady, setMapReady] = useState(false);
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [provinces, setProvinces] = useState<string[]>([]);
   const [failedProvinces, setFailedProvinces] = useState<string[]>([]);
   // 다른 시도로 이동 시 재검색 안내 — null이면 버튼 숨김
   const [researchTarget, setResearchTarget] = useState<{
@@ -117,10 +117,6 @@ export default function NationwideMapPage({ params, searchParams }: MapPageProps
     });
     const regionMeta: { region: string; province: string }[] = json.meta?.regions ?? [];
     for (const r of regionMeta) searchedRegionsRef.current.add(r.region);
-    setProvinces((prev) => [
-      ...prev,
-      ...regionMeta.map((r) => r.province).filter((p) => !prev.includes(p)),
-    ]);
     const failed: string[] = (json.meta?.failedRegions ?? []).map(
       (f: { province: string }) => f.province
     );
@@ -323,14 +319,13 @@ export default function NationwideMapPage({ params, searchParams }: MapPageProps
   }
 
   const holdingCount = libraries.length;
-  const areaLabel = provinces.length > 0 ? `${provinces.join(", ")} 전체` : "";
 
   return (
     <main className="h-screen h-dvh flex flex-col overflow-hidden">
       <header className="bg-white border-b border-gray-100 px-4 pt-4 pb-3 flex-shrink-0 z-20">
         <div className="flex items-center gap-3">
           <Link
-            href="/physical/all"
+            href="/nationwide"
             className="p-2 -ml-2 text-gray-500"
             aria-label="뒤로가기"
             onClick={() => {
@@ -346,9 +341,15 @@ export default function NationwideMapPage({ params, searchParams }: MapPageProps
             </svg>
           </Link>
           <div className="min-w-0">
-            <h1 className="font-bold text-gray-900 text-sm line-clamp-1">{title ?? "도서관 찾기"}</h1>
+            {/* [07-20] 제목 뒤에 저자를 기호 없이 간격만 두고 표기 (예: 혼모노   성해나) */}
+            <h1 className="font-bold text-gray-900 text-sm line-clamp-1">
+              {title ?? "도서관 찾기"}
+              {author && (
+                <span className="font-normal text-gray-500 ml-2.5">{author}</span>
+              )}
+            </h1>
             <p className="text-xs text-gray-400 line-clamp-1">
-              {areaLabel ? `${areaLabel} · ` : ""}대출가능은 전일 기준 · 권수 미제공
+              마커를 눌러서 지금 빌릴 수 있는지 확인해 보세요.
             </p>
           </div>
         </div>

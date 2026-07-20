@@ -99,11 +99,17 @@ function createCustomOverlay(lib: PhysicalLibrary, onClick: () => void) {
 // ];
 const LEGEND: { label: string; color: string }[] = [];
 
-type MapPageProps = { params: { isbn: string }; searchParams: { title?: string } };
+type MapPageProps = {
+  params: { isbn: string };
+  searchParams: { title?: string; from?: string };
+};
 
 export default function PhysicalMapPage({ params, searchParams }: MapPageProps) {
   const { isbn } = params;
   const title = searchParams?.title;
+  // [2026-07-20] 전국판(/nationwide)에서 서울로 넘어온 경우 — 뒤로가기가
+  // 전국판 검색 화면으로 돌아가야 함. 파라미터 없으면 기존 동작 그대로.
+  const fromNationwide = searchParams?.from === "nationwide";
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<any>(null);
   const overlaysRef = useRef<any[]>([]);
@@ -593,7 +599,20 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <Link href="/physical" className="p-2 -ml-2 text-gray-500" aria-label="뒤로가기">
+          <Link
+            href={fromNationwide ? "/nationwide" : "/physical"}
+            className="p-2 -ml-2 text-gray-500"
+            aria-label="뒤로가기"
+            onClick={() => {
+              // 전국판 검색 화면이 sessionStorage의 후보 목록을 복원하도록
+              // "지도에서 돌아옴" 플래그를 남김 (전국판 지도와 동일 패턴)
+              if (fromNationwide) {
+                try {
+                  sessionStorage.setItem("nationwide_returning_from_map", "1");
+                } catch {}
+              }
+            }}
+          >
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path
                 d="M13 4l-6 6 6 6"
