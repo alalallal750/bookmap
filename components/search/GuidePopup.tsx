@@ -47,12 +47,13 @@ export function GuidePopup({ onClose }: { onClose: () => void }) {
           <GuideStep no={1}>책을 검색하고,</GuideStep>
           <GuideStep no={2}>가까운 도서관을 지도에서 확인하신 후,</GuideStep>
           <GuideStep no={3}>
-            도서관 홈페이지에서 대출 가능 여부를 확인하시면,
-            <MiniButton variant="primary">대출 가능한지 확인하기</MiniButton>
+            도서관 홈페이지에서{" "}
+            <MiniButton variant="primary">대출 가능한지 확인하기</MiniButton>{" "}
+            버튼으로 대출 가능 여부를 확인하시면,
           </GuideStep>
           <GuideStep no={4}>
-            해당 도서관으로 바로 길찾기를 해서 찾아갈 수 있어요.
-            <MiniButton variant="secondary">길찾기</MiniButton>
+            <MiniButton variant="secondary">길찾기</MiniButton> 버튼으로 해당
+            도서관까지 바로 찾아갈 수 있어요.
           </GuideStep>
           <GuideStep no={5}>
             원하는 도서관의 책이 대출중이라면, 구별 도서관에 로그인 후 도서
@@ -61,8 +62,24 @@ export function GuidePopup({ onClose }: { onClose: () => void }) {
         </ol>
 
         <div className="bg-gray-50 rounded-xl p-3.5 text-xs text-gray-500 leading-relaxed">
-          카카오 지갑/네이버 전자문서에서{" "}
-          <span className="font-bold text-gray-700">책이음 회원가입</span>을
+          <a
+            href="https://books.nl.go.kr/tech/contents/TE4010300000.do?schM=view&id=57806"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 font-medium text-gray-600"
+          >
+            카카오 지갑
+          </a>
+          /
+          <a
+            href="https://books.nl.go.kr/tech/contents/TE4010300000.do?schOpt5=PUNOTICE&schOpt6=U&schM=view&act=UPDATE&page=2&ordFld=regdt&ordBy=DESC&viewCount=10&id=48545&schBdcode=&schGroupCode="
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 font-medium text-gray-600"
+          >
+            네이버 전자문서
+          </a>
+          에서 <span className="font-bold text-gray-700">책이음 회원가입</span>을
           하시면, 전국 도서관에서 책을 빌리실 수 있어요. 일부 도서관은 최초
           1회 방문이 필요할 수 있어요.
         </div>
@@ -82,7 +99,8 @@ function GuideStep({ no, children }: { no: number; children: React.ReactNode }) 
   );
 }
 
-/** LibraryDetail의 btn-primary/btn-secondary 디자인 축소판 (장식용) */
+/** LibraryDetail의 btn-primary/btn-secondary 디자인 축소판 — 문장 안에
+ *  인라인으로 들어가는 장식용 (실제 동작 없음) */
 function MiniButton({
   variant,
   children,
@@ -97,7 +115,7 @@ function MiniButton({
   return (
     <span
       aria-hidden
-      className={`pointer-events-none select-none inline-block mt-1.5 ${style} font-semibold rounded-lg px-3 py-1.5 text-[11px] text-center`}
+      className={`pointer-events-none select-none inline-block align-baseline ${style} font-semibold rounded-md px-2 py-0.5 text-[11px] text-center whitespace-nowrap`}
     >
       {children}
     </span>

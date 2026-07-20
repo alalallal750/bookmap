@@ -218,13 +218,12 @@ function NationwideInner() {
               종이책 · 전국
             </span>
           </div>
-          <p className="text-[11px] leading-relaxed text-gray-400 flex-1 min-w-0">
+          {/* [07-20] 책이음 바코드 문구는 헤더가 길어져 삭제 — 아래 idle
+              본문의 책이음 발급 안내로 갈음 */}
+          <p className="text-xs leading-relaxed text-gray-400 flex-1 min-w-0">
             그 책, 지금 어디서 빌릴 수 있지?
             <br />
             원하는 위치의 도서관에서 바로 찾아볼게요.
-            <br />
-            <span className="font-bold text-gray-500">책이음 서비스</span> 바코드가
-            있으시면 전국 도서관에서 책을 빌릴 수 있어요. (참여기관에 한함)
           </p>
           <button
             onClick={() => setGuideOpen(true)}

@@ -24,7 +24,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { PhysicalLibrary } from "@/types";
-import { formatLibraryName } from "@/lib/utils/formatLibraryName";
+import { formatNationwideLibraryName } from "@/lib/utils/formatLibraryName";
 import { LibraryDetail } from "@/components/map/LibraryDetail";
 import { getSearchUnit, getNearbyUnits } from "@/lib/data/searchUnits";
 
@@ -55,7 +55,7 @@ function createOverlayContent(lib: PhysicalLibrary, onClick: () => void) {
   const label = unknown ? "소장" : lib.available ? "가능" : "대출중";
   const div = document.createElement("div");
   div.style.cssText = `background:${color};color:white;border-radius:10px;padding:5px 10px;font-size:12px;font-weight:500;text-align:center;cursor:pointer;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,0.2);line-height:1.4;`;
-  div.innerHTML = `${formatLibraryName(lib.libraryName)}<br><span style="font-size:11px;opacity:0.9;">${label}</span>`;
+  div.innerHTML = `${formatNationwideLibraryName(lib.libraryName)}<br><span style="font-size:11px;opacity:0.9;">${label}</span>`;
   div.addEventListener("click", onClick);
   return div;
 }

@@ -302,6 +302,20 @@ const PORTAL_TEMPLATES: Record<string, NationwideUrlBuilder> = {
 };
 
 /**
+ * hostname 접미사 → 검색 URL 빌더. 충남교육청처럼 교육지원청별 서브도메인
+ * (hslib·cle·gjlib·…)이 수십 개지만 검색 경로가 완전히 동일한 경우 —
+ * 각 도서관 homepage의 host를 그대로 살려서 빌드.
+ */
+const SUFFIX_TEMPLATES: Record<string, (host: string, title: string) => string> = {
+  // 충남교육청(*.cne.go.kr) — [2026-07-20 사용자 제보 홍성 URL에서 역산]
+  // menuId는 없어도 동작 확인. hslib·cle·gjlib·yglib·talib·cnbl 6곳에서
+  // 두 책(불편한 편의점/홍학의 자리) SSR 결과 교차검증 통과 → 패턴 일반화.
+  ".cne.go.kr": (host, title) =>
+    `https://${host}/api/srch/bookSearch.do?manageCode=MS&searchCondition=ALL` +
+    `&searchTxt=${encodeURIComponent(title)}`,
+};
+
+/**
  * 시도 단위 통합 포털 (hostname 매핑이 안 될 때의 폴백).
  * 대전처럼 관별 homepage 도메인은 제각각이지만 시 전체를 검색하는 통합
  * 포털이 따로 있는 경우 — region 코드(units 앞 2자리)로 연결.
@@ -338,7 +352,14 @@ export function buildNationwidePortalSearchUrl(
   try {
     const host = homepage ? new URL(homepage).hostname : undefined;
     const byHost = host ? PORTAL_TEMPLATES[host]?.(title, homepage!) : undefined;
-    return byHost ?? (region ? REGION_TEMPLATES[region]?.(title) : undefined);
+    const bySuffix =
+      byHost ??
+      (host
+        ? Object.entries(SUFFIX_TEMPLATES).find(([suffix]) =>
+            host.endsWith(suffix)
+          )?.[1](host, title)
+        : undefined);
+    return bySuffix ?? (region ? REGION_TEMPLATES[region]?.(title) : undefined);
   } catch {
     return region ? REGION_TEMPLATES[region]?.(title) : undefined;
   }
