@@ -12,9 +12,13 @@ const SCROLL_PX_PER_SEC = 25;
 // 맞춘 축약형. 문장 전체는 421px로 칩 폭(343px)을 넘어 축약형만 사용.
 // 이 라벨 길이에 맞춰 제목 창을 150→130px로 줄임(넘치는 제목은 기존
 // 자동 스크롤이 처리) — 360px 폭 기기까지 안전.
+// [2026-07-20] 10권 체제: mania/media는 데이터의 chipLabel(시드 책 제목 포함)이
+// 우선이고, 아래는 chipLabel이 빈 항목의 폴백.
 const LABEL_TEXT: Record<Suggestion["label"], string> = {
   hot: "서울 20·30대 대출 급상승",
   popular: "서울 20·30대 대출 인기",
+  mania: "독자들이 함께 빌린 책",
+  media: "화제의 드라마 원작",
 };
 
 /**
@@ -104,7 +108,7 @@ export function SuggestionChip({
         <path d="M3 13l5-5 3 3 6-7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M13 4h4v4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
-      <span className="flex-shrink-0">{LABEL_TEXT[current.label]}</span>
+      <span className="flex-shrink-0">{current.chipLabel ?? LABEL_TEXT[current.label]}</span>
       <span ref={windowRef} className="max-w-[130px] overflow-hidden inline-block align-bottom">
         <span
           ref={innerRef}

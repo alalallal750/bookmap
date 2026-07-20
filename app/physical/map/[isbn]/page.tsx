@@ -5,6 +5,7 @@ import Link from "next/link";
 import { PhysicalLibrary, PhysicalBook, PhysicalSearchResponse, ApiResponse } from "@/types";
 import { formatLibraryName } from "@/lib/utils/formatLibraryName";
 import { LibraryDetail } from "@/components/map/LibraryDetail";
+import { BookStoryStrip } from "@/components/map/BookStoryStrip";
 import { DEFAULT_LOCATION, getNearbyDbnums, getNearbyUnreliableDbnums, getDistrictName, distanceKm } from "@/lib/data/districtCoords";
 
 // [2026-06-24 추가] 지도 이동 시 "이 지역에서 재검색" UX 관련 상수
@@ -628,6 +629,9 @@ export default function PhysicalMapPage({ params, searchParams }: MapPageProps) 
             <p className="text-xs text-gray-400">ISBN {isbn}</p>
           </div>
         </div>
+        {/* [07-20] 추천 도서 스토리텔링 — 추천 칩·팝업과 동일하게 전국판
+            흐름(from=nationwide)에서만. 서울판 자체 검색 적용은 추후 결정. */}
+        {fromNationwide && <BookStoryStrip isbn={isbn} />}
       </header>
 
       {/* 지도 영역 */}

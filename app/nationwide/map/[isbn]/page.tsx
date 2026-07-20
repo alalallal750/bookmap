@@ -32,6 +32,7 @@ import { PhysicalLibrary } from "@/types";
 import { formatNationwideLibraryName } from "@/lib/utils/formatLibraryName";
 import { calculateDistance } from "@/lib/distance";
 import { LibraryDetail } from "@/components/map/LibraryDetail";
+import { BookStoryStrip } from "@/components/map/BookStoryStrip";
 import { getSearchUnit, getNearbyUnits } from "@/lib/data/searchUnits";
 
 // [07-20 A안, 2차] 사전 확인 상한 — 기준점(현재위치, 없으면 지도 시작
@@ -448,6 +449,9 @@ export default function NationwideMapPage({ params, searchParams }: MapPageProps
             </p>
           </div>
         </div>
+        {/* [07-20] 추천 도서 10권(판본 포함)에 한해 대출 스토리텔링 한 줄 —
+            정적 데이터 매칭이라 정보나루 호출 없음 */}
+        <BookStoryStrip isbn={isbn} />
       </header>
 
       <div className="flex-1 relative min-h-0">
