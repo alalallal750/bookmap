@@ -13,10 +13,11 @@
  *   - 마커는 "소장"으로 표시 — 대출가능 여부는 모름
  *   - 마커 탭 시 /api/naru-book-exist로 그 도서관 1건만 조회해
  *     "가능"/"대출중"으로 갱신 (6시간 캐시)
- *   - [07-20 A안] 위치가 있으면 반경 3km·최대 10곳만 사전 확인해 색을
- *     확정한 뒤 마커를 일괄 표시 — "탭 후 색이 늦게 바뀌는" 혼선 제거.
- *     호출 증가는 검색당 최대 10회(일 한도 500회의 2%). 위치 없으면
- *     기존처럼 즉시 표시(전부 소장), 나머지는 탭 시 온디맨드 유지.
+ *   - [07-20 A안, 2차] 기준점(현재위치, 없으면 지도 시작 중심)에서 가까운
+ *     순 최대 10곳을 사전 확인해 색을 확정한 뒤 마커를 일괄 표시 —
+ *     "탭 후 색이 늦게 바뀌는" 혼선 제거. 지역 팝업 진입(위치 없음)도
+ *     동일하게 발동. 호출 증가는 검색당 최대 10회(일 한도 500회의 2%),
+ *     기준점에서 먼 마커는 탭 시 온디맨드 유지.
  *
  * [07-18 3차 피드백]
  *   - wide=1 (위치 없이 지역 팝업으로 진입): 그 시도 소장관 전체가
@@ -33,8 +34,9 @@ import { calculateDistance } from "@/lib/distance";
 import { LibraryDetail } from "@/components/map/LibraryDetail";
 import { getSearchUnit, getNearbyUnits } from "@/lib/data/searchUnits";
 
-// [07-20 A안] 위치 기반 사전 확인 파라미터 — 반경 3km·최대 10곳
-const PRECHECK_RADIUS_KM = 3;
+// [07-20 A안, 2차] 사전 확인 상한 — 기준점(현재위치, 없으면 지도 시작
+// 중심)에서 가까운 순 최대 10곳. 위치 없는 지역 팝업 진입에서도 항상
+// 발동하도록 반경 제한은 제거 (사용자 피드백: "한 번에 10곳 확정색")
 const PRECHECK_MAX = 10;
 
 function LoadingDots({ message }: { message: string }) {
@@ -168,24 +170,30 @@ export default function NationwideMapPage({ params, searchParams }: MapPageProps
   }, [isbn, title, unitsParam, applyResponse]);
 
   /**
-   * [07-20 A안] 위치 기반 사전 확인 — 검색 완료 + 위치 확정(성공/실패)
-   * 시점에 1회 실행. 반경 3km 내 소장관을 가까운 순 최대 10곳만
-   * /api/naru-book-exist로 병렬 조회해 색을 확정한 뒤 setLoading(false)
-   * → 마커가 확정색으로 한 번에 뜬다. 위치 없음·반경 내 0곳이면 즉시
-   * 표시(현행 동작). 개별 실패·한도초과는 "소장" 유지 (악화 없음).
+   * [07-20 A안, 2차] 사전 확인 — 검색 완료 + 위치 확정(성공/실패) 시점에
+   * 1회 실행. 기준점(현재위치, 없으면 지도 시작 중심 = 첫 unit 좌표)에서
+   * 가까운 순 최대 10곳을 /api/naru-book-exist로 병렬 조회해 색을 확정한
+   * 뒤 setLoading(false) → 마커가 확정색으로 한 번에 뜬다. 지역 팝업
+   * 진입(위치 없음)도 지도 중심 기준으로 항상 발동. 개별 실패·한도초과는
+   * "소장" 유지 (악화 없음).
    */
   useEffect(() => {
     if (!searchDone || userLocation === undefined) return; // 위치 조회 대기(최대 5초)
     if (precheckStartedRef.current) return;
     precheckStartedRef.current = true;
 
-    const targets = userLocation
+    const firstUnit = getSearchUnit(unitsParam.split(",")[0] ?? "");
+    const anchor =
+      userLocation ??
+      (firstUnit?.lat !== undefined ? { lat: firstUnit.lat, lng: firstUnit.lng! } : null) ??
+      (libraries[0] ? { lat: libraries[0].latitude, lng: libraries[0].longitude } : null);
+
+    const targets = anchor
       ? libraries
           .map((lib) => ({
             lib,
-            d: calculateDistance(userLocation.lat, userLocation.lng, lib.latitude, lib.longitude),
+            d: calculateDistance(anchor.lat, anchor.lng, lib.latitude, lib.longitude),
           }))
-          .filter((x) => x.d <= PRECHECK_RADIUS_KM)
           .sort((a, b) => a.d - b.d)
           .slice(0, PRECHECK_MAX)
           .map((x) => x.lib)
@@ -230,7 +238,7 @@ export default function NationwideMapPage({ params, searchParams }: MapPageProps
       setLoading(false);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchDone, userLocation, libraries, isbn]);
+  }, [searchDone, userLocation, libraries, isbn, unitsParam]);
 
   // 카카오맵 SDK 로드 (서울 지도와 동일 패턴)
   useEffect(() => {
