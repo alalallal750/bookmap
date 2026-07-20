@@ -306,13 +306,47 @@ const PORTAL_TEMPLATES: Record<string, NationwideUrlBuilder> = {
  * (hslib·cle·gjlib·…)이 수십 개지만 검색 경로가 완전히 동일한 경우 —
  * 각 도서관 homepage의 host를 그대로 살려서 빌드.
  */
+/**
+ * 충남교육청 서브도메인 → 자기 관 manageCode.
+ * [2026-07-20 2차 수정] manageCode=MS 일률 적용은 오류였음 — MS는 홍성
+ * 코드라 유구 등 모든 사이트에서 홍성 결과만 나왔음 (사용자 제보).
+ * 19개 서브도메인의 검색 페이지에서 checked 기본값을 전수 수집했고,
+ * 코드별 필터링은 결과 등록번호 접두어(E+관코드: EMF·EMU·EMG)로 검증.
+ */
+const CNE_MANAGE_CODES: Record<string, string> = {
+  "cle.cne.go.kr": "MB", // 충남교육청평생교육원
+  "chsl.cne.go.kr": "MA", // 학생교육문화원
+  "shlib.cne.go.kr": "ME", // 천안 성환도서관
+  "gjlib.cne.go.kr": "MF", // 공주도서관
+  "yglib.cne.go.kr": "MG", // 공주 유구도서관
+  "brlib.cne.go.kr": "MH", // 보령도서관
+  "uclib.cne.go.kr": "MJ", // 보령 웅천도서관
+  "aslib.cne.go.kr": "MK", // 아산도서관
+  "csbl.cne.go.kr": "MD", // 서부평생교육원
+  "hmlib.cne.go.kr": "ML", // 서산 해미도서관
+  "cnbl.cne.go.kr": "MC", // 남부평생교육원
+  "djlib.cne.go.kr": "MM", // 당진도서관
+  "kslib.cne.go.kr": "MN", // 금산도서관
+  "bylib.cne.go.kr": "MP", // 부여도서관
+  "sclib.cne.go.kr": "MQ", // 서천도서관
+  "cylib.cne.go.kr": "MR", // 청양도서관
+  "hslib.cne.go.kr": "MS", // 홍성도서관
+  "yslib.cne.go.kr": "MT", // 예산도서관
+  "talib.cne.go.kr": "MU", // 태안도서관
+};
+
 const SUFFIX_TEMPLATES: Record<string, (host: string, title: string) => string> = {
   // 충남교육청(*.cne.go.kr) — [2026-07-20 사용자 제보 홍성 URL에서 역산]
-  // menuId는 없어도 동작 확인. hslib·cle·gjlib·yglib·talib·cnbl 6곳에서
-  // 두 책(불편한 편의점/홍학의 자리) SSR 결과 교차검증 통과 → 패턴 일반화.
-  ".cne.go.kr": (host, title) =>
-    `https://${host}/api/srch/bookSearch.do?manageCode=MS&searchCondition=ALL` +
-    `&searchTxt=${encodeURIComponent(title)}`,
+  // menuId는 없어도 동작 확인. 관 코드를 알면 그 관만, 목록에 없는
+  // 서브도메인은 manageCode 생략 → 충남 전체 통합검색(그 관 포함)으로 폴백.
+  ".cne.go.kr": (host, title) => {
+    const mc = CNE_MANAGE_CODES[host];
+    return (
+      `https://${host}/api/srch/bookSearch.do?` +
+      (mc ? `manageCode=${mc}&` : "") +
+      `searchCondition=ALL&searchTxt=${encodeURIComponent(title)}`
+    );
+  },
 };
 
 /**

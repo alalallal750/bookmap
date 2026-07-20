@@ -13,6 +13,10 @@
  *   - 마커는 "소장"으로 표시 — 대출가능 여부는 모름
  *   - 마커 탭 시 /api/naru-book-exist로 그 도서관 1건만 조회해
  *     "가능"/"대출중"으로 갱신 (6시간 캐시)
+ *   - [07-20 A안] 위치가 있으면 반경 3km·최대 10곳만 사전 확인해 색을
+ *     확정한 뒤 마커를 일괄 표시 — "탭 후 색이 늦게 바뀌는" 혼선 제거.
+ *     호출 증가는 검색당 최대 10회(일 한도 500회의 2%). 위치 없으면
+ *     기존처럼 즉시 표시(전부 소장), 나머지는 탭 시 온디맨드 유지.
  *
  * [07-18 3차 피드백]
  *   - wide=1 (위치 없이 지역 팝업으로 진입): 그 시도 소장관 전체가
@@ -25,8 +29,13 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { PhysicalLibrary } from "@/types";
 import { formatNationwideLibraryName } from "@/lib/utils/formatLibraryName";
+import { calculateDistance } from "@/lib/distance";
 import { LibraryDetail } from "@/components/map/LibraryDetail";
 import { getSearchUnit, getNearbyUnits } from "@/lib/data/searchUnits";
+
+// [07-20 A안] 위치 기반 사전 확인 파라미터 — 반경 3km·최대 10곳
+const PRECHECK_RADIUS_KM = 3;
+const PRECHECK_MAX = 10;
 
 function LoadingDots({ message }: { message: string }) {
   const [dotCount, setDotCount] = useState(0);
@@ -84,7 +93,14 @@ export default function NationwideMapPage({ params, searchParams }: MapPageProps
   const searchedRegionsRef = useRef<Set<string>>(new Set());
 
   const [libraries, setLibraries] = useState<PhysicalLibrary[]>([]);
-  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+  // undefined = 위치 조회 중, null = 실패/미지원, 좌표 = 성공 (서울판 패턴)
+  // — 사전 확인이 "위치 조회가 끝났는지"를 알아야 해서 3상태로 구분
+  const [userLocation, setUserLocation] = useState<
+    { lat: number; lng: number } | null | undefined
+  >(undefined);
+  const [searchDone, setSearchDone] = useState(false);
+  const [prechecking, setPrechecking] = useState(false);
+  const precheckStartedRef = useRef(false);
   const [selectedLibrary, setSelectedLibrary] = useState<PhysicalLibrary | null>(null);
   const [mapReady, setMapReady] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -98,12 +114,16 @@ export default function NationwideMapPage({ params, searchParams }: MapPageProps
   } | null>(null);
   const [researching, setResearching] = useState(false);
 
-  // 사용자 위치 (지도 중심·현위치 dot용 — 검색에는 불필요, units가 이미 확정)
+  // 사용자 위치 — 지도 중심·현위치 dot + [07-20] 반경 3km 사전 확인 대상
+  // 선정에 사용. 검색 화면에서 넘어온 경우 maximumAge 5분 캐시로 즉시 확정.
   useEffect(() => {
-    if (!navigator.geolocation) return;
+    if (!navigator.geolocation) {
+      setUserLocation(null);
+      return;
+    }
     navigator.geolocation.getCurrentPosition(
       (pos) => setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
-      () => {},
+      () => setUserLocation(null),
       { enableHighAccuracy: false, timeout: 5000, maximumAge: 300000 }
     );
   }, []);
@@ -140,10 +160,77 @@ export default function NationwideMapPage({ params, searchParams }: MapPageProps
       } catch (e) {
         setErrorMsg(e instanceof Error ? e.message : "검색 중 오류가 발생했습니다.");
       } finally {
-        setLoading(false);
+        // 로딩 종료는 사전 확인 effect가 담당 — 위치가 있으면 반경 내
+        // 대출가능 확인까지 끝낸 뒤에야 마커를 일괄 표시 (A안)
+        setSearchDone(true);
       }
     })();
   }, [isbn, title, unitsParam, applyResponse]);
+
+  /**
+   * [07-20 A안] 위치 기반 사전 확인 — 검색 완료 + 위치 확정(성공/실패)
+   * 시점에 1회 실행. 반경 3km 내 소장관을 가까운 순 최대 10곳만
+   * /api/naru-book-exist로 병렬 조회해 색을 확정한 뒤 setLoading(false)
+   * → 마커가 확정색으로 한 번에 뜬다. 위치 없음·반경 내 0곳이면 즉시
+   * 표시(현행 동작). 개별 실패·한도초과는 "소장" 유지 (악화 없음).
+   */
+  useEffect(() => {
+    if (!searchDone || userLocation === undefined) return; // 위치 조회 대기(최대 5초)
+    if (precheckStartedRef.current) return;
+    precheckStartedRef.current = true;
+
+    const targets = userLocation
+      ? libraries
+          .map((lib) => ({
+            lib,
+            d: calculateDistance(userLocation.lat, userLocation.lng, lib.latitude, lib.longitude),
+          }))
+          .filter((x) => x.d <= PRECHECK_RADIUS_KM)
+          .sort((a, b) => a.d - b.d)
+          .slice(0, PRECHECK_MAX)
+          .map((x) => x.lib)
+      : [];
+
+    if (targets.length === 0) {
+      setLoading(false);
+      return;
+    }
+
+    setPrechecking(true);
+    (async () => {
+      const results = await Promise.allSettled(
+        targets.map(async (lib) => {
+          const libCode = lib.id.replace(/^naru_/, "");
+          checkingRef.current.add(libCode);
+          try {
+            const res = await fetch(
+              `/api/naru-book-exist?isbn=${encodeURIComponent(isbn)}&libCode=${encodeURIComponent(libCode)}`,
+              { signal: AbortSignal.timeout(3500) }
+            );
+            const json = await res.json();
+            if (!json.success || !json.known) return null;
+            // hasBook=false(월 병합 데이터 시차)도 보수적으로 "대출중" 취급 — 탭 확인과 동일 규칙
+            const available: boolean = json.hasBook === true && json.loanAvailable === true;
+            return { id: lib.id, available };
+          } finally {
+            checkingRef.current.delete(libCode);
+          }
+        })
+      );
+      const byId = new Map<string, boolean>();
+      for (const r of results) {
+        if (r.status === "fulfilled" && r.value) byId.set(r.value.id, r.value.available);
+      }
+      if (byId.size > 0) {
+        setLibraries((prev) =>
+          prev.map((l) => (byId.has(l.id) ? { ...l, available: byId.get(l.id) } : l))
+        );
+      }
+      setPrechecking(false);
+      setLoading(false);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchDone, userLocation, libraries, isbn]);
 
   // 카카오맵 SDK 로드 (서울 지도와 동일 패턴)
   useEffect(() => {
@@ -361,7 +448,15 @@ export default function NationwideMapPage({ params, searchParams }: MapPageProps
         {(loading || !mapReady) && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-20">
             <div className="bg-white rounded-2xl px-6 py-5 shadow-lg">
-              <LoadingDots message={mapReady ? "소장 도서관 찾는 중..." : "지도를 불러오는 중..."} />
+              <LoadingDots
+                message={
+                  !mapReady
+                    ? "지도를 불러오는 중..."
+                    : prechecking
+                      ? "가까운 도서관 대출가능 확인 중..."
+                      : "소장 도서관 찾는 중..."
+                }
+              />
             </div>
           </div>
         )}
