@@ -111,7 +111,7 @@ export const suggestions: Suggestion[] = [
     matchIsbns: ["9788954681179", "9788954699730"], // + 리커버판
     story: { month: "2026-06", lastMonthLoanCnt: 1394 },
   },
-  // ── 대출순위 3 (2026-06 서울 20+30대 합산) ──
+  // ── 대출순위 4 (2026-06 서울 20+30대 합산) ──
   {
     title: "홍학의 자리",
     isbn13: "9788954681155",
@@ -166,7 +166,25 @@ export const suggestions: Suggestion[] = [
       topGroupRank: 1,
     },
   },
-  // ── 마니아 3 (시드: 홍학의 자리 — 같은저자·중복저자 제외) ──
+  {
+    title: "모순",
+    isbn13: "9788998441012",
+    label: "popular",
+    author: "양귀자",
+    publisher: "쓰다",
+    // 모순은 알라딘 cover500 판이 없어 네이버 표지 원본 사용(쿼리 없으면 458×674 원본)
+    coverUrl: "https://bookthumb-phinf.pstatic.net/cover/071/902/07190270.jpg",
+    description:
+      "1998년 출간 이후 132쇄를 찍으며 스테디셀러로 사랑받아 온 양귀자의 장편소설. 스물다섯 안진진이 억척스러운 어머니, 그와 꼭 닮았지만 정반대로 살아온 이모, 성격이 상반된 두 남자 사이에서 '모순으로 가득한 인생'을 들여다본다. 지금도 독서모임의 단골이자 도서관 대출 상위권을 지키는 책.",
+    story: {
+      month: "2026-06",
+      lastMonthLoanCnt: 2668,
+      lastMonthRank: 4,
+      topGroup: "30대 여성",
+      topGroupRank: 2,
+    },
+  },
+  // ── 마니아 2 (시드: 홍학의 자리 — 같은저자·중복저자 제외) ──
   {
     title: "절창",
     isbn13: "9791141602451",
@@ -206,18 +224,5 @@ export const suggestions: Suggestion[] = [
       topGroup: "40대 여성",
       topGroupRank: 1,
     },
-  },
-  {
-    title: "가공범",
-    isbn13: "9791170612759",
-    label: "mania",
-    chipLabel: "『홍학의 자리』 독자의 다음 책",
-    popupLabel: "『홍학의 자리』 독자들이 함께 많이 빌린 책이에요",
-    author: "히가시노 게이고 · 김선영 옮김",
-    publisher: "교보문고",
-    coverUrl: "https://image.aladin.co.kr/product/36786/80/cover500/k472030698_2.jpg",
-    description:
-      "데뷔 40주년을 맞은 히가시노 게이고가 새 시리즈의 문을 여는 장편소설. \"이 소재를 작품으로 쓸 날은 오지 않을 거라고 생각했다\"고 스스로 밝힌 소재를 정면으로 다루며, 형사 고다이 쓰토무가 진실을 좇는다. 단행본 누계 1억 부를 돌파한 '오늘의 일본을 대표하는 작가'의 신작.",
-    story: { month: "2026-06", lastMonthLoanCnt: 1511 },
   },
 ];

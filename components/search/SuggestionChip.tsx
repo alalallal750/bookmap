@@ -40,21 +40,32 @@ export function SuggestionChip({
   /** 전자책(blue) / 종이책(green) 페이지 테마 — 강조된 책 제목 색상에 반영. */
   theme?: "blue" | "green";
 }) {
-  const [index, setIndex] = useState(0);
+  // 방문마다 노출 순서를 통째로 섞음 (카테고리 순서 그대로 도는 걸 방지).
+  // 초기값은 원본 순서 — 서버/첫 렌더 일치용, 마운트 직후 셔플로 교체.
+  const [order, setOrder] = useState<number[]>(() =>
+    suggestions.map((_, i) => i)
+  );
+  const [pos, setPos] = useState(0);
   const [paused, setPaused] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
   const windowRef = useRef<HTMLSpanElement>(null);
   const innerRef = useRef<HTMLSpanElement>(null);
 
-  // 방문마다 랜덤 시작 도서
+  // Fisher–Yates 셔플로 방문마다 순서 무작위화
   useEffect(() => {
-    setIndex(Math.floor(Math.random() * suggestions.length));
+    const arr = suggestions.map((_, i) => i);
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    setOrder(arr);
+    setPos(0);
   }, []);
 
   useEffect(() => {
     if (paused || popupOpen || !visible) return;
     const id = setInterval(() => {
-      setIndex((i) => (i + 1) % suggestions.length);
+      setPos((p) => (p + 1) % suggestions.length);
     }, ROTATE_MS);
     return () => clearInterval(id);
   }, [paused, popupOpen, visible]);
@@ -77,10 +88,10 @@ export function SuggestionChip({
       inner.style.transform = `translateX(-${overflow}px)`;
     }, SCROLL_DELAY_MS);
     return () => clearTimeout(timer);
-  }, [index, visible]);
+  }, [pos, visible]);
 
   if (!visible) return null;
-  const current = suggestions[index];
+  const current = suggestions[order[pos] ?? 0];
   if (!current) return null;
 
   return (
