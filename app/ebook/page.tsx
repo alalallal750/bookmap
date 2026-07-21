@@ -7,6 +7,7 @@ import { SearchBar } from "@/components/search/SearchBar";
 import { SuggestionChip } from "@/components/search/SuggestionChip";
 import { DataAttribution } from "@/components/search/DataAttribution";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
+import { classifyByCoords, getPositionOnce } from "@/lib/entryLocation";
 
 type SearchState =
   | { status: "idle" }
@@ -28,6 +29,31 @@ function EbookSearchInner() {
   const initialQuery = searchParams.get("q") ?? "";
   const [state, setState] = useState<SearchState>({ status: "idle" });
   const [searchValue, setSearchValue] = useState(initialQuery);
+
+  // [2026-07-22 20장] 루트가 위치를 못 잡아(거부/타임아웃/미지원) 여기로 보낸 경우
+  // loc=none. 서울 도서관 정보를 보여주는 중임을 알리고, 전국(C) 이동 배너 +
+  // "내 위치로 찾기" 재시도 어포던스를 노출한다(A안 보완 — 브라우저는 거부 후
+  // 재요청 팝업을 못 띄우므로, 성공하면 재분기하고 거부 상태면 설정 안내로 갈음).
+  const locNone = searchParams.get("loc") === "none";
+  const [retry, setRetry] = useState<"idle" | "locating" | "denied">("idle");
+
+  async function handleRetryLocation() {
+    setRetry("locating");
+    try {
+      const coords = await getPositionOnce();
+      const cls = classifyByCoords(coords.latitude, coords.longitude);
+      if (cls === "outside") {
+        router.replace("/nationwide");
+        return;
+      }
+      // 서울(또는 판정불가) — 현재 A-B에 머무르되 배너만 제거.
+      router.replace("/ebook");
+    } catch (e) {
+      const denied =
+        typeof e === "object" && e !== null && (e as GeolocationPositionError).code === 1;
+      setRetry(denied ? "denied" : "idle");
+    }
+  }
 
   // /ebook?q=제목 딥링크(MCP 검색 결과 링크 등)로 진입하면 자동 검색.
   // 기존에는 검색어만 입력창에 채우고 대기해서, 링크로 공유받은 사용자가
@@ -103,6 +129,38 @@ function EbookSearchInner() {
           theme="blue"
         />
       </header>
+
+      {/* [20장] 위치 없음 배너 — 전국(C) 이동 유도 + 위치 재시도 */}
+      {locNone && (
+        <div className="px-4 pt-3">
+          <div className="rounded-xl bg-emerald-50 border border-emerald-100 px-4 py-3">
+            <p className="text-xs text-emerald-800 leading-relaxed">
+              서울 도서관 정보를 보여드리고 있어요. 다른 지역으로 이동할까요?
+            </p>
+            <div className="flex items-center gap-2 mt-2">
+              <a
+                href="/nationwide"
+                className="flex-1 text-center py-2 rounded-lg bg-emerald-600 text-white text-xs font-semibold active:bg-emerald-800"
+              >
+                전국에서 찾기
+              </a>
+              <button
+                onClick={handleRetryLocation}
+                disabled={retry === "locating"}
+                className="flex-1 py-2 rounded-lg bg-white border border-emerald-200 text-emerald-700 text-xs font-semibold active:bg-emerald-100 disabled:opacity-60"
+              >
+                {retry === "locating" ? "확인 중..." : "📍 내 위치로 찾기"}
+              </button>
+            </div>
+            {retry === "denied" && (
+              <p className="text-[11px] text-emerald-700/80 mt-2 leading-relaxed">
+                위치 권한이 꺼져 있어요. 주소창의 자물쇠(또는 ⓘ) → 권한 → 위치를
+                허용하면 가까운 지역을 자동으로 찾아드려요.
+              </p>
+            )}
+          </div>
+        </div>
+      )}
 
       <div className="flex-1 py-4">
         {state.status === "idle" && (

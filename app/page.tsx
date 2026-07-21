@@ -1,111 +1,61 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Book, ApiResponse, SearchResult } from "@/types";
-import { SearchBar } from "@/components/search/SearchBar";
-import { BookList } from "@/components/search/BookList";
-import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
+/**
+ * [2026-07-22 개편 — 진입 구조(핸드오프 v3 20장)] 루트(`/`)는 유일 진입점.
+ * 진입 즉시 현재 위치로 서울/서울외를 갈라 라우팅한다(20-2, A안):
+ *   - 서울           → /ebook       (A-B 랜딩: 전자책 → 하단 버튼으로 종이책 교차)
+ *   - 서울 외        → /nationwide  (C: 전국 종이책)
+ *   - 위치 없음/거부 → /ebook?loc=none (기본 A-B + 배너로 C 유도)
+ *
+ * 이전 버전은 검색 UI를 두고 무조건 /ebook으로 리다이렉트했으나, 단일 도메인
+ * 원칙(점1)에 따라 루트는 분기 스플래시만 담당하도록 정리. 검색은 각 하위
+ * 페이지(/ebook·/physical·/nationwide)가 담당한다.
+ */
 
-type SearchState =
-  | { status: "idle" }
-  | { status: "loading" }
-  | { status: "done"; books: Book[]; query: string }
-  | { status: "error"; message: string };
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import {
+  classifyByCoords,
+  routeForClass,
+  getPositionOnce,
+} from "@/lib/entryLocation";
 
 export default function HomePage() {
-  return (
-    // useSearchParams()는 빌드 시점에 미리 알 수 없는 값이라 Suspense로 감싸야 함
-    // (안 감싸면 "useSearchParams() should be wrapped in a suspense boundary" 빌드 오류)
-    <Suspense fallback={<LoadingSpinner />}>
-      <HomeContent />
-    </Suspense>
-  );
-}
-
-function HomeContent() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const [state, setState] = useState<SearchState>({ status: "idle" });
-
-  async function handleSearch(query: string) {
-    setState({ status: "loading" });
-    try {
-      const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
-      const json: ApiResponse<SearchResult> = await res.json();
-      if (!json.success) throw new Error(json.error);
-      setState({ status: "done", books: json.data.books, query });
-    } catch (e) {
-      setState({
-        status: "error",
-        message: e instanceof Error ? e.message : "오류가 발생했습니다.",
-      });
-    }
-  }
 
   useEffect(() => {
-    const q = searchParams.get("q");
-    if (!q) {
-      router.replace("/ebook");
-      return;
-    }
-    handleSearch(q);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  function handleSelectBook(book: Book) {
-    router.push(`/map/${book.isbn}?title=${encodeURIComponent(book.title)}`);
-  }
+    let cancelled = false;
+    (async () => {
+      try {
+        const coords = await getPositionOnce();
+        if (cancelled) return;
+        const cls = classifyByCoords(coords.latitude, coords.longitude);
+        router.replace(routeForClass(cls));
+      } catch {
+        // 거부·타임아웃·미지원 — 전부 위치 없음으로 취급, A-B + 배너로.
+        if (!cancelled) router.replace("/ebook?loc=none");
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [router]);
 
   return (
-    <main className="min-h-screen flex flex-col">
-      <header className="bg-white border-b border-gray-100 px-4 pt-14 pb-4 sticky top-0 z-10">
-        <div className="flex items-center gap-3 mb-3">
-          <img src="/logo-header.png" alt="지금빌려" className="h-10" />
-          <p className="text-xs text-gray-400">그 책, 지금 어디서 빌릴 수 있지?</p>
-        </div>
-        <SearchBar
-          onSearch={handleSearch}
-          loading={state.status === "loading"}
-        />
-      </header>
-
-      <div className="flex-1 py-4">
-        {state.status === "idle" && (
-          <div className="flex flex-col items-center justify-center pt-24 px-8 text-center">
-            <img src="/logo-main.png" alt="지금빌려 로고" className="w-64 mb-6" style={{filter: "brightness(0.9)"}} />
-            <p className="text-gray-500 text-base font-medium mb-1">
-              읽고 싶은 책을 검색하세요
-            </p>
-            <p className="text-gray-400 text-sm mb-4">
-              나랑 가까운 도서관에서 지금 빌릴 수 있는지 바로 확인해 드려요.
-            </p>
-            <div className="mt-10" />
-            <p className="text-gray-300 text-xs leading-relaxed">
-              현재는 동작구 도서관만 지원해요.<br />
-              실제 대출가능 여부는 도서관 홈페이지에서 다시 한번 확인해 주세요.
-            </p>
-          </div>
-        )}
-
-        {state.status === "loading" && (
-          <LoadingSpinner message="도서관에서 검색 중..." />
-        )}
-
-        {state.status === "error" && (
-          <div className="px-4 py-8 text-center">
-            <p className="text-red-500 text-sm">{state.message}</p>
-          </div>
-        )}
-
-        {state.status === "done" && (
-          <BookList
-            books={state.books}
-            onSelect={handleSelectBook}
-            query={state.query}
-          />
-        )}
-      </div>
+    <main className="min-h-screen flex flex-col items-center justify-center px-8 text-center">
+      <img
+        src="/logo-main.png"
+        alt="지금빌려 로고"
+        className="w-56 mb-8"
+        style={{ filter: "brightness(0.9)" }}
+      />
+      <div className="w-7 h-7 border-2 border-gray-300 border-t-transparent rounded-full animate-spin mb-3" />
+      <p className="text-gray-400 text-sm">
+        내 위치를 확인하고 있어요...
+      </p>
+      <p className="text-gray-300 text-xs mt-1">
+        가까운 도서관 정보를 준비할게요.
+      </p>
     </main>
   );
 }
