@@ -39,6 +39,12 @@ export type Suggestion = {
   description: string;
   /** 지도 헤더 스트립·팝업용 대출 통계 — 검증된 값만(전국 순위·건수, 그룹 1~3위) */
   story?: SuggestionStory;
+  /**
+   * 서울 전자책 미소장 도서 — /ebook 페이지 칩에서만 제외(종이책·전국판엔 그대로 노출).
+   * findSuggestionByIsbn(지도 헤더 스트립)에는 영향 없음. 2026-07-21 확정(사용자 실측).
+   * 갱신 시 새 추천 도서의 전자책 존재 여부를 /ebook에서 확인해 이 플래그를 관리할 것.
+   */
+  noEbook?: boolean;
 };
 
 /** 지도 페이지 헤더 스트립용 — ISBN 완전일치로 추천 도서 찾기 (판본 포함) */
@@ -183,6 +189,7 @@ export const suggestions: Suggestion[] = [
       topGroup: "30대 여성",
       topGroupRank: 2,
     },
+    noEbook: true, // 서울 전자책 미소장 (2026-07-21 실측)
   },
   // ── 마니아 2 (서로 다른 인기 시드에서 각 1권 — 라벨이 "『○○』 독자의 다음 책"으로
   //    시드마다 다르게, 시드와 같은 저자·기선정 도서 제외) ──
@@ -223,5 +230,6 @@ export const suggestions: Suggestion[] = [
       lastMonthLoanCnt: 2197,
       lastMonthRank: 11,
     },
+    noEbook: true, // 서울 전자책 미소장 (2026-07-21 실측)
   },
 ];

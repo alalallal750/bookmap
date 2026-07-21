@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { suggestions, type Suggestion } from "@/lib/data/suggestions";
 import { SuggestionPopup } from "@/components/search/SuggestionPopup";
 
@@ -40,11 +40,15 @@ export function SuggestionChip({
   /** 전자책(blue) / 종이책(green) 페이지 테마 — 강조된 책 제목 색상에 반영. */
   theme?: "blue" | "green";
 }) {
+  // [2026-07-21] 전자책(blue) 화면에서는 서울 전자책 미소장 도서(noEbook)를 제외.
+  // 종이책(green)·전국판은 전체 노출. theme은 페이지당 고정이라 pool도 고정.
+  const pool = useMemo(
+    () => (theme === "blue" ? suggestions.filter((s) => !s.noEbook) : suggestions),
+    [theme]
+  );
   // 방문마다 노출 순서를 통째로 섞음 (카테고리 순서 그대로 도는 걸 방지).
   // 초기값은 원본 순서 — 서버/첫 렌더 일치용, 마운트 직후 셔플로 교체.
-  const [order, setOrder] = useState<number[]>(() =>
-    suggestions.map((_, i) => i)
-  );
+  const [order, setOrder] = useState<number[]>(() => pool.map((_, i) => i));
   const [pos, setPos] = useState(0);
   const [paused, setPaused] = useState(false);
   // 팝업은 클릭한 순간의 책을 고정해 띄운다(칩은 뒤에서 계속 로테이션되므로
@@ -55,23 +59,23 @@ export function SuggestionChip({
 
   // Fisher–Yates 셔플로 방문마다 순서 무작위화
   useEffect(() => {
-    const arr = suggestions.map((_, i) => i);
+    const arr = pool.map((_, i) => i);
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
     setOrder(arr);
     setPos(0);
-  }, []);
+  }, [pool]);
 
   // 팝업이 떠 있어도 칩 로테이션은 계속 유지 (팝업은 고정 스냅샷을 보여주므로 무관)
   useEffect(() => {
     if (paused || !visible) return;
     const id = setInterval(() => {
-      setPos((p) => (p + 1) % suggestions.length);
+      setPos((p) => (p + 1) % pool.length);
     }, ROTATE_MS);
     return () => clearInterval(id);
-  }, [paused, visible]);
+  }, [paused, visible, pool]);
 
   // 제목이 창 폭보다 길면 1.2초 대기 후 한 번만 끝까지 스크롤하고 정지(무한 반복 아님)
   useEffect(() => {
@@ -94,7 +98,7 @@ export function SuggestionChip({
   }, [pos, visible]);
 
   if (!visible) return null;
-  const current = suggestions[order[pos] ?? 0];
+  const current = pool[order[pos] ?? 0];
   if (!current) return null;
 
   return (
