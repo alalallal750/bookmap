@@ -47,7 +47,9 @@ export function SuggestionChip({
   );
   const [pos, setPos] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [popupOpen, setPopupOpen] = useState(false);
+  // 팝업은 클릭한 순간의 책을 고정해 띄운다(칩은 뒤에서 계속 로테이션되므로
+  // current를 참조하면 팝업 내용이 읽는 중에 바뀜). null이면 닫힌 상태.
+  const [popupSuggestion, setPopupSuggestion] = useState<Suggestion | null>(null);
   const windowRef = useRef<HTMLSpanElement>(null);
   const innerRef = useRef<HTMLSpanElement>(null);
 
@@ -62,13 +64,14 @@ export function SuggestionChip({
     setPos(0);
   }, []);
 
+  // 팝업이 떠 있어도 칩 로테이션은 계속 유지 (팝업은 고정 스냅샷을 보여주므로 무관)
   useEffect(() => {
-    if (paused || popupOpen || !visible) return;
+    if (paused || !visible) return;
     const id = setInterval(() => {
       setPos((p) => (p + 1) % suggestions.length);
     }, ROTATE_MS);
     return () => clearInterval(id);
-  }, [paused, popupOpen, visible]);
+  }, [paused, visible]);
 
   // 제목이 창 폭보다 길면 1.2초 대기 후 한 번만 끝까지 스크롤하고 정지(무한 반복 아님)
   useEffect(() => {
@@ -96,20 +99,20 @@ export function SuggestionChip({
 
   return (
     <>
-    {popupOpen && (
+    {popupSuggestion && (
       <SuggestionPopup
-        suggestion={current}
+        suggestion={popupSuggestion}
         theme={theme}
-        onClose={() => setPopupOpen(false)}
+        onClose={() => setPopupSuggestion(null)}
         onSearch={(title) => {
-          setPopupOpen(false);
+          setPopupSuggestion(null);
           onPick(title);
         }}
       />
     )}
     <button
       type="button"
-      onClick={() => setPopupOpen(true)}
+      onClick={() => setPopupSuggestion(current)}
       onTouchStart={() => setPaused(true)}
       onTouchEnd={() => setPaused(false)}
       onTouchCancel={() => setPaused(false)}
