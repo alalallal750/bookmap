@@ -1,18 +1,17 @@
 "use client";
 
 /**
- * [2026-07-22 v3 — 책 산책 21-4·21-6] 도착 인증 스탬프 에디터 (템플릿 앨범).
+ * [2026-07-22 v3 — 책 산책 21-4·24-3] 도착 인증 스탬프 에디터 (템플릿 앨범 + 경량 편집).
  *
  * 데이터(거리·걸음수·책·도서관 등)는 이미 준비된 상태. 여러 완성 템플릿을 까만
- * 배경 썸네일 앨범으로 보여주고 하나 고른다(요소 토글 없음). 고른 템플릿을 적용
- * 대상에 얹는다:
- *   - 내 사진: 로컬 사진 canvas 합성 → 저장/공유 (CORS 무관)
- *   - 기본 배경: 까만 배경 canvas 생성 → 저장/공유 (사진·표지 없이 바로, CORS 무관)
+ * 배경 썸네일 앨범으로 보여주고 하나 고른다. 고른 템플릿을 적용 대상에 얹는다:
+ *   - 내 사진: 로컬 사진 위 경량 에디터(드래그·크기·문구·숨기기) → 저장/공유 (CORS 무관)
+ *   - 기본 배경: 까만/밝은 배경 위 경량 에디터 → 저장/공유 (사진·표지 없이, CORS 무관)
  *   - 표지 카드: 표지 <img> + 오버레이 화면 → 사용자 스크린샷 (CORS 무관)
  * 표지를 canvas에 합성(방식2)은 후속(알라딘 직접/카카오 프록시).
  */
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // 배민 서체 self-host(@font-face 등록). canvas는 아래 fontsReady 게이트로 로딩 대기.
 import "@fontsource/do-hyeon";
 import "@fontsource/jua";
@@ -26,39 +25,13 @@ import {
   STAMP_FONT_FAMILIES,
 } from "@/lib/walk/stampTemplates";
 import { drawStamp, StampMark, TextMode } from "@/lib/walk/drawStamp";
-import { formatBookLine } from "@/lib/walk/stampContent";
+import { StampCanvasEditor } from "./StampCanvasEditor";
 import { CaptureCertPage } from "./CaptureCertPage";
 
 type Tab = "photo" | "plain" | "cover";
 export type LogoVariant = "icon" | "wordmark";
 
-const PREVIEW_MAX = 1200; // 저장용 렌더 해상도(높이/긴 변)
 const THUMB_MAX = 320;
-
-async function shareOrDownloadCanvas(canvas: HTMLCanvasElement, captionText: string) {
-  return new Promise<void>((resolve) => {
-    canvas.toBlob(async (blob) => {
-      if (!blob) return resolve();
-      const file = new File([blob], "책산책_인증.png", { type: "image/png" });
-      try {
-        const nav = navigator as Navigator & { canShare?: (d: { files: File[] }) => boolean };
-        if (nav.canShare && nav.canShare({ files: [file] }) && navigator.share) {
-          await navigator.share({ files: [file], title: "책 산책 인증", text: captionText });
-        } else {
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = file.name;
-          a.click();
-          URL.revokeObjectURL(url);
-        }
-      } catch {
-        /* 취소 무시 */
-      }
-      resolve();
-    }, "image/png");
-  });
-}
 
 export function StampEditor({
   data,
@@ -109,7 +82,6 @@ export function StampEditor({
   };
 
   // 배민 서체 로딩 게이트 — canvas는 로딩 완료 후 그려야 실제 폰트로 렌더됨.
-  // (미로딩 시 기본 폰트로 대체되는 canvas 특성). ready 카운터가 오르면 재렌더.
   const [fontsReady, setFontsReady] = useState(0);
   useEffect(() => {
     let alive = true;
@@ -123,30 +95,9 @@ export function StampEditor({
     };
   }, [data]);
 
-  const bigCanvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const tpl = getTemplate(tplId);
-
-  // 큰 미리보기(내 사진 / 기본 배경) 렌더
-  const redrawBig = useCallback(() => {
-    const canvas = bigCanvasRef.current;
-    if (!canvas) return;
-    const m: StampMark = {
-      img: logoVariant === "icon" ? iconRef.current : wordmarkRef.current,
-      variant: logoVariant,
-      color: markColor,
-    };
-    if (tab === "photo") {
-      if (!photo) return;
-      drawStamp(canvas, data, tpl, { type: "image", bitmap: photo }, PREVIEW_MAX, m, textMode);
-    } else if (tab === "plain") {
-      drawStamp(canvas, data, tpl, { type: "color", color: plainBg }, PREVIEW_MAX, m, textMode);
-    }
-  }, [tab, photo, tpl, data, fontsReady, logosReady, logoVariant, markColor, textMode, plainBg]);
-
-  useEffect(() => {
-    redrawBig();
-  }, [redrawBig]);
+  const ready = fontsReady + logosReady;
 
   async function onPhoto(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -164,15 +115,8 @@ export function StampEditor({
       console.log("[StampEditor] createImageBitmap 실패:", err);
     } finally {
       setBusy(false);
+      e.target.value = ""; // 같은 파일 재선택 허용
     }
-  }
-
-  async function onSave() {
-    const canvas = bigCanvasRef.current;
-    if (!canvas) return;
-    setBusy(true);
-    await shareOrDownloadCanvas(canvas, formatBookLine(data));
-    setBusy(false);
   }
 
   return (
@@ -208,7 +152,7 @@ export function StampEditor({
             data={data}
             template={t}
             selected={t.id === tplId}
-            fontsReady={fontsReady + logosReady}
+            fontsReady={ready}
             mark={mark}
             textMode={textMode}
             bgColor={plainBg}
@@ -243,50 +187,38 @@ export function StampEditor({
           {!photo ? (
             <button
               onClick={() => fileInputRef.current?.click()}
-              className="w-full aspect-[3/4] max-h-[380px] rounded-2xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-400 active:bg-gray-50"
+              disabled={busy}
+              className="w-full aspect-[3/4] max-h-[380px] rounded-2xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-400 active:bg-gray-50 disabled:opacity-60"
             >
               <span className="text-3xl mb-2">📷</span>
               <span className="text-sm font-medium">사진 촬영 / 앨범에서 선택</span>
               <span className="text-xs mt-1">고른 스탬프가 사진 위에 얹혀요</span>
             </button>
           ) : (
-            <div>
-              <canvas ref={bigCanvasRef} className="w-full rounded-2xl shadow-md" style={{ maxHeight: "440px", objectFit: "contain" }} />
-              <div className="flex gap-2 mt-3">
-                <button
-                  onClick={() => fileInputRef.current?.click()}
-                  className="flex-1 py-2.5 rounded-xl bg-white border border-gray-200 text-gray-600 text-sm font-semibold active:bg-gray-50"
-                >
-                  사진 바꾸기
-                </button>
-                <button
-                  onClick={onSave}
-                  disabled={busy}
-                  className="flex-[2] py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-semibold active:bg-emerald-800 disabled:opacity-60"
-                >
-                  {busy ? "준비 중..." : "저장 / 공유하기"}
-                </button>
-              </div>
-            </div>
+            <StampCanvasEditor
+              key={`photo-${tplId}`}
+              data={data}
+              tpl={tpl}
+              bg={{ kind: "photo", bitmap: photo }}
+              textMode={textMode}
+              mark={mark}
+              logoVariant={logoVariant}
+              onReplacePhoto={() => fileInputRef.current?.click()}
+            />
           )}
         </div>
       )}
 
       {tab === "plain" && (
-        <div className="flex flex-col items-center">
-          <canvas
-            ref={bigCanvasRef}
-            className="rounded-2xl shadow-md"
-            style={{ width: "min(300px,100%)", aspectRatio: "3 / 4" }}
-          />
-          <button
-            onClick={onSave}
-            disabled={busy}
-            className="w-full mt-3 py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-semibold active:bg-emerald-800 disabled:opacity-60"
-          >
-            {busy ? "준비 중..." : "저장 / 공유하기"}
-          </button>
-        </div>
+        <StampCanvasEditor
+          key={`plain-${tplId}`}
+          data={data}
+          tpl={tpl}
+          bg={{ kind: "plain", color: plainBg }}
+          textMode={textMode}
+          mark={mark}
+          logoVariant={logoVariant}
+        />
       )}
 
       {tab === "cover" && (

@@ -1,18 +1,29 @@
 /**
- * [2026-07-22 v3 — 책 산책 21-6] 통합 canvas 스탬프 렌더러.
+ * [2026-07-22 v3 — 책 산책 21-6·24-3] 통합 canvas 스탬프 렌더러 (레이어 기반).
  *
- * 같은 함수로 (1) 앨범 썸네일(까만 배경), (2) 방식1 사진 합성(사용자 사진 배경)을
- * 모두 그린다 — 썸네일과 실제 결과가 정확히 일치한다. 흰 텍스트+그림자로 배경 위에
- * 얹는 타이포그래피(불투명 패널 없음). 템플릿의 폰트(sans/serif/mono)·배치·강조색을
- * 반영한다.
+ * 렌더 경로가 하나다: 어떤 표면이든 "레이어 배열"을 canvas에 그린다.
+ *   - 앨범 썸네일 / 템플릿 미리보기 → drawStamp(템플릿을 buildLayers로 펼침)
+ *   - 경량 에디터 저장(WYSIWYG flatten) → drawStampLayers(에디터가 편집한 레이어)
+ * 썸네일·에디터 미리보기·저장 결과가 같은 렌더러를 거치므로 정확히 일치한다.
+ * 흰/검 텍스트 + 그림자로 배경 위에 얹는 타이포그래피(불투명 패널 없음).
  */
 import { WalkStampData } from "./types";
-import { StampTemplate, FONT_STACKS, DISPLAY_FONTS } from "./stampTemplates";
-import { buildStampLines, LINE_STYLE } from "./stampLayout";
+import { StampTemplate, FONT_STACKS } from "./stampTemplates";
+import {
+  StampLayer,
+  buildLayers,
+  aspectOf,
+  lhFactor,
+  layerMaxWidthPx,
+  resolveStampColors,
+  colorForTone,
+} from "./stampLayers";
 
 export type StampBackground =
   | { type: "image"; bitmap: ImageBitmap }
   | { type: "color"; color: string };
+
+export type TextMode = "white" | "black";
 
 /** 우하단 고정 서명 마크(편집 불가): "오늘도 책 산책 with 지금빌려" + 로고.
  *  로고는 색 하나로 틴트(흑백 처리) — 텍스트 색과 맞춘다. */
@@ -96,22 +107,64 @@ function truncate(ctx: CanvasRenderingContext2D, text: string, maxW: number): st
   return t + "…";
 }
 
-/**
- * @param maxDim 이미지 배경이면 긴 변 상한(다운스케일). 색 배경이면 높이(3:4 세로).
- */
-export type TextMode = "white" | "black";
+/** 우하단 서명 마크(고정·편집 불가, 모든 개체 중 가장 작게)를 그림. */
+function drawMark(
+  ctx: CanvasRenderingContext2D,
+  w: number,
+  h: number,
+  unit: number,
+  mark: StampMark
+) {
+  const tagline =
+    mark.variant === "icon" ? "오늘도 책 산책 with 지금빌려" : "오늘도 책 산책 with";
+  const markMargin = Math.round(unit * 0.05);
+  // 태그라인 텍스트는 로고 이미지 크기 유지한 채 20% 축소
+  const fs = Math.max(8, Math.round(unit * 0.021));
+  const logoH = Math.round(unit * (mark.variant === "icon" ? 0.05 : 0.044));
+  const bounds = mark.img ? getContentBounds(mark.img) : null;
+  const aspect = bounds ? bounds.sw / bounds.sh : 1;
+  const logoW = Math.round(logoH * aspect);
+  const gap = Math.round(unit * 0.012);
 
-export function drawStamp(
+  ctx.font = `500 ${fs}px ${FONT_STACKS.sans}`;
+  const tw = Math.round(ctx.measureText(tagline).width);
+  const totalW = tw + (bounds ? gap + logoW : 0);
+  const bx = w - markMargin - totalW;
+  const cy = h - markMargin - logoH / 2;
+
+  ctx.textAlign = "left";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = mark.color;
+  ctx.fillText(tagline, bx, cy);
+  if (mark.img && bounds) {
+    drawTintedImage(ctx, mark.img, bounds, bx + tw + gap, cy - logoH / 2, logoW, logoH, mark.color);
+  }
+}
+
+export type DrawLayersOpts = {
+  bg: StampBackground;
+  /** 이미지 배경이면 긴 변 상한(다운스케일). 색 배경이면 높이(3:4 세로). */
+  maxDim: number;
+  /** 폰트 스택(템플릿 폰트 = 편집 불가). */
+  family: string;
+  /** 히어로 강조색(템플릿). */
+  accent: string;
+  textMode: TextMode;
+  mark?: StampMark;
+};
+
+/**
+ * 레이어 배열을 canvas에 렌더 — 경량 에디터의 저장(flatten)과 템플릿 렌더의 공용 코어.
+ * 각 레이어는 정규화 좌표(nx,ny)·크기(sizeRatio)를 가지며 자유 배치된다.
+ */
+export function drawStampLayers(
   canvas: HTMLCanvasElement,
-  data: WalkStampData,
-  tpl: StampTemplate,
-  bg: StampBackground,
-  maxDim: number,
-  mark?: StampMark,
-  textMode: TextMode = "white"
+  layers: StampLayer[],
+  opts: DrawLayersOpts
 ) {
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
+  const { bg, maxDim, family, accent, textMode, mark } = opts;
 
   let w: number;
   let h: number;
@@ -129,122 +182,70 @@ export function drawStamp(
   if (bg.type === "image") {
     ctx.drawImage(bg.bitmap, 0, 0, w, h);
   } else {
-    // 지정 배경색으로 채움(화이트/블랙 모드에 따라 어둡게/밝게)
     ctx.fillStyle = bg.color;
     ctx.fillRect(0, 0, w, h);
   }
 
-  const family = FONT_STACKS[tpl.font];
-  const isDisplay = DISPLAY_FONTS.has(tpl.font);
-
-  // [가로/세로 대응] 폰트·마크 크기는 "짧은 변" 기준 — 가로 사진에서 글자가
-  // 과대해지지 않고, 세로 폰 사진(주 사용처)에선 기존과 동일하게 나온다.
   const unit = Math.min(w, h);
+  const cols = resolveStampColors(textMode, accent);
 
-  // [화이트/블랙 토글] dark=흰 텍스트(어두운 배경용), light=검은 텍스트(밝은 배경용).
-  const dark = textMode === "white";
-  const heroCol = dark ? tpl.accent : "#141414";
-  const whiteCol = dark ? "#ffffff" : "#141414";
-  const grayCol = dark ? "rgba(255,255,255,0.82)" : "rgba(20,20,20,0.66)";
-  const scrimRGB = dark ? "0,0,0" : "255,255,255";
-  const shadowCol = dark ? "rgba(0,0,0,0.55)" : "rgba(255,255,255,0.6)";
-  const colorFor = (tone: "hero" | "white" | "gray") =>
-    tone === "hero" ? heroCol : tone === "white" ? whiteCol : grayCol;
-
-  const lines = buildStampLines(data, tpl);
-  const marginX = Math.round(w * 0.07);
-  const marginY = Math.round(h * 0.06);
-  const maxTextW = w - marginX * 2;
-
-  const isTop = tpl.pos === "topLeft";
-  const isMid = tpl.pos === "center";
-  const isCenter = tpl.pos === "bottomCenter" || tpl.pos === "center";
-
-  let sized = lines.map((ln) => {
-    const st = LINE_STYLE[ln.kind];
-    const ratio = ln.kind === "hero" && tpl.hero === "book" ? 0.07 : st.size;
-    const fontSize = Math.max(9, Math.round(unit * ratio));
-    const lh = Math.round(fontSize * (ln.kind === "hero" ? 1.08 : 1.36));
-    // 배민 디스플레이 폰트는 단일 웨이트 — 가짜 볼드 방지 위해 400 고정
-    const weight = isDisplay ? 400 : st.weight;
-    return { ...ln, fontSize, lh, weight, tone: st.tone, font: family };
-  });
-  let total = sized.reduce((s, l) => s + l.lh, 0);
-
-  // [가로 대응 안전장치] 블록이 높이를 넘치면 전체 축소.
-  const maxBlock = h * (isMid ? 0.9 : 0.66);
-  if (total > maxBlock) {
-    const k = maxBlock / total;
-    sized = sized.map((l) => ({
-      ...l,
-      fontSize: Math.max(9, Math.round(l.fontSize * k)),
-      lh: Math.max(1, Math.round(l.lh * k)),
-    }));
-    total = sized.reduce((s, l) => s + l.lh, 0);
-  }
-
-  let y = isTop ? marginY : isMid ? Math.round((h - total) / 2) : h - marginY - total;
-  const x = isCenter ? Math.round(w / 2) : marginX;
-  ctx.textAlign = isCenter ? "center" : "left";
-  ctx.textBaseline = "alphabetic";
-
-  // 가독성 스크림(텍스트 모드에 따라 어둡게/밝게 반전)
-  const scrimH = Math.round(total + h * 0.1);
-  if (isTop) {
-    const gr = ctx.createLinearGradient(0, 0, 0, scrimH);
-    gr.addColorStop(0, `rgba(${scrimRGB},0.42)`);
-    gr.addColorStop(1, `rgba(${scrimRGB},0)`);
-    ctx.fillStyle = gr;
-    ctx.fillRect(0, 0, w, scrimH);
-  } else if (!isMid) {
-    const gr = ctx.createLinearGradient(0, h, 0, h - scrimH);
-    gr.addColorStop(0, `rgba(${scrimRGB},0.42)`);
-    gr.addColorStop(1, `rgba(${scrimRGB},0)`);
-    ctx.fillStyle = gr;
-    ctx.fillRect(0, h - scrimH, w, scrimH);
-  }
-
-  ctx.shadowColor = shadowCol;
+  ctx.shadowColor = cols.shadow;
   ctx.shadowBlur = Math.round(unit * 0.012);
   ctx.shadowOffsetY = Math.round(unit * 0.004);
+  ctx.textBaseline = "top";
 
-  for (const l of sized) {
-    ctx.font = `${l.weight} ${l.fontSize}px ${l.font}`;
-    ctx.fillStyle = colorFor(l.tone);
-    ctx.fillText(truncate(ctx, l.text, maxTextW), x, y + l.fontSize);
-    y += l.lh;
+  for (const ly of layers) {
+    if (ly.hidden || !ly.text.trim()) continue;
+    const fs = Math.max(9, sizeToPx(ly.sizeRatio, unit));
+    const lh = fs * lhFactor(ly.kind);
+    ctx.font = `${ly.weight} ${fs}px ${family}`;
+    ctx.fillStyle = colorForTone(ly.tone, cols);
+    ctx.textAlign = ly.align === "center" ? "center" : "left";
+    const px = ly.nx * w;
+    const top = ly.ny * h;
+    const maxW = layerMaxWidthPx(ly.align, px, w, unit);
+    const rows = ly.text.split("\n");
+    rows.forEach((row, i) => {
+      // 앵커 기준 최대폭 넘으면 …로 말줄임(DOM 미리보기와 동일 기준). 캔버스는
+      // 가장자리에서도 자동 클립되지만, 말줄임이 깔끔하고 WYSIWYG가 정합.
+      const t = truncate(ctx, row, maxW);
+      // 라인 스트립 내부 세로 중앙 정렬 — DOM line-height 렌더와 위치 일치
+      ctx.fillText(t, px, top + i * lh + (lh - fs) / 2);
+    });
   }
 
-  // ── 우하단 서명 마크(고정·편집 불가, 모든 개체 중 가장 작게) ──
-  if (mark) {
-    const tagline =
-      mark.variant === "icon" ? "오늘도 책 산책 with 지금빌려" : "오늘도 책 산책 with";
-    const markMargin = Math.round(unit * 0.05);
-    // 태그라인 텍스트는 로고 이미지 크기 유지한 채 20% 축소(기존 0.026 → 0.021)
-    const fs = Math.max(8, Math.round(unit * 0.021));
-    const logoH = Math.round(unit * (mark.variant === "icon" ? 0.05 : 0.044));
-    // 투명 패딩 제거한 실제 내용 바운딩박스로 종횡비 계산 → 좌측 여백 제거
-    const bounds = mark.img ? getContentBounds(mark.img) : null;
-    const aspect = bounds ? bounds.sw / bounds.sh : 1;
-    const logoW = Math.round(logoH * aspect);
-    const gap = Math.round(unit * 0.012);
-
-    ctx.font = `500 ${fs}px ${FONT_STACKS.sans}`;
-    const tw = Math.round(ctx.measureText(tagline).width);
-    const totalW = tw + (bounds ? gap + logoW : 0);
-    const bx = w - markMargin - totalW;
-    const cy = h - markMargin - logoH / 2;
-
-    ctx.textAlign = "left";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = mark.color;
-    ctx.fillText(tagline, bx, cy);
-    if (mark.img && bounds) {
-      drawTintedImage(ctx, mark.img, bounds, bx + tw + gap, cy - logoH / 2, logoW, logoH, mark.color);
-    }
-  }
+  if (mark) drawMark(ctx, w, h, unit, mark);
 
   ctx.shadowColor = "transparent";
   ctx.shadowBlur = 0;
   ctx.shadowOffsetY = 0;
+}
+
+/** sizeRatio(폭 대비) → px. renderer·에디터 공용. */
+export function sizeToPx(sizeRatio: number, unit: number): number {
+  return Math.round(sizeRatio * unit);
+}
+
+/**
+ * 템플릿을 그 자리에서 레이어로 펼쳐 그린다(썸네일·템플릿 미리보기). 편집 없는 경로.
+ * 기존 호출부 호환용 — 시그니처 동일.
+ */
+export function drawStamp(
+  canvas: HTMLCanvasElement,
+  data: WalkStampData,
+  tpl: StampTemplate,
+  bg: StampBackground,
+  maxDim: number,
+  mark?: StampMark,
+  textMode: TextMode = "white"
+) {
+  const layers = buildLayers(data, tpl, aspectOf(bg));
+  drawStampLayers(canvas, layers, {
+    bg,
+    maxDim,
+    family: FONT_STACKS[tpl.font],
+    accent: tpl.accent,
+    textMode,
+    mark,
+  });
 }
