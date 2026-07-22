@@ -427,6 +427,69 @@ const PORTAL_TEMPLATES: Record<string, NationwideUrlBuilder> = {
 
   // ── 2026-07-22 추가 (사용자 제보 URL 기반, 전부 X≠Y 차등 실측) ──
 
+  // 경기광주(8관) — kolaseek plusSearch(포트 8443, Network 캡처로 발견).
+  // searchLibraryArr, 10/10 매핑. MA≠MB 차등 실측.
+  "lib.gjcity.go.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "141114": "MA", // 광주시립중앙도서관
+      "141236": "MB", // 광주시립오포도서관
+      "141235": "MC", // 광주시립곤지암도서관
+      "141512": "MH", // 광주시립초월도서관
+      "141576": "MJ", // 광주시립능평도서관
+      "141147": "MD", // 대주작은도서관
+      "141392": "MF", // 퇴촌작은도서관
+      "141399": "MG", // 도척작은도서관
+      "741089": "MI", // 광남작은도서관
+      "741464": "MK", // 남한산성작은도서관
+    };
+    return (
+      `https://lib.gjcity.go.kr:8443/kolaseek/plus/search/plusSearchResultList.do` +
+      `?searchType=SIMPLE&searchKey=ALL&searchKeyword=${encodeURIComponent(title)}` +
+      facetParam(map, "searchLibraryArr", libCode)
+    );
+  },
+
+  // 광명(6관) — dls_le 벤더(아산 계열, Network 캡처). manageCode, 6/6 매핑.
+  "gmlib.gm.go.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "141080": "MA", // 광명도서관
+      "141019": "MB", // 하안도서관
+      "141155": "MD", // 충현도서관
+      "141405": "ME", // 철산도서관
+      "141561": "MF", // 소하도서관
+      "141613": "MJ", // 연서도서관
+    };
+    return (
+      `https://gmlib.gm.go.kr/dls_le/index.php?mod=wdDataSearch&act=searchIList&item=total` +
+      `&word=${encodeURIComponent(title)}` +
+      facetParam(map, "manageCode", libCode)
+    );
+  },
+
+  // 구미(13관) — dls_lt 벤더(Network 캡처). manageCode. 본관 7/7 + 작은도서관은
+  // 통합코드 BA. (구미시립작은도서관 147133은 미매핑 → 전관 폴백)
+  "lib.gumi.go.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "147038": "MA", // 구미시립중앙도서관
+      "147051": "MB", // 인동도서관
+      "147029": "MC", // 선산도서관
+      "147062": "MD", // 봉곡도서관
+      "147119": "ME", // 상모정수도서관
+      "147169": "MG", // 양포도서관
+      "147178": "MH", // 산동도서관
+      "14703810": "BA", // 생활문화센터작은도서관(작은도서관 통합)
+      "14703811": "BA", // 송정나래작은도서관
+      "14703812": "BA", // 평생학습원 자료실
+      "14703813": "BA", // 한국폴리텍구미캠퍼스작은도서관
+      "14703801": "BA", // 해평누리작은도서관
+    };
+    return (
+      `https://lib.gumi.go.kr/dls_lt/index.php?mod=wdDataSearch&act=searchResultList&searchItem=total` +
+      `&searchWord=${encodeURIComponent(title)}` +
+      facetParam(map, "manageCode", libCode)
+    );
+  },
+
   // 부평(인천, 6관) — plusSearch, searchLibraryArr, searchWord. 6/6 매핑.
   "www.bppl.or.kr": (title, _homepage, libCode) => {
     const map: Record<string, string> = {
