@@ -425,6 +425,101 @@ const PORTAL_TEMPLATES: Record<string, NationwideUrlBuilder> = {
     );
   },
 
+  // ── 2026-07-22 추가 (사용자 제보 URL 기반, 전부 X≠Y 차등 실측) ──
+
+  // 부평(인천, 6관) — plusSearch, searchLibraryArr, searchWord. 6/6 매핑.
+  "www.bppl.or.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "128040": "MC", // 갈산도서관
+      "128057": "ME", // 부개도서관
+      "128035": "MB", // 부개어린이도서관
+      "128056": "MD", // 삼산도서관
+      "128085": "MF", // 청천도서관
+      "128007": "MA", // 부평기적의도서관
+    };
+    return (
+      `https://www.bppl.or.kr/bugae/menu/10095/program/30031/searchResultList.do` +
+      `?searchType=SIMPLE&searchCategory=BOOK&searchField=ALL&searchWord=${encodeURIComponent(title)}` +
+      facetParam(map, "searchLibraryArr", libCode)
+    );
+  },
+
+  // 경주(경북, 6관) — tBookList 벤더(부산 계열), manage_code. 6/6 매핑.
+  "library.gyeongju.go.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "147042": "MB", // 감포도서관
+      "147044": "MC", // 단석도서관
+      "147025": "MA", // 경주시립도서관
+      "147120": "MG", // 송화도서관
+      "147026": "MF", // 중앙도서관
+      "147052": "MD", // 칠평도서관
+    };
+    return (
+      `https://library.gyeongju.go.kr/?page_id=search_booklist&mode=tBookList&collection=tot_book` +
+      `&search_field1=IAL&search_txt=${encodeURIComponent(title)}` +
+      facetParam(map, "manage_code", libCode)
+    );
+  },
+
+  // 여주(경기, 8관) — plusSearch /web/menu/10036/, searchLibraryArr, searchWord. 8/8.
+  "www.yjlib.go.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "741094": "MD", // 북내작은도서관
+      "141177": "MC", // 산북작은도서관
+      "141641": "MH", // 여주기적의도서관
+      "141615": "MG", // 여주시립금사도서관
+      "141600": "MF", // 여주시립대신도서관
+      "141054": "MB", // 여주시립세종도서관
+      "141331": "MA", // 여주시립여주도서관
+      "141586": "ME", // 점동도서관
+    };
+    return (
+      `https://www.yjlib.go.kr/web/menu/10036/program/30001/searchResultList.do` +
+      `?searchType=SIMPLE&searchCategory=ALL&searchField=ALL&searchWord=${encodeURIComponent(title)}` +
+      facetParam(map, "searchLibraryArr", libCode)
+    );
+  },
+
+  // 충주(충북, 6관) — plusSearch /web/menu/10041/, searchLibraryArr, searchWord. 6/6.
+  "lib.chungju.go.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "143135": "MD", // 서충주도서관
+      "143011": "MA", // 충주시립도서관
+      "143130": "MC", // 충주시립어린이청소년도서관
+      "143121": "SH", // 충주시립엄정꿈터도서관
+      "143026": "BR", // 충주시립호암도서관
+      "143140": "SK", // 충주시립호암어린이도서관
+    };
+    return (
+      `https://lib.chungju.go.kr/web/menu/10041/program/30001/searchResultList.do` +
+      `?searchType=SIMPLE&searchCategory=ALL&searchField=ALL&searchWord=${encodeURIComponent(title)}` +
+      facetParam(map, "searchLibraryArr", libCode)
+    );
+  },
+
+  // 안성(경기, 11관) — 정보나루 homepage는 www.apl.go.kr이나 검색은 anseong.go.kr.
+  // 필터 param이 branchId(숫자). 11/11 매핑. branchId 1 vs 2 차등 실측.
+  "www.apl.go.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "141168": "1",  // 중앙도서관
+      "141289": "2",  // 보개도서관
+      "141294": "3",  // 일죽도서관
+      "141292": "4",  // 송정작은도서관
+      "141291": "5",  // 부영작은도서관
+      "141295": "6",  // 죽산작은도서관
+      "141293": "7",  // 풍림작은도서관(주은풍림)
+      "141213": "8",  // 태산작은도서관
+      "141296": "9",  // 삼죽작은도서관
+      "141290": "10", // 공도도서관
+      "141547": "11", // 진사도서관
+    };
+    return (
+      `https://www.anseong.go.kr/library/search/search.do?mId=0101010100&searchKeyType=K` +
+      `&searchType=ALL&searchTxt=${encodeURIComponent(title)}` +
+      facetParam(map, "branchId", libCode)
+    );
+  },
+
   // 익산(7관) — site/search bookSearch.do 벤더(광주교육청 계열), manage_code.
   // /gm/ 경로. 7/7 매핑, 결과 69건·MA≠MB 차등 실측. (최종조사 Network 캡처)
   "lib.iksan.go.kr": (title, _homepage, libCode) => {
