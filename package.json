@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource/do-hyeon": "^5.3.0",
+    "@fontsource/jua": "^5.3.0",
+    "@fontsource/kirang-haerang": "^5.3.0",
+    "@fontsource/yeon-sung": "^5.3.0",
     "@supabase/supabase-js": "^2.43.4",
     "cheerio": "^1.0.0",
     "iconv-lite": "^0.6.3",
