@@ -16,8 +16,26 @@
  * (전자책 buildSearchPageUrl과 동일 수준).
  */
 
-/** hostname → 검색 URL 빌더. homepage는 대구처럼 경로에 구 식별자가 있는 통합 사이트용. */
-type NationwideUrlBuilder = (title: string, homepage: string) => string | undefined;
+/**
+ * hostname → 검색 URL 빌더. homepage는 대구처럼 경로에 구 식별자가 있는 통합
+ * 사이트용. libCode(정보나루)는 소장처 facet 딥링크가 되는 포털에서 그 관만
+ * 지정하는 데 씀(2026-07-22 — 광양·울산동구·평창 등). 없으면 전관 검색.
+ */
+type NationwideUrlBuilder = (
+  title: string,
+  homepage: string,
+  libCode?: string
+) => string | undefined;
+
+/** libCode→포털 소장처 코드 맵에서 필터 조각을 만든다. 매핑 없으면 빈 문자열(전관). */
+function facetParam(
+  map: Record<string, string>,
+  param: string,
+  libCode?: string
+): string {
+  const code = libCode ? map[libCode] : undefined;
+  return code ? `&${param}=${encodeURIComponent(code)}` : "";
+}
 
 const PORTAL_TEMPLATES: Record<string, NationwideUrlBuilder> = {
   // ── 2026-07-19 헤드리스 전수조사(상위 50 도메인) 통과분 ──────────────
@@ -299,6 +317,204 @@ const PORTAL_TEMPLATES: Record<string, NationwideUrlBuilder> = {
       `&pageUnit=10&manageCode=${b.mc}&searchKrwd=${encodeURIComponent(title)}`
     );
   },
+
+  // ── 2026-07-22 소장처 facet 딥링크(대전식) — 헤드리스 확정 + GET필터 스코핑
+  // 실검증(X≠Y 차등). libCode→포털 소장처 코드로 그 관만 지정. 매핑 없는 관은
+  // 전관 검색으로 폴백(악화 없음). ───────────────────────────────────────
+
+  // 광양(6관) — lib/book/search 벤더, manageCd. 6/6 매핑, 건수 55→6 실측.
+  "lib.gwangyang.go.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "146024": "MA", // 중앙도서관
+      "146050": "MB", // 중마도서관
+      "146177": "ME", // 희망도서관
+      "146049": "MD", // 용강도서관
+      "146181": "MF", // 금호도서관
+      "146185": "MG", // 광영도서관
+    };
+    return (
+      `https://lib.gwangyang.go.kr/lib/book/search/searchIndex.do?searchType=&menuCd=L001001001` +
+      `&search=${encodeURIComponent(title)}` +
+      facetParam(map, "manageCd", libCode)
+    );
+  },
+
+  // 울산 동구(5관) — site/search bookSearch.do 벤더, manage_code. 5/5 매핑.
+  "library.donggu.ulsan.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "131082": "ME", // 남목도서관
+      "131016": "MA", // 마성만화도서관
+      "131021": "MB", // 전하작은도서관
+      "131022": "MC", // 화정아이꿈누리도서관(화정작은)
+      "131028": "MD", // 꽃바위작은도서관
+    };
+    return (
+      `https://library.donggu.ulsan.kr/main/site/search/bookSearch.do?cmd_name=bookandnonbooksearch` +
+      `&search_type=detail&search_item=search_title&search_txt=${encodeURIComponent(title)}` +
+      facetParam(map, "manage_code", libCode)
+    );
+  },
+
+  // 연천(6관) — plusSearch. 검색 경로가 /menu/10039/program/30005/(사용자 제보
+  // URL로 확정 — 루트 경로가 아니라 이 menu/program 경로여야 필터 먹음).
+  // searchLibraryArr로 관 지정, 6/6 매핑. MA≠BR 차등 실측.
+  "library.yeoncheon.go.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "141013": "MA", // 연천군중앙도서관
+      "141117": "BR", // 연천도서관
+      "141250": "ME", // 청산작은도서관
+      "141228": "MD", // 학마을작은도서관
+      "741044": "MF", // 무등실작은도서관
+      "741168": "MG", // 신서작은도서관
+    };
+    return (
+      `https://library.yeoncheon.go.kr/menu/10039/program/30005/searchResultList.do` +
+      `?searchType=SIMPLE&searchCategory=ALL&searchKey=TITLE&searchKeyword=${encodeURIComponent(title)}` +
+      facetParam(map, "searchLibraryArr", libCode)
+    );
+  },
+
+  // 가평(4관) — plusSearch, 경로 /intro/menu/10035/program/30005/(사용자 제보).
+  // searchLibraryArr, 4/4 매핑. MA≠MB 차등 실측.
+  "www.gaplib.go.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "141001": "MA", // 한석봉도서관
+      "141143": "MC", // 설악도서관
+      "141105": "MB", // 조종도서관
+      "141286": "MD", // 청평도서관
+    };
+    return (
+      `https://www.gaplib.go.kr/intro/menu/10035/program/30005/searchResultList.do` +
+      `?searchType=SIMPLE&searchCategory=ALL&searchKey=ALL&searchKeyword=${encodeURIComponent(title)}` +
+      facetParam(map, "searchLibraryArr", libCode)
+    );
+  },
+
+  // 동해(5관) — plusSearch. 검색 param이 searchWord(연천/가평의 searchKeyword가
+  // 아님 — 개발자도구 Network 캡처로 확정). 경로 /web/menu/10003/program/30001/.
+  // searchLibraryArr, 5/5 매핑. 콜드스타트 결과 렌더+MA≠MB 차등 실측.
+  "donghaelib.go.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "142037": "MA", // 북삼도서관
+      "142034": "MB", // 발한도서관
+      "142051": "MC", // 무릉작은도서관
+      "142057": "MD", // 등대작은도서관
+      "142056": "ME", // 이도작은도서관
+    };
+    return (
+      `https://donghaelib.go.kr/web/menu/10003/program/30001/searchResultList.do` +
+      `?searchType=SIMPLE&searchCategory=ALL&searchField=ALL&searchWord=${encodeURIComponent(title)}` +
+      facetParam(map, "searchLibraryArr", libCode)
+    );
+  },
+
+  // 원주(5관) — portal 벤더 /mr/menu/840/book/search, manageCodes(사용자 제보).
+  // searchCondition=searchTitle + searchTitle. 5/5 매핑. MA≠MQ 차등 실측.
+  "lib.wonju.go.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "142015": "MA", // 원주시립중앙도서관
+      "142118": "MQ", // 미리내도서관
+      "142123": "MS", // 샘마루도서관
+      "142129": "MU", // 생각자람어린이도서관
+      "142058": "MB", // 태장도서관
+    };
+    return (
+      `https://lib.wonju.go.kr/mr/menu/840/book/search?search=true&searchType=detail` +
+      `&searchCondition=searchTitle&searchTitle=${encodeURIComponent(title)}` +
+      facetParam(map, "manageCodes", libCode)
+    );
+  },
+
+  // 익산(7관) — site/search bookSearch.do 벤더(광주교육청 계열), manage_code.
+  // /gm/ 경로. 7/7 매핑, 결과 69건·MA≠MB 차등 실측. (최종조사 Network 캡처)
+  "lib.iksan.go.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "145153": "MB", // 금마도서관
+      "145024": "MA", // 마동도서관
+      "145095": "MO", // 모현도서관
+      "145116": "BU", // 부송도서관
+      "145042": "BR", // 영등도서관
+      "145154": "MC", // 유천도서관
+      "145144": "HW", // 황등도서관
+    };
+    return (
+      `https://lib.iksan.go.kr/gm/site/search/bookSearch.do?cmd_name=bookandnonbooksearch` +
+      `&search_type=detail&search_item=search_title&search_txt=${encodeURIComponent(title)}` +
+      facetParam(map, "manage_code", libCode)
+    );
+  },
+
+  // 하남(8관) — plusSearch이나 홈 검색은 POST. 실검색 URL은 kolaseek GET
+  // 엔드포인트(Network 캡처로 발견). searchLibraryArr, 8/8 매핑. MB≠MA 차등.
+  "www.hanamlib.go.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "141171": "MB", // 나룰도서관
+      "141579": "MC", // 덕풍도서관
+      "141608": "ME", // 디지털도서관
+      "141622": "MS", // 미사도서관
+      "141607": "MD", // 세미도서관
+      "141046": "MA", // 신장도서관
+      "141636": "MF", // 위례도서관
+      "741725": "IG", // 일가도서관
+    };
+    return (
+      `https://www.hanamlib.go.kr/kolaseek/search/plusSearchResultList.do` +
+      `?searchType=SIMPLE&searchCategory=ALL&searchKey=ALL&searchKeyword=${encodeURIComponent(title)}` +
+      facetParam(map, "searchLibraryArr", libCode)
+    );
+  },
+
+  // 음성(4관) — front/index.php 벤더, 필터 param이 manage_code[](배열)이 핵심
+  // (사용자 제보 URL로 확정). CSRFToken은 불필요(있으나 없으나 결과 동일 실측).
+  // 4/4 매핑. 홍학의 자리+정해연 렌더링·MF≠MA 차등 확인.
+  "lib.eumseong.go.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "143124": "MC", // 감곡도서관
+      "143024": "MA", // 대소도서관
+      "143138": "MF", // 맹동혁신도서관
+      "143134": "ME", // 삼성도서관
+    };
+    return (
+      `https://lib.eumseong.go.kr/front/index.php?g_page=search&m_page=search01` +
+      `&search_type=NORMAL&book_type%5B%5D=BOOK&display=10` +
+      `&search_txt=${encodeURIComponent(title)}` +
+      facetParam(map, "manage_code%5B%5D", libCode)
+    );
+  },
+
+  // 광주교육청(6관) — 정보나루 homepage는 lib.gen.go.kr이나 검색은 lib.jge.go.kr
+  // (site/search bookSearch.do 벤더, manage_code). 딥링크 렌더링(책+저자) 확인,
+  // manage_code X≠Y 스코핑 실측. 4/6 매핑(학생독립운동기념회관·금호평생교육관은
+  // 포털 facet 미노출 → 전관 폴백).
+  "lib.gen.go.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "124002": "MD", // 중앙도서관
+      "124011": "MC", // 광주학생교육문화회관
+      "129221": "MF", // 중앙도서관 분관 최상준도서관
+      "124001": "ME", // 송정다가치문화도서관
+    };
+    return (
+      `https://lib.jge.go.kr/jungang/site/search/bookSearch.do?cmd_name=bookandnonbooksearch` +
+      `&search_type=detail&search_item=search_title&search_txt=${encodeURIComponent(title)}` +
+      facetParam(map, "manage_code", libCode)
+    );
+  },
+
+  // 평창(4관) — site/search bookSearch.do 벤더, manage_code. 3/4 매핑(봉평 미등록
+  // → 전관 폴백). www.pc.go.kr는 평창군청 도메인이나 정보나루 평창관 전용.
+  "www.pc.go.kr": (title, _homepage, libCode) => {
+    const map: Record<string, string> = {
+      "142115": "MH", // 대관령도서관
+      "142042": "MA", // 대화도서관
+      "142036": "MB", // 진부도서관
+      // 142097 봉평 — 포털 facet에 없음 → 전관 검색 폴백
+    };
+    return (
+      `https://www.pc.go.kr/lib/main/site/search/bookSearch.do?cmd_name=bookandnonbooksearch` +
+      `&search_type=detail&use_facet=N&search_item=search_title&search_txt=${encodeURIComponent(title)}` +
+      facetParam(map, "manage_code", libCode)
+    );
+  },
 };
 
 /**
@@ -350,11 +566,50 @@ const SUFFIX_TEMPLATES: Record<string, (host: string, title: string) => string> 
 };
 
 /**
+ * [2026-07-22 신설] 대전 u-library.kr 소장처(도서관) facet 코드.
+ * 정보나루 libCode → u-library lmt0 값(H코드). 소장처 필터에서 실측 추출한
+ * 코드↔관명 매핑을 정보나루 25.json 관과 대조해 확정(26/27관, 성남작은도서관만
+ * 통합 OPAC 미참여라 제외 → 그 관은 전체검색으로 폴백).
+ * 딥링크 검증(콜드스타트·_csrf불요·필터 스코핑): title `[소장처:OO]` 확인.
+ */
+const DAEJEON_HCODE: Record<string, string> = {
+  "125008": "H0000003", // 가오도서관
+  "143064": "H0000008", // 무지개도서관
+  "125006": "H0000004", // 용운도서관
+  "130008": "H0000010", // 자양도서관
+  "130004": "H0000006", // 판암도서관
+  "130009": "H0000009", // 홍도도서관
+  "125002": "H0000024", // 대전학생교육문화원
+  "125001": "H0000025", // 산성어린이도서관
+  "125003": "H0000001", // 한밭도서관
+  "125010": "H0000014", // 가수원도서관
+  "125004": "H0000011", // 갈마도서관
+  "130007": "H0000017", // 대전 서구 어린이도서관(서구어린이)
+  "130006": "H0000012", // 둔산도서관
+  "130028": "H0000027", // 월평도서관
+  "130023": "H0000030", // 관평도서관
+  "130022": "H0000020", // 구암도서관
+  "125013": "H0000019", // 구즉도서관
+  "130012": "H0000015", // 노은도서관
+  "130026": "H0000026", // 원신흥도서관
+  "125007": "H0000016", // 유성도서관
+  "12500701": "H0000013", // 유성도서관 엑스포분관(유성엑스포)
+  "130031": "H0000031", // 전민도서관
+  "130010": "H0000018", // 진잠도서관
+  "130030": "H0000029", // 석봉도서관
+  "130013": "H0000023", // 송촌도서관
+  "125005": "H0000022", // 안산도서관
+  // 730165 성남작은도서관 — 대전공공도서관 통합 OPAC 미참여 → 전체검색 폴백
+};
+
+/**
  * 시도 단위 통합 포털 (hostname 매핑이 안 될 때의 폴백).
  * 대전처럼 관별 homepage 도메인은 제각각이지만 시 전체를 검색하는 통합
  * 포털이 따로 있는 경우 — region 코드(units 앞 2자리)로 연결.
+ * libCode를 받으면 소장처 facet으로 그 관만 지정(대전). 코드 없거나 매핑
+ * 없으면 전체검색으로 폴백(악화 없음).
  */
-const REGION_TEMPLATES: Record<string, (title: string) => string> = {
+const REGION_TEMPLATES: Record<string, (title: string, libCode?: string) => string> = {
   // [실측 확인 2026-07-19 — 2단 프로브] 부산 도서관포털 통합자료검색.
   // 렌더링 확인: 전 구·군 선택지 + 소장처별 결과 915건 — 부산 전역 맞음.
   // manageCode 전체 나열은 실제 검색 실행 시 폼이 만드는 URL 그대로.
@@ -368,8 +623,14 @@ const REGION_TEMPLATES: Record<string, (title: string) => string> = {
   // 이천 작은도서관과 동일 벤더(search/tot/result). 렌더링 확인: 소장처
   // 필터에 가수원·가오·갈마·관평·구암 등 29곳(한밭·유성·대덕 포함) —
   // 대전 전역 통합검색 맞음. 두 책 교차검증 통과.
-  "25": (title) =>
-    `https://www.u-library.kr/search/tot/result?st=KWRD&si=TOTAL&q=${encodeURIComponent(title)}`,
+  // [2026-07-22] libCode가 있으면 소장처 facet(lmt0=H코드)으로 그 관만 지정.
+  "25": (title, libCode) => {
+    const base =
+      `https://www.u-library.kr/search/tot/result?st=KWRD&si=TOTAL&q=${encodeURIComponent(title)}`;
+    const h = libCode ? DAEJEON_HCODE[libCode] : undefined;
+    // lmtsn=000000000006/lmtst=OR는 소장처 facet 슬롯 상수(실측 URL에서 확인)
+    return h ? `${base}&lmt0=${h}&lmtsn=000000000006&lmtst=OR` : base;
+  },
 };
 
 /**
@@ -380,12 +641,13 @@ const REGION_TEMPLATES: Record<string, (title: string) => string> = {
 export function buildNationwidePortalSearchUrl(
   homepage: string | undefined,
   title: string,
-  region?: string
+  region?: string,
+  libCode?: string
 ): string | undefined {
   if (!title) return undefined;
   try {
     const host = homepage ? new URL(homepage).hostname : undefined;
-    const byHost = host ? PORTAL_TEMPLATES[host]?.(title, homepage!) : undefined;
+    const byHost = host ? PORTAL_TEMPLATES[host]?.(title, homepage!, libCode) : undefined;
     const bySuffix =
       byHost ??
       (host
@@ -393,8 +655,8 @@ export function buildNationwidePortalSearchUrl(
             host.endsWith(suffix)
           )?.[1](host, title)
         : undefined);
-    return bySuffix ?? (region ? REGION_TEMPLATES[region]?.(title) : undefined);
+    return bySuffix ?? (region ? REGION_TEMPLATES[region]?.(title, libCode) : undefined);
   } catch {
-    return region ? REGION_TEMPLATES[region]?.(title) : undefined;
+    return region ? REGION_TEMPLATES[region]?.(title, libCode) : undefined;
   }
 }
