@@ -95,7 +95,9 @@ export function StampEditor({
     };
   }, [data]);
 
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  // 촬영 전용(후면 카메라 바로 열림)과 앨범 선택(capture 없음 → 사진첩/카메라 시트).
+  const cameraInputRef = useRef<HTMLInputElement>(null);
+  const albumInputRef = useRef<HTMLInputElement>(null);
   const tpl = getTemplate(tplId);
   const ready = fontsReady + logosReady;
 
@@ -176,24 +178,44 @@ export function StampEditor({
 
       {tab === "photo" && (
         <div>
+          {/* 촬영: 후면 카메라 바로 열림 / 앨범: 사진첩(미리 찍어둔 사진) 선택.
+              capture 없는 입력은 OS가 카메라·앨범 선택 시트를 띄운다. */}
           <input
-            ref={fileInputRef}
+            ref={cameraInputRef}
             type="file"
             accept="image/*"
             capture="environment"
             onChange={onPhoto}
             className="hidden"
           />
+          <input
+            ref={albumInputRef}
+            type="file"
+            accept="image/*"
+            onChange={onPhoto}
+            className="hidden"
+          />
           {!photo ? (
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              disabled={busy}
-              className="w-full aspect-[3/4] max-h-[380px] rounded-2xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-400 active:bg-gray-50 disabled:opacity-60"
-            >
-              <span className="text-3xl mb-2">📷</span>
-              <span className="text-sm font-medium">사진 촬영 / 앨범에서 선택</span>
-              <span className="text-xs mt-1">고른 스탬프가 사진 위에 얹혀요</span>
-            </button>
+            <div className="w-full aspect-[3/4] max-h-[380px] rounded-2xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center gap-3 px-6 text-gray-400">
+              <span className="text-3xl">📷</span>
+              <span className="text-xs">고른 스탬프가 사진 위에 얹혀요</span>
+              <div className="flex flex-col gap-2 w-full max-w-[240px]">
+                <button
+                  onClick={() => cameraInputRef.current?.click()}
+                  disabled={busy}
+                  className="w-full py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-semibold active:bg-emerald-800 disabled:opacity-60"
+                >
+                  카메라로 촬영
+                </button>
+                <button
+                  onClick={() => albumInputRef.current?.click()}
+                  disabled={busy}
+                  className="w-full py-2.5 rounded-xl bg-white border border-gray-200 text-gray-600 text-sm font-semibold active:bg-gray-50 disabled:opacity-60"
+                >
+                  앨범에서 선택
+                </button>
+              </div>
+            </div>
           ) : (
             <StampCanvasEditor
               key={`photo-${tplId}`}
@@ -203,7 +225,7 @@ export function StampEditor({
               textMode={textMode}
               mark={mark}
               logoVariant={logoVariant}
-              onReplacePhoto={() => fileInputRef.current?.click()}
+              onReplacePhoto={() => albumInputRef.current?.click()}
             />
           )}
         </div>
